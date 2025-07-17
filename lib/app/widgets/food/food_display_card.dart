@@ -89,7 +89,6 @@ extension _WidgetFactories on FoodDisplayCard {
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
-      tag: S.current.calorieUnit,
       label: calories.toString(),
       icon: FaIcon(
         FontAwesomeIcons.fire,

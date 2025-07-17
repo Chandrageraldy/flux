@@ -40,16 +40,10 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
 
   // Linear Progress Indicator
   Widget getLinearProgressIndicator(BuildContext context) {
-    Color color = macroNutrient == MacroNutrients.protein
-        ? Color(0xFFdf9149)
-        : macroNutrient == MacroNutrients.carbs
-            ? Color(0xFF6bd0e9)
-            : Color(0xFF7770c0);
-
     return LinearPercentIndicator(
       percent: percentage,
       backgroundColor: context.theme.colorScheme.tertiary,
-      progressColor: color,
+      progressColor: _Styles.getLinearProgressIndicatorColor(macroNutrient),
       animation: true,
       animateFromLastPercent: true,
       animateToInitialPercent: false,
@@ -84,4 +78,13 @@ abstract class _Styles {
 
   // Linear Percent Indicator Line Height
   static const double linearPercentIndicatorLineHeight = 6.0;
+
+  // Linear Progress Indicator Color
+  static Color getLinearProgressIndicatorColor(MacroNutrients macroNutrient) {
+    return macroNutrient == MacroNutrients.protein
+        ? Color(0xFFdf9149)
+        : macroNutrient == MacroNutrients.carbs
+            ? Color(0xFF6bd0e9)
+            : Color(0xFF7770c0);
+  }
 }

@@ -2,9 +2,9 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NutritionTag extends StatelessWidget {
-  const NutritionTag({required this.tag, required this.label, this.icon, super.key});
+  const NutritionTag({this.tag, required this.label, this.icon, super.key});
 
-  final String tag;
+  final String? tag;
   final String label;
   final FaIcon? icon;
 
@@ -23,10 +23,11 @@ class NutritionTag extends StatelessWidget {
           Text.rich(
             TextSpan(
               children: [
-                TextSpan(
-                  text: '$tag ',
-                  style: _Styles.getTagLabelTextStyle(context),
-                ),
+                if (tag != null)
+                  TextSpan(
+                    text: '$tag ',
+                    style: _Styles.getTagLabelTextStyle(context),
+                  ),
                 TextSpan(
                   text: label.toString(),
                   style: _Styles.getLabelTextStyle(),

@@ -23,7 +23,6 @@ class MealFoodDisplayCard extends StatelessWidget {
                 spacing: AppStyles.kSpac8,
                 children: [
                   NutritionTag(
-                    tag: S.current.calorieUnit,
                     label: '245',
                     icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize16),
                   ),

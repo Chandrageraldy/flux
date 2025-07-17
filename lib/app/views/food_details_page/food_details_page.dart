@@ -80,7 +80,10 @@ extension _WidgetFactories on _FoodDetailsPageState {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppStyles.kSpac12,
         children: [
-          getFoodNameLabel(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [getFoodNameLabel()],
+          ),
           AppStyles.kSizedBoxH4,
           Row(
             children: [

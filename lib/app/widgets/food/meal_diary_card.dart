@@ -76,7 +76,6 @@ extension _WidgetFactories on MealDiaryCard {
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
-      tag: S.current.calorieUnit,
       label: '500/360',
       icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize16),
     );

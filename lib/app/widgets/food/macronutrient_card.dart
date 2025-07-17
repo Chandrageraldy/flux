@@ -18,14 +18,7 @@ class MacronutrientCard extends StatelessWidget {
           padding: AppStyles.kPaddSV8H16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(label, style: _Styles.getLabelTextStyle(context)),
-              Text('${value}g', style: _Styles.getValueLabelTextStyle(context)),
-              Text(
-                '${(percentage * 100).toStringAsFixed(1)}%',
-                style: _Styles.getPercentageTextStyle(context, macroNutrient),
-              ),
-            ],
+            children: [getLabel(context), getValueLabel(context), getPercentageText(context)],
           ),
         ),
       ),
@@ -34,7 +27,31 @@ class MacronutrientCard extends StatelessWidget {
 }
 
 // * ------------------------ WidgetFactories ------------------------
-extension _WidgetFactories on MacronutrientCard {}
+extension _WidgetFactories on MacronutrientCard {
+  // Label
+  Widget getLabel(BuildContext context) {
+    return Text(
+      label,
+      style: _Styles.getLabelTextStyle(context),
+    );
+  }
+
+  // Value Label
+  Widget getValueLabel(BuildContext context) {
+    return Text(
+      value,
+      style: _Styles.getValueLabelTextStyle(context),
+    );
+  }
+
+  // Percentage Text
+  Widget getPercentageText(BuildContext context) {
+    return Text(
+      '${(percentage * 100).toStringAsFixed(1)}%',
+      style: _Styles.getPercentageTextStyle(context, macroNutrient),
+    );
+  }
+}
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
