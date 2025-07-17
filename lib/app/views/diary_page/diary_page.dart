@@ -1,7 +1,5 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
 import 'package:flux/app/widgets/food/meal_diary_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +15,6 @@ class DiaryPage extends BaseStatefulPage {
 }
 
 class _DiaryPageState extends BaseStatefulState<DiaryPage> {
-  DateTime selectedDate = DateTime.now();
-
   DateTime _selectedDate = DateTime.now();
 
   final EasyDatePickerController _datePickerController = EasyDatePickerController();
@@ -33,7 +29,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   Widget body() {
     return SingleChildScrollView(
       child: Padding(
-        padding: AppStyles.kPaddSH20,
+        padding: AppStyles.kPaddOL20R20B16,
         child: Column(
           spacing: AppStyles.kSpac16,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,6 +42,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
             ),
             getCalorieIntakeContainer(),
             getMacroNutrientIntakeContainer(),
+            getMealsLoggedLabel(),
             MealDiaryCard(mealType: S.current.breakfastLabel),
             MealDiaryCard(mealType: S.current.lunchLabel),
             MealDiaryCard(mealType: S.current.dinnerLabel),
@@ -71,6 +68,16 @@ extension _PrivateMethods on _DiaryPageState {
       _selectedDate = _selectedDate.add(Duration(days: days));
     });
     _datePickerController.animateToDate(_selectedDate);
+  }
+
+  String _formatDate(DateTime selectedDate) {
+    final now = DateTime.now();
+
+    if (DateUtils.isSameDay(selectedDate, now)) {
+      return 'Today, ${DateFormat('MMMM d').format(selectedDate)}'; // Today, July 18
+    } else {
+      return DateFormat('EEEE, MMMM d').format(selectedDate); // Wednesday, July 17
+    }
   }
 }
 
@@ -119,7 +126,7 @@ extension _WidgetFactories on _DiaryPageState {
   // Date Shifter Label
   Widget getDateShifterLabel() {
     return Text(
-      _selectedDate.toFormattedString(DateFormat.MONTH_WEEKDAY_DAY),
+      _formatDate(_selectedDate),
       style: _Styles.getDateShifterLabelTextStyle(context),
     );
   }
@@ -265,6 +272,11 @@ extension _WidgetFactories on _DiaryPageState {
       ],
     );
   }
+
+  // Meals Logged Label
+  Widget getMealsLoggedLabel() {
+    return Text(S.current.loggedMealsLabel, style: _Styles.getMealsLoggedLabelTextStyle(context));
+  }
 }
 
 // * ----------------------------- Styles -----------------------------
@@ -333,5 +345,10 @@ class _Styles {
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.mediumHuge);
+  }
+
+  // Meals Logged Label Text Style
+  static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.large);
   }
 }

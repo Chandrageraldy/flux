@@ -1219,6 +1219,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Logged Meals`
+  String get loggedMealsLabel {
+    return Intl.message(
+      'Logged Meals',
+      name: 'loggedMealsLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

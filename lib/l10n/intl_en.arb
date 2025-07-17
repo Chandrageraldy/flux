@@ -124,5 +124,6 @@
     "calorieLabel": "Calorie",
     "calorieFormula": "Remaining = Goal - Logged",
     "remainingLabel": "Remaining",
-    "macronutrientsLabel": "Macronutrients"
+    "macronutrientsLabel": "Macronutrients",
+    "loggedMealsLabel": "Logged Meals"
 }

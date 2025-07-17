@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logFoodLabel": MessageLookupByLibrary.simpleMessage("Log Food"),
         "logOutLabel": MessageLookupByLibrary.simpleMessage("Log Out"),
         "loggedLabel": MessageLookupByLibrary.simpleMessage("Logged"),
+        "loggedMealsLabel":
+            MessageLookupByLibrary.simpleMessage("Logged Meals"),
         "loggingSelectionButtonDesc1": MessageLookupByLibrary.simpleMessage(
             "Search and select your food, then enter the portion."),
         "loggingSelectionButtonDesc2": MessageLookupByLibrary.simpleMessage(

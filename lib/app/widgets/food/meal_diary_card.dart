@@ -18,8 +18,8 @@ class MealDiaryCard extends StatelessWidget {
           getHeaderContainer(context),
           getDivider(context),
           ListView.separated(
-            padding: AppStyles.kPaddSV16H20,
-            itemCount: 3,
+            padding: AppStyles.kPaddSV16H12,
+            itemCount: 1,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => MealFoodDisplayCard(),
@@ -39,7 +39,7 @@ extension _WidgetFactories on MealDiaryCard {
   // Header Container
   Widget getHeaderContainer(BuildContext context) {
     return Container(
-      padding: AppStyles.kPaddSV16H20,
+      padding: AppStyles.kPaddSV12H20,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
