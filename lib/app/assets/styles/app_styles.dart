@@ -1,0 +1,119 @@
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+
+class AppStyles {
+  // Padding
+  static const kPadd0 = EdgeInsets.zero;
+  static const kPadd3 = EdgeInsets.all(3.0);
+
+  static const kPadd8 = EdgeInsets.all(8.0);
+  static const kPadd12 = EdgeInsets.all(12.0);
+  static const kPadd16 = EdgeInsets.all(16.0);
+  // Padding ONLY
+  static const kPaddOB70 = EdgeInsets.only(bottom: 70.0);
+  static const kPaddOT6 = EdgeInsets.only(top: 6.0);
+  static const kPaddOT20 = EdgeInsets.only(top: 20.0);
+  static const kPaddOT20B5 = EdgeInsets.only(top: 20.0, bottom: 5.0);
+  static const kPaddOR12 = EdgeInsets.only(right: 12.0);
+  // Padding SIDES
+  static const kPaddOL20R8 = EdgeInsets.only(left: 20.0, right: 8.0);
+  // Padding SYMMETRIC
+  // Padding VERTICAL
+  static const kPaddSV6 = EdgeInsets.symmetric(vertical: 6.0);
+  static const kPaddSV8 = EdgeInsets.symmetric(vertical: 8.0);
+  static const kPaddSV12 = EdgeInsets.symmetric(vertical: 12.0);
+  static const kPaddSV15 = EdgeInsets.symmetric(vertical: 15.0);
+  static const kPaddSV20 = EdgeInsets.symmetric(vertical: 20.0);
+  static const kPaddSV28 = EdgeInsets.symmetric(vertical: 28.0);
+  // Padding HORIZONTAL
+  static const kPaddSH12 = EdgeInsets.symmetric(horizontal: 12.0);
+  static const kPaddSH16 = EdgeInsets.symmetric(horizontal: 16.0);
+  static const kPaddSH20 = EdgeInsets.symmetric(horizontal: 20.0);
+  static const kPaddSH28 = EdgeInsets.symmetric(horizontal: 28.0);
+  // Padding VERTICAL and HORIZONTAL
+  static const kPaddSV3H6 = EdgeInsets.symmetric(vertical: 3.0, horizontal: 6.0);
+  static const kPaddSV12H20 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0);
+  static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
+  static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
+  static const kPaddSV20H28 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 28.0);
+  static const kPaddSV6H12 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0);
+  static const kPaddSV6H8 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0);
+  static const kPaddSV10H12 = EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
+  static const kPaddSV12H14 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 14.0);
+  static const kPaddSV16H12 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0);
+  static const kPaddSV16H20 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0);
+  static const kPaddSV8H16 = EdgeInsets.symmetric(vertical: 8, horizontal: 16);
+  static const kPaddSV16H16 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0);
+  static const kPaddSV20H16 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0);
+
+  static const kPaddSV20H20 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0);
+
+  // Spacing
+  static const kSpac4 = 4.0;
+  static const kSpac8 = 8.0;
+  static const kSpac12 = 12.0;
+  static const kSpac16 = 16.0;
+  static const kSpac20 = 20.0;
+  static const kSpac24 = 24.0;
+  static const kSpac32 = 32.0;
+
+  // Radius
+  static final kRad8 = BorderRadius.circular(8.0);
+  static final kRad10 = BorderRadius.circular(10.0);
+  static final kRad12 = BorderRadius.circular(12.0);
+  static final kRad16 = BorderRadius.circular(16.0);
+  static final kRad20 = BorderRadius.circular(20.0);
+  static final kRad24 = BorderRadius.circular(24.0);
+  static final kRad100 = BorderRadius.circular(100.0);
+  // Radius VERTICAL
+  static final kRadVT24 = BorderRadius.vertical(top: Radius.circular(24.0));
+  // Radius SIDES
+  static final kRadOTL20TR20 = BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20));
+  static final kRadOBL20BR20 = BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20));
+
+  // Sized Box
+  static final kEmptyWidget = const SizedBox.shrink();
+  // Sized Box WIDTH
+  static final kSizedBoxW2 = const SizedBox(width: 2.0);
+  static final kSizedBoxW4 = const SizedBox(width: 4.0);
+  static final kSizedBoxW8 = const SizedBox(width: 8.0);
+  static final kSizedBoxW12 = const SizedBox(width: 12.0);
+  static final kSizedBoxW16 = const SizedBox(width: 16.0);
+  static final kSizedBoxW20 = const SizedBox(width: 20.0);
+  static final kSizedBoxW24 = const SizedBox(width: 24.0);
+  static final kSizedBoxW32 = const SizedBox(width: 32.0);
+  // Sized Box HEIGHT
+  static final kSizedBoxH2 = const SizedBox(height: 2.0);
+  static final kSizedBoxH4 = const SizedBox(height: 4.0);
+  static final kSizedBoxH6 = const SizedBox(height: 6.0);
+  static final kSizedBoxH8 = const SizedBox(height: 8.0);
+  static final kSizedBoxH12 = const SizedBox(height: 12.0);
+  static final kSizedBoxH16 = const SizedBox(height: 16.0);
+  static final kSizedBoxH20 = const SizedBox(height: 20.0);
+  static final kSizedBoxH24 = const SizedBox(height: 24.0);
+  static final kSizedBoxH32 = const SizedBox(height: 32.0);
+
+  // Size
+  static double kDoubleInfinity = double.infinity;
+  // Icon Size
+  static const kIconSize4 = 4.0;
+  static const kIconSize16 = 16.0;
+  static const kIconSize20 = 20.0;
+  static const kIconSize25 = 25.0;
+  static const kIconSize30 = 30.0;
+  static const kIconSize35 = 35.0;
+  static const kIconSize40 = 40.0;
+  static const kIconSize52 = 52.0;
+
+  // Height & Width
+  static const kSize8 = 8.0;
+  static const kSize12 = 12.0;
+  static const kSize16 = 16.0;
+  static const kSize20 = 20.0;
+  static const kSize24 = 24.0;
+  static const kSize28 = 28.0;
+  static const kSize32 = 32.0;
+  static const kSize30 = 30.0;
+  static const kSize48 = 48.0;
+  static const kSize56 = 56.0;
+  static const kSize64 = 64.0;
+}

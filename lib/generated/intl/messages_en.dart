@@ -1,0 +1,213 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a en locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+final messages = new MessageLookup();
+
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  String get localeName => 'en';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "activeDesc": MessageLookupByLibrary.simpleMessage(
+            "On your feet most of the day (e.g., retail, light labor)."),
+        "activeLabel": MessageLookupByLibrary.simpleMessage("Active"),
+        "allLabel": MessageLookupByLibrary.simpleMessage("All"),
+        "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
+        "calorieFormula":
+            MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
+        "calorieLabel": MessageLookupByLibrary.simpleMessage("Calorie"),
+        "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
+        "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
+        "cmUnitLabel": MessageLookupByLibrary.simpleMessage("cm"),
+        "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
+        "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
+            "We use your age to estimate your metabolic rate."),
+        "dateOfBirthLabel":
+            MessageLookupByLibrary.simpleMessage("Date of Birth"),
+        "describeAMealLabel":
+            MessageLookupByLibrary.simpleMessage("Describe a meal"),
+        "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
+        "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
+        "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
+        "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
+        "favoritesLabel": MessageLookupByLibrary.simpleMessage("Favorites"),
+        "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
+        "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),
+        "forgotPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Forgot Password?"),
+        "frequentDesc": MessageLookupByLibrary.simpleMessage(
+            "I work out almost every day."),
+        "frequentLabel": MessageLookupByLibrary.simpleMessage("5+ times/week"),
+        "genderDesc": MessageLookupByLibrary.simpleMessage(
+            "Used to personalize your health and calorie estimates."),
+        "genderLabel": MessageLookupByLibrary.simpleMessage("Gender"),
+        "goalLabel": MessageLookupByLibrary.simpleMessage("Goal"),
+        "heightDesc": MessageLookupByLibrary.simpleMessage(
+            "Helps calculate your body mass index (BMI)."),
+        "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
+        "invalidCredential": MessageLookupByLibrary.simpleMessage(
+            "The email or password you entered is incorrect. Please try again."),
+        "kgUnitLabel": MessageLookupByLibrary.simpleMessage("Kg"),
+        "lightDesc": MessageLookupByLibrary.simpleMessage(
+            "Light or occasional workouts."),
+        "lightLabel": MessageLookupByLibrary.simpleMessage("1–2 times/week"),
+        "lightlyActiveDesc": MessageLookupByLibrary.simpleMessage(
+            "Occasional walking or standing (e.g., teacher, short walks)."),
+        "lightlyActiveLabel":
+            MessageLookupByLibrary.simpleMessage("Lightly Active"),
+        "logFoodLabel": MessageLookupByLibrary.simpleMessage("Log Food"),
+        "logOutLabel": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "loggedLabel": MessageLookupByLibrary.simpleMessage("Logged"),
+        "loggingSelectionButtonDesc1": MessageLookupByLibrary.simpleMessage(
+            "Search and select your food, then enter the portion."),
+        "loggingSelectionButtonDesc2": MessageLookupByLibrary.simpleMessage(
+            "Snap a quick photo — we’ll handle the rest."),
+        "loggingSelectionButtonDesc3": MessageLookupByLibrary.simpleMessage(
+            "Scan a barcode to log packaged food instantly."),
+        "loggingSelectionButtonTitle1":
+            MessageLookupByLibrary.simpleMessage("Log Food"),
+        "loggingSelectionButtonTitle2":
+            MessageLookupByLibrary.simpleMessage("Meal Scan"),
+        "loggingSelectionButtonTitle3":
+            MessageLookupByLibrary.simpleMessage("Scan Barcode"),
+        "loginLabel": MessageLookupByLibrary.simpleMessage("Log in"),
+        "loginPrimarySpanText":
+            MessageLookupByLibrary.simpleMessage("Already have an account? "),
+        "loginScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "Smarter tracking for better results—log in and let AI help you stay on top of your diet!"),
+        "loginScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Welcome back to Flux"),
+        "loginSecondarySpanText":
+            MessageLookupByLibrary.simpleMessage("Log In"),
+        "lunchLabel": MessageLookupByLibrary.simpleMessage("Lunch"),
+        "macronutrientsLabel":
+            MessageLookupByLibrary.simpleMessage("Macronutrients"),
+        "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
+        "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
+        "moderateDesc": MessageLookupByLibrary.simpleMessage(
+            "Consistent workouts on most weekdays."),
+        "moderateLabel": MessageLookupByLibrary.simpleMessage("3–4 times/week"),
+        "moreLabel": MessageLookupByLibrary.simpleMessage("More"),
+        "myMealsLabel": MessageLookupByLibrary.simpleMessage("My Meals"),
+        "neverDesc":
+            MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
+        "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
+        "nutritionalInformationLabel":
+            MessageLookupByLibrary.simpleMessage("Nutritional Information"),
+        "okLabel": MessageLookupByLibrary.simpleMessage("Ok"),
+        "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
+            "Chat with our AI to create a meal plan that fits your goals—whether it’s losing fat, maintaining weight, or gaining muscle."),
+        "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
+            "Use our advanced AI-powered meal scanner to effortlessly log your meals and get personalized nutrition insights."),
+        "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
+            "Fuel your progress, unlock new rewards, and watch your virtual pet thrive. Every milestone helps them evolve!"),
+        "onboardingTitle1": MessageLookupByLibrary.simpleMessage(
+            "Your Smart Nutrition Assistant"),
+        "onboardingTitle2":
+            MessageLookupByLibrary.simpleMessage("AI Meal Scan: Track Smarter"),
+        "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
+            "Fuel Up. Friend Up. Level Up"),
+        "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "permissionDenied": MessageLookupByLibrary.simpleMessage(
+            "Session Expired or User is not Authenticated, Please Login Again."),
+        "planDescription1": MessageLookupByLibrary.simpleMessage(
+            "Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you."),
+        "planDescription2": MessageLookupByLibrary.simpleMessage(
+            "Tell us your goal weight so we can guide your progress and adjust your plan as you move toward it."),
+        "planDescription3": MessageLookupByLibrary.simpleMessage(
+            "Set your preferred weight gain pace — from a slow and steady 0.1 kg to a more aggressive 1.0 kg per week."),
+        "planDescription4": MessageLookupByLibrary.simpleMessage(
+            "Tell us how active you are throughout the day — this includes movement during work, school, or at home."),
+        "planDescription5": MessageLookupByLibrary.simpleMessage(
+            "Let us know your weekly workout habits so we can fine-tune your plan to match your training level."),
+        "planQuestion1":
+            MessageLookupByLibrary.simpleMessage("Tell Us About You"),
+        "planQuestion2":
+            MessageLookupByLibrary.simpleMessage("Set Your Target Weight"),
+        "planQuestion3": MessageLookupByLibrary.simpleMessage(
+            "Choose Your Weekly Weight Gain"),
+        "planQuestion4": MessageLookupByLibrary.simpleMessage(
+            "Describe Your Daily Activity"),
+        "planQuestion5":
+            MessageLookupByLibrary.simpleMessage("How Often Do You Exercise?"),
+        "planSelectionButtonDesc1": MessageLookupByLibrary.simpleMessage(
+            "Answer questions and customize your own journey."),
+        "planSelectionButtonDesc2": MessageLookupByLibrary.simpleMessage(
+            "Describe your body and goals — let AI build your perfect plan."),
+        "planSelectionButtonTitle1":
+            MessageLookupByLibrary.simpleMessage("Manual Custom Plan"),
+        "planSelectionButtonTitle2":
+            MessageLookupByLibrary.simpleMessage("Smart Plan with AI"),
+        "planSelectionDesc": MessageLookupByLibrary.simpleMessage(
+            "Choose to build your plan step-by-step or let AI design one based on your goals."),
+        "planSelectionTitle": MessageLookupByLibrary.simpleMessage(
+            "How Should We Build Your Plan?"),
+        "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
+        "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
+        "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),
+        "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
+        "requestError": MessageLookupByLibrary.simpleMessage(
+            "There was an error with your request. Please try again later."),
+        "scanABarcodeLabel":
+            MessageLookupByLibrary.simpleMessage("Scan a barcode"),
+        "searchFoodPlaceholder":
+            MessageLookupByLibrary.simpleMessage("Search foods..."),
+        "sedentaryDesc": MessageLookupByLibrary.simpleMessage(
+            "Mostly sitting all day (e.g., desk job, little movement)."),
+        "sedentaryLabel": MessageLookupByLibrary.simpleMessage("Sedentary"),
+        "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
+        "servingUnitLabel":
+            MessageLookupByLibrary.simpleMessage("Serving Unit"),
+        "signUpLabel": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signUpPrimarySpanText":
+            MessageLookupByLibrary.simpleMessage("Don’t have an account yet? "),
+        "signUpScreenDesc": MessageLookupByLibrary.simpleMessage(
+            "Sign up to start with Flux. Get meal plans, track nutrition, and evolve your pet!"),
+        "signUpScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Get Started with Flux"),
+        "signUpSecondarySpanText":
+            MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "simplifiedChineseLabel":
+            MessageLookupByLibrary.simpleMessage("Simplified chinese"),
+        "snackLabel": MessageLookupByLibrary.simpleMessage("Snack"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
+        "targetWeightDesc": MessageLookupByLibrary.simpleMessage(
+            "Set your goal weight — if it’s higher, we’ll help you gain; if lower, lose; if the same, maintain."),
+        "targetWeightLabel":
+            MessageLookupByLibrary.simpleMessage("Target Weight"),
+        "targetWeightWeeklyDesc": MessageLookupByLibrary.simpleMessage(
+            "0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk"),
+        "targetWeightWeeklyLabel":
+            MessageLookupByLibrary.simpleMessage("Target Weekly Gain"),
+        "tooManyRequests": MessageLookupByLibrary.simpleMessage(
+            "We have blocked all requests from this device due to unusual activity. Try again later."),
+        "usedEmail": MessageLookupByLibrary.simpleMessage(
+            "This email address is already in use. Please use a different email."),
+        "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
+        "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
+            "Physically demanding job or lots of daily movement."),
+        "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),
+        "weakPassword": MessageLookupByLibrary.simpleMessage(
+            "The password you entered is too weak. Please choose a stronger password."),
+        "weightDesc": MessageLookupByLibrary.simpleMessage(
+            "Used to determine your daily calorie needs."),
+        "weightLabel": MessageLookupByLibrary.simpleMessage("Weight")
+      };
+}
