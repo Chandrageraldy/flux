@@ -36,6 +36,26 @@ class TableCol {
 
 class DateFormatConstant {}
 
+enum MealType {
+  breakfast,
+  lunch,
+  dinner,
+  snack;
+
+  String get label {
+    switch (this) {
+      case breakfast:
+        return S.current.breakfastLabel;
+      case lunch:
+        return S.current.lunchLabel;
+      case dinner:
+        return S.current.dinnerLabel;
+      case snack:
+        return S.current.snackLabel;
+    }
+  }
+}
+
 enum MacroNutrients {
   carbs('carbs'),
   protein('protein'),

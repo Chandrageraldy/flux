@@ -6,33 +6,40 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MealDiaryCard extends StatelessWidget {
   const MealDiaryCard({required this.mealType, super.key});
 
-  final String mealType;
+  final MealType mealType;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: _Styles.getContainerDecoration(context),
-      width: AppStyles.kDoubleInfinity,
-      child: Column(
-        children: [
-          getHeaderContainer(context),
-          getDivider(context),
-          ListView.separated(
-            padding: AppStyles.kPaddSV16H12,
-            itemCount: 1,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => MealFoodDisplayCard(),
-            separatorBuilder: (context, index) => const SizedBox(height: 12),
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => _onHeaderTap(context),
+      child: Container(
+        decoration: _Styles.getContainerDecoration(context),
+        width: AppStyles.kDoubleInfinity,
+        child: Column(
+          children: [
+            getHeaderContainer(context),
+            getDivider(context),
+            ListView.separated(
+              padding: AppStyles.kPaddSV16H12,
+              itemCount: 1,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => MealFoodDisplayCard(),
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on MealDiaryCard {}
+extension _Actions on MealDiaryCard {
+  void _onHeaderTap(BuildContext context) {
+    context.router.push(MealDetailsRoute(mealType: mealType));
+  }
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on MealDiaryCard {
@@ -63,7 +70,7 @@ extension _WidgetFactories on MealDiaryCard {
 
   // Meal Type Label
   Widget getMealTypeLabel(BuildContext context) {
-    return Text(mealType, style: _Styles.getMealTypeLabelTextStyle(context));
+    return Text(mealType.label, style: _Styles.getMealTypeLabelTextStyle(context));
   }
 
   // Calorie Tag

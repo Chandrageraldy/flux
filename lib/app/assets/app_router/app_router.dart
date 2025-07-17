@@ -10,6 +10,7 @@ import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
 import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.dart';
 import 'package:flux/app/views/manual_plan_setup_page/manual_plan_setup_page.dart';
+import 'package:flux/app/views/meal_details_page/meal_details_page.dart';
 import 'package:flux/app/views/more_page/more_page.dart';
 import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
 import 'package:flux/app/views/progress_page/progress_page.dart';
@@ -59,6 +60,7 @@ class AppRouter extends RootStackRouter {
         ),
         CustomRoute(page: LoggingSelectionRoute.page, customRouteBuilder: _modalSheetBuilder),
         AutoRoute(page: FoodDetailsRoute.page),
+        AutoRoute(page: MealDetailsRoute.page),
       ],
     );
   }
