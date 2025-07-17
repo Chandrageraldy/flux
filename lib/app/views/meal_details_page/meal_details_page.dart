@@ -1,6 +1,9 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/food/meal_macronutrient_intake_progress.dart';
+import 'package:flux/app/widgets/food/nutrition_tag.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 
 @RoutePage()
@@ -15,8 +18,7 @@ class MealDetailsPage extends BaseStatefulPage {
 
 class _MealDetailsPageState extends BaseStatefulState<MealDetailsPage> {
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar(
-      backgroundColor: context.theme.colorScheme.onPrimary, title: widget.mealType.label, centerTitle: true);
+  PreferredSizeWidget? appbar() => DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary);
 
   @override
   defaultPadding() => AppStyles.kPadd0;
@@ -40,25 +42,60 @@ extension _Actions on _MealDetailsPageState {
   Widget getHeaderContainer() {
     return Container(
       width: AppStyles.kDoubleInfinity,
-      padding: AppStyles.kPaddSV12H28,
+      padding: AppStyles.kPaddSH28,
       decoration: _Styles.getHeaderContainerDecoration(context),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: AppStyles.kSpac32,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          getCalorieCircularProgressIndicator(),
-          Expanded(
-            child: Column(
-              spacing: AppStyles.kSpac20,
-              children: [
-                MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.protein),
-                MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.carbs),
-                MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.fat),
-              ],
-            ),
-          )
+          getMealTypeLabel(),
+          AppStyles.kSizedBoxH4,
+          getDateContainer(),
+          AppStyles.kSizedBoxH32,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: AppStyles.kSpac32,
+            children: [
+              getCalorieCircularProgressIndicator(),
+              Expanded(
+                child: Column(
+                  spacing: AppStyles.kSpac20,
+                  children: [
+                    MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.protein),
+                    MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.carbs),
+                    MealMacronutrientIntakeProgress(macroNutrient: MacroNutrients.fat),
+                  ],
+                ),
+              )
+            ],
+          ),
+          AppStyles.kSizedBoxH20,
         ],
       ),
+    );
+  }
+
+  // Meal Type Label
+  Widget getMealTypeLabel() {
+    return Text(
+      widget.mealType.label,
+      style: _Styles.getMealTypeLabelTextStyle(context),
+    );
+  }
+
+  // Date Container
+  Widget getDateContainer() {
+    return Container(
+      padding: AppStyles.kPaddSV4H8,
+      decoration: _Styles.getDateContainerDecoration(context),
+      child: getDateLabel(),
+    );
+  }
+
+  // Date Label
+  Widget getDateLabel() {
+    return Text(
+      DateTime.now().toFormattedString(DateFormat.YEAR_ABBR_MONTH_DAY),
+      style: _Styles.getDateLabelTextStyle(context),
     );
   }
 
@@ -124,4 +161,24 @@ abstract class _Styles {
 
   // Circular Percent Indicator Radius
   static double circularPercentIndicatorRadius = 80.0;
+
+  // Meal Type Label Text Style
+  static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.extraHuge);
+  }
+
+  // Date Label Text Style
+  static TextStyle getDateLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold
+        .withSize(FontSizes.mediumPlus)
+        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  }
+
+  // Date Container Decoration
+  static BoxDecoration getDateContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.surface,
+      borderRadius: AppStyles.kRad8,
+    );
+  }
 }

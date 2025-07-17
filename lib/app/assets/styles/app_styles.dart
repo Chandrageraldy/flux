@@ -32,6 +32,8 @@ class AppStyles {
   static const kPaddSH28 = EdgeInsets.symmetric(horizontal: 28.0);
   // Padding VERTICAL and HORIZONTAL
   static const kPaddSV3H6 = EdgeInsets.symmetric(vertical: 3.0, horizontal: 6.0);
+  static const kPaddSV3H12 = EdgeInsets.symmetric(vertical: 3.0, horizontal: 12.0);
+  static const kPaddSV4H8 = EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0);
   static const kPaddSV12H20 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0);
   static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
   static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
