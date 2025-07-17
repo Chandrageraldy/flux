@@ -83,10 +83,7 @@ extension _WidgetFactories on _FoodSearchPageState {
         height: AppStyles.kSize48,
         width: AppStyles.kSize48,
         decoration: BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad10),
-        child: Icon(
-          Icons.qr_code_scanner,
-          color: context.theme.colorScheme.primary,
-        ),
+        child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary),
       ),
     );
   }
@@ -130,11 +127,7 @@ extension _WidgetFactories on _FoodSearchPageState {
   Widget getFoodActionHeader() {
     return SliverToBoxAdapter(
       child: Column(
-        children: [
-          AppStyles.kSizedBoxH12,
-          getFoodActionHeaderRow(),
-          AppStyles.kSizedBoxH12,
-        ],
+        children: [AppStyles.kSizedBoxH12, getFoodActionHeaderRow(), AppStyles.kSizedBoxH12],
       ),
     );
   }
@@ -211,11 +204,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRadOBL20BR20,
       boxShadow: [
-        BoxShadow(
-          color: context.theme.colorScheme.tertiaryFixedDim,
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
       ],
     );
   }
@@ -226,11 +215,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.tertiaryContainer,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(
-          color: context.theme.colorScheme.tertiaryFixedDim,
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
       ],
     );
   }

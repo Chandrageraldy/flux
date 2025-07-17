@@ -103,10 +103,7 @@ extension _WidgetFactories on _RootPageState {
     return Row(
       children: List.generate(
         onboardData.length,
-        (index) => Padding(
-          padding: AppStyles.kPadd3,
-          child: getDotIndicator(isActive: index == pageIndex),
-        ),
+        (index) => Padding(padding: AppStyles.kPadd3, child: getDotIndicator(isActive: index == pageIndex)),
       ),
     );
   }

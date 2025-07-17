@@ -33,7 +33,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   Widget body() {
     return SingleChildScrollView(
       child: Padding(
-        padding: AppStyles.kPaddSV12H20,
+        padding: AppStyles.kPaddSH20,
         child: Column(
           spacing: AppStyles.kSpac16,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +42,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppStyles.kSpac24,
-              children: [
-                getDateShifterContainer(),
-                getDateTimeline(),
-              ],
+              children: [getDateShifterContainer(), getDateTimeline()],
             ),
             getCalorieIntakeContainer(),
             getMacroNutrientIntakeContainer(),
@@ -115,11 +112,7 @@ extension _WidgetFactories on _DiaryPageState {
   Widget getDateShifterButton(VoidCallback onPressed, IconData icon, bool isEnabled) {
     return IconButton(
       onPressed: isEnabled ? onPressed : null,
-      icon: FaIcon(
-        icon,
-        size: AppStyles.kIconSize20,
-        color: isEnabled ? null : Colors.grey,
-      ),
+      icon: FaIcon(icon, size: AppStyles.kIconSize20, color: isEnabled ? null : Colors.grey),
     );
   }
 
@@ -282,11 +275,7 @@ class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(
-          color: context.theme.colorScheme.tertiaryFixedDim,
-          blurRadius: 4,
-          offset: const Offset(0, 2), // changes position of shadow
-        ),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
       ],
     );
   }

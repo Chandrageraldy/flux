@@ -46,9 +46,7 @@ extension _WidgetFactories on ManualPlanSetupPickerButton {
       width: 48,
       height: 48,
       decoration: _Styles.getIconContainerDecoration(context, isPicked),
-      child: Center(
-        child: icon,
-      ),
+      child: Center(child: icon),
     );
   }
 
@@ -69,18 +67,12 @@ extension _WidgetFactories on ManualPlanSetupPickerButton {
 
   // Title Label
   Widget getTitleLabel(BuildContext context) {
-    return Text(
-      title,
-      style: _Styles.getTitleLabelTextStyle(context),
-    );
+    return Text(title, style: _Styles.getTitleLabelTextStyle(context));
   }
 
   // Picked Value Label
   Widget getPickedValueLabel(BuildContext context) {
-    return Text(
-      pickedValue,
-      style: _Styles.getDescriptionLabelTextStyle(context),
-    );
+    return Text(pickedValue, style: _Styles.getDescriptionLabelTextStyle(context));
   }
 
   // Unit Label
@@ -119,13 +111,7 @@ abstract class _Styles {
   // Icon Container Decoration
   static BoxDecoration getIconContainerDecoration(BuildContext context, bool isPicked) {
     return isPicked
-        ? BoxDecoration(
-            gradient: GradientAppColors.primaryGradient,
-            borderRadius: AppStyles.kRad100,
-          )
-        : BoxDecoration(
-            color: context.theme.colorScheme.tertiaryContainer,
-            borderRadius: AppStyles.kRad100,
-          );
+        ? BoxDecoration(gradient: GradientAppColors.primaryGradient, borderRadius: AppStyles.kRad100)
+        : BoxDecoration(color: context.theme.colorScheme.tertiaryContainer, borderRadius: AppStyles.kRad100);
   }
 }

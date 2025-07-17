@@ -44,11 +44,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(
-          color: context.theme.colorScheme.tertiaryFixedDim,
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
       ],
     );
   }
