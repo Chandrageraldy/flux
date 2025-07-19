@@ -1,3 +1,4 @@
+import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/button/app_text_span_button.dart';
@@ -51,31 +52,27 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _LoginPageState {
-  void _onLoginPressed() async {
-    context.router.replaceAll([DashboardNavigatorRoute()]);
-  }
-
   void _onSignUpPressed() {
     context.router.push(const PlanSelectionRoute());
   }
 
-  // void _onLoginPressed() async {
-  //   if (_formKey.currentState!.saveAndValidate()) {
-  //     final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
-  //     final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
+  void _onLoginPressed() async {
+    if (_formKey.currentState!.saveAndValidate()) {
+      final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
+      final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
 
-  //     final result = await tryLoad(
-  //           context,
-  //           () =>
-  //               context.read<UserViewModel>().loginWithEmailAndPassword(email: email.trim(), password: password.trim()),
-  //         ) ??
-  //         false;
+      final result = await tryLoad(
+            context,
+            () =>
+                context.read<UserViewModel>().loginWithEmailAndPassword(email: email.trim(), password: password.trim()),
+          ) ??
+          false;
 
-  //     if (result && mounted) {
-  //       context.router.replaceAll([DashboardNavigatorRoute()]);
-  //     }
-  //   }
-  // }
+      if (result && mounted) {
+        context.router.replaceAll([DashboardNavigatorRoute()]);
+      }
+    }
+  }
 
   // void _onTestErrorPressed() async {
   //   await tryLoad(

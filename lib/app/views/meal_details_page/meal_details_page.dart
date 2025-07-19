@@ -2,7 +2,6 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/food/meal_macronutrient_intake_progress.dart';
-import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 
@@ -103,7 +102,7 @@ extension _Actions on _MealDetailsPageState {
   Widget getCalorieCircularProgressIndicator() {
     return CircularPercentIndicator(
       lineWidth: _Styles.circularPercentIndicatorLineWidth,
-      radius: 80,
+      radius: _Styles.circularPercentIndicatorRadius,
       percent: 0.66,
       progressColor: context.theme.colorScheme.secondary,
       backgroundColor: context.theme.colorScheme.tertiary,

@@ -7,11 +7,8 @@ part 'user_profile_model.g.dart';
 class UserProfileModel with _$UserProfileModel {
   factory UserProfileModel({
     String? userId,
-    String? fullName,
+    String? username,
     String? email,
-    @Default(false) bool isEmailVerified,
-    String? phoneCountryCode,
-    String? phoneNumber,
     String? photoUrl,
   }) = _UserProfileModel;
 

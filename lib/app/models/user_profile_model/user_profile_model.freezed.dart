@@ -21,11 +21,8 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserProfileModel {
   String? get userId => throw _privateConstructorUsedError;
-  String? get fullName => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  bool get isEmailVerified => throw _privateConstructorUsedError;
-  String? get phoneCountryCode => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
 
   /// Serializes this UserProfileModel to a JSON map.
@@ -45,13 +42,7 @@ abstract class $UserProfileModelCopyWith<$Res> {
       _$UserProfileModelCopyWithImpl<$Res, UserProfileModel>;
   @useResult
   $Res call(
-      {String? userId,
-      String? fullName,
-      String? email,
-      bool isEmailVerified,
-      String? phoneCountryCode,
-      String? phoneNumber,
-      String? photoUrl});
+      {String? userId, String? username, String? email, String? photoUrl});
 }
 
 /// @nodoc
@@ -70,11 +61,8 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? fullName = freezed,
+    Object? username = freezed,
     Object? email = freezed,
-    Object? isEmailVerified = null,
-    Object? phoneCountryCode = freezed,
-    Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,25 +70,13 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isEmailVerified: null == isEmailVerified
-          ? _value.isEmailVerified
-          : isEmailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      phoneCountryCode: freezed == phoneCountryCode
-          ? _value.phoneCountryCode
-          : phoneCountryCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
@@ -119,13 +95,7 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? userId,
-      String? fullName,
-      String? email,
-      bool isEmailVerified,
-      String? phoneCountryCode,
-      String? phoneNumber,
-      String? photoUrl});
+      {String? userId, String? username, String? email, String? photoUrl});
 }
 
 /// @nodoc
@@ -142,11 +112,8 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? fullName = freezed,
+    Object? username = freezed,
     Object? email = freezed,
-    Object? isEmailVerified = null,
-    Object? phoneCountryCode = freezed,
-    Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
   }) {
     return _then(_$UserProfileModelImpl(
@@ -154,25 +121,13 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isEmailVerified: null == isEmailVerified
-          ? _value.isEmailVerified
-          : isEmailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      phoneCountryCode: freezed == phoneCountryCode
-          ? _value.phoneCountryCode
-          : phoneCountryCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
@@ -186,13 +141,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserProfileModelImpl implements _UserProfileModel {
   _$UserProfileModelImpl(
-      {this.userId,
-      this.fullName,
-      this.email,
-      this.isEmailVerified = false,
-      this.phoneCountryCode,
-      this.phoneNumber,
-      this.photoUrl});
+      {this.userId, this.username, this.email, this.photoUrl});
 
   factory _$UserProfileModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileModelImplFromJson(json);
@@ -200,22 +149,15 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   final String? userId;
   @override
-  final String? fullName;
+  final String? username;
   @override
   final String? email;
-  @override
-  @JsonKey()
-  final bool isEmailVerified;
-  @override
-  final String? phoneCountryCode;
-  @override
-  final String? phoneNumber;
   @override
   final String? photoUrl;
 
   @override
   String toString() {
-    return 'UserProfileModel(userId: $userId, fullName: $fullName, email: $email, isEmailVerified: $isEmailVerified, phoneCountryCode: $phoneCountryCode, phoneNumber: $phoneNumber, photoUrl: $photoUrl)';
+    return 'UserProfileModel(userId: $userId, username: $username, email: $email, photoUrl: $photoUrl)';
   }
 
   @override
@@ -224,23 +166,17 @@ class _$UserProfileModelImpl implements _UserProfileModel {
         (other.runtimeType == runtimeType &&
             other is _$UserProfileModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.fullName, fullName) ||
-                other.fullName == fullName) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.isEmailVerified, isEmailVerified) ||
-                other.isEmailVerified == isEmailVerified) &&
-            (identical(other.phoneCountryCode, phoneCountryCode) ||
-                other.phoneCountryCode == phoneCountryCode) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, fullName, email,
-      isEmailVerified, phoneCountryCode, phoneNumber, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, username, email, photoUrl);
 
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -262,11 +198,8 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 abstract class _UserProfileModel implements UserProfileModel {
   factory _UserProfileModel(
       {final String? userId,
-      final String? fullName,
+      final String? username,
       final String? email,
-      final bool isEmailVerified,
-      final String? phoneCountryCode,
-      final String? phoneNumber,
       final String? photoUrl}) = _$UserProfileModelImpl;
 
   factory _UserProfileModel.fromJson(Map<String, dynamic> json) =
@@ -275,15 +208,9 @@ abstract class _UserProfileModel implements UserProfileModel {
   @override
   String? get userId;
   @override
-  String? get fullName;
+  String? get username;
   @override
   String? get email;
-  @override
-  bool get isEmailVerified;
-  @override
-  String? get phoneCountryCode;
-  @override
-  String? get phoneNumber;
   @override
   String? get photoUrl;
 

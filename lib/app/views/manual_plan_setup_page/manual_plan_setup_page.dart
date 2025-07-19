@@ -157,6 +157,7 @@ extension _Actions on _ManualPlanSetupPageState {
   }
 
   void _onLastQuestionContinueButtonPressed() {
+    context.read<ManualPlanSetupViewModel>().cleanUserPlan();
     context.router.push(SignUpRoute());
   }
 
@@ -166,7 +167,8 @@ extension _Actions on _ManualPlanSetupPageState {
   void _onContinueButtonPressed(Map<String, String> userPlan) {
     final nextIndex = _currentQuestionIndex + 1;
 
-    final shouldSkipTargetWeekly = userPlan[PlanSelectionKey.targetWeight.key] == userPlan[PlanSelectionKey.weight.key];
+    final shouldSkipTargetWeekly = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeightWeekly.key &&
+        userPlan[PlanSelectionKey.targetWeight.key] == userPlan[PlanSelectionKey.weight.key];
 
     if (shouldSkipTargetWeekly && nextIndex + 1 < planQuestionData.length) {
       _setState(() => _currentQuestionIndex = nextIndex + 1);

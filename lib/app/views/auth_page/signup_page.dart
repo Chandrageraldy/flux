@@ -1,3 +1,4 @@
+import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/button/app_text_span_button.dart';
@@ -51,24 +52,25 @@ class _SignUpPageState extends BaseStatefulState<SignUpPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _SignUpPageState {
-  // void _onSignUpPressed() async {
-  //   if (_formKey.currentState!.saveAndValidate()) {
-  //     final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
-  //     final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
+  void _onSignUpPressed() async {
+    if (_formKey.currentState!.saveAndValidate()) {
+      final username = _formKey.currentState!.fields[FormFields.username.name]!.value as String;
+      final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
+      final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
 
-  //     final result = await tryLoad(
-  //           context,
-  //           () => context
-  //               .read<UserViewModel>()
-  //               .signUpWithEmailAndPassword(email: email.trim(), password: password.trim()),
-  //         ) ??
-  //         false;
+      final result = await tryLoad(
+            context,
+            () => context
+                .read<UserViewModel>()
+                .signUpWithEmailAndPassword(email: email.trim(), password: password.trim(), username: username),
+          ) ??
+          false;
 
-  //     if (result && mounted) {
-  //       context.router.replaceAll([DashboardNavigatorRoute()]);
-  //     }
-  //   }
-  // }
+      if (result && mounted) {
+        context.router.replaceAll([DashboardNavigatorRoute()]);
+      }
+    }
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -146,7 +148,7 @@ extension _WidgetFactories on _SignUpPageState {
 
   // Sign Up Button
   Widget getSignUpButton() {
-    return AppDefaultButton(label: S.current.signUpLabel, onPressed: () {});
+    return AppDefaultButton(label: S.current.signUpLabel, onPressed: _onSignUpPressed);
   }
 
   // Log In Button

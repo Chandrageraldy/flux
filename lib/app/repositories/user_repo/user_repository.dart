@@ -28,8 +28,8 @@ class UserRepository {
     return response;
   }
 
-  Future<Response> createUserProfile({required String userId, required String email}) async {
-    UserProfileModel model = UserProfileModel(userId: userId, email: email);
+  Future<Response> createUserProfile({required String userId, required String email, required String username}) async {
+    UserProfileModel model = UserProfileModel(userId: userId, email: email, username: username);
     final response = await userService.createUserProfile(model: model);
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);

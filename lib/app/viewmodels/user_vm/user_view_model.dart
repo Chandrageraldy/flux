@@ -19,13 +19,14 @@ class UserViewModel extends BaseViewModel {
     return response.data is User;
   }
 
-  Future<bool> signUpWithEmailAndPassword({required String email, required String password}) async {
+  Future<bool> signUpWithEmailAndPassword(
+      {required String email, required String password, required String username}) async {
     final response = await userRepository.signUpWithEmailAndPassword(email: email, password: password);
     checkError(response);
 
     if (response.data is User) {
       User user = response.data;
-      await createUserProfile(userId: user.id, email: user.email!);
+      await createUserProfile(userId: user.id, email: user.email!, username: username);
     }
 
     return response.data is User;
@@ -37,8 +38,8 @@ class UserViewModel extends BaseViewModel {
     return response.data;
   }
 
-  Future<void> createUserProfile({required String userId, required String email}) async {
-    final response = await userRepository.createUserProfile(userId: userId, email: email);
+  Future<void> createUserProfile({required String userId, required String email, required String username}) async {
+    final response = await userRepository.createUserProfile(userId: userId, email: email, username: username);
     checkError(response);
   }
 
