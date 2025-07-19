@@ -10,12 +10,6 @@ class ProgressPage extends BaseStatefulPage {
 
 class _ProgressPageState extends BaseStatefulState<ProgressPage> {
   @override
-  bool useGradientBackground() => false;
-
-  @override
-  Color backgroundColor() => context.theme.colorScheme.surface;
-
-  @override
   Widget body() {
     return const Center(
       child: Text('ProgressPage body'),

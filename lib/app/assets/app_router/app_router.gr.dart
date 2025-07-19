@@ -278,18 +278,39 @@ class RootRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SignUpPage]
-class SignUpRoute extends PageRouteInfo<void> {
-  const SignUpRoute({List<PageRouteInfo>? children})
-    : super(SignUpRoute.name, initialChildren: children);
+class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({
+    required Map<String, String> userPlan,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SignUpRoute.name,
+         args: SignUpRouteArgs(userPlan: userPlan, key: key),
+         initialChildren: children,
+       );
 
   static const String name = 'SignUpRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SignUpPage();
+      final args = data.argsAs<SignUpRouteArgs>();
+      return SignUpPage(userPlan: args.userPlan, key: args.key);
     },
   );
+}
+
+class SignUpRouteArgs {
+  const SignUpRouteArgs({required this.userPlan, this.key});
+
+  final Map<String, String> userPlan;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{userPlan: $userPlan, key: $key}';
+  }
 }
 
 /// generated route for

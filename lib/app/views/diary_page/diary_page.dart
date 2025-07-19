@@ -23,9 +23,6 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
   @override
-  Color backgroundColor() => context.theme.colorScheme.surface;
-
-  @override
   Widget body() {
     return SingleChildScrollView(
       child: Padding(

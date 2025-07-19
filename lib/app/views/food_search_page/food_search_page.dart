@@ -20,9 +20,6 @@ class _FoodSearchPageState extends BaseStatefulState<FoodSearchPage> {
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
   @override
-  Color backgroundColor() => context.theme.colorScheme.surface;
-
-  @override
   bool useGradientBackground() => false;
 
   @override

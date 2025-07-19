@@ -130,7 +130,10 @@ extension _Actions on _ManualPlanSetupPageState {
       title: title,
       description: description,
       onItemSelected: (int index) {
-        final selectedValue = items[index];
+        var selectedValue = items[index];
+        if (key == PlanSelectionKey.gender.key) {
+          selectedValue = selectedValue.toLowerCase();
+        }
         context.read<ManualPlanSetupViewModel>().saveUserPlan(key, selectedValue);
       },
     );
@@ -158,7 +161,8 @@ extension _Actions on _ManualPlanSetupPageState {
 
   void _onLastQuestionContinueButtonPressed() {
     context.read<ManualPlanSetupViewModel>().cleanUserPlan();
-    context.router.push(SignUpRoute());
+    Map<String, String> userPlan = context.read<ManualPlanSetupViewModel>().userPlan;
+    context.router.push(SignUpRoute(userPlan: userPlan));
   }
 
   // Advances to the next question.

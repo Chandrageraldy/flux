@@ -1,4 +1,5 @@
 import 'package:flux/app/models/auth_model.dart/email_auth_request_model.dart';
+import 'package:flux/app/models/user_plan_model.dart/user_plan_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/services/user_service/user_service.dart';
 
@@ -28,8 +29,14 @@ class UserRepository {
     return response;
   }
 
-  Future<Response> createUserProfile({required String userId, required String email, required String username}) async {
-    UserProfileModel model = UserProfileModel(userId: userId, email: email, username: username);
+  Future<Response> createUserProfile({
+    required String userId,
+    required String email,
+    required String username,
+    required Map<String, String> userPlan,
+  }) async {
+    UserProfileModel model =
+        UserProfileModel(userId: userId, email: email, username: username, userPlan: UserPlanModel.fromJson(userPlan));
     final response = await userService.createUserProfile(model: model);
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);

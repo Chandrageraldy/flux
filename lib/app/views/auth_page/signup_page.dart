@@ -9,7 +9,9 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
 @RoutePage()
 class SignUpPage extends BaseStatefulPage {
-  const SignUpPage({super.key});
+  const SignUpPage({required this.userPlan, super.key});
+
+  final Map<String, String> userPlan;
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -60,9 +62,8 @@ extension _Actions on _SignUpPageState {
 
       final result = await tryLoad(
             context,
-            () => context
-                .read<UserViewModel>()
-                .signUpWithEmailAndPassword(email: email.trim(), password: password.trim(), username: username),
+            () => context.read<UserViewModel>().signUpWithEmailAndPassword(
+                email: email.trim(), password: password.trim(), username: username, userPlan: widget.userPlan),
           ) ??
           false;
 

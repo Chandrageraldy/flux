@@ -30,13 +30,13 @@ enum PlanSelectionKey {
       case PlanSelectionKey.dob:
         return 'dob';
       case PlanSelectionKey.targetWeight:
-        return 'target_weight';
+        return 'targetWeight';
       case PlanSelectionKey.targetWeightWeekly:
-        return 'target_weekly';
+        return 'targetWeekly';
       case PlanSelectionKey.activityLevel:
-        return 'activity_level';
+        return 'activityLevel';
       case PlanSelectionKey.exerciseLevel:
-        return 'exercise_level';
+        return 'exerciseLevel';
     }
   }
 }

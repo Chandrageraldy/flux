@@ -28,7 +28,7 @@ abstract class SupabaseBaseService {
       }
       return Response.complete(response.user);
     } on AuthException catch (e) {
-      debugPrint(e.message);
+      debugPrint(e.code);
       return _handleSupabaseException(e.code);
     } catch (e) {
       return Response.error(e);

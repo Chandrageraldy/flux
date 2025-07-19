@@ -47,9 +47,9 @@ extension _Actions on _PlanSelectionModalState {
     context.router.push(ManualPlanSetupRoute());
   }
 
-  void _onSmartPlanWithAIPressed() {
-    context.router.push(SignUpRoute());
-  }
+  // void _onSmartPlanWithAIPressed() {
+  //   context.router.push(SignUpRoute());
+  // }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -86,7 +86,7 @@ extension _WidgetFactories on _PlanSelectionModalState {
           FontAwesomeIcons.rocket,
           color: context.theme.colorScheme.primary,
         ),
-        onPressed: _onSmartPlanWithAIPressed,
+        onPressed: () {},
       ),
     ];
   }
