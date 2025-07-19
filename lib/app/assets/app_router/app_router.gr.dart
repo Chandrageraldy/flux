@@ -112,6 +112,22 @@ class FoodSearchRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LoadingPage]
+class LoadingRoute extends PageRouteInfo<void> {
+  const LoadingRoute({List<PageRouteInfo>? children})
+    : super(LoadingRoute.name, initialChildren: children);
+
+  static const String name = 'LoadingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LoadingPage();
+    },
+  );
+}
+
+/// generated route for
 /// [LoggingSelectionModal]
 class LoggingSelectionRoute extends PageRouteInfo<void> {
   const LoggingSelectionRoute({List<PageRouteInfo>? children})
@@ -280,12 +296,12 @@ class RootRoute extends PageRouteInfo<void> {
 /// [SignUpPage]
 class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
   SignUpRoute({
-    required Map<String, String> userPlan,
+    required Map<String, String> bodyMetrics,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          SignUpRoute.name,
-         args: SignUpRouteArgs(userPlan: userPlan, key: key),
+         args: SignUpRouteArgs(bodyMetrics: bodyMetrics, key: key),
          initialChildren: children,
        );
 
@@ -295,21 +311,21 @@ class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<SignUpRouteArgs>();
-      return SignUpPage(userPlan: args.userPlan, key: args.key);
+      return SignUpPage(bodyMetrics: args.bodyMetrics, key: args.key);
     },
   );
 }
 
 class SignUpRouteArgs {
-  const SignUpRouteArgs({required this.userPlan, this.key});
+  const SignUpRouteArgs({required this.bodyMetrics, this.key});
 
-  final Map<String, String> userPlan;
+  final Map<String, String> bodyMetrics;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'SignUpRouteArgs{userPlan: $userPlan, key: $key}';
+    return 'SignUpRouteArgs{bodyMetrics: $bodyMetrics, key: $key}';
   }
 }
 

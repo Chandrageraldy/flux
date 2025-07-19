@@ -24,7 +24,7 @@ mixin _$UserProfileModel {
   String? get username => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
-  UserPlanModel? get userPlan => throw _privateConstructorUsedError;
+  BodyMetricsModel? get bodyMetrics => throw _privateConstructorUsedError;
 
   /// Serializes this UserProfileModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,9 +47,9 @@ abstract class $UserProfileModelCopyWith<$Res> {
       String? username,
       String? email,
       String? photoUrl,
-      UserPlanModel? userPlan});
+      BodyMetricsModel? bodyMetrics});
 
-  $UserPlanModelCopyWith<$Res>? get userPlan;
+  $BodyMetricsModelCopyWith<$Res>? get bodyMetrics;
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
     Object? username = freezed,
     Object? email = freezed,
     Object? photoUrl = freezed,
-    Object? userPlan = freezed,
+    Object? bodyMetrics = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -90,10 +90,10 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPlan: freezed == userPlan
-          ? _value.userPlan
-          : userPlan // ignore: cast_nullable_to_non_nullable
-              as UserPlanModel?,
+      bodyMetrics: freezed == bodyMetrics
+          ? _value.bodyMetrics
+          : bodyMetrics // ignore: cast_nullable_to_non_nullable
+              as BodyMetricsModel?,
     ) as $Val);
   }
 
@@ -101,13 +101,13 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserPlanModelCopyWith<$Res>? get userPlan {
-    if (_value.userPlan == null) {
+  $BodyMetricsModelCopyWith<$Res>? get bodyMetrics {
+    if (_value.bodyMetrics == null) {
       return null;
     }
 
-    return $UserPlanModelCopyWith<$Res>(_value.userPlan!, (value) {
-      return _then(_value.copyWith(userPlan: value) as $Val);
+    return $BodyMetricsModelCopyWith<$Res>(_value.bodyMetrics!, (value) {
+      return _then(_value.copyWith(bodyMetrics: value) as $Val);
     });
   }
 }
@@ -125,10 +125,10 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
       String? username,
       String? email,
       String? photoUrl,
-      UserPlanModel? userPlan});
+      BodyMetricsModel? bodyMetrics});
 
   @override
-  $UserPlanModelCopyWith<$Res>? get userPlan;
+  $BodyMetricsModelCopyWith<$Res>? get bodyMetrics;
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
     Object? username = freezed,
     Object? email = freezed,
     Object? photoUrl = freezed,
-    Object? userPlan = freezed,
+    Object? bodyMetrics = freezed,
   }) {
     return _then(_$UserProfileModelImpl(
       userId: freezed == userId
@@ -167,10 +167,10 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPlan: freezed == userPlan
-          ? _value.userPlan
-          : userPlan // ignore: cast_nullable_to_non_nullable
-              as UserPlanModel?,
+      bodyMetrics: freezed == bodyMetrics
+          ? _value.bodyMetrics
+          : bodyMetrics // ignore: cast_nullable_to_non_nullable
+              as BodyMetricsModel?,
     ));
   }
 }
@@ -179,7 +179,11 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserProfileModelImpl implements _UserProfileModel {
   _$UserProfileModelImpl(
-      {this.userId, this.username, this.email, this.photoUrl, this.userPlan});
+      {this.userId,
+      this.username,
+      this.email,
+      this.photoUrl,
+      this.bodyMetrics});
 
   factory _$UserProfileModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileModelImplFromJson(json);
@@ -193,11 +197,11 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   final String? photoUrl;
   @override
-  final UserPlanModel? userPlan;
+  final BodyMetricsModel? bodyMetrics;
 
   @override
   String toString() {
-    return 'UserProfileModel(userId: $userId, username: $username, email: $email, photoUrl: $photoUrl, userPlan: $userPlan)';
+    return 'UserProfileModel(userId: $userId, username: $username, email: $email, photoUrl: $photoUrl, bodyMetrics: $bodyMetrics)';
   }
 
   @override
@@ -211,14 +215,14 @@ class _$UserProfileModelImpl implements _UserProfileModel {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
-            (identical(other.userPlan, userPlan) ||
-                other.userPlan == userPlan));
+            (identical(other.bodyMetrics, bodyMetrics) ||
+                other.bodyMetrics == bodyMetrics));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, username, email, photoUrl, userPlan);
+      Object.hash(runtimeType, userId, username, email, photoUrl, bodyMetrics);
 
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -243,7 +247,7 @@ abstract class _UserProfileModel implements UserProfileModel {
       final String? username,
       final String? email,
       final String? photoUrl,
-      final UserPlanModel? userPlan}) = _$UserProfileModelImpl;
+      final BodyMetricsModel? bodyMetrics}) = _$UserProfileModelImpl;
 
   factory _UserProfileModel.fromJson(Map<String, dynamic> json) =
       _$UserProfileModelImpl.fromJson;
@@ -257,7 +261,7 @@ abstract class _UserProfileModel implements UserProfileModel {
   @override
   String? get photoUrl;
   @override
-  UserPlanModel? get userPlan;
+  BodyMetricsModel? get bodyMetrics;
 
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.

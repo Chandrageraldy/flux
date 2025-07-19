@@ -1,4 +1,4 @@
-import 'package:flux/app/models/user_plan_model.dart/user_plan_model.dart';
+import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_profile_model.freezed.dart';
@@ -11,7 +11,7 @@ class UserProfileModel with _$UserProfileModel {
     String? username,
     String? email,
     String? photoUrl,
-    UserPlanModel? userPlan,
+    BodyMetricsModel? bodyMetrics,
   }) = _UserProfileModel;
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) => _$UserProfileModelFromJson(json);

@@ -64,7 +64,7 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
 
   @override
   Widget body() {
-    final userPlan = context.select((ManualPlanSetupViewModel vm) => vm.userPlan);
+    final bodyMetrics = context.select((ManualPlanSetupViewModel vm) => vm.bodyMetrics);
     final currentQuestion = planQuestionData[_currentQuestionIndex];
 
     return Column(
@@ -75,12 +75,12 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
         getQuestionDescriptionLabel(),
         AppStyles.kSizedBoxH32,
         currentQuestion.type == PlanSelectionQuestionType.options
-            ? getQuestionOptions(userPlan, currentQuestion)
-            : getQuestionPickers(userPlan, currentQuestion),
+            ? getQuestionOptions(bodyMetrics, currentQuestion)
+            : getQuestionPickers(bodyMetrics, currentQuestion),
         Spacer(),
         getLinearPercentIndicator(),
         AppStyles.kSizedBoxH20,
-        getContinueButton(userPlan, currentQuestion),
+        getContinueButton(bodyMetrics, currentQuestion),
         AppStyles.kSizedBoxH12,
       ],
     );
@@ -93,13 +93,13 @@ extension _PrivateMethods on _ManualPlanSetupPageState {
     final initialHeightIndex = '165';
     final initialWeightIndex = '60';
 
-    final userPlan = context.read<ManualPlanSetupViewModel>().userPlan;
+    final bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
     if (key == PlanSelectionKey.height.key) {
       return items.indexOf(initialHeightIndex); // Default height
     } else if (key == PlanSelectionKey.weight.key) {
       return items.indexOf(initialWeightIndex); // Default weight
     } else if (key == PlanSelectionKey.targetWeight.key) {
-      final userWeight = userPlan[PlanSelectionKey.weight.key];
+      final userWeight = bodyMetrics[PlanSelectionKey.weight.key];
       return items.indexOf(userWeight ?? initialWeightIndex);
     }
     return 0;
@@ -109,11 +109,11 @@ extension _PrivateMethods on _ManualPlanSetupPageState {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ManualPlanSetupPageState {
   void _onOptionPressed(String value) {
-    context.read<ManualPlanSetupViewModel>().saveUserPlan(planQuestionData[_currentQuestionIndex].key, value);
+    context.read<ManualPlanSetupViewModel>().savebodyMetrics(planQuestionData[_currentQuestionIndex].key, value);
   }
 
   void _onPickerPressed(String key, List<String> items, String unit, String title, String description) {
-    final currentSelectedValue = context.read<ManualPlanSetupViewModel>().userPlan[key];
+    final currentSelectedValue = context.read<ManualPlanSetupViewModel>().bodyMetrics[key];
 
     // Determines the initial index in the picker.
     // - If the user already selected a value, use its index.
@@ -134,13 +134,13 @@ extension _Actions on _ManualPlanSetupPageState {
         if (key == PlanSelectionKey.gender.key) {
           selectedValue = selectedValue.toLowerCase();
         }
-        context.read<ManualPlanSetupViewModel>().saveUserPlan(key, selectedValue);
+        context.read<ManualPlanSetupViewModel>().savebodyMetrics(key, selectedValue);
       },
     );
   }
 
   void _onDobPickerPressed(String key, String title, String description) {
-    final currentSelectedValue = context.read<ManualPlanSetupViewModel>().userPlan[key];
+    final currentSelectedValue = context.read<ManualPlanSetupViewModel>().bodyMetrics[key];
 
     final dateFormat = DateFormat.YEAR_MONTH_DAY;
 
@@ -154,25 +154,25 @@ extension _Actions on _ManualPlanSetupPageState {
       description: description,
       onDateSelected: (date) {
         final selectedDate = date;
-        context.read<ManualPlanSetupViewModel>().saveUserPlan(key, selectedDate.toFormattedString(dateFormat));
+        context.read<ManualPlanSetupViewModel>().savebodyMetrics(key, selectedDate.toFormattedString(dateFormat));
       },
     );
   }
 
   void _onLastQuestionContinueButtonPressed() {
-    context.read<ManualPlanSetupViewModel>().cleanUserPlan();
-    Map<String, String> userPlan = context.read<ManualPlanSetupViewModel>().userPlan;
-    context.router.push(SignUpRoute(userPlan: userPlan));
+    context.read<ManualPlanSetupViewModel>().cleanbodyMetrics();
+    Map<String, String> bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
+    context.router.push(SignUpRoute(bodyMetrics: bodyMetrics));
   }
 
   // Advances to the next question.
   // If the "targetWeightWeekly" question is not relevant (target weight == current weight),
   // it will be skipped automatically by jumping two steps forward.
-  void _onContinueButtonPressed(Map<String, String> userPlan) {
+  void _onContinueButtonPressed(Map<String, String> bodyMetrics) {
     final nextIndex = _currentQuestionIndex + 1;
 
     final shouldSkipTargetWeekly = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeightWeekly.key &&
-        userPlan[PlanSelectionKey.targetWeight.key] == userPlan[PlanSelectionKey.weight.key];
+        bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
     if (shouldSkipTargetWeekly && nextIndex + 1 < planQuestionData.length) {
       _setState(() => _currentQuestionIndex = nextIndex + 1);
@@ -185,12 +185,12 @@ extension _Actions on _ManualPlanSetupPageState {
   // If the "targetWeightWeekly" question was skipped, it should also be skipped when moving backward
   // by jumping two steps back to avoid showing a question that was not shown.
   void _onBackNavigationPressed() {
-    final userPlan = context.read<ManualPlanSetupViewModel>().userPlan;
+    final bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
     final previousIndex = _currentQuestionIndex - 1;
 
     final shouldSkipTargetWeekly =
         planQuestionData[_currentQuestionIndex - 1].key == PlanSelectionKey.targetWeightWeekly.key &&
-            userPlan[PlanSelectionKey.targetWeight.key] == userPlan[PlanSelectionKey.weight.key];
+            bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
     if (shouldSkipTargetWeekly && previousIndex - 1 >= 0) {
       _setState(() => _currentQuestionIndex = previousIndex - 1);
@@ -219,7 +219,7 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
   }
 
   // Question Options
-  Widget getQuestionOptions(Map<String, String> userPlan, PlanQuestion currentQuestion) {
+  Widget getQuestionOptions(Map<String, String> bodyMetrics, PlanQuestion currentQuestion) {
     return Column(
       spacing: AppStyles.kSpac20,
       children: [
@@ -230,7 +230,7 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
               description: option.description,
               icon: option.icon,
               onPressed: () => _onOptionPressed(option.value),
-              isSelected: userPlan[planQuestionData[_currentQuestionIndex].key] == option.value,
+              isSelected: bodyMetrics[planQuestionData[_currentQuestionIndex].key] == option.value,
             );
           },
         ),
@@ -239,7 +239,7 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
   }
 
   // Question Pickers
-  Widget getQuestionPickers(Map<String, String> userPlan, PlanQuestion currentQuestion) {
+  Widget getQuestionPickers(Map<String, String> bodyMetrics, PlanQuestion currentQuestion) {
     return Column(
       spacing: AppStyles.kSpac20,
       children: [
@@ -247,13 +247,13 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
           (picker) {
             return ManualPlanSetupPickerButton(
               title: picker.title,
-              pickedValue: userPlan[picker.key] ?? '-',
+              pickedValue: bodyMetrics[picker.key] ?? '-',
               icon: picker.icon,
               onPressed: () => picker.key == PlanSelectionKey.dob.key
                   ? _onDobPickerPressed(picker.key, picker.title, picker.description)
                   : _onPickerPressed(picker.key, picker.items, picker.unit ?? '', picker.title, picker.description),
               unit: picker.unit ?? '',
-              isPicked: userPlan.containsKey(picker.key),
+              isPicked: bodyMetrics.containsKey(picker.key),
             );
           },
         ),
@@ -278,17 +278,17 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
 
   // Continue Button
   Widget getContinueButton(
-    Map<String, String> userPlan,
+    Map<String, String> bodyMetrics,
     PlanQuestion currentQuestion,
   ) {
     // Determine if the current question has been fully answered
     final isAnswered = () {
       if (currentQuestion.type == PlanSelectionQuestionType.options) {
-        return userPlan.containsKey(currentQuestion.key);
+        return bodyMetrics.containsKey(currentQuestion.key);
       } else {
         final pickers = currentQuestion.pickers ?? [];
         // For picker-based questions, ensure all required pickers have a selected value
-        return pickers.every((picker) => userPlan.containsKey(picker.key));
+        return pickers.every((picker) => bodyMetrics.containsKey(picker.key));
       }
     }();
 
@@ -300,7 +300,7 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
       onPressed: isAnswered
           ? () => _currentQuestionIndex + 1 == planQuestionData.length
               ? _onLastQuestionContinueButtonPressed()
-              : _onContinueButtonPressed(userPlan)
+              : _onContinueButtonPressed(bodyMetrics)
           : null,
     );
   }

@@ -60,6 +60,7 @@ dependencies:
   percent_indicator: ^4.2.5
   font_awesome_flutter: ^10.8.0
   easy_date_timeline: ^2.0.9
+  lottie: ^3.3.1
 
 
 dev_dependencies:
@@ -77,6 +78,7 @@ flutter:
 
   assets:
     - lib/app/assets/images/
+    - lib/app/assets/animations/
 
   fonts:
     - family: Quicksand

@@ -2,26 +2,26 @@ import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class ManualPlanSetupViewModel extends BaseViewModel {
-  Map<String, String> userPlan = {};
+  Map<String, String> bodyMetrics = {};
 
-  void saveUserPlan(String key, String value) {
-    // Use this instead of 'userPlan[key] = value' to provide new reference for notifying listener
-    userPlan = {...userPlan, key: value};
+  void savebodyMetrics(String key, String value) {
+    // Use this instead of 'bodyMetrics[key] = value' to provide new reference for notifying listener
+    bodyMetrics = {...bodyMetrics, key: value};
     notifyListeners();
-    print(userPlan);
+    print(bodyMetrics);
   }
 
-  void cleanUserPlan() {
-    String userWeight = userPlan[PlanSelectionKey.weight.key] ?? '';
-    String userTargetWeight = userPlan[PlanSelectionKey.targetWeight.key] ?? '';
+  void cleanbodyMetrics() {
+    String userWeight = bodyMetrics[PlanSelectionKey.weight.key] ?? '';
+    String userTargetWeight = bodyMetrics[PlanSelectionKey.targetWeight.key] ?? '';
     if (userWeight == userTargetWeight) {
-      userPlan.remove(PlanSelectionKey.targetWeightWeekly.key);
-      userPlan[PlanSelectionKey.goal.key] = PlanSelectionValue.maintain.value;
+      bodyMetrics.remove(PlanSelectionKey.targetWeightWeekly.key);
+      bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.maintain.value;
     } else if (double.parse(userWeight) < double.parse(userTargetWeight)) {
-      userPlan[PlanSelectionKey.goal.key] = PlanSelectionValue.gain.value;
+      bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.gain.value;
     } else {
-      userPlan[PlanSelectionKey.goal.key] = PlanSelectionValue.lose.value;
+      bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.lose.value;
     }
-    print(userPlan);
+    print(bodyMetrics);
   }
 }

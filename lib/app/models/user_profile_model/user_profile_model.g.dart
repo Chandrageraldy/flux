@@ -13,9 +13,10 @@ _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
       username: json['username'] as String?,
       email: json['email'] as String?,
       photoUrl: json['photoUrl'] as String?,
-      userPlan: json['userPlan'] == null
+      bodyMetrics: json['bodyMetrics'] == null
           ? null
-          : UserPlanModel.fromJson(json['userPlan'] as Map<String, dynamic>),
+          : BodyMetricsModel.fromJson(
+              json['bodyMetrics'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserProfileModelImplToJson(
@@ -25,5 +26,5 @@ Map<String, dynamic> _$$UserProfileModelImplToJson(
       'username': instance.username,
       'email': instance.email,
       'photoUrl': instance.photoUrl,
-      'userPlan': instance.userPlan,
+      'bodyMetrics': instance.bodyMetrics,
     };

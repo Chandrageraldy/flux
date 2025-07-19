@@ -23,14 +23,14 @@ class UserViewModel extends BaseViewModel {
     required String email,
     required String password,
     required String username,
-    required Map<String, String> userPlan,
+    required Map<String, String> bodyMetrics,
   }) async {
     final response = await userRepository.signUpWithEmailAndPassword(email: email, password: password);
     checkError(response);
 
     if (response.data is User) {
       User user = response.data;
-      await createUserProfile(userId: user.id, email: user.email!, username: username, userPlan: userPlan);
+      await createUserProfile(userId: user.id, email: user.email!, username: username, bodyMetrics: bodyMetrics);
     }
 
     return response.data is User;
@@ -46,10 +46,10 @@ class UserViewModel extends BaseViewModel {
     required String userId,
     required String email,
     required String username,
-    required Map<String, String> userPlan,
+    required Map<String, String> bodyMetrics,
   }) async {
-    final response =
-        await userRepository.createUserProfile(userId: userId, email: email, username: username, userPlan: userPlan);
+    final response = await userRepository.createUserProfile(
+        userId: userId, email: email, username: username, bodyMetrics: bodyMetrics);
     checkError(response);
   }
 

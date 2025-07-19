@@ -20,9 +20,6 @@ class _FoodSearchPageState extends BaseStatefulState<FoodSearchPage> {
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
   @override
-  bool useGradientBackground() => false;
-
-  @override
   Widget body() {
     return DefaultTabController(
       length: 3,

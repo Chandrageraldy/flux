@@ -1,5 +1,5 @@
 import 'package:flux/app/models/auth_model.dart/email_auth_request_model.dart';
-import 'package:flux/app/models/user_plan_model.dart/user_plan_model.dart';
+import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/services/user_service/user_service.dart';
 
@@ -33,10 +33,10 @@ class UserRepository {
     required String userId,
     required String email,
     required String username,
-    required Map<String, String> userPlan,
+    required Map<String, String> bodyMetrics,
   }) async {
-    UserProfileModel model =
-        UserProfileModel(userId: userId, email: email, username: username, userPlan: UserPlanModel.fromJson(userPlan));
+    UserProfileModel model = UserProfileModel(
+        userId: userId, email: email, username: username, bodyMetrics: BodyMetricsModel.fromJson(bodyMetrics));
     final response = await userService.createUserProfile(model: model);
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);
