@@ -1,5 +1,11 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
+class Env {
+  static const String file = '.env';
+  static const String supabaseUrl = 'SUPABASE_URL';
+  static const String supabaseAnonKey = 'SUPABASE_ANON_KEY';
+}
+
 class ImagePath {
   static const String fluxLogo = 'lib/app/assets/images/flux.png';
   static const String onboarding1 = 'lib/app/assets/images/onboarding1.png';

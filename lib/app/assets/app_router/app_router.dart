@@ -8,7 +8,7 @@ import 'package:flux/app/views/dashboard_page/dashboard_page.dart';
 import 'package:flux/app/views/diary_page/diary_page.dart';
 import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
-import 'package:flux/app/views/loading_page/loading_page.dart';
+import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.dart';
 import 'package:flux/app/views/manual_plan_setup_page/manual_plan_setup_page.dart';
 import 'package:flux/app/views/meal_details_page/meal_details_page.dart';
@@ -41,7 +41,7 @@ class AppRouter extends RootStackRouter {
       AutoRoute(page: LoginRoute.page),
       AutoRoute(page: SignUpRoute.page),
       AutoRoute(page: ManualPlanSetupRoute.page),
-      AutoRoute(page: LoadingRoute.page),
+      AutoRoute(page: PersonalizingPlanLoadingRoute.page),
     ];
   }
 

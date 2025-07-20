@@ -112,22 +112,6 @@ class FoodSearchRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LoadingPage]
-class LoadingRoute extends PageRouteInfo<void> {
-  const LoadingRoute({List<PageRouteInfo>? children})
-    : super(LoadingRoute.name, initialChildren: children);
-
-  static const String name = 'LoadingRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const LoadingPage();
-    },
-  );
-}
-
-/// generated route for
 /// [LoggingSelectionModal]
 class LoggingSelectionRoute extends PageRouteInfo<void> {
   const LoggingSelectionRoute({List<PageRouteInfo>? children})
@@ -224,6 +208,22 @@ class MoreRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const MorePage();
+    },
+  );
+}
+
+/// generated route for
+/// [PersonalizingPlanLoadingPage]
+class PersonalizingPlanLoadingRoute extends PageRouteInfo<void> {
+  const PersonalizingPlanLoadingRoute({List<PageRouteInfo>? children})
+    : super(PersonalizingPlanLoadingRoute.name, initialChildren: children);
+
+  static const String name = 'PersonalizingPlanLoadingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PersonalizingPlanLoadingPage();
     },
   );
 }

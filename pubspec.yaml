@@ -62,6 +62,9 @@ dependencies:
   easy_date_timeline: ^2.0.9
   lottie: ^3.3.1
 
+  # Security
+  flutter_dotenv: ^5.2.1
+
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +82,7 @@ flutter:
   assets:
     - lib/app/assets/images/
     - lib/app/assets/animations/
+    - .env
 
   fonts:
     - family: Quicksand

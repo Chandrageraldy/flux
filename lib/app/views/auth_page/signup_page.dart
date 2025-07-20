@@ -68,7 +68,7 @@ extension _Actions on _SignUpPageState {
           false;
 
       if (result && mounted) {
-        context.router.replaceAll([LoadingRoute()]);
+        context.router.replaceAll([PersonalizingPlanLoadingRoute()]);
       }
     }
   }

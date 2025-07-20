@@ -6,14 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 @RoutePage()
-class LoadingPage extends BaseStatefulPage {
-  const LoadingPage({super.key});
+class PersonalizingPlanLoadingPage extends BaseStatefulPage {
+  const PersonalizingPlanLoadingPage({super.key});
 
   @override
-  State<LoadingPage> createState() => _LoadingPageState();
+  State<PersonalizingPlanLoadingPage> createState() => _PersonalizingPlanLoadingPageState();
 }
 
-class _LoadingPageState extends BaseStatefulState<LoadingPage> {
+class _PersonalizingPlanLoadingPageState extends BaseStatefulState<PersonalizingPlanLoadingPage> {
   @override
   void initState() {
     super.initState();
@@ -26,8 +26,8 @@ class _LoadingPageState extends BaseStatefulState<LoadingPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Lottie.asset(AnimationPath.loadingAnimation, width: 150, height: 150),
-          Text(S.current.personalizingYourPlanLoadingText, style: Quicksand.medium.withSize(FontSizes.huge)),
+          Lottie.asset(AnimationPath.loadingAnimation, width: AppStyles.kSize150, height: AppStyles.kSize150),
+          Text(S.current.personalizingYourPlanLoadingText, style: _Styles.personalizingPlanLabelTextStyle()),
         ],
       ),
     );
@@ -35,7 +35,7 @@ class _LoadingPageState extends BaseStatefulState<LoadingPage> {
 }
 
 // * ------------------------ PrivateMethods ------------------------
-extension _PrivateMethods on _LoadingPageState {
+extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   void calculateRequiredCaloriesAndNutrients() {
     final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
 
@@ -77,11 +77,12 @@ extension _PrivateMethods on _LoadingPageState {
         : adjustCaloriesForTargetWeeklyGain(tdee: tdee, targetWeeklyGain: targetWeeklyGain);
 
     Map<String, double> macroRatio = getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
+    Map<String, double> dailyMicronutrients = getDailyMicronutrients(gender, age);
 
-    final calorieAndMacro = getCalorieAndMacro(adjustedKcalBasedOnTargetWeeklyGain, macroRatio);
+    final completeNutrient = getCompleteNutrients(adjustedKcalBasedOnTargetWeeklyGain, macroRatio, dailyMicronutrients);
 
     // ignore: avoid_print
-    print(calorieAndMacro);
+    print(completeNutrient);
   }
 
   int calculateAge(DateTime dob) {
@@ -182,7 +183,95 @@ extension _PrivateMethods on _LoadingPageState {
   }
 
   Map<String, double> getDailyMicronutrients(String gender, int age) {
-    if (gender == PlanSelectionValue.male.value && age >= 19 && age <= 30) {}
+    final bool isMale = gender == PlanSelectionValue.male.value;
+
+    Map<String, double> male19_30 = {
+      Nutrition.calcium.key: 1000, // mg
+      Nutrition.iron.key: 8, // mg
+      Nutrition.magnesium.key: 400, // mg
+      Nutrition.phosphorus.key: 700, // mg
+      Nutrition.potassium.key: 3400, // mg
+      Nutrition.sodium.key: 1500, // mg
+      Nutrition.zinc.key: 11, // mg
+      Nutrition.copper.key: 0.9, // mg
+      Nutrition.manganese.key: 2.3, // mg
+      Nutrition.selenium.key: 55, // µg
+      Nutrition.vitaminA.key: 3000, // IU
+      Nutrition.vitaminE.key: 15, // mg
+      Nutrition.vitaminD.key: 600, // IU
+      Nutrition.vitaminC.key: 90, // mg
+      Nutrition.thiamin.key: 1.2, // mg
+      Nutrition.riboflavin.key: 1.3, // mg
+      Nutrition.niacin.key: 16, // mg
+      Nutrition.vitaminB6.key: 1.3, // mg
+      Nutrition.vitaminB12.key: 2.4, // µg
+      Nutrition.choline.key: 550, // mg
+      Nutrition.vitaminK.key: 120, // µg
+      Nutrition.folate.key: 400, // µg
+    };
+
+    Map<String, double> male31_50 = {
+      ...male19_30,
+      Nutrition.magnesium.key: 420, // mg
+    };
+
+    Map<String, double> male51plus = {
+      ...male31_50,
+      Nutrition.vitaminB6.key: 1.7, // mg
+    };
+
+    Map<String, double> male70plus = {
+      ...male51plus,
+      Nutrition.calcium.key: 1200, // mg
+    };
+
+    Map<String, double> female19_30 = {
+      Nutrition.calcium.key: 1000, // mg
+      Nutrition.iron.key: 18, // mg
+      Nutrition.magnesium.key: 310, // mg
+      Nutrition.phosphorus.key: 700, // mg
+      Nutrition.potassium.key: 2600, // mg
+      Nutrition.sodium.key: 1500, // mg
+      Nutrition.zinc.key: 8, // mg
+      Nutrition.copper.key: 0.9, // mg
+      Nutrition.manganese.key: 1.8, // mg
+      Nutrition.selenium.key: 55, // µg
+      Nutrition.vitaminA.key: 2333, // IU
+      Nutrition.vitaminE.key: 15, // mg
+      Nutrition.vitaminD.key: 600, // IU
+      Nutrition.vitaminC.key: 75, // mg
+      Nutrition.thiamin.key: 1.1, // mg
+      Nutrition.riboflavin.key: 1.1, // mg
+      Nutrition.niacin.key: 14, // mg
+      Nutrition.vitaminB6.key: 1.3, // mg
+      Nutrition.vitaminB12.key: 2.4, // µg
+      Nutrition.choline.key: 425, // mg
+      Nutrition.vitaminK.key: 90, // µg
+      Nutrition.folate.key: 400, // µg
+    };
+
+    Map<String, double> female31_50 = {
+      ...female19_30,
+      Nutrition.magnesium.key: 320, // mg
+    };
+
+    Map<String, double> female51plus = {
+      ...female31_50,
+      Nutrition.calcium.key: 1200, // mg
+      Nutrition.iron.key: 8, // mg
+      Nutrition.vitaminB6.key: 1.5, // mg
+    };
+
+    if (age >= 19 && age <= 30) {
+      return isMale ? male19_30 : female19_30;
+    } else if (age >= 31 && age <= 50) {
+      return isMale ? male31_50 : female31_50;
+    } else if (age >= 51 && age <= 70) {
+      return isMale ? male51plus : female51plus;
+    } else if (age > 70) {
+      return isMale ? male70plus : female51plus;
+    }
+
     return {};
   }
 
@@ -194,7 +283,8 @@ extension _PrivateMethods on _LoadingPageState {
     return tdee + calorieAdjustment;
   }
 
-  Map<String, double> getCalorieAndMacro(double calorie, Map<String, double> macroRatio) {
+  Map<String, double> getCompleteNutrients(
+      double calorie, Map<String, double> macroRatio, Map<String, double> microNutrients) {
     double protein = calorie * macroRatio['proteinRatio']!;
     double fat = calorie * macroRatio['fatRatio']!;
     double carb = calorie * macroRatio['carbRatio']!;
@@ -204,6 +294,14 @@ extension _PrivateMethods on _LoadingPageState {
       Nutrition.protein.key: protein / 4,
       Nutrition.fat.key: fat / 9,
       Nutrition.carbs.key: carb / 4,
+      ...microNutrients,
     };
+  }
+}
+
+// * ----------------------------- Styles -----------------------------
+abstract class _Styles {
+  static TextStyle personalizingPlanLabelTextStyle() {
+    return Quicksand.medium.withSize(FontSizes.huge);
   }
 }
