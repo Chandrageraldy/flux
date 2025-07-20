@@ -26,6 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "On your feet most of the day (e.g., retail, light labor)."),
         "activeLabel": MessageLookupByLibrary.simpleMessage("Active"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
+        "balancedDesc": MessageLookupByLibrary.simpleMessage(
+            "A balanced diet with a variety of foods."),
+        "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
         "calorieFormula":
             MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
@@ -63,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
+        "ketoDesc": MessageLookupByLibrary.simpleMessage(
+            "Low-carb, high-fat diet for weight loss."),
+        "ketoLabel": MessageLookupByLibrary.simpleMessage("Keto"),
         "kgUnitLabel": MessageLookupByLibrary.simpleMessage("Kg"),
         "lightDesc": MessageLookupByLibrary.simpleMessage(
             "Light or occasional workouts."),
@@ -97,11 +103,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Welcome back to Flux"),
         "loginSecondarySpanText":
             MessageLookupByLibrary.simpleMessage("Log In"),
+        "lowCarbsDesc": MessageLookupByLibrary.simpleMessage(
+            "Low-carb, high-protein diet."),
+        "lowCarbsLabel": MessageLookupByLibrary.simpleMessage("Low Carbs"),
         "lunchLabel": MessageLookupByLibrary.simpleMessage("Lunch"),
         "macronutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Macronutrients"),
         "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
+        "mediterraneanDesc":
+            MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),
+        "mediterraneanLabel":
+            MessageLookupByLibrary.simpleMessage("Mediterranean"),
         "moderateDesc": MessageLookupByLibrary.simpleMessage(
             "Consistent workouts on most weekdays."),
         "moderateLabel": MessageLookupByLibrary.simpleMessage("3–4 times/week"),
@@ -125,9 +138,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AI Meal Scan: Track Smarter"),
         "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Fuel Up. Friend Up. Level Up"),
+        "paleoDesc": MessageLookupByLibrary.simpleMessage(
+            "Based on foods eaten by early humans."),
+        "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "permissionDenied": MessageLookupByLibrary.simpleMessage(
             "Session Expired or User is not Authenticated, Please Login Again."),
+        "personalizingYourPlanLoadingText":
+            MessageLookupByLibrary.simpleMessage(
+                "Personalizing your plan....."),
         "planDescription1": MessageLookupByLibrary.simpleMessage(
             "Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you."),
         "planDescription2": MessageLookupByLibrary.simpleMessage(
@@ -138,6 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tell us how active you are throughout the day — this includes movement during work, school, or at home."),
         "planDescription5": MessageLookupByLibrary.simpleMessage(
             "Let us know your weekly workout habits so we can fine-tune your plan to match your training level."),
+        "planDescription6": MessageLookupByLibrary.simpleMessage(
+            "Choose the diet type that best fits your lifestyle. We\'ll use this to tailor your calorie and macronutrient goals."),
         "planQuestion1":
             MessageLookupByLibrary.simpleMessage("Tell Us About You"),
         "planQuestion2":
@@ -148,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Describe Your Daily Activity"),
         "planQuestion5":
             MessageLookupByLibrary.simpleMessage("How Often Do You Exercise?"),
+        "planQuestion6": MessageLookupByLibrary.simpleMessage(
+            "What’s Your Diet Preference?"),
         "planSelectionButtonDesc1": MessageLookupByLibrary.simpleMessage(
             "Answer questions and customize your own journey."),
         "planSelectionButtonDesc2": MessageLookupByLibrary.simpleMessage(
@@ -203,6 +226,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "usedEmail": MessageLookupByLibrary.simpleMessage(
             "This email address is already in use. Please use a different email."),
         "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
+        "vegetarianDesc": MessageLookupByLibrary.simpleMessage(
+            "A diet that excludes meat and fish."),
+        "vegetarianLabel": MessageLookupByLibrary.simpleMessage("Vegetarian"),
         "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
             "Physically demanding job or lots of daily movement."),
         "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),

@@ -1,10 +1,14 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
-class ImageConstant {
+class ImagePath {
   static const String fluxLogo = 'lib/app/assets/images/flux.png';
   static const String onboarding1 = 'lib/app/assets/images/onboarding1.png';
   static const String onboarding2 = 'lib/app/assets/images/onboarding2.png';
   static const String onboarding3 = 'lib/app/assets/images/onboarding3.png';
+}
+
+class AnimationPath {
+  static const String loadingAnimation = 'lib/app/assets/animations/loading.json';
 }
 
 enum Language {
@@ -33,8 +37,6 @@ class TableName {
 class TableCol {
   static String userId = 'userId';
 }
-
-class DateFormatConstant {}
 
 enum MealType {
   breakfast,
@@ -83,6 +85,92 @@ enum MacroNutrients {
         return S.current.proteinLabel;
       case fat:
         return S.current.fatLabel;
+    }
+  }
+}
+
+enum Nutrition {
+  calorie,
+  protein,
+  fat,
+  carbs,
+  calcium,
+  iron,
+  magnesium,
+  phosphorus,
+  potassium,
+  sodium,
+  zinc,
+  copper,
+  manganese,
+  selenium,
+  vitaminA,
+  vitaminE,
+  vitaminD,
+  vitaminC,
+  thiamin,
+  riboflavin,
+  niacin,
+  vitaminB6,
+  vitaminB12,
+  choline,
+  vitaminK,
+  folate;
+
+  String get key {
+    switch (this) {
+      case calorie:
+        return 'calorieKcal';
+      case protein:
+        return 'proteinG';
+      case fat:
+        return 'fatG';
+      case carbs:
+        return 'carbsG';
+      case calcium:
+        return 'calciumMg';
+      case iron:
+        return 'ironMg';
+      case magnesium:
+        return 'magnesiumMg';
+      case phosphorus:
+        return 'phosphorusMg';
+      case potassium:
+        return 'potassiumMg';
+      case sodium:
+        return 'sodiumMg';
+      case zinc:
+        return 'zincMg';
+      case copper:
+        return 'copperMg';
+      case manganese:
+        return 'manganeseMg';
+      case selenium:
+        return 'seleniumUg';
+      case vitaminA:
+        return 'vitaminAIu';
+      case vitaminE:
+        return 'vitaminEMg';
+      case vitaminD:
+        return 'vitaminDIu';
+      case vitaminC:
+        return 'vitaminCMg';
+      case thiamin:
+        return 'thiaminMg';
+      case riboflavin:
+        return 'riboflavinMg';
+      case niacin:
+        return 'niacinMg';
+      case vitaminB6:
+        return 'vitaminB6Mg';
+      case vitaminB12:
+        return 'vitaminB12Ug';
+      case choline:
+        return 'cholineMg';
+      case vitaminK:
+        return 'vitaminKUg';
+      case folate:
+        return 'folateUg';
     }
   }
 }

@@ -15,9 +15,10 @@ _$BodyMetricsModelImpl _$$BodyMetricsModelImplFromJson(
       weight: json['weight'] as String?,
       dob: json['dob'] as String?,
       targetWeight: json['targetWeight'] as String?,
-      targetWeekly: json['targetWeekly'] as String?,
+      targetWeeklyGain: json['targetWeeklyGain'] as String?,
       activityLevel: json['activityLevel'] as String?,
       exerciseLevel: json['exerciseLevel'] as String?,
+      dietType: json['dietType'] as String?,
     );
 
 Map<String, dynamic> _$$BodyMetricsModelImplToJson(
@@ -29,7 +30,8 @@ Map<String, dynamic> _$$BodyMetricsModelImplToJson(
       'weight': instance.weight,
       'dob': instance.dob,
       'targetWeight': instance.targetWeight,
-      'targetWeekly': instance.targetWeekly,
+      'targetWeeklyGain': instance.targetWeeklyGain,
       'activityLevel': instance.activityLevel,
       'exerciseLevel': instance.exerciseLevel,
+      'dietType': instance.dietType,
     };

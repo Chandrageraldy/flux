@@ -125,7 +125,7 @@ extension _WidgetFactories on _RootPageState {
   // Flux Logo Image
   Widget getFluxLogoImage() {
     return Image.asset(
-      ImageConstant.fluxLogo,
+      ImagePath.fluxLogo,
       width: _Styles.getFluxLogoImageSize(context),
       height: _Styles.getFluxLogoImageSize(context),
     );

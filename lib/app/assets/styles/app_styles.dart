@@ -9,6 +9,7 @@ class AppStyles {
   static const kPadd12 = EdgeInsets.all(12.0);
   static const kPadd16 = EdgeInsets.all(16.0);
   // Padding ONLY
+  static const kPaddOB20 = EdgeInsets.only(bottom: 20.0);
   static const kPaddOB70 = EdgeInsets.only(bottom: 70.0);
   static const kPaddOT6 = EdgeInsets.only(top: 6.0);
   static const kPaddOT20 = EdgeInsets.only(top: 20.0);

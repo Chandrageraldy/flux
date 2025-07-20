@@ -12,9 +12,10 @@ class BodyMetricsModel with _$BodyMetricsModel {
     String? weight,
     String? dob,
     String? targetWeight,
-    String? targetWeekly,
+    String? targetWeeklyGain,
     String? activityLevel,
     String? exerciseLevel,
+    String? dietType,
   }) = _BodyMetricsModel;
 
   factory BodyMetricsModel.fromJson(Map<String, dynamic> json) => _$BodyMetricsModelFromJson(json);

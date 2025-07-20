@@ -11,9 +11,10 @@ enum PlanSelectionKey {
   weight,
   dob,
   targetWeight,
-  targetWeightWeekly,
+  targetWeeklyGain,
   activityLevel,
-  exerciseLevel;
+  exerciseLevel,
+  dietType;
 
   String get key {
     switch (this) {
@@ -31,17 +32,21 @@ enum PlanSelectionKey {
         return 'dob';
       case PlanSelectionKey.targetWeight:
         return 'targetWeight';
-      case PlanSelectionKey.targetWeightWeekly:
-        return 'targetWeekly';
+      case PlanSelectionKey.targetWeeklyGain:
+        return 'targetWeeklyGain';
       case PlanSelectionKey.activityLevel:
         return 'activityLevel';
       case PlanSelectionKey.exerciseLevel:
         return 'exerciseLevel';
+      case PlanSelectionKey.dietType:
+        return 'dietType';
     }
   }
 }
 
 enum PlanSelectionValue {
+  male,
+  female,
   lose,
   maintain,
   gain,
@@ -52,7 +57,13 @@ enum PlanSelectionValue {
   never,
   light,
   moderate,
-  frequent;
+  frequent,
+  balanced,
+  keto,
+  mediterranean,
+  paleo,
+  vegetarian,
+  lowCarbs;
 
   String get value {
     switch (this) {
@@ -78,6 +89,22 @@ enum PlanSelectionValue {
         return 'moderate';
       case PlanSelectionValue.frequent:
         return 'frequent';
+      case PlanSelectionValue.balanced:
+        return 'balanced';
+      case PlanSelectionValue.keto:
+        return 'keto';
+      case PlanSelectionValue.mediterranean:
+        return 'mediterranean';
+      case PlanSelectionValue.paleo:
+        return 'paleo';
+      case PlanSelectionValue.vegetarian:
+        return 'vegetarian';
+      case PlanSelectionValue.lowCarbs:
+        return 'lowCarbs';
+      case PlanSelectionValue.male:
+        return 'male';
+      case PlanSelectionValue.female:
+        return 'female';
     }
   }
 }
@@ -144,7 +171,7 @@ final List<PlanQuestion> planQuestionData = [
         title: S.current.genderLabel,
         description: S.current.genderDesc,
         icon: FaIcon(FontAwesomeIcons.venusMars),
-        items: [S.current.maleLabel, S.current.femaleLabel],
+        items: [PlanSelectionValue.male.value, PlanSelectionValue.female.value],
       ),
       PlanPicker(
         key: PlanSelectionKey.height.key,
@@ -191,13 +218,13 @@ final List<PlanQuestion> planQuestionData = [
     ],
   ),
   PlanQuestion(
-    key: PlanSelectionKey.targetWeightWeekly.key,
+    key: PlanSelectionKey.targetWeeklyGain.key,
     title: S.current.planQuestion3,
     description: S.current.planDescription3,
     type: PlanSelectionQuestionType.picker,
     pickers: [
       PlanPicker(
-        key: PlanSelectionKey.targetWeightWeekly.key,
+        key: PlanSelectionKey.targetWeeklyGain.key,
         title: S.current.targetWeightWeeklyLabel,
         description: S.current.targetWeightWeeklyDesc,
         unit: S.current.kgUnitLabel,
@@ -268,6 +295,50 @@ final List<PlanQuestion> planQuestionData = [
         title: S.current.frequentLabel,
         description: S.current.frequentDesc,
         icon: FaIcon(FontAwesomeIcons.fire),
+      ),
+    ],
+  ),
+  PlanQuestion(
+    key: PlanSelectionKey.dietType.key,
+    title: S.current.planQuestion6,
+    description: S.current.planDescription6,
+    type: PlanSelectionQuestionType.options,
+    options: [
+      PlanOption(
+        value: PlanSelectionValue.balanced.value,
+        title: S.current.balancedLabel,
+        description: S.current.balancedDesc,
+        icon: FaIcon(FontAwesomeIcons.appleWhole),
+      ),
+      PlanOption(
+        value: PlanSelectionValue.vegetarian.value,
+        title: S.current.vegetarianLabel,
+        description: S.current.vegetarianDesc,
+        icon: FaIcon(FontAwesomeIcons.leaf),
+      ),
+      PlanOption(
+        value: PlanSelectionValue.keto.value,
+        title: S.current.ketoLabel,
+        description: S.current.ketoDesc,
+        icon: FaIcon(FontAwesomeIcons.egg),
+      ),
+      PlanOption(
+        value: PlanSelectionValue.mediterranean.value,
+        title: S.current.mediterraneanLabel,
+        description: S.current.mediterraneanDesc,
+        icon: FaIcon(FontAwesomeIcons.fish),
+      ),
+      PlanOption(
+        value: PlanSelectionValue.paleo.value,
+        title: S.current.paleoLabel,
+        description: S.current.paleoDesc,
+        icon: FaIcon(FontAwesomeIcons.drumstickBite),
+      ),
+      PlanOption(
+        value: PlanSelectionValue.lowCarbs.value,
+        title: S.current.lowCarbsLabel,
+        description: S.current.lowCarbsDesc,
+        icon: FaIcon(FontAwesomeIcons.cheese),
       ),
     ],
   ),

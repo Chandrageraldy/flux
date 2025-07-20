@@ -38,7 +38,7 @@ extension _WidgetFactories on _SplashScreenState {
   // App Logo
   // Widget getAppLogoImage() {
   //   return Image.asset(
-  //     ImageConstant.fluxLogo,
+  //     ImagePath.fluxLogo,
   //     width: _Styles.getFluxLogoImageSize(context),
   //     height: _Styles.getFluxLogoImageSize(context),
   //   );

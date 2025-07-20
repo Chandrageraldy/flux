@@ -26,9 +26,10 @@ mixin _$BodyMetricsModel {
   String? get weight => throw _privateConstructorUsedError;
   String? get dob => throw _privateConstructorUsedError;
   String? get targetWeight => throw _privateConstructorUsedError;
-  String? get targetWeekly => throw _privateConstructorUsedError;
+  String? get targetWeeklyGain => throw _privateConstructorUsedError;
   String? get activityLevel => throw _privateConstructorUsedError;
   String? get exerciseLevel => throw _privateConstructorUsedError;
+  String? get dietType => throw _privateConstructorUsedError;
 
   /// Serializes this BodyMetricsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,9 +54,10 @@ abstract class $BodyMetricsModelCopyWith<$Res> {
       String? weight,
       String? dob,
       String? targetWeight,
-      String? targetWeekly,
+      String? targetWeeklyGain,
       String? activityLevel,
-      String? exerciseLevel});
+      String? exerciseLevel,
+      String? dietType});
 }
 
 /// @nodoc
@@ -79,9 +81,10 @@ class _$BodyMetricsModelCopyWithImpl<$Res, $Val extends BodyMetricsModel>
     Object? weight = freezed,
     Object? dob = freezed,
     Object? targetWeight = freezed,
-    Object? targetWeekly = freezed,
+    Object? targetWeeklyGain = freezed,
     Object? activityLevel = freezed,
     Object? exerciseLevel = freezed,
+    Object? dietType = freezed,
   }) {
     return _then(_value.copyWith(
       goal: freezed == goal
@@ -108,9 +111,9 @@ class _$BodyMetricsModelCopyWithImpl<$Res, $Val extends BodyMetricsModel>
           ? _value.targetWeight
           : targetWeight // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetWeekly: freezed == targetWeekly
-          ? _value.targetWeekly
-          : targetWeekly // ignore: cast_nullable_to_non_nullable
+      targetWeeklyGain: freezed == targetWeeklyGain
+          ? _value.targetWeeklyGain
+          : targetWeeklyGain // ignore: cast_nullable_to_non_nullable
               as String?,
       activityLevel: freezed == activityLevel
           ? _value.activityLevel
@@ -119,6 +122,10 @@ class _$BodyMetricsModelCopyWithImpl<$Res, $Val extends BodyMetricsModel>
       exerciseLevel: freezed == exerciseLevel
           ? _value.exerciseLevel
           : exerciseLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dietType: freezed == dietType
+          ? _value.dietType
+          : dietType // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -139,9 +146,10 @@ abstract class _$$BodyMetricsModelImplCopyWith<$Res>
       String? weight,
       String? dob,
       String? targetWeight,
-      String? targetWeekly,
+      String? targetWeeklyGain,
       String? activityLevel,
-      String? exerciseLevel});
+      String? exerciseLevel,
+      String? dietType});
 }
 
 /// @nodoc
@@ -163,9 +171,10 @@ class __$$BodyMetricsModelImplCopyWithImpl<$Res>
     Object? weight = freezed,
     Object? dob = freezed,
     Object? targetWeight = freezed,
-    Object? targetWeekly = freezed,
+    Object? targetWeeklyGain = freezed,
     Object? activityLevel = freezed,
     Object? exerciseLevel = freezed,
+    Object? dietType = freezed,
   }) {
     return _then(_$BodyMetricsModelImpl(
       goal: freezed == goal
@@ -192,9 +201,9 @@ class __$$BodyMetricsModelImplCopyWithImpl<$Res>
           ? _value.targetWeight
           : targetWeight // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetWeekly: freezed == targetWeekly
-          ? _value.targetWeekly
-          : targetWeekly // ignore: cast_nullable_to_non_nullable
+      targetWeeklyGain: freezed == targetWeeklyGain
+          ? _value.targetWeeklyGain
+          : targetWeeklyGain // ignore: cast_nullable_to_non_nullable
               as String?,
       activityLevel: freezed == activityLevel
           ? _value.activityLevel
@@ -203,6 +212,10 @@ class __$$BodyMetricsModelImplCopyWithImpl<$Res>
       exerciseLevel: freezed == exerciseLevel
           ? _value.exerciseLevel
           : exerciseLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dietType: freezed == dietType
+          ? _value.dietType
+          : dietType // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -218,9 +231,10 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
       this.weight,
       this.dob,
       this.targetWeight,
-      this.targetWeekly,
+      this.targetWeeklyGain,
       this.activityLevel,
-      this.exerciseLevel});
+      this.exerciseLevel,
+      this.dietType});
 
   factory _$BodyMetricsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BodyMetricsModelImplFromJson(json);
@@ -238,15 +252,17 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
   @override
   final String? targetWeight;
   @override
-  final String? targetWeekly;
+  final String? targetWeeklyGain;
   @override
   final String? activityLevel;
   @override
   final String? exerciseLevel;
+  @override
+  final String? dietType;
 
   @override
   String toString() {
-    return 'BodyMetricsModel(goal: $goal, gender: $gender, height: $height, weight: $weight, dob: $dob, targetWeight: $targetWeight, targetWeekly: $targetWeekly, activityLevel: $activityLevel, exerciseLevel: $exerciseLevel)';
+    return 'BodyMetricsModel(goal: $goal, gender: $gender, height: $height, weight: $weight, dob: $dob, targetWeight: $targetWeight, targetWeeklyGain: $targetWeeklyGain, activityLevel: $activityLevel, exerciseLevel: $exerciseLevel, dietType: $dietType)';
   }
 
   @override
@@ -261,18 +277,30 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
             (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.targetWeight, targetWeight) ||
                 other.targetWeight == targetWeight) &&
-            (identical(other.targetWeekly, targetWeekly) ||
-                other.targetWeekly == targetWeekly) &&
+            (identical(other.targetWeeklyGain, targetWeeklyGain) ||
+                other.targetWeeklyGain == targetWeeklyGain) &&
             (identical(other.activityLevel, activityLevel) ||
                 other.activityLevel == activityLevel) &&
             (identical(other.exerciseLevel, exerciseLevel) ||
-                other.exerciseLevel == exerciseLevel));
+                other.exerciseLevel == exerciseLevel) &&
+            (identical(other.dietType, dietType) ||
+                other.dietType == dietType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, goal, gender, height, weight,
-      dob, targetWeight, targetWeekly, activityLevel, exerciseLevel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      goal,
+      gender,
+      height,
+      weight,
+      dob,
+      targetWeight,
+      targetWeeklyGain,
+      activityLevel,
+      exerciseLevel,
+      dietType);
 
   /// Create a copy of BodyMetricsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -299,9 +327,10 @@ abstract class _BodyMetricsModel implements BodyMetricsModel {
       final String? weight,
       final String? dob,
       final String? targetWeight,
-      final String? targetWeekly,
+      final String? targetWeeklyGain,
       final String? activityLevel,
-      final String? exerciseLevel}) = _$BodyMetricsModelImpl;
+      final String? exerciseLevel,
+      final String? dietType}) = _$BodyMetricsModelImpl;
 
   factory _BodyMetricsModel.fromJson(Map<String, dynamic> json) =
       _$BodyMetricsModelImpl.fromJson;
@@ -319,11 +348,13 @@ abstract class _BodyMetricsModel implements BodyMetricsModel {
   @override
   String? get targetWeight;
   @override
-  String? get targetWeekly;
+  String? get targetWeeklyGain;
   @override
   String? get activityLevel;
   @override
   String? get exerciseLevel;
+  @override
+  String? get dietType;
 
   /// Create a copy of BodyMetricsModel
   /// with the given fields replaced by the non-null parameter values.

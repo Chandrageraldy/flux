@@ -50,6 +50,8 @@
     "planDescription4": "Tell us how active you are throughout the day — this includes movement during work, school, or at home.",
     "planQuestion5": "How Often Do You Exercise?",
     "planDescription5": "Let us know your weekly workout habits so we can fine-tune your plan to match your training level.",
+    "planQuestion6": "What’s Your Diet Preference?",
+    "planDescription6": "Choose the diet type that best fits your lifestyle. We'll use this to tailor your calorie and macronutrient goals.",
 
     "genderLabel": "Gender",
     "genderDesc": "Used to personalize your health and calorie estimates.",
@@ -83,6 +85,18 @@
     "moderateDesc": "Consistent workouts on most weekdays.",
     "frequentLabel": "5+ times/week",
     "frequentDesc": "I work out almost every day.",
+    "balancedLabel": "Balanced",
+    "balancedDesc": "A balanced diet with a variety of foods.",
+    "ketoLabel": "Keto",
+    "ketoDesc": "Low-carb, high-fat diet for weight loss.",
+    "mediterraneanLabel": "Mediterranean",
+    "mediterraneanDesc": "Plant-rich healthy fats.",
+    "paleoLabel": "Paleo",
+    "paleoDesc": "Based on foods eaten by early humans.",
+    "vegetarianLabel": "Vegetarian",
+    "vegetarianDesc": "A diet that excludes meat and fish.",
+    "lowCarbsLabel": "Low Carbs",
+    "lowCarbsDesc": "Low-carb, high-protein diet.",
 
     "progressLabel": "Progress",
     "diaryLabel": "Diary",
@@ -125,5 +139,6 @@
     "calorieFormula": "Remaining = Goal - Logged",
     "remainingLabel": "Remaining",
     "macronutrientsLabel": "Macronutrients",
-    "loggedMealsLabel": "Logged Meals"
+    "loggedMealsLabel": "Logged Meals",
+    "personalizingYourPlanLoadingText": "Personalizing your plan....."
 }

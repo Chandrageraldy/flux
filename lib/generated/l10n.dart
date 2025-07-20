@@ -520,6 +520,26 @@ class S {
     );
   }
 
+  /// `What’s Your Diet Preference?`
+  String get planQuestion6 {
+    return Intl.message(
+      'What’s Your Diet Preference?',
+      name: 'planQuestion6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose the diet type that best fits your lifestyle. We'll use this to tailor your calorie and macronutrient goals.`
+  String get planDescription6 {
+    return Intl.message(
+      'Choose the diet type that best fits your lifestyle. We\'ll use this to tailor your calorie and macronutrient goals.',
+      name: 'planDescription6',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Gender`
   String get genderLabel {
     return Intl.message(
@@ -835,6 +855,126 @@ class S {
     return Intl.message(
       'I work out almost every day.',
       name: 'frequentDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balanced`
+  String get balancedLabel {
+    return Intl.message(
+      'Balanced',
+      name: 'balancedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A balanced diet with a variety of foods.`
+  String get balancedDesc {
+    return Intl.message(
+      'A balanced diet with a variety of foods.',
+      name: 'balancedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keto`
+  String get ketoLabel {
+    return Intl.message(
+      'Keto',
+      name: 'ketoLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Low-carb, high-fat diet for weight loss.`
+  String get ketoDesc {
+    return Intl.message(
+      'Low-carb, high-fat diet for weight loss.',
+      name: 'ketoDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mediterranean`
+  String get mediterraneanLabel {
+    return Intl.message(
+      'Mediterranean',
+      name: 'mediterraneanLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plant-rich healthy fats.`
+  String get mediterraneanDesc {
+    return Intl.message(
+      'Plant-rich healthy fats.',
+      name: 'mediterraneanDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paleo`
+  String get paleoLabel {
+    return Intl.message(
+      'Paleo',
+      name: 'paleoLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Based on foods eaten by early humans.`
+  String get paleoDesc {
+    return Intl.message(
+      'Based on foods eaten by early humans.',
+      name: 'paleoDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vegetarian`
+  String get vegetarianLabel {
+    return Intl.message(
+      'Vegetarian',
+      name: 'vegetarianLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A diet that excludes meat and fish.`
+  String get vegetarianDesc {
+    return Intl.message(
+      'A diet that excludes meat and fish.',
+      name: 'vegetarianDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Low Carbs`
+  String get lowCarbsLabel {
+    return Intl.message(
+      'Low Carbs',
+      name: 'lowCarbsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Low-carb, high-protein diet.`
+  String get lowCarbsDesc {
+    return Intl.message(
+      'Low-carb, high-protein diet.',
+      name: 'lowCarbsDesc',
       desc: '',
       args: [],
     );
@@ -1225,6 +1365,16 @@ class S {
     return Intl.message(
       'Logged Meals',
       name: 'loggedMealsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personalizing your plan.....`
+  String get personalizingYourPlanLoadingText {
+    return Intl.message(
+      'Personalizing your plan.....',
+      name: 'personalizingYourPlanLoadingText',
       desc: '',
       args: [],
     );

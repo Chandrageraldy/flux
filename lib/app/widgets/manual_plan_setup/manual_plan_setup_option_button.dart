@@ -80,6 +80,8 @@ extension _WidgetFactories on ManualPlanSetupOptionButton {
     return Text(
       description,
       style: _Styles.getDescriptionLabelTextStyle(context),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

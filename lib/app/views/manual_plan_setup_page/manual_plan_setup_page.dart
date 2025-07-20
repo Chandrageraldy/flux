@@ -34,6 +34,7 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
   @override
   PreferredSizeWidget? appbar() {
     return AppBar(
+      scrolledUnderElevation: 0.0,
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: GestureDetector(
@@ -68,16 +69,24 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
     final currentQuestion = planQuestionData[_currentQuestionIndex];
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        getQuestionTitleLabel(),
-        AppStyles.kSizedBoxH4,
-        getQuestionDescriptionLabel(),
-        AppStyles.kSizedBoxH32,
-        currentQuestion.type == PlanSelectionQuestionType.options
-            ? getQuestionOptions(bodyMetrics, currentQuestion)
-            : getQuestionPickers(bodyMetrics, currentQuestion),
-        Spacer(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: AppStyles.kPaddOB20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                getQuestionTitleLabel(),
+                AppStyles.kSizedBoxH4,
+                getQuestionDescriptionLabel(),
+                AppStyles.kSizedBoxH32,
+                currentQuestion.type == PlanSelectionQuestionType.options
+                    ? getQuestionOptions(bodyMetrics, currentQuestion)
+                    : getQuestionPickers(bodyMetrics, currentQuestion),
+              ],
+            ),
+          ),
+        ),
         getLinearPercentIndicator(),
         AppStyles.kSizedBoxH20,
         getContinueButton(bodyMetrics, currentQuestion),
@@ -171,10 +180,10 @@ extension _Actions on _ManualPlanSetupPageState {
   void _onContinueButtonPressed(Map<String, String> bodyMetrics) {
     final nextIndex = _currentQuestionIndex + 1;
 
-    final shouldSkipTargetWeekly = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeightWeekly.key &&
+    final shouldSkipTargetWeeklyGain = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeeklyGain.key &&
         bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
-    if (shouldSkipTargetWeekly && nextIndex + 1 < planQuestionData.length) {
+    if (shouldSkipTargetWeeklyGain && nextIndex + 1 < planQuestionData.length) {
       _setState(() => _currentQuestionIndex = nextIndex + 1);
     } else {
       _setState(() => _currentQuestionIndex = nextIndex);
@@ -188,11 +197,11 @@ extension _Actions on _ManualPlanSetupPageState {
     final bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
     final previousIndex = _currentQuestionIndex - 1;
 
-    final shouldSkipTargetWeekly =
-        planQuestionData[_currentQuestionIndex - 1].key == PlanSelectionKey.targetWeightWeekly.key &&
+    final shouldSkipTargetWeeklyGain =
+        planQuestionData[_currentQuestionIndex - 1].key == PlanSelectionKey.targetWeeklyGain.key &&
             bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
-    if (shouldSkipTargetWeekly && previousIndex - 1 >= 0) {
+    if (shouldSkipTargetWeeklyGain && previousIndex - 1 >= 0) {
       _setState(() => _currentQuestionIndex = previousIndex - 1);
     } else {
       _setState(() => _currentQuestionIndex = previousIndex);
