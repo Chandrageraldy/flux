@@ -99,6 +99,7 @@ class SharedPreferenceHandler {
       _sharedPreferences!.remove(spIsDarkMode),
       _sharedPreferences!.remove(spLocale),
       _sharedPreferences!.remove(spUser),
+      _sharedPreferences!.remove(spPlan),
     ]);
   }
 }

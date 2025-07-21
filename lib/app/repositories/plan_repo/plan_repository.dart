@@ -6,12 +6,21 @@ class PlanRepository {
   final PlanService planService = PlanService();
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
 
-  Future<Response> createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
-    // Add userId to the completeNutrients map
+  Future<Response> createPersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
+    // Add userId to the personalizedPlan map
     final userProfile = sharedPreferenceHandler.getUser();
-    completeNutrients[TableCol.userId] = userProfile?.userId ?? '';
+    personalizedPlan[TableCol.userId] = userProfile?.userId ?? '';
 
-    final response = await planService.createPersonalizedPlan(completeNutrients: completeNutrients);
+    final response = await planService.createPersonalizedPlan(personalizedPlan: personalizedPlan);
+    if (response.error == null) {
+      await processPersonalizedPlan(response.data as List<Map<String, dynamic>>);
+    }
+    return response;
+  }
+
+  Future<Response> getPersonalizedPlan() async {
+    final userProfile = sharedPreferenceHandler.getUser();
+    final response = await planService.getPersonalizedPlan(userId: userProfile?.userId ?? '');
     if (response.error == null) {
       await processPersonalizedPlan(response.data as List<Map<String, dynamic>>);
     }

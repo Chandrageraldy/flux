@@ -41,13 +41,13 @@ class WidgetUtils {
   }) {
     int selectedItem = initialItem;
 
-    showCupertinoModalPopup(
+    showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.4,
         decoration: BoxDecoration(borderRadius: AppStyles.kRadVT24, color: context.theme.colorScheme.onPrimary),
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
                 width: AppStyles.kDoubleInfinity,
@@ -56,6 +56,7 @@ class WidgetUtils {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
                         style: Quicksand.semiBold
@@ -73,7 +74,8 @@ class WidgetUtils {
                 ),
               ),
               AppStyles.kSizedBoxH12,
-              Expanded(
+              SizedBox(
+                height: AppStyles.kSize200,
                 child: CupertinoPicker(
                   itemExtent: 50,
                   scrollController: FixedExtentScrollController(initialItem: initialItem),
@@ -128,16 +130,16 @@ class WidgetUtils {
   }) {
     DateTime selectedDate = initialDate;
 
-    showCupertinoModalPopup(
+    showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.4,
         decoration: BoxDecoration(
           borderRadius: AppStyles.kRadVT24,
           color: context.theme.colorScheme.onPrimary,
         ),
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Title & Description
               SizedBox(
@@ -147,6 +149,7 @@ class WidgetUtils {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
                         style: Quicksand.semiBold
@@ -166,7 +169,8 @@ class WidgetUtils {
               AppStyles.kSizedBoxH12,
 
               // Cupertino Date Picker
-              Expanded(
+              SizedBox(
+                height: AppStyles.kSize200,
                 child: CupertinoDatePicker(
                   mode: CupertinoDatePickerMode.date,
                   initialDateTime: initialDate,
@@ -176,6 +180,7 @@ class WidgetUtils {
                   },
                 ),
               ),
+
               AppStyles.kSizedBoxH12,
 
               // Buttons

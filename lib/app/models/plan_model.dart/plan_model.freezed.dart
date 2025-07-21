@@ -47,7 +47,11 @@ mixin _$PlanModel {
   double? get vitaminB12Ug => throw _privateConstructorUsedError; // µg
   double? get cholineMg => throw _privateConstructorUsedError; // mg
   double? get vitaminKUg => throw _privateConstructorUsedError; // µg
-  double? get folateUg => throw _privateConstructorUsedError;
+  double? get folateUg => throw _privateConstructorUsedError; // µg
+  MealRatioModel? get breakfast => throw _privateConstructorUsedError;
+  MealRatioModel? get lunch => throw _privateConstructorUsedError;
+  MealRatioModel? get dinner => throw _privateConstructorUsedError;
+  MealRatioModel? get snack => throw _privateConstructorUsedError;
 
   /// Serializes this PlanModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -92,7 +96,16 @@ abstract class $PlanModelCopyWith<$Res> {
       double? vitaminB12Ug,
       double? cholineMg,
       double? vitaminKUg,
-      double? folateUg});
+      double? folateUg,
+      MealRatioModel? breakfast,
+      MealRatioModel? lunch,
+      MealRatioModel? dinner,
+      MealRatioModel? snack});
+
+  $MealRatioModelCopyWith<$Res>? get breakfast;
+  $MealRatioModelCopyWith<$Res>? get lunch;
+  $MealRatioModelCopyWith<$Res>? get dinner;
+  $MealRatioModelCopyWith<$Res>? get snack;
 }
 
 /// @nodoc
@@ -138,6 +151,10 @@ class _$PlanModelCopyWithImpl<$Res, $Val extends PlanModel>
     Object? cholineMg = freezed,
     Object? vitaminKUg = freezed,
     Object? folateUg = freezed,
+    Object? breakfast = freezed,
+    Object? lunch = freezed,
+    Object? dinner = freezed,
+    Object? snack = freezed,
   }) {
     return _then(_value.copyWith(
       planId: freezed == planId
@@ -252,7 +269,79 @@ class _$PlanModelCopyWithImpl<$Res, $Val extends PlanModel>
           ? _value.folateUg
           : folateUg // ignore: cast_nullable_to_non_nullable
               as double?,
+      breakfast: freezed == breakfast
+          ? _value.breakfast
+          : breakfast // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      lunch: freezed == lunch
+          ? _value.lunch
+          : lunch // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      dinner: freezed == dinner
+          ? _value.dinner
+          : dinner // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      snack: freezed == snack
+          ? _value.snack
+          : snack // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
     ) as $Val);
+  }
+
+  /// Create a copy of PlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MealRatioModelCopyWith<$Res>? get breakfast {
+    if (_value.breakfast == null) {
+      return null;
+    }
+
+    return $MealRatioModelCopyWith<$Res>(_value.breakfast!, (value) {
+      return _then(_value.copyWith(breakfast: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MealRatioModelCopyWith<$Res>? get lunch {
+    if (_value.lunch == null) {
+      return null;
+    }
+
+    return $MealRatioModelCopyWith<$Res>(_value.lunch!, (value) {
+      return _then(_value.copyWith(lunch: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MealRatioModelCopyWith<$Res>? get dinner {
+    if (_value.dinner == null) {
+      return null;
+    }
+
+    return $MealRatioModelCopyWith<$Res>(_value.dinner!, (value) {
+      return _then(_value.copyWith(dinner: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MealRatioModelCopyWith<$Res>? get snack {
+    if (_value.snack == null) {
+      return null;
+    }
+
+    return $MealRatioModelCopyWith<$Res>(_value.snack!, (value) {
+      return _then(_value.copyWith(snack: value) as $Val);
+    });
   }
 }
 
@@ -292,7 +381,20 @@ abstract class _$$PlanModelImplCopyWith<$Res>
       double? vitaminB12Ug,
       double? cholineMg,
       double? vitaminKUg,
-      double? folateUg});
+      double? folateUg,
+      MealRatioModel? breakfast,
+      MealRatioModel? lunch,
+      MealRatioModel? dinner,
+      MealRatioModel? snack});
+
+  @override
+  $MealRatioModelCopyWith<$Res>? get breakfast;
+  @override
+  $MealRatioModelCopyWith<$Res>? get lunch;
+  @override
+  $MealRatioModelCopyWith<$Res>? get dinner;
+  @override
+  $MealRatioModelCopyWith<$Res>? get snack;
 }
 
 /// @nodoc
@@ -336,6 +438,10 @@ class __$$PlanModelImplCopyWithImpl<$Res>
     Object? cholineMg = freezed,
     Object? vitaminKUg = freezed,
     Object? folateUg = freezed,
+    Object? breakfast = freezed,
+    Object? lunch = freezed,
+    Object? dinner = freezed,
+    Object? snack = freezed,
   }) {
     return _then(_$PlanModelImpl(
       planId: freezed == planId
@@ -450,6 +556,22 @@ class __$$PlanModelImplCopyWithImpl<$Res>
           ? _value.folateUg
           : folateUg // ignore: cast_nullable_to_non_nullable
               as double?,
+      breakfast: freezed == breakfast
+          ? _value.breakfast
+          : breakfast // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      lunch: freezed == lunch
+          ? _value.lunch
+          : lunch // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      dinner: freezed == dinner
+          ? _value.dinner
+          : dinner // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
+      snack: freezed == snack
+          ? _value.snack
+          : snack // ignore: cast_nullable_to_non_nullable
+              as MealRatioModel?,
     ));
   }
 }
@@ -485,7 +607,11 @@ class _$PlanModelImpl implements _PlanModel {
       this.vitaminB12Ug,
       this.cholineMg,
       this.vitaminKUg,
-      this.folateUg});
+      this.folateUg,
+      this.breakfast,
+      this.lunch,
+      this.dinner,
+      this.snack});
 
   factory _$PlanModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlanModelImplFromJson(json);
@@ -571,10 +697,19 @@ class _$PlanModelImpl implements _PlanModel {
 // µg
   @override
   final double? folateUg;
+// µg
+  @override
+  final MealRatioModel? breakfast;
+  @override
+  final MealRatioModel? lunch;
+  @override
+  final MealRatioModel? dinner;
+  @override
+  final MealRatioModel? snack;
 
   @override
   String toString() {
-    return 'PlanModel(planId: $planId, userId: $userId, calorieKcal: $calorieKcal, proteinG: $proteinG, fatG: $fatG, carbsG: $carbsG, calciumMg: $calciumMg, ironMg: $ironMg, magnesiumMg: $magnesiumMg, phosphorusMg: $phosphorusMg, potassiumMg: $potassiumMg, sodiumMg: $sodiumMg, zincMg: $zincMg, copperMg: $copperMg, manganeseMg: $manganeseMg, seleniumUg: $seleniumUg, vitaminAIu: $vitaminAIu, vitaminEMg: $vitaminEMg, vitaminDIu: $vitaminDIu, vitaminCMg: $vitaminCMg, thiaminMg: $thiaminMg, riboflavinMg: $riboflavinMg, niacinMg: $niacinMg, vitaminB6Mg: $vitaminB6Mg, vitaminB12Ug: $vitaminB12Ug, cholineMg: $cholineMg, vitaminKUg: $vitaminKUg, folateUg: $folateUg)';
+    return 'PlanModel(planId: $planId, userId: $userId, calorieKcal: $calorieKcal, proteinG: $proteinG, fatG: $fatG, carbsG: $carbsG, calciumMg: $calciumMg, ironMg: $ironMg, magnesiumMg: $magnesiumMg, phosphorusMg: $phosphorusMg, potassiumMg: $potassiumMg, sodiumMg: $sodiumMg, zincMg: $zincMg, copperMg: $copperMg, manganeseMg: $manganeseMg, seleniumUg: $seleniumUg, vitaminAIu: $vitaminAIu, vitaminEMg: $vitaminEMg, vitaminDIu: $vitaminDIu, vitaminCMg: $vitaminCMg, thiaminMg: $thiaminMg, riboflavinMg: $riboflavinMg, niacinMg: $niacinMg, vitaminB6Mg: $vitaminB6Mg, vitaminB12Ug: $vitaminB12Ug, cholineMg: $cholineMg, vitaminKUg: $vitaminKUg, folateUg: $folateUg, breakfast: $breakfast, lunch: $lunch, dinner: $dinner, snack: $snack)';
   }
 
   @override
@@ -631,7 +766,12 @@ class _$PlanModelImpl implements _PlanModel {
             (identical(other.vitaminKUg, vitaminKUg) ||
                 other.vitaminKUg == vitaminKUg) &&
             (identical(other.folateUg, folateUg) ||
-                other.folateUg == folateUg));
+                other.folateUg == folateUg) &&
+            (identical(other.breakfast, breakfast) ||
+                other.breakfast == breakfast) &&
+            (identical(other.lunch, lunch) || other.lunch == lunch) &&
+            (identical(other.dinner, dinner) || other.dinner == dinner) &&
+            (identical(other.snack, snack) || other.snack == snack));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -665,7 +805,11 @@ class _$PlanModelImpl implements _PlanModel {
         vitaminB12Ug,
         cholineMg,
         vitaminKUg,
-        folateUg
+        folateUg,
+        breakfast,
+        lunch,
+        dinner,
+        snack
       ]);
 
   /// Create a copy of PlanModel
@@ -713,7 +857,11 @@ abstract class _PlanModel implements PlanModel {
       final double? vitaminB12Ug,
       final double? cholineMg,
       final double? vitaminKUg,
-      final double? folateUg}) = _$PlanModelImpl;
+      final double? folateUg,
+      final MealRatioModel? breakfast,
+      final MealRatioModel? lunch,
+      final MealRatioModel? dinner,
+      final MealRatioModel? snack}) = _$PlanModelImpl;
 
   factory _PlanModel.fromJson(Map<String, dynamic> json) =
       _$PlanModelImpl.fromJson;
@@ -773,7 +921,15 @@ abstract class _PlanModel implements PlanModel {
   @override
   double? get vitaminKUg; // µg
   @override
-  double? get folateUg;
+  double? get folateUg; // µg
+  @override
+  MealRatioModel? get breakfast;
+  @override
+  MealRatioModel? get lunch;
+  @override
+  MealRatioModel? get dinner;
+  @override
+  MealRatioModel? get snack;
 
   /// Create a copy of PlanModel
   /// with the given fields replaced by the non-null parameter values.

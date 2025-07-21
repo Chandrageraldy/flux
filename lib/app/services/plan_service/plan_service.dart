@@ -3,11 +3,19 @@ import 'package:flux/app/models/response_model.dart';
 import 'package:flux/app/services/supabase_base_service.dart';
 
 class PlanService extends SupabaseBaseService {
-  Future<Response> createPersonalizedPlan({required Map<String, dynamic> completeNutrients}) {
+  Future<Response> createPersonalizedPlan({required Map<String, dynamic> personalizedPlan}) {
     return callSupabaseDB(
       requestType: RequestType.POST,
       table: TableName.plan,
-      requestBody: completeNutrients,
+      requestBody: personalizedPlan,
+    );
+  }
+
+  Future<Response> getPersonalizedPlan({required String userId}) {
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.plan,
+      filters: {TableCol.userId: userId},
     );
   }
 }

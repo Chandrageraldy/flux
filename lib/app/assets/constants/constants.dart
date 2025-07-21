@@ -66,6 +66,19 @@ enum MealType {
         return S.current.snackLabel;
     }
   }
+
+  String get key {
+    switch (this) {
+      case breakfast:
+        return 'breakfast';
+      case lunch:
+        return 'lunch';
+      case dinner:
+        return 'dinner';
+      case snack:
+        return 'snack';
+    }
+  }
 }
 
 enum MacroNutrients {

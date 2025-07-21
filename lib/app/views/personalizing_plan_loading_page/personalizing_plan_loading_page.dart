@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/meal_ratio_model.dart/meal_ratio_model.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
@@ -316,9 +317,78 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     };
   }
 
+  Map<String, dynamic> calculateMealRatioMap({
+    required double totalCalories,
+    required double totalProtein,
+    required double totalFat,
+    required double totalCarbs,
+    required double portion,
+  }) {
+    return {
+      Nutrition.calorie.key: (totalCalories * portion).roundToDouble(),
+      Nutrition.protein.key: (totalProtein * portion).roundToDouble(),
+      Nutrition.fat.key: (totalFat * portion).roundToDouble(),
+      Nutrition.carbs.key: (totalCarbs * portion).roundToDouble(),
+    };
+  }
+
+  Map<String, dynamic> getMealRatio(Map<String, dynamic> completeNutrients) {
+    final double totalCalories = (completeNutrients[Nutrition.calorie.key] ?? 0).toDouble();
+    final double totalProtein = (completeNutrients[Nutrition.protein.key] ?? 0).toDouble();
+    final double totalFat = (completeNutrients[Nutrition.fat.key] ?? 0).toDouble();
+    final double totalCarbs = (completeNutrients[Nutrition.carbs.key] ?? 0).toDouble();
+
+    final Map<String, dynamic> mealDistribution = {
+      MealType.breakfast.key: 0.25,
+      MealType.lunch.key: 0.35,
+      MealType.dinner.key: 0.30,
+      MealType.snack.key: 0.10,
+    };
+
+    final Map<String, dynamic> mealRatios = {
+      MealType.breakfast.key: calculateMealRatioMap(
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalFat: totalFat,
+        totalCarbs: totalCarbs,
+        portion: mealDistribution[MealType.breakfast.key]!,
+      ),
+      MealType.lunch.key: calculateMealRatioMap(
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalFat: totalFat,
+        totalCarbs: totalCarbs,
+        portion: mealDistribution[MealType.lunch.key]!,
+      ),
+      MealType.dinner.key: calculateMealRatioMap(
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalFat: totalFat,
+        totalCarbs: totalCarbs,
+        portion: mealDistribution[MealType.dinner.key]!,
+      ),
+      MealType.snack.key: calculateMealRatioMap(
+        totalCalories: totalCalories,
+        totalProtein: totalProtein,
+        totalFat: totalFat,
+        totalCarbs: totalCarbs,
+        portion: mealDistribution[MealType.snack.key]!,
+      ),
+    };
+
+    return mealRatios;
+  }
+
   void createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
+    final mealRatio = getMealRatio(completeNutrients);
+
+    final personalizedPlan = {
+      ...completeNutrients,
+      ...mealRatio,
+    };
+
     final result =
-        await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(completeNutrients)) ?? false;
+        await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan)) ?? false;
 
     await Future.delayed(Duration(seconds: 3));
 

@@ -5,8 +5,14 @@ import 'package:flux/app/viewmodels/base_view_model.dart';
 class PlanViewModel extends BaseViewModel {
   final PlanRepository planRepository = PlanRepository();
 
-  Future<bool> createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
-    final response = await planRepository.createPersonalizedPlan(completeNutrients);
+  Future<bool> createPersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
+    final response = await planRepository.createPersonalizedPlan(personalizedPlan);
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
+  }
+
+  Future<bool> getPersonalizedPlan() async {
+    final response = await planRepository.getPersonalizedPlan();
     checkError(response);
     return response.status == ResponseStatus.COMPLETE;
   }

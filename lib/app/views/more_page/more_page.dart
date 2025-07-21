@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 
 @RoutePage()
 class MorePage extends BaseStatefulPage {
@@ -14,8 +15,25 @@ class _MorePageState extends BaseStatefulState<MorePage> {
 
   @override
   Widget body() {
-    return const Center(
-      child: Text('MorePage body'),
+    return Center(
+      child: ElevatedButton(onPressed: _onLogoutPressed, child: Text(S.current.logOutLabel)),
     );
   }
 }
+
+// * ---------------------------- Actions ----------------------------
+extension _Actions on _MorePageState {
+  void _onLogoutPressed() async {
+    final result = await tryLoad(context, () => context.read<UserViewModel>().logout());
+
+    if (result == true && mounted) {
+      context.router.replaceAll([RootRoute()]);
+    }
+  }
+}
+
+// * ------------------------ WidgetFactories ------------------------
+extension _WidgetFactories on _MorePageState {}
+
+// * ----------------------------- Styles -----------------------------
+// abstract class _Styles {}

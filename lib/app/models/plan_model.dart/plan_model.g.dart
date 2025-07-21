@@ -36,6 +36,18 @@ _$PlanModelImpl _$$PlanModelImplFromJson(Map<String, dynamic> json) =>
       cholineMg: (json['cholineMg'] as num?)?.toDouble(),
       vitaminKUg: (json['vitaminKUg'] as num?)?.toDouble(),
       folateUg: (json['folateUg'] as num?)?.toDouble(),
+      breakfast: json['breakfast'] == null
+          ? null
+          : MealRatioModel.fromJson(json['breakfast'] as Map<String, dynamic>),
+      lunch: json['lunch'] == null
+          ? null
+          : MealRatioModel.fromJson(json['lunch'] as Map<String, dynamic>),
+      dinner: json['dinner'] == null
+          ? null
+          : MealRatioModel.fromJson(json['dinner'] as Map<String, dynamic>),
+      snack: json['snack'] == null
+          ? null
+          : MealRatioModel.fromJson(json['snack'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PlanModelImplToJson(_$PlanModelImpl instance) =>
@@ -68,4 +80,8 @@ Map<String, dynamic> _$$PlanModelImplToJson(_$PlanModelImpl instance) =>
       'cholineMg': instance.cholineMg,
       'vitaminKUg': instance.vitaminKUg,
       'folateUg': instance.folateUg,
+      'breakfast': instance.breakfast,
+      'lunch': instance.lunch,
+      'dinner': instance.dinner,
+      'snack': instance.snack,
     };

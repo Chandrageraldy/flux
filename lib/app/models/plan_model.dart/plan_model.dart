@@ -1,3 +1,4 @@
+import 'package:flux/app/models/meal_ratio_model.dart/meal_ratio_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'plan_model.freezed.dart';
@@ -34,6 +35,10 @@ class PlanModel with _$PlanModel {
     double? cholineMg, // mg
     double? vitaminKUg, // µg
     double? folateUg, // µg
+    MealRatioModel? breakfast,
+    MealRatioModel? lunch,
+    MealRatioModel? dinner,
+    MealRatioModel? snack,
   }) = _PlanModel;
 
   factory PlanModel.fromJson(Map<String, Object?> json) => _$PlanModelFromJson(json);
