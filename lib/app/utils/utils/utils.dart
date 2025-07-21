@@ -167,8 +167,6 @@ class WidgetUtils {
                 ),
               ),
               AppStyles.kSizedBoxH12,
-
-              // Cupertino Date Picker
               SizedBox(
                 height: AppStyles.kSize200,
                 child: CupertinoDatePicker(
@@ -180,10 +178,7 @@ class WidgetUtils {
                   },
                 ),
               ),
-
               AppStyles.kSizedBoxH12,
-
-              // Buttons
               Padding(
                 padding: AppStyles.kPaddSH28,
                 child: Row(
