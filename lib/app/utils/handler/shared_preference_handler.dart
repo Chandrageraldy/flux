@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,7 @@ class SharedPreferenceHandler {
   static const spIsDarkMode = 'isDarkMode';
   static const spHasOnboarded = 'hasOnboarded';
   static const spUser = 'user';
+  static const spPlan = 'plan';
 
   // Factory constructor that returns the single instance.
   factory SharedPreferenceHandler() {
@@ -61,6 +63,20 @@ class SharedPreferenceHandler {
 
   Future<bool?> putUser(UserProfileModel user) async {
     return _sharedPreferences?.setString(spUser, jsonEncode(user.toJson()));
+  }
+
+  // Plan
+  PlanModel? getPlan() {
+    final String planString = _sharedPreferences?.getString(spPlan) ?? '';
+    if (planString.isNotEmpty) {
+      final planMap = jsonDecode(planString) as Map<String, dynamic>;
+      return PlanModel.fromJson(planMap);
+    }
+    return null;
+  }
+
+  Future<bool?> putPlan(PlanModel plan) async {
+    return _sharedPreferences?.setString(spPlan, jsonEncode(plan.toJson()));
   }
 
   // Remove All

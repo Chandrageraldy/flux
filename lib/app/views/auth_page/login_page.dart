@@ -37,7 +37,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac16,
             children: [
-              AppStyles.kSizedBoxH16,
+              AppStyles.kSizedBoxH4,
               getAppTitleLabel(),
               getLoginDescriptionLabel(),
               AppStyles.kSizedBoxH16,
@@ -60,6 +60,8 @@ extension _Actions on _LoginPageState {
     if (_formKey.currentState!.saveAndValidate()) {
       final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
       final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
+
+      FocusScope.of(context).unfocus();
 
       final result = await tryLoad(
             context,

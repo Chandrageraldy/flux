@@ -31,7 +31,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
           spacing: AppStyles.kSpac16,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppStyles.kSizedBoxH24,
+            AppStyles.kSizedBoxH4,
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppStyles.kSpac24,

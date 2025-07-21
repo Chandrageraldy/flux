@@ -29,6 +29,7 @@ abstract class SupabaseBaseService {
       return Response.complete(response.user);
     } on AuthException catch (e) {
       debugPrint(e.code);
+      debugPrint(e.message);
       return _handleSupabaseException(e.code);
     } catch (e) {
       return Response.error(e);
@@ -91,6 +92,7 @@ abstract class SupabaseBaseService {
 
       return Response.complete(response);
     } on PostgrestException catch (e) {
+      debugPrint(e.code);
       debugPrint(e.message);
       return _handleSupabaseException(e.code);
     } catch (e) {

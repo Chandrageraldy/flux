@@ -1370,10 +1370,10 @@ class S {
     );
   }
 
-  /// `Personalizing your plan.....`
+  /// `Hang tight! We're crafting a personalized plan just for you.`
   String get personalizingYourPlanLoadingText {
     return Intl.message(
-      'Personalizing your plan.....',
+      'Hang tight! We\'re crafting a personalized plan just for you.',
       name: 'personalizingYourPlanLoadingText',
       desc: '',
       args: [],

@@ -15,6 +15,9 @@ class ImagePath {
 
 class AnimationPath {
   static const String loadingAnimation = 'lib/app/assets/animations/loading.json';
+  static const String orangeAnimation = 'lib/app/assets/animations/Walking Orange.json';
+  static const String loadingSpinnerAnimation = 'lib/app/assets/animations/Loading Spinner.json';
+  static const String starAIAnimation = 'lib/app/assets/animations/Star AI loader activated state.json';
 }
 
 enum Language {
@@ -38,6 +41,7 @@ enum FormFields { email, password, username, search, servingUnit, mealType }
 
 class TableName {
   static String user = 'user';
+  static String plan = 'plan';
 }
 
 class TableCol {

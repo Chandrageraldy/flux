@@ -39,7 +39,7 @@ class _SignUpPageState extends BaseStatefulState<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac16,
             children: [
-              AppStyles.kSizedBoxH16,
+              AppStyles.kSizedBoxH4,
               getAppTitleLabel(),
               getSignUpDescriptionLabel(),
               AppStyles.kSizedBoxH16,
@@ -59,6 +59,8 @@ extension _Actions on _SignUpPageState {
       final username = _formKey.currentState!.fields[FormFields.username.name]!.value as String;
       final email = _formKey.currentState!.fields[FormFields.email.name]!.value as String;
       final password = _formKey.currentState!.fields[FormFields.password.name]!.value as String;
+
+      FocusScope.of(context).unfocus();
 
       final result = await tryLoad(
             context,

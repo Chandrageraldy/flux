@@ -144,9 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "permissionDenied": MessageLookupByLibrary.simpleMessage(
             "Session Expired or User is not Authenticated, Please Login Again."),
-        "personalizingYourPlanLoadingText":
-            MessageLookupByLibrary.simpleMessage(
-                "Personalizing your plan....."),
+        "personalizingYourPlanLoadingText": MessageLookupByLibrary.simpleMessage(
+            "Hang tight! We\'re crafting a personalized plan just for you."),
         "planDescription1": MessageLookupByLibrary.simpleMessage(
             "Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you."),
         "planDescription2": MessageLookupByLibrary.simpleMessage(

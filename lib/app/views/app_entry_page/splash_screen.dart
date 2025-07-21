@@ -1,6 +1,7 @@
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class SplashScreen extends BaseStatefulPage {
@@ -21,17 +22,18 @@ class _SplashScreenState extends BaseStatefulState<SplashScreen> {
 
   @override
   Widget body() {
-    return Center(child: getAppTitleLabel());
+    return Center(child: getAppLogoAnimation());
   }
 }
 
 // * ------------------------ WidgetFactories -----------------------
 extension _WidgetFactories on _SplashScreenState {
-  // App Title Label
-  Widget getAppTitleLabel() {
-    return Text(
-      'LOGO',
-      style: _Styles.getAppTitleLabelTextStyle(context),
+  // App Logo Animation
+  Widget getAppLogoAnimation() {
+    return Lottie.asset(
+      AnimationPath.starAIAnimation,
+      width: AppStyles.kSize64,
+      height: AppStyles.kSize64,
     );
   }
 
@@ -65,17 +67,4 @@ extension _PrivateMethods on _SplashScreenState {
       }
     }
   }
-}
-
-// * ---------------------------- Styles -----------------------------
-abstract class _Styles {
-  // App Title Text Style
-  static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraMassive).copyWith(color: context.theme.colorScheme.secondary);
-  }
-
-  // Flux Logo Image Style
-  // static double getFluxLogoImageSize(BuildContext context) {
-  //   return MediaQuery.of(context).size.width * 0.3;
-  // }
 }

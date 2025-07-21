@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
+import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,8 +27,20 @@ class _PersonalizingPlanLoadingPageState extends BaseStatefulState<Personalizing
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Lottie.asset(AnimationPath.loadingAnimation, width: AppStyles.kSize150, height: AppStyles.kSize150),
-          Text(S.current.personalizingYourPlanLoadingText, style: _Styles.personalizingPlanLabelTextStyle()),
+          Lottie.asset(
+            AnimationPath.starAIAnimation,
+            width: AppStyles.kSize64,
+            height: AppStyles.kSize64,
+          ),
+          AppStyles.kSizedBoxH20,
+          Padding(
+            padding: AppStyles.kPaddSH20,
+            child: Text(
+              S.current.personalizingYourPlanLoadingText,
+              style: _Styles.personalizingPlanLabelTextStyle(),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
     );
@@ -83,6 +96,8 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 
     // ignore: avoid_print
     print(completeNutrient);
+
+    createPersonalizedPlan(completeNutrient);
   }
 
   int calculateAge(DateTime dob) {
@@ -283,25 +298,39 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     return tdee + calorieAdjustment;
   }
 
-  Map<String, double> getCompleteNutrients(
-      double calorie, Map<String, double> macroRatio, Map<String, double> microNutrients) {
+  Map<String, dynamic> getCompleteNutrients(
+    double calorie,
+    Map<String, double> macroRatio,
+    Map<String, double> microNutrients,
+  ) {
     double protein = calorie * macroRatio['proteinRatio']!;
     double fat = calorie * macroRatio['fatRatio']!;
     double carb = calorie * macroRatio['carbRatio']!;
 
     return {
-      Nutrition.calorie.key: calorie,
-      Nutrition.protein.key: protein / 4,
-      Nutrition.fat.key: fat / 9,
-      Nutrition.carbs.key: carb / 4,
+      Nutrition.calorie.key: calorie.round(),
+      Nutrition.protein.key: (protein / 4).round(),
+      Nutrition.fat.key: (fat / 9).round(),
+      Nutrition.carbs.key: (carb / 4).round(),
       ...microNutrients,
     };
+  }
+
+  void createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
+    final result =
+        await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(completeNutrients)) ?? false;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    if (result && mounted) {
+      context.router.replaceAll([DashboardNavigatorRoute()]);
+    }
   }
 }
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   static TextStyle personalizingPlanLabelTextStyle() {
-    return Quicksand.medium.withSize(FontSizes.huge);
+    return Quicksand.medium.withSize(FontSizes.large);
   }
 }

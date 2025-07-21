@@ -1,3 +1,13 @@
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/repositories/plan_repo/plan_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
-class PlanViewModel extends BaseViewModel {}
+class PlanViewModel extends BaseViewModel {
+  final PlanRepository planRepository = PlanRepository();
+
+  Future<bool> createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
+    final response = await planRepository.createPersonalizedPlan(completeNutrients);
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
+  }
+}
