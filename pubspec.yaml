@@ -65,6 +65,8 @@ dependencies:
   # Security
   flutter_dotenv: ^5.2.1
 
+  # Networking
+  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:

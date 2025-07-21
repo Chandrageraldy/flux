@@ -4,6 +4,8 @@ class Env {
   static const String file = '.env';
   static const String supabaseUrl = 'SUPABASE_URL';
   static const String supabaseAnonKey = 'SUPABASE_ANON_KEY';
+  static const String nutritionixAppId = 'NUTRITIONIX_APP_ID';
+  static const String nutritionixAppKey = 'NUTRITIONIX_APP_KEY';
 }
 
 class ImagePath {
