@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'food_search_model.dart';
+part of 'food_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FoodSearchModelImpl _$$FoodSearchModelImplFromJson(
+_$FoodResponseModelImpl _$$FoodResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$FoodSearchModelImpl(
+    _$FoodResponseModelImpl(
       tagId: json['tagId'] as String?,
       brandNameItemName: json['brandNameItemName'] as String?,
       brandName: json['brandName'] as String?,
@@ -19,8 +19,8 @@ _$FoodSearchModelImpl _$$FoodSearchModelImplFromJson(
       servingUnit: json['servingUnit'] as String?,
     );
 
-Map<String, dynamic> _$$FoodSearchModelImplToJson(
-        _$FoodSearchModelImpl instance) =>
+Map<String, dynamic> _$$FoodResponseModelImplToJson(
+        _$FoodResponseModelImpl instance) =>
     <String, dynamic>{
       'tagId': instance.tagId,
       'brandNameItemName': instance.brandNameItemName,

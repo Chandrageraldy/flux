@@ -45,6 +45,7 @@ enum FormFields { email, password, username, search, servingUnit, mealType }
 class TableName {
   static String user = 'user';
   static String plan = 'plan';
+  static String savedFood = 'saved_food';
 }
 
 class TableCol {

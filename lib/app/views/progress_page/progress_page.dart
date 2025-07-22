@@ -1,5 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/repositories/food_repo/food_repository.dart';
+import 'package:flux/app/repositories/food_repo/food_repo.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 
 @RoutePage()

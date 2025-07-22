@@ -1,7 +1,8 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
-import 'package:flux/app/models/food_search_model/food_search_model.dart';
+import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
+import 'package:flux/app/viewmodels/food_details_vm/food_details_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dropdown_form/app_dropdown_form.dart';
@@ -12,19 +13,33 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
-class FoodDetailsPage extends BaseStatefulPage {
+class FoodDetailsPage extends StatelessWidget {
   const FoodDetailsPage({required this.food, required this.foodSearchModel, super.key});
 
   final FoodModel food;
-  final FoodSearchModel foodSearchModel;
+  final FoodResponseModel foodSearchModel;
 
   @override
-  State<FoodDetailsPage> createState() => _FoodDetailsPageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+        create: (_) => FoodDetailsViewModel(), child: _FoodDetailsPage(food: food, foodSearchModel: foodSearchModel));
+  }
 }
 
-class _FoodDetailsPageState extends BaseStatefulState<FoodDetailsPage> {
+class _FoodDetailsPage extends BaseStatefulPage {
+  const _FoodDetailsPage({required this.food, required this.foodSearchModel});
+
+  final FoodModel food;
+  final FoodResponseModel foodSearchModel;
+
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary);
+  State<_FoodDetailsPage> createState() => _FoodDetailsPageState();
+}
+
+class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
+  @override
+  PreferredSizeWidget? appbar() =>
+      DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary, actionButton: getSaveContainer());
 
   @override
   defaultPadding() => AppStyles.kPadd0;
@@ -54,7 +69,7 @@ class _FoodDetailsPageState extends BaseStatefulState<FoodDetailsPage> {
                   children: [
                     getCalorieContainer(macroNutrientPercentage),
                     getMacronutrientsRow(macroNutrientPercentage),
-                    getNutritionalInfoContainer(),
+                    // getNutritionalInfoContainer(),
                   ],
                 ),
               ),
@@ -68,10 +83,24 @@ class _FoodDetailsPageState extends BaseStatefulState<FoodDetailsPage> {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _FoodDetailsPageState {}
+extension _Actions on _FoodDetailsPageState {
+  void _onSavePressed() {}
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _FoodDetailsPageState {
+  // Save Container
+  Widget getSaveContainer() {
+    return GestureDetector(
+      onTap: _onSavePressed,
+      child: Container(
+        padding: AppStyles.kPadd8,
+        decoration: _Styles.getSaveContainerDecoration(context),
+        child: Icon(Icons.bookmark_add_outlined, color: context.theme.colorScheme.primary),
+      ),
+    );
+  }
+
   // Header Container
   Widget getHeaderContainer() {
     return Container(
@@ -343,6 +372,14 @@ class _Styles {
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
       ],
+    );
+  }
+
+  // Save Container Decoration
+  static BoxDecoration getSaveContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.tertiaryFixedDim,
+      borderRadius: AppStyles.kRad10,
     );
   }
 }
