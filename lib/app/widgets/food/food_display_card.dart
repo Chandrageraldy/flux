@@ -15,7 +15,7 @@ class FoodDisplayCard extends StatelessWidget {
   final double calories;
   final String foodName;
   final String servingUnit;
-  final int servingQuantity;
+  final double servingQuantity;
   final VoidCallback onCardPressed;
 
   @override

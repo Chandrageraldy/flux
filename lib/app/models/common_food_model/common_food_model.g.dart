@@ -12,7 +12,7 @@ _$CommonFoodModelImpl _$$CommonFoodModelImplFromJson(
       tagId: json['tag_id'] as String?,
       foodName: json['food_name'] as String?,
       calorieKcal: (json['nf_calories'] as num?)?.toDouble(),
-      servingQty: (json['serving_qty'] as num?)?.toInt(),
+      servingQty: (json['serving_qty'] as num?)?.toDouble(),
       servingUnit: json['serving_unit'] as String?,
     );
 

@@ -13,7 +13,7 @@ class BrandedFoodModel with _$BrandedFoodModel {
     @JsonKey(name: 'food_name') String? foodName,
     @JsonKey(name: 'nix_item_id') String? nixItemId,
     @JsonKey(name: 'nf_calories') double? calorieKcal,
-    @JsonKey(name: 'serving_qty') int? servingQty,
+    @JsonKey(name: 'serving_qty') double? servingQty,
     @JsonKey(name: 'serving_unit') String? servingUnit,
   }) = _BrandedFoodModel;
 

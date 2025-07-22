@@ -57,7 +57,7 @@ class FoodSearchResultModel {
   String? foodName;
   String? nixItemId;
   double? calorieKcal;
-  int? servingQty;
+  double? servingQty;
   String? servingUnit;
 
   FoodSearchResultModel({

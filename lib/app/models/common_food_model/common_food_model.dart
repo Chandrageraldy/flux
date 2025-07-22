@@ -11,7 +11,7 @@ class CommonFoodModel with _$CommonFoodModel {
     @JsonKey(name: 'tag_id') String? tagId,
     @JsonKey(name: 'food_name') String? foodName,
     @JsonKey(name: 'nf_calories') double? calorieKcal,
-    @JsonKey(name: 'serving_qty') int? servingQty,
+    @JsonKey(name: 'serving_qty') double? servingQty,
     @JsonKey(name: 'serving_unit') String? servingUnit,
   }) = _CommonFoodModel;
 

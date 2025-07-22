@@ -14,7 +14,7 @@ _$BrandedFoodModelImpl _$$BrandedFoodModelImplFromJson(
       foodName: json['food_name'] as String?,
       nixItemId: json['nix_item_id'] as String?,
       calorieKcal: (json['nf_calories'] as num?)?.toDouble(),
-      servingQty: (json['serving_qty'] as num?)?.toInt(),
+      servingQty: (json['serving_qty'] as num?)?.toDouble(),
       servingUnit: json['serving_unit'] as String?,
     );
 
