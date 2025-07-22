@@ -9,11 +9,13 @@ enum HttpRequestType { get, post, put, delete }
 class NutritionixBaseService {
   final dio.Dio _dio;
 
+  static const String BASE_URL = 'https://trackapi.nutritionix.com/v2';
+
   NutritionixBaseService({
     String? baseUrl,
   }) : _dio = dio.Dio(
           dio.BaseOptions(
-            baseUrl: baseUrl ?? 'https://trackapi.nutritionix.com/v2',
+            baseUrl: baseUrl ?? BASE_URL,
             headers: {
               'Content-Type': 'application/json',
               'x-app-id': dotenv.env[Env.nutritionixAppId] ?? '',
@@ -22,7 +24,7 @@ class NutritionixBaseService {
           ),
         );
 
-  Future<Response<dynamic, String>> callAPI(
+  Future<Response<dynamic, String>> callNutritionixAPI(
     HttpRequestType type,
     String path, {
     dynamic body,

@@ -13,6 +13,7 @@ class ImagePath {
   static const String onboarding1 = 'lib/app/assets/images/onboarding1.png';
   static const String onboarding2 = 'lib/app/assets/images/onboarding2.png';
   static const String onboarding3 = 'lib/app/assets/images/onboarding3.png';
+  static const String fluxStar = 'lib/app/assets/images/flux_star.png';
 }
 
 class AnimationPath {

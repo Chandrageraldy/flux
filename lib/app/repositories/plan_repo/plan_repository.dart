@@ -34,7 +34,7 @@ extension _PrivateMethods on PlanRepository {
     PlanModel model = PlanModel.fromJson(plan[0]);
 
     await sharedPreferenceHandler.putPlan(model);
-    // ignore: avoid_print
-    print(sharedPreferenceHandler.getPlan());
+
+    debugPrint('${sharedPreferenceHandler.getPlan()}');
   }
 }

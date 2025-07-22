@@ -168,9 +168,7 @@ abstract class _Styles {
 
   // Date Label Text Style
   static TextStyle getDateLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold
-        .withSize(FontSizes.mediumPlus)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Date Container Decoration

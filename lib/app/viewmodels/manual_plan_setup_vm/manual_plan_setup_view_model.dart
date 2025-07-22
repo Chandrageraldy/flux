@@ -1,3 +1,4 @@
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
@@ -8,7 +9,7 @@ class ManualPlanSetupViewModel extends BaseViewModel {
     // Use this instead of 'bodyMetrics[key] = value' to provide new reference for notifying listener
     bodyMetrics = {...bodyMetrics, key: value};
     notifyListeners();
-    print(bodyMetrics);
+    debugPrint('$bodyMetrics');
   }
 
   void cleanbodyMetrics() {
@@ -22,6 +23,6 @@ class ManualPlanSetupViewModel extends BaseViewModel {
     } else {
       bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.lose.value;
     }
-    print(bodyMetrics);
+    debugPrint('$bodyMetrics');
   }
 }

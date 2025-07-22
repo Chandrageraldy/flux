@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 
 @RoutePage()
@@ -18,8 +19,8 @@ class _ProgressPageState extends BaseStatefulState<ProgressPage> {
 
   @override
   Widget body() {
-    return const Center(
-      child: Text('ProgressPage body'),
+    return Center(
+      child: ElevatedButton(onPressed: _testAPI, child: Text('Test API')),
     );
   }
 }
@@ -28,6 +29,16 @@ class _ProgressPageState extends BaseStatefulState<ProgressPage> {
 extension _PrivateMethods on _ProgressPageState {
   void _getPersonalizedPlan() async {
     await tryLoad(context, () => context.read<PlanViewModel>().getPersonalizedPlan()) ?? false;
+  }
+
+  void _testAPI() async {
+    await FoodRepository().searchInstant('Eggs');
+
+    // if (response.status == ResponseStatus.COMPLETE) {
+    //   debugPrint('API Response: ${response.data}');
+    // } else {
+    //   debugPrint('API Error: ${response.error}');
+    // }
   }
 }
 
