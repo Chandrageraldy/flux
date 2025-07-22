@@ -1,7 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_search_model/food_search_model.dart';
-import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
