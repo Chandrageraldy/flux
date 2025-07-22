@@ -10,10 +10,15 @@ class FoodRepository {
     final List<FoodSearchResultModel> foodSearchResponse = [];
 
     final response = await foodService.searchInstant(query: query);
+    // Nutrionix search instant API returns common foods that may have the same tagId, track tagIds to avoid food with same tagId
+    final Set<String?> seenTagIds = {};
 
     final List commonList = response.data['common'] ?? [];
     for (final item in commonList) {
       final common = CommonFoodModel.fromJson(item);
+      // ignore common foods with the same tagIds as the previous ones
+      if (seenTagIds.contains(common.tagId)) continue;
+      seenTagIds.add(common.tagId);
       foodSearchResponse.add(FoodSearchResultModel(
         tagId: common.tagId,
         foodName: common.foodName,

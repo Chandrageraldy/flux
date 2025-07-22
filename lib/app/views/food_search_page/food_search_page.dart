@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/viewmodels/food_vm/food_view_model.dart';
 import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
@@ -42,9 +41,9 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 extension _Actions on _FoodSearchPageState {
   void _onBarcodeScannerPressed() {}
 
-  void _onFoodCardPressed(FoodModel food) {
-    context.router.push(FoodDetailsRoute(food: food));
-  }
+  // void _onFoodCardPressed(FoodModel food) {
+  //   context.router.push(FoodDetailsRoute(food: food));
+  // }
 
   void _onSubmitted(String value) async {
     await tryCatch(context, () => context.read<FoodViewModel>().searchInstant(value));
