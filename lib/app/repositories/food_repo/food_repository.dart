@@ -1,6 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
+import 'package:flux/app/models/food_search_model/food_search_model.dart';
 import 'package:flux/app/services/food_service/food_service.dart';
 
 class FoodRepository {
@@ -48,26 +49,4 @@ class FoodRepository {
 
     return response;
   }
-}
-
-class FoodSearchModel {
-  String? tagId;
-  String? brandNameItemName;
-  String? brandName;
-  String? foodName;
-  String? nixItemId;
-  double? calorieKcal;
-  double? servingQty;
-  String? servingUnit;
-
-  FoodSearchModel({
-    this.tagId,
-    this.brandNameItemName,
-    this.brandName,
-    this.foodName,
-    this.nixItemId,
-    this.calorieKcal,
-    this.servingQty,
-    this.servingUnit,
-  });
 }

@@ -1,7 +1,8 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
+import 'package:flux/app/models/food_search_model/food_search_model.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
-import 'package:flux/app/viewmodels/food_search_vm/food_view_model.dart';
+import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
