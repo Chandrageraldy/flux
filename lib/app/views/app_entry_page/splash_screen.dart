@@ -56,14 +56,10 @@ extension _PrivateMethods on _SplashScreenState {
 
   void navigateBasedOnState() {
     if (mounted) {
-      if (SharedPreferenceHandler().getHasOnboarded() == false) {
-        context.router.replaceAll([const RootRoute()]);
+      if (context.read<UserViewModel>().isLoggedIn) {
+        context.router.replaceAll([const DashboardNavigatorRoute()]);
       } else {
-        if (context.read<UserViewModel>().isLoggedIn) {
-          context.router.replaceAll([const DashboardNavigatorRoute()]);
-        } else {
-          context.router.replaceAll([const LoginRoute()]);
-        }
+        context.router.replaceAll([const RootRoute()]);
       }
     }
   }

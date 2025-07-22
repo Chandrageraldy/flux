@@ -9,6 +9,7 @@ class FoodDisplayCard extends StatelessWidget {
     required this.servingUnit,
     required this.servingQuantity,
     required this.onCardPressed,
+    required this.brandName,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class FoodDisplayCard extends StatelessWidget {
   final String servingUnit;
   final double servingQuantity;
   final VoidCallback onCardPressed;
+  final String brandName;
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +37,18 @@ extension _WidgetFactories on FoodDisplayCard {
   // Content Row
   Widget getContentRow(BuildContext context) {
     return Row(
+      spacing: AppStyles.kSpac8,
       children: [
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac4,
-            children: [getTitleLabel(context), getTagRow(context)],
+            children: [getTitleLabel(context), getServingAndBrandRow(context)],
           ),
         ),
-        FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kIconSize16)
+        getCalorieTag(context),
+        getIcon(context),
       ],
-    );
-  }
-
-  // Tag Row
-  Widget getTagRow(BuildContext context) {
-    return Row(
-      spacing: AppStyles.kSpac8,
-      children: [getCalorieTag(context), getServingTag(context)],
     );
   }
 
@@ -67,6 +63,14 @@ extension _WidgetFactories on FoodDisplayCard {
     );
   }
 
+  // Get Icon
+  Widget getIcon(BuildContext context) {
+    return FaIcon(
+      FontAwesomeIcons.chevronRight,
+      size: AppStyles.kIconSize16,
+    );
+  }
+
   // Description Label
   // Widget getDescriptionLabel(BuildContext context) {
   //   return Text(
@@ -78,9 +82,34 @@ extension _WidgetFactories on FoodDisplayCard {
   //   );
   // }
 
-  // Serving Tag
-  Widget getServingTag(BuildContext context) {
-    return Text('$servingQuantity $servingUnit', style: Quicksand.medium.withSize(FontSizes.small));
+  // Serving and Brand Row
+  Widget getServingAndBrandRow(BuildContext context) {
+    return Row(spacing: AppStyles.kSpac8, children: [
+      getServingRow(context),
+      if (brandName.isNotEmpty) getBrandRow(context),
+    ]);
+  }
+
+  // Serving Row
+  Widget getServingRow(BuildContext context) {
+    return Row(
+      spacing: AppStyles.kSpac4,
+      children: [
+        FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kIconSize12),
+        Text('$servingQuantity $servingUnit', style: _Styles.getServingAndBrandLabelTextStyle(context)),
+      ],
+    );
+  }
+
+  // Brand Row
+  Widget getBrandRow(BuildContext context) {
+    return Row(
+      spacing: AppStyles.kSpac4,
+      children: [
+        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12),
+        Text(brandName, style: _Styles.getServingAndBrandLabelTextStyle(context))
+      ],
+    );
   }
 
   // Calorie Tag
@@ -135,16 +164,8 @@ abstract class _Styles {
     return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
-  // Description Text Style
-  // static TextStyle getDescriptionTextStyle(BuildContext context) {
-  //   return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
-  // }
-
-  // Icon Container Decoration
-  // static BoxDecoration getIconContainerDecoration(BuildContext context) {
-  //   return BoxDecoration(
-  //     color: context.theme.colorScheme.secondary,
-  //     borderRadius: AppStyles.kRad100,
-  //   );
-  // }
+  // Serving and Brand Label Text Style
+  static TextStyle getServingAndBrandLabelTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small);
+  }
 }

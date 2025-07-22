@@ -10,7 +10,7 @@ class AppTextFormField extends StatelessWidget {
     this.icon,
     this.initialValue,
     this.topLabel,
-    this.onSubmitted,
+    this.onChanged,
     super.key,
   });
 
@@ -20,7 +20,7 @@ class AppTextFormField extends StatelessWidget {
   final FaIcon? icon;
   final String? initialValue;
   final String? topLabel;
-  final void Function(String value)? onSubmitted;
+  final void Function(String value)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,10 @@ extension _WidgetFactories on AppTextFormField {
         decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
         obscureText: field == FormFields.password,
         validator: validator,
-        onSubmitted: onSubmitted == null
+        onChanged: onChanged == null
             ? null
             : (value) {
-                if (value != null && value.isNotEmpty) onSubmitted!(value);
+                if (value != null && value.isNotEmpty) onChanged!(value);
               },
       ),
     );

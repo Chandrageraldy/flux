@@ -102,6 +102,7 @@ class AppStyles {
   static double kDoubleInfinity = double.infinity;
   // Icon Size
   static const kIconSize4 = 4.0;
+  static const kIconSize12 = 12.0;
   static const kIconSize16 = 16.0;
   static const kIconSize20 = 20.0;
   static const kIconSize25 = 25.0;

@@ -1,5 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/viewmodels/food_vm/food_view_model.dart';
+import 'package:flux/app/models/food_model/food_model.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
+import 'package:flux/app/viewmodels/food_search_vm/food_view_model.dart';
 import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
@@ -13,7 +15,7 @@ class FoodSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => FoodViewModel(), child: _FoodSearchPage());
+    return ChangeNotifierProvider(create: (_) => FoodSearchViewModel(), child: _FoodSearchPage());
   }
 }
 
@@ -25,6 +27,20 @@ class _FoodSearchPage extends BaseStatefulPage {
 class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
+
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget body() {
@@ -41,12 +57,28 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 extension _Actions on _FoodSearchPageState {
   void _onBarcodeScannerPressed() {}
 
-  // void _onFoodCardPressed(FoodModel food) {
-  //   context.router.push(FoodDetailsRoute(food: food));
-  // }
+  void _onFoodCardPressed(FoodSearchModel foodSearchModel) {
+    FoodModel food = FoodModel(
+      foodName: 'Dummy Food',
+      calories: 100,
+      protein: 5,
+      fat: 2,
+      carbohydrate: 20,
+      servingQuantity: 1,
+      servingUnit: ['piece', 'cup', 'gram'],
+      nutrients: [],
+    );
+    context.router.push(FoodDetailsRoute(food: food, foodSearchModel: foodSearchModel));
+  }
 
-  void _onSubmitted(String value) async {
-    await tryCatch(context, () => context.read<FoodViewModel>().searchInstant(value));
+  void _onChanged(String value) async {
+    await tryCatch(context, () => context.read<FoodSearchViewModel>().searchInstant(value));
+
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 }
 
@@ -77,7 +109,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       placeholder: S.current.searchFoodPlaceholder,
       validator: FormBuilderValidators.compose([]),
       icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kIconSize16),
-      onSubmitted: _onSubmitted,
+      onChanged: _onChanged,
     );
   }
 
@@ -124,6 +156,7 @@ extension _WidgetFactories on _FoodSearchPageState {
     return Padding(
       padding: AppStyles.kPaddSH20,
       child: CustomScrollView(
+        controller: _scrollController,
         slivers: [getFoodActionHeader(), getFoodSliverList()],
       ),
     );
@@ -171,7 +204,7 @@ extension _WidgetFactories on _FoodSearchPageState {
 
   // Food Sliver List
   Widget getFoodSliverList() {
-    final foodSearchResults = context.select((FoodViewModel vm) => vm.foodSearchResults);
+    final foodSearchResults = context.select((FoodSearchViewModel vm) => vm.foodSearchResults);
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -184,7 +217,8 @@ extension _WidgetFactories on _FoodSearchPageState {
               calories: food.calorieKcal ?? 0,
               servingUnit: food.servingUnit ?? '',
               servingQuantity: food.servingQty ?? 0,
-              onCardPressed: () {},
+              brandName: food.brandName ?? '',
+              onCardPressed: () => _onFoodCardPressed(food),
             ),
           );
         },

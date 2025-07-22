@@ -7,7 +7,7 @@ class FoodRepository {
   FoodService foodService = FoodService();
 
   Future<Response> searchInstant({required String query}) async {
-    final List<FoodSearchResultModel> foodSearchResponse = [];
+    final List<FoodSearchModel> foodSearchResponse = [];
 
     final response = await foodService.searchInstant(query: query);
     // Nutrionix search instant API returns common foods that may have the same tagId, track tagIds to avoid food with same tagId
@@ -19,7 +19,7 @@ class FoodRepository {
       // ignore common foods with the same tagIds as the previous ones
       if (seenTagIds.contains(common.tagId)) continue;
       seenTagIds.add(common.tagId);
-      foodSearchResponse.add(FoodSearchResultModel(
+      foodSearchResponse.add(FoodSearchModel(
         tagId: common.tagId,
         foodName: common.foodName,
         calorieKcal: common.calorieKcal,
@@ -31,7 +31,7 @@ class FoodRepository {
     final List brandedList = response.data['branded'] ?? [];
     for (final item in brandedList) {
       final branded = BrandedFoodModel.fromJson(item);
-      foodSearchResponse.add(FoodSearchResultModel(
+      foodSearchResponse.add(FoodSearchModel(
         brandNameItemName: branded.brandNameItemName,
         brandName: branded.brandName,
         foodName: branded.foodName,
@@ -50,7 +50,7 @@ class FoodRepository {
   }
 }
 
-class FoodSearchResultModel {
+class FoodSearchModel {
   String? tagId;
   String? brandNameItemName;
   String? brandName;
@@ -60,7 +60,7 @@ class FoodSearchResultModel {
   double? servingQty;
   String? servingUnit;
 
-  FoodSearchResultModel({
+  FoodSearchModel({
     this.tagId,
     this.brandNameItemName,
     this.brandName,

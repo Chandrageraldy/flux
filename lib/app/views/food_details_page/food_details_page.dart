@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
@@ -12,9 +13,10 @@ import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
 class FoodDetailsPage extends BaseStatefulPage {
-  const FoodDetailsPage({required this.food, super.key});
+  const FoodDetailsPage({required this.food, required this.foodSearchModel, super.key});
 
   final FoodModel food;
+  final FoodSearchModel foodSearchModel;
 
   @override
   State<FoodDetailsPage> createState() => _FoodDetailsPageState();
