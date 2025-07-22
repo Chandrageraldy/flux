@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
+import 'package:flux/app/viewmodels/food_vm/food_view_model.dart';
 import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
@@ -8,14 +9,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 @RoutePage()
-class FoodSearchPage extends BaseStatefulPage {
+class FoodSearchPage extends StatelessWidget {
   const FoodSearchPage({super.key});
 
   @override
-  State<FoodSearchPage> createState() => _FoodSearchPageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(create: (_) => FoodViewModel(), child: _FoodSearchPage());
+  }
 }
 
-class _FoodSearchPageState extends BaseStatefulState<FoodSearchPage> {
+class _FoodSearchPage extends BaseStatefulPage {
+  @override
+  State<_FoodSearchPage> createState() => _FoodSearchPageState();
+}
+
+class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
@@ -36,6 +44,10 @@ extension _Actions on _FoodSearchPageState {
 
   void _onFoodCardPressed(FoodModel food) {
     context.router.push(FoodDetailsRoute(food: food));
+  }
+
+  void _onSubmitted(String value) async {
+    await tryCatch(context, () => context.read<FoodViewModel>().searchInstant(value));
   }
 }
 
@@ -66,6 +78,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       placeholder: S.current.searchFoodPlaceholder,
       validator: FormBuilderValidators.compose([]),
       icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kIconSize16),
+      onSubmitted: _onSubmitted,
     );
   }
 
@@ -159,22 +172,24 @@ extension _WidgetFactories on _FoodSearchPageState {
 
   // Food Sliver List
   Widget getFoodSliverList() {
+    final foodSearchResults = context.select((FoodViewModel vm) => vm.foodSearchResults);
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          final food = foodList[index];
+          final food = foodSearchResults[index];
           return Padding(
             padding: const EdgeInsets.only(bottom: 12.0),
             child: FoodDisplayCard(
-              foodName: food.foodName,
-              calories: food.calories,
-              servingUnit: food.servingUnit.first,
-              servingQuantity: food.servingQuantity,
-              onCardPressed: () => _onFoodCardPressed(food),
+              foodName: food.foodName ?? '',
+              calories: food.calorieKcal ?? 0,
+              servingUnit: food.servingUnit ?? '',
+              servingQuantity: food.servingQty ?? 0,
+              onCardPressed: () {},
             ),
           );
         },
-        childCount: foodList.length,
+        childCount: foodSearchResults.length,
       ),
     );
   }

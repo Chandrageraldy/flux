@@ -15,7 +15,7 @@ class FoodDisplayCard extends StatelessWidget {
   final double calories;
   final String foodName;
   final String servingUnit;
-  final double servingQuantity;
+  final int servingQuantity;
   final VoidCallback onCardPressed;
 
   @override
@@ -52,7 +52,7 @@ extension _WidgetFactories on FoodDisplayCard {
   Widget getTagRow(BuildContext context) {
     return Row(
       spacing: AppStyles.kSpac8,
-      children: [getServingTag(context), getCalorieTag(context)],
+      children: [getCalorieTag(context), getServingTag(context)],
     );
   }
 
@@ -80,10 +80,7 @@ extension _WidgetFactories on FoodDisplayCard {
 
   // Serving Tag
   Widget getServingTag(BuildContext context) {
-    return NutritionTag(
-      tag: servingUnit,
-      label: servingQuantity.toString(),
-    );
+    return Text('$servingQuantity $servingUnit', style: Quicksand.medium.withSize(FontSizes.small));
   }
 
   // Calorie Tag

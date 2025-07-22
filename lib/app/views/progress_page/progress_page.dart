@@ -32,7 +32,7 @@ extension _PrivateMethods on _ProgressPageState {
   }
 
   void _testAPI() async {
-    await FoodRepository().searchInstant('Eggs');
+    await FoodRepository().searchInstant(query: 'Eggs');
 
     // if (response.status == ResponseStatus.COMPLETE) {
     //   debugPrint('API Response: ${response.data}');

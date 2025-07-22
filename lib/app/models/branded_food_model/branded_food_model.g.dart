@@ -13,7 +13,7 @@ _$BrandedFoodModelImpl _$$BrandedFoodModelImplFromJson(
       brandName: json['brand_name'] as String?,
       foodName: json['food_name'] as String?,
       nixItemId: json['nix_item_id'] as String?,
-      calorieKcal: (json['nf_calories'] as num?)?.toInt(),
+      calorieKcal: (json['nf_calories'] as num?)?.toDouble(),
       servingQty: (json['serving_qty'] as num?)?.toInt(),
       servingUnit: json['serving_unit'] as String?,
     );

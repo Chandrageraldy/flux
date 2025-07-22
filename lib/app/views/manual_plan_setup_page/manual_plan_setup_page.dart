@@ -16,10 +16,7 @@ class ManualPlanSetupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ManualPlanSetupViewModel(),
-      child: _ManualPlanSetupPage(),
-    );
+    return ChangeNotifierProvider(create: (_) => ManualPlanSetupViewModel(), child: _ManualPlanSetupPage());
   }
 }
 

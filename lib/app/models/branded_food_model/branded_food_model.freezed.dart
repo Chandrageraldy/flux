@@ -29,7 +29,7 @@ mixin _$BrandedFoodModel {
   @JsonKey(name: 'nix_item_id')
   String? get nixItemId => throw _privateConstructorUsedError;
   @JsonKey(name: 'nf_calories')
-  int? get calorieKcal => throw _privateConstructorUsedError;
+  double? get calorieKcal => throw _privateConstructorUsedError;
   @JsonKey(name: 'serving_qty')
   int? get servingQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'serving_unit')
@@ -56,7 +56,7 @@ abstract class $BrandedFoodModelCopyWith<$Res> {
       @JsonKey(name: 'brand_name') String? brandName,
       @JsonKey(name: 'food_name') String? foodName,
       @JsonKey(name: 'nix_item_id') String? nixItemId,
-      @JsonKey(name: 'nf_calories') int? calorieKcal,
+      @JsonKey(name: 'nf_calories') double? calorieKcal,
       @JsonKey(name: 'serving_qty') int? servingQty,
       @JsonKey(name: 'serving_unit') String? servingUnit});
 }
@@ -104,7 +104,7 @@ class _$BrandedFoodModelCopyWithImpl<$Res, $Val extends BrandedFoodModel>
       calorieKcal: freezed == calorieKcal
           ? _value.calorieKcal
           : calorieKcal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       servingQty: freezed == servingQty
           ? _value.servingQty
           : servingQty // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$$BrandedFoodModelImplCopyWith<$Res>
       @JsonKey(name: 'brand_name') String? brandName,
       @JsonKey(name: 'food_name') String? foodName,
       @JsonKey(name: 'nix_item_id') String? nixItemId,
-      @JsonKey(name: 'nf_calories') int? calorieKcal,
+      @JsonKey(name: 'nf_calories') double? calorieKcal,
       @JsonKey(name: 'serving_qty') int? servingQty,
       @JsonKey(name: 'serving_unit') String? servingUnit});
 }
@@ -176,7 +176,7 @@ class __$$BrandedFoodModelImplCopyWithImpl<$Res>
       calorieKcal: freezed == calorieKcal
           ? _value.calorieKcal
           : calorieKcal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       servingQty: freezed == servingQty
           ? _value.servingQty
           : servingQty // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$BrandedFoodModelImpl implements _BrandedFoodModel {
   final String? nixItemId;
   @override
   @JsonKey(name: 'nf_calories')
-  final int? calorieKcal;
+  final double? calorieKcal;
   @override
   @JsonKey(name: 'serving_qty')
   final int? servingQty;
@@ -280,7 +280,7 @@ abstract class _BrandedFoodModel implements BrandedFoodModel {
       @JsonKey(name: 'brand_name') final String? brandName,
       @JsonKey(name: 'food_name') final String? foodName,
       @JsonKey(name: 'nix_item_id') final String? nixItemId,
-      @JsonKey(name: 'nf_calories') final int? calorieKcal,
+      @JsonKey(name: 'nf_calories') final double? calorieKcal,
       @JsonKey(name: 'serving_qty') final int? servingQty,
       @JsonKey(name: 'serving_unit')
       final String? servingUnit}) = _$BrandedFoodModelImpl;
@@ -302,7 +302,7 @@ abstract class _BrandedFoodModel implements BrandedFoodModel {
   String? get nixItemId;
   @override
   @JsonKey(name: 'nf_calories')
-  int? get calorieKcal;
+  double? get calorieKcal;
   @override
   @JsonKey(name: 'serving_qty')
   int? get servingQty;

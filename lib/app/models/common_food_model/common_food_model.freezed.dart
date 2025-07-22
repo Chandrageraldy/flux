@@ -25,7 +25,7 @@ mixin _$CommonFoodModel {
   @JsonKey(name: 'food_name')
   String? get foodName => throw _privateConstructorUsedError;
   @JsonKey(name: 'nf_calories')
-  int? get calorieKcal => throw _privateConstructorUsedError;
+  double? get calorieKcal => throw _privateConstructorUsedError;
   @JsonKey(name: 'serving_qty')
   int? get servingQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'serving_unit')
@@ -50,7 +50,7 @@ abstract class $CommonFoodModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'tag_id') String? tagId,
       @JsonKey(name: 'food_name') String? foodName,
-      @JsonKey(name: 'nf_calories') int? calorieKcal,
+      @JsonKey(name: 'nf_calories') double? calorieKcal,
       @JsonKey(name: 'serving_qty') int? servingQty,
       @JsonKey(name: 'serving_unit') String? servingUnit});
 }
@@ -88,7 +88,7 @@ class _$CommonFoodModelCopyWithImpl<$Res, $Val extends CommonFoodModel>
       calorieKcal: freezed == calorieKcal
           ? _value.calorieKcal
           : calorieKcal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       servingQty: freezed == servingQty
           ? _value.servingQty
           : servingQty // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$CommonFoodModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'tag_id') String? tagId,
       @JsonKey(name: 'food_name') String? foodName,
-      @JsonKey(name: 'nf_calories') int? calorieKcal,
+      @JsonKey(name: 'nf_calories') double? calorieKcal,
       @JsonKey(name: 'serving_qty') int? servingQty,
       @JsonKey(name: 'serving_unit') String? servingUnit});
 }
@@ -148,7 +148,7 @@ class __$$CommonFoodModelImplCopyWithImpl<$Res>
       calorieKcal: freezed == calorieKcal
           ? _value.calorieKcal
           : calorieKcal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       servingQty: freezed == servingQty
           ? _value.servingQty
           : servingQty // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ class _$CommonFoodModelImpl implements _CommonFoodModel {
   final String? foodName;
   @override
   @JsonKey(name: 'nf_calories')
-  final int? calorieKcal;
+  final double? calorieKcal;
   @override
   @JsonKey(name: 'serving_qty')
   final int? servingQty;
@@ -237,7 +237,7 @@ abstract class _CommonFoodModel implements CommonFoodModel {
   const factory _CommonFoodModel(
           {@JsonKey(name: 'tag_id') final String? tagId,
           @JsonKey(name: 'food_name') final String? foodName,
-          @JsonKey(name: 'nf_calories') final int? calorieKcal,
+          @JsonKey(name: 'nf_calories') final double? calorieKcal,
           @JsonKey(name: 'serving_qty') final int? servingQty,
           @JsonKey(name: 'serving_unit') final String? servingUnit}) =
       _$CommonFoodModelImpl;
@@ -253,7 +253,7 @@ abstract class _CommonFoodModel implements CommonFoodModel {
   String? get foodName;
   @override
   @JsonKey(name: 'nf_calories')
-  int? get calorieKcal;
+  double? get calorieKcal;
   @override
   @JsonKey(name: 'serving_qty')
   int? get servingQty;

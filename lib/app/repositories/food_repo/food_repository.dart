@@ -6,15 +6,15 @@ import 'package:flux/app/services/food_service/food_service.dart';
 class FoodRepository {
   FoodService foodService = FoodService();
 
-  Future<Response> searchInstant(String query) async {
-    final List<FoodSearchResponseModel> foodSearchResponse = [];
+  Future<Response> searchInstant({required String query}) async {
+    final List<FoodSearchResultModel> foodSearchResponse = [];
 
-    final response = await foodService.searchInstant(query);
+    final response = await foodService.searchInstant(query: query);
 
     final List commonList = response.data['common'] ?? [];
     for (final item in commonList) {
       final common = CommonFoodModel.fromJson(item);
-      foodSearchResponse.add(FoodSearchResponseModel(
+      foodSearchResponse.add(FoodSearchResultModel(
         tagId: common.tagId,
         foodName: common.foodName,
         calorieKcal: common.calorieKcal,
@@ -26,7 +26,7 @@ class FoodRepository {
     final List brandedList = response.data['branded'] ?? [];
     for (final item in brandedList) {
       final branded = BrandedFoodModel.fromJson(item);
-      foodSearchResponse.add(FoodSearchResponseModel(
+      foodSearchResponse.add(FoodSearchResultModel(
         brandNameItemName: branded.brandNameItemName,
         brandName: branded.brandName,
         foodName: branded.foodName,
@@ -45,17 +45,17 @@ class FoodRepository {
   }
 }
 
-class FoodSearchResponseModel {
+class FoodSearchResultModel {
   String? tagId;
   String? brandNameItemName;
   String? brandName;
   String? foodName;
   String? nixItemId;
-  int? calorieKcal;
+  double? calorieKcal;
   int? servingQty;
   String? servingUnit;
 
-  FoodSearchResponseModel({
+  FoodSearchResultModel({
     this.tagId,
     this.brandNameItemName,
     this.brandName,
