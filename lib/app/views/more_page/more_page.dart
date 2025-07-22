@@ -24,9 +24,9 @@ class _MorePageState extends BaseStatefulState<MorePage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _MorePageState {
   void _onLogoutPressed() async {
-    final result = await tryLoad(context, () => context.read<UserViewModel>().logout());
+    final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
 
-    if (result == true && mounted) {
+    if (response == true && mounted) {
       context.router.replaceAll([RootRoute()]);
     }
   }

@@ -63,14 +63,14 @@ extension _Actions on _LoginPageState {
 
       FocusScope.of(context).unfocus();
 
-      final result = await tryLoad(
+      final response = await tryLoad(
             context,
             () =>
                 context.read<UserViewModel>().loginWithEmailAndPassword(email: email.trim(), password: password.trim()),
           ) ??
           false;
 
-      if (result && mounted) {
+      if (response && mounted) {
         context.router.replaceAll([DashboardNavigatorRoute()]);
       }
     }

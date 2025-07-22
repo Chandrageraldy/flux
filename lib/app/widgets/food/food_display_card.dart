@@ -84,30 +84,46 @@ extension _WidgetFactories on FoodDisplayCard {
 
   // Serving and Brand Row
   Widget getServingAndBrandRow(BuildContext context) {
-    return Row(spacing: AppStyles.kSpac8, children: [
-      getServingRow(context),
-      if (brandName.isNotEmpty) getBrandRow(context),
-    ]);
+    return Row(
+      spacing: AppStyles.kSpac8,
+      children: [
+        Flexible(child: getServingRow(context)),
+        if (brandName.isNotEmpty) Flexible(child: getBrandRow(context)),
+      ],
+    );
   }
 
   // Serving Row
   Widget getServingRow(BuildContext context) {
     return Row(
       spacing: AppStyles.kSpac4,
+      mainAxisSize: MainAxisSize.min,
       children: [
         FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kIconSize12),
-        Text('$servingQuantity $servingUnit', style: _Styles.getServingAndBrandLabelTextStyle(context)),
+        Flexible(
+          child: Text(
+            '$servingQuantity $servingUnit',
+            style: _Styles.getServingAndBrandLabelTextStyle(context),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }
 
-  // Brand Row
   Widget getBrandRow(BuildContext context) {
     return Row(
       spacing: AppStyles.kSpac4,
+      mainAxisSize: MainAxisSize.min,
       children: [
         FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12),
-        Text(brandName, style: _Styles.getServingAndBrandLabelTextStyle(context))
+        Flexible(
+          child: Text(
+            brandName,
+            style: _Styles.getServingAndBrandLabelTextStyle(context),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

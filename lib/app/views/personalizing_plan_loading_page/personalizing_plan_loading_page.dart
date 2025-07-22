@@ -386,12 +386,12 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
       ...mealRatio,
     };
 
-    final result =
+    final response =
         await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan)) ?? false;
 
     await Future.delayed(Duration(seconds: 3));
 
-    if (result && mounted) {
+    if (response && mounted) {
       context.router.replaceAll([DashboardNavigatorRoute()]);
     }
   }

@@ -62,14 +62,14 @@ extension _Actions on _SignUpPageState {
 
       FocusScope.of(context).unfocus();
 
-      final result = await tryLoad(
+      final response = await tryLoad(
             context,
             () => context.read<UserViewModel>().signUpWithEmailAndPassword(
                 email: email.trim(), password: password.trim(), username: username, bodyMetrics: widget.bodyMetrics),
           ) ??
           false;
 
-      if (result && mounted) {
+      if (response && mounted) {
         context.router.replaceAll([PersonalizingPlanLoadingRoute()]);
       }
     }

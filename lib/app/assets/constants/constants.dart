@@ -50,6 +50,7 @@ class TableName {
 
 class TableCol {
   static String userId = 'userId';
+  static String id = 'id';
 }
 
 enum MealType {

@@ -84,7 +84,12 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _FoodDetailsPageState {
-  void _onSavePressed() {}
+  Future<void> _onSavePressed() async {
+    final response =
+        await tryLoad(context, () => context.read<FoodDetailsViewModel>().saveFood(widget.foodSearchModel));
+
+    if (response == true) {}
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
