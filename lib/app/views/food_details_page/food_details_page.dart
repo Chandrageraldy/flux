@@ -47,6 +47,15 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
   @override
   bool resizeToAvoidBottomInset() => true;
 
+  bool isSaved = false;
+  bool isSavedEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfSaved();
+  }
+
   @override
   Widget body() {
     final macroNutrientPercentage = FunctionUtils.calculateMacronutrientPercentage(
@@ -80,15 +89,50 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
       ],
     );
   }
+
+  // Enable Set State inside Extension
+  void _setState(VoidCallback fn) {
+    if (mounted) {
+      setState(fn);
+    }
+  }
+}
+
+// * ------------------------ PrivateMethods ------------------------
+extension _PrivateMethods on _FoodDetailsPageState {
+  Future<void> checkIfSaved() async {
+    final response = await tryCatch(
+        context, () => context.read<FoodDetailsViewModel>().checkIfSaved(foodResponseModel: widget.foodSearchModel));
+
+    if (response == true) {
+      _setState(() {
+        isSaved = true;
+      });
+    }
+  }
 }
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _FoodDetailsPageState {
   Future<void> _onSavePressed() async {
-    final response =
-        await tryLoad(context, () => context.read<FoodDetailsViewModel>().saveFood(widget.foodSearchModel));
+    _setState(() {
+      isSavedEnabled = false;
+    });
 
-    if (response == true) {}
+    final response = await tryCatch(
+      context,
+      () => context.read<FoodDetailsViewModel>().saveOrUnsaveFood(
+            foodResponseModel: widget.foodSearchModel,
+            isSaved: isSaved,
+          ),
+    );
+
+    if (response == true) {
+      _setState(() {
+        isSaved = !isSaved;
+        isSavedEnabled = true;
+      });
+    }
   }
 }
 
@@ -96,12 +140,16 @@ extension _Actions on _FoodDetailsPageState {
 extension _WidgetFactories on _FoodDetailsPageState {
   // Save Container
   Widget getSaveContainer() {
+    Icon icon = isSaved
+        ? Icon(Icons.bookmark, color: context.theme.colorScheme.primary)
+        : Icon(Icons.bookmark_add_outlined, color: context.theme.colorScheme.primary);
+
     return GestureDetector(
-      onTap: _onSavePressed,
+      onTap: isSavedEnabled ? _onSavePressed : null,
       child: Container(
         padding: AppStyles.kPadd8,
         decoration: _Styles.getSaveContainerDecoration(context),
-        child: Icon(Icons.bookmark_add_outlined, color: context.theme.colorScheme.primary),
+        child: icon,
       ),
     );
   }

@@ -6,8 +6,15 @@ import 'package:flux/app/viewmodels/base_view_model.dart';
 class FoodDetailsViewModel extends BaseViewModel {
   FoodRepository foodRepository = FoodRepository();
 
-  Future<bool> saveFood(FoodResponseModel foodSearchModel) async {
-    final response = await foodRepository.saveFood(foodSearchModel);
+  Future<bool> saveOrUnsaveFood({required FoodResponseModel foodResponseModel, required bool isSaved}) async {
+    final response = await foodRepository.saveOrUnsaveFood(foodResponseModel: foodResponseModel, isSaved: isSaved);
+    checkError(response);
     return response.status == ResponseStatus.COMPLETE;
+  }
+
+  Future<bool> checkIfSaved({required FoodResponseModel foodResponseModel}) async {
+    final response = await foodRepository.checkIfSaved(foodResponseModel: foodResponseModel);
+    checkError(response);
+    return response.data;
   }
 }

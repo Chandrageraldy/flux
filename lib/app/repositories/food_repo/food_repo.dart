@@ -55,20 +55,42 @@ class FoodRepository {
     return response;
   }
 
-  Future<Response> saveFood(FoodResponseModel foodSearchModel) async {
+  Future<Response> saveOrUnsaveFood({required FoodResponseModel foodResponseModel, required bool isSaved}) async {
     UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
-    SavedFoodModel foodRequestModel = SavedFoodModel(
-      tagId: foodSearchModel.tagId,
-      foodName: foodSearchModel.foodName,
-      calorieKcal: foodSearchModel.calorieKcal,
-      servingQty: foodSearchModel.servingQty,
-      servingUnit: foodSearchModel.servingUnit,
-      brandNameItemName: foodSearchModel.brandNameItemName,
-      brandName: foodSearchModel.brandName,
-      nixItemId: foodSearchModel.nixItemId,
+    SavedFoodModel savedFoodModel = SavedFoodModel(
+      tagId: foodResponseModel.tagId,
+      foodName: foodResponseModel.foodName,
+      calorieKcal: foodResponseModel.calorieKcal,
+      servingQty: foodResponseModel.servingQty,
+      servingUnit: foodResponseModel.servingUnit,
+      brandNameItemName: foodResponseModel.brandNameItemName,
+      brandName: foodResponseModel.brandName,
+      nixItemId: foodResponseModel.nixItemId,
       userId: userProfile?.userId,
     );
-    final response = await foodServiceSupabase.saveFood(foodRequestModel);
+    final response = await foodServiceSupabase.saveOrUnsaveFood(
+      savedFoodModel: savedFoodModel,
+      userId: userProfile?.userId ?? '',
+      isSaved: isSaved,
+    );
+    return response;
+  }
+
+  Future<Response> checkIfSaved({required FoodResponseModel foodResponseModel}) async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final isCommonFood = foodResponseModel.tagId != null;
+    final response = await foodServiceSupabase.checkIfSaved(
+      isCommonFood: isCommonFood,
+      tagId: foodResponseModel.tagId,
+      nixItemId: foodResponseModel.nixItemId,
+      userId: userProfile?.userId ?? '',
+    );
+
+    if (response.error == null) {
+      List retrievedData = response.data ?? [];
+      return Response.complete(retrievedData.isNotEmpty);
+    }
+
     return response;
   }
 }

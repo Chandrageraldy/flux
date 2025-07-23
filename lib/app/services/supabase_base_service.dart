@@ -86,9 +86,9 @@ abstract class SupabaseBaseService {
       }
 
       // Return urgent error if response is empty
-      if (response.isEmpty) {
-        return _handleSupabaseException(SupabaseExceptionType.permissionDenied);
-      }
+      // if (response.isEmpty) {
+      //   return _handleSupabaseException(SupabaseExceptionType.permissionDenied);
+      // }
 
       return Response.complete(response);
     } on PostgrestException catch (e) {

@@ -51,6 +51,8 @@ class TableName {
 class TableCol {
   static String userId = 'userId';
   static String id = 'id';
+  static String tagId = 'tagId';
+  static String nixItemId = 'nixItemId';
 }
 
 enum MealType {
