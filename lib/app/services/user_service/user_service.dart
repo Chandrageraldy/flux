@@ -1,5 +1,5 @@
 import 'package:flux/app/assets/constants/constants.dart';
-import 'package:flux/app/models/auth_model.dart/email_auth_request_model.dart';
+import 'package:flux/app/models/auth_model/email_auth_request_model.dart';
 import 'package:flux/app/models/response_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/services/supabase_base_service.dart';

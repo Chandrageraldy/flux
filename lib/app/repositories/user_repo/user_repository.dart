@@ -1,4 +1,4 @@
-import 'package:flux/app/models/auth_model.dart/email_auth_request_model.dart';
+import 'package:flux/app/models/auth_model/email_auth_request_model.dart';
 import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/services/user_service/user_service.dart';
