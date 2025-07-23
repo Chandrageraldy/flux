@@ -23,8 +23,6 @@ class FoodServiceSupabase extends SupabaseBaseService {
           TableCol.nixItemId: savedFoodModel.nixItemId,
       };
 
-      print(filters);
-
       return callSupabaseDB(
         requestType: RequestType.DELETE,
         table: TableName.savedFood,

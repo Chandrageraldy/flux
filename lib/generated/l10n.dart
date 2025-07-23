@@ -1250,36 +1250,6 @@ class S {
     );
   }
 
-  /// `Protein`
-  String get proteinLabel {
-    return Intl.message(
-      'Protein',
-      name: 'proteinLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Carbs`
-  String get carbsLabel {
-    return Intl.message(
-      'Carbs',
-      name: 'carbsLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Fats`
-  String get fatLabel {
-    return Intl.message(
-      'Fats',
-      name: 'fatLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Log Food`
   String get logFoodLabel {
     return Intl.message(
@@ -1315,16 +1285,6 @@ class S {
     return Intl.message(
       'Logged',
       name: 'loggedLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Calorie`
-  String get calorieLabel {
-    return Intl.message(
-      'Calorie',
-      name: 'calorieLabel',
       desc: '',
       args: [],
     );
@@ -1375,6 +1335,266 @@ class S {
     return Intl.message(
       'Hang tight! We\'re crafting a personalized plan just for you.',
       name: 'personalizingYourPlanLoadingText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calorie`
+  String get calorieLabel {
+    return Intl.message(
+      'Calorie',
+      name: 'calorieLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Protein`
+  String get proteinLabel {
+    return Intl.message(
+      'Protein',
+      name: 'proteinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fats`
+  String get fatLabel {
+    return Intl.message(
+      'Fats',
+      name: 'fatLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carbs`
+  String get carbsLabel {
+    return Intl.message(
+      'Carbs',
+      name: 'carbsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calcium`
+  String get calciumLabel {
+    return Intl.message(
+      'Calcium',
+      name: 'calciumLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Iron`
+  String get ironLabel {
+    return Intl.message(
+      'Iron',
+      name: 'ironLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Magnesium`
+  String get magnesiumLabel {
+    return Intl.message(
+      'Magnesium',
+      name: 'magnesiumLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phosphorus`
+  String get phosphorusLabel {
+    return Intl.message(
+      'Phosphorus',
+      name: 'phosphorusLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Potassium`
+  String get potassiumLabel {
+    return Intl.message(
+      'Potassium',
+      name: 'potassiumLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sodium`
+  String get sodiumLabel {
+    return Intl.message(
+      'Sodium',
+      name: 'sodiumLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zinc`
+  String get zincLabel {
+    return Intl.message(
+      'Zinc',
+      name: 'zincLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copper`
+  String get copperLabel {
+    return Intl.message(
+      'Copper',
+      name: 'copperLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manganese`
+  String get manganeseLabel {
+    return Intl.message(
+      'Manganese',
+      name: 'manganeseLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selenium`
+  String get seleniumLabel {
+    return Intl.message(
+      'Selenium',
+      name: 'seleniumLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin A`
+  String get vitaminALabel {
+    return Intl.message(
+      'Vitamin A',
+      name: 'vitaminALabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin E`
+  String get vitaminELabel {
+    return Intl.message(
+      'Vitamin E',
+      name: 'vitaminELabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin D`
+  String get vitaminDLabel {
+    return Intl.message(
+      'Vitamin D',
+      name: 'vitaminDLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin C`
+  String get vitaminCLabel {
+    return Intl.message(
+      'Vitamin C',
+      name: 'vitaminCLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thiamin`
+  String get thiaminLabel {
+    return Intl.message(
+      'Thiamin',
+      name: 'thiaminLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Riboflavin`
+  String get riboflavinLabel {
+    return Intl.message(
+      'Riboflavin',
+      name: 'riboflavinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Niacin`
+  String get niacinLabel {
+    return Intl.message(
+      'Niacin',
+      name: 'niacinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin B6`
+  String get vitaminB6Label {
+    return Intl.message(
+      'Vitamin B6',
+      name: 'vitaminB6Label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin B12`
+  String get vitaminB12Label {
+    return Intl.message(
+      'Vitamin B12',
+      name: 'vitaminB12Label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choline`
+  String get cholineLabel {
+    return Intl.message(
+      'Choline',
+      name: 'cholineLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitamin K`
+  String get vitaminKLabel {
+    return Intl.message(
+      'Vitamin K',
+      name: 'vitaminKLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folate`
+  String get folateLabel {
+    return Intl.message(
+      'Folate',
+      name: 'folateLabel',
       desc: '',
       args: [],
     );

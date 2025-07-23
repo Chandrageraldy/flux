@@ -5,6 +5,22 @@ class FoodServiceNutritionix extends NutritionixBaseService {
   FoodServiceNutritionix() : super();
 
   Future<Response> searchInstant({required String query}) async {
-    return callNutritionixAPI(HttpRequestType.get, '/search/instant', queryParameters: {'query': query});
+    return callNutritionixAPI(
+      HttpRequestType.get,
+      NutritionixEndpoint.instantSearch,
+      queryParameters: {NutritionixParam.query: query},
+    );
+  }
+
+  Future<Response> getFoodDetails({required bool isCommonFood, String? foodName, String? nixItemId}) async {
+    if (isCommonFood) {
+    } else {
+      return callNutritionixAPI(
+        HttpRequestType.get,
+        NutritionixEndpoint.searchItem,
+        queryParameters: {NutritionixParam.nixItemId: nixItemId},
+      );
+    }
+    return Response.complete('');
   }
 }

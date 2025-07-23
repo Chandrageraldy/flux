@@ -23,6 +23,17 @@ class AnimationPath {
   static const String starAIAnimation = 'lib/app/assets/animations/Star AI loader activated state.json';
 }
 
+class NutritionixEndpoint {
+  static const String instantSearch = '/search/instant';
+  static const String searchItem = '/search/item';
+  static const String naturalLanuageSearch = '/natural/nutrients';
+}
+
+class NutritionixParam {
+  static const String query = 'query';
+  static const String nixItemId = 'nix_item_id';
+}
+
 enum Language {
   english('en'),
   simplifiedChinese('zh');
@@ -201,6 +212,86 @@ enum Nutrition {
         return 'vitaminKUg';
       case folate:
         return 'folateUg';
+    }
+  }
+
+  String get label {
+    switch (this) {
+      case calorie:
+        return S.current.calorieLabel;
+      case protein:
+        return S.current.proteinLabel;
+      case fat:
+        return S.current.fatLabel;
+      case carbs:
+        return S.current.carbsLabel;
+      case calcium:
+        return S.current.calciumLabel;
+      case iron:
+        return S.current.ironLabel;
+      case magnesium:
+        return S.current.magnesiumLabel;
+      case phosphorus:
+        return S.current.phosphorusLabel;
+      case potassium:
+        return S.current.potassiumLabel;
+      case sodium:
+        return S.current.sodiumLabel;
+      case zinc:
+        return S.current.zincLabel;
+      case copper:
+        return S.current.copperLabel;
+      case manganese:
+        return S.current.manganeseLabel;
+      case selenium:
+        return S.current.seleniumLabel;
+      case vitaminA:
+        return S.current.vitaminALabel;
+      case vitaminE:
+        return S.current.vitaminELabel;
+      case vitaminD:
+        return S.current.vitaminDLabel;
+      case vitaminC:
+        return S.current.vitaminCLabel;
+      case thiamin:
+        return S.current.thiaminLabel;
+      case riboflavin:
+        return S.current.riboflavinLabel;
+      case niacin:
+        return S.current.niacinLabel;
+      case vitaminB6:
+        return S.current.vitaminB6Label;
+      case vitaminB12:
+        return S.current.vitaminB12Label;
+      case choline:
+        return S.current.cholineLabel;
+      case vitaminK:
+        return S.current.vitaminKLabel;
+      case folate:
+        return S.current.folateLabel;
+    }
+  }
+}
+
+enum NutritionUnit {
+  kcal,
+  g,
+  mg,
+  ug,
+  IU;
+
+  String get label {
+    switch (this) {
+      case kcal:
+        return 'kcal';
+      case g:
+        return 'g';
+      case mg:
+        return 'mg';
+      case ug:
+        return 'µg';
+      case IU:
+        return 'IU';
     }
   }
 }

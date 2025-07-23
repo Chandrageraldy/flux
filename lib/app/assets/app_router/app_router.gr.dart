@@ -63,14 +63,14 @@ class DiaryRoute extends PageRouteInfo<void> {
 class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
   FoodDetailsRoute({
     required FoodModel food,
-    required FoodResponseModel foodSearchModel,
+    required FoodResponseModel foodResponseModel,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          FoodDetailsRoute.name,
          args: FoodDetailsRouteArgs(
            food: food,
-           foodSearchModel: foodSearchModel,
+           foodResponseModel: foodResponseModel,
            key: key,
          ),
          initialChildren: children,
@@ -84,7 +84,7 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
       final args = data.argsAs<FoodDetailsRouteArgs>();
       return FoodDetailsPage(
         food: args.food,
-        foodSearchModel: args.foodSearchModel,
+        foodResponseModel: args.foodResponseModel,
         key: args.key,
       );
     },
@@ -94,19 +94,19 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
 class FoodDetailsRouteArgs {
   const FoodDetailsRouteArgs({
     required this.food,
-    required this.foodSearchModel,
+    required this.foodResponseModel,
     this.key,
   });
 
   final FoodModel food;
 
-  final FoodResponseModel foodSearchModel;
+  final FoodResponseModel foodResponseModel;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'FoodDetailsRouteArgs{food: $food, foodSearchModel: $foodSearchModel, key: $key}';
+    return 'FoodDetailsRouteArgs{food: $food, foodResponseModel: $foodResponseModel, key: $key}';
   }
 }
 

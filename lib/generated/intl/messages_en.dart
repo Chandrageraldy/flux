@@ -30,14 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
+        "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":
             MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
         "calorieLabel": MessageLookupByLibrary.simpleMessage("Calorie"),
         "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
+        "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
         "cmUnitLabel": MessageLookupByLibrary.simpleMessage("cm"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
+        "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
@@ -51,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
         "favoritesLabel": MessageLookupByLibrary.simpleMessage("Favorites"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
+        "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
         "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),
         "forgotPasswordLabel":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
@@ -66,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
+        "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),
         "ketoDesc": MessageLookupByLibrary.simpleMessage(
             "Low-carb, high-fat diet for weight loss."),
         "ketoLabel": MessageLookupByLibrary.simpleMessage("Keto"),
@@ -109,7 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "lunchLabel": MessageLookupByLibrary.simpleMessage("Lunch"),
         "macronutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Macronutrients"),
+        "magnesiumLabel": MessageLookupByLibrary.simpleMessage("Magnesium"),
         "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
+        "manganeseLabel": MessageLookupByLibrary.simpleMessage("Manganese"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
         "mediterraneanDesc":
             MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),
@@ -123,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "neverDesc":
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
+        "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
         "nutritionalInformationLabel":
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "okLabel": MessageLookupByLibrary.simpleMessage("Ok"),
@@ -146,6 +154,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Session Expired or User is not Authenticated, Please Login Again."),
         "personalizingYourPlanLoadingText": MessageLookupByLibrary.simpleMessage(
             "Hang tight! We\'re crafting a personalized plan just for you."),
+        "phosphorusLabel": MessageLookupByLibrary.simpleMessage("Phosphorus"),
         "planDescription1": MessageLookupByLibrary.simpleMessage(
             "Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you."),
         "planDescription2": MessageLookupByLibrary.simpleMessage(
@@ -182,12 +191,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose to build your plan step-by-step or let AI design one based on your goals."),
         "planSelectionTitle": MessageLookupByLibrary.simpleMessage(
             "How Should We Build Your Plan?"),
+        "potassiumLabel": MessageLookupByLibrary.simpleMessage("Potassium"),
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
         "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
+        "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "searchFoodPlaceholder":
@@ -196,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mostly sitting all day (e.g., desk job, little movement)."),
         "sedentaryLabel": MessageLookupByLibrary.simpleMessage("Sedentary"),
         "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
+        "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
         "servingUnitLabel":
             MessageLookupByLibrary.simpleMessage("Serving Unit"),
         "signUpLabel": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -210,6 +222,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplifiedChineseLabel":
             MessageLookupByLibrary.simpleMessage("Simplified chinese"),
         "snackLabel": MessageLookupByLibrary.simpleMessage("Snack"),
+        "sodiumLabel": MessageLookupByLibrary.simpleMessage("Sodium"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
         "targetWeightDesc": MessageLookupByLibrary.simpleMessage(
@@ -220,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk"),
         "targetWeightWeeklyLabel":
             MessageLookupByLibrary.simpleMessage("Target Weekly Gain"),
+        "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),
         "usedEmail": MessageLookupByLibrary.simpleMessage(
@@ -231,10 +245,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
             "Physically demanding job or lots of daily movement."),
         "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),
+        "vitaminALabel": MessageLookupByLibrary.simpleMessage("Vitamin A"),
+        "vitaminB12Label": MessageLookupByLibrary.simpleMessage("Vitamin B12"),
+        "vitaminB6Label": MessageLookupByLibrary.simpleMessage("Vitamin B6"),
+        "vitaminCLabel": MessageLookupByLibrary.simpleMessage("Vitamin C"),
+        "vitaminDLabel": MessageLookupByLibrary.simpleMessage("Vitamin D"),
+        "vitaminELabel": MessageLookupByLibrary.simpleMessage("Vitamin E"),
+        "vitaminKLabel": MessageLookupByLibrary.simpleMessage("Vitamin K"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password you entered is too weak. Please choose a stronger password."),
         "weightDesc": MessageLookupByLibrary.simpleMessage(
             "Used to determine your daily calorie needs."),
-        "weightLabel": MessageLookupByLibrary.simpleMessage("Weight")
+        "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
+        "zincLabel": MessageLookupByLibrary.simpleMessage("Zinc")
       };
 }

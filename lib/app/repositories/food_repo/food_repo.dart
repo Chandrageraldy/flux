@@ -1,6 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
+import 'package:flux/app/models/food_details_model/food_details_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
@@ -89,6 +90,23 @@ class FoodRepository {
     if (response.error == null) {
       List retrievedData = response.data ?? [];
       return Response.complete(retrievedData.isNotEmpty);
+    }
+
+    return response;
+  }
+
+  Future<Response> getFoodDetails({required FoodResponseModel foodResponseModel}) async {
+    final isCommonFood = foodResponseModel.tagId != null;
+    final response = await foodServiceNutritionix.getFoodDetails(
+      isCommonFood: isCommonFood,
+      foodName: foodResponseModel.foodName,
+      nixItemId: foodResponseModel.nixItemId,
+    );
+
+    if (response.error == null) {
+      final List foodDetails = response.data['foods'] ?? [];
+      final foodDetail = FoodDetailsModel.fromJson(foodDetails.first);
+      return Response.complete(foodDetail);
     }
 
     return response;

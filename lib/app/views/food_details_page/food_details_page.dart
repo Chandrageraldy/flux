@@ -14,23 +14,24 @@ import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
 class FoodDetailsPage extends StatelessWidget {
-  const FoodDetailsPage({required this.food, required this.foodSearchModel, super.key});
+  const FoodDetailsPage({required this.food, required this.foodResponseModel, super.key});
 
   final FoodModel food;
-  final FoodResponseModel foodSearchModel;
+  final FoodResponseModel foodResponseModel;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => FoodDetailsViewModel(), child: _FoodDetailsPage(food: food, foodSearchModel: foodSearchModel));
+        create: (_) => FoodDetailsViewModel(),
+        child: _FoodDetailsPage(food: food, foodResponseModel: foodResponseModel));
   }
 }
 
 class _FoodDetailsPage extends BaseStatefulPage {
-  const _FoodDetailsPage({required this.food, required this.foodSearchModel});
+  const _FoodDetailsPage({required this.food, required this.foodResponseModel});
 
   final FoodModel food;
-  final FoodResponseModel foodSearchModel;
+  final FoodResponseModel foodResponseModel;
 
   @override
   State<_FoodDetailsPage> createState() => _FoodDetailsPageState();
@@ -54,6 +55,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
   void initState() {
     super.initState();
     checkIfSaved();
+    getFoodDetails();
   }
 
   @override
@@ -102,13 +104,18 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
 extension _PrivateMethods on _FoodDetailsPageState {
   Future<void> checkIfSaved() async {
     final response = await tryCatch(
-        context, () => context.read<FoodDetailsViewModel>().checkIfSaved(foodResponseModel: widget.foodSearchModel));
+        context, () => context.read<FoodDetailsViewModel>().checkIfSaved(foodResponseModel: widget.foodResponseModel));
 
     if (response == true) {
       _setState(() {
         isSaved = true;
       });
     }
+  }
+
+  Future<void> getFoodDetails() async {
+    await tryLoad(context,
+        () => context.read<FoodDetailsViewModel>().getFoodDetails(foodResponseModel: widget.foodResponseModel));
   }
 }
 
@@ -122,7 +129,7 @@ extension _Actions on _FoodDetailsPageState {
     final response = await tryCatch(
       context,
       () => context.read<FoodDetailsViewModel>().saveOrUnsaveFood(
-            foodResponseModel: widget.foodSearchModel,
+            foodResponseModel: widget.foodResponseModel,
             isSaved: isSaved,
           ),
     );

@@ -57,7 +57,7 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 extension _Actions on _FoodSearchPageState {
   void _onBarcodeScannerPressed() {}
 
-  void _onFoodCardPressed(FoodResponseModel foodSearchModel) {
+  void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
     FoodModel food = FoodModel(
       foodName: 'Dummy Food',
       calories: 100,
@@ -68,7 +68,7 @@ extension _Actions on _FoodSearchPageState {
       servingUnit: ['piece', 'cup', 'gram'],
       nutrients: [],
     );
-    context.router.push(FoodDetailsRoute(food: food, foodSearchModel: foodSearchModel));
+    context.router.push(FoodDetailsRoute(food: food, foodResponseModel: foodResponseModel));
   }
 
   void _onChanged(String value) async {
