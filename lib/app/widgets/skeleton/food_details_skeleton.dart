@@ -27,10 +27,13 @@ class FoodDetailsSkeleton extends StatelessWidget {
       ],
     );
   }
+}
 
+// * ------------------------ WidgetFactories ------------------------
+extension _WidgetFactories on FoodDetailsSkeleton {
   Widget _buildHeaderSkeleton(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: AppStyles.kDoubleInfinity,
       padding: AppStyles.kPaddSV12H20,
       decoration: _Styles.getHeaderContainerDecoration(context),
       child: Column(
@@ -38,7 +41,7 @@ class FoodDetailsSkeleton extends StatelessWidget {
         spacing: AppStyles.kSpac12,
         children: [
           AppStyles.kSizedBoxH12,
-          Skeleton(height: 50, width: double.infinity), // food name
+          Skeleton(height: AppStyles.kSize50, width: AppStyles.kDoubleInfinity),
           AppStyles.kSizedBoxH12,
           Row(
             children: [
@@ -50,9 +53,9 @@ class FoodDetailsSkeleton extends StatelessWidget {
                   children: [
                     FractionallySizedBox(
                       widthFactor: 0.8, // Half width
-                      child: Skeleton(height: 20),
+                      child: Skeleton(height: AppStyles.kSize20),
                     ),
-                    Skeleton(height: 45, width: double.infinity), // Full width
+                    Skeleton(height: AppStyles.kSize45, width: AppStyles.kDoubleInfinity),
                   ],
                 ),
               ),
@@ -65,9 +68,9 @@ class FoodDetailsSkeleton extends StatelessWidget {
                   children: [
                     FractionallySizedBox(
                       widthFactor: 0.5, // Half width
-                      child: Skeleton(height: 20),
+                      child: Skeleton(height: AppStyles.kSize20),
                     ),
-                    Skeleton(height: 45, width: double.infinity), // Full width
+                    Skeleton(height: AppStyles.kSize45, width: AppStyles.kDoubleInfinity),
                   ],
                 ),
               ),
@@ -80,9 +83,9 @@ class FoodDetailsSkeleton extends StatelessWidget {
             children: [
               FractionallySizedBox(
                 widthFactor: 0.3, // Half width
-                child: Skeleton(height: 20),
+                child: Skeleton(height: AppStyles.kSize20),
               ),
-              Skeleton(height: 45, width: double.infinity), // Full width
+              Skeleton(height: AppStyles.kSize45, width: AppStyles.kDoubleInfinity),
             ],
           ),
           AppStyles.kSizedBoxH8,
@@ -100,8 +103,8 @@ class FoodDetailsSkeleton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppStyles.kSpac12,
         children: [
-          Skeleton(height: 32, width: 100), // calorie text
-          Skeleton(height: _Styles.linearIndicatorLineHeight, width: double.infinity),
+          Skeleton(height: AppStyles.kSize32, width: AppStyles.kSize100),
+          Skeleton(height: _Styles.linearIndicatorLineHeight, width: AppStyles.kDoubleInfinity),
         ],
       ),
     );
@@ -111,7 +114,8 @@ class FoodDetailsSkeleton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: AppStyles.kSpac12,
-      children: List.generate(3, (_) => Expanded(child: Skeleton(height: 90, width: double.infinity))),
+      children: List.generate(
+          3, (_) => Expanded(child: Skeleton(height: AppStyles.kSize90, width: AppStyles.kDoubleInfinity))),
     );
   }
 
@@ -120,7 +124,7 @@ class FoodDetailsSkeleton extends StatelessWidget {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: Skeleton(height: 70, width: double.infinity),
+      child: Skeleton(height: AppStyles.kSize70, width: AppStyles.kDoubleInfinity),
     );
   }
 }
