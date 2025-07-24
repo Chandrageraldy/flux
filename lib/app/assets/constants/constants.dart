@@ -51,7 +51,7 @@ enum Language {
   }
 }
 
-enum FormFields { email, password, username, search, servingUnit, mealType }
+enum FormFields { email, password, username, search, servingUnit, mealType, quantity }
 
 class TableName {
   static String user = 'user';

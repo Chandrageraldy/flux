@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
@@ -105,7 +106,19 @@ class FoodRepository {
 
     if (response.error == null) {
       final List foodDetails = response.data['foods'] ?? [];
-      final foodDetail = FoodDetailsModel.fromJson(foodDetails.first);
+      var foodDetail = FoodDetailsModel.fromJson(foodDetails.first);
+      // If the foodDetail does not have altMeasures (==null), create a default one using servingUnit, servingQty, and servingWeightGrams
+      if (foodDetail.altMeasures == null) {
+        foodDetail = foodDetail.copyWith(
+          altMeasures: [
+            AltMeasureModel(
+              measure: foodDetail.servingUnit ?? 'serving',
+              qty: foodDetail.servingQty ?? 1.0,
+              servingWeight: foodDetail.servingWeightGrams ?? 100,
+            ),
+          ],
+        );
+      }
       return Response.complete(foodDetail);
     }
 

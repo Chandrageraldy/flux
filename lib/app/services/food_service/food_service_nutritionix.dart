@@ -14,6 +14,11 @@ class FoodServiceNutritionix extends NutritionixBaseService {
 
   Future<Response> getFoodDetails({required bool isCommonFood, String? foodName, String? nixItemId}) async {
     if (isCommonFood) {
+      return callNutritionixAPI(
+        HttpRequestType.post,
+        NutritionixEndpoint.naturalLanuageSearch,
+        body: {NutritionixParam.query: foodName},
+      );
     } else {
       return callNutritionixAPI(
         HttpRequestType.get,
@@ -21,6 +26,5 @@ class FoodServiceNutritionix extends NutritionixBaseService {
         queryParameters: {NutritionixParam.nixItemId: nixItemId},
       );
     }
-    return Response.complete('');
   }
 }

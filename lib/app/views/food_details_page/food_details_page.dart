@@ -1,4 +1,7 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
+import 'package:flux/app/models/food_details_model/food_details_model.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
@@ -39,6 +42,8 @@ class _FoodDetailsPage extends BaseStatefulPage {
 }
 
 class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
+  final _formKey = GlobalKey<FormBuilderState>();
+
   @override
   PreferredSizeWidget? appbar() =>
       DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary, actionButton: getSaveContainer());
@@ -80,7 +85,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
           padding: AppStyles.kPaddOB70,
           child: Column(
             children: [
-              getHeaderContainer(foodDetails.foodName ?? ''),
+              getHeaderContainer(foodDetails),
               Padding(
                 padding: AppStyles.kPaddSV12H20,
                 child: Column(
@@ -171,27 +176,40 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Header Container
-  Widget getHeaderContainer(String foodName) {
+  Widget getHeaderContainer(FoodDetailsModel foodDetails) {
     return Container(
       width: double.infinity,
       padding: AppStyles.kPaddSV12H20,
       decoration: _Styles.getHeaderContainerDecoration(context),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: AppStyles.kSpac12,
-        children: [
-          getFoodNameLabel(foodName),
-          AppStyles.kSizedBoxH4,
-          Row(
-            children: [
-              Expanded(flex: 1, child: getQuantityTextFormField()),
-              AppStyles.kSizedBoxW12,
-              Expanded(flex: 3, child: getServingUnitDropdownForm()),
-            ],
-          ),
-          getMealTypeDropdownForm(),
-          AppStyles.kSizedBoxH4,
-        ],
+      child: FormBuilder(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppStyles.kSpac12,
+          children: [
+            getFoodNameLabel(foodDetails.foodName ?? ''),
+            AppStyles.kSizedBoxH4,
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: getQuantityTextFormField(foodDetails.altMeasures ?? []),
+                ),
+                AppStyles.kSizedBoxW12,
+                Expanded(
+                  flex: 3,
+                  child: getServingUnitDropdownForm(
+                    foodDetails.servingUnit ?? '',
+                    foodDetails.servingWeightGrams ?? 0.0,
+                    foodDetails.altMeasures ?? [],
+                  ),
+                ),
+              ],
+            ),
+            getMealTypeDropdownForm(),
+            AppStyles.kSizedBoxH4,
+          ],
+        ),
       ),
     );
   }
@@ -205,23 +223,47 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Quantity Text Form Field
-  Widget getQuantityTextFormField() {
+  Widget getQuantityTextFormField(List<AltMeasureModel> altMeasures) {
+    final selectedAltMeasures = context.select((FoodDetailsViewModel vm) => vm.selectedAltMeasure);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAltMeasures?.qty.toString());
+    });
+
     return AppTextFormField(
-      field: FormFields.search,
+      field: FormFields.quantity,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-      initialValue: widget.food.servingQuantity.toString(),
+      initialValue: altMeasures.first.qty.toString(),
       topLabel: S.current.quantityLabel,
+      keyboardType: TextInputType.number,
     );
   }
 
   // Serving Unit Dropdown Form
-  Widget getServingUnitDropdownForm() {
+  Widget getServingUnitDropdownForm(String servingUnit, double servingWeightGrams, List<AltMeasureModel> altMeasures) {
+    List<String> servingUnits = [];
+
+    for (final alt in altMeasures) {
+      final String? measure = alt.measure;
+      final double? weight = alt.servingWeight;
+
+      if (measure != null && weight != null) {
+        servingUnits.add('$measure (${weight.toStringAsFixed(0)}g)');
+      }
+    }
+
     return AppDropdownForm(
       field: FormFields.servingUnit,
       validator: FormBuilderValidators.compose([]),
-      items: widget.food.servingUnit.map((unit) => DropdownMenuItem<String>(value: unit, child: Text(unit))).toList(),
-      initialValue: widget.food.servingUnit.first,
+      items: servingUnits.map((unit) => DropdownMenuItem<String>(value: unit, child: Text(unit))).toList(),
+      initialValue: servingUnits.first,
       topLabel: S.current.servingUnitLabel,
+      onChanged: (String? selectedUnit) {
+        // Extract the measure from selected string (e.g., "small (38g)" => "small") // TODO: HANDLE ALL CASES
+        final selectedMeasure = selectedUnit!.split(' (').first;
+        final selectedAlt = altMeasures.firstWhere((alt) => alt.measure == selectedMeasure);
+        context.read<FoodDetailsViewModel>().onServingUnitChanged(selectedAltMeasure: selectedAlt);
+      },
     );
   }
 

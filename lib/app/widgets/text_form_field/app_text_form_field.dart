@@ -11,6 +11,7 @@ class AppTextFormField extends StatelessWidget {
     this.initialValue,
     this.topLabel,
     this.onChanged,
+    this.keyboardType = TextInputType.text,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class AppTextFormField extends StatelessWidget {
   final String? initialValue;
   final String? topLabel;
   final void Function(String value)? onChanged;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ extension _WidgetFactories on AppTextFormField {
         style: _Styles.getTextFormFieldTextStyle(),
         decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
         obscureText: field == FormFields.password,
+        keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged == null
             ? null

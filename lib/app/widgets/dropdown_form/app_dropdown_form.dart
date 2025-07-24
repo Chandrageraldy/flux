@@ -8,6 +8,7 @@ class AppDropdownForm extends StatelessWidget {
     required this.items,
     this.initialValue,
     this.topLabel,
+    this.onChanged,
     super.key,
   });
 
@@ -16,6 +17,7 @@ class AppDropdownForm extends StatelessWidget {
   final List<DropdownMenuItem<String>> items;
   final String? initialValue;
   final String? topLabel;
+  final ValueChanged<String?>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ extension _WidgetFactories on AppDropdownForm {
         validator: validator,
         decoration: _Styles.getDropdownDecoration(context),
         style: _Styles.getTextFormFieldTextStyle(context),
+        onChanged: onChanged,
       ),
     );
   }
