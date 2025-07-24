@@ -7,7 +7,7 @@ class NutritionMappingModel {
   const NutritionMappingModel({required this.label, required this.unit});
 }
 
-Map<int, NutritionMappingModel> nutrientMapping = {
+Map<int, NutritionMappingModel> nutrientsMapping = {
   208: NutritionMappingModel(label: S.current.calorieLabel, unit: NutritionUnit.kcal.label),
   203: NutritionMappingModel(label: S.current.proteinLabel, unit: NutritionUnit.g.label),
   204: NutritionMappingModel(label: S.current.fatLabel, unit: NutritionUnit.g.label),

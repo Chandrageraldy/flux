@@ -4,6 +4,8 @@ import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
+import 'package:flux/app/models/full_nutrients_model/full_nutrients_model.dart';
+import 'package:flux/app/models/nutrition_mapping_model/nutrition_mapping_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/food_details_vm/food_details_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
@@ -94,7 +96,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
                     getCalorieContainer(macroNutrientPercentage, foodDetails.calorieKcal ?? 0.0),
                     getMacronutrientsRow(macroNutrientPercentage, foodDetails.carbsG ?? 0.0, foodDetails.fatG ?? 0.0,
                         foodDetails.proteinG ?? 0.0),
-                    // getNutritionalInfoContainer(),
+                    getNutritionalInfoContainer(foodDetails.fullNutrients ?? []),
                   ],
                 ),
               ),
@@ -379,7 +381,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Nutritional Information Container
-  Widget getNutritionalInfoContainer() {
+  Widget getNutritionalInfoContainer(List<FullNutrient> fullNutrients) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac12,
@@ -391,17 +393,21 @@ extension _WidgetFactories on _FoodDetailsPageState {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...widget.food.nutrients.map(
-                (nutrient) => Padding(
-                  padding: AppStyles.kPaddSV6,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(nutrient.name),
-                      Text('${nutrient.amount} ${nutrient.unit}'),
-                    ],
-                  ),
-                ),
+              // only show mapped nutriets in nutrientMapping // TODO: ADD MORE NUTRIENTS
+              ...fullNutrients.where((nutrient) => nutrientsMapping.containsKey(nutrient.attrId)).map(
+                (nutrient) {
+                  final nutrientInformation = nutrientsMapping[nutrient.attrId];
+                  return Padding(
+                    padding: AppStyles.kPaddSV6,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(nutrientInformation?.label ?? ''),
+                        Text('${nutrient.value} ${nutrientInformation?.unit ?? ''}'),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),
