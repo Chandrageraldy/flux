@@ -7,6 +7,7 @@ import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dropdown_form/app_dropdown_form.dart';
 import 'package:flux/app/widgets/food/macronutrient_card.dart';
+import 'package:flux/app/widgets/skeleton/food_details_skeleton.dart';
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
 
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -60,10 +61,17 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
 
   @override
   Widget body() {
+    final isLoading = context.select((FoodDetailsViewModel vm) => vm.isLoading);
+
+    if (isLoading) {
+      return const FoodDetailsSkeleton();
+    }
+
+    final foodDetails = context.select((FoodDetailsViewModel vm) => vm.foodDetails);
     final macroNutrientPercentage = FunctionUtils.calculateMacronutrientPercentage(
-      carbs: widget.food.carbohydrate,
-      fat: widget.food.fat,
-      protein: widget.food.protein,
+      carbs: foodDetails.carbsG ?? 0.0,
+      fat: foodDetails.fatG ?? 0.0,
+      protein: foodDetails.proteinG ?? 0.0,
     );
 
     return Stack(
@@ -72,14 +80,15 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
           padding: AppStyles.kPaddOB70,
           child: Column(
             children: [
-              getHeaderContainer(),
+              getHeaderContainer(foodDetails.foodName ?? ''),
               Padding(
                 padding: AppStyles.kPaddSV12H20,
                 child: Column(
                   spacing: AppStyles.kSpac12,
                   children: [
-                    getCalorieContainer(macroNutrientPercentage),
-                    getMacronutrientsRow(macroNutrientPercentage),
+                    getCalorieContainer(macroNutrientPercentage, foodDetails.calorieKcal ?? 0.0),
+                    getMacronutrientsRow(macroNutrientPercentage, foodDetails.carbsG ?? 0.0, foodDetails.fatG ?? 0.0,
+                        foodDetails.proteinG ?? 0.0),
                     // getNutritionalInfoContainer(),
                   ],
                 ),
@@ -114,7 +123,7 @@ extension _PrivateMethods on _FoodDetailsPageState {
   }
 
   Future<void> getFoodDetails() async {
-    await tryLoad(context,
+    await tryCatch(context,
         () => context.read<FoodDetailsViewModel>().getFoodDetails(foodResponseModel: widget.foodResponseModel));
   }
 }
@@ -162,7 +171,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Header Container
-  Widget getHeaderContainer() {
+  Widget getHeaderContainer(String foodName) {
     return Container(
       width: double.infinity,
       padding: AppStyles.kPaddSV12H20,
@@ -171,10 +180,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppStyles.kSpac12,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [getFoodNameLabel()],
-          ),
+          getFoodNameLabel(foodName),
           AppStyles.kSizedBoxH4,
           Row(
             children: [
@@ -191,9 +197,9 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Food Name Label
-  Widget getFoodNameLabel() {
+  Widget getFoodNameLabel(String foodName) {
     return Text(
-      widget.food.foodName,
+      foodName,
       style: _Styles.getFoodNameLabelTextStyle(context),
     );
   }
@@ -232,7 +238,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Calories Container
-  Widget getCalorieContainer(Map<String, double> macroNutrientPercentage) {
+  Widget getCalorieContainer(Map<String, double> macroNutrientPercentage, double calorie) {
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getCalorieContainerDecoration(context),
@@ -242,7 +248,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
         children: [
           RichText(
             text: TextSpan(
-              children: [getCalorieValueLabel(), getCalorieUnitLabel()],
+              children: [getCalorieValueLabel(calorie), getCalorieUnitLabel()],
             ),
           ),
           AppStyles.kSizedBoxH12,
@@ -253,9 +259,9 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Calorie Value Label
-  TextSpan getCalorieValueLabel() {
+  TextSpan getCalorieValueLabel(double calorie) {
     return TextSpan(
-      text: widget.food.calories.toString(),
+      text: calorie.toString(),
       style: _Styles.getCalorieValueLabelTextStyle(context),
     );
   }
@@ -293,26 +299,26 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Macronutrients Row
-  Widget getMacronutrientsRow(Map<String, double> macroNutrientPercentage) {
+  Widget getMacronutrientsRow(Map<String, double> macroNutrientPercentage, double carbs, double fat, double protein) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: AppStyles.kSpac12,
       children: [
         MacronutrientCard(
           label: MacroNutrients.protein.label,
-          value: widget.food.protein.toString(),
+          value: protein.toString(),
           macroNutrient: MacroNutrients.protein,
           percentage: macroNutrientPercentage[MacroNutrients.protein.key] ?? 0.0,
         ),
         MacronutrientCard(
           label: MacroNutrients.carbs.label,
-          value: widget.food.carbohydrate.toString(),
+          value: carbs.toString(),
           macroNutrient: MacroNutrients.carbs,
           percentage: macroNutrientPercentage[MacroNutrients.carbs.key] ?? 0.0,
         ),
         MacronutrientCard(
           label: MacroNutrients.fat.label,
-          value: widget.food.fat.toString(),
+          value: fat.toString(),
           macroNutrient: MacroNutrients.fat,
           percentage: macroNutrientPercentage[MacroNutrients.fat.key] ?? 0.0,
         ),

@@ -9,6 +9,9 @@ class FoodDetailsViewModel extends BaseViewModel {
 
   FoodDetailsModel foodDetails = FoodDetailsModel();
 
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
   Future<bool> saveOrUnsaveFood({required FoodResponseModel foodResponseModel, required bool isSaved}) async {
     final response = await foodRepository.saveOrUnsaveFood(foodResponseModel: foodResponseModel, isSaved: isSaved);
     checkError(response);
@@ -22,10 +25,11 @@ class FoodDetailsViewModel extends BaseViewModel {
   }
 
   Future<void> getFoodDetails({required FoodResponseModel foodResponseModel}) async {
+    _isLoading = true;
     final response = await foodRepository.getFoodDetails(foodResponseModel: foodResponseModel);
     checkError(response);
     foodDetails = response.data as FoodDetailsModel;
-    print(foodDetails.fullNutrients);
+    _isLoading = false;
     notifyListeners();
   }
 }
