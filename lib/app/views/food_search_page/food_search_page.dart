@@ -3,6 +3,7 @@ import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/views/food_search_page_tab_bar_view/all_tab_bar_view.dart';
+import 'package:flux/app/views/food_search_page_tab_bar_view/saved_food_tab_bar_view.dart';
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -43,7 +44,7 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   @override
   Widget body() {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Column(
         children: [getHeaderContainer(), getTabBarView()],
       ),
@@ -135,7 +136,7 @@ extension _WidgetFactories on _FoodSearchPageState {
         dividerColor: Colors.transparent,
         labelColor: context.theme.colorScheme.onPrimary,
         unselectedLabelColor: context.theme.colorScheme.onTertiary,
-        tabs: [Tab(text: S.current.allLabel), Tab(text: S.current.myMealsLabel), Tab(text: S.current.favoritesLabel)],
+        tabs: [Tab(text: S.current.allLabel), Tab(text: S.current.savedLabel)],
       ),
     );
   }
@@ -144,7 +145,7 @@ extension _WidgetFactories on _FoodSearchPageState {
   Widget getTabBarView() {
     return Expanded(
       child: TabBarView(
-        children: [getAllTabBarView(), getMyMealsTabBarView(), getFavoritesTabBarView()],
+        children: [getAllTabBarView(), getSavedTabBarView()],
       ),
     );
   }
@@ -159,13 +160,13 @@ extension _WidgetFactories on _FoodSearchPageState {
   }
 
   // Tab Bar View -> "My Meals"
-  Widget getMyMealsTabBarView() {
-    return Center(child: Text(S.current.myMealsLabel));
-  }
+  // Widget getMyMealsTabBarView() {
+  //   return Center(child: Text(S.current.myMealsLabel));
+  // }
 
-  // Tab Bar View -> "Favorites"
-  Widget getFavoritesTabBarView() {
-    return Center(child: Text(S.current.favoritesLabel));
+  // Tab Bar View -> "Saved"
+  Widget getSavedTabBarView() {
+    return SavedFoodTabBarView(onFoodCardPressed: _onFoodCardPressed);
   }
 }
 

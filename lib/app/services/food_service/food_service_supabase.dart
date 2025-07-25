@@ -57,4 +57,8 @@ class FoodServiceSupabase extends SupabaseBaseService {
       );
     }
   }
+
+  Future<Response> getSavedFoods({required String userId}) async {
+    return callSupabaseDB(requestType: RequestType.GET, table: TableName.savedFood, filters: {TableCol.userId: userId});
+  }
 }

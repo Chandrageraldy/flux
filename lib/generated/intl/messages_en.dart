@@ -52,7 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
-        "favoritesLabel": MessageLookupByLibrary.simpleMessage("Favorites"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
         "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),
@@ -199,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
+        "savedLabel": MessageLookupByLibrary.simpleMessage("Saved"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),

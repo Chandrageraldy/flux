@@ -40,7 +40,7 @@ extension _WidgetFactories on AllTabBarView {
         (context, index) {
           final food = foodSearchResults[index];
           return Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
+            padding: AppStyles.kPaddOB12,
             child: FoodDisplayCard(
               foodName: food.foodName ?? '',
               calories: food.calorieKcal ?? 0,
@@ -69,7 +69,7 @@ extension _WidgetFactories on AllTabBarView {
                   title: S.current.scanABarcodeLabel,
                   icon: FaIcon(
                     FontAwesomeIcons.barcode,
-                    size: AppStyles.kIconSize25,
+                    size: AppStyles.kIconSize20,
                     color: context.theme.colorScheme.primary,
                   ),
                   onPressed: onBarcodeScannerPressed,
@@ -81,7 +81,7 @@ extension _WidgetFactories on AllTabBarView {
                   title: S.current.scanAMealLabel,
                   icon: FaIcon(
                     FontAwesomeIcons.camera,
-                    size: AppStyles.kIconSize25,
+                    size: AppStyles.kIconSize20,
                     color: context.theme.colorScheme.primary,
                   ),
                   onPressed: onBarcodeScannerPressed,

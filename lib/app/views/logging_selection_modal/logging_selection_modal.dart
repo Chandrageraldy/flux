@@ -23,7 +23,7 @@ class _LoggingSelectionModalState extends BaseStatefulState<LoggingSelectionModa
   @override
   Widget body() {
     return Padding(
-      padding: AppStyles.kPaddSV20,
+      padding: AppStyles.kPaddO10B20,
       child: Column(
         spacing: AppStyles.kSpac16,
         crossAxisAlignment: CrossAxisAlignment.start,

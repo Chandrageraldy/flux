@@ -172,18 +172,22 @@ extension _Actions on _FoodDetailsPageState {
 extension _WidgetFactories on _FoodDetailsPageState {
   // Save Container
   Widget getSaveContainer() {
+    final isLoading = context.select((FoodDetailsViewModel vm) => vm.isLoading);
+
     Icon icon = isSaved
         ? Icon(Icons.bookmark, color: context.theme.colorScheme.primary)
         : Icon(Icons.bookmark_add_outlined, color: context.theme.colorScheme.primary);
 
-    return GestureDetector(
-      onTap: isSavedEnabled ? _onSavePressed : null,
-      child: Container(
-        padding: AppStyles.kPadd8,
-        decoration: _Styles.getSaveContainerDecoration(context),
-        child: icon,
-      ),
-    );
+    return isLoading
+        ? AppStyles.kEmptyWidget
+        : GestureDetector(
+            onTap: isSavedEnabled ? _onSavePressed : null,
+            child: Container(
+              padding: AppStyles.kPadd8,
+              decoration: _Styles.getSaveContainerDecoration(context),
+              child: icon,
+            ),
+          );
   }
 
   // Header Container

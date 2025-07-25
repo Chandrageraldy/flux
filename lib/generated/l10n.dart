@@ -1140,11 +1140,11 @@ class S {
     );
   }
 
-  /// `Favorites`
-  String get favoritesLabel {
+  /// `Saved`
+  String get savedLabel {
     return Intl.message(
-      'Favorites',
-      name: 'favoritesLabel',
+      'Saved',
+      name: 'savedLabel',
       desc: '',
       args: [],
     );

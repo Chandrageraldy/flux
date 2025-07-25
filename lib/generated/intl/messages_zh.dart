@@ -48,7 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailLabel": MessageLookupByLibrary.simpleMessage("电子邮件"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("英文"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("脂肪"),
-        "favoritesLabel": MessageLookupByLibrary.simpleMessage("收藏"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("女"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("叶酸"),
         "foodLabel": MessageLookupByLibrary.simpleMessage("食物"),

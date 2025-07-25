@@ -25,10 +25,10 @@ extension _WidgetFactories on FoodActionHeader {
   // Food Header Content
   Widget getFoodHeaderContent(BuildContext context) {
     return Padding(
-      padding: AppStyles.kPaddSV15,
+      padding: AppStyles.kPaddSV6,
       child: Center(
-        child: Row(
-          spacing: AppStyles.kSpac8,
+        child: Column(
+          spacing: AppStyles.kSpac4,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [icon, Text(title, style: _Styles.getTitleLabelTextStyle(context))],
         ),
@@ -52,6 +52,6 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.mediumPlus);
+    return Quicksand.regular.withSize(FontSizes.medium);
   }
 }

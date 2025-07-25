@@ -117,7 +117,7 @@
     "searchFoodPlaceholder": "Search foods...",
     "allLabel": "All",
     "myMealsLabel": "My Meals",
-    "favoritesLabel": "Favorites",
+    "savedLabel": "Saved",
     "scanABarcodeLabel": "Scan a barcode",
     "scanAMealLabel": "Scan a meal",
     "describeAMealLabel": "Describe a meal",

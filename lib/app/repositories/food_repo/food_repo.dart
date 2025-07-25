@@ -124,4 +124,16 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> getSavedFoods() async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final response = await foodServiceSupabase.getSavedFoods(userId: userProfile?.userId ?? '');
+
+    if (response.error == null) {
+      List retrievedData = response.data ?? [];
+      return Response.complete(retrievedData.map((item) => SavedFoodModel.fromJson(item)).toList());
+    }
+
+    return response;
+  }
 }

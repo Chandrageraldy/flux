@@ -9,11 +9,13 @@ class AppStyles {
   static const kPadd12 = EdgeInsets.all(12.0);
   static const kPadd16 = EdgeInsets.all(16.0);
   // Padding ONLY
+  static const kPaddOB12 = EdgeInsets.only(bottom: 12.0);
   static const kPaddOB20 = EdgeInsets.only(bottom: 20.0);
   static const kPaddOB70 = EdgeInsets.only(bottom: 70.0);
   static const kPaddOT6 = EdgeInsets.only(top: 6.0);
   static const kPaddOT20 = EdgeInsets.only(top: 20.0);
   static const kPaddOT20B5 = EdgeInsets.only(top: 20.0, bottom: 5.0);
+  static const kPaddO10B20 = EdgeInsets.only(top: 10.0, bottom: 20.0);
   static const kPaddOL20R20B16 = EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0);
   static const kPaddOR12 = EdgeInsets.only(right: 12.0);
   // Padding SIDES
