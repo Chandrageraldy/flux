@@ -3,9 +3,6 @@ import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/views/food_search_page_tab_bar_view/all_tab_bar_view.dart';
-import 'package:flux/app/widgets/food/food_action_header.dart';
-import 'package:flux/app/widgets/food/food_display_card.dart';
-
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
