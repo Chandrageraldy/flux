@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
+import 'package:flux/app/views/food_search_page_tab_bar_view/all_tab_bar_view.dart';
 import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
@@ -153,77 +154,10 @@ extension _WidgetFactories on _FoodSearchPageState {
 
   // Tab Bar View -> "All"
   Widget getAllTabBarView() {
-    return Padding(
-      padding: AppStyles.kPaddSH20,
-      child: CustomScrollView(
-        controller: _scrollController,
-        slivers: [getFoodActionHeader(), getFoodSliverList()],
-      ),
-    );
-  }
-
-  // Food Action Header
-  Widget getFoodActionHeader() {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: [AppStyles.kSizedBoxH12, getFoodActionHeaderRow(), AppStyles.kSizedBoxH12],
-      ),
-    );
-  }
-
-  // Food Action Header Row
-  Widget getFoodActionHeaderRow() {
-    return Row(
-      children: [
-        Expanded(
-          child: FoodActionHeader(
-            title: S.current.scanABarcodeLabel,
-            icon: FaIcon(
-              FontAwesomeIcons.barcode,
-              size: AppStyles.kIconSize25,
-              color: context.theme.colorScheme.primary,
-            ),
-            onPressed: _onBarcodeScannerPressed,
-          ),
-        ),
-        AppStyles.kSizedBoxW12,
-        Expanded(
-          child: FoodActionHeader(
-            title: S.current.describeAMealLabel,
-            icon: FaIcon(
-              FontAwesomeIcons.keyboard,
-              size: AppStyles.kIconSize25,
-              color: context.theme.colorScheme.primary,
-            ),
-            onPressed: _onBarcodeScannerPressed,
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Food Sliver List
-  Widget getFoodSliverList() {
-    final foodSearchResults = context.select((FoodSearchViewModel vm) => vm.foodSearchResults);
-
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final food = foodSearchResults[index];
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: FoodDisplayCard(
-              foodName: food.foodName ?? '',
-              calories: food.calorieKcal ?? 0,
-              servingUnit: food.servingUnit ?? '',
-              servingQuantity: food.servingQty ?? 0,
-              brandName: food.brandName ?? '',
-              onCardPressed: () => _onFoodCardPressed(food),
-            ),
-          );
-        },
-        childCount: foodSearchResults.length,
-      ),
+    return AllTabBarView(
+      scrollController: _scrollController,
+      onFoodCardPressed: _onFoodCardPressed,
+      onBarcodeScannerPressed: _onBarcodeScannerPressed,
     );
   }
 
