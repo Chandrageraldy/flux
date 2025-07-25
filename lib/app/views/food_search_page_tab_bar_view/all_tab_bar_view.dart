@@ -78,9 +78,9 @@ extension _WidgetFactories on AllTabBarView {
               AppStyles.kSizedBoxW12,
               Expanded(
                 child: FoodActionHeader(
-                  title: S.current.describeAMealLabel,
+                  title: S.current.scanAMealLabel,
                   icon: FaIcon(
-                    FontAwesomeIcons.keyboard,
+                    FontAwesomeIcons.camera,
                     size: AppStyles.kIconSize25,
                     color: context.theme.colorScheme.primary,
                   ),

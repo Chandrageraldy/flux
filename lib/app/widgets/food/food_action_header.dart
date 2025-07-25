@@ -25,11 +25,12 @@ extension _WidgetFactories on FoodActionHeader {
   // Food Header Content
   Widget getFoodHeaderContent(BuildContext context) {
     return Padding(
-      padding: AppStyles.kPaddSV20,
+      padding: AppStyles.kPaddSV15,
       child: Center(
-        child: Column(
+        child: Row(
+          spacing: AppStyles.kSpac8,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [icon, AppStyles.kSizedBoxH8, Text(title, style: _Styles.getTitleLabelTextStyle(context))],
+          children: [icon, Text(title, style: _Styles.getTitleLabelTextStyle(context))],
         ),
       ),
     );

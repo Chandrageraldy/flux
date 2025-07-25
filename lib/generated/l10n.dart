@@ -1160,6 +1160,16 @@ class S {
     );
   }
 
+  /// `Scan a meal`
+  String get scanAMealLabel {
+    return Intl.message(
+      'Scan a meal',
+      name: 'scanAMealLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Describe a meal`
   String get describeAMealLabel {
     return Intl.message(

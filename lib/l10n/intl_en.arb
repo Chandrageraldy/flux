@@ -119,6 +119,7 @@
     "myMealsLabel": "My Meals",
     "favoritesLabel": "Favorites",
     "scanABarcodeLabel": "Scan a barcode",
+    "scanAMealLabel": "Scan a meal",
     "describeAMealLabel": "Describe a meal",
     "quantityLabel": "Quantity",
     "servingUnitLabel": "Serving Unit",

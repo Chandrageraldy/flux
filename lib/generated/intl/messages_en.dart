@@ -201,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
+        "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),
         "searchFoodPlaceholder":
             MessageLookupByLibrary.simpleMessage("Search foods..."),
         "sedentaryDesc": MessageLookupByLibrary.simpleMessage(
