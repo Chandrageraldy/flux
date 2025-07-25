@@ -6,6 +6,7 @@ import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/full_nutrients_model/full_nutrients_model.dart';
 import 'package:flux/app/models/nutrition_mapping_model/nutrition_mapping_model.dart';
+import 'package:flux/app/utils/regexp/regexp.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/food_details_vm/food_details_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
@@ -45,6 +46,8 @@ class _FoodDetailsPage extends BaseStatefulPage {
 
 class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool isSaved = false;
+  bool isSavedEnabled = true;
 
   @override
   PreferredSizeWidget? appbar() =>
@@ -55,9 +58,6 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
 
   @override
   bool resizeToAvoidBottomInset() => true;
-
-  bool isSaved = false;
-  bool isSavedEnabled = true;
 
   @override
   void initState() {
@@ -74,7 +74,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
       return const FoodDetailsSkeleton();
     }
 
-    final foodDetails = context.select((FoodDetailsViewModel vm) => vm.foodDetails);
+    final foodDetails = context.select((FoodDetailsViewModel vm) => vm.modifiedFoodDetails);
     final macroNutrientPercentage = FunctionUtils.calculateMacronutrientPercentage(
       carbs: foodDetails.carbsG ?? 0.0,
       fat: foodDetails.fatG ?? 0.0,
@@ -96,6 +96,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
                     getCalorieContainer(macroNutrientPercentage, foodDetails.calorieKcal ?? 0.0),
                     getMacronutrientsRow(macroNutrientPercentage, foodDetails.carbsG ?? 0.0, foodDetails.fatG ?? 0.0,
                         foodDetails.proteinG ?? 0.0),
+                    AppStyles.kSizedBoxH2,
                     getNutritionalInfoContainer(foodDetails.fullNutrients ?? []),
                   ],
                 ),
@@ -157,6 +158,14 @@ extension _Actions on _FoodDetailsPageState {
       });
     }
   }
+
+  Future<void> _onServingQtyChanged(String? selectedUnit, List<AltMeasureModel> altMeasures) async {
+    final selectedMeasure = selectedUnit!.replaceAll(Regexp.removeTrailingParentheses, '').trim();
+    final selectedAlt = altMeasures.firstWhere((alt) => alt.measure == selectedMeasure);
+    context.read<FoodDetailsViewModel>().selectAltMeasure(selectedAltMeasure: selectedAlt);
+    context.read<FoodDetailsViewModel>().updateNutrientsData();
+    _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -192,12 +201,12 @@ extension _WidgetFactories on _FoodDetailsPageState {
             getFoodNameLabel(foodDetails.foodName ?? ''),
             AppStyles.kSizedBoxH4,
             Row(
+              spacing: AppStyles.kSpac12,
               children: [
                 Expanded(
                   flex: 1,
                   child: getQuantityTextFormField(foodDetails.altMeasures ?? []),
                 ),
-                AppStyles.kSizedBoxW12,
                 Expanded(
                   flex: 3,
                   child: getServingUnitDropdownForm(
@@ -226,18 +235,18 @@ extension _WidgetFactories on _FoodDetailsPageState {
 
   // Quantity Text Form Field
   Widget getQuantityTextFormField(List<AltMeasureModel> altMeasures) {
-    final selectedAltMeasures = context.select((FoodDetailsViewModel vm) => vm.selectedAltMeasure);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAltMeasures?.qty.toString());
-    });
-
     return AppTextFormField(
       field: FormFields.quantity,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-      initialValue: altMeasures.first.qty.toString(),
       topLabel: S.current.quantityLabel,
+      initialValue: altMeasures.first.qty.toString(),
       keyboardType: TextInputType.number,
+      onChanged: (value) {
+        final qty = double.tryParse(value);
+        if (qty != null) {
+          context.read<FoodDetailsViewModel>().updateNutrientsData(servingQty: qty);
+        }
+      },
     );
   }
 
@@ -261,10 +270,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       initialValue: servingUnits.first,
       topLabel: S.current.servingUnitLabel,
       onChanged: (String? selectedUnit) {
-        // Extract the measure from selected string (e.g., "small (38g)" => "small") // TODO: HANDLE ALL CASES
-        final selectedMeasure = selectedUnit!.split(' (').first;
-        final selectedAlt = altMeasures.firstWhere((alt) => alt.measure == selectedMeasure);
-        context.read<FoodDetailsViewModel>().onServingUnitChanged(selectedAltMeasure: selectedAlt);
+        _onServingQtyChanged(selectedUnit, altMeasures);
       },
     );
   }
@@ -402,7 +408,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(nutrientInformation?.label ?? ''),
+                        Text(nutrientInformation?.label ?? '', style: _Styles.getNutrientLabelTextStyle(context)),
                         Text('${nutrient.value} ${nutrientInformation?.unit ?? ''}'),
                       ],
                     ),
@@ -475,7 +481,7 @@ class _Styles {
 
   // Nutritional Info Label Text Style
   static TextStyle getNutritionalInfoLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Container Decoration
@@ -495,5 +501,10 @@ class _Styles {
       color: context.theme.colorScheme.tertiaryFixedDim,
       borderRadius: AppStyles.kRad10,
     );
+  }
+
+  // Nutritient Label Text Style
+  static TextStyle getNutrientLabelTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 }
