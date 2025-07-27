@@ -62,14 +62,12 @@ class DiaryRoute extends PageRouteInfo<void> {
 /// [FoodDetailsPage]
 class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
   FoodDetailsRoute({
-    required FoodModel food,
     required FoodResponseModel foodResponseModel,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          FoodDetailsRoute.name,
          args: FoodDetailsRouteArgs(
-           food: food,
            foodResponseModel: foodResponseModel,
            key: key,
          ),
@@ -83,7 +81,6 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
     builder: (data) {
       final args = data.argsAs<FoodDetailsRouteArgs>();
       return FoodDetailsPage(
-        food: args.food,
         foodResponseModel: args.foodResponseModel,
         key: args.key,
       );
@@ -92,13 +89,7 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
 }
 
 class FoodDetailsRouteArgs {
-  const FoodDetailsRouteArgs({
-    required this.food,
-    required this.foodResponseModel,
-    this.key,
-  });
-
-  final FoodModel food;
+  const FoodDetailsRouteArgs({required this.foodResponseModel, this.key});
 
   final FoodResponseModel foodResponseModel;
 
@@ -106,7 +97,7 @@ class FoodDetailsRouteArgs {
 
   @override
   String toString() {
-    return 'FoodDetailsRouteArgs{food: $food, foodResponseModel: $foodResponseModel, key: $key}';
+    return 'FoodDetailsRouteArgs{foodResponseModel: $foodResponseModel, key: $key}';
   }
 }
 
@@ -303,6 +294,22 @@ class RootRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const RootPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ScanBarcodePage]
+class ScanBarcodeRoute extends PageRouteInfo<void> {
+  const ScanBarcodeRoute({List<PageRouteInfo>? children})
+    : super(ScanBarcodeRoute.name, initialChildren: children);
+
+  static const String name = 'ScanBarcodeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ScanBarcodePage();
     },
   );
 }

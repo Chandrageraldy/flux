@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/views/food_search_page_tab_bar_view/all_tab_bar_view.dart';
@@ -54,20 +53,12 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _FoodSearchPageState {
-  void _onBarcodeScannerPressed() {}
+  void _onBarcodeScannerPressed() {
+    context.router.push(ScanBarcodeRoute());
+  }
 
   void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
-    FoodModel food = FoodModel(
-      foodName: 'Dummy Food',
-      calories: 100,
-      protein: 5,
-      fat: 2,
-      carbohydrate: 20,
-      servingQuantity: 1,
-      servingUnit: ['piece', 'cup', 'gram'],
-      nutrients: [],
-    );
-    context.router.push(FoodDetailsRoute(food: food, foodResponseModel: foodResponseModel));
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel));
   }
 
   void _onChanged(String value) async {

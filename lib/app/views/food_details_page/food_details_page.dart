@@ -2,7 +2,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
-import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/full_nutrients_model/full_nutrients_model.dart';
 import 'package:flux/app/models/nutrition_mapping_model/nutrition_mapping_model.dart';
@@ -21,23 +20,20 @@ import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
 class FoodDetailsPage extends StatelessWidget {
-  const FoodDetailsPage({required this.food, required this.foodResponseModel, super.key});
+  const FoodDetailsPage({required this.foodResponseModel, super.key});
 
-  final FoodModel food;
   final FoodResponseModel foodResponseModel;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => FoodDetailsViewModel(),
-        child: _FoodDetailsPage(food: food, foodResponseModel: foodResponseModel));
+        create: (_) => FoodDetailsViewModel(), child: _FoodDetailsPage(foodResponseModel: foodResponseModel));
   }
 }
 
 class _FoodDetailsPage extends BaseStatefulPage {
-  const _FoodDetailsPage({required this.food, required this.foodResponseModel});
+  const _FoodDetailsPage({required this.foodResponseModel});
 
-  final FoodModel food;
   final FoodResponseModel foodResponseModel;
 
   @override
@@ -403,7 +399,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // only show mapped nutriets in nutrientMapping // TODO: ADD MORE NUTRIENTS
+              // only show mapped nutriets in nutrientMapping
               ...fullNutrients.where((nutrient) => nutrientsMapping.containsKey(nutrient.attrId)).map(
                 (nutrient) {
                   final nutrientInformation = nutrientsMapping[nutrient.attrId];

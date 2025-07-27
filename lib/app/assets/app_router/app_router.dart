@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/models/food_model/food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
@@ -18,6 +17,7 @@ import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
 import 'package:flux/app/views/progress_page/progress_page.dart';
 import 'package:flux/app/views/root_page/root_page.dart';
 import 'package:flux/app/views/root_page/root_navigator_page.dart';
+import 'package:flux/app/views/scan_barcode_page/scan_barcode_page.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page|Screen|Modal,Route')
@@ -64,6 +64,7 @@ class AppRouter extends RootStackRouter {
         CustomRoute(page: LoggingSelectionRoute.page, customRouteBuilder: _modalSheetBuilder),
         AutoRoute(page: FoodDetailsRoute.page),
         AutoRoute(page: MealDetailsRoute.page),
+        AutoRoute(page: ScanBarcodeRoute.page),
       ],
     );
   }
