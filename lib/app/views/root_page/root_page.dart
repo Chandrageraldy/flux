@@ -42,11 +42,12 @@ class _RootPageState extends BaseStatefulState<RootPage> {
       children: [
         getFluxLogoImage(),
         Flexible(fit: FlexFit.loose, child: getOnboardingPageView()),
+        AppStyles.kSizedBoxH12,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [getGeneratedDotIndicator()],
         ),
-        AppStyles.kSizedBoxH24,
+        AppStyles.kSizedBoxH12,
         getGetStartedButton(),
         AppStyles.kSizedBoxH24,
         getTextSpanLoginButton(),
@@ -110,7 +111,7 @@ extension _WidgetFactories on _RootPageState {
 
   // Get Started Button
   Widget getGetStartedButton() {
-    return AppDefaultButton(label: 'Get Started', onPressed: _onGetStartedPressed);
+    return AppDefaultButton(label: S.current.getStartedLabel, onPressed: _onGetStartedPressed);
   }
 
   // Text Span Login Button

@@ -10,8 +10,8 @@ class OnboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: AppStyles.kSpac16,
-      children: [getOnboardImage(context), getTitleLabel(context), getDescriptionLabel()],
+      spacing: AppStyles.kSpac8,
+      children: [Expanded(child: getOnboardImage(context)), getTitleLabel(context), getDescriptionLabel()],
     );
   }
 }
@@ -22,8 +22,6 @@ extension _WidgetFactories on OnboardContent {
   Widget getOnboardImage(BuildContext context) {
     return Image.asset(
       onboardImage,
-      width: _Styles.getOnboardImageSize(context),
-      height: _Styles.getOnboardImageSize(context),
     );
   }
 
@@ -48,14 +46,9 @@ extension _WidgetFactories on OnboardContent {
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  // Onboard Image Style
-  static double getOnboardImageSize(BuildContext context) {
-    return MediaQuery.of(context).size.width * 0.9;
-  }
-
   // Title Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.massive).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style

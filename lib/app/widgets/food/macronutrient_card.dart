@@ -68,7 +68,7 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onSurface);
+    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onSurface);
   }
 
   // Value Label Text Style

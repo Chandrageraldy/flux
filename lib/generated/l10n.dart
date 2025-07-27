@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Chat with our AI to create a meal plan that fits your goals—whether it’s losing fat, maintaining weight, or gaining muscle.`
+  /// `Chat with our AI to create a meal plan that fits your goals.`
   String get onboardingDesc1 {
     return Intl.message(
-      'Chat with our AI to create a meal plan that fits your goals—whether it’s losing fat, maintaining weight, or gaining muscle.',
+      'Chat with our AI to create a meal plan that fits your goals.',
       name: 'onboardingDesc1',
       desc: '',
       args: [],
@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `Use our advanced AI-powered meal scanner to effortlessly log your meals and get personalized nutrition insights.`
+  /// `Use our advanced AI-powered meal scanner to effortlessly log your meals.`
   String get onboardingDesc2 {
     return Intl.message(
-      'Use our advanced AI-powered meal scanner to effortlessly log your meals and get personalized nutrition insights.',
+      'Use our advanced AI-powered meal scanner to effortlessly log your meals.',
       name: 'onboardingDesc2',
       desc: '',
       args: [],
@@ -140,10 +140,10 @@ class S {
     );
   }
 
-  /// `Fuel your progress, unlock new rewards, and watch your virtual pet thrive. Every milestone helps them evolve!`
+  /// `Fuel your progress, unlock new rewards, and watch your virtual pet thrive.`
   String get onboardingDesc3 {
     return Intl.message(
-      'Fuel your progress, unlock new rewards, and watch your virtual pet thrive. Every milestone helps them evolve!',
+      'Fuel your progress, unlock new rewards, and watch your virtual pet thrive.',
       name: 'onboardingDesc3',
       desc: '',
       args: [],
@@ -215,6 +215,16 @@ class S {
     return Intl.message(
       'Choose to build your plan step-by-step or let AI design one based on your goals.',
       name: 'planSelectionDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Started`
+  String get getStartedLabel {
+    return Intl.message(
+      'Get Started',
+      name: 'getStartedLabel',
       desc: '',
       args: [],
     );

@@ -14,6 +14,7 @@ import 'package:flux/app/widgets/dropdown_form/app_dropdown_form.dart';
 import 'package:flux/app/widgets/food/macronutrient_card.dart';
 import 'package:flux/app/widgets/skeleton/food_details_skeleton.dart';
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:percent_indicator/multi_segment_linear_indicator.dart';
@@ -198,6 +199,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: AppStyles.kSpac12,
           children: [
+            getBrandedNameLabel(foodDetails.brandName ?? ''),
             getFoodNameLabel(foodDetails.foodName ?? ''),
             AppStyles.kSizedBoxH4,
             Row(
@@ -222,6 +224,20 @@ extension _WidgetFactories on _FoodDetailsPageState {
           ],
         ),
       ),
+    );
+  }
+
+  // Branded Name Label
+  Widget getBrandedNameLabel(String brandedName) {
+    return Row(
+      spacing: AppStyles.kSpac4,
+      children: [
+        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12, color: context.theme.colorScheme.secondary),
+        Text(
+          brandedName,
+          style: _Styles.getBrandedNameLabelTextStyle(context),
+        ),
+      ],
     );
   }
 
@@ -296,10 +312,16 @@ extension _WidgetFactories on _FoodDetailsPageState {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichText(
-            text: TextSpan(
-              children: [getCalorieValueLabel(calorie), getCalorieUnitLabel()],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              getCalorieLabel(),
+              RichText(
+                text: TextSpan(
+                  children: [getCalorieValueLabel(calorie), getCalorieUnitLabel()],
+                ),
+              ),
+            ],
           ),
           AppStyles.kSizedBoxH12,
           getMultiSegmentLinearIndicator(macroNutrientPercentage),
@@ -308,20 +330,19 @@ extension _WidgetFactories on _FoodDetailsPageState {
     );
   }
 
+  // Calorie Label
+  Text getCalorieLabel() {
+    return Text(S.current.calorieLabel, style: _Styles.getCalorieLabelTextStyle(context));
+  }
+
   // Calorie Value Label
   TextSpan getCalorieValueLabel(double calorie) {
-    return TextSpan(
-      text: calorie.toString(),
-      style: _Styles.getCalorieValueLabelTextStyle(context),
-    );
+    return TextSpan(text: calorie.toString(), style: _Styles.getCalorieValueLabelTextStyle(context));
   }
 
   // Calorie Unit Label
   TextSpan getCalorieUnitLabel() {
-    return TextSpan(
-      text: ' ${S.current.calorieUnit}',
-      style: _Styles.getCalorieUnitLabelTextStyle(context),
-    );
+    return TextSpan(text: ' ${S.current.calorieUnit}', style: _Styles.getCalorieUnitLabelTextStyle(context));
   }
 
   // Mutli Segment Linear Indicator
@@ -481,7 +502,7 @@ class _Styles {
 
   // Nutritional Info Label Text Style
   static TextStyle getNutritionalInfoLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Container Decoration
@@ -506,5 +527,15 @@ class _Styles {
   // Nutritient Label Text Style
   static TextStyle getNutrientLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.medium);
+  }
+
+  // Branded Name Label Text Style
+  static TextStyle getBrandedNameLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+  }
+
+  // Calorie Label Text Style
+  static TextStyle getCalorieLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
   }
 }

@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "genderDesc": MessageLookupByLibrary.simpleMessage(
             "Used to personalize your health and calorie estimates."),
         "genderLabel": MessageLookupByLibrary.simpleMessage("Gender"),
+        "getStartedLabel": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goalLabel": MessageLookupByLibrary.simpleMessage("Goal"),
         "heightDesc": MessageLookupByLibrary.simpleMessage(
             "Helps calculate your body mass index (BMI)."),
@@ -134,11 +135,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "okLabel": MessageLookupByLibrary.simpleMessage("Ok"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
-            "Chat with our AI to create a meal plan that fits your goals—whether it’s losing fat, maintaining weight, or gaining muscle."),
+            "Chat with our AI to create a meal plan that fits your goals."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
-            "Use our advanced AI-powered meal scanner to effortlessly log your meals and get personalized nutrition insights."),
+            "Use our advanced AI-powered meal scanner to effortlessly log your meals."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-            "Fuel your progress, unlock new rewards, and watch your virtual pet thrive. Every milestone helps them evolve!"),
+            "Fuel your progress, unlock new rewards, and watch your virtual pet thrive."),
         "onboardingTitle1": MessageLookupByLibrary.simpleMessage(
             "Your Smart Nutrition Assistant"),
         "onboardingTitle2":

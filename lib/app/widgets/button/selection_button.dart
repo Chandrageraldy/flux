@@ -73,7 +73,8 @@ extension _WidgetFactories on SelectionButton {
 
   // Description Label
   Widget getDescriptionLabel(BuildContext context) {
-    return Text(description, style: _Styles.getDescriptionLabelTextStyle(context));
+    return Text(description,
+        style: _Styles.getDescriptionLabelTextStyle(context), maxLines: 2, overflow: TextOverflow.ellipsis);
   }
 }
 
