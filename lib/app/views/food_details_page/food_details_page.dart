@@ -93,7 +93,6 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
                     getCalorieContainer(macroNutrientPercentage, foodDetails.calorieKcal ?? 0.0),
                     getMacronutrientsRow(macroNutrientPercentage, foodDetails.carbsG ?? 0.0, foodDetails.fatG ?? 0.0,
                         foodDetails.proteinG ?? 0.0),
-                    AppStyles.kSizedBoxH2,
                     getNutritionalInfoContainer(foodDetails.fullNutrients ?? []),
                   ],
                 ),
@@ -197,18 +196,14 @@ extension _WidgetFactories on _FoodDetailsPageState {
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: AppStyles.kSpac12,
+          spacing: AppStyles.kSpac8,
           children: [
-            getBrandedNameLabel(foodDetails.brandName ?? ''),
+            if (foodDetails.brandName != null) getBrandedNameLabel(foodDetails.brandName ?? ''),
             getFoodNameLabel(foodDetails.foodName ?? ''),
-            AppStyles.kSizedBoxH4,
             Row(
-              spacing: AppStyles.kSpac12,
+              spacing: AppStyles.kSpac16,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: getQuantityTextFormField(foodDetails.altMeasures ?? []),
-                ),
+                Expanded(flex: 1, child: getQuantityTextFormField(foodDetails.altMeasures ?? [])),
                 Expanded(
                   flex: 3,
                   child: getServingUnitDropdownForm(
@@ -233,10 +228,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       spacing: AppStyles.kSpac4,
       children: [
         FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12, color: context.theme.colorScheme.secondary),
-        Text(
-          brandedName,
-          style: _Styles.getBrandedNameLabelTextStyle(context),
-        ),
+        Text(brandedName, style: _Styles.getBrandedNameLabelTextStyle(context)),
       ],
     );
   }
@@ -257,9 +249,10 @@ extension _WidgetFactories on _FoodDetailsPageState {
       topLabel: S.current.quantityLabel,
       initialValue: altMeasures.first.qty.toString(),
       keyboardType: TextInputType.number,
+      height: AppStyles.kSize40,
       onChanged: (value) {
         final qty = double.tryParse(value);
-        if (qty != null) {
+        if (qty != null && qty != 0) {
           context.read<FoodDetailsViewModel>().updateNutrientsData(servingQty: qty);
         }
       },
@@ -285,6 +278,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       items: servingUnits.map((unit) => DropdownMenuItem<String>(value: unit, child: Text(unit))).toList(),
       initialValue: servingUnits.first,
       topLabel: S.current.servingUnitLabel,
+      height: AppStyles.kSize40,
       onChanged: (String? selectedUnit) {
         _onServingQtyChanged(selectedUnit, altMeasures);
       },
@@ -300,6 +294,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       items: mealTypes.map((type) => DropdownMenuItem<String>(value: type, child: Text(type))).toList(),
       initialValue: mealTypes.first,
       topLabel: S.current.mealTypeLabel,
+      height: AppStyles.kSize40,
     );
   }
 
@@ -308,7 +303,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getCalorieContainerDecoration(context),
-      padding: AppStyles.kPadd16,
+      padding: AppStyles.kPaddSV10H12,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -411,7 +406,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   Widget getNutritionalInfoContainer(List<FullNutrient> fullNutrients) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: AppStyles.kSpac12,
+      spacing: AppStyles.kSpac8,
       children: [
         getNutritionalInfoLabel(),
         Container(
@@ -430,7 +425,14 @@ extension _WidgetFactories on _FoodDetailsPageState {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(nutrientInformation?.label ?? '', style: _Styles.getNutrientLabelTextStyle(context)),
-                        Text('${nutrient.value} ${nutrientInformation?.unit ?? ''}'),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              getNutritionValueLabel(nutrient.value ?? 0),
+                              getNutrientUnitLabel(nutrientInformation?.unit ?? '')
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -440,6 +442,22 @@ extension _WidgetFactories on _FoodDetailsPageState {
           ),
         ),
       ],
+    );
+  }
+
+  // Nutrition Value Label
+  TextSpan getNutritionValueLabel(double value) {
+    return TextSpan(
+      text: '$value',
+      style: _Styles.getNutrientValueLabelTextStyle(context),
+    );
+  }
+
+  // Nutritient Unit Label
+  TextSpan getNutrientUnitLabel(String unit) {
+    return TextSpan(
+      text: unit,
+      style: _Styles.getNutrientUnitLabelTextStyle(context),
     );
   }
 
@@ -467,17 +485,17 @@ class _Styles {
 
   // Food Name Label Text Style
   static TextStyle getFoodNameLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.massive);
+    return Quicksand.semiBold.withSize(FontSizes.mediumHuge);
   }
 
   // Calorie Value Label Text Style
   static TextStyle getCalorieValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.massive).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Unit Label Text Style
   static TextStyle getCalorieUnitLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onSurface);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onSurface);
   }
 
   // Button Positioning
@@ -502,7 +520,7 @@ class _Styles {
 
   // Nutritional Info Label Text Style
   static TextStyle getNutritionalInfoLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Container Decoration
@@ -526,16 +544,26 @@ class _Styles {
 
   // Nutritient Label Text Style
   static TextStyle getNutrientLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+  }
+
+  // Nutritient Value Label Text Style
+  static TextStyle getNutrientValueLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+  }
+
+  // Nutrient Unit Label Text Style
+  static TextStyle getNutrientUnitLabelTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Branded Name Label Text Style
   static TextStyle getBrandedNameLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Label Text Style
   static TextStyle getCalorieLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 }

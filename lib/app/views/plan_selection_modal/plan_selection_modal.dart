@@ -28,7 +28,7 @@ class _PlanSelectionModalState extends BaseStatefulState<PlanSelectionModal> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppStyles.kSizedBoxH8,
+          AppStyles.kSizedBoxH4,
           getTitleLabel(),
           AppStyles.kSizedBoxH4,
           getDescriptionLabel(),
@@ -71,10 +71,7 @@ extension _WidgetFactories on _PlanSelectionModalState {
       SelectionButton(
         title: S.current.planSelectionButtonTitle1,
         description: S.current.planSelectionButtonDesc1,
-        icon: FaIcon(
-          FontAwesomeIcons.pencil,
-          color: context.theme.colorScheme.primary,
-        ),
+        icon: FaIcon(FontAwesomeIcons.pencil, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
         onPressed: _onManualCustomPlanPressed,
       ),
       AppStyles.kSizedBoxH16,
@@ -82,10 +79,7 @@ extension _WidgetFactories on _PlanSelectionModalState {
       SelectionButton(
         title: S.current.planSelectionButtonTitle2,
         description: S.current.planSelectionButtonDesc2,
-        icon: FaIcon(
-          FontAwesomeIcons.rocket,
-          color: context.theme.colorScheme.primary,
-        ),
+        icon: FaIcon(FontAwesomeIcons.rocket, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
         onPressed: () {},
       ),
     ];
@@ -96,11 +90,11 @@ extension _WidgetFactories on _PlanSelectionModalState {
 abstract class _Styles {
   // Title Label Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Label Text Style
   static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }

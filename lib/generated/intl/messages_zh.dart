@@ -36,7 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelLabel": MessageLookupByLibrary.simpleMessage("取消"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("碳水化合物"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("胆碱"),
-        "cmUnitLabel": MessageLookupByLibrary.simpleMessage("厘米"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("继续"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("铜"),
         "dateOfBirthDesc":
@@ -64,7 +63,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "ironLabel": MessageLookupByLibrary.simpleMessage("铁"),
         "ketoDesc": MessageLookupByLibrary.simpleMessage("低碳水，高脂肪的减重饮食。"),
         "ketoLabel": MessageLookupByLibrary.simpleMessage("生酮饮食"),
-        "kgUnitLabel": MessageLookupByLibrary.simpleMessage("千克"),
         "lightDesc": MessageLookupByLibrary.simpleMessage("偶尔或轻度锻炼。"),
         "lightLabel": MessageLookupByLibrary.simpleMessage("每周 1–2 次"),
         "lightlyActiveDesc":

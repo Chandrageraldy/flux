@@ -66,14 +66,12 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
 abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.regular
-        .withSize(FontSizes.mediumPlus)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Linear Percent Indicator Line Height

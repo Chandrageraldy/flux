@@ -138,8 +138,8 @@ extension _WidgetFactories on _DiaryPageState {
         focusedDate: _selectedDate,
         firstDate: DateTime.now().subtract(const Duration(days: 7)),
         lastDate: DateTime.now().add(const Duration(days: 7)),
-        timelineOptions: TimelineOptions(height: 90),
-        itemExtent: 60,
+        timelineOptions: TimelineOptions(height: AppStyles.kSize80),
+        itemExtent: AppStyles.kSize56,
         onDateChange: (date) {
           _setState(() {
             _selectedDate = date;
@@ -189,7 +189,7 @@ extension _WidgetFactories on _DiaryPageState {
     return SizedBox(
       child: CircularPercentIndicator(
         lineWidth: _Styles.circularPercentIndicatorLineWidth,
-        radius: _Styles.circularPercentIndicatorRadius,
+        radius: AppStyles.kSize45,
         percent: 0.66,
         progressColor: context.theme.colorScheme.secondary,
         backgroundColor: context.theme.colorScheme.tertiary,
@@ -218,7 +218,7 @@ extension _WidgetFactories on _DiaryPageState {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('2000', style: _Styles.getRemainingLabelTextStyle(context)),
+        Text('2000', style: _Styles.getRemainingValueLabelTextStyle(context)),
         Text(S.current.remainingLabel, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
         AppStyles.kSizedBoxH4
       ],
@@ -232,7 +232,7 @@ extension _WidgetFactories on _DiaryPageState {
       decoration: _Styles.getIntakeContainerDecoration(context),
       padding: AppStyles.kPaddSV8H16,
       child: Column(
-        spacing: AppStyles.kSpac16,
+        spacing: AppStyles.kSpac12,
         children: [getMacroNutrientIntakeLabel(), getMacroNutrientIntakeProgressRow()],
       ),
     );
@@ -291,24 +291,21 @@ class _Styles {
 
   // Calorie Intake Label Text Style
   static TextStyle getIntakeLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large);
+    return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 
   // Calorie Formula Label Text Style
   static TextStyle getCalorieFormulaLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Remaining Label Label Text Style
-  static TextStyle getRemainingLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
+  static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Circular Percent Indicator Line Width
   static double circularPercentIndicatorLineWidth = 6.0;
-
-  // Circular Percent Indicator Radius
-  static double circularPercentIndicatorRadius = 50.0;
 
   // Date Timeline Theme
   static EasyThemeData getDateTimelineTheme(BuildContext context) {
@@ -341,11 +338,11 @@ class _Styles {
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumHuge);
+    return Quicksand.semiBold.withSize(FontSizes.extraLarge);
   }
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large);
+    return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 }

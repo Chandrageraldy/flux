@@ -18,7 +18,7 @@ class MacronutrientCard extends StatelessWidget {
           padding: AppStyles.kPaddSV8H16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [getLabel(context), getValueLabel(context), getPercentageText(context)],
+            children: [getLabel(context), getValueLabelWithUnit(context), getPercentageText(context)],
           ),
         ),
       ),
@@ -36,11 +36,28 @@ extension _WidgetFactories on MacronutrientCard {
     );
   }
 
+  // Value Label With Unit
+  Widget getValueLabelWithUnit(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [getMacroNutrientValueLabel(value, context), getMacroNutrientUnitLabel(context)],
+      ),
+    );
+  }
+
   // Value Label
-  Widget getValueLabel(BuildContext context) {
-    return Text(
-      value,
+  TextSpan getMacroNutrientValueLabel(String macroNutrient, BuildContext context) {
+    return TextSpan(
+      text: macroNutrient,
       style: _Styles.getValueLabelTextStyle(context),
+    );
+  }
+
+  // Unut Label
+  TextSpan getMacroNutrientUnitLabel(BuildContext context) {
+    return TextSpan(
+      text: NutritionUnit.g.label,
+      style: _Styles.getUnitLabelTextStyle(context),
     );
   }
 
@@ -68,12 +85,17 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onSurface);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onSurface);
   }
 
   // Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+  }
+
+  // Unit Label Text Style
+  static TextStyle getUnitLabelTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Percentage Text Style

@@ -26,7 +26,7 @@ class FoodDisplayCard extends StatelessWidget {
       onTap: onCardPressed,
       child: Container(
         decoration: _Styles.getFoodCardContainerDecoration(context),
-        child: Padding(padding: AppStyles.kPaddSV16H16, child: getContentRow(context)),
+        child: Padding(padding: AppStyles.kPaddSV12H16, child: getContentRow(context)),
       ),
     );
   }
@@ -42,12 +42,11 @@ extension _WidgetFactories on FoodDisplayCard {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: AppStyles.kSpac4,
+            spacing: AppStyles.kSpac2,
             children: [getTitleLabel(context), getServingAndBrandRow(context)],
           ),
         ),
         getCalorieTag(context),
-        getIcon(context),
       ],
     );
   }
@@ -60,14 +59,6 @@ extension _WidgetFactories on FoodDisplayCard {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       softWrap: false,
-    );
-  }
-
-  // Get Icon
-  Widget getIcon(BuildContext context) {
-    return FaIcon(
-      FontAwesomeIcons.chevronRight,
-      size: AppStyles.kIconSize16,
     );
   }
 
@@ -99,7 +90,7 @@ extension _WidgetFactories on FoodDisplayCard {
       spacing: AppStyles.kSpac4,
       mainAxisSize: MainAxisSize.min,
       children: [
-        FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kIconSize12),
+        FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kIconSize8),
         Flexible(
           child: Text(
             '$servingQuantity $servingUnit',
@@ -134,7 +125,7 @@ extension _WidgetFactories on FoodDisplayCard {
       label: calories.toString(),
       icon: FaIcon(
         FontAwesomeIcons.fire,
-        size: AppStyles.kIconSize16,
+        size: AppStyles.kIconSize12,
       ),
     );
   }
@@ -177,11 +168,11 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Serving and Brand Label Text Style
   static TextStyle getServingAndBrandLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.extraSmall);
   }
 }

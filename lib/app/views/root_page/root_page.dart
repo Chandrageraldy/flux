@@ -47,7 +47,7 @@ class _RootPageState extends BaseStatefulState<RootPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [getGeneratedDotIndicator()],
         ),
-        AppStyles.kSizedBoxH12,
+        AppStyles.kSizedBoxH20,
         getGetStartedButton(),
         AppStyles.kSizedBoxH24,
         getTextSpanLoginButton(),

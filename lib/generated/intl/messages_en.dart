@@ -38,7 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
-        "cmUnitLabel": MessageLookupByLibrary.simpleMessage("cm"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
@@ -74,7 +73,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "ketoDesc": MessageLookupByLibrary.simpleMessage(
             "Low-carb, high-fat diet for weight loss."),
         "ketoLabel": MessageLookupByLibrary.simpleMessage("Keto"),
-        "kgUnitLabel": MessageLookupByLibrary.simpleMessage("Kg"),
         "lightDesc": MessageLookupByLibrary.simpleMessage(
             "Light or occasional workouts."),
         "lightLabel": MessageLookupByLibrary.simpleMessage("1–2 times/week"),
@@ -200,6 +198,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "There was an error with your request. Please try again later."),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
         "savedLabel": MessageLookupByLibrary.simpleMessage("Saved"),
+        "savedYourFoodDesc": MessageLookupByLibrary.simpleMessage(
+            "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."),
+        "savedYourFoodLabel":
+            MessageLookupByLibrary.simpleMessage("Saved Your Food"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),

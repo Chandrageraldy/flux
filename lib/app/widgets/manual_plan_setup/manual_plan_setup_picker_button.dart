@@ -27,7 +27,7 @@ class ManualPlanSetupPickerButton extends StatelessWidget {
         decoration: _Styles.getButtonContainerDecoration(context, isPicked),
         width: AppStyles.kDoubleInfinity,
         child: Padding(
-          padding: AppStyles.kPadd12,
+          padding: AppStyles.kPaddSV10H12,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [getIconContainer(context), AppStyles.kSizedBoxW12, getTextColumn(context)],
@@ -43,8 +43,8 @@ extension _WidgetFactories on ManualPlanSetupPickerButton {
   // Get Icon Container
   Widget getIconContainer(BuildContext context) {
     return Container(
-      width: 48,
-      height: 48,
+      width: AppStyles.kSize40,
+      height: AppStyles.kSize40,
       decoration: _Styles.getIconContainerDecoration(context, isPicked),
       child: Center(child: icon),
     );
@@ -85,12 +85,12 @@ extension _WidgetFactories on ManualPlanSetupPickerButton {
 abstract class _Styles {
   // Title Label Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style
   static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.light.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Button Container Decoration
@@ -98,7 +98,7 @@ abstract class _Styles {
     return BoxDecoration(
       borderRadius: AppStyles.kRad16,
       border: Border.all(
-        color: isPicked ? context.theme.colorScheme.secondary : context.theme.colorScheme.tertiary,
+        color: isPicked ? context.theme.colorScheme.tertiaryFixed : context.theme.colorScheme.tertiary,
         width: 1,
       ),
       color: isPicked ? context.theme.colorScheme.surfaceBright : context.theme.colorScheme.onPrimary,

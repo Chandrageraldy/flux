@@ -690,26 +690,6 @@ class S {
     );
   }
 
-  /// `cm`
-  String get cmUnitLabel {
-    return Intl.message(
-      'cm',
-      name: 'cmUnitLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Kg`
-  String get kgUnitLabel {
-    return Intl.message(
-      'Kg',
-      name: 'kgUnitLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Sedentary`
   String get sedentaryLabel {
     return Intl.message(
@@ -1615,6 +1595,26 @@ class S {
     return Intl.message(
       'Folate',
       name: 'folateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Your Food`
+  String get savedYourFoodLabel {
+    return Intl.message(
+      'Saved Your Food',
+      name: 'savedYourFoodLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.`
+  String get savedYourFoodDesc {
+    return Intl.message(
+      'Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.',
+      name: 'savedYourFoodDesc',
       desc: '',
       args: [],
     );

@@ -31,12 +31,12 @@ extension _WidgetFactories on AppTextSpanButton {
 abstract class _Styles {
   // Primary Label Text Style
   static TextStyle getPrimaryLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Secondary Label Text Style
   static TextStyle getSecondaryLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.secondary);
+    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary);
   }
 
   // Text Button Style

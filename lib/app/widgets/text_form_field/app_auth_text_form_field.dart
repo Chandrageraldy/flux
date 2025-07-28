@@ -2,11 +2,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
 class AppAuthTextFormField extends StatelessWidget {
-  const AppAuthTextFormField({required this.field, required this.placeholder, required this.validator, super.key});
+  const AppAuthTextFormField(
+      {required this.field, required this.placeholder, required this.validator, this.height, super.key});
 
   final FormFields field;
   final String placeholder;
   final String? Function(String? value)? validator;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class AppAuthTextFormField extends StatelessWidget {
       ),
       obscureText: field == FormFields.password ? true : false,
       validator: validator,
+      style: Quicksand.regular.withSize(FontSizes.medium),
     );
   }
 }

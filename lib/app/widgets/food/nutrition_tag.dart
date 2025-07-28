@@ -48,11 +48,11 @@ extension _WidgetFactories on NutritionTag {}
 abstract class _Styles {
   // Tag Label Text Style
   static TextStyle getTagLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withCustomSize(9).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Label Text Style
   static TextStyle getLabelTextStyle() {
-    return Quicksand.medium.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.extraSmall);
   }
 }

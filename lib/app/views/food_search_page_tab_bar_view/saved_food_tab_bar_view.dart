@@ -110,7 +110,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Save Container
   Widget getSaveContainer(BuildContext context) {
     return Container(
-      padding: AppStyles.kPadd8,
+      padding: AppStyles.kPadd6,
       decoration: _Styles.getSaveContainerDecoration(context),
       child: Icon(Icons.bookmark_add_outlined),
     );
@@ -119,7 +119,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Header Label
   Widget getHeaderLabel(BuildContext context) {
     return Text(
-      'Save your food',
+      S.current.savedYourFoodLabel,
       style: _Styles.getHeaderLabelTextStyle(context),
       textAlign: TextAlign.center,
     );
@@ -128,7 +128,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Header Description Label
   Widget getHeaderDescriptionLabel(BuildContext context) {
     return Text(
-      'Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.',
+      S.current.savedYourFoodDesc,
       style: _Styles.getHeaderDescriptionLabelTextStyle(context),
     );
   }
@@ -149,12 +149,12 @@ abstract class _Styles {
 
   // Header Label Text Style
   static TextStyle getHeaderLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus);
+    return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 
   // Header Description Label Text Style
   static TextStyle getHeaderDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.small);
+    return Quicksand.regular.withSize(FontSizes.extraSmall);
   }
 
   // Save Container Decoration

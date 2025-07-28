@@ -81,7 +81,6 @@ extension _WidgetFactories on _FoodSearchPageState {
       decoration: _Styles.getHeaderContainerDecoration(context),
       child: Column(
         children: [
-          AppStyles.kSizedBoxH20,
           Row(
             children: [Expanded(child: getSearchTextFormField()), AppStyles.kSizedBoxW12, getBarcodeScannerButton()],
           ),
@@ -99,6 +98,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       placeholder: S.current.searchFoodPlaceholder,
       validator: FormBuilderValidators.compose([]),
       icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kIconSize16),
+      height: AppStyles.kSize40,
       onChanged: _onChanged,
     );
   }
@@ -108,10 +108,10 @@ extension _WidgetFactories on _FoodSearchPageState {
     return GestureDetector(
       onTap: _onBarcodeScannerPressed,
       child: Container(
-        height: AppStyles.kSize48,
-        width: AppStyles.kSize48,
+        height: AppStyles.kSize40,
+        width: AppStyles.kSize40,
         decoration: BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad10),
-        child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary),
+        child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
       ),
     );
   }
@@ -119,7 +119,7 @@ extension _WidgetFactories on _FoodSearchPageState {
   // Tabs Container
   Widget getTabBarContainer() {
     return Container(
-      height: AppStyles.kSize30,
+      height: AppStyles.kSize26,
       decoration: _Styles.getTabBarContainerDecoration(context),
       child: TabBar(
         indicator: _Styles.getTabBarIndicatorDecoration(context),
@@ -127,6 +127,7 @@ extension _WidgetFactories on _FoodSearchPageState {
         dividerColor: Colors.transparent,
         labelColor: context.theme.colorScheme.onPrimary,
         unselectedLabelColor: context.theme.colorScheme.onTertiary,
+        labelStyle: Quicksand.medium.withSize(FontSizes.small),
         tabs: [Tab(text: S.current.allLabel), Tab(text: S.current.savedLabel)],
       ),
     );

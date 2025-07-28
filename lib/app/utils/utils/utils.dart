@@ -60,14 +60,12 @@ class WidgetUtils {
                       Text(
                         title ?? '',
                         style: Quicksand.semiBold
-                            .withSize(FontSizes.extraLarge)
+                            .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style: Quicksand.light
-                            .withSize(FontSizes.medium)
-                            .copyWith(color: context.theme.colorScheme.primary),
+                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       )
                     ],
                   ),
@@ -75,9 +73,9 @@ class WidgetUtils {
               ),
               AppStyles.kSizedBoxH12,
               SizedBox(
-                height: AppStyles.kSize200,
+                height: AppStyles.kSize150,
                 child: CupertinoPicker(
-                  itemExtent: 50,
+                  itemExtent: AppStyles.kSize40,
                   scrollController: FixedExtentScrollController(initialItem: initialItem),
                   onSelectedItemChanged: (int value) {
                     selectedItem = value;
@@ -97,7 +95,7 @@ class WidgetUtils {
                         backgroundColor: context.theme.colorScheme.tertiary,
                         labelColor: context.theme.colorScheme.primary,
                         borderColor: context.theme.colorScheme.tertiary,
-                        padding: AppStyles.kPaddSV15,
+                        padding: AppStyles.kPaddSV12,
                       ),
                     ),
                     AppStyles.kSizedBoxW12,
@@ -108,12 +106,13 @@ class WidgetUtils {
                           Navigator.of(context).pop();
                           onItemSelected(selectedItem);
                         },
-                        padding: AppStyles.kPaddSV15,
+                        padding: AppStyles.kPaddSV12,
                       ),
                     ),
                   ],
                 ),
-              )
+              ),
+              AppStyles.kSizedBoxH12
             ],
           ),
         ),
@@ -153,14 +152,12 @@ class WidgetUtils {
                       Text(
                         title ?? '',
                         style: Quicksand.semiBold
-                            .withSize(FontSizes.extraLarge)
+                            .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style: Quicksand.light
-                            .withSize(FontSizes.medium)
-                            .copyWith(color: context.theme.colorScheme.primary),
+                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       ),
                     ],
                   ),
@@ -168,8 +165,9 @@ class WidgetUtils {
               ),
               AppStyles.kSizedBoxH12,
               SizedBox(
-                height: AppStyles.kSize200,
+                height: AppStyles.kSize150,
                 child: CupertinoDatePicker(
+                  itemExtent: AppStyles.kSize40,
                   mode: CupertinoDatePickerMode.date,
                   initialDateTime: initialDate,
                   maximumDate: DateTime.now(),
@@ -190,7 +188,7 @@ class WidgetUtils {
                         backgroundColor: context.theme.colorScheme.tertiary,
                         labelColor: context.theme.colorScheme.primary,
                         borderColor: context.theme.colorScheme.tertiary,
-                        padding: AppStyles.kPaddSV15,
+                        padding: AppStyles.kPaddSV12,
                       ),
                     ),
                     AppStyles.kSizedBoxW12,
@@ -201,12 +199,13 @@ class WidgetUtils {
                           Navigator.of(context).pop();
                           onDateSelected(selectedDate);
                         },
-                        padding: AppStyles.kPaddSV15,
+                        padding: AppStyles.kPaddSV12,
                       ),
                     ),
                   ],
                 ),
               ),
+              AppStyles.kSizedBoxH12
             ],
           ),
         ),

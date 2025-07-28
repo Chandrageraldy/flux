@@ -273,6 +273,20 @@ enum Nutrition {
   }
 }
 
+enum Unit {
+  kg,
+  cm;
+
+  String get label {
+    switch (this) {
+      case kg:
+        return 'Kg';
+      case Unit.cm:
+        return 'cm';
+    }
+  }
+}
+
 enum NutritionUnit {
   kcal,
   g,

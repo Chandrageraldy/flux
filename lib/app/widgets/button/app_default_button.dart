@@ -71,7 +71,7 @@ abstract class _Styles {
           color: borderColor ?? Colors.transparent,
         ),
       ),
-      padding: padding ?? AppStyles.kPaddSV20,
+      padding: padding ?? AppStyles.kPaddSV18,
       elevation: 0,
     );
   }

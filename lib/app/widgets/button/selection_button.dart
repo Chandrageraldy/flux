@@ -23,7 +23,7 @@ class SelectionButton extends StatelessWidget {
         decoration: _Styles.getButtonContainerDecoration(context),
         width: AppStyles.kDoubleInfinity,
         child: Padding(
-          padding: AppStyles.kPadd12,
+          padding: AppStyles.kPaddSV10H12,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -45,7 +45,10 @@ extension _WidgetFactories on SelectionButton {
   // Icon Container
   Widget getIconContainer(BuildContext context) {
     return Container(
-        width: 48, height: 48, decoration: _Styles.getIconContainerDecoration(context), child: Center(child: icon));
+        width: AppStyles.kSize40,
+        height: AppStyles.kSize40,
+        decoration: _Styles.getIconContainerDecoration(context),
+        child: Center(child: icon));
   }
 
   // Arrow Icon
@@ -82,12 +85,12 @@ extension _WidgetFactories on SelectionButton {
 abstract class _Styles {
   // Title Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style
   static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.light.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Button Container Decoration

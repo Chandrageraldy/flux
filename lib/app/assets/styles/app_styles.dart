@@ -4,7 +4,7 @@ class AppStyles {
   // Padding
   static const kPadd0 = EdgeInsets.zero;
   static const kPadd3 = EdgeInsets.all(3.0);
-
+  static const kPadd6 = EdgeInsets.all(6.0);
   static const kPadd8 = EdgeInsets.all(8.0);
   static const kPadd12 = EdgeInsets.all(12.0);
   static const kPadd16 = EdgeInsets.all(16.0);
@@ -26,6 +26,7 @@ class AppStyles {
   static const kPaddSV8 = EdgeInsets.symmetric(vertical: 8.0);
   static const kPaddSV12 = EdgeInsets.symmetric(vertical: 12.0);
   static const kPaddSV15 = EdgeInsets.symmetric(vertical: 15.0);
+  static const kPaddSV18 = EdgeInsets.symmetric(vertical: 18.0);
   static const kPaddSV20 = EdgeInsets.symmetric(vertical: 20.0);
   static const kPaddSV28 = EdgeInsets.symmetric(vertical: 28.0);
   // Padding HORIZONTAL
@@ -41,19 +42,22 @@ class AppStyles {
   static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
   static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
   static const kPaddSV20H28 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 28.0);
-  static const kPaddSV6H12 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0);
-  static const kPaddSV6H8 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0);
   static const kPaddSV10H12 = EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
+  static const kPaddSV6H12 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0);
+  static const kPaddSV4H6 = EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0);
+  static const kPaddSV6H8 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0);
   static const kPaddSV12H14 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 14.0);
   static const kPaddSV16H12 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0);
   static const kPaddSV16H20 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0);
   static const kPaddSV8H16 = EdgeInsets.symmetric(vertical: 8, horizontal: 16);
+  static const kPaddSV10H16 = EdgeInsets.symmetric(vertical: 10, horizontal: 16);
   static const kPaddSV16H16 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0);
   static const kPaddSV20H16 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0);
 
   static const kPaddSV20H20 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0);
 
   // Spacing
+  static const kSpac2 = 2.0;
   static const kSpac4 = 4.0;
   static const kSpac8 = 8.0;
   static const kSpac12 = 12.0;
@@ -104,8 +108,10 @@ class AppStyles {
   static double kDoubleInfinity = double.infinity;
   // Icon Size
   static const kIconSize4 = 4.0;
+  static const kIconSize8 = 8.0;
   static const kIconSize12 = 12.0;
   static const kIconSize16 = 16.0;
+  static const kIconSize18 = 18.0;
   static const kIconSize20 = 20.0;
   static const kIconSize25 = 25.0;
   static const kIconSize30 = 30.0;
@@ -119,16 +125,20 @@ class AppStyles {
   static const kSize16 = 16.0;
   static const kSize20 = 20.0;
   static const kSize24 = 24.0;
+  static const kSize26 = 26.0;
   static const kSize28 = 28.0;
   static const kSize32 = 32.0;
   static const kSize30 = 30.0;
+  static const kSize40 = 40.0;
   static const kSize45 = 45.0;
   static const kSize48 = 48.0;
   static const kSize50 = 50.0;
   static const kSize56 = 56.0;
   static const kSize64 = 64.0;
   static const kSize70 = 70.0;
+  static const kSize80 = 80.0;
   static const kSize90 = 90.0;
   static const kSize100 = 100.0;
+  static const kSize150 = 150.0;
   static const kSize200 = 200.0;
 }

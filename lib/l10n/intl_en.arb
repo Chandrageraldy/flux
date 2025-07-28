@@ -68,8 +68,6 @@
     "targetWeightDesc": "Set your goal weight — if it’s higher, we’ll help you gain; if lower, lose; if the same, maintain.",
     "targetWeightWeeklyLabel": "Target Weekly Gain",
     "targetWeightWeeklyDesc": "0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk",
-    "cmUnitLabel": "cm",
-    "kgUnitLabel": "Kg",
     "sedentaryLabel": "Sedentary",
     "sedentaryDesc": "Mostly sitting all day (e.g., desk job, little movement).",
     "lightlyActiveLabel": "Lightly Active",
@@ -165,5 +163,8 @@
     "vitaminB12Label": "Vitamin B12",
     "cholineLabel": "Choline",
     "vitaminKLabel": "Vitamin K",
-    "folateLabel": "Folate"
+    "folateLabel": "Folate",
+
+    "savedYourFoodLabel": "Saved Your Food",
+    "savedYourFoodDesc": "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."
 }

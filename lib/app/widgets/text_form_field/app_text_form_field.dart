@@ -12,6 +12,7 @@ class AppTextFormField extends StatelessWidget {
     this.topLabel,
     this.onChanged,
     this.keyboardType = TextInputType.text,
+    this.height,
     super.key,
   });
 
@@ -23,6 +24,7 @@ class AppTextFormField extends StatelessWidget {
   final String? topLabel;
   final void Function(String value)? onChanged;
   final TextInputType keyboardType;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,10 @@ class AppTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (topLabel != null) Text(topLabel!, style: _Styles.getTopLabelTextStyle(context)),
-        if (topLabel != null) AppStyles.kSizedBoxH8,
+        if (topLabel != null) AppStyles.kSizedBoxH4,
         Container(
           padding: AppStyles.kPaddSH20,
-          height: AppStyles.kSize48,
+          height: height ?? AppStyles.kSize48,
           decoration: _Styles.getContainerDecoration(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,11 +89,11 @@ abstract class _Styles {
 
   // Text Form Field Text Style
   static TextStyle getTextFormFieldTextStyle() {
-    return Quicksand.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.small);
   }
 
   // Top Label Text Style
   static TextStyle getTopLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.tertiaryFixed);
+    return Quicksand.semiBold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
   }
 }

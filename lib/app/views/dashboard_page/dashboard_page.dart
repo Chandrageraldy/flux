@@ -47,6 +47,8 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
                 elevation: 0,
                 selectedItemColor: context.theme.colorScheme.onTertiary,
                 unselectedItemColor: context.theme.colorScheme.tertiaryFixed,
+                selectedLabelStyle: Quicksand.semiBold.withSize(FontSizes.extraSmall),
+                unselectedLabelStyle: Quicksand.semiBold.withSize(FontSizes.extraSmall),
                 type: BottomNavigationBarType.fixed,
                 items: [
                   getProgressBarItem(),
@@ -73,16 +75,17 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
 extension _WidgetFactories on _DashboardPageState {
   BottomNavigationBarItem getProgressBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.chartLine),
-      activeIcon: FaIcon(FontAwesomeIcons.chartLine, color: context.theme.colorScheme.primary),
+      icon: FaIcon(FontAwesomeIcons.chartLine, size: AppStyles.kSize24),
+      activeIcon: FaIcon(FontAwesomeIcons.chartLine, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
       label: S.current.progressLabel,
     );
   }
 
   BottomNavigationBarItem getDiaryBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.bookOpenReader),
-      activeIcon: FaIcon(FontAwesomeIcons.bookOpenReader, color: context.theme.colorScheme.primary),
+      icon: FaIcon(FontAwesomeIcons.bookOpenReader, size: AppStyles.kSize24),
+      activeIcon:
+          FaIcon(FontAwesomeIcons.bookOpenReader, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
       label: S.current.diaryLabel,
     );
   }
@@ -91,13 +94,10 @@ extension _WidgetFactories on _DashboardPageState {
     final navigationItem = Container(
       padding: AppStyles.kPaddSV6H8,
       decoration: BoxDecoration(
-        borderRadius: AppStyles.kRad12,
+        borderRadius: AppStyles.kRad10,
         color: context.theme.colorScheme.secondary,
       ),
-      child: FaIcon(
-        FontAwesomeIcons.add,
-        color: context.theme.colorScheme.onPrimary,
-      ),
+      child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize20),
     );
 
     return BottomNavigationBarItem(
@@ -115,16 +115,17 @@ extension _WidgetFactories on _DashboardPageState {
 
   BottomNavigationBarItem getFoodBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.appleWhole),
-      activeIcon: FaIcon(FontAwesomeIcons.appleWhole, color: context.theme.colorScheme.primary),
+      icon: FaIcon(FontAwesomeIcons.appleWhole, size: AppStyles.kSize24),
+      activeIcon:
+          FaIcon(FontAwesomeIcons.appleWhole, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
       label: S.current.foodLabel,
     );
   }
 
   BottomNavigationBarItem getMoreBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.ellipsis),
-      activeIcon: FaIcon(FontAwesomeIcons.ellipsis, color: context.theme.colorScheme.primary),
+      icon: FaIcon(FontAwesomeIcons.ellipsis, size: AppStyles.kSize24),
+      activeIcon: FaIcon(FontAwesomeIcons.ellipsis, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
       label: S.current.moreLabel,
     );
   }

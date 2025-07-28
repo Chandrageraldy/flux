@@ -48,11 +48,11 @@ extension _WidgetFactories on OnboardContent {
 abstract class _Styles {
   // Title Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style
   static TextStyle getDescriptionLabelTextStyle() {
-    return Quicksand.regular.withSize(FontSizes.mediumPlus);
+    return Quicksand.regular.withSize(FontSizes.medium);
   }
 }

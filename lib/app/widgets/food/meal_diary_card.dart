@@ -77,7 +77,7 @@ extension _WidgetFactories on MealDiaryCard {
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
       label: '500/360',
-      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize16),
+      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize12),
     );
   }
 
@@ -86,8 +86,8 @@ extension _WidgetFactories on MealDiaryCard {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: AppStyles.kSize32,
-        height: AppStyles.kSize32,
+        width: AppStyles.kSize28,
+        height: AppStyles.kSize28,
         decoration: _Styles.getIconContainerDecoration(context),
         child: Center(child: getIcon(context)),
       ),
@@ -98,7 +98,7 @@ extension _WidgetFactories on MealDiaryCard {
   Widget getIcon(BuildContext context) {
     return FaIcon(
       FontAwesomeIcons.add,
-      size: AppStyles.kIconSize20,
+      size: AppStyles.kIconSize18,
       color: context.theme.colorScheme.onPrimary,
     );
   }
@@ -131,6 +131,6 @@ abstract class _Styles {
 
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 }

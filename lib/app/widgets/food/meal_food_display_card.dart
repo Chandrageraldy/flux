@@ -24,7 +24,7 @@ class MealFoodDisplayCard extends StatelessWidget {
                 children: [
                   NutritionTag(
                     label: '245',
-                    icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize16),
+                    icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize12),
                   ),
                   NutritionTag(tag: 'P', label: '31'),
                   NutritionTag(tag: 'C', label: '20'),
@@ -58,6 +58,6 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium);
+    return Quicksand.semiBold.withCustomSize(13);
   }
 }

@@ -9,6 +9,7 @@ class AppDropdownForm extends StatelessWidget {
     this.initialValue,
     this.topLabel,
     this.onChanged,
+    this.height,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class AppDropdownForm extends StatelessWidget {
   final String? initialValue;
   final String? topLabel;
   final ValueChanged<String?>? onChanged;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +27,10 @@ class AppDropdownForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (topLabel != null) Text(topLabel!, style: _Styles.getTopLabelTextStyle(context)),
-        if (topLabel != null) AppStyles.kSizedBoxH8,
+        if (topLabel != null) AppStyles.kSizedBoxH4,
         Container(
           padding: AppStyles.kPaddSH20,
-          height: AppStyles.kSize48,
+          height: height ?? AppStyles.kSize48,
           decoration: _Styles.getContainerDecoration(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,6 +81,6 @@ abstract class _Styles {
 
   // Top Label Text Style
   static TextStyle getTopLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.tertiaryFixed);
+    return Quicksand.semiBold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
   }
 }
