@@ -116,7 +116,7 @@ extension _WidgetFactories on _DiaryPageState {
   Widget getDateShifterButton(VoidCallback onPressed, IconData icon, bool isEnabled) {
     return IconButton(
       onPressed: isEnabled ? onPressed : null,
-      icon: FaIcon(icon, size: AppStyles.kIconSize20, color: isEnabled ? null : Colors.grey),
+      icon: FaIcon(icon, size: AppStyles.kIconSize18, color: isEnabled ? null : Colors.grey),
     );
   }
 

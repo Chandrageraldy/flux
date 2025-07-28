@@ -1,5 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/widgets/button/selection_button.dart';
+import 'package:flux/app/widgets/button/logging_selection_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()
@@ -23,11 +23,11 @@ class _LoggingSelectionModalState extends BaseStatefulState<LoggingSelectionModa
   @override
   Widget body() {
     return Padding(
-      padding: AppStyles.kPaddO10B20,
-      child: Column(
+      padding: AppStyles.kPaddSV15,
+      child: Row(
         spacing: AppStyles.kSpac16,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [AppStyles.kSizedBoxH2, ...getLoggingSelectionButtonList()],
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [...getLoggingSelectionButtonList()],
       ),
     );
   }
@@ -50,33 +50,34 @@ extension _WidgetFactories on _LoggingSelectionModalState {
   List<Widget> getLoggingSelectionButtonList() {
     return [
       // Log Food
-      SelectionButton(
-        title: S.current.loggingSelectionButtonTitle1,
-        description: S.current.loggingSelectionButtonDesc1,
+      LoggingSelectionButton(
         icon: FaIcon(
           FontAwesomeIcons.appleWhole,
           color: context.theme.colorScheme.primary,
+          size: AppStyles.kSize16,
         ),
+        label: S.current.loggingSelectionButtonTitle1,
         onPressed: _onLogFoodPressed,
       ),
+      // Barcode Scan
+      LoggingSelectionButton(
+        icon: FaIcon(
+          FontAwesomeIcons.qrcode,
+          color: context.theme.colorScheme.primary,
+          size: AppStyles.kSize16,
+        ),
+        label: S.current.loggingSelectionButtonTitle3,
+        onPressed: _onBarcodeScanPressed,
+      ),
       // Meal Scan
-      SelectionButton(
-        title: S.current.loggingSelectionButtonTitle2,
-        description: S.current.loggingSelectionButtonDesc2,
+      LoggingSelectionButton(
         icon: FaIcon(
           FontAwesomeIcons.cameraRetro,
           color: context.theme.colorScheme.primary,
+          size: AppStyles.kSize16,
         ),
+        label: S.current.loggingSelectionButtonTitle2,
         onPressed: _onMealScanIPressed,
-      ),
-      SelectionButton(
-        title: S.current.loggingSelectionButtonTitle3,
-        description: S.current.loggingSelectionButtonDesc3,
-        icon: FaIcon(
-          FontAwesomeIcons.barcode,
-          color: context.theme.colorScheme.primary,
-        ),
-        onPressed: _onBarcodeScanPressed,
       ),
     ];
   }
