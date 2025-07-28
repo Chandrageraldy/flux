@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Describe a meal"),
         "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
+        "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
@@ -115,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "magnesiumLabel": MessageLookupByLibrary.simpleMessage("Magnesium"),
         "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
         "manganeseLabel": MessageLookupByLibrary.simpleMessage("Manganese"),
+        "mealRatioLabel": MessageLookupByLibrary.simpleMessage("Meal Ratio"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
         "mediterraneanDesc":
             MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),
@@ -190,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "planSelectionTitle": MessageLookupByLibrary.simpleMessage(
             "How Should We Build Your Plan?"),
         "potassiumLabel": MessageLookupByLibrary.simpleMessage("Potassium"),
+        "profileLabel": MessageLookupByLibrary.simpleMessage("Profile"),
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
         "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),

@@ -17,6 +17,9 @@
     "planSelectionTitle": "How Should We Build Your Plan?",
     "planSelectionDesc": "Choose to build your plan step-by-step or let AI design one based on your goals.",
     "getStartedLabel": "Get Started",
+    "profileLabel": "Profile",
+    "editLabel": "Edit",
+    "mealRatioLabel": "Meal Ratio",
 
     "planSelectionButtonTitle1": "Manual Custom Plan",
     "planSelectionButtonDesc1": "Answer questions and customize your own journey.",

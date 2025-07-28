@@ -10,6 +10,13 @@ class MorePage extends BaseStatefulPage {
 
 class _MorePageState extends BaseStatefulState<MorePage> {
   @override
+  PreferredSizeWidget? appbar() => AppBar(
+        title: Text(S.current.profileLabel, style: Quicksand.bold.withSize(FontSizes.large)),
+        backgroundColor: context.theme.colorScheme.onPrimary,
+        centerTitle: true,
+      );
+
+  @override
   bool useGradientBackground() => false;
 
   @override

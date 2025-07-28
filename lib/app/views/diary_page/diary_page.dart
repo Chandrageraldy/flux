@@ -30,18 +30,36 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppStyles.kSizedBoxH20,
+            AppStyles.kSizedBoxH12,
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppStyles.kSpac24,
               children: [getDateShifterContainer(), getDateTimeline()],
             ),
             AppStyles.kSizedBoxH16,
-            getTargetsLabel(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                getTargetsLabel(),
+                getEditButton(
+                  '${S.current.editLabel} ${S.current.targetsLabel.toLowerCase()}',
+                  _onEditTargetsPressed,
+                ),
+              ],
+            ),
             AppStyles.kSizedBoxH8,
             getTargetsContainer(),
             AppStyles.kSizedBoxH16,
-            getMealsLoggedLabel(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                getMealsLoggedLabel(),
+                getEditButton(
+                  '${S.current.editLabel} ${S.current.mealRatioLabel.toLowerCase()}',
+                  _onEditMealRatioPressed,
+                ),
+              ],
+            ),
             AppStyles.kSizedBoxH8,
             MealDiaryCard(mealType: MealType.breakfast),
             AppStyles.kSizedBoxH16,
@@ -85,7 +103,11 @@ extension _PrivateMethods on _DiaryPageState {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _DiaryPageState {}
+extension _Actions on _DiaryPageState {
+  void _onEditTargetsPressed() {}
+
+  void _onEditMealRatioPressed() {}
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _DiaryPageState {
@@ -271,6 +293,14 @@ extension _WidgetFactories on _DiaryPageState {
   Widget getTargetsLabel() {
     return Text(S.current.targetsLabel, style: _Styles.getTargetsLabelTextStyle(context));
   }
+
+  // Edit Button
+  Widget getEditButton(String label, VoidCallback? onPressed) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Text(label, style: _Styles.getEditLabelTextStyle(context)),
+    );
+  }
 }
 
 // * ----------------------------- Styles -----------------------------
@@ -346,5 +376,10 @@ class _Styles {
   // Targets Label Text Style
   static TextStyle getTargetsLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.medium);
+  }
+
+  // Edit Label Text Style
+  static TextStyle getEditLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

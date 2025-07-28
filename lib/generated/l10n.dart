@@ -230,6 +230,36 @@ class S {
     );
   }
 
+  /// `Profile`
+  String get profileLabel {
+    return Intl.message(
+      'Profile',
+      name: 'profileLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get editLabel {
+    return Intl.message(
+      'Edit',
+      name: 'editLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meal Ratio`
+  String get mealRatioLabel {
+    return Intl.message(
+      'Meal Ratio',
+      name: 'mealRatioLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Manual Custom Plan`
   String get planSelectionButtonTitle1 {
     return Intl.message(
