@@ -346,15 +346,15 @@ extension _WidgetFactories on _FoodDetailsPageState {
       segments: [
         SegmentLinearIndicator(
           percent: macroNutrientPercentage[MacroNutrients.protein.key] ?? 0.0,
-          color: Color(0xFFdf9149),
+          color: MacroNutrients.protein.color,
         ),
         SegmentLinearIndicator(
           percent: macroNutrientPercentage[MacroNutrients.carbs.key] ?? 0.0,
-          color: Color(0xFF6bd0e9),
+          color: MacroNutrients.carbs.color,
         ),
         SegmentLinearIndicator(
           percent: macroNutrientPercentage[MacroNutrients.fat.key] ?? 0.0,
-          color: Color(0xFF7770c0),
+          color: MacroNutrients.fat.color,
         ),
       ],
       width: AppStyles.kDoubleInfinity,

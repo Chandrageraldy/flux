@@ -24,6 +24,7 @@ class AppStyles {
   // Padding VERTICAL
   static const kPaddSV6 = EdgeInsets.symmetric(vertical: 6.0);
   static const kPaddSV8 = EdgeInsets.symmetric(vertical: 8.0);
+  static const kPaddSV10 = EdgeInsets.symmetric(vertical: 10.0);
   static const kPaddSV12 = EdgeInsets.symmetric(vertical: 12.0);
   static const kPaddSV15 = EdgeInsets.symmetric(vertical: 15.0);
   static const kPaddSV18 = EdgeInsets.symmetric(vertical: 18.0);

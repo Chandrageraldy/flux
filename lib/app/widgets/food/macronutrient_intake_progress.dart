@@ -24,7 +24,6 @@ class MacronutrientIntakeProgress extends StatelessWidget {
           getLabel(context),
           getLinearProgressIndicator(context),
           getValueLabel(context),
-          AppStyles.kSizedBoxH2,
         ],
       ),
     );
@@ -80,9 +79,9 @@ abstract class _Styles {
   // Linear Progress Indicator Color
   static Color getLinearProgressIndicatorColor(MacroNutrients macroNutrient) {
     return macroNutrient == MacroNutrients.protein
-        ? Color(0xFFdf9149)
+        ? MacroNutrients.protein.color
         : macroNutrient == MacroNutrients.carbs
-            ? Color(0xFF6bd0e9)
-            : Color(0xFF7770c0);
+            ? MacroNutrients.carbs.color
+            : MacroNutrients.fat.color;
   }
 }

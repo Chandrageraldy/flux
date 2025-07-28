@@ -27,6 +27,8 @@ class MealDiaryCard extends StatelessWidget {
               itemBuilder: (context, index) => MealFoodDisplayCard(),
               separatorBuilder: (context, index) => const SizedBox(height: 12),
             ),
+            getDivider(context),
+            getAddToButton(context)
           ],
         ),
       ),
@@ -48,21 +50,13 @@ extension _WidgetFactories on MealDiaryCard {
     return Container(
       padding: AppStyles.kPaddSV12H20,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        spacing: AppStyles.kSpac8,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  getMealTypeLabel(context),
-                  AppStyles.kSizedBoxW8,
-                  getCalorieTag(context),
-                ],
-              ),
-            ],
-          ),
-          getIconContainer(context)
+          getMealTypeLabel(context),
+          getCalorieTag(context),
+          NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
+          NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
+          NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
         ],
       ),
     );
@@ -81,33 +75,19 @@ extension _WidgetFactories on MealDiaryCard {
     );
   }
 
-  // Icon Container
-  Widget getIconContainer(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: AppStyles.kSize28,
-        height: AppStyles.kSize28,
-        decoration: _Styles.getIconContainerDecoration(context),
-        child: Center(child: getIcon(context)),
-      ),
-    );
-  }
-
-  // Get Icon
-  Widget getIcon(BuildContext context) {
-    return FaIcon(
-      FontAwesomeIcons.add,
-      size: AppStyles.kIconSize18,
-      color: context.theme.colorScheme.onPrimary,
-    );
-  }
-
   // Get Divider
   Widget getDivider(BuildContext context) {
     return Divider(
       height: 1,
       color: context.theme.colorScheme.tertiaryFixedDim,
+    );
+  }
+
+  // Add To Button
+  Widget getAddToButton(BuildContext context) {
+    return Container(
+      padding: AppStyles.kPaddSV10,
+      child: Text('+ ADD TO ${mealType.label.toUpperCase()}', style: _Styles.getAddToButtonTextStyle(context)),
     );
   }
 }
@@ -121,16 +101,13 @@ abstract class _Styles {
     ]);
   }
 
-  // Icon Container Decoration
-  static BoxDecoration getIconContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.secondary,
-      borderRadius: AppStyles.kRad100,
-    );
-  }
-
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+  }
+
+  // Add To Button Label Text Style
+  static TextStyle getAddToButtonTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

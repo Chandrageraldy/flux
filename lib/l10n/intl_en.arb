@@ -135,6 +135,7 @@
     "calorieFormula": "Remaining = Goal - Logged",
     "remainingLabel": "Remaining",
     "macronutrientsLabel": "Macronutrients",
+    "targetsLabel": "Targets",
     "loggedMealsLabel": "Logged Meals",
     "personalizingYourPlanLoadingText": "Hang tight! We're crafting a personalized plan just for you.",
 

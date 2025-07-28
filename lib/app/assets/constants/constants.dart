@@ -128,6 +128,28 @@ enum MacroNutrients {
         return S.current.fatLabel;
     }
   }
+
+  String get tag {
+    switch (this) {
+      case carbs:
+        return 'C';
+      case protein:
+        return 'P';
+      case fat:
+        return 'F';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case carbs:
+        return const Color(0xFF6bd0e9);
+      case protein:
+        return const Color(0xFFdf9149);
+      case fat:
+        return const Color(0xFF7770c0);
+    }
+  }
 }
 
 enum Nutrition {

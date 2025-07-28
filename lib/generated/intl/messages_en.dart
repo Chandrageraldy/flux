@@ -237,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk"),
         "targetWeightWeeklyLabel":
             MessageLookupByLibrary.simpleMessage("Target Weekly Gain"),
+        "targetsLabel": MessageLookupByLibrary.simpleMessage("Targets"),
         "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),

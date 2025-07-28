@@ -1320,6 +1320,16 @@ class S {
     );
   }
 
+  /// `Targets`
+  String get targetsLabel {
+    return Intl.message(
+      'Targets',
+      name: 'targetsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Logged Meals`
   String get loggedMealsLabel {
     return Intl.message(

@@ -1,6 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/repositories/food_repo/food_repo.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
+import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 
 @RoutePage()
 class ProgressPage extends BaseStatefulPage {
@@ -20,7 +21,13 @@ class _ProgressPageState extends BaseStatefulState<ProgressPage> {
   @override
   Widget body() {
     return Center(
-      child: ElevatedButton(onPressed: _testAPI, child: Text('Test API')),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ElevatedButton(onPressed: _testAPI, child: Text('Test API')),
+          ElevatedButton(onPressed: _onLogoutPressed, child: Text(S.current.logOutLabel)),
+        ],
+      ),
     );
   }
 }
@@ -39,6 +46,14 @@ extension _PrivateMethods on _ProgressPageState {
     // } else {
     //   debugPrint('API Error: ${response.error}');
     // }
+  }
+
+  void _onLogoutPressed() async {
+    final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
+
+    if (response == true && mounted) {
+      context.router.replaceAll([RootRoute()]);
+    }
   }
 }
 

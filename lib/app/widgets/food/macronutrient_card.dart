@@ -101,10 +101,10 @@ abstract class _Styles {
   // Percentage Text Style
   static TextStyle getPercentageTextStyle(BuildContext context, MacroNutrients macroNutrient) {
     Color color = macroNutrient == MacroNutrients.protein
-        ? Color(0xFFdf9149)
+        ? MacroNutrients.protein.color
         : macroNutrient == MacroNutrients.carbs
-            ? Color(0xFF6bd0e9)
-            : Color(0xFF7770c0);
+            ? MacroNutrients.carbs.color
+            : MacroNutrients.fat.color;
 
     return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: color);
   }

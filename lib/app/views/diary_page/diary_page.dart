@@ -28,21 +28,27 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
       child: Padding(
         padding: AppStyles.kPaddOL20R20B16,
         child: Column(
-          spacing: AppStyles.kSpac16,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppStyles.kSizedBoxH4,
+            AppStyles.kSizedBoxH20,
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppStyles.kSpac24,
               children: [getDateShifterContainer(), getDateTimeline()],
             ),
-            getCalorieIntakeContainer(),
-            getMacroNutrientIntakeContainer(),
+            AppStyles.kSizedBoxH16,
+            getTargetsLabel(),
+            AppStyles.kSizedBoxH8,
+            getTargetsContainer(),
+            AppStyles.kSizedBoxH16,
             getMealsLoggedLabel(),
+            AppStyles.kSizedBoxH8,
             MealDiaryCard(mealType: MealType.breakfast),
+            AppStyles.kSizedBoxH16,
             MealDiaryCard(mealType: MealType.lunch),
+            AppStyles.kSizedBoxH16,
             MealDiaryCard(mealType: MealType.dinner),
+            AppStyles.kSizedBoxH16,
             MealDiaryCard(mealType: MealType.snack),
           ],
         ),
@@ -138,8 +144,8 @@ extension _WidgetFactories on _DiaryPageState {
         focusedDate: _selectedDate,
         firstDate: DateTime.now().subtract(const Duration(days: 7)),
         lastDate: DateTime.now().add(const Duration(days: 7)),
-        timelineOptions: TimelineOptions(height: AppStyles.kSize80),
-        itemExtent: AppStyles.kSize56,
+        timelineOptions: TimelineOptions(height: AppStyles.kSize70),
+        itemExtent: AppStyles.kSize50,
         onDateChange: (date) {
           _setState(() {
             _selectedDate = date;
@@ -150,7 +156,7 @@ extension _WidgetFactories on _DiaryPageState {
   }
 
   // Calorie Intake Container
-  Widget getCalorieIntakeContainer() {
+  Widget getTargetsContainer() {
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getIntakeContainerDecoration(context),
@@ -168,7 +174,11 @@ extension _WidgetFactories on _DiaryPageState {
               getCalorieInformationLabel('1000', S.current.loggedLabel),
             ],
           ),
-          AppStyles.kSizedBoxH4,
+          AppStyles.kSizedBoxH12,
+          Padding(
+            padding: AppStyles.kPaddSH16,
+            child: getMacroNutrientIntakeProgressRow(),
+          )
         ],
       ),
     );
@@ -225,24 +235,6 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
-  // Macro Nutrient Intake Container
-  Widget getMacroNutrientIntakeContainer() {
-    return Container(
-      width: AppStyles.kDoubleInfinity,
-      decoration: _Styles.getIntakeContainerDecoration(context),
-      padding: AppStyles.kPaddSV8H16,
-      child: Column(
-        spacing: AppStyles.kSpac12,
-        children: [getMacroNutrientIntakeLabel(), getMacroNutrientIntakeProgressRow()],
-      ),
-    );
-  }
-
-  // Macro Nutrient Intake Label
-  Widget getMacroNutrientIntakeLabel() {
-    return Text(S.current.macronutrientsLabel, style: _Styles.getIntakeLabelTextStyle(context));
-  }
-
   // Macro Nutrient Intake Progress Row
   Widget getMacroNutrientIntakeProgressRow() {
     return Row(
@@ -273,6 +265,11 @@ extension _WidgetFactories on _DiaryPageState {
   // Meals Logged Label
   Widget getMealsLoggedLabel() {
     return Text(S.current.loggedMealsLabel, style: _Styles.getMealsLoggedLabelTextStyle(context));
+  }
+
+  // Targets Label
+  Widget getTargetsLabel() {
+    return Text(S.current.targetsLabel, style: _Styles.getTargetsLabelTextStyle(context));
   }
 }
 
@@ -343,6 +340,11 @@ class _Styles {
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.medium);
+  }
+
+  // Targets Label Text Style
+  static TextStyle getTargetsLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 }

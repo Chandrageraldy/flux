@@ -26,9 +26,9 @@ class MealFoodDisplayCard extends StatelessWidget {
                     label: '245',
                     icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize12),
                   ),
-                  NutritionTag(tag: 'P', label: '31'),
-                  NutritionTag(tag: 'C', label: '20'),
-                  NutritionTag(tag: 'F', label: '62'),
+                  NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
+                  NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
+                  NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
                 ],
               ),
             ],
@@ -48,7 +48,7 @@ abstract class _Styles {
   // Container Decoration
   static BoxDecoration getContainerDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.surface,
+      color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),

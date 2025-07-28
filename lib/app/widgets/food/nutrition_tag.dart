@@ -26,7 +26,7 @@ class NutritionTag extends StatelessWidget {
                 if (tag != null)
                   TextSpan(
                     text: '$tag ',
-                    style: _Styles.getTagLabelTextStyle(context),
+                    style: _Styles.getTagLabelTextStyle(context, tag!),
                   ),
                 TextSpan(
                   text: label.toString(),
@@ -47,8 +47,14 @@ extension _WidgetFactories on NutritionTag {}
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Tag Label Text Style
-  static TextStyle getTagLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(9).copyWith(color: context.theme.colorScheme.primary);
+  static TextStyle getTagLabelTextStyle(BuildContext context, String tag) {
+    Color color = tag == MacroNutrients.protein.tag
+        ? MacroNutrients.protein.color
+        : tag == MacroNutrients.carbs.tag
+            ? MacroNutrients.carbs.color
+            : MacroNutrients.fat.color;
+
+    return Quicksand.bold.withCustomSize(9).copyWith(color: color);
   }
 
   // Label Text Style
