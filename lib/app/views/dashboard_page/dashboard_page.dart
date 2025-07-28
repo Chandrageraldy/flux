@@ -22,7 +22,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
         DiaryRoute(),
         LoggingSelectionRoute(),
         FoodSearchRoute(),
-        MoreRoute(),
+        ProfileRoute(),
       ],
       builder: (context, child, _) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -124,9 +124,9 @@ extension _WidgetFactories on _DashboardPageState {
 
   BottomNavigationBarItem getMoreBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.ellipsis, size: AppStyles.kSize24),
-      activeIcon: FaIcon(FontAwesomeIcons.ellipsis, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
-      label: S.current.moreLabel,
+      icon: FaIcon(FontAwesomeIcons.solidUser, size: AppStyles.kSize24),
+      activeIcon: FaIcon(FontAwesomeIcons.solidUser, color: context.theme.colorScheme.primary, size: AppStyles.kSize24),
+      label: S.current.profileLabel,
     );
   }
 }

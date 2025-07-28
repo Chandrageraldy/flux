@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -76,7 +77,7 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     final activityLevel = bm.activityLevel ?? PlanSelectionValue.sedentary.value;
     final exerciseLevel = bm.exerciseLevel ?? PlanSelectionValue.never.value;
 
-    final age = calculateAge(dob);
+    final age = FunctionUtils.calculateAge(dob);
     final bmr = calculateBMR(gender: gender, weightKg: weight, heightCm: height, age: age);
 
     final activityFactor = getActivityFactor(activityLevel);
@@ -98,15 +99,6 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     print(completeNutrient);
 
     createPersonalizedPlan(completeNutrient);
-  }
-
-  int calculateAge(DateTime dob) {
-    final now = DateTime.now();
-    int age = now.year - dob.year;
-    if (now.month < dob.month || (now.month == dob.month && now.day < dob.day)) {
-      age--;
-    }
-    return age;
   }
 
   // Basal Metabolic Rate (BMR)

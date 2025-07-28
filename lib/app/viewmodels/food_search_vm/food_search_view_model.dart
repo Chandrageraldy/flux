@@ -9,6 +9,9 @@ class FoodSearchViewModel extends BaseViewModel {
   List<FoodResponseModel> foodSearchResults = [];
   List<SavedFoodModel> savedFoodResults = [];
 
+  bool _isSavedFoodLoading = false;
+  bool get isSavedFoodLoading => _isSavedFoodLoading;
+
   Future<void> searchInstant(String query) async {
     final response = await foodRepository.searchInstant(query: query);
     checkError(response);
@@ -17,9 +20,11 @@ class FoodSearchViewModel extends BaseViewModel {
   }
 
   Future<void> getSavedFoods() async {
+    _isSavedFoodLoading = true;
     final response = await foodRepository.getSavedFoods();
     checkError(response);
     savedFoodResults = response.data as List<SavedFoodModel>;
+    _isSavedFoodLoading = false;
     notifyListeners();
   }
 }

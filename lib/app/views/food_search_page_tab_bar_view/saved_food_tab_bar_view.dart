@@ -3,6 +3,7 @@ import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/utils/mixins/error_handling_mixin.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
+import 'package:flux/app/widgets/skeleton/food_list_skeleton.dart';
 
 class SavedFoodTabBarView extends StatefulWidget {
   const SavedFoodTabBarView({required this.onFoodCardPressed, super.key});
@@ -34,7 +35,7 @@ class _SavedFoodTabBarViewState extends State<SavedFoodTabBarView> with ErrorHan
 // * ------------------------ PrivateMethods ------------------------
 extension _PrivateMethods on _SavedFoodTabBarViewState {
   void getSavedFoods() async {
-    await tryLoad(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
+    await tryCatch(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
   }
 }
 
@@ -74,6 +75,11 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Food Sliver List
   Widget getFoodSliverList(BuildContext context) {
     final savedFoodResults = context.select((FoodSearchViewModel vm) => vm.savedFoodResults);
+    final isSavedFoodLoading = context.select((FoodSearchViewModel vm) => vm.isSavedFoodLoading);
+
+    if (isSavedFoodLoading) {
+      return FoodListSkeleton();
+    }
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(

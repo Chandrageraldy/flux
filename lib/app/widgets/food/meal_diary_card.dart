@@ -75,7 +75,7 @@ extension _WidgetFactories on MealDiaryCard {
     );
   }
 
-  // Get Divider
+  // Divider
   Widget getDivider(BuildContext context) {
     return Divider(
       height: 1,

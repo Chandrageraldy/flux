@@ -61,6 +61,14 @@ extension _Actions on _FoodSearchPageState {
     context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel));
   }
 
+  void _onFoodCardPressedFromSavedTab(FoodResponseModel foodResponseModel) {
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel)).then((_) {
+      if (mounted) {
+        tryCatch(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
+      }
+    });
+  }
+
   void _onChanged(String value) async {
     await tryCatch(context, () => context.read<FoodSearchViewModel>().searchInstant(value));
 
@@ -158,7 +166,7 @@ extension _WidgetFactories on _FoodSearchPageState {
 
   // Tab Bar View -> "Saved"
   Widget getSavedTabBarView() {
-    return SavedFoodTabBarView(onFoodCardPressed: _onFoodCardPressed);
+    return SavedFoodTabBarView(onFoodCardPressed: _onFoodCardPressedFromSavedTab);
   }
 }
 

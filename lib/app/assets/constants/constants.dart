@@ -15,6 +15,7 @@ class ImagePath {
   static const String onboarding3 = 'lib/app/assets/images/onboarding3.png';
   static const String fluxStar = 'lib/app/assets/images/flux-star.png';
   static const String fluxApple = 'lib/app/assets/images/flux-apple.png';
+  static const String profilePlaceholder = 'lib/app/assets/images/profile-placeholder.png';
 }
 
 class AnimationPath {

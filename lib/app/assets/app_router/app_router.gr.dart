@@ -203,22 +203,6 @@ class MealDetailsRouteArgs {
 }
 
 /// generated route for
-/// [MorePage]
-class MoreRoute extends PageRouteInfo<void> {
-  const MoreRoute({List<PageRouteInfo>? children})
-    : super(MoreRoute.name, initialChildren: children);
-
-  static const String name = 'MoreRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MorePage();
-    },
-  );
-}
-
-/// generated route for
 /// [PersonalizingPlanLoadingPage]
 class PersonalizingPlanLoadingRoute extends PageRouteInfo<void> {
   const PersonalizingPlanLoadingRoute({List<PageRouteInfo>? children})
@@ -246,6 +230,22 @@ class PlanSelectionRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const PlanSelectionModal();
+    },
+  );
+}
+
+/// generated route for
+/// [ProfilePage]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+    : super(ProfileRoute.name, initialChildren: children);
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfilePage();
     },
   );
 }
