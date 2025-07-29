@@ -45,59 +45,68 @@ extension _Actions on _ProfilePageState {}
 extension _WidgetFactories on _ProfilePageState {
   // Header Container
   Widget getHeaderContainer() {
-    final dob = userProfile?.bodyMetrics?.dob?.toDateTime(DateFormat.YEAR_MONTH_DAY);
-
     return Container(
       decoration: _Styles.getHeaderContainerDecoration(context),
       padding: AppStyles.kPaddSV10H16,
       child: Column(
         spacing: AppStyles.kSpac12,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            spacing: AppStyles.kSpac20,
-            children: [
-              getUserProfileImage(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(userProfile?.username ?? '', style: _Styles.getUsernameLabelTextStyle(context)),
-                  Text('${FunctionUtils.calculateAge(dob!)} years', style: _Styles.getAgeLabelTextStyle(context)),
-                  AppStyles.kSizedBoxH4
-                ],
-              ),
-            ],
-          ),
-          getDivider(context),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: getHeaderColumn(
-                  FaIcon(FontAwesomeIcons.bowlFood, size: AppStyles.kIconSize16),
-                  'Diet',
-                  userProfile?.bodyMetrics?.dietType?.toString().capitalize() ?? '',
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: getHeaderColumn(
-                  FaIcon(FontAwesomeIcons.weightScale, size: AppStyles.kIconSize16),
-                  'Weight',
-                  '${userProfile?.bodyMetrics?.weight?.toString()} Kg',
-                ),
-              ),
-              Expanded(
-                child: getHeaderColumn(
-                  FaIcon(FontAwesomeIcons.bullseye, size: AppStyles.kIconSize16),
-                  'Goal',
-                  '${userProfile?.bodyMetrics?.goal?.toString().capitalize()} Weight',
-                ),
-              ),
-            ],
-          )
-        ],
+        children: [getHeaderRow(), getDivider(context), getHeaderStatsRow()],
       ),
+    );
+  }
+
+  // Header Row
+  Widget getHeaderRow() {
+    final dob = userProfile?.bodyMetrics?.dob?.toDateTime(DateFormat.YEAR_MONTH_DAY);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      spacing: AppStyles.kSpac20,
+      children: [
+        getUserProfileImage(),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(userProfile?.username ?? '', style: _Styles.getUsernameLabelTextStyle(context)),
+            Text(
+              '${FunctionUtils.calculateAge(dob!)} ${S.current.yearsLabel}',
+              style: _Styles.getAgeLabelTextStyle(context),
+            ),
+            AppStyles.kSizedBoxH4
+          ],
+        ),
+      ],
+    );
+  }
+
+  // Header Stats Row
+  Widget getHeaderStatsRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: getHeaderStatsColumn(
+            FaIcon(FontAwesomeIcons.bowlFood, size: AppStyles.kIconSize16),
+            S.current.dietLabel,
+            userProfile?.bodyMetrics?.dietType?.toString().capitalize() ?? '',
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: getHeaderStatsColumn(
+            FaIcon(FontAwesomeIcons.weightScale, size: AppStyles.kIconSize16),
+            S.current.targetWeightLabel,
+            '${userProfile?.bodyMetrics?.targetWeight?.toString()} ${Unit.kg.label}',
+          ),
+        ),
+        Expanded(
+          child: getHeaderStatsColumn(
+            FaIcon(FontAwesomeIcons.bullseye, size: AppStyles.kIconSize16),
+            S.current.goalLabel,
+            '${userProfile?.bodyMetrics?.goal?.toString().capitalize()} ${S.current.weightLabel}',
+          ),
+        ),
+      ],
     );
   }
 
@@ -135,7 +144,7 @@ extension _WidgetFactories on _ProfilePageState {
   }
 
   // Header Row
-  Widget getHeaderColumn(FaIcon icon, String label, String value) {
+  Widget getHeaderStatsColumn(FaIcon icon, String label, String value) {
     return Column(
       children: [
         Container(
@@ -172,12 +181,12 @@ abstract class _Styles {
 
   // Username Label Text Style
   static TextStyle getUsernameLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus);
+    return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 
   // Age Label Text Style
   static TextStyle getAgeLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // User Profile Add Button Container Decoration
@@ -191,7 +200,7 @@ abstract class _Styles {
 
   // Header Row Label Text Style
   static TextStyle getHeaderColumnLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.small);
+    return Quicksand.regular.withSize(FontSizes.extraSmall);
   }
 
   // Header Row Value Label Text Style

@@ -1,20 +1,18 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
-import 'package:flux/app/widgets/food/food_action_header.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AllTabBarView extends StatelessWidget {
   final ScrollController scrollController;
   final void Function(FoodResponseModel) onFoodCardPressed;
-  final VoidCallback onBarcodeScannerPressed;
+  final VoidCallback onMealScanPressed;
 
   const AllTabBarView({
     super.key,
     required this.scrollController,
     required this.onFoodCardPressed,
-    required this.onBarcodeScannerPressed,
+    required this.onMealScanPressed,
   });
 
   @override
@@ -23,7 +21,7 @@ class AllTabBarView extends StatelessWidget {
       padding: AppStyles.kPaddSH20,
       child: CustomScrollView(
         controller: scrollController,
-        slivers: [getFoodActionHeader(context), getFoodSliverList(context)],
+        slivers: [getHeader(context), getFoodSliverList(context)],
       ),
     );
   }
@@ -40,7 +38,7 @@ extension _WidgetFactories on AllTabBarView {
         (context, index) {
           final food = foodSearchResults[index];
           return Padding(
-            padding: AppStyles.kPaddOB12,
+            padding: index == 0 ? AppStyles.kPaddSV12 : AppStyles.kPaddOB12,
             child: FoodDisplayCard(
               foodName: food.foodName ?? '',
               calories: food.calorieKcal ?? 0,
@@ -57,41 +55,91 @@ extension _WidgetFactories on AllTabBarView {
   }
 
   // Food Action Header
-  Widget getFoodActionHeader(BuildContext context) {
+  Widget getHeader(BuildContext context) {
     return SliverToBoxAdapter(
       child: Column(
         children: [
           AppStyles.kSizedBoxH12,
-          Row(
-            children: [
-              Expanded(
-                child: FoodActionHeader(
-                  title: S.current.scanABarcodeLabel,
-                  icon: FaIcon(
-                    FontAwesomeIcons.barcode,
-                    size: AppStyles.kIconSize20,
-                    color: context.theme.colorScheme.primary,
+          Container(
+            decoration: _Styles.getHeaderContainerDecoration(context),
+            width: AppStyles.kDoubleInfinity,
+            child: Padding(
+              padding: AppStyles.kPaddSV16H16,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      spacing: AppStyles.kSpac4,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [getHeaderLabel(context), getHeaderDescriptionLabel(context)],
+                    ),
                   ),
-                  onPressed: onBarcodeScannerPressed,
-                ),
+                  getMealScanButton(context)
+                ],
               ),
-              AppStyles.kSizedBoxW12,
-              Expanded(
-                child: FoodActionHeader(
-                  title: S.current.scanAMealLabel,
-                  icon: FaIcon(
-                    FontAwesomeIcons.camera,
-                    size: AppStyles.kIconSize20,
-                    color: context.theme.colorScheme.primary,
-                  ),
-                  onPressed: onBarcodeScannerPressed,
-                ),
-              ),
-            ],
+            ),
           ),
-          AppStyles.kSizedBoxH12,
         ],
       ),
+    );
+  }
+
+  // Meal Scan Button
+  Widget getMealScanButton(BuildContext context) {
+    return GestureDetector(
+      onTap: onMealScanPressed,
+      child: Container(
+        padding: AppStyles.kPadd6,
+        decoration: _Styles.getSaveContainerDecoration(context),
+        child: Icon(Icons.camera_enhance),
+      ),
+    );
+  }
+
+  // Header Label
+  Widget getHeaderLabel(BuildContext context) {
+    return Text(
+      S.current.scanYourMealLabel,
+      style: _Styles.getHeaderLabelTextStyle(context),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  // Header Description Label
+  Widget getHeaderDescriptionLabel(BuildContext context) {
+    return Text(
+      S.current.scanYourMealDesc,
+      style: _Styles.getHeaderDescriptionLabelTextStyle(context),
+    );
+  }
+}
+
+// * ----------------------------- Styles ----------------------------
+abstract class _Styles {
+  // Header Container Decoration
+  static BoxDecoration getHeaderContainerDecoration(BuildContext context) {
+    return BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRad10);
+  }
+
+  // Header Label Text Style
+  static TextStyle getHeaderLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.medium);
+  }
+
+  // Header Description Label Text Style
+  static TextStyle getHeaderDescriptionLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.extraSmall);
+  }
+
+  // Save Container Decoration
+  static BoxDecoration getSaveContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.tertiaryFixedDim,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+      ],
     );
   }
 }

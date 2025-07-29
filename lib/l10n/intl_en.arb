@@ -20,6 +20,7 @@
     "profileLabel": "Profile",
     "editLabel": "Edit",
     "mealRatioLabel": "Meal Ratio",
+    "yearsLabel": "Years",
 
     "planSelectionButtonTitle1": "Manual Custom Plan",
     "planSelectionButtonDesc1": "Answer questions and customize your own journey.",
@@ -169,6 +170,9 @@
     "vitaminKLabel": "Vitamin K",
     "folateLabel": "Folate",
 
-    "savedYourFoodLabel": "Saved Your Food",
-    "savedYourFoodDesc": "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."
+    "saveYourFoodLabel": "Save Your Food",
+    "saveYourFoodDesc": "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.",
+    "scanYourMealLabel": "Scan Your Meal",
+    "scanYourMealDesc": "Tap the camera icon to scan your meal with AI and get instant nutrition details.",
+    "dietLabel": "Diet"
 }

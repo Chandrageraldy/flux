@@ -57,6 +57,8 @@ extension _Actions on _FoodSearchPageState {
     context.router.push(ScanBarcodeRoute());
   }
 
+  void _onMealScanPressed() {}
+
   void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
     context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel));
   }
@@ -155,7 +157,7 @@ extension _WidgetFactories on _FoodSearchPageState {
     return AllTabBarView(
       scrollController: _scrollController,
       onFoodCardPressed: _onFoodCardPressed,
-      onBarcodeScannerPressed: _onBarcodeScannerPressed,
+      onMealScanPressed: _onMealScanPressed,
     );
   }
 

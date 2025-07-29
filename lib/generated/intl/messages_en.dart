@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "describeAMealLabel":
             MessageLookupByLibrary.simpleMessage("Describe a meal"),
         "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
+        "dietLabel": MessageLookupByLibrary.simpleMessage("Diet"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
@@ -200,14 +201,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
-        "savedLabel": MessageLookupByLibrary.simpleMessage("Saved"),
-        "savedYourFoodDesc": MessageLookupByLibrary.simpleMessage(
+        "saveYourFoodDesc": MessageLookupByLibrary.simpleMessage(
             "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."),
-        "savedYourFoodLabel":
-            MessageLookupByLibrary.simpleMessage("Saved Your Food"),
+        "saveYourFoodLabel":
+            MessageLookupByLibrary.simpleMessage("Save Your Food"),
+        "savedLabel": MessageLookupByLibrary.simpleMessage("Saved"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),
+        "scanYourMealDesc": MessageLookupByLibrary.simpleMessage(
+            "Tap the camera icon to scan your meal with AI and get instant nutrition details."),
+        "scanYourMealLabel":
+            MessageLookupByLibrary.simpleMessage("Scan Your Meal"),
         "searchFoodPlaceholder":
             MessageLookupByLibrary.simpleMessage("Search foods..."),
         "sedentaryDesc": MessageLookupByLibrary.simpleMessage(
@@ -265,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weightDesc": MessageLookupByLibrary.simpleMessage(
             "Used to determine your daily calorie needs."),
         "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
+        "yearsLabel": MessageLookupByLibrary.simpleMessage("Years"),
         "zincLabel": MessageLookupByLibrary.simpleMessage("Zinc")
       };
 }

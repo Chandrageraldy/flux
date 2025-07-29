@@ -260,6 +260,16 @@ class S {
     );
   }
 
+  /// `Years`
+  String get yearsLabel {
+    return Intl.message(
+      'Years',
+      name: 'yearsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Manual Custom Plan`
   String get planSelectionButtonTitle1 {
     return Intl.message(
@@ -1640,21 +1650,51 @@ class S {
     );
   }
 
-  /// `Saved Your Food`
-  String get savedYourFoodLabel {
+  /// `Save Your Food`
+  String get saveYourFoodLabel {
     return Intl.message(
-      'Saved Your Food',
-      name: 'savedYourFoodLabel',
+      'Save Your Food',
+      name: 'saveYourFoodLabel',
       desc: '',
       args: [],
     );
   }
 
   /// `Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.`
-  String get savedYourFoodDesc {
+  String get saveYourFoodDesc {
     return Intl.message(
       'Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.',
-      name: 'savedYourFoodDesc',
+      name: 'saveYourFoodDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan Your Meal`
+  String get scanYourMealLabel {
+    return Intl.message(
+      'Scan Your Meal',
+      name: 'scanYourMealLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap the camera icon to scan your meal with AI and get instant nutrition details.`
+  String get scanYourMealDesc {
+    return Intl.message(
+      'Tap the camera icon to scan your meal with AI and get instant nutrition details.',
+      name: 'scanYourMealDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diet`
+  String get dietLabel {
+    return Intl.message(
+      'Diet',
+      name: 'dietLabel',
       desc: '',
       args: [],
     );

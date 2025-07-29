@@ -125,7 +125,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Header Label
   Widget getHeaderLabel(BuildContext context) {
     return Text(
-      S.current.savedYourFoodLabel,
+      S.current.saveYourFoodLabel,
       style: _Styles.getHeaderLabelTextStyle(context),
       textAlign: TextAlign.center,
     );
@@ -134,7 +134,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   // Header Description Label
   Widget getHeaderDescriptionLabel(BuildContext context) {
     return Text(
-      S.current.savedYourFoodDesc,
+      S.current.saveYourFoodDesc,
       style: _Styles.getHeaderDescriptionLabelTextStyle(context),
     );
   }
@@ -168,6 +168,9 @@ abstract class _Styles {
     return BoxDecoration(
       color: context.theme.colorScheme.tertiaryFixedDim,
       borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+      ],
     );
   }
 }
