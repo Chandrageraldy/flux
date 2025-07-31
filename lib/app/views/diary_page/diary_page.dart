@@ -1,5 +1,6 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
 import 'package:flux/app/widgets/food/meal_diary_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,12 +16,32 @@ class DiaryPage extends BaseStatefulPage {
 }
 
 class _DiaryPageState extends BaseStatefulState<DiaryPage> {
+  final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
+
   DateTime _selectedDate = DateTime.now();
 
   final EasyDatePickerController _datePickerController = EasyDatePickerController();
 
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
+
+  @override
+  bool useGradientBackground() {
+    return true;
+  }
+
+  @override
+  PreferredSizeWidget? appbar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      title: Image.asset(
+        ImagePath.fluxPadding,
+        height: AppStyles.kSize80,
+      ),
+      scrolledUnderElevation: 0,
+      actions: [getProfileActionButton()],
+    );
+  }
 
   @override
   Widget body() {
@@ -30,37 +51,25 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppStyles.kSizedBoxH12,
+            AppStyles.kSizedBoxH4,
             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: AppStyles.kSpac24,
-              children: [getDateShifterContainer(), getDateTimeline()],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: AppStyles.kSpac12,
+              children: [getDateShifterColumn(), getDateTimeline()],
             ),
             AppStyles.kSizedBoxH16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                getTargetsLabel(),
-                getEditButton(
-                  '${S.current.editLabel} ${S.current.targetsLabel.toLowerCase()}',
-                  _onEditTargetsPressed,
-                ),
-              ],
+              children: [getTargetsLabel(), getEditButton(_onEditTargetsPressed)],
             ),
-            AppStyles.kSizedBoxH8,
+            AppStyles.kSizedBoxH4,
             getTargetsContainer(),
-            AppStyles.kSizedBoxH16,
+            AppStyles.kSizedBoxH20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                getMealsLoggedLabel(),
-                getEditButton(
-                  '${S.current.editLabel} ${S.current.mealRatioLabel.toLowerCase()}',
-                  _onEditMealRatioPressed,
-                ),
-              ],
+              children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
             ),
-            AppStyles.kSizedBoxH8,
+            AppStyles.kSizedBoxH4,
             MealDiaryCard(mealType: MealType.breakfast),
             AppStyles.kSizedBoxH16,
             MealDiaryCard(mealType: MealType.lunch),
@@ -84,13 +93,6 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
 
 // * ------------------------ PrivateMethods ------------------------
 extension _PrivateMethods on _DiaryPageState {
-  void _shiftDate(int days) {
-    _setState(() {
-      _selectedDate = _selectedDate.add(Duration(days: days));
-    });
-    _datePickerController.animateToDate(_selectedDate);
-  }
-
   String _formatDate(DateTime selectedDate) {
     final now = DateTime.now();
 
@@ -107,73 +109,102 @@ extension _Actions on _DiaryPageState {
   void _onEditTargetsPressed() {}
 
   void _onEditMealRatioPressed() {}
+
+  void _onProfileActionPressed() {
+    context.router.push(ProfileRoute());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _DiaryPageState {
-  // Date Shifter Container
-  Widget getDateShifterContainer() {
-    final today = DateTime.now();
-    final minDate = today.subtract(const Duration(days: 7));
-    final maxDate = today.add(const Duration(days: 7));
-
-    final DateTime previousDate = _selectedDate.subtract(const Duration(days: 1));
-    final DateTime nextDate = _selectedDate.add(const Duration(days: 1));
-
-    // Allow going to the previous date (left arrow) if:
-    // - the previous date is after the minimum allowed date, OR
-    // - the previous date is exactly equal to the minimum date
-    final bool canGoPrevious = previousDate.isAfter(minDate) || DateUtils.isSameDay(previousDate, minDate);
-
-    // Allow going to the next date (right arrow) if:
-    // - the next date is before the maximum allowed date, OR
-    // - the next date is exactly equal to the maximum date
-    final bool canGoNext = nextDate.isBefore(maxDate) || DateUtils.isSameDay(nextDate, maxDate);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        getDateShifterButton(() => _shiftDate(-1), FontAwesomeIcons.chevronLeft, canGoPrevious),
-        getDateShifterLabel(),
-        getDateShifterButton(() => _shiftDate(1), FontAwesomeIcons.chevronRight, canGoNext),
-      ],
-    );
-  }
-
-  // Date Shifter Button
-  Widget getDateShifterButton(VoidCallback onPressed, IconData icon, bool isEnabled) {
-    return IconButton(
-      onPressed: isEnabled ? onPressed : null,
-      icon: FaIcon(icon, size: AppStyles.kIconSize18, color: isEnabled ? null : Colors.grey),
+  // Profile Action Button
+  Widget getProfileActionButton() {
+    return GestureDetector(
+      onTap: _onProfileActionPressed,
+      child: Padding(
+        padding: AppStyles.kPaddOR20,
+        child: FaIcon(FontAwesomeIcons.user, size: AppStyles.kIconSize18, color: context.theme.colorScheme.primary),
+      ),
     );
   }
 
   // Date Shifter Label
   Widget getDateShifterLabel() {
-    return Text(
-      _formatDate(_selectedDate),
-      style: _Styles.getDateShifterLabelTextStyle(context),
-    );
+    return Text(_formatDate(_selectedDate), style: _Styles.getDateShifterLabelTextStyle(context));
+  }
+
+  // Date Shifter Column
+  Widget getDateShifterColumn() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [getUsernameLabel(), getDateShifterLabel()]);
+  }
+
+  // Username Label
+  Widget getUsernameLabel() {
+    return Text('${S.current.hiLabel} ${userProfile?.username ?? ''},',
+        style: _Styles.getUsernameLabelTextStyle(context));
   }
 
   // Date Timeline
   Widget getDateTimeline() {
-    return EasyTheme(
-      data: _Styles.getDateTimelineTheme(context),
-      child: EasyDateTimeLinePicker(
-        controller: _datePickerController,
-        headerOptions: HeaderOptions(headerType: HeaderType.none),
-        focusedDate: _selectedDate,
-        firstDate: DateTime.now().subtract(const Duration(days: 7)),
-        lastDate: DateTime.now().add(const Duration(days: 7)),
-        timelineOptions: TimelineOptions(height: AppStyles.kSize70),
-        itemExtent: AppStyles.kSize50,
-        onDateChange: (date) {
-          _setState(() {
-            _selectedDate = date;
-          });
-        },
-      ),
+    return EasyDateTimeLinePicker.itemBuilder(
+      controller: _datePickerController,
+      headerOptions: HeaderOptions(headerType: HeaderType.none),
+      focusedDate: _selectedDate,
+      firstDate: DateTime.now().subtract(const Duration(days: 7)),
+      lastDate: DateTime.now().add(const Duration(days: 7)),
+      timelineOptions: TimelineOptions(height: AppStyles.kSize70),
+      itemExtent: AppStyles.kSize50,
+      itemBuilder: (context, date, isSelected, isDisabled, isToday, onTap) {
+        return GestureDetector(
+          onTap: onTap,
+          child: Padding(
+            padding: AppStyles.kPaddSV2,
+            child: Container(
+              decoration: _Styles.getDateTimelineContainerDecoration(context, isSelected),
+              child: Center(
+                child: Column(
+                  spacing: AppStyles.kSpac2,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    getDateTimelineMonthLabel(date, isSelected),
+                    getDateTimelineDayLabel(date, isSelected),
+                    getDateTimelineWeekdayLabel(date, isSelected)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      onDateChange: (date) {
+        _setState(() {
+          _selectedDate = date;
+        });
+      },
+    );
+  }
+
+  // Date Timeline Month Label
+  Widget getDateTimelineMonthLabel(DateTime date, bool isSelected) {
+    return Text(
+      DateFormat.MMM().format(date),
+      style: _Styles.getDateTimelineMonthLabelTextStyle(context, isSelected),
+    );
+  }
+
+  // Date Timeline Day Label
+  Widget getDateTimelineDayLabel(DateTime date, bool isSelected) {
+    return Text(
+      date.day.toString(),
+      style: _Styles.getDateTimelineDayLabelTextStyle(context, isSelected),
+    );
+  }
+
+  // Date Timeline Weekday Label
+  Widget getDateTimelineWeekdayLabel(DateTime date, bool isSelected) {
+    return Text(
+      DateFormat.E().format(date),
+      style: _Styles.getDateTimelineWeekdayLabelTextStyle(context, isSelected),
     );
   }
 
@@ -198,7 +229,7 @@ extension _WidgetFactories on _DiaryPageState {
           ),
           AppStyles.kSizedBoxH12,
           Padding(
-            padding: AppStyles.kPaddSH16,
+            padding: AppStyles.kPaddSH12,
             child: getMacroNutrientIntakeProgressRow(),
           )
         ],
@@ -221,7 +252,7 @@ extension _WidgetFactories on _DiaryPageState {
     return SizedBox(
       child: CircularPercentIndicator(
         lineWidth: _Styles.circularPercentIndicatorLineWidth,
-        radius: AppStyles.kSize45,
+        radius: AppStyles.kSize50,
         percent: 0.66,
         progressColor: context.theme.colorScheme.secondary,
         backgroundColor: context.theme.colorScheme.tertiary,
@@ -260,7 +291,7 @@ extension _WidgetFactories on _DiaryPageState {
   // Macro Nutrient Intake Progress Row
   Widget getMacroNutrientIntakeProgressRow() {
     return Row(
-      spacing: AppStyles.kSpac16,
+      spacing: AppStyles.kSpac8,
       children: [
         MacronutrientIntakeProgress(
           macroNutrient: MacroNutrients.protein,
@@ -295,10 +326,10 @@ extension _WidgetFactories on _DiaryPageState {
   }
 
   // Edit Button
-  Widget getEditButton(String label, VoidCallback? onPressed) {
+  Widget getEditButton(VoidCallback? onPressed) {
     return GestureDetector(
       onTap: onPressed,
-      child: Text(label, style: _Styles.getEditLabelTextStyle(context)),
+      child: Text(S.current.editLabel.toUpperCase(), style: _Styles.getEditLabelTextStyle(context)),
     );
   }
 }
@@ -311,7 +342,7 @@ class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }
@@ -328,40 +359,40 @@ class _Styles {
 
   // Remaining Label Label Text Style
   static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Circular Percent Indicator Line Width
   static double circularPercentIndicatorLineWidth = 6.0;
 
   // Date Timeline Theme
-  static EasyThemeData getDateTimelineTheme(BuildContext context) {
-    return EasyTheme.of(context).copyWithState(
-      selectedDayTheme: DayThemeData(
-        backgroundColor: context.theme.colorScheme.secondary,
-        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-      ),
-      unselectedDayTheme: DayThemeData(
-        backgroundColor: context.theme.colorScheme.onPrimary,
-        border: BorderSide(color: Colors.transparent),
-        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-      ),
-      disabledDayTheme: DayThemeData(
-        backgroundColor: Colors.grey.shade100,
-        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-      ),
-      selectedCurrentDayTheme: DayThemeData(
-        backgroundColor: context.theme.colorScheme.secondary,
-        border: BorderSide(color: Colors.transparent),
-        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-      ),
-      unselectedCurrentDayTheme: DayThemeData(
-        backgroundColor: context.theme.colorScheme.secondary.withValues(alpha: 0.05),
-        border: BorderSide(color: Colors.transparent),
-        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-      ),
-    );
-  }
+  // static EasyThemeData getDateTimelineTheme(BuildContext context) {
+  //   return EasyTheme.of(context).copyWithState(
+  //     selectedDayTheme: DayThemeData(
+  //       backgroundColor: context.theme.colorScheme.secondary,
+  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+  //     ),
+  //     unselectedDayTheme: DayThemeData(
+  //       backgroundColor: context.theme.colorScheme.onPrimary,
+  //       border: BorderSide(color: Colors.transparent),
+  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+  //     ),
+  //     disabledDayTheme: DayThemeData(
+  //       backgroundColor: Colors.grey.shade100,
+  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+  //     ),
+  //     selectedCurrentDayTheme: DayThemeData(
+  //       backgroundColor: context.theme.colorScheme.secondary,
+  //       border: BorderSide(color: Colors.transparent),
+  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+  //     ),
+  //     unselectedCurrentDayTheme: DayThemeData(
+  //       backgroundColor: context.theme.colorScheme.secondary.withValues(alpha: 0.05),
+  //       border: BorderSide(color: Colors.transparent),
+  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+  //     ),
+  //   );
+  // }
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
@@ -370,16 +401,47 @@ class _Styles {
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium);
+    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Targets Label Text Style
   static TextStyle getTargetsLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium);
+    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Edit Label Text Style
   static TextStyle getEditLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+  }
+
+  // Date Timeline Container Decoration
+  static BoxDecoration getDateTimelineContainerDecoration(BuildContext context, bool isSelected) {
+    return BoxDecoration(
+      color: isSelected ? context.theme.colorScheme.secondary : context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
+    );
+  }
+
+  // Date Timeline Month Label Text Style
+  static TextStyle getDateTimelineMonthLabelTextStyle(BuildContext context, bool isSelected) {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: isSelected ? Colors.white : Colors.black);
+  }
+
+  // Date Timeline Day Label Text Style
+  static TextStyle getDateTimelineDayLabelTextStyle(BuildContext context, bool isSelected) {
+    return Quicksand.bold.withSize(FontSizes.large).copyWith(color: isSelected ? Colors.white : Colors.black);
+  }
+
+  // Date Timeline Weekday Label Text Style
+  static TextStyle getDateTimelineWeekdayLabelTextStyle(BuildContext context, bool isSelected) {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: isSelected ? Colors.white : Colors.black);
+  }
+
+  // Username Label Text Style
+  static TextStyle getUsernameLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

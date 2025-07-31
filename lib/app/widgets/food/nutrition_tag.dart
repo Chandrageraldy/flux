@@ -13,7 +13,7 @@ class NutritionTag extends StatelessWidget {
     return Container(
       padding: AppStyles.kPaddSV3H6,
       decoration: BoxDecoration(
-        color: context.theme.colorScheme.tertiaryFixedDim,
+        color: context.theme.colorScheme.tertiaryContainer,
         borderRadius: AppStyles.kRad10,
       ),
       child: Row(

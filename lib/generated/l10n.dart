@@ -1699,6 +1699,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Personal Details`
+  String get personalDetailsLabel {
+    return Intl.message(
+      'Personal Details',
+      name: 'personalDetailsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get accountLabel {
+    return Intl.message(
+      'Account',
+      name: 'accountLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi`
+  String get hiLabel {
+    return Intl.message(
+      'Hi',
+      name: 'hiLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

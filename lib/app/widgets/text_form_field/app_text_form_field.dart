@@ -74,7 +74,7 @@ extension _WidgetFactories on AppTextFormField {
 abstract class _Styles {
   // Container Decoration
   static BoxDecoration getContainerDecoration(BuildContext context) {
-    return BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad10);
+    return BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad100);
   }
 
   // Text Form Field Input Decoration

@@ -4,7 +4,7 @@ class AppThemes {
   static ThemeData lightMode = ThemeData(
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
-      surface: AppColors.bluePalette[100]!,
+      surface: Color(0xFFf7f6f6),
       surfaceBright: AppColors.bluePalette[50]!,
       primary: AppColors.bluePalette[300]!,
       onPrimary: AppColors.whiteColor,

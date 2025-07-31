@@ -18,14 +18,13 @@ class MealDiaryCard extends StatelessWidget {
         child: Column(
           children: [
             getHeaderContainer(context),
-            getDivider(context),
             ListView.separated(
-              padding: AppStyles.kPaddSV16H12,
+              padding: AppStyles.kPadd16,
               itemCount: 1,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => MealFoodDisplayCard(),
-              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              separatorBuilder: (context, index) => const SizedBox(height: AppStyles.kSize12),
             ),
             getDivider(context),
             getAddToButton(context)
@@ -48,15 +47,15 @@ extension _WidgetFactories on MealDiaryCard {
   // Header Container
   Widget getHeaderContainer(BuildContext context) {
     return Container(
-      padding: AppStyles.kPaddSV12H20,
+      padding: AppStyles.kPaddOL16R16T16,
       child: Row(
         spacing: AppStyles.kSpac8,
         children: [
           getMealTypeLabel(context),
           getCalorieTag(context),
-          NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
-          NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
-          NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
+          getProteinTag(context),
+          getCarbsTag(context),
+          getFatTag(context),
         ],
       ),
     );
@@ -69,16 +68,28 @@ extension _WidgetFactories on MealDiaryCard {
 
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
-    return NutritionTag(
-      label: '500/360',
-      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize12),
-    );
+    return NutritionTag(label: '500/360', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10));
+  }
+
+  // Protein Tag
+  Widget getProteinTag(BuildContext context) {
+    return NutritionTag(tag: MacroNutrients.protein.tag, label: '31');
+  }
+
+  // Carbs Tag
+  Widget getCarbsTag(BuildContext context) {
+    return NutritionTag(tag: MacroNutrients.carbs.tag, label: '20');
+  }
+
+  // Fat Tag
+  Widget getFatTag(BuildContext context) {
+    return NutritionTag(tag: MacroNutrients.fat.tag, label: '62');
   }
 
   // Divider
   Widget getDivider(BuildContext context) {
     return Divider(
-      height: 1,
+      height: 0.1,
       color: context.theme.colorScheme.tertiaryFixedDim,
     );
   }
@@ -86,7 +97,7 @@ extension _WidgetFactories on MealDiaryCard {
   // Add To Button
   Widget getAddToButton(BuildContext context) {
     return Container(
-      padding: AppStyles.kPaddSV10,
+      padding: AppStyles.kPaddSV8,
       child: Text('+ ADD TO ${mealType.label.toUpperCase()}', style: _Styles.getAddToButtonTextStyle(context)),
     );
   }
@@ -96,18 +107,22 @@ extension _WidgetFactories on MealDiaryCard {
 abstract class _Styles {
   // Container Decoration
   static BoxDecoration getContainerDecoration(BuildContext context) {
-    return BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRad10, boxShadow: [
-      BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
-    ]);
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
+    );
   }
 
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Add To Button Label Text Style
   static TextStyle getAddToButtonTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

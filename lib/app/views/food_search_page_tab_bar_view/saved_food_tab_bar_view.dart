@@ -51,7 +51,7 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
             decoration: _Styles.getHeaderContainerDecoration(context),
             width: AppStyles.kDoubleInfinity,
             child: Padding(
-              padding: AppStyles.kPaddSV16H16,
+              padding: AppStyles.kPaddSV12H16,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -148,14 +148,14 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }
 
   // Header Label Text Style
   static TextStyle getHeaderLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Header Description Label Text Style
@@ -169,7 +169,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.tertiaryFixedDim,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }

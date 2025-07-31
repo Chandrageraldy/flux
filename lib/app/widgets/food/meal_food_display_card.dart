@@ -7,35 +7,27 @@ class MealFoodDisplayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppStyles.kDoubleInfinity,
-      decoration: _Styles.getContainerDecoration(context),
-      padding: AppStyles.kPaddSV6H12,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            spacing: AppStyles.kSpac4,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Nasi Lemak', style: _Styles.labelTextStyle(context)),
-              Row(
-                spacing: AppStyles.kSpac8,
-                children: [
-                  NutritionTag(
-                    label: '245',
-                    icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize12),
-                  ),
-                  NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
-                  NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
-                  NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
-                ],
-              ),
-            ],
-          ),
-          FaIcon(FontAwesomeIcons.bars, size: AppStyles.kIconSize16)
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          spacing: AppStyles.kSpac4,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Nasi Lemak', style: _Styles.labelTextStyle(context)),
+            Row(
+              spacing: AppStyles.kSpac8,
+              children: [
+                NutritionTag(label: '245', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10)),
+                NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
+                NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
+                NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
+              ],
+            ),
+          ],
+        ),
+        FaIcon(FontAwesomeIcons.bars, size: AppStyles.kIconSize16)
+      ],
     );
   }
 }
@@ -45,19 +37,8 @@ extension _WidgetFactories on MealFoodDisplayCard {}
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  // Container Decoration
-  static BoxDecoration getContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
-      ],
-    );
-  }
-
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withCustomSize(13);
+    return Quicksand.semiBold.withSize(FontSizes.small);
   }
 }

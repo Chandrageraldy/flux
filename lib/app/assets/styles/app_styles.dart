@@ -18,11 +18,14 @@ class AppStyles {
   static const kPaddOT20B5 = EdgeInsets.only(top: 20.0, bottom: 5.0);
   static const kPaddOT10B20 = EdgeInsets.only(top: 10.0, bottom: 20.0);
   static const kPaddOL20R20B16 = EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0);
+  static const kPaddOL16R16T16 = EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0);
   static const kPaddOR12 = EdgeInsets.only(right: 12.0);
+  static const kPaddOR20 = EdgeInsets.only(right: 20.0);
   // Padding SIDES
   static const kPaddOL20R8 = EdgeInsets.only(left: 20.0, right: 8.0);
   // Padding SYMMETRIC
   // Padding VERTICAL
+  static const kPaddSV2 = EdgeInsets.symmetric(vertical: 2.0);
   static const kPaddSV6 = EdgeInsets.symmetric(vertical: 6.0);
   static const kPaddSV8 = EdgeInsets.symmetric(vertical: 8.0);
   static const kPaddSV10 = EdgeInsets.symmetric(vertical: 10.0);
@@ -88,6 +91,7 @@ class AppStyles {
   static final kSizedBoxW2 = const SizedBox(width: 2.0);
   static final kSizedBoxW4 = const SizedBox(width: 4.0);
   static final kSizedBoxW8 = const SizedBox(width: 8.0);
+  static final kSizedBoxW10 = const SizedBox(width: 10.0);
   static final kSizedBoxW12 = const SizedBox(width: 12.0);
   static final kSizedBoxW16 = const SizedBox(width: 16.0);
   static final kSizedBoxW20 = const SizedBox(width: 20.0);
@@ -111,6 +115,7 @@ class AppStyles {
   // Icon Size
   static const kIconSize4 = 4.0;
   static const kIconSize8 = 8.0;
+  static const kIconSize10 = 10.0;
   static const kIconSize12 = 12.0;
   static const kIconSize16 = 16.0;
   static const kIconSize18 = 18.0;

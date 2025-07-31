@@ -92,7 +92,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       child: Column(
         children: [
           Row(
-            children: [Expanded(child: getSearchTextFormField()), AppStyles.kSizedBoxW12, getBarcodeScannerButton()],
+            children: [Expanded(child: getSearchTextFormField()), AppStyles.kSizedBoxW10, getBarcodeScannerButton()],
           ),
           AppStyles.kSizedBoxH12,
           getTabBarContainer(),
@@ -117,10 +117,9 @@ extension _WidgetFactories on _FoodSearchPageState {
   Widget getBarcodeScannerButton() {
     return GestureDetector(
       onTap: _onBarcodeScannerPressed,
-      child: Container(
+      child: SizedBox(
         height: AppStyles.kSize40,
         width: AppStyles.kSize40,
-        decoration: BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad10),
         child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
       ),
     );
@@ -180,7 +179,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRadOBL20BR20,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }
@@ -189,9 +188,9 @@ abstract class _Styles {
   static BoxDecoration getTabBarContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.tertiaryContainer,
-      borderRadius: AppStyles.kRad10,
+      borderRadius: AppStyles.kRad100,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }
@@ -199,8 +198,8 @@ abstract class _Styles {
   // Tab Bar Indicator Decoration
   static BoxDecoration getTabBarIndicatorDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.secondary,
-      borderRadius: AppStyles.kRad10,
+      color: context.theme.colorScheme.primary,
+      borderRadius: AppStyles.kRad100,
     );
   }
 }

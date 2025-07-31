@@ -123,10 +123,7 @@ extension _WidgetFactories on FoodDisplayCard {
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
       label: calories.toString(),
-      icon: FaIcon(
-        FontAwesomeIcons.fire,
-        size: AppStyles.kIconSize12,
-      ),
+      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10),
     );
   }
 
@@ -161,7 +158,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }

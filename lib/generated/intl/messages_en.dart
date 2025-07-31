@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountLabel": MessageLookupByLibrary.simpleMessage("Account"),
         "activeDesc": MessageLookupByLibrary.simpleMessage(
             "On your feet most of the day (e.g., retail, light labor)."),
         "activeLabel": MessageLookupByLibrary.simpleMessage("Active"),
@@ -69,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "heightDesc": MessageLookupByLibrary.simpleMessage(
             "Helps calculate your body mass index (BMI)."),
         "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
+        "hiLabel": MessageLookupByLibrary.simpleMessage("Hi"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
         "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),
@@ -153,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "permissionDenied": MessageLookupByLibrary.simpleMessage(
             "Session Expired or User is not Authenticated, Please Login Again."),
+        "personalDetailsLabel":
+            MessageLookupByLibrary.simpleMessage("Personal Details"),
         "personalizingYourPlanLoadingText": MessageLookupByLibrary.simpleMessage(
             "Hang tight! We\'re crafting a personalized plan just for you."),
         "phosphorusLabel": MessageLookupByLibrary.simpleMessage("Phosphorus"),

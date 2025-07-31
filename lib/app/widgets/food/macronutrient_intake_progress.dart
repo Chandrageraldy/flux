@@ -19,7 +19,7 @@ class MacronutrientIntakeProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        spacing: AppStyles.kSpac8,
+        spacing: AppStyles.kSpac4,
         children: [
           getLabel(context),
           getLinearProgressIndicator(context),
@@ -47,7 +47,7 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
       animateFromLastPercent: true,
       animateToInitialPercent: false,
       padding: AppStyles.kPaddSH12,
-      barRadius: Radius.circular(AppStyles.kSpac20),
+      barRadius: Radius.circular(AppStyles.kSize20),
       lineHeight: _Styles.linearPercentIndicatorLineHeight,
     );
   }
@@ -55,7 +55,7 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
   // Value Label
   Widget getValueLabel(BuildContext context) {
     return Text(
-      '${currentValue.toStringAsFixed(1)} / ${targetValue.toStringAsFixed(1)} g',
+      '${currentValue.toStringAsFixed(0)} / ${targetValue.toStringAsFixed(0)}g',
       style: _Styles.getValueLabelTextStyle(context),
     );
   }
@@ -65,12 +65,12 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
 abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Linear Percent Indicator Line Height

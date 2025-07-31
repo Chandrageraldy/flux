@@ -10,6 +10,7 @@ class Env {
 
 class ImagePath {
   static const String fluxLogo = 'lib/app/assets/images/flux.png';
+  static const String fluxPadding = 'lib/app/assets/images/flux-padding.png';
   static const String onboarding1 = 'lib/app/assets/images/onboarding1.png';
   static const String onboarding2 = 'lib/app/assets/images/onboarding2.png';
   static const String onboarding3 = 'lib/app/assets/images/onboarding3.png';
@@ -145,11 +146,11 @@ enum MacroNutrients {
   Color get color {
     switch (this) {
       case carbs:
-        return const Color(0xFF6bd0e9);
+        return const Color(0xFF67ae7d);
       case protein:
-        return const Color(0xFFdf9149);
+        return const Color(0xFFee8d69);
       case fat:
-        return const Color(0xFF7770c0);
+        return const Color(0xFFf7c65e);
     }
   }
 }

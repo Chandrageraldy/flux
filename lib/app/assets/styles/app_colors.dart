@@ -31,12 +31,11 @@ class BluePalette {
 // Gradient
 class GradientAppColors {
   static const LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
     colors: [
-      Color(0xFFF9FBFD),
-      Color(0xFFF4F7FC),
-      Color(0xFFEAF2FB),
+      Color(0xFFFFFFFF),
+      Color(0xFFF0F8FF),
     ],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
   );
 }
