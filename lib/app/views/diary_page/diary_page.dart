@@ -131,7 +131,7 @@ extension _WidgetFactories on _DiaryPageState {
       onTap: _onProfileActionPressed,
       child: Padding(
         padding: AppStyles.kPaddOR20,
-        child: FaIcon(FontAwesomeIcons.user, size: AppStyles.kIconSize18, color: context.theme.colorScheme.primary),
+        child: FaIcon(FontAwesomeIcons.user, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
       ),
     );
   }
@@ -172,7 +172,7 @@ extension _WidgetFactories on _DiaryPageState {
         decoration: _Styles.getDateShifterButtonContainerDecoration(context, isEnabled),
         child: FaIcon(
           icon,
-          size: AppStyles.kIconSize16,
+          size: AppStyles.kSize16,
           color: isEnabled ? context.theme.colorScheme.onTertiary : Colors.grey,
         ),
       ),
@@ -286,7 +286,7 @@ extension _WidgetFactories on _DiaryPageState {
   Widget getCalorieCircularPercentIndicator() {
     return SizedBox(
       child: CircularPercentIndicator(
-        lineWidth: _Styles.circularPercentIndicatorLineWidth,
+        lineWidth: AppStyles.kSize7,
         radius: AppStyles.kSize56,
         percent: 0.66,
         progressColor: context.theme.colorScheme.secondary,
@@ -392,38 +392,6 @@ class _Styles {
   static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
-
-  // Circular Percent Indicator Line Width
-  static double circularPercentIndicatorLineWidth = 6.0;
-
-  // Date Timeline Theme
-  // static EasyThemeData getDateTimelineTheme(BuildContext context) {
-  //   return EasyTheme.of(context).copyWithState(
-  //     selectedDayTheme: DayThemeData(
-  //       backgroundColor: context.theme.colorScheme.secondary,
-  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-  //     ),
-  //     unselectedDayTheme: DayThemeData(
-  //       backgroundColor: context.theme.colorScheme.onPrimary,
-  //       border: BorderSide(color: Colors.transparent),
-  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-  //     ),
-  //     disabledDayTheme: DayThemeData(
-  //       backgroundColor: Colors.grey.shade100,
-  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-  //     ),
-  //     selectedCurrentDayTheme: DayThemeData(
-  //       backgroundColor: context.theme.colorScheme.secondary,
-  //       border: BorderSide(color: Colors.transparent),
-  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-  //     ),
-  //     unselectedCurrentDayTheme: DayThemeData(
-  //       backgroundColor: context.theme.colorScheme.secondary.withValues(alpha: 0.05),
-  //       border: BorderSide(color: Colors.transparent),
-  //       shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-  //     ),
-  //   );
-  // }
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {

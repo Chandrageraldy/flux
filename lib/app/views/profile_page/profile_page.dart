@@ -1,7 +1,9 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
+import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -20,7 +22,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   PreferredSizeWidget? appbar() => AppBar(
         title: Text(
           S.current.profileLabel,
-          style: Quicksand.bold.withSize(FontSizes.mediumPlus),
+          style: Quicksand.bold.withSize(FontSizes.medium),
         ),
         backgroundColor: context.theme.colorScheme.onPrimary,
         centerTitle: true,
@@ -28,12 +30,24 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       );
 
   @override
-  bool useGradientBackground() => false;
-
-  @override
   Widget body() {
     return Column(
-      children: [AppStyles.kSizedBoxH12, getHeaderContainer()],
+      children: [
+        AppStyles.kSizedBoxH12,
+        getHeaderContainer(),
+        AppStyles.kSizedBoxH12,
+        Container(
+          padding: AppStyles.kPaddSV12H20,
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.onPrimary,
+            borderRadius: AppStyles.kRad10,
+            boxShadow: [
+              BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+            ],
+          ),
+          child: getProfileSettingsListView(),
+        ),
+      ],
     );
   }
 }
@@ -86,7 +100,7 @@ extension _WidgetFactories on _ProfilePageState {
       children: [
         Expanded(
           child: getHeaderStatsColumn(
-            FaIcon(FontAwesomeIcons.bowlFood, size: AppStyles.kIconSize16),
+            FaIcon(FontAwesomeIcons.bowlFood, size: AppStyles.kSize16),
             S.current.dietLabel,
             userProfile?.bodyMetrics?.dietType?.toString().capitalize() ?? '',
           ),
@@ -94,14 +108,14 @@ extension _WidgetFactories on _ProfilePageState {
         Expanded(
           flex: 2,
           child: getHeaderStatsColumn(
-            FaIcon(FontAwesomeIcons.weightScale, size: AppStyles.kIconSize16),
+            FaIcon(FontAwesomeIcons.weightScale, size: AppStyles.kSize16),
             S.current.targetWeightLabel,
             '${userProfile?.bodyMetrics?.targetWeight?.toString()} ${Unit.kg.label}',
           ),
         ),
         Expanded(
           child: getHeaderStatsColumn(
-            FaIcon(FontAwesomeIcons.bullseye, size: AppStyles.kIconSize16),
+            FaIcon(FontAwesomeIcons.bullseye, size: AppStyles.kSize16),
             S.current.goalLabel,
             '${userProfile?.bodyMetrics?.goal?.toString().capitalize()} ${S.current.weightLabel}',
           ),
@@ -147,34 +161,44 @@ extension _WidgetFactories on _ProfilePageState {
   Widget getHeaderStatsColumn(FaIcon icon, String label, String value) {
     return Column(
       children: [
-        Container(
-          padding: AppStyles.kPadd12,
-          decoration: BoxDecoration(
-            color: context.theme.colorScheme.onPrimary,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
-            ],
-          ),
-          child: icon,
-        ),
-        AppStyles.kSizedBoxH8,
         Text(value, style: _Styles.getHeaderColumnValueLabelTextStyle(context)),
         Text(label, style: _Styles.getHeaderColumnLabelTextStyle(context)),
       ],
     );
   }
+
+  // Profile Settings List View
+  Widget getProfileSettingsListView() {
+    List<ProfileSettingsModel> settings = profileSettings;
+    return ListView.separated(
+      itemCount: settings.length,
+      itemBuilder: (context, index) {
+        final setting = settings[index];
+        return ProfileSettingsListTile(
+          icon: setting.icon,
+          label: setting.label,
+          desc: setting.desc,
+        );
+      },
+      separatorBuilder: (context, index) => Padding(
+        padding: AppStyles.kPaddSV6,
+        child: Divider(color: context.theme.colorScheme.tertiaryFixedDim),
+      ),
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+    );
+  }
 }
 
 // * ----------------------------- Styles -----------------------------
-abstract class _Styles {
+class _Styles {
   // Header Container Decoration
   static BoxDecoration getHeaderContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 4, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }

@@ -71,7 +71,7 @@ extension _WidgetFactories on _PlanSelectionModalState {
       SelectionButton(
         title: S.current.planSelectionButtonTitle1,
         description: S.current.planSelectionButtonDesc1,
-        icon: FaIcon(FontAwesomeIcons.pencil, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
+        icon: FaIcon(FontAwesomeIcons.pencil, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
         onPressed: _onManualCustomPlanPressed,
       ),
       AppStyles.kSizedBoxH16,
@@ -79,7 +79,7 @@ extension _WidgetFactories on _PlanSelectionModalState {
       SelectionButton(
         title: S.current.planSelectionButtonTitle2,
         description: S.current.planSelectionButtonDesc2,
-        icon: FaIcon(FontAwesomeIcons.rocket, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
+        icon: FaIcon(FontAwesomeIcons.rocket, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
         onPressed: () {},
       ),
     ];

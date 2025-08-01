@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flux/generated/l10n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,18 +9,18 @@ class ProfileSettingsModel {
     this.desc,
   });
 
-  final FaIcon icon;
+  final IconData icon;
   final String label;
   final String? desc;
 }
 
 List<ProfileSettingsModel> profileSettings = [
   ProfileSettingsModel(
-    icon: FaIcon(FontAwesomeIcons.solidUser),
-    label: S.current.profileLabel,
+    icon: FontAwesomeIcons.gear,
+    label: S.current.accountLabel,
   ),
   ProfileSettingsModel(
-    icon: FaIcon(FontAwesomeIcons.gear),
-    label: S.current.accountLabel,
+    icon: FontAwesomeIcons.solidUser,
+    label: S.current.personalDetailsLabel,
   ),
 ];

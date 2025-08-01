@@ -55,7 +55,7 @@ extension _WidgetFactories on SelectionButton {
   Widget getArrowIcon(BuildContext context) {
     return Padding(
       padding: AppStyles.kPaddOR12,
-      child: FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kIconSize16),
+      child: FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize16),
     );
   }
 

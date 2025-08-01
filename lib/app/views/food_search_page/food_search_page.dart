@@ -107,7 +107,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       field: FormFields.search,
       placeholder: S.current.searchFoodPlaceholder,
       validator: FormBuilderValidators.compose([]),
-      icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kIconSize16),
+      icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kSize16),
       height: AppStyles.kSize40,
       onChanged: _onChanged,
     );
@@ -120,7 +120,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       child: SizedBox(
         height: AppStyles.kSize40,
         width: AppStyles.kSize40,
-        child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary, size: AppStyles.kIconSize20),
+        child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
       ),
     );
   }

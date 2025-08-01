@@ -58,8 +58,7 @@ extension _WidgetFactories on MealDiaryCard {
           Container(
             padding: AppStyles.kPadd6,
             decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
-            child:
-                FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kIconSize16),
+            child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize16),
           )
         ],
       ),
@@ -73,7 +72,7 @@ extension _WidgetFactories on MealDiaryCard {
 
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
-    return NutritionTag(label: '500/360', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10));
+    return NutritionTag(label: '500/360', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10));
   }
 
   // Protein Tag

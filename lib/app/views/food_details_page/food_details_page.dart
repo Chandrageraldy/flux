@@ -227,7 +227,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
     return Row(
       spacing: AppStyles.kSpac4,
       children: [
-        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12, color: context.theme.colorScheme.secondary),
+        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kSize12, color: context.theme.colorScheme.secondary),
         Text(brandedName, style: _Styles.getBrandedNameLabelTextStyle(context)),
       ],
     );

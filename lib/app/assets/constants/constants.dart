@@ -146,11 +146,11 @@ enum MacroNutrients {
   Color get color {
     switch (this) {
       case carbs:
-        return const Color(0xFF67ae7d);
+        return const Color(0xFF4ba0ae);
       case protein:
-        return const Color(0xFFee8d69);
+        return const Color(0xFFec6b72);
       case fat:
-        return const Color(0xFFf7c65e);
+        return const Color(0xFF9179ee);
     }
   }
 }

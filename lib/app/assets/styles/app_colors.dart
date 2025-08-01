@@ -23,7 +23,7 @@ class BluePalette {
   static Map<int, Color> blues = {
     50: Color(0xFFF0F8FF),
     100: Color(0xFFf5f7fc),
-    200: Color(0xFF2B65D6), // 5863e8 2B65D6
+    200: Color(0xFF558eed), // 5863e8 2B65D6 558eed
     300: Color(0xFF272a3b),
   };
 }
@@ -35,7 +35,7 @@ class GradientAppColors {
     end: Alignment.bottomRight,
     colors: [
       Color(0xFFFFFFFF),
-      Color(0xFFF0F8FF),
+      Color(0xFFf0f2f9),
     ],
   );
 }

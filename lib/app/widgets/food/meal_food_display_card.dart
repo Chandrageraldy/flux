@@ -18,7 +18,7 @@ class MealFoodDisplayCard extends StatelessWidget {
             Row(
               spacing: AppStyles.kSpac4,
               children: [
-                NutritionTag(label: '245', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10)),
+                NutritionTag(label: '245', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
                 NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),
                 NutritionTag(tag: MacroNutrients.carbs.tag, label: '20'),
                 NutritionTag(tag: MacroNutrients.fat.tag, label: '62'),
@@ -26,7 +26,7 @@ class MealFoodDisplayCard extends StatelessWidget {
             ),
           ],
         ),
-        FaIcon(FontAwesomeIcons.bars, size: AppStyles.kIconSize16)
+        FaIcon(FontAwesomeIcons.bars, size: AppStyles.kSize16)
       ],
     );
   }

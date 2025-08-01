@@ -26,6 +26,7 @@ class AppStyles {
   // Padding SYMMETRIC
   // Padding VERTICAL
   static const kPaddSV2 = EdgeInsets.symmetric(vertical: 2.0);
+  static const kPaddSV4 = EdgeInsets.symmetric(vertical: 4.0);
   static const kPaddSV6 = EdgeInsets.symmetric(vertical: 6.0);
   static const kPaddSV8 = EdgeInsets.symmetric(vertical: 8.0);
   static const kPaddSV10 = EdgeInsets.symmetric(vertical: 10.0);
@@ -112,24 +113,12 @@ class AppStyles {
 
   // Size
   static double kDoubleInfinity = double.infinity;
-  // Icon Size
-  static const kIconSize4 = 4.0;
-  static const kIconSize8 = 8.0;
-  static const kIconSize10 = 10.0;
-  static const kIconSize12 = 12.0;
-  static const kIconSize16 = 16.0;
-  static const kIconSize18 = 18.0;
-  static const kIconSize20 = 20.0;
-  static const kIconSize25 = 25.0;
-  static const kIconSize30 = 30.0;
-  static const kIconSize35 = 35.0;
-  static const kIconSize40 = 40.0;
-  static const kIconSize52 = 52.0;
-
-  // Height & Width
+  static const kSize7 = 7.0;
   static const kSize8 = 8.0;
+  static const kSize10 = 10.0;
   static const kSize12 = 12.0;
   static const kSize16 = 16.0;
+  static const kSize18 = 18.0;
   static const kSize20 = 20.0;
   static const kSize24 = 24.0;
   static const kSize26 = 26.0;

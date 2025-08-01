@@ -48,7 +48,7 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
       animateToInitialPercent: false,
       padding: AppStyles.kPaddSH12,
       barRadius: Radius.circular(AppStyles.kSize20),
-      lineHeight: _Styles.linearPercentIndicatorLineHeight,
+      lineHeight: AppStyles.kSize7,
     );
   }
 
@@ -72,9 +72,6 @@ abstract class _Styles {
   static TextStyle getValueLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
-
-  // Linear Percent Indicator Line Height
-  static const double linearPercentIndicatorLineHeight = 6.0;
 
   // Linear Progress Indicator Color
   static Color getLinearProgressIndicatorColor(MacroNutrients macroNutrient) {

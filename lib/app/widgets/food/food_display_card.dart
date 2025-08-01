@@ -90,7 +90,7 @@ extension _WidgetFactories on FoodDisplayCard {
       spacing: AppStyles.kSpac4,
       mainAxisSize: MainAxisSize.min,
       children: [
-        FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kIconSize8),
+        FaIcon(FontAwesomeIcons.pencil, size: AppStyles.kSize8),
         Flexible(
           child: Text(
             '$servingQuantity $servingUnit',
@@ -107,7 +107,7 @@ extension _WidgetFactories on FoodDisplayCard {
       spacing: AppStyles.kSpac4,
       mainAxisSize: MainAxisSize.min,
       children: [
-        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kIconSize12),
+        FaIcon(FontAwesomeIcons.tags, size: AppStyles.kSize12),
         Flexible(
           child: Text(
             brandName,
@@ -123,7 +123,7 @@ extension _WidgetFactories on FoodDisplayCard {
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
       label: calories.toString(),
-      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10),
+      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
     );
   }
 
@@ -144,7 +144,7 @@ extension _WidgetFactories on FoodDisplayCard {
   // Widget getIcon(BuildContext context) {
   //   return FaIcon(
   //     FontAwesomeIcons.add,
-  //     size: AppStyles.kIconSize20,
+  //     size: AppStyles.kSize20,
   //     color: context.theme.colorScheme.onPrimary,
   //   );
   // }

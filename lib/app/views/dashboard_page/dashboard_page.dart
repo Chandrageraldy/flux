@@ -100,7 +100,7 @@ extension _WidgetFactories on _DashboardPageState {
         borderRadius: AppStyles.kRad100,
         color: context.theme.colorScheme.secondary,
       ),
-      child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize20),
+      child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize18),
     );
 
     return BottomNavigationBarItem(
