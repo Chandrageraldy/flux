@@ -198,7 +198,7 @@ abstract class _Styles {
   // Tab Bar Indicator Decoration
   static BoxDecoration getTabBarIndicatorDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.primary,
+      color: context.theme.colorScheme.secondary,
       borderRadius: AppStyles.kRad100,
     );
   }

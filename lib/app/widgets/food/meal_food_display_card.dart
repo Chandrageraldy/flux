@@ -16,7 +16,7 @@ class MealFoodDisplayCard extends StatelessWidget {
           children: [
             Text('Nasi Lemak', style: _Styles.labelTextStyle(context)),
             Row(
-              spacing: AppStyles.kSpac8,
+              spacing: AppStyles.kSpac4,
               children: [
                 NutritionTag(label: '245', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kIconSize10)),
                 NutritionTag(tag: MacroNutrients.protein.tag, label: '31'),

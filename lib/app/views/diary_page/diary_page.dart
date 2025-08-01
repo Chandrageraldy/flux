@@ -55,14 +55,15 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: AppStyles.kSpac12,
-              children: [getDateShifterColumn(), getDateTimeline()],
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [getDateShifterLabel(), getDateShifter()],
+                ),
+                getDateTimeline()
+              ],
             ),
             AppStyles.kSizedBoxH16,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [getTargetsLabel(), getEditButton(_onEditTargetsPressed)],
-            ),
-            AppStyles.kSizedBoxH4,
             getTargetsContainer(),
             AppStyles.kSizedBoxH20,
             Row(
@@ -70,13 +71,15 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
               children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
             ),
             AppStyles.kSizedBoxH4,
-            MealDiaryCard(mealType: MealType.breakfast),
-            AppStyles.kSizedBoxH16,
-            MealDiaryCard(mealType: MealType.lunch),
-            AppStyles.kSizedBoxH16,
-            MealDiaryCard(mealType: MealType.dinner),
-            AppStyles.kSizedBoxH16,
-            MealDiaryCard(mealType: MealType.snack),
+            Column(
+              spacing: AppStyles.kSpac16,
+              children: [
+                MealDiaryCard(mealType: MealType.breakfast),
+                MealDiaryCard(mealType: MealType.lunch),
+                MealDiaryCard(mealType: MealType.dinner),
+                MealDiaryCard(mealType: MealType.snack),
+              ],
+            ),
           ],
         ),
       ),
@@ -102,12 +105,17 @@ extension _PrivateMethods on _DiaryPageState {
       return DateFormat('EEEE, MMMM d').format(selectedDate); // Wednesday, July 17
     }
   }
+
+  void _shiftDate(int days) {
+    _setState(() {
+      _selectedDate = _selectedDate.add(Duration(days: days));
+    });
+    _datePickerController.animateToDate(_selectedDate);
+  }
 }
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _DiaryPageState {
-  void _onEditTargetsPressed() {}
-
   void _onEditMealRatioPressed() {}
 
   void _onProfileActionPressed() {
@@ -133,15 +141,42 @@ extension _WidgetFactories on _DiaryPageState {
     return Text(_formatDate(_selectedDate), style: _Styles.getDateShifterLabelTextStyle(context));
   }
 
-  // Date Shifter Column
-  Widget getDateShifterColumn() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [getUsernameLabel(), getDateShifterLabel()]);
+  // Date Shifter
+  Widget getDateShifter() {
+    final today = DateTime.now();
+    final minDate = today.subtract(const Duration(days: 7));
+    final maxDate = today.add(const Duration(days: 7));
+
+    final DateTime previousDate = _selectedDate.subtract(const Duration(days: 1));
+    final DateTime nextDate = _selectedDate.add(const Duration(days: 1));
+
+    final bool canGoPrevious = previousDate.isAfter(minDate) || DateUtils.isSameDay(previousDate, minDate);
+    final bool canGoNext = nextDate.isBefore(maxDate) || DateUtils.isSameDay(nextDate, maxDate);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: AppStyles.kSpac12,
+      children: [
+        getDateShifterButton(() => _shiftDate(-1), FontAwesomeIcons.arrowLeft, canGoPrevious),
+        getDateShifterButton(() => _shiftDate(1), FontAwesomeIcons.arrowRight, canGoNext),
+      ],
+    );
   }
 
-  // Username Label
-  Widget getUsernameLabel() {
-    return Text('${S.current.hiLabel} ${userProfile?.username ?? ''},',
-        style: _Styles.getUsernameLabelTextStyle(context));
+  // Date Shifter Button
+  Widget getDateShifterButton(VoidCallback onPressed, IconData icon, bool isEnabled) {
+    return GestureDetector(
+      onTap: isEnabled ? onPressed : null,
+      child: Container(
+        padding: AppStyles.kPadd8,
+        decoration: _Styles.getDateShifterButtonContainerDecoration(context, isEnabled),
+        child: FaIcon(
+          icon,
+          size: AppStyles.kIconSize16,
+          color: isEnabled ? context.theme.colorScheme.onTertiary : Colors.grey,
+        ),
+      ),
+    );
   }
 
   // Date Timeline
@@ -218,7 +253,7 @@ extension _WidgetFactories on _DiaryPageState {
         children: [
           getCalorieIntakeLabel(),
           getCalorieFormulaLabel(),
-          AppStyles.kSizedBoxH12,
+          AppStyles.kSizedBoxH16,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -252,15 +287,16 @@ extension _WidgetFactories on _DiaryPageState {
     return SizedBox(
       child: CircularPercentIndicator(
         lineWidth: _Styles.circularPercentIndicatorLineWidth,
-        radius: AppStyles.kSize50,
+        radius: AppStyles.kSize56,
         percent: 0.66,
         progressColor: context.theme.colorScheme.secondary,
-        backgroundColor: context.theme.colorScheme.tertiary,
         center: getCalorieCircularCenterLabel(),
         circularStrokeCap: CircularStrokeCap.round,
         animation: true,
         animateFromLastPercent: true,
         animateToInitialPercent: false,
+        arcType: ArcType.FULL,
+        arcBackgroundColor: context.theme.colorScheme.tertiary,
       ),
     );
   }
@@ -320,11 +356,6 @@ extension _WidgetFactories on _DiaryPageState {
     return Text(S.current.loggedMealsLabel, style: _Styles.getMealsLoggedLabelTextStyle(context));
   }
 
-  // Targets Label
-  Widget getTargetsLabel() {
-    return Text(S.current.targetsLabel, style: _Styles.getTargetsLabelTextStyle(context));
-  }
-
   // Edit Button
   Widget getEditButton(VoidCallback? onPressed) {
     return GestureDetector(
@@ -359,7 +390,7 @@ class _Styles {
 
   // Remaining Label Label Text Style
   static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Circular Percent Indicator Line Width
@@ -396,16 +427,11 @@ class _Styles {
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.extraLarge);
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
-  }
-
-  // Targets Label Text Style
-  static TextStyle getTargetsLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
@@ -432,7 +458,7 @@ class _Styles {
 
   // Date Timeline Day Label Text Style
   static TextStyle getDateTimelineDayLabelTextStyle(BuildContext context, bool isSelected) {
-    return Quicksand.bold.withSize(FontSizes.large).copyWith(color: isSelected ? Colors.white : Colors.black);
+    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: isSelected ? Colors.white : Colors.black);
   }
 
   // Date Timeline Weekday Label Text Style
@@ -440,8 +466,11 @@ class _Styles {
     return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: isSelected ? Colors.white : Colors.black);
   }
 
-  // Username Label Text Style
-  static TextStyle getUsernameLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  // Date Shifter Button Container Decoration
+  static BoxDecoration getDateShifterButtonContainerDecoration(BuildContext context, bool isEnabled) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.tertiaryContainer,
+      shape: BoxShape.circle,
+    );
   }
 }

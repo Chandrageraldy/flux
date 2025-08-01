@@ -26,8 +26,6 @@ class MealDiaryCard extends StatelessWidget {
               itemBuilder: (context, index) => MealFoodDisplayCard(),
               separatorBuilder: (context, index) => const SizedBox(height: AppStyles.kSize12),
             ),
-            getDivider(context),
-            getAddToButton(context)
           ],
         ),
       ),
@@ -49,13 +47,20 @@ extension _WidgetFactories on MealDiaryCard {
     return Container(
       padding: AppStyles.kPaddOL16R16T16,
       child: Row(
-        spacing: AppStyles.kSpac8,
+        spacing: AppStyles.kSpac4,
         children: [
           getMealTypeLabel(context),
           getCalorieTag(context),
           getProteinTag(context),
           getCarbsTag(context),
           getFatTag(context),
+          Spacer(),
+          Container(
+            padding: AppStyles.kPadd6,
+            decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
+            child:
+                FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kIconSize16),
+          )
         ],
       ),
     );
@@ -85,22 +90,6 @@ extension _WidgetFactories on MealDiaryCard {
   Widget getFatTag(BuildContext context) {
     return NutritionTag(tag: MacroNutrients.fat.tag, label: '62');
   }
-
-  // Divider
-  Widget getDivider(BuildContext context) {
-    return Divider(
-      height: 0.1,
-      color: context.theme.colorScheme.tertiaryFixedDim,
-    );
-  }
-
-  // Add To Button
-  Widget getAddToButton(BuildContext context) {
-    return Container(
-      padding: AppStyles.kPaddSV8,
-      child: Text('+ ADD TO ${mealType.label.toUpperCase()}', style: _Styles.getAddToButtonTextStyle(context)),
-    );
-  }
 }
 
 // * ----------------------------- Styles -----------------------------
@@ -119,10 +108,5 @@ abstract class _Styles {
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
-  }
-
-  // Add To Button Label Text Style
-  static TextStyle getAddToButtonTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }
