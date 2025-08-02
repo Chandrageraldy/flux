@@ -1,35 +1,48 @@
+import 'dart:async';
+
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/viewmodels/barcode_scan_vm/barcode_scan_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 @RoutePage()
-class ScanBarcodePage extends BaseStatefulPage {
+class ScanBarcodePage extends StatelessWidget {
   const ScanBarcodePage({super.key});
 
   @override
-  State<ScanBarcodePage> createState() => _ScanBarcodePageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(create: (_) => BarcodeScanViewModel(), child: _ScanBarcodePage());
+  }
 }
 
-class _ScanBarcodePageState extends BaseStatefulState<ScanBarcodePage> {
+class _ScanBarcodePage extends BaseStatefulPage {
+  @override
+  State<_ScanBarcodePage> createState() => _ScanBarcodePageState();
+}
+
+class _ScanBarcodePageState extends BaseStatefulState<_ScanBarcodePage> {
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
+  @override
+  bool useGradientBackground() => false;
+
+  @override
+  Color backgroundColor() => context.theme.colorScheme.onPrimary;
+
   final MobileScannerController controller = MobileScannerController(
-      detectionSpeed: DetectionSpeed.noDuplicates, facing: CameraFacing.back, returnImage: true);
+    facing: CameraFacing.back,
+  );
 
   bool isFlashOn = false;
+  bool isProcessing = false;
+  Timer? resetTimer;
 
   @override
   Widget body() {
     return Stack(
       children: [
-        MobileScanner(
-          controller: controller,
-          onDetect: (capture) {
-            final barcode = capture.barcodes.first;
-            debugPrint(barcode.rawValue);
-          },
-        ),
+        MobileScanner(controller: controller, onDetect: _onBarcodeDetected),
         getTopNavigationBar(),
         getLabelColumn(),
         getFrameContainer(),
@@ -46,7 +59,28 @@ class _ScanBarcodePageState extends BaseStatefulState<ScanBarcodePage> {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _ScanBarcodePageState {}
+extension _Actions on _ScanBarcodePageState {
+  _onBarcodeDetected(BarcodeCapture capture) async {
+    if (isProcessing) return;
+
+    resetTimer = Timer(const Duration(seconds: 3), () {
+      isProcessing = false;
+    });
+
+    final barcode = capture.barcodes.first;
+    debugPrint('Barcode detected: ${barcode.rawValue}');
+
+    isProcessing = true;
+
+    final result = await tryLoad(
+        context, () => context.read<BarcodeScanViewModel>().getFoodDetailsWithUPC(upc: barcode.rawValue ?? ''));
+
+    if (result == true && mounted) {
+      final scannedFood = context.read<BarcodeScanViewModel>().scannedFood;
+      context.router.push(FoodDetailsRoute(foodResponseModel: scannedFood));
+    }
+  }
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ScanBarcodePageState {

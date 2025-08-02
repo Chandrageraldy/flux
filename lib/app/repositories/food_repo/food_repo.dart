@@ -136,4 +136,24 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> getFoodDetailsWithUPC({required String upc}) async {
+    final response = await foodServiceNutritionix.getFoodDetailsWithUPC(upc: upc);
+    if (response.error == null) {
+      final List foodDetails = response.data['foods'] ?? [];
+      var foodDetail = FoodDetailsModel.fromJson(foodDetails.first);
+      final foodResponseModel = FoodResponseModel(
+        tagId: foodDetail.tagId,
+        foodName: foodDetail.foodName,
+        calorieKcal: foodDetail.calorieKcal,
+        servingQty: foodDetail.servingQty,
+        servingUnit: foodDetail.servingUnit,
+        brandNameItemName: '${foodDetail.brandName} ${foodDetail.foodName}',
+        brandName: foodDetail.brandName,
+        nixItemId: foodDetail.nixItemId,
+      );
+      return Response.complete(foodResponseModel);
+    }
+    return response;
+  }
 }

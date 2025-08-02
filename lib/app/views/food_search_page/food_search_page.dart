@@ -92,7 +92,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       child: Column(
         children: [
           Row(
-            children: [Expanded(child: getSearchTextFormField()), AppStyles.kSizedBoxW10, getBarcodeScannerButton()],
+            children: [Expanded(child: getSearchTextFormField()), AppStyles.kSizedBoxW4, getBarcodeScannerButton()],
           ),
           AppStyles.kSizedBoxH12,
           getTabBarContainer(),

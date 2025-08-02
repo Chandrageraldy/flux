@@ -35,6 +35,7 @@ class NutritionixEndpoint {
 class NutritionixParam {
   static const String query = 'query';
   static const String nixItemId = 'nix_item_id';
+  static const String upc = 'upc';
 }
 
 enum Language {

@@ -27,4 +27,12 @@ class FoodServiceNutritionix extends NutritionixBaseService {
       );
     }
   }
+
+  Future<Response> getFoodDetailsWithUPC({required String upc}) async {
+    return callNutritionixAPI(
+      HttpRequestType.get,
+      NutritionixEndpoint.searchItem,
+      queryParameters: {NutritionixParam.upc: upc},
+    );
+  }
 }
