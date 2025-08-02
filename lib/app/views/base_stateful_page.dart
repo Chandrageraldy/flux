@@ -49,7 +49,7 @@ abstract class BaseStatefulState<Screen extends BaseStatefulPage> extends State<
     }
 
     final scaffold = Scaffold(
-      backgroundColor: useGradientBackground() ? Colors.transparent : backgroundColor(),
+      backgroundColor: useGradientBackground() ? AppColors.transparentColor : backgroundColor(),
       appBar: appbar(),
       body: SafeArea(
         left: false,
