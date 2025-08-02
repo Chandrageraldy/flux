@@ -60,18 +60,72 @@ class DiaryRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ErrorModal]
-class ErrorRoute extends PageRouteInfo<void> {
-  const ErrorRoute({List<PageRouteInfo>? children})
-    : super(ErrorRoute.name, initialChildren: children);
+class ErrorRoute extends PageRouteInfo<ErrorRouteArgs> {
+  ErrorRoute({
+    IconData? icon,
+    Color? iconBackgroundColor,
+    required String label,
+    required String description,
+    List<Widget>? actions,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ErrorRoute.name,
+         args: ErrorRouteArgs(
+           icon: icon,
+           iconBackgroundColor: iconBackgroundColor,
+           label: label,
+           description: description,
+           actions: actions,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'ErrorRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ErrorModal();
+      final args = data.argsAs<ErrorRouteArgs>();
+      return ErrorModal(
+        icon: args.icon,
+        iconBackgroundColor: args.iconBackgroundColor,
+        label: args.label,
+        description: args.description,
+        actions: args.actions,
+        key: args.key,
+      );
     },
   );
+}
+
+class ErrorRouteArgs {
+  const ErrorRouteArgs({
+    this.icon,
+    this.iconBackgroundColor,
+    required this.label,
+    required this.description,
+    this.actions,
+    this.key,
+  });
+
+  final IconData? icon;
+
+  final Color? iconBackgroundColor;
+
+  final String label;
+
+  final String description;
+
+  final List<Widget>? actions;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ErrorRouteArgs{icon: $icon, iconBackgroundColor: $iconBackgroundColor, label: $label, description: $description, actions: $actions, key: $key}';
+  }
 }
 
 /// generated route for

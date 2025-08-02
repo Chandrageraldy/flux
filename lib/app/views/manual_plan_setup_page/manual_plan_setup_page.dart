@@ -32,7 +32,7 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
   PreferredSizeWidget? appbar() {
     return AppBar(
       scrolledUnderElevation: 0.0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparentColor,
       elevation: 0,
       leading: GestureDetector(
         onTap: () {

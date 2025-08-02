@@ -108,7 +108,7 @@ abstract class _Styles {
       ),
       color: isSelected ? context.theme.colorScheme.surfaceBright : context.theme.colorScheme.onPrimary,
       boxShadow: [
-        BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 1, offset: Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
   }

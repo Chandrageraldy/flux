@@ -193,5 +193,7 @@
     "locatingBarcodeLabel": "Locating Barcode",
     "locatingBarcodeDesc": "Align the barcode within the frame to scan",
     "barcodeNotRecognizedLabel": "Barcode not recognized",
-    "bacrodeNotRecognizedDesc": "Sorry, we couldn’t find that barcode in our database. Please try another one :("
+    "barcodeNotRecognizedDesc": "Sorry, we couldn’t find that barcode in our database. Please try another one :(",
+    "tryAgainLabel": "Try Again",
+    "useAiMealScanLabel": "Use AI Meal Scan"
 }

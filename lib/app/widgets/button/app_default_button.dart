@@ -8,6 +8,7 @@ class AppDefaultButton extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.labelColor,
+    this.labelStyle,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class AppDefaultButton extends StatelessWidget {
   final Color? borderColor;
   final Color? backgroundColor;
   final Color? labelColor;
+  final TextStyle? labelStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ extension _WidgetFactories on AppDefaultButton {
   Widget getButtonLabel(BuildContext context, String label) {
     return Text(
       label,
-      style: _Styles.getButtonLabelTextStyle(context, labelColor),
+      style: labelStyle ?? _Styles.getButtonLabelTextStyle(context, labelColor),
     );
   }
 }
@@ -68,7 +70,7 @@ abstract class _Styles {
       shape: RoundedRectangleBorder(
         borderRadius: AppStyles.kRad10,
         side: BorderSide(
-          color: borderColor ?? Colors.transparent,
+          color: borderColor ?? AppColors.transparentColor,
         ),
       ),
       padding: padding ?? AppStyles.kPaddSV18,

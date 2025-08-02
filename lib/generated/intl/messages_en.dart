@@ -35,11 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "adjustMacroNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Adjust Macronutrients Ratio"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
-        "bacrodeNotRecognizedDesc": MessageLookupByLibrary.simpleMessage(
-            "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
+        "barcodeNotRecognizedDesc": MessageLookupByLibrary.simpleMessage(
+            "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "barcodeNotRecognizedLabel":
             MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
@@ -277,6 +277,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),
+        "tryAgainLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
+        "useAiMealScanLabel":
+            MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),
         "usedEmail": MessageLookupByLibrary.simpleMessage(
             "This email address is already in use. Please use a different email."),
         "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),

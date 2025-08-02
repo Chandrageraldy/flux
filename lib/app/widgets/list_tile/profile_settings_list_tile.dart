@@ -36,7 +36,7 @@ extension _WidgetFactories on ProfileSettingsListTile {
     return FaIcon(
       icon,
       size: AppStyles.kSize20,
-      color: icon == FontAwesomeIcons.arrowRightFromBracket ? Colors.red : context.theme.colorScheme.secondary,
+      color: icon == FontAwesomeIcons.arrowRightFromBracket ? AppColors.redColor : context.theme.colorScheme.secondary,
     );
   }
 

@@ -1871,10 +1871,30 @@ class S {
   }
 
   /// `Sorry, we couldn’t find that barcode in our database. Please try another one :(`
-  String get bacrodeNotRecognizedDesc {
+  String get barcodeNotRecognizedDesc {
     return Intl.message(
       'Sorry, we couldn’t find that barcode in our database. Please try another one :(',
-      name: 'bacrodeNotRecognizedDesc',
+      name: 'barcodeNotRecognizedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get tryAgainLabel {
+    return Intl.message(
+      'Try Again',
+      name: 'tryAgainLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use AI Meal Scan`
+  String get useAiMealScanLabel {
+    return Intl.message(
+      'Use AI Meal Scan',
+      name: 'useAiMealScanLabel',
       desc: '',
       args: [],
     );

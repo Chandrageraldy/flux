@@ -1,9 +1,21 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/widgets/button/app_default_button.dart';
 
 @RoutePage()
 class ErrorModal extends BaseStatefulPage {
-  const ErrorModal({super.key});
+  const ErrorModal({
+    this.icon,
+    this.iconBackgroundColor,
+    required this.label,
+    required this.description,
+    this.actions,
+    super.key,
+  });
+
+  final IconData? icon;
+  final Color? iconBackgroundColor;
+  final String label;
+  final String description;
+  final List<Widget>? actions;
 
   @override
   State<ErrorModal> createState() => _ErrorModalState();
@@ -28,15 +40,12 @@ class _ErrorModalState extends BaseStatefulState<ErrorModal> {
         child: Column(
           children: [
             getIcon(),
-            AppStyles.kSizedBoxH12,
+            AppStyles.kSizedBoxH16,
             getLabel(),
             AppStyles.kSizedBoxH4,
             getDescriptionLabel(),
-            AppDefaultButton(
-              label: 'Try Again',
-              onPressed: () {},
-              padding: AppStyles.kPaddSV8,
-            ),
+            AppStyles.kSizedBoxH20,
+            ...?widget.actions
           ],
         ),
       ),
@@ -44,20 +53,17 @@ class _ErrorModalState extends BaseStatefulState<ErrorModal> {
   }
 }
 
-// * ---------------------------- Actions ----------------------------
-extension _Actions on _ErrorModalState {}
-
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ErrorModalState {
   // Icon
   Widget getIcon() {
     return Container(
       padding: AppStyles.kPadd8,
-      decoration: _Styles.iconOuterContainerDecoration(context),
+      decoration: _Styles.iconOuterContainerDecoration(context, widget.iconBackgroundColor),
       child: Container(
         padding: AppStyles.kPadd12,
-        decoration: _Styles.iconInnerContainerDecoration(context),
-        child: Icon(Icons.error_outline_outlined, size: AppStyles.kSize30, color: context.theme.colorScheme.onPrimary),
+        decoration: _Styles.iconInnerContainerDecoration(context, widget.iconBackgroundColor),
+        child: Icon(widget.icon ?? Icons.error, size: AppStyles.kSize30, color: context.theme.colorScheme.onPrimary),
       ),
     );
   }
@@ -65,7 +71,7 @@ extension _WidgetFactories on _ErrorModalState {
   // Label
   Widget getLabel() {
     return Text(
-      S.current.barcodeNotRecognizedLabel,
+      widget.label,
       style: _Styles.labelTextStyle(context),
     );
   }
@@ -73,7 +79,7 @@ extension _WidgetFactories on _ErrorModalState {
   // Description Label
   Widget getDescriptionLabel() {
     return Text(
-      S.current.bacrodeNotRecognizedDesc,
+      widget.description,
       textAlign: TextAlign.center,
       style: _Styles.descriptionTextStyle(context),
     );
@@ -83,24 +89,24 @@ extension _WidgetFactories on _ErrorModalState {
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
   // Icon Outer Container Decoration
-  static BoxDecoration iconOuterContainerDecoration(BuildContext context) {
+  static BoxDecoration iconOuterContainerDecoration(BuildContext context, Color? iconBackgroundColor) {
     return BoxDecoration(
-      color: Colors.red.withAlpha(40),
+      color: iconBackgroundColor?.withAlpha(40) ?? context.theme.colorScheme.primary.withAlpha(40),
       borderRadius: AppStyles.kRad100,
     );
   }
 
   // Icon Inner Container Decoration
-  static BoxDecoration iconInnerContainerDecoration(BuildContext context) {
+  static BoxDecoration iconInnerContainerDecoration(BuildContext context, Color? iconBackgroundColor) {
     return BoxDecoration(
-      color: Colors.red,
+      color: iconBackgroundColor ?? context.theme.colorScheme.primary,
       borderRadius: AppStyles.kRad100,
     );
   }
 
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraLarge);
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 
   // Description Text Style

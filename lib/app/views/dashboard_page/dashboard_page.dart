@@ -45,7 +45,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
                       tabsRouter.setActiveIndex(index);
                     }
                   },
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: AppColors.transparentColor,
                   elevation: 0,
                   selectedItemColor: context.theme.colorScheme.onTertiary,
                   unselectedItemColor: context.theme.colorScheme.tertiaryFixed,

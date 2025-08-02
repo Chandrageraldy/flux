@@ -2,7 +2,11 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DefaultAppBar(
-      {this.backgroundColor = Colors.transparent, this.actionButton, this.centerTitle = false, this.title, super.key});
+      {this.backgroundColor = AppColors.transparentColor,
+      this.actionButton,
+      this.centerTitle = false,
+      this.title,
+      super.key});
 
   final Color backgroundColor;
   final Widget? actionButton;
@@ -16,11 +20,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title ?? '', style: _Styles.getTitleLabelTextStyle(context)),
       centerTitle: centerTitle,
       actions: [
-        if (actionButton != null)
-          Padding(
-            padding: const EdgeInsets.only(right: 16), // or EdgeInsets.symmetric(horizontal: 16)
-            child: actionButton!,
-          ),
+        if (actionButton != null) Padding(padding: AppStyles.kPaddOR16, child: actionButton!),
       ],
       backgroundColor: backgroundColor,
       elevation: 0,

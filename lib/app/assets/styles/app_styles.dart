@@ -21,6 +21,7 @@ class AppStyles {
   static const kPaddOL20R20B16 = EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0);
   static const kPaddOL16R16T16 = EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0);
   static const kPaddOR12 = EdgeInsets.only(right: 12.0);
+  static const kPaddOR16 = EdgeInsets.only(right: 16.0);
   static const kPaddOR20 = EdgeInsets.only(right: 20.0);
   // Padding SIDES
   static const kPaddOL20R8 = EdgeInsets.only(left: 20.0, right: 8.0);

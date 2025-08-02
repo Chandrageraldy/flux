@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/viewmodels/barcode_scan_vm/barcode_scan_view_model.dart';
+import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -76,11 +77,25 @@ extension _Actions on _ScanBarcodePageState {
         isProcessing = false;
       });
     } else {
-      context.router.push(ErrorRoute()).then((_) {
+      context.router
+          .push(ErrorRoute(
+        label: S.current.barcodeNotRecognizedLabel,
+        description: S.current.barcodeNotRecognizedDesc,
+        actions: [getTryAgainButton(), getUseAiMealScanButton()],
+        icon: Icons.error,
+        iconBackgroundColor: AppColors.redColor,
+      ))
+          .then((_) {
         isProcessing = false;
       });
     }
   }
+
+  void _tryAgainPressed() {
+    context.router.maybePop();
+  }
+
+  void _useAiMealScanPressed() {}
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -169,6 +184,27 @@ extension _WidgetFactories on _ScanBarcodePageState {
       ),
     );
   }
+
+  // Try Again Button
+  Widget getTryAgainButton() {
+    return AppDefaultButton(
+      label: S.current.tryAgainLabel,
+      onPressed: _tryAgainPressed,
+      padding: AppStyles.kPaddSV12,
+      labelStyle: _Styles.tryAgainButtonTextStyle(context),
+    );
+  }
+
+  // Use AI Meal Scan Button
+  Widget getUseAiMealScanButton() {
+    return AppDefaultButton(
+      label: S.current.useAiMealScanLabel,
+      onPressed: _useAiMealScanPressed,
+      padding: AppStyles.kPaddSV12,
+      labelStyle: _Styles.useAiMealScanButtonTextStyle(context),
+      backgroundColor: context.theme.colorScheme.secondary.withAlpha(20),
+    );
+  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -176,7 +212,7 @@ class _Styles {
   // Flashlight Button Container Decoration
   static BoxDecoration flashlightButtonContainerDecoration(BuildContext context, bool isFlashOn) {
     return BoxDecoration(
-      color: isFlashOn == true ? context.theme.colorScheme.onPrimary : Colors.transparent,
+      color: isFlashOn == true ? context.theme.colorScheme.onPrimary : AppColors.transparentColor,
       shape: BoxShape.circle,
     );
   }
@@ -200,5 +236,15 @@ class _Styles {
       ),
       borderRadius: BorderRadius.circular(12),
     );
+  }
+
+  // Try Again Button Text Style
+  static TextStyle tryAgainButtonTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  // Use AI Meal Scan Button Text Style
+  static TextStyle useAiMealScanButtonTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }

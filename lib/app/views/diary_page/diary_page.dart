@@ -33,7 +33,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   @override
   PreferredSizeWidget? appbar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparentColor,
       title: Image.asset(
         ImagePath.fluxPadding,
         height: AppStyles.kSize80,
@@ -173,7 +173,7 @@ extension _WidgetFactories on _DiaryPageState {
         child: FaIcon(
           icon,
           size: AppStyles.kSize16,
-          color: isEnabled ? context.theme.colorScheme.onTertiary : Colors.grey,
+          color: isEnabled ? context.theme.colorScheme.onTertiary : context.theme.colorScheme.tertiaryFixed,
         ),
       ),
     );
@@ -421,17 +421,23 @@ class _Styles {
 
   // Date Timeline Month Label Text Style
   static TextStyle getDateTimelineMonthLabelTextStyle(BuildContext context, bool isSelected) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: isSelected ? Colors.white : Colors.black);
+    return Quicksand.medium
+        .withSize(FontSizes.extraSmall)
+        .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Date Timeline Day Label Text Style
   static TextStyle getDateTimelineDayLabelTextStyle(BuildContext context, bool isSelected) {
-    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: isSelected ? Colors.white : Colors.black);
+    return Quicksand.bold
+        .withSize(FontSizes.medium)
+        .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Date Timeline Weekday Label Text Style
   static TextStyle getDateTimelineWeekdayLabelTextStyle(BuildContext context, bool isSelected) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: isSelected ? Colors.white : Colors.black);
+    return Quicksand.medium
+        .withSize(FontSizes.extraSmall)
+        .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Date Shifter Button Container Decoration

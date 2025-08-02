@@ -24,6 +24,7 @@ class Skeleton extends StatelessWidget {
 abstract class _Styles {
   // Container Decoration
   static BoxDecoration getContainerDecoration(BuildContext context) {
-    return BoxDecoration(color: Colors.black.withValues(alpha: 0.04), borderRadius: AppStyles.kRad10);
+    return BoxDecoration(
+        color: context.theme.colorScheme.onTertiary.withValues(alpha: 0.04), borderRadius: AppStyles.kRad10);
   }
 }

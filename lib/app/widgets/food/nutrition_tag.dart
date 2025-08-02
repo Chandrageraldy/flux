@@ -12,10 +12,7 @@ class NutritionTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppStyles.kPaddSV3H6,
-      decoration: BoxDecoration(
-        color: context.theme.colorScheme.tertiaryContainer,
-        borderRadius: AppStyles.kRad10,
-      ),
+      decoration: _Styles.getContainerDecoration(context),
       child: Row(
         spacing: AppStyles.kSpac4,
         children: [
@@ -60,5 +57,13 @@ abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle() {
     return Quicksand.medium.withSize(FontSizes.extraSmall);
+  }
+
+  // Container Decoration
+  static BoxDecoration getContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.tertiaryContainer,
+      borderRadius: AppStyles.kRad10,
+    );
   }
 }

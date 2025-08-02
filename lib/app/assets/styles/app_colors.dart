@@ -6,6 +6,9 @@ class AppColors {
 
   static final greyPalette = GreyPalette.greys;
   static final bluePalette = BluePalette.blues;
+
+  static const redColor = Colors.red;
+  static const transparentColor = Colors.transparent;
 }
 
 // Palette
