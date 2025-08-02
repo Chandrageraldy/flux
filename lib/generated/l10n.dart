@@ -50,1791 +50,1811 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `欢迎回来，Flux用户`
+  /// `Welcome back to Flux`
   String get loginScreenTitle {
     return Intl.message(
-      '欢迎回来，Flux用户',
+      'Welcome back to Flux',
       name: 'loginScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `更智能的追踪，获得更好的成果 —— 登录并让AI助你饮食无忧！`
+  /// `Smarter tracking for better results—log in and let AI help you stay on top of your diet!`
   String get loginScreenDesc {
     return Intl.message(
-      '更智能的追踪，获得更好的成果 —— 登录并让AI助你饮食无忧！',
+      'Smarter tracking for better results—log in and let AI help you stay on top of your diet!',
       name: 'loginScreenDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `开始使用 Flux`
+  /// `Get Started with Flux`
   String get signUpScreenTitle {
     return Intl.message(
-      '开始使用 Flux',
+      'Get Started with Flux',
       name: 'signUpScreenTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `注册即可使用Flux，获取饮食计划、追踪营养，并养成你的宠物！`
+  /// `Sign up to start with Flux. Get meal plans, track nutrition, and evolve your pet!`
   String get signUpScreenDesc {
     return Intl.message(
-      '注册即可使用Flux，获取饮食计划、追踪营养，并养成你的宠物！',
+      'Sign up to start with Flux. Get meal plans, track nutrition, and evolve your pet!',
       name: 'signUpScreenDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `你的智能营养助手`
+  /// `Your Smart Nutrition Assistant`
   String get onboardingTitle1 {
     return Intl.message(
-      '你的智能营养助手',
+      'Your Smart Nutrition Assistant',
       name: 'onboardingTitle1',
       desc: '',
       args: [],
     );
   }
 
-  /// `与AI聊天，为你量身定制饮食计划。`
+  /// `Chat with our AI to create a meal plan that fits your goals.`
   String get onboardingDesc1 {
     return Intl.message(
-      '与AI聊天，为你量身定制饮食计划。',
+      'Chat with our AI to create a meal plan that fits your goals.',
       name: 'onboardingDesc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `AI识餐：更聪明地追踪`
+  /// `AI Meal Scan: Track Smarter`
   String get onboardingTitle2 {
     return Intl.message(
-      'AI识餐：更聪明地追踪',
+      'AI Meal Scan: Track Smarter',
       name: 'onboardingTitle2',
       desc: '',
       args: [],
     );
   }
 
-  /// `使用AI驱动的先进识餐功能，轻松记录每一餐。`
+  /// `Use our advanced AI-powered meal scanner to effortlessly log your meals.`
   String get onboardingDesc2 {
     return Intl.message(
-      '使用AI驱动的先进识餐功能，轻松记录每一餐。',
+      'Use our advanced AI-powered meal scanner to effortlessly log your meals.',
       name: 'onboardingDesc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `补能，交友，升级！`
+  /// `Fuel Up. Friend Up. Level Up`
   String get onboardingTitle3 {
     return Intl.message(
-      '补能，交友，升级！',
+      'Fuel Up. Friend Up. Level Up',
       name: 'onboardingTitle3',
       desc: '',
       args: [],
     );
   }
 
-  /// `补充营养，解锁奖励，见证你的虚拟宠物茁壮成长。`
+  /// `Fuel your progress, unlock new rewards, and watch your virtual pet thrive.`
   String get onboardingDesc3 {
     return Intl.message(
-      '补充营养，解锁奖励，见证你的虚拟宠物茁壮成长。',
+      'Fuel your progress, unlock new rewards, and watch your virtual pet thrive.',
       name: 'onboardingDesc3',
       desc: '',
       args: [],
     );
   }
 
-  /// `已有账号？`
+  /// `Already have an account? `
   String get loginPrimarySpanText {
     return Intl.message(
-      '已有账号？',
+      'Already have an account? ',
       name: 'loginPrimarySpanText',
       desc: '',
       args: [],
     );
   }
 
-  /// `登录`
+  /// `Log In`
   String get loginSecondarySpanText {
     return Intl.message(
-      '登录',
+      'Log In',
       name: 'loginSecondarySpanText',
       desc: '',
       args: [],
     );
   }
 
-  /// `还没有账号？`
+  /// `Don’t have an account yet? `
   String get signUpPrimarySpanText {
     return Intl.message(
-      '还没有账号？',
+      'Don’t have an account yet? ',
       name: 'signUpPrimarySpanText',
       desc: '',
       args: [],
     );
   }
 
-  /// `注册`
+  /// `Sign Up`
   String get signUpSecondarySpanText {
     return Intl.message(
-      '注册',
+      'Sign Up',
       name: 'signUpSecondarySpanText',
       desc: '',
       args: [],
     );
   }
 
-  /// `忘记密码？`
+  /// `Forgot Password?`
   String get forgotPasswordLabel {
     return Intl.message(
-      '忘记密码？',
+      'Forgot Password?',
       name: 'forgotPasswordLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `我们该如何为你制定计划？`
+  /// `How Should We Build Your Plan?`
   String get planSelectionTitle {
     return Intl.message(
-      '我们该如何为你制定计划？',
+      'How Should We Build Your Plan?',
       name: 'planSelectionTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `选择逐步构建计划或让AI根据你的目标自动生成。`
+  /// `Choose to build your plan step-by-step or let AI design one based on your goals.`
   String get planSelectionDesc {
     return Intl.message(
-      '选择逐步构建计划或让AI根据你的目标自动生成。',
+      'Choose to build your plan step-by-step or let AI design one based on your goals.',
       name: 'planSelectionDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `开始`
+  /// `Get Started`
   String get getStartedLabel {
     return Intl.message(
-      '开始',
+      'Get Started',
       name: 'getStartedLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `个人资料`
+  /// `Profile`
   String get profileLabel {
     return Intl.message(
-      '个人资料',
+      'Profile',
       name: 'profileLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `编辑`
+  /// `Edit`
   String get editLabel {
     return Intl.message(
-      '编辑',
+      'Edit',
       name: 'editLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `餐食比例`
+  /// `Meal Ratio`
   String get mealRatioLabel {
     return Intl.message(
-      '餐食比例',
+      'Meal Ratio',
       name: 'mealRatioLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `岁`
+  /// `Years`
   String get yearsLabel {
     return Intl.message(
-      '岁',
+      'Years',
       name: 'yearsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `手动定制计划`
+  /// `Manual Custom Plan`
   String get planSelectionButtonTitle1 {
     return Intl.message(
-      '手动定制计划',
+      'Manual Custom Plan',
       name: 'planSelectionButtonTitle1',
       desc: '',
       args: [],
     );
   }
 
-  /// `回答问题，自定义你的饮食旅程。`
+  /// `Answer questions and customize your own journey.`
   String get planSelectionButtonDesc1 {
     return Intl.message(
-      '回答问题，自定义你的饮食旅程。',
+      'Answer questions and customize your own journey.',
       name: 'planSelectionButtonDesc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `AI智能计划`
+  /// `Smart Plan with AI`
   String get planSelectionButtonTitle2 {
     return Intl.message(
-      'AI智能计划',
+      'Smart Plan with AI',
       name: 'planSelectionButtonTitle2',
       desc: '',
       args: [],
     );
   }
 
-  /// `描述你的身体和目标——让AI帮你打造完美计划。`
+  /// `Describe your body and goals — let AI build your perfect plan.`
   String get planSelectionButtonDesc2 {
     return Intl.message(
-      '描述你的身体和目标——让AI帮你打造完美计划。',
+      'Describe your body and goals — let AI build your perfect plan.',
       name: 'planSelectionButtonDesc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `记录食物`
+  /// `Log Food`
   String get loggingSelectionButtonTitle1 {
     return Intl.message(
-      '记录食物',
+      'Log Food',
       name: 'loggingSelectionButtonTitle1',
       desc: '',
       args: [],
     );
   }
 
-  /// `搜索并选择食物，然后输入分量。`
+  /// `Search and select your food, then enter the portion.`
   String get loggingSelectionButtonDesc1 {
     return Intl.message(
-      '搜索并选择食物，然后输入分量。',
+      'Search and select your food, then enter the portion.',
       name: 'loggingSelectionButtonDesc1',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描餐食`
+  /// `Meal Scan`
   String get loggingSelectionButtonTitle2 {
     return Intl.message(
-      '扫描餐食',
+      'Meal Scan',
       name: 'loggingSelectionButtonTitle2',
       desc: '',
       args: [],
     );
   }
 
-  /// `快速拍照——我们将自动识别。`
+  /// `Snap a quick photo — we’ll handle the rest.`
   String get loggingSelectionButtonDesc2 {
     return Intl.message(
-      '快速拍照——我们将自动识别。',
+      'Snap a quick photo — we’ll handle the rest.',
       name: 'loggingSelectionButtonDesc2',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描条码`
+  /// `Scan Barcode`
   String get loggingSelectionButtonTitle3 {
     return Intl.message(
-      '扫描条码',
+      'Scan Barcode',
       name: 'loggingSelectionButtonTitle3',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描包装食品条码，快速记录。`
+  /// `Scan a barcode to log packaged food instantly.`
   String get loggingSelectionButtonDesc3 {
     return Intl.message(
-      '扫描包装食品条码，快速记录。',
+      'Scan a barcode to log packaged food instantly.',
       name: 'loggingSelectionButtonDesc3',
       desc: '',
       args: [],
     );
   }
 
-  /// `继续`
+  /// `Continue`
   String get continueLabel {
     return Intl.message(
-      '继续',
+      'Continue',
       name: 'continueLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `好的`
+  /// `Ok`
   String get okLabel {
     return Intl.message(
-      '好的',
+      'Ok',
       name: 'okLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `选择`
+  /// `Select`
   String get selectLabel {
     return Intl.message(
-      '选择',
+      'Select',
       name: 'selectLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `取消`
+  /// `Cancel`
   String get cancelLabel {
     return Intl.message(
-      '取消',
+      'Cancel',
       name: 'cancelLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `登录`
+  /// `Log in`
   String get loginLabel {
     return Intl.message(
-      '登录',
+      'Log in',
       name: 'loginLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `注册`
+  /// `Sign Up`
   String get signUpLabel {
     return Intl.message(
-      '注册',
+      'Sign Up',
       name: 'signUpLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `登出`
+  /// `Log Out`
   String get logOutLabel {
     return Intl.message(
-      '登出',
+      'Log Out',
       name: 'logOutLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `用户名`
+  /// `Username`
   String get usernameLabel {
     return Intl.message(
-      '用户名',
+      'Username',
       name: 'usernameLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `邮箱`
+  /// `Email`
   String get emailLabel {
     return Intl.message(
-      '邮箱',
+      'Email',
       name: 'emailLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `密码`
+  /// `Password`
   String get passwordLabel {
     return Intl.message(
-      '密码',
+      'Password',
       name: 'passwordLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `告诉我们你的信息`
+  /// `Tell Us About You`
   String get planQuestion1 {
     return Intl.message(
-      '告诉我们你的信息',
+      'Tell Us About You',
       name: 'planQuestion1',
       desc: '',
       args: [],
     );
   }
 
-  /// `分享你的性别、体重、身高和生日，帮助我们为你制定专属计划。`
+  /// `Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you.`
   String get planDescription1 {
     return Intl.message(
-      '分享你的性别、体重、身高和生日，帮助我们为你制定专属计划。',
+      'Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you.',
       name: 'planDescription1',
       desc: '',
       args: [],
     );
   }
 
-  /// `设定目标体重`
+  /// `Set Your Target Weight`
   String get planQuestion2 {
     return Intl.message(
-      '设定目标体重',
+      'Set Your Target Weight',
       name: 'planQuestion2',
       desc: '',
       args: [],
     );
   }
 
-  /// `告诉我们你的目标体重，我们会帮你规划前进路线。`
+  /// `Tell us your goal weight so we can guide your progress and adjust your plan as you move toward it.`
   String get planDescription2 {
     return Intl.message(
-      '告诉我们你的目标体重，我们会帮你规划前进路线。',
+      'Tell us your goal weight so we can guide your progress and adjust your plan as you move toward it.',
       name: 'planDescription2',
       desc: '',
       args: [],
     );
   }
 
-  /// `选择每周增重目标`
+  /// `Choose Your Weekly Weight Gain`
   String get planQuestion3 {
     return Intl.message(
-      '选择每周增重目标',
+      'Choose Your Weekly Weight Gain',
       name: 'planQuestion3',
       desc: '',
       args: [],
     );
   }
 
-  /// `设定每周期望增重速度——从0.1公斤到1.0公斤。`
+  /// `Set your preferred weight gain pace — from a slow and steady 0.1 kg to a more aggressive 1.0 kg per week.`
   String get planDescription3 {
     return Intl.message(
-      '设定每周期望增重速度——从0.1公斤到1.0公斤。',
+      'Set your preferred weight gain pace — from a slow and steady 0.1 kg to a more aggressive 1.0 kg per week.',
       name: 'planDescription3',
       desc: '',
       args: [],
     );
   }
 
-  /// `描述你的日常活动`
+  /// `Describe Your Daily Activity`
   String get planQuestion4 {
     return Intl.message(
-      '描述你的日常活动',
+      'Describe Your Daily Activity',
       name: 'planQuestion4',
       desc: '',
       args: [],
     );
   }
 
-  /// `告诉我们你一天的活动量，包括工作、学习或家庭事务中的移动。`
+  /// `Tell us how active you are throughout the day — this includes movement during work, school, or at home.`
   String get planDescription4 {
     return Intl.message(
-      '告诉我们你一天的活动量，包括工作、学习或家庭事务中的移动。',
+      'Tell us how active you are throughout the day — this includes movement during work, school, or at home.',
       name: 'planDescription4',
       desc: '',
       args: [],
     );
   }
 
-  /// `你每周锻炼几次？`
+  /// `How Often Do You Exercise?`
   String get planQuestion5 {
     return Intl.message(
-      '你每周锻炼几次？',
+      'How Often Do You Exercise?',
       name: 'planQuestion5',
       desc: '',
       args: [],
     );
   }
 
-  /// `告诉我们你的锻炼频率，以便更精准地匹配你的训练水平。`
+  /// `Let us know your weekly workout habits so we can fine-tune your plan to match your training level.`
   String get planDescription5 {
     return Intl.message(
-      '告诉我们你的锻炼频率，以便更精准地匹配你的训练水平。',
+      'Let us know your weekly workout habits so we can fine-tune your plan to match your training level.',
       name: 'planDescription5',
       desc: '',
       args: [],
     );
   }
 
-  /// `你的饮食偏好是什么？`
+  /// `What’s Your Diet Preference?`
   String get planQuestion6 {
     return Intl.message(
-      '你的饮食偏好是什么？',
+      'What’s Your Diet Preference?',
       name: 'planQuestion6',
       desc: '',
       args: [],
     );
   }
 
-  /// `选择最适合你的饮食方式，我们将据此定制热量与营养目标。`
+  /// `Choose the diet type that best fits your lifestyle. We'll use this to tailor your calorie and macronutrient goals.`
   String get planDescription6 {
     return Intl.message(
-      '选择最适合你的饮食方式，我们将据此定制热量与营养目标。',
+      'Choose the diet type that best fits your lifestyle. We\'ll use this to tailor your calorie and macronutrient goals.',
       name: 'planDescription6',
       desc: '',
       args: [],
     );
   }
 
-  /// `性别`
+  /// `Gender`
   String get genderLabel {
     return Intl.message(
-      '性别',
+      'Gender',
       name: 'genderLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `用于个性化健康与热量估算。`
+  /// `Used to personalize your health and calorie estimates.`
   String get genderDesc {
     return Intl.message(
-      '用于个性化健康与热量估算。',
+      'Used to personalize your health and calorie estimates.',
       name: 'genderDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `男性`
+  /// `Male`
   String get maleLabel {
     return Intl.message(
-      '男性',
+      'Male',
       name: 'maleLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `女性`
+  /// `Female`
   String get femaleLabel {
     return Intl.message(
-      '女性',
+      'Female',
       name: 'femaleLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `身高`
+  /// `Height`
   String get heightLabel {
     return Intl.message(
-      '身高',
+      'Height',
       name: 'heightLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `有助于计算身体质量指数（BMI）。`
+  /// `Helps calculate your body mass index (BMI).`
   String get heightDesc {
     return Intl.message(
-      '有助于计算身体质量指数（BMI）。',
+      'Helps calculate your body mass index (BMI).',
       name: 'heightDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `体重`
+  /// `Weight`
   String get weightLabel {
     return Intl.message(
-      '体重',
+      'Weight',
       name: 'weightLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `用于确定每日热量需求。`
+  /// `Used to determine your daily calorie needs.`
   String get weightDesc {
     return Intl.message(
-      '用于确定每日热量需求。',
+      'Used to determine your daily calorie needs.',
       name: 'weightDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `出生日期`
+  /// `Date of Birth`
   String get dateOfBirthLabel {
     return Intl.message(
-      '出生日期',
+      'Date of Birth',
       name: 'dateOfBirthLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `我们将根据你的年龄估算基础代谢率。`
+  /// `We use your age to estimate your metabolic rate.`
   String get dateOfBirthDesc {
     return Intl.message(
-      '我们将根据你的年龄估算基础代谢率。',
+      'We use your age to estimate your metabolic rate.',
       name: 'dateOfBirthDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `目标体重`
+  /// `Target Weight`
   String get targetWeightLabel {
     return Intl.message(
-      '目标体重',
+      'Target Weight',
       name: 'targetWeightLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `设置目标体重——高于现值则增重，低于现值则减重，相同则维持。`
+  /// `Set your goal weight — if it’s higher, we’ll help you gain; if lower, lose; if the same, maintain.`
   String get targetWeightDesc {
     return Intl.message(
-      '设置目标体重——高于现值则增重，低于现值则减重，相同则维持。',
+      'Set your goal weight — if it’s higher, we’ll help you gain; if lower, lose; if the same, maintain.',
       name: 'targetWeightDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `每周目标增重`
+  /// `Target Weekly Gain`
   String get targetWeightWeeklyLabel {
     return Intl.message(
-      '每周目标增重',
+      'Target Weekly Gain',
       name: 'targetWeightWeeklyLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `0.1–0.2公斤：缓慢增长 | 0.25–0.4公斤：均衡推荐 | 0.45–0.6公斤：快速增长 | 0.65–1.0公斤：非常激进，脂肪增长风险较高`
+  /// `0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk`
   String get targetWeightWeeklyDesc {
     return Intl.message(
-      '0.1–0.2公斤：缓慢增长 | 0.25–0.4公斤：均衡推荐 | 0.45–0.6公斤：快速增长 | 0.65–1.0公斤：非常激进，脂肪增长风险较高',
+      '0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk',
       name: 'targetWeightWeeklyDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `久坐不动`
+  /// `Sedentary`
   String get sedentaryLabel {
     return Intl.message(
-      '久坐不动',
+      'Sedentary',
       name: 'sedentaryLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `大部分时间坐着（如办公室工作）。`
+  /// `Mostly sitting all day (e.g., desk job, little movement).`
   String get sedentaryDesc {
     return Intl.message(
-      '大部分时间坐着（如办公室工作）。',
+      'Mostly sitting all day (e.g., desk job, little movement).',
       name: 'sedentaryDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `轻度活动`
+  /// `Lightly Active`
   String get lightlyActiveLabel {
     return Intl.message(
-      '轻度活动',
+      'Lightly Active',
       name: 'lightlyActiveLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `偶尔走动或站立（如教师、短时步行）。`
+  /// `Occasional walking or standing (e.g., teacher, short walks).`
   String get lightlyActiveDesc {
     return Intl.message(
-      '偶尔走动或站立（如教师、短时步行）。',
+      'Occasional walking or standing (e.g., teacher, short walks).',
       name: 'lightlyActiveDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `活跃`
+  /// `Active`
   String get activeLabel {
     return Intl.message(
-      '活跃',
+      'Active',
       name: 'activeLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `大部分时间站立或活动（如零售工作、轻体力劳动）。`
+  /// `On your feet most of the day (e.g., retail, light labor).`
   String get activeDesc {
     return Intl.message(
-      '大部分时间站立或活动（如零售工作、轻体力劳动）。',
+      'On your feet most of the day (e.g., retail, light labor).',
       name: 'activeDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `非常活跃`
+  /// `Very Active`
   String get veryActiveLabel {
     return Intl.message(
-      '非常活跃',
+      'Very Active',
       name: 'veryActiveLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `体力劳动多，日常活动量大。`
+  /// `Physically demanding job or lots of daily movement.`
   String get veryActiveDesc {
     return Intl.message(
-      '体力劳动多，日常活动量大。',
+      'Physically demanding job or lots of daily movement.',
       name: 'veryActiveDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `从不锻炼`
+  /// `Never`
   String get neverLabel {
     return Intl.message(
-      '从不锻炼',
+      'Never',
       name: 'neverLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `我不定期进行锻炼。`
+  /// `I don’t work out regularly.`
   String get neverDesc {
     return Intl.message(
-      '我不定期进行锻炼。',
+      'I don’t work out regularly.',
       name: 'neverDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `每周1–2次`
+  /// `1–2 times/week`
   String get lightLabel {
     return Intl.message(
-      '每周1–2次',
+      '1–2 times/week',
       name: 'lightLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `轻度或偶尔锻炼。`
+  /// `Light or occasional workouts.`
   String get lightDesc {
     return Intl.message(
-      '轻度或偶尔锻炼。',
+      'Light or occasional workouts.',
       name: 'lightDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `每周3–4次`
+  /// `3–4 times/week`
   String get moderateLabel {
     return Intl.message(
-      '每周3–4次',
+      '3–4 times/week',
       name: 'moderateLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `一周多数天都有锻炼。`
+  /// `Consistent workouts on most weekdays.`
   String get moderateDesc {
     return Intl.message(
-      '一周多数天都有锻炼。',
+      'Consistent workouts on most weekdays.',
       name: 'moderateDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `每周5次以上`
+  /// `5+ times/week`
   String get frequentLabel {
     return Intl.message(
-      '每周5次以上',
+      '5+ times/week',
       name: 'frequentLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `我几乎每天锻炼。`
+  /// `I work out almost every day.`
   String get frequentDesc {
     return Intl.message(
-      '我几乎每天锻炼。',
+      'I work out almost every day.',
       name: 'frequentDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `均衡`
+  /// `Balanced`
   String get balancedLabel {
     return Intl.message(
-      '均衡',
+      'Balanced',
       name: 'balancedLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `多样化的均衡饮食。`
+  /// `A balanced diet with a variety of foods.`
   String get balancedDesc {
     return Intl.message(
-      '多样化的均衡饮食。',
+      'A balanced diet with a variety of foods.',
       name: 'balancedDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `生酮饮食`
+  /// `Keto`
   String get ketoLabel {
     return Intl.message(
-      '生酮饮食',
+      'Keto',
       name: 'ketoLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `低碳水、高脂肪饮食。`
+  /// `Low-carb, high-fat diet for weight loss.`
   String get ketoDesc {
     return Intl.message(
-      '低碳水、高脂肪饮食。',
+      'Low-carb, high-fat diet for weight loss.',
       name: 'ketoDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `地中海饮食`
+  /// `Mediterranean`
   String get mediterraneanLabel {
     return Intl.message(
-      '地中海饮食',
+      'Mediterranean',
       name: 'mediterraneanLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `富含植物成分和健康脂肪。`
+  /// `Plant-rich healthy fats.`
   String get mediterraneanDesc {
     return Intl.message(
-      '富含植物成分和健康脂肪。',
+      'Plant-rich healthy fats.',
       name: 'mediterraneanDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `古饮食`
+  /// `Paleo`
   String get paleoLabel {
     return Intl.message(
-      '古饮食',
+      'Paleo',
       name: 'paleoLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `模仿古代人类的饮食方式。`
+  /// `Based on foods eaten by early humans.`
   String get paleoDesc {
     return Intl.message(
-      '模仿古代人类的饮食方式。',
+      'Based on foods eaten by early humans.',
       name: 'paleoDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `素食`
+  /// `Vegetarian`
   String get vegetarianLabel {
     return Intl.message(
-      '素食',
+      'Vegetarian',
       name: 'vegetarianLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `不含肉类和鱼类的饮食。`
+  /// `A diet that excludes meat and fish.`
   String get vegetarianDesc {
     return Intl.message(
-      '不含肉类和鱼类的饮食。',
+      'A diet that excludes meat and fish.',
       name: 'vegetarianDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `低碳水`
+  /// `Low Carbs`
   String get lowCarbsLabel {
     return Intl.message(
-      '低碳水',
+      'Low Carbs',
       name: 'lowCarbsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `低碳水、高蛋白饮食。`
+  /// `Low-carb, high-protein diet.`
   String get lowCarbsDesc {
     return Intl.message(
-      '低碳水、高蛋白饮食。',
+      'Low-carb, high-protein diet.',
       name: 'lowCarbsDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `进度`
+  /// `Progress`
   String get progressLabel {
     return Intl.message(
-      '进度',
+      'Progress',
       name: 'progressLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `日记`
+  /// `Diary`
   String get diaryLabel {
     return Intl.message(
-      '日记',
+      'Diary',
       name: 'diaryLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `食物`
+  /// `Food`
   String get foodLabel {
     return Intl.message(
-      '食物',
+      'Food',
       name: 'foodLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `更多`
+  /// `More`
   String get moreLabel {
     return Intl.message(
-      '更多',
+      'More',
       name: 'moreLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `英语`
+  /// `English`
   String get englishLabel {
     return Intl.message(
-      '英语',
+      'English',
       name: 'englishLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `简体中文`
+  /// `Simplified chinese`
   String get simplifiedChineseLabel {
     return Intl.message(
-      '简体中文',
+      'Simplified chinese',
       name: 'simplifiedChineseLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `哎呀，出错了`
+  /// `Oops, something went wrong`
   String get somethingWentWrong {
     return Intl.message(
-      '哎呀，出错了',
+      'Oops, something went wrong',
       name: 'somethingWentWrong',
       desc: '',
       args: [],
     );
   }
 
-  /// `密码太弱，请选择更强的密码。`
+  /// `The password you entered is too weak. Please choose a stronger password.`
   String get weakPassword {
     return Intl.message(
-      '密码太弱，请选择更强的密码。',
+      'The password you entered is too weak. Please choose a stronger password.',
       name: 'weakPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `此邮箱已被注册，请更换邮箱。`
+  /// `This email address is already in use. Please use a different email.`
   String get usedEmail {
     return Intl.message(
-      '此邮箱已被注册，请更换邮箱。',
+      'This email address is already in use. Please use a different email.',
       name: 'usedEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `邮箱或密码错误，请重试。`
+  /// `The email or password you entered is incorrect. Please try again.`
   String get invalidCredential {
     return Intl.message(
-      '邮箱或密码错误，请重试。',
+      'The email or password you entered is incorrect. Please try again.',
       name: 'invalidCredential',
       desc: '',
       args: [],
     );
   }
 
-  /// `会话已过期或用户未认证，请重新登录。`
+  /// `Session Expired or User is not Authenticated, Please Login Again.`
   String get permissionDenied {
     return Intl.message(
-      '会话已过期或用户未认证，请重新登录。',
+      'Session Expired or User is not Authenticated, Please Login Again.',
       name: 'permissionDenied',
       desc: '',
       args: [],
     );
   }
 
-  /// `请求出错，请稍后再试。`
+  /// `There was an error with your request. Please try again later.`
   String get requestError {
     return Intl.message(
-      '请求出错，请稍后再试。',
+      'There was an error with your request. Please try again later.',
       name: 'requestError',
       desc: '',
       args: [],
     );
   }
 
-  /// `由于异常活动，我们已屏蔽此设备的请求。请稍后再试。`
+  /// `We have blocked all requests from this device due to unusual activity. Try again later.`
   String get tooManyRequests {
     return Intl.message(
-      '由于异常活动，我们已屏蔽此设备的请求。请稍后再试。',
+      'We have blocked all requests from this device due to unusual activity. Try again later.',
       name: 'tooManyRequests',
       desc: '',
       args: [],
     );
   }
 
-  /// `搜索食物...`
+  /// `Search foods...`
   String get searchFoodPlaceholder {
     return Intl.message(
-      '搜索食物...',
+      'Search foods...',
       name: 'searchFoodPlaceholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `全部`
+  /// `All`
   String get allLabel {
     return Intl.message(
-      '全部',
+      'All',
       name: 'allLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `我的餐食`
+  /// `My Meals`
   String get myMealsLabel {
     return Intl.message(
-      '我的餐食',
+      'My Meals',
       name: 'myMealsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `已保存`
+  /// `Saved`
   String get savedLabel {
     return Intl.message(
-      '已保存',
+      'Saved',
       name: 'savedLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描条码`
+  /// `Scan a barcode`
   String get scanABarcodeLabel {
     return Intl.message(
-      '扫描条码',
+      'Scan a barcode',
       name: 'scanABarcodeLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描餐食`
+  /// `Scan a meal`
   String get scanAMealLabel {
     return Intl.message(
-      '扫描餐食',
+      'Scan a meal',
       name: 'scanAMealLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `描述餐食`
+  /// `Describe a meal`
   String get describeAMealLabel {
     return Intl.message(
-      '描述餐食',
+      'Describe a meal',
       name: 'describeAMealLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `数量`
+  /// `Quantity`
   String get quantityLabel {
     return Intl.message(
-      '数量',
+      'Quantity',
       name: 'quantityLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `单位`
+  /// `Serving Unit`
   String get servingUnitLabel {
     return Intl.message(
-      '单位',
+      'Serving Unit',
       name: 'servingUnitLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `餐别`
+  /// `Meal Type`
   String get mealTypeLabel {
     return Intl.message(
-      '餐别',
+      'Meal Type',
       name: 'mealTypeLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `早餐`
+  /// `Breakfast`
   String get breakfastLabel {
     return Intl.message(
-      '早餐',
+      'Breakfast',
       name: 'breakfastLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `午餐`
+  /// `Lunch`
   String get lunchLabel {
     return Intl.message(
-      '午餐',
+      'Lunch',
       name: 'lunchLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `晚餐`
+  /// `Dinner`
   String get dinnerLabel {
     return Intl.message(
-      '晚餐',
+      'Dinner',
       name: 'dinnerLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `加餐`
+  /// `Snack`
   String get snackLabel {
     return Intl.message(
-      '加餐',
+      'Snack',
       name: 'snackLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `千卡`
+  /// `kcal`
   String get calorieUnit {
     return Intl.message(
-      '千卡',
+      'kcal',
       name: 'calorieUnit',
       desc: '',
       args: [],
     );
   }
 
-  /// `记录食物`
+  /// `Log Food`
   String get logFoodLabel {
     return Intl.message(
-      '记录食物',
+      'Log Food',
       name: 'logFoodLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `营养信息`
+  /// `Nutritional Information`
   String get nutritionalInformationLabel {
     return Intl.message(
-      '营养信息',
+      'Nutritional Information',
       name: 'nutritionalInformationLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `目标`
+  /// `Goal`
   String get goalLabel {
     return Intl.message(
-      '目标',
+      'Goal',
       name: 'goalLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `已记录`
+  /// `Logged`
   String get loggedLabel {
     return Intl.message(
-      '已记录',
+      'Logged',
       name: 'loggedLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `剩余 = 目标 - 已记录`
+  /// `Remaining = Goal - Logged`
   String get calorieFormula {
     return Intl.message(
-      '剩余 = 目标 - 已记录',
+      'Remaining = Goal - Logged',
       name: 'calorieFormula',
       desc: '',
       args: [],
     );
   }
 
-  /// `剩余`
+  /// `Remaining`
   String get remainingLabel {
     return Intl.message(
-      '剩余',
+      'Remaining',
       name: 'remainingLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `宏量营养素`
+  /// `Macronutrients`
   String get macronutrientsLabel {
     return Intl.message(
-      '宏量营养素',
+      'Macronutrients',
       name: 'macronutrientsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `目标值`
+  /// `Targets`
   String get targetsLabel {
     return Intl.message(
-      '目标值',
+      'Targets',
       name: 'targetsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `已记录的餐食`
+  /// `Logged Meals`
   String get loggedMealsLabel {
     return Intl.message(
-      '已记录的餐食',
+      'Logged Meals',
       name: 'loggedMealsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `请稍候，我们正在为你定制专属计划。`
+  /// `Hang tight! We're crafting a personalized plan just for you.`
   String get personalizingYourPlanLoadingText {
     return Intl.message(
-      '请稍候，我们正在为你定制专属计划。',
+      'Hang tight! We\'re crafting a personalized plan just for you.',
       name: 'personalizingYourPlanLoadingText',
       desc: '',
       args: [],
     );
   }
 
-  /// `热量`
+  /// `Calorie`
   String get calorieLabel {
     return Intl.message(
-      '热量',
+      'Calorie',
       name: 'calorieLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `蛋白质`
+  /// `Protein`
   String get proteinLabel {
     return Intl.message(
-      '蛋白质',
+      'Protein',
       name: 'proteinLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `脂肪`
+  /// `Fats`
   String get fatLabel {
     return Intl.message(
-      '脂肪',
+      'Fats',
       name: 'fatLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `碳水化合物`
+  /// `Carbs`
   String get carbsLabel {
     return Intl.message(
-      '碳水化合物',
+      'Carbs',
       name: 'carbsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `钙`
+  /// `Calcium`
   String get calciumLabel {
     return Intl.message(
-      '钙',
+      'Calcium',
       name: 'calciumLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `铁`
+  /// `Iron`
   String get ironLabel {
     return Intl.message(
-      '铁',
+      'Iron',
       name: 'ironLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `镁`
+  /// `Magnesium`
   String get magnesiumLabel {
     return Intl.message(
-      '镁',
+      'Magnesium',
       name: 'magnesiumLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `磷`
+  /// `Phosphorus`
   String get phosphorusLabel {
     return Intl.message(
-      '磷',
+      'Phosphorus',
       name: 'phosphorusLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `钾`
+  /// `Potassium`
   String get potassiumLabel {
     return Intl.message(
-      '钾',
+      'Potassium',
       name: 'potassiumLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `钠`
+  /// `Sodium`
   String get sodiumLabel {
     return Intl.message(
-      '钠',
+      'Sodium',
       name: 'sodiumLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `锌`
+  /// `Zinc`
   String get zincLabel {
     return Intl.message(
-      '锌',
+      'Zinc',
       name: 'zincLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `铜`
+  /// `Copper`
   String get copperLabel {
     return Intl.message(
-      '铜',
+      'Copper',
       name: 'copperLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `锰`
+  /// `Manganese`
   String get manganeseLabel {
     return Intl.message(
-      '锰',
+      'Manganese',
       name: 'manganeseLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `硒`
+  /// `Selenium`
   String get seleniumLabel {
     return Intl.message(
-      '硒',
+      'Selenium',
       name: 'seleniumLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素A`
+  /// `Vitamin A`
   String get vitaminALabel {
     return Intl.message(
-      '维生素A',
+      'Vitamin A',
       name: 'vitaminALabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素E`
+  /// `Vitamin E`
   String get vitaminELabel {
     return Intl.message(
-      '维生素E',
+      'Vitamin E',
       name: 'vitaminELabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素D`
+  /// `Vitamin D`
   String get vitaminDLabel {
     return Intl.message(
-      '维生素D',
+      'Vitamin D',
       name: 'vitaminDLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素C`
+  /// `Vitamin C`
   String get vitaminCLabel {
     return Intl.message(
-      '维生素C',
+      'Vitamin C',
       name: 'vitaminCLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `硫胺素`
+  /// `Thiamin`
   String get thiaminLabel {
     return Intl.message(
-      '硫胺素',
+      'Thiamin',
       name: 'thiaminLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `核黄素`
+  /// `Riboflavin`
   String get riboflavinLabel {
     return Intl.message(
-      '核黄素',
+      'Riboflavin',
       name: 'riboflavinLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `烟酸`
+  /// `Niacin`
   String get niacinLabel {
     return Intl.message(
-      '烟酸',
+      'Niacin',
       name: 'niacinLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素B6`
+  /// `Vitamin B6`
   String get vitaminB6Label {
     return Intl.message(
-      '维生素B6',
+      'Vitamin B6',
       name: 'vitaminB6Label',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素B12`
+  /// `Vitamin B12`
   String get vitaminB12Label {
     return Intl.message(
-      '维生素B12',
+      'Vitamin B12',
       name: 'vitaminB12Label',
       desc: '',
       args: [],
     );
   }
 
-  /// `胆碱`
+  /// `Choline`
   String get cholineLabel {
     return Intl.message(
-      '胆碱',
+      'Choline',
       name: 'cholineLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `维生素K`
+  /// `Vitamin K`
   String get vitaminKLabel {
     return Intl.message(
-      '维生素K',
+      'Vitamin K',
       name: 'vitaminKLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `叶酸`
+  /// `Folate`
   String get folateLabel {
     return Intl.message(
-      '叶酸',
+      'Folate',
       name: 'folateLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `保存你的食物`
+  /// `Save Your Food`
   String get saveYourFoodLabel {
     return Intl.message(
-      '保存你的食物',
+      'Save Your Food',
       name: 'saveYourFoodLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `在食物详情页点击书签图标，即可保存你喜欢的食物，方便下次使用。`
+  /// `Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.`
   String get saveYourFoodDesc {
     return Intl.message(
-      '在食物详情页点击书签图标，即可保存你喜欢的食物，方便下次使用。',
+      'Tap the bookmark icon on any food detail page to save your favorite foods here for easy access.',
       name: 'saveYourFoodDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `扫描你的餐食`
+  /// `Scan Your Meal`
   String get scanYourMealLabel {
     return Intl.message(
-      '扫描你的餐食',
+      'Scan Your Meal',
       name: 'scanYourMealLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `点击相机图标，用AI扫描餐食，立即获取营养信息。`
+  /// `Tap the camera icon to scan your meal with AI and get instant nutrition details.`
   String get scanYourMealDesc {
     return Intl.message(
-      '点击相机图标，用AI扫描餐食，立即获取营养信息。',
+      'Tap the camera icon to scan your meal with AI and get instant nutrition details.',
       name: 'scanYourMealDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `饮食`
+  /// `Diet`
   String get dietLabel {
     return Intl.message(
-      '饮食',
+      'Diet',
       name: 'dietLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `个人信息`
+  /// `Personal Details`
   String get personalDetailsLabel {
     return Intl.message(
-      '个人信息',
+      'Personal Details',
       name: 'personalDetailsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `账号`
+  /// `Account`
   String get accountLabel {
     return Intl.message(
-      '账号',
+      'Account',
       name: 'accountLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `你好`
+  /// `Hi`
   String get hiLabel {
     return Intl.message(
-      '你好',
+      'Hi',
       name: 'hiLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `调整宏量营养比例`
+  /// `Adjust Macronutrients Ratio`
   String get adjustMacroNutrientsLabel {
     return Intl.message(
-      '调整宏量营养比例',
+      'Adjust Macronutrients Ratio',
       name: 'adjustMacroNutrientsLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `碳水、脂肪和蛋白质`
+  /// `Carbs, fat, and protein`
   String get adjustMacroNutrientsDesc {
     return Intl.message(
-      '碳水、脂肪和蛋白质',
+      'Carbs, fat, and protein',
       name: 'adjustMacroNutrientsDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `调整热量摄入`
+  /// `Adjust Calorie Intake`
   String get adjustCalorieIntakeLabel {
     return Intl.message(
-      '调整热量摄入',
+      'Adjust Calorie Intake',
       name: 'adjustCalorieIntakeLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `千卡/天`
+  /// `kcal/day`
   String get adjustCalorieIntakeDesc {
     return Intl.message(
-      '千卡/天',
+      'kcal/day',
       name: 'adjustCalorieIntakeDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `饮食类型`
+  /// `Diet Type`
   String get dietTypeLabel {
     return Intl.message(
-      '饮食类型',
+      'Diet Type',
       name: 'dietTypeLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `早餐、午餐、晚餐与加餐`
+  /// `Breakfast, lunch, dinner, and snacks`
   String get mealRatioDesc {
     return Intl.message(
-      '早餐、午餐、晚餐与加餐',
+      'Breakfast, lunch, dinner, and snacks',
       name: 'mealRatioDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `想重新开始？`
+  /// `Want to start fresh?`
   String get wantToStartFreshLabel {
     return Intl.message(
-      '想重新开始？',
+      'Want to start fresh?',
       name: 'wantToStartFreshLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `生成一个全新的个性化计划`
+  /// `Generate a new personalized plan`
   String get wantToStartFreshDesc {
     return Intl.message(
-      '生成一个全新的个性化计划',
+      'Generate a new personalized plan',
       name: 'wantToStartFreshDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `生成`
+  /// `Generate`
   String get generateLabel {
     return Intl.message(
-      '生成',
+      'Generate',
       name: 'generateLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `个人信息`
+  /// `Personal Info`
   String get personalInfoLabel {
     return Intl.message(
-      '个人信息',
+      'Personal Info',
       name: 'personalInfoLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `计划自定义`
+  /// `Plan Customization`
   String get planCustomizationLabel {
     return Intl.message(
-      '计划自定义',
+      'Plan Customization',
       name: 'planCustomizationLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Locating Barcode`
+  String get locatingBarcodeLabel {
+    return Intl.message(
+      'Locating Barcode',
+      name: 'locatingBarcodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Align the barcode within the frame to scan`
+  String get locatingBarcodeDesc {
+    return Intl.message(
+      'Align the barcode within the frame to scan',
+      name: 'locatingBarcodeDesc',
       desc: '',
       args: [],
     );
