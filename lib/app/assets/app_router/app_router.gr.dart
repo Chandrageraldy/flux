@@ -59,6 +59,22 @@ class DiaryRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ErrorModal]
+class ErrorRoute extends PageRouteInfo<void> {
+  const ErrorRoute({List<PageRouteInfo>? children})
+    : super(ErrorRoute.name, initialChildren: children);
+
+  static const String name = 'ErrorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ErrorModal();
+    },
+  );
+}
+
+/// generated route for
 /// [FoodDetailsPage]
 class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
   FoodDetailsRoute({

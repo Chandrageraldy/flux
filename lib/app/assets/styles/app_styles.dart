@@ -8,6 +8,7 @@ class AppStyles {
   static const kPadd8 = EdgeInsets.all(8.0);
   static const kPadd12 = EdgeInsets.all(12.0);
   static const kPadd16 = EdgeInsets.all(16.0);
+  static const kPadd24 = EdgeInsets.all(24.0);
   // Padding ONLY
   static const kPaddOB12 = EdgeInsets.only(bottom: 12.0);
   static const kPaddOB20 = EdgeInsets.only(bottom: 20.0);
@@ -84,6 +85,7 @@ class AppStyles {
   static final kRad24 = BorderRadius.circular(24.0);
   static final kRad100 = BorderRadius.circular(100.0);
   // Radius VERTICAL
+  static final kRadVT10 = BorderRadius.vertical(top: Radius.circular(10.0));
   static final kRadVT24 = BorderRadius.vertical(top: Radius.circular(24.0));
   // Radius SIDES
   static final kRadOTL20TR20 = BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20));

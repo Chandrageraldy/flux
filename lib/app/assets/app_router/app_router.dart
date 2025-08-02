@@ -6,6 +6,7 @@ import 'package:flux/app/views/auth_page/signup_page.dart';
 import 'package:flux/app/views/dashboard_page/dashboard_navigator_page.dart';
 import 'package:flux/app/views/dashboard_page/dashboard_page.dart';
 import 'package:flux/app/views/diary_page/diary_page.dart';
+import 'package:flux/app/views/error_modal/error_modal.dart';
 import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
@@ -65,6 +66,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: FoodDetailsRoute.page),
         AutoRoute(page: MealDetailsRoute.page),
         AutoRoute(page: ScanBarcodeRoute.page),
+        CustomRoute(page: ErrorRoute.page, customRouteBuilder: _modalSheetBuilder),
       ],
     );
   }
@@ -82,7 +84,7 @@ Route<T> _modalSheetBuilder<T>(
       child: Wrap(
         children: [
           Container(
-            decoration: BoxDecoration(borderRadius: AppStyles.kRadVT24),
+            decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10),
             clipBehavior: Clip.hardEdge,
             child: child,
           ),

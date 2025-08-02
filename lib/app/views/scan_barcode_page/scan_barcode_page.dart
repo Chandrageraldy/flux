@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/viewmodels/barcode_scan_vm/barcode_scan_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,7 +34,6 @@ class _ScanBarcodePageState extends BaseStatefulState<_ScanBarcodePage> {
 
   bool isFlashOn = false;
   bool isProcessing = false;
-  Timer? resetTimer;
 
   @override
   Widget body() {
@@ -63,10 +60,6 @@ extension _Actions on _ScanBarcodePageState {
   _onBarcodeDetected(BarcodeCapture capture) async {
     if (isProcessing) return;
 
-    resetTimer = Timer(const Duration(seconds: 3), () {
-      isProcessing = false;
-    });
-
     final barcode = capture.barcodes.first;
     debugPrint('Barcode detected: ${barcode.rawValue}');
 
@@ -75,9 +68,17 @@ extension _Actions on _ScanBarcodePageState {
     final result = await tryLoad(
         context, () => context.read<BarcodeScanViewModel>().getFoodDetailsWithUPC(upc: barcode.rawValue ?? ''));
 
-    if (result == true && mounted) {
+    if (!mounted) return;
+
+    if (result == true) {
       final scannedFood = context.read<BarcodeScanViewModel>().scannedFood;
-      context.router.push(FoodDetailsRoute(foodResponseModel: scannedFood));
+      context.router.push(FoodDetailsRoute(foodResponseModel: scannedFood)).then((_) {
+        isProcessing = false;
+      });
+    } else {
+      context.router.push(ErrorRoute()).then((_) {
+        isProcessing = false;
+      });
     }
   }
 }

@@ -191,5 +191,7 @@
     "personalInfoLabel": "Personal Info",
     "planCustomizationLabel": "Plan Customization",
     "locatingBarcodeLabel": "Locating Barcode",
-    "locatingBarcodeDesc": "Align the barcode within the frame to scan"
+    "locatingBarcodeDesc": "Align the barcode within the frame to scan",
+    "barcodeNotRecognizedLabel": "Barcode not recognized",
+    "bacrodeNotRecognizedDesc": "Sorry, we couldn’t find that barcode in our database. Please try another one :("
 }

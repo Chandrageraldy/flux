@@ -35,9 +35,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "adjustMacroNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Adjust Macronutrients Ratio"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
+        "bacrodeNotRecognizedDesc": MessageLookupByLibrary.simpleMessage(
+            "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
+        "barcodeNotRecognizedLabel":
+            MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
         "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":

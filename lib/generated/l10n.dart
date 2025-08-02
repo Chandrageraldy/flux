@@ -1859,6 +1859,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Barcode not recognized`
+  String get barcodeNotRecognizedLabel {
+    return Intl.message(
+      'Barcode not recognized',
+      name: 'barcodeNotRecognizedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, we couldn’t find that barcode in our database. Please try another one :(`
+  String get bacrodeNotRecognizedDesc {
+    return Intl.message(
+      'Sorry, we couldn’t find that barcode in our database. Please try another one :(',
+      name: 'bacrodeNotRecognizedDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
