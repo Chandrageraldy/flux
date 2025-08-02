@@ -17,10 +17,13 @@ class ProfileSettingsListTile extends StatelessWidget {
           children: [
             SizedBox(height: AppStyles.kSize20, width: AppStyles.kSize20, child: getIcon(context)),
             AppStyles.kSizedBoxW10,
-            getLabel(context),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [getLabel(context), getDesc(context)],
+            ),
           ],
         ),
-        getChevronIcon(),
+        getChevronIcon(context),
       ],
     );
   }
@@ -30,7 +33,11 @@ class ProfileSettingsListTile extends StatelessWidget {
 extension _WidgetFactories on ProfileSettingsListTile {
   // Icon
   Widget getIcon(BuildContext context) {
-    return FaIcon(icon, size: AppStyles.kSize20, color: context.theme.colorScheme.secondary);
+    return FaIcon(
+      icon,
+      size: AppStyles.kSize20,
+      color: icon == FontAwesomeIcons.arrowRightFromBracket ? Colors.red : context.theme.colorScheme.secondary,
+    );
   }
 
   // Label
@@ -42,8 +49,18 @@ extension _WidgetFactories on ProfileSettingsListTile {
   }
 
   // Chevron Icon
-  Widget getChevronIcon() {
-    return FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize12);
+  Widget getChevronIcon(BuildContext context) {
+    return FaIcon(
+      FontAwesomeIcons.chevronRight,
+      size: AppStyles.kSize12,
+      color: context.theme.colorScheme.onTertiaryContainer,
+    );
+  }
+
+  // Desc
+  Widget getDesc(BuildContext context) {
+    if (desc == null) return const SizedBox.shrink();
+    return Text(desc!, style: _Styles.getDescTextStyle(context));
   }
 }
 
@@ -52,5 +69,12 @@ abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.small);
+  }
+
+  // Desc Text Style
+  static TextStyle getDescTextStyle(BuildContext context) {
+    return Quicksand.regular
+        .withSize(FontSizes.extraSmall)
+        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

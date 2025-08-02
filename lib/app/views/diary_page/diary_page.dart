@@ -119,7 +119,7 @@ extension _Actions on _DiaryPageState {
   void _onEditMealRatioPressed() {}
 
   void _onProfileActionPressed() {
-    context.router.push(ProfileRoute());
+    context.router.replaceAll([ProfileRoute()]);
   }
 }
 

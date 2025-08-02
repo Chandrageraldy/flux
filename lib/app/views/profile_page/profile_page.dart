@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
@@ -19,33 +20,38 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
 
   @override
-  PreferredSizeWidget? appbar() => AppBar(
-        title: Text(
-          S.current.profileLabel,
-          style: Quicksand.bold.withSize(FontSizes.medium),
-        ),
-        backgroundColor: context.theme.colorScheme.onPrimary,
-        centerTitle: true,
-        toolbarHeight: AppStyles.kSize45,
-      );
+  bool hasDefaultPadding() => false;
 
   @override
   Widget body() {
     return Column(
       children: [
-        AppStyles.kSizedBoxH12,
-        getHeaderContainer(),
-        AppStyles.kSizedBoxH12,
         Container(
-          padding: AppStyles.kPaddSV12H20,
-          decoration: BoxDecoration(
-            color: context.theme.colorScheme.onPrimary,
-            borderRadius: AppStyles.kRad10,
-            boxShadow: [
-              BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
-            ],
+          width: AppStyles.kDoubleInfinity,
+          decoration: BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRadOBL20BR20),
+          padding: AppStyles.kPaddSV12,
+          child: Text(
+            S.current.profileLabel,
+            style: Quicksand.bold.withSize(FontSizes.medium),
+            textAlign: TextAlign.center,
           ),
-          child: getProfileSettingsListView(),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: AppStyles.kPaddSH20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: AppStyles.kSpac12,
+              children: [
+                AppStyles.kEmptyWidget,
+                getHeaderContainer(),
+                getPlanGenerationContainer(),
+                getPlanCustomizationColumn(),
+                getPersonalInfoColumn(),
+                AppStyles.kEmptyWidget,
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -53,7 +59,9 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _ProfilePageState {}
+extension _Actions on _ProfilePageState {
+  void _onGeneratePlanPressed() {}
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ProfilePageState {
@@ -167,13 +175,116 @@ extension _WidgetFactories on _ProfilePageState {
     );
   }
 
+  // Plan Generation Container
+  Widget getPlanGenerationContainer() {
+    return Container(
+      width: AppStyles.kDoubleInfinity,
+      decoration: BoxDecoration(
+        gradient: GradientAppColors.secondaryGradient,
+        borderRadius: AppStyles.kRad10,
+      ),
+      padding: AppStyles.kPaddSV12H16,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [getPlanGenerationLabel(), getPlanGenerationDesc()],
+          ),
+          getPlanGenerationButton()
+        ],
+      ),
+    );
+  }
+
+  // Plan Generation Label
+  Widget getPlanGenerationLabel() {
+    return Text(S.current.wantToStartFreshLabel, style: _Styles.getPlanGenerationLabelTextStyle(context));
+  }
+
+  // Plan Generation Description
+  Widget getPlanGenerationDesc() {
+    return Text(S.current.wantToStartFreshDesc, style: _Styles.getPlanGenerationDescTextStyle(context));
+  }
+
+  // Plan Generation Button
+  Widget getPlanGenerationButton() {
+    return GestureDetector(
+      onTap: _onGeneratePlanPressed,
+      child: Container(
+        decoration: _Styles.getPlanGenerationButtonContainerDecoration(context),
+        padding: AppStyles.kPaddSV3H12,
+        child: Text(S.current.generateLabel, style: _Styles.getPlanGenerationButtonTextStyle(context)),
+      ),
+    );
+  }
+
+  // Personal Info Column
+  Widget getPersonalInfoColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: AppStyles.kSpac4,
+      children: [
+        Text(S.current.personalInfoLabel, style: Quicksand.bold.withSize(FontSizes.small)),
+        Container(
+          padding: AppStyles.kPaddSV12H20,
+          decoration: _Styles.getPersonalInfoContainerDecoration(context),
+          child: getPersonalInfoListView(),
+        ),
+      ],
+    );
+  }
+
   // Profile Settings List View
-  Widget getProfileSettingsListView() {
-    List<ProfileSettingsModel> settings = profileSettings;
+  Widget getPersonalInfoListView() {
     return ListView.separated(
-      itemCount: settings.length,
+      itemCount: personalInfo.length,
       itemBuilder: (context, index) {
-        final setting = settings[index];
+        final setting = personalInfo[index];
+        return ProfileSettingsListTile(
+          icon: setting.icon,
+          label: setting.label,
+          desc: setting.desc,
+        );
+      },
+      separatorBuilder: (context, index) => Padding(
+        padding: AppStyles.kPaddSV6,
+        child: Divider(color: context.theme.colorScheme.tertiaryFixedDim),
+      ),
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+    );
+  }
+
+  // Plan Customization Column
+  Widget getPlanCustomizationColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: AppStyles.kSpac4,
+      children: [
+        Text(S.current.planCustomizationLabel, style: Quicksand.bold.withSize(FontSizes.small)),
+        Container(
+          padding: AppStyles.kPaddSV12H20,
+          decoration: _Styles.getPersonalInfoContainerDecoration(context),
+          child: getPlanCustomizationListView(),
+        ),
+      ],
+    );
+  }
+
+  // Plan Customization List View
+  Widget getPlanCustomizationListView() {
+    final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
+    final PlanModel? planModel = SharedPreferenceHandler().getPlan();
+    final planCustomizationSettings = planCustomization(
+      planModel?.calorieKcal.toString() ?? '',
+      userProfile?.bodyMetrics?.dietType?.capitalize() ?? '',
+    );
+
+    return ListView.separated(
+      itemCount: planCustomizationSettings.length,
+      itemBuilder: (context, index) {
+        final setting = planCustomizationSettings[index];
         return ProfileSettingsListTile(
           icon: setting.icon,
           label: setting.label,
@@ -230,5 +341,36 @@ class _Styles {
   // Header Row Value Label Text Style
   static TextStyle getHeaderColumnValueLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+  }
+
+  // Personal Info Container Decoration
+  static BoxDecoration getPersonalInfoContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
+    );
+  }
+
+  // Plan Generation Label Text Style
+  static TextStyle getPlanGenerationLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  // Plan Generation Description Text Style
+  static TextStyle getPlanGenerationDescTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  // Plan Generation Button Container Decoration
+  static BoxDecoration getPlanGenerationButtonContainerDecoration(BuildContext context) {
+    return BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRad10);
+  }
+
+  // Plan Generation Button Text Style
+  static TextStyle getPlanGenerationButtonTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

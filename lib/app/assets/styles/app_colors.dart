@@ -34,8 +34,17 @@ class GradientAppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFFFFFFFF),
       Color(0xFFf0f2f9),
+      Color(0xFFFFFFFF),
+    ],
+  );
+
+  static const LinearGradient secondaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFF7BAAF7),
+      Color(0xFF6D7BE4),
     ],
   );
 }

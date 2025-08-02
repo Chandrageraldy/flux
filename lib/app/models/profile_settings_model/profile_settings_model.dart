@@ -14,13 +14,40 @@ class ProfileSettingsModel {
   final String? desc;
 }
 
-List<ProfileSettingsModel> profileSettings = [
+List<ProfileSettingsModel> personalInfo = [
   ProfileSettingsModel(
     icon: FontAwesomeIcons.gear,
     label: S.current.accountLabel,
   ),
   ProfileSettingsModel(
-    icon: FontAwesomeIcons.solidUser,
-    label: S.current.personalDetailsLabel,
+    icon: FontAwesomeIcons.arrowRightFromBracket,
+    label: S.current.logOutLabel,
   ),
 ];
+
+List<ProfileSettingsModel> planCustomization(String currentCalorieRequired, String currentDietType) => [
+      ProfileSettingsModel(
+        icon: FontAwesomeIcons.solidUser,
+        label: S.current.personalDetailsLabel,
+      ),
+      ProfileSettingsModel(
+        icon: FontAwesomeIcons.fire,
+        label: S.current.adjustCalorieIntakeLabel,
+        desc: '$currentCalorieRequired ${S.current.adjustCalorieIntakeDesc}',
+      ),
+      ProfileSettingsModel(
+        icon: FontAwesomeIcons.puzzlePiece,
+        label: S.current.adjustMacroNutrientsLabel,
+        desc: S.current.adjustMacroNutrientsDesc,
+      ),
+      ProfileSettingsModel(
+        icon: FontAwesomeIcons.percent,
+        label: S.current.mealRatioLabel,
+        desc: S.current.mealRatioDesc,
+      ),
+      ProfileSettingsModel(
+        icon: FontAwesomeIcons.apple,
+        label: S.current.dietTypeLabel,
+        desc: currentDietType,
+      ),
+    ];
