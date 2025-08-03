@@ -23,7 +23,7 @@ class AppAuthTextFormField extends StatelessWidget {
       ),
       obscureText: field == FormFields.password ? true : false,
       validator: validator,
-      style: Quicksand.regular.withSize(FontSizes.medium),
+      style: AltmannGrotesk.light.withSize(FontSizes.medium),
     );
   }
 }

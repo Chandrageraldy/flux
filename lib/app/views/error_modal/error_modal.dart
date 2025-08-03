@@ -106,11 +106,11 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.large);
+    return AltmannGrotesk.bold.withSize(FontSizes.large);
   }
 
   // Description Text Style
   static TextStyle descriptionTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return AltmannGrotesk.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

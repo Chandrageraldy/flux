@@ -58,8 +58,8 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
                   elevation: 0,
                   selectedItemColor: context.theme.colorScheme.onTertiary,
                   unselectedItemColor: context.theme.colorScheme.tertiaryFixed,
-                  selectedLabelStyle: Quicksand.bold.withSize(FontSizes.extraSmall),
-                  unselectedLabelStyle: Quicksand.bold.withSize(FontSizes.extraSmall),
+                  selectedLabelStyle: AltmannGrotesk.bold.withSize(FontSizes.extraSmall),
+                  unselectedLabelStyle: AltmannGrotesk.bold.withSize(FontSizes.extraSmall),
                   type: BottomNavigationBarType.fixed,
                   items: [
                     getProgressBarItem(),

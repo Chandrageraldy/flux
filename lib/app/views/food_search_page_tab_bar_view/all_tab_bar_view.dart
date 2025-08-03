@@ -67,6 +67,7 @@ extension _WidgetFactories on AllTabBarView {
               padding: AppStyles.kPaddSV12H16,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: AppStyles.kSpac8,
                 children: [
                   Expanded(
                     child: Column(
@@ -127,12 +128,12 @@ abstract class _Styles {
 
   // Header Label Text Style
   static TextStyle getHeaderLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
+    return AltmannGrotesk.bold.withSize(FontSizes.small);
   }
 
   // Header Description Label Text Style
   static TextStyle getHeaderDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.extraSmall);
+    return AltmannGrotesk.light.withSize(FontSizes.extraSmall);
   }
 
   // Save Container Decoration

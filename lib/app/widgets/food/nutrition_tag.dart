@@ -51,12 +51,12 @@ abstract class _Styles {
             ? MacroNutrients.carbs.color
             : MacroNutrients.fat.color;
 
-    return Quicksand.bold.withCustomSize(9).copyWith(color: color);
+    return AltmannGrotesk.bold.withCustomSize(9).copyWith(color: color);
   }
 
   // Label Text Style
   static TextStyle getLabelTextStyle() {
-    return Quicksand.medium.withSize(FontSizes.extraSmall);
+    return AltmannGrotesk.medium.withSize(FontSizes.extraSmall);
   }
 
   // Container Decoration

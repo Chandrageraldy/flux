@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget {
 abstract class _Styles {
   // Title Label Text Style
   static getTitleTextStyle() {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus);
+    return AltmannGrotesk.bold.withSize(FontSizes.mediumPlus);
   }
 
   // Container Decoration

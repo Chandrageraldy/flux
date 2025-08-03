@@ -85,12 +85,12 @@ extension _WidgetFactories on SelectionButton {
 abstract class _Styles {
   // Title Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style
   static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return AltmannGrotesk.thin.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Button Container Decoration

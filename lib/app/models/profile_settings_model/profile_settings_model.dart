@@ -1,6 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
-import 'package:flux/app/utils/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileSettingsModel {

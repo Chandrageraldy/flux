@@ -183,17 +183,19 @@ extension _WidgetFactories on _LoginPageState {
 abstract class _Styles {
   // App Title Label Text Style
   static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary, height: 1);
+    return AltmannGrotesk.medium
+        .withSize(FontSizes.extraHuge)
+        .copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Login Description Label Text Style
   static getLoginDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return AltmannGrotesk.thin.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Button Label Text Style
   static getForgotPasswordButtonLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary);
+    return AltmannGrotesk.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary);
   }
 
   // Forgot Password Button Style

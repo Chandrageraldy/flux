@@ -137,7 +137,7 @@ extension _WidgetFactories on _FoodSearchPageState {
         dividerColor: Colors.transparent,
         labelColor: context.theme.colorScheme.onPrimary,
         unselectedLabelColor: context.theme.colorScheme.onTertiary,
-        labelStyle: Quicksand.medium.withSize(FontSizes.small),
+        labelStyle: AltmannGrotesk.medium.withSize(FontSizes.small),
         tabs: [Tab(text: S.current.allLabel), Tab(text: S.current.savedLabel)],
       ),
     );

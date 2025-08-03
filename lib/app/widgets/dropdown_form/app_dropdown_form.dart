@@ -70,17 +70,19 @@ abstract class _Styles {
     return InputDecoration(
       isDense: true,
       border: InputBorder.none,
-      hintStyle: Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary),
+      hintStyle: AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary),
     );
   }
 
   // Text Form Field Text Style
   static TextStyle getTextFormFieldTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Top Label Text Style
   static TextStyle getTopLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
+    return AltmannGrotesk.medium
+        .withSize(FontSizes.extraSmall)
+        .copyWith(color: context.theme.colorScheme.tertiaryFixed);
   }
 }

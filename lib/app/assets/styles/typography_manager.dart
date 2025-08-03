@@ -85,3 +85,42 @@ enum Quicksand implements TypographyManager {
     return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size, letterSpacing: 0);
   }
 }
+
+enum AltmannGrotesk implements TypographyManager {
+  thin,
+  light,
+  regular,
+  medium,
+  bold;
+
+  static const name = 'Altmann Grotesk';
+
+  @override
+  String get fontFamily => name;
+
+  @override
+  FontWeight get weight {
+    switch (this) {
+      case AltmannGrotesk.thin:
+        return FontWeight.w400;
+      case AltmannGrotesk.light:
+        return FontWeight.w500;
+      case AltmannGrotesk.regular:
+        return FontWeight.w600;
+      case AltmannGrotesk.medium:
+        return FontWeight.w700;
+      case AltmannGrotesk.bold:
+        return FontWeight.w800;
+    }
+  }
+
+  @override
+  TextStyle withSize(FontSizes size) {
+    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size.size, letterSpacing: 0.3);
+  }
+
+  @override
+  TextStyle withCustomSize(double size) {
+    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size, letterSpacing: 0.3);
+  }
+}

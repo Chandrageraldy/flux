@@ -106,6 +106,6 @@ abstract class _Styles {
 
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
   }
 }

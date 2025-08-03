@@ -485,17 +485,17 @@ class _Styles {
 
   // Food Name Label Text Style
   static TextStyle getFoodNameLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumHuge);
+    return AltmannGrotesk.medium.withSize(FontSizes.mediumHuge);
   }
 
   // Calorie Value Label Text Style
   static TextStyle getCalorieValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Unit Label Text Style
   static TextStyle getCalorieUnitLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onSurface);
+    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onSurface);
   }
 
   // Button Positioning
@@ -520,7 +520,7 @@ class _Styles {
 
   // Nutritional Info Label Text Style
   static TextStyle getNutritionalInfoLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return AltmannGrotesk.bold.withSize(FontSizes.medium);
   }
 
   // Calorie Container Decoration
@@ -544,26 +544,26 @@ class _Styles {
 
   // Nutritient Label Text Style
   static TextStyle getNutrientLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Nutritient Value Label Text Style
   static TextStyle getNutrientValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Nutrient Unit Label Text Style
   static TextStyle getNutrientUnitLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Branded Name Label Text Style
   static TextStyle getBrandedNameLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Label Text Style
   static TextStyle getCalorieLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 }

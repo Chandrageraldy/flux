@@ -165,11 +165,11 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Serving and Brand Label Text Style
   static TextStyle getServingAndBrandLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall);
+    return AltmannGrotesk.light.withSize(FontSizes.extraSmall);
   }
 }

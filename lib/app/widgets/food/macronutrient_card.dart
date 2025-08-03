@@ -85,17 +85,17 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onSurface);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onSurface);
   }
 
   // Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Unit Label Text Style
   static TextStyle getUnitLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Percentage Text Style
@@ -106,6 +106,6 @@ abstract class _Styles {
             ? MacroNutrients.carbs.color
             : MacroNutrients.fat.color;
 
-    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: color);
+    return AltmannGrotesk.medium.withSize(FontSizes.medium).copyWith(color: color);
   }
 }

@@ -90,11 +90,11 @@ extension _WidgetFactories on _PlanSelectionModalState {
 abstract class _Styles {
   // Title Label Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.bold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Label Text Style
   static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return AltmannGrotesk.thin.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }

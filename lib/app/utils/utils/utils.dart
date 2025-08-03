@@ -55,7 +55,7 @@ class WidgetUtils {
                 if (label != null) ...[
                   Text(
                     label,
-                    style: Quicksand.bold.withSize(FontSizes.mediumPlus),
+                    style: AltmannGrotesk.bold.withSize(FontSizes.mediumPlus),
                   ),
                 ],
                 SizedBox(
@@ -73,7 +73,7 @@ class WidgetUtils {
                             child: Center(
                               child: Text(
                                 '$item $unit',
-                                style: Quicksand.semiBold.withSize(FontSizes.medium),
+                                style: AltmannGrotesk.medium.withSize(FontSizes.medium),
                               ),
                             ),
                           ),
@@ -88,7 +88,7 @@ class WidgetUtils {
                       onPressed: () => Navigator.of(context).pop(selectedItem),
                       padding: AppStyles.kPaddSV8,
                       borderRadius: AppStyles.kRad6,
-                      labelStyle: Quicksand.semiBold.withSize(FontSizes.small).copyWith(
+                      labelStyle: AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(
                             color: context.theme.colorScheme.onPrimary,
                           ),
                     ),
@@ -131,13 +131,14 @@ class WidgetUtils {
                       AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
-                        style: Quicksand.semiBold
+                        style: AltmannGrotesk.medium
                             .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
+                        style:
+                            AltmannGrotesk.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       )
                     ],
                   ),
@@ -223,13 +224,14 @@ class WidgetUtils {
                       AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
-                        style: Quicksand.semiBold
+                        style: AltmannGrotesk.medium
                             .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
+                        style:
+                            AltmannGrotesk.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       ),
                     ],
                   ),

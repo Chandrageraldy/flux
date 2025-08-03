@@ -21,12 +21,12 @@ class AppThemes {
       // Grey Text
       onTertiaryContainer: AppColors.greyPalette[400]!,
     ),
-    fontFamily: 'Quicksand',
+    fontFamily: AltmannGrotesk.name,
   );
 
   static ThemeData darkMode = ThemeData(
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(surface: Colors.black, primary: Color(0xFF1570EF)),
-    fontFamily: 'Quicksand',
+    fontFamily: AltmannGrotesk.name,
   );
 }

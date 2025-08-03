@@ -50,7 +50,7 @@ class ProfileSettingsListTile extends StatelessWidget {
             Row(
               spacing: AppStyles.kSpac12,
               children: [
-                if (value != null) Text(value!, style: Quicksand.medium.withSize(FontSizes.small)),
+                if (value != null) Text(value!, style: AltmannGrotesk.medium.withSize(FontSizes.small)),
                 getTrailingIcon(context),
               ],
             ),
@@ -101,12 +101,12 @@ extension _WidgetFactories on ProfileSettingsListTile {
 abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
+    return AltmannGrotesk.bold.withSize(FontSizes.small);
   }
 
   // Desc Text Style
   static TextStyle getDescTextStyle(BuildContext context) {
-    return Quicksand.regular
+    return AltmannGrotesk.regular
         .withSize(FontSizes.extraSmall)
         .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
