@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeDesc": MessageLookupByLibrary.simpleMessage(
             "On your feet most of the day (e.g., retail, light labor)."),
         "activeLabel": MessageLookupByLibrary.simpleMessage("Active"),
+        "activityLevelLabel":
+            MessageLookupByLibrary.simpleMessage("Activity Level"),
         "adjustCalorieIntakeDesc":
             MessageLookupByLibrary.simpleMessage("kcal/day"),
         "adjustCalorieIntakeLabel":
@@ -34,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Carbs, fat, and protein"),
         "adjustMacroNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Adjust Macronutrients Ratio"),
+        "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
@@ -42,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "barcodeNotRecognizedLabel":
             MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
+        "bmiLabel": MessageLookupByLibrary.simpleMessage("BMI"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
         "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":
@@ -66,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
+        "exerciseLevelLabel":
+            MessageLookupByLibrary.simpleMessage("Exercise Level"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
@@ -154,8 +160,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
+        "normalWeightLabel":
+            MessageLookupByLibrary.simpleMessage("Normal weight"),
         "nutritionalInformationLabel":
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
+        "obesityLabel": MessageLookupByLibrary.simpleMessage("Obesity"),
         "okLabel": MessageLookupByLibrary.simpleMessage("Ok"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Chat with our AI to create a meal plan that fits your goals."),
@@ -169,6 +178,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AI Meal Scan: Track Smarter"),
         "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Fuel Up. Friend Up. Level Up"),
+        "overweightLabel": MessageLookupByLibrary.simpleMessage("Overweight"),
         "paleoDesc": MessageLookupByLibrary.simpleMessage(
             "Based on foods eaten by early humans."),
         "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
@@ -278,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),
         "tryAgainLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
+        "underweightLabel": MessageLookupByLibrary.simpleMessage("Underweight"),
         "useAiMealScanLabel":
             MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),
         "usedEmail": MessageLookupByLibrary.simpleMessage(

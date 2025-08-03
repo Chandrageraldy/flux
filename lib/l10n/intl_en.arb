@@ -195,5 +195,13 @@
     "barcodeNotRecognizedLabel": "Barcode not recognized",
     "barcodeNotRecognizedDesc": "Sorry, we couldn’t find that barcode in our database. Please try another one :(",
     "tryAgainLabel": "Try Again",
-    "useAiMealScanLabel": "Use AI Meal Scan"
+    "useAiMealScanLabel": "Use AI Meal Scan",
+    "ageLabel": "Age",
+    "activityLevelLabel": "Activity Level",
+    "exerciseLevelLabel": "Exercise Level",
+    "bmiLabel": "BMI",
+    "underweightLabel": "Underweight",
+    "normalWeightLabel": "Normal weight",
+    "overweightLabel": "Overweight",
+    "obesityLabel": "Obesity"
 }

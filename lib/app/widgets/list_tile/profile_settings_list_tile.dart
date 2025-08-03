@@ -2,12 +2,24 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileSettingsListTile extends StatelessWidget {
-  const ProfileSettingsListTile({required this.icon, required this.label, this.desc, required this.onTap, super.key});
+  const ProfileSettingsListTile({
+    this.leadingIcon,
+    required this.label,
+    this.desc,
+    this.onTap,
+    this.value,
+    this.trailingIcon,
+    this.trailingIconColor,
+    super.key,
+  });
 
-  final IconData icon;
+  final IconData? leadingIcon;
   final String label;
   final String? desc;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final String? value;
+  final IconData? trailingIcon;
+  final Color? trailingIconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +32,28 @@ class ProfileSettingsListTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: AppStyles.kSpac12,
               children: [
-                SizedBox(height: AppStyles.kSize20, width: AppStyles.kSize20, child: getIcon(context)),
-                AppStyles.kSizedBoxW10,
+                if (leadingIcon != null)
+                  SizedBox(
+                    height: AppStyles.kSize20,
+                    width: AppStyles.kSize20,
+                    child: getLeadingIcon(context),
+                  ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [getLabel(context), getDesc(context)],
+                  children: [getLabel(context), if (desc != null) getDesc(context)],
                 ),
               ],
             ),
-            getChevronIcon(context),
+            Row(
+              spacing: AppStyles.kSpac12,
+              children: [
+                if (value != null) Text(value!, style: Quicksand.medium.withSize(FontSizes.small)),
+                getTrailingIcon(context),
+              ],
+            ),
           ],
         ),
       ),
@@ -40,11 +64,13 @@ class ProfileSettingsListTile extends StatelessWidget {
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on ProfileSettingsListTile {
   // Icon
-  Widget getIcon(BuildContext context) {
+  Widget getLeadingIcon(BuildContext context) {
     return FaIcon(
-      icon,
+      leadingIcon,
       size: AppStyles.kSize20,
-      color: icon == FontAwesomeIcons.arrowRightFromBracket ? AppColors.redColor : context.theme.colorScheme.secondary,
+      color: leadingIcon == FontAwesomeIcons.arrowRightFromBracket
+          ? AppColors.redColor
+          : context.theme.colorScheme.secondary,
     );
   }
 
@@ -57,17 +83,16 @@ extension _WidgetFactories on ProfileSettingsListTile {
   }
 
   // Chevron Icon
-  Widget getChevronIcon(BuildContext context) {
+  Widget getTrailingIcon(BuildContext context) {
     return FaIcon(
-      FontAwesomeIcons.chevronRight,
+      trailingIcon ?? FontAwesomeIcons.chevronRight,
       size: AppStyles.kSize12,
-      color: context.theme.colorScheme.onTertiaryContainer,
+      color: trailingIconColor ?? context.theme.colorScheme.onTertiaryContainer,
     );
   }
 
   // Desc
   Widget getDesc(BuildContext context) {
-    if (desc == null) return const SizedBox.shrink();
     return Text(desc!, style: _Styles.getDescTextStyle(context));
   }
 }
@@ -76,7 +101,7 @@ extension _WidgetFactories on ProfileSettingsListTile {
 abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Desc Text Style

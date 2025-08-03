@@ -1899,6 +1899,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Age`
+  String get ageLabel {
+    return Intl.message(
+      'Age',
+      name: 'ageLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activity Level`
+  String get activityLevelLabel {
+    return Intl.message(
+      'Activity Level',
+      name: 'activityLevelLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exercise Level`
+  String get exerciseLevelLabel {
+    return Intl.message(
+      'Exercise Level',
+      name: 'exerciseLevelLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BMI`
+  String get bmiLabel {
+    return Intl.message(
+      'BMI',
+      name: 'bmiLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Underweight`
+  String get underweightLabel {
+    return Intl.message(
+      'Underweight',
+      name: 'underweightLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal weight`
+  String get normalWeightLabel {
+    return Intl.message(
+      'Normal weight',
+      name: 'normalWeightLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overweight`
+  String get overweightLabel {
+    return Intl.message(
+      'Overweight',
+      name: 'overweightLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Obesity`
+  String get obesityLabel {
+    return Intl.message(
+      'Obesity',
+      name: 'obesityLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

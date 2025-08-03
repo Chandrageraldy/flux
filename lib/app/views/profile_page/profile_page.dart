@@ -4,6 +4,7 @@ import 'package:flux/app/models/profile_settings_model/profile_settings_model.da
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
+import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -53,6 +54,17 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ProfilePageState {
   void _onGeneratePlanPressed() {}
+}
+
+// * ------------------------ PrivateMethods -------------------------
+extension _PrivateMethods on _ProfilePageState {
+  void _onLogoutPressed() async {
+    final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
+
+    if (response == true && mounted) {
+      context.router.replaceAll([RootRoute()]);
+    }
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -238,14 +250,14 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Profile Settings List View
   Widget getPersonalInfoListView() {
-    final personalInfoSettings = personalInfo(context);
+    final personalInfoSettings = personalInfo(context, _onLogoutPressed);
 
     return ListView.separated(
       itemCount: personalInfoSettings.length,
       itemBuilder: (context, index) {
         final setting = personalInfoSettings[index];
         return ProfileSettingsListTile(
-          icon: setting.icon,
+          leadingIcon: setting.icon,
           label: setting.label,
           desc: setting.desc,
           onTap: setting.onTap,
@@ -291,7 +303,7 @@ extension _WidgetFactories on _ProfilePageState {
       itemBuilder: (context, index) {
         final setting = planCustomizationSettings[index];
         return ProfileSettingsListTile(
-          icon: setting.icon,
+          leadingIcon: setting.icon,
           label: setting.label,
           desc: setting.desc,
           onTap: setting.onTap,
