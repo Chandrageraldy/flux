@@ -84,7 +84,7 @@ Route<T> _modalSheetBuilder<T>(
       child: Wrap(
         children: [
           Container(
-            decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10),
+            decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10, color: context.theme.colorScheme.onPrimary),
             clipBehavior: Clip.hardEdge,
             child: child,
           ),

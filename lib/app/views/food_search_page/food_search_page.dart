@@ -117,9 +117,10 @@ extension _WidgetFactories on _FoodSearchPageState {
   Widget getBarcodeScannerButton() {
     return GestureDetector(
       onTap: _onBarcodeScannerPressed,
-      child: SizedBox(
+      child: Container(
         height: AppStyles.kSize40,
         width: AppStyles.kSize40,
+        decoration: _Styles.getBarcodeScannerContainerDecoration(context),
         child: Icon(Icons.qr_code_scanner, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
       ),
     );
@@ -201,5 +202,10 @@ abstract class _Styles {
       color: context.theme.colorScheme.secondary,
       borderRadius: AppStyles.kRad100,
     );
+  }
+
+  // Barcode Scanner Container Decoration
+  static BoxDecoration getBarcodeScannerContainerDecoration(BuildContext context) {
+    return BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad100);
   }
 }

@@ -82,7 +82,7 @@ extension _Actions on _ScanBarcodePageState {
         label: S.current.barcodeNotRecognizedLabel,
         description: S.current.barcodeNotRecognizedDesc,
         actions: [getTryAgainButton(), getUseAiMealScanButton()],
-        icon: Icons.error,
+        icon: Icons.qr_code_scanner_outlined,
         iconBackgroundColor: AppColors.redColor,
       ))
           .then((_) {

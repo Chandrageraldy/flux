@@ -139,7 +139,7 @@ abstract class _Styles {
   static BoxDecoration getMealScanContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.tertiaryFixedDim,
-      borderRadius: AppStyles.kRad10,
+      borderRadius: AppStyles.kRad100,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
