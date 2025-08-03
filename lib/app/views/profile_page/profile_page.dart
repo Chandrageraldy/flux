@@ -5,6 +5,7 @@ import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
+import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -26,7 +27,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   Widget body() {
     return Column(
       children: [
-        getTopBar(),
+        getCustomAppBar(),
         Expanded(
           child: SingleChildScrollView(
             padding: AppStyles.kPaddSH16,
@@ -57,12 +58,11 @@ extension _Actions on _ProfilePageState {
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ProfilePageState {
   // Top Bar
-  Widget getTopBar() {
-    return Container(
-      width: AppStyles.kDoubleInfinity,
-      decoration: _Styles.getTopBarContainerDecoration(context),
-      padding: AppStyles.kPaddSV12,
-      child: Text(S.current.profileLabel, style: _Styles.getTopBarLabelTextStyle(context), textAlign: TextAlign.center),
+  Widget getCustomAppBar() {
+    return CustomAppBar(
+      leadingButton: AppStyles.kEmptyWidget,
+      trailingButton: AppStyles.kEmptyWidget,
+      title: S.current.profileLabel,
     );
   }
 
@@ -238,15 +238,17 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Profile Settings List View
   Widget getPersonalInfoListView() {
+    final personalInfoSettings = personalInfo(context);
+
     return ListView.separated(
-      itemCount: personalInfo.length,
+      itemCount: personalInfoSettings.length,
       itemBuilder: (context, index) {
-        final setting = personalInfo[index];
+        final setting = personalInfoSettings[index];
         return ProfileSettingsListTile(
           icon: setting.icon,
           label: setting.label,
           desc: setting.desc,
-          onTap: () => context.router.push(setting.route),
+          onTap: setting.onTap,
         );
       },
       separatorBuilder: (context, index) => Padding(
@@ -281,6 +283,7 @@ extension _WidgetFactories on _ProfilePageState {
     final planCustomizationSettings = planCustomization(
       planModel?.calorieKcal.toString() ?? '',
       userProfile?.bodyMetrics?.dietType?.capitalize() ?? '',
+      context,
     );
 
     return ListView.separated(
@@ -291,7 +294,7 @@ extension _WidgetFactories on _ProfilePageState {
           icon: setting.icon,
           label: setting.label,
           desc: setting.desc,
-          onTap: () => context.router.push(setting.route),
+          onTap: setting.onTap,
         );
       },
       separatorBuilder: (context, index) => Padding(
@@ -375,21 +378,5 @@ class _Styles {
   // Plan Generation Button Text Style
   static TextStyle getPlanGenerationButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
-  }
-
-  // Top Bar Container Decoration
-  static BoxDecoration getTopBarContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRadOBL10BR10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
-      ],
-    );
-  }
-
-  // Top Bar Label Text Style
-  static TextStyle getTopBarLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
   }
 }

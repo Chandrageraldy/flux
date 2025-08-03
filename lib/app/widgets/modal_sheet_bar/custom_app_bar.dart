@@ -1,7 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
-class ModalSheetBar extends StatelessWidget {
-  const ModalSheetBar({
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
     required this.leadingButton,
     required this.trailingButton,
     required this.title,

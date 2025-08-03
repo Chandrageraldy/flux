@@ -1,13 +1,13 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum ModalSheetBarTappablePosition {
+enum CustomAppBarTappablePosition {
   LEADING,
   TRAILING,
 }
 
-class ModalSheetBarTappable extends StatelessWidget {
-  const ModalSheetBarTappable({
+class CustomAppBarTappable extends StatelessWidget {
+  const CustomAppBarTappable({
     required this.icon,
     required this.color,
     required this.label,
@@ -19,7 +19,7 @@ class ModalSheetBarTappable extends StatelessWidget {
   final IconData icon;
   final Color color;
   final String label;
-  final ModalSheetBarTappablePosition modalSheetBarTappablePosition;
+  final CustomAppBarTappablePosition modalSheetBarTappablePosition;
   final void Function()? onTap;
 
   @override
@@ -29,10 +29,10 @@ class ModalSheetBarTappable extends StatelessWidget {
       child: Row(
         spacing: AppStyles.kSpac4,
         children: [
-          if (modalSheetBarTappablePosition == ModalSheetBarTappablePosition.TRAILING)
+          if (modalSheetBarTappablePosition == CustomAppBarTappablePosition.TRAILING)
             Text(label, style: _Styles.getLabelTextStyle(context, color)),
           FaIcon(icon, size: AppStyles.kSize16, color: color),
-          if (modalSheetBarTappablePosition == ModalSheetBarTappablePosition.LEADING)
+          if (modalSheetBarTappablePosition == CustomAppBarTappablePosition.LEADING)
             Text(label, style: _Styles.getLabelTextStyle(context, color)),
         ],
       ),

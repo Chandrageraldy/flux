@@ -73,7 +73,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: MealDetailsRoute.page),
         AutoRoute(page: ScanBarcodeRoute.page),
         CustomRoute(page: ErrorRoute.page, customRouteBuilder: _modalSheetBuilder),
-        CustomRoute(page: PersonalDetailsRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
+        AutoRoute(page: PersonalDetailsRoute.page),
         CustomRoute(page: AdjustCalorieIntakeRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
         CustomRoute(page: AdjustMacronutrientsRatioRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
         CustomRoute(page: MealRatioRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),

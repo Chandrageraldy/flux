@@ -1,6 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/modal_sheet_bar.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/modal_sheet_bar_tappable.dart';
+import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
+import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()
@@ -19,7 +19,7 @@ class _PersonalDetailsPageState extends BaseStatefulState<PersonalDetailsPage> {
   Widget body() {
     return Column(
       children: [
-        getModalSheetBar(),
+        getCustomAppBar(),
       ],
     );
   }
@@ -31,13 +31,13 @@ extension _Actions on _PersonalDetailsPageState {}
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _PersonalDetailsPageState {
   // Top Bar
-  Widget getModalSheetBar() {
-    return ModalSheetBar(
-      leadingButton: ModalSheetBarTappable(
+  Widget getCustomAppBar() {
+    return CustomAppBar(
+      leadingButton: CustomAppBarTappable(
         icon: FontAwesomeIcons.chevronLeft,
         color: context.theme.colorScheme.secondary,
         label: 'Profile',
-        modalSheetBarTappablePosition: ModalSheetBarTappablePosition.LEADING,
+        modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
         onTap: () => context.router.maybePop(),
       ),
       trailingButton: AppStyles.kEmptyWidget,
@@ -47,4 +47,4 @@ extension _WidgetFactories on _PersonalDetailsPageState {
 }
 
 // * ----------------------------- Styles ----------------------------
-abstract class _Styles {}
+// abstract class _Styles {}
