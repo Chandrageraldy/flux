@@ -12,7 +12,7 @@ abstract class BaseStatefulState<Screen extends BaseStatefulPage> extends State<
 
   Widget? floatingActionButton() => null;
 
-  EdgeInsets defaultPadding() => AppStyles.kPaddSH20;
+  EdgeInsets defaultPadding() => AppStyles.kPaddSH16;
 
   Color backgroundColor() => context.theme.colorScheme.surface;
 

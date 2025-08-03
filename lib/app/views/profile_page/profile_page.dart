@@ -29,7 +29,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
         getTopBar(),
         Expanded(
           child: SingleChildScrollView(
-            padding: AppStyles.kPaddSH20,
+            padding: AppStyles.kPaddSH16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: AppStyles.kSpac12,
@@ -246,6 +246,7 @@ extension _WidgetFactories on _ProfilePageState {
           icon: setting.icon,
           label: setting.label,
           desc: setting.desc,
+          onTap: () => context.router.push(setting.route),
         );
       },
       separatorBuilder: (context, index) => Padding(
@@ -290,6 +291,7 @@ extension _WidgetFactories on _ProfilePageState {
           icon: setting.icon,
           label: setting.label,
           desc: setting.desc,
+          onTap: () => context.router.push(setting.route),
         );
       },
       separatorBuilder: (context, index) => Padding(

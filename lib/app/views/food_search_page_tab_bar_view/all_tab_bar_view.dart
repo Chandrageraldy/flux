@@ -18,7 +18,7 @@ class AllTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppStyles.kPaddSH20,
+      padding: AppStyles.kPaddSH16,
       child: CustomScrollView(
         controller: scrollController,
         slivers: [getHeader(context), getFoodSliverList(context)],

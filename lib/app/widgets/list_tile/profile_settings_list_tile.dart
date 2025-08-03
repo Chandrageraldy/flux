@@ -2,29 +2,37 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileSettingsListTile extends StatelessWidget {
-  const ProfileSettingsListTile({required this.icon, required this.label, this.desc, super.key});
+  const ProfileSettingsListTile({required this.icon, required this.label, this.desc, required this.onTap, super.key});
 
   final IconData icon;
   final String label;
   final String? desc;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: context.theme.colorScheme.onPrimary,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: AppStyles.kSize20, width: AppStyles.kSize20, child: getIcon(context)),
-            AppStyles.kSizedBoxW10,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [getLabel(context), getDesc(context)],
+            Row(
+              children: [
+                SizedBox(height: AppStyles.kSize20, width: AppStyles.kSize20, child: getIcon(context)),
+                AppStyles.kSizedBoxW10,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [getLabel(context), getDesc(context)],
+                ),
+              ],
             ),
+            getChevronIcon(context),
           ],
         ),
-        getChevronIcon(context),
-      ],
+      ),
     );
   }
 }

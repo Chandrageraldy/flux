@@ -47,7 +47,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   Widget body() {
     return SingleChildScrollView(
       child: Padding(
-        padding: AppStyles.kPaddOL20R20B16,
+        padding: AppStyles.kPaddSH16,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -130,7 +130,7 @@ extension _WidgetFactories on _DiaryPageState {
     return GestureDetector(
       onTap: _onProfileActionPressed,
       child: Padding(
-        padding: AppStyles.kPaddOR20,
+        padding: AppStyles.kPaddOR16,
         child: FaIcon(FontAwesomeIcons.user, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
       ),
     );

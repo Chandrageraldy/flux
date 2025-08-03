@@ -87,7 +87,7 @@ extension _WidgetFactories on _FoodSearchPageState {
   // Header Container
   Widget getHeaderContainer() {
     return Container(
-      padding: AppStyles.kPaddSV12H20,
+      padding: AppStyles.kPaddSV12H16,
       decoration: _Styles.getHeaderContainerDecoration(context),
       child: Column(
         children: [

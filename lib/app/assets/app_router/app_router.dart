@@ -115,12 +115,14 @@ Route<T> _fullScreenModalSheetBuilder<T>(
 ) {
   return ModalBottomSheetRoute(
     settings: page,
-    builder: (context) => Container(
-      decoration: BoxDecoration(borderRadius: AppStyles.kRadVT15),
-      clipBehavior: Clip.hardEdge,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.975,
-        child: child,
+    builder: (context) => SafeArea(
+      child: Container(
+        decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10),
+        clipBehavior: Clip.hardEdge,
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.9,
+          child: child,
+        ),
       ),
     ),
     isScrollControlled: true,

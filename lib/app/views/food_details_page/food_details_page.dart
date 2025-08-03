@@ -86,7 +86,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
             children: [
               getHeaderContainer(foodDetails),
               Padding(
-                padding: AppStyles.kPaddSV12H20,
+                padding: AppStyles.kPaddSV12H16,
                 child: Column(
                   spacing: AppStyles.kSpac12,
                   children: [
@@ -190,7 +190,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   Widget getHeaderContainer(FoodDetailsModel foodDetails) {
     return Container(
       width: double.infinity,
-      padding: AppStyles.kPaddSV12H20,
+      padding: AppStyles.kPaddSV12H16,
       decoration: _Styles.getHeaderContainerDecoration(context),
       child: FormBuilder(
         key: _formKey,
@@ -502,7 +502,7 @@ class _Styles {
   static double getButtonBottomPositition = 10.0;
 
   // Button Positioning
-  static double getButtonHorizontalPosition = 20.0;
+  static double getButtonHorizontalPosition = 16.0;
 
   // Linear Indicator Line Height
   static double linearIndicatorLineHeight = 8.0;
