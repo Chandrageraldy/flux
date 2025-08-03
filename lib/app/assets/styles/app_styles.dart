@@ -89,7 +89,11 @@ class AppStyles {
   static final kRadVT10 = BorderRadius.vertical(top: Radius.circular(10.0));
   static final kRadVT24 = BorderRadius.vertical(top: Radius.circular(24.0));
   // Radius SIDES
+  static final kRadOTL10TR10 = BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10));
+  static final kRadOTL15TR15 = BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15));
   static final kRadOTL20TR20 = BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20));
+  static final kRadOBL10BR10 = BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10));
+  static final kRadOBL15BR15 = BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15));
   static final kRadOBL20BR20 = BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20));
 
   // Sized Box

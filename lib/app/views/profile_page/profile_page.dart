@@ -26,16 +26,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   Widget body() {
     return Column(
       children: [
-        Container(
-          width: AppStyles.kDoubleInfinity,
-          decoration: BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRadOBL20BR20),
-          padding: AppStyles.kPaddSV12,
-          child: Text(
-            S.current.profileLabel,
-            style: Quicksand.bold.withSize(FontSizes.medium),
-            textAlign: TextAlign.center,
-          ),
-        ),
+        getTopBar(),
         Expanded(
           child: SingleChildScrollView(
             padding: AppStyles.kPaddSH20,
@@ -65,6 +56,16 @@ extension _Actions on _ProfilePageState {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ProfilePageState {
+  // Top Bar
+  Widget getTopBar() {
+    return Container(
+      width: AppStyles.kDoubleInfinity,
+      decoration: _Styles.getTopBarContainerDecoration(context),
+      padding: AppStyles.kPaddSV12,
+      child: Text(S.current.profileLabel, style: _Styles.getTopBarLabelTextStyle(context), textAlign: TextAlign.center),
+    );
+  }
+
   // Header Container
   Widget getHeaderContainer() {
     return Container(
@@ -372,5 +373,21 @@ class _Styles {
   // Plan Generation Button Text Style
   static TextStyle getPlanGenerationButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+  }
+
+  // Top Bar Container Decoration
+  static BoxDecoration getTopBarContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRadOBL10BR10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+      ],
+    );
+  }
+
+  // Top Bar Label Text Style
+  static TextStyle getTopBarLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.mediumPlus).copyWith(color: context.theme.colorScheme.primary);
   }
 }

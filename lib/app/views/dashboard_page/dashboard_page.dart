@@ -31,9 +31,18 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
           body: child,
           extendBody: true,
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(borderRadius: AppStyles.kRadOTL20TR20),
+            decoration: BoxDecoration(
+              borderRadius: AppStyles.kRadOTL15TR15,
+              boxShadow: [
+                BoxShadow(
+                  color: context.theme.colorScheme.tertiaryFixedDim,
+                  blurRadius: 5,
+                  offset: Offset(0, -1),
+                ),
+              ],
+            ),
             child: ClipRRect(
-              borderRadius: AppStyles.kRadOTL20TR20,
+              borderRadius: AppStyles.kRadOTL15TR15,
               child: Container(
                 color: context.theme.colorScheme.onPrimary,
                 child: BottomNavigationBar(
@@ -79,7 +88,8 @@ extension _WidgetFactories on _DashboardPageState {
   BottomNavigationBarItem getProgressBarItem() {
     return BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.chartLine, size: AppStyles.kSize20),
-      activeIcon: FaIcon(FontAwesomeIcons.chartLine, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
+      activeIcon:
+          FaIcon(FontAwesomeIcons.chartLine, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
       label: S.current.progressLabel,
     );
   }
@@ -88,7 +98,7 @@ extension _WidgetFactories on _DashboardPageState {
     return BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.bookOpenReader, size: AppStyles.kSize20),
       activeIcon:
-          FaIcon(FontAwesomeIcons.bookOpenReader, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
+          FaIcon(FontAwesomeIcons.bookOpenReader, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
       label: S.current.diaryLabel,
     );
   }
@@ -120,7 +130,7 @@ extension _WidgetFactories on _DashboardPageState {
     return BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.appleWhole, size: AppStyles.kSize20),
       activeIcon:
-          FaIcon(FontAwesomeIcons.appleWhole, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
+          FaIcon(FontAwesomeIcons.appleWhole, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
       label: S.current.foodLabel,
     );
   }
@@ -128,7 +138,8 @@ extension _WidgetFactories on _DashboardPageState {
   BottomNavigationBarItem getMoreBarItem() {
     return BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.solidUser, size: AppStyles.kSize20),
-      activeIcon: FaIcon(FontAwesomeIcons.solidUser, color: context.theme.colorScheme.primary, size: AppStyles.kSize20),
+      activeIcon:
+          FaIcon(FontAwesomeIcons.solidUser, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
       label: S.current.profileLabel,
     );
   }

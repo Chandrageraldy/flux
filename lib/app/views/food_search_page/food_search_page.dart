@@ -178,7 +178,7 @@ abstract class _Styles {
   static BoxDecoration getHeaderContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRadOBL20BR20,
+      borderRadius: AppStyles.kRadOBL15BR15,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],

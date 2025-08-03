@@ -274,7 +274,7 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Calorie Intake Label
   Widget getCalorieIntakeLabel() {
-    return Text(S.current.calorieLabel, style: _Styles.getIntakeLabelTextStyle(context));
+    return Text(S.current.targetsLabel, style: _Styles.getIntakeLabelTextStyle(context));
   }
 
   // Calorie Formula Label
