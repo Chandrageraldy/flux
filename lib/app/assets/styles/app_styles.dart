@@ -87,6 +87,7 @@ class AppStyles {
   static final kRad100 = BorderRadius.circular(100.0);
   // Radius VERTICAL
   static final kRadVT10 = BorderRadius.vertical(top: Radius.circular(10.0));
+  static final kRadVT15 = BorderRadius.vertical(top: Radius.circular(15.0));
   static final kRadVT24 = BorderRadius.vertical(top: Radius.circular(24.0));
   // Radius SIDES
   static final kRadOTL10TR10 = BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10));
