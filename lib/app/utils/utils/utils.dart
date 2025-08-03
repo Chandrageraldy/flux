@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
-import 'package:flux/app/widgets/alert_dialog/adaptive_alert_dialog.dart';
+import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
 
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
+import 'package:flux/app/widgets/dialog/picker_dialog.dart';
 
 class WidgetUtils {
   static Future<void> showDefaultErrorDialog(
@@ -32,71 +33,24 @@ class WidgetUtils {
 
   static void showPickerDialog(
     BuildContext context,
+    String label,
     List<String> items, {
     String unit = '',
     int initialItem = 0,
-    String? label,
+    String? desc,
+    required void Function(int value) onItemSelected,
   }) {
-    int selectedItem = initialItem;
-
     showDialog(
       context: context,
       builder: (context) {
-        return Dialog(
-          backgroundColor: Theme.of(context).dialogBackgroundColor,
-          shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
-          insetPadding: AppStyles.kPaddSH36,
-          child: Padding(
-            padding: AppStyles.kPaddOL12R12T16B8,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: AppStyles.kSpac4,
-              children: [
-                if (label != null) ...[
-                  Text(
-                    label,
-                    style: AltmannGrotesk.bold.withSize(FontSizes.mediumPlus),
-                  ),
-                ],
-                SizedBox(
-                  height: AppStyles.kSize100,
-                  child: CupertinoPicker(
-                    itemExtent: AppStyles.kSize30,
-                    scrollController: FixedExtentScrollController(initialItem: initialItem),
-                    onSelectedItemChanged: (int value) {
-                      selectedItem = value;
-                    },
-                    children: items
-                        .map(
-                          (item) => SizedBox(
-                            height: AppStyles.kSize30,
-                            child: Center(
-                              child: Text(
-                                '$item $unit',
-                                style: AltmannGrotesk.medium.withSize(FontSizes.medium),
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Column(
-                  children: [
-                    AppDefaultButton(
-                      label: S.current.confirmLabel.toUpperCase(),
-                      onPressed: () => Navigator.of(context).pop(selectedItem),
-                      padding: AppStyles.kPaddSV8,
-                      borderRadius: AppStyles.kRad6,
-                      labelStyle: AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(
-                            color: context.theme.colorScheme.onPrimary,
-                          ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+        return PickerDialog(
+          context: context,
+          items: items,
+          label: label,
+          desc: desc,
+          onItemSelected: onItemSelected,
+          initialItem: initialItem,
+          unit: unit,
         );
       },
     );

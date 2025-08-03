@@ -112,12 +112,14 @@ class PersonalDetailsModel {
     required this.key,
     this.unit,
     required this.items,
+    this.desc,
   });
 
   final String label;
   final String key;
   final String? unit;
   final List<String> items;
+  final String? desc;
 }
 
 List<PersonalDetailsModel> personalDetails(BuildContext context) => [
@@ -130,6 +132,8 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
         label: PersonalDetailsSettings.gender.label,
         key: PersonalDetailsSettings.gender.key,
         items: [PlanSelectionValue.male.value, PlanSelectionValue.female.value],
+        desc:
+            '*Some gender identities are not yet scientifically supported in existing research used for creating personalized plans. Please select the closest available option to proceed.',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.weight.label,
@@ -137,6 +141,8 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
         unit: Unit.kg.label,
         // 20 to 150
         items: List.generate(131, (index) => (index + 20).toString()),
+        desc:
+            '*Used to estimate your daily calorie needs and track your progress. Please enter your current body weight as accurately as possible.',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.height.label,
@@ -144,6 +150,8 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
         unit: Unit.cm.label,
         // 100 to 250
         items: List.generate(151, (index) => (index + 100).toString()),
+        desc:
+            '*Helps calculate your body metrics like BMI and ideal caloric intake. Please provide your current height in centimeters.',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.activityLevel.label,
@@ -154,6 +162,11 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
           PlanSelectionValue.active.value,
           PlanSelectionValue.veryActive.value,
         ],
+        desc: '*Your general daily movement:\n'
+            '- Sedentary: Little to no physical activity.\n'
+            '- Lightly Active: Occasional movement.\n'
+            '- Active: Regular movement during the day.\n'
+            '- Very Active: Physically demanding routine.',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.exerciseLevel.label,
@@ -164,5 +177,10 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
           PlanSelectionValue.frequent.value,
           PlanSelectionValue.never.value
         ],
+        desc: '*How often you engage in intentional exercise:\n'
+            '- Light: 1–2 times per week\n'
+            '- Moderate: 3–4 times per week\n'
+            '- Frequent: 5 or more times per week\n'
+            '- Never: No regular exercise routine',
       ),
     ];

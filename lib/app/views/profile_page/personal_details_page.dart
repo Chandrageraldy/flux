@@ -42,7 +42,27 @@ class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> 
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _PersonalDetailsPageState {}
+extension _Actions on _PersonalDetailsPageState {
+  void _onPickerPressed(PersonalDetailsModel setting) {
+    // Retrieve the currently selected value
+    final currentSelectedValue = context.read<PersonalDetailsViewModel>().personalDetails[setting.key] ?? '';
+    // Get the index of the current selected value in the items list
+    final initialItemIndex = setting.items.indexOf(currentSelectedValue);
+
+    WidgetUtils.showPickerDialog(
+      context,
+      setting.label,
+      setting.items,
+      unit: setting.unit ?? '',
+      desc: setting.desc,
+      onItemSelected: (int index) {
+        var selectedValue = setting.items[index];
+        context.read<PersonalDetailsViewModel>().onItemSelected(setting.key, selectedValue);
+      },
+      initialItem: initialItemIndex,
+    );
+  }
+}
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _PersonalDetailsPageState {
@@ -120,9 +140,7 @@ extension _WidgetFactories on _PersonalDetailsPageState {
         return ProfileSettingsListTile(
           label: setting.label,
           value: personalDetailsInfo[setting.key] ?? '',
-          onTap: () {
-            WidgetUtils.showPickerDialog(context, setting.items, unit: setting.unit ?? '', label: setting.label);
-          },
+          onTap: () => setting.key == PersonalDetailsSettings.dob.key ? null : _onPickerPressed(setting),
         );
       },
       separatorBuilder: (context, index) => Padding(

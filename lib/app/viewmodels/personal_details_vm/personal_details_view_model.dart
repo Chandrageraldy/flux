@@ -25,4 +25,11 @@ class PersonalDetailsViewModel extends BaseViewModel {
     };
     notifyListeners();
   }
+
+  void onItemSelected(String key, String value) {
+    // Use this instead of 'personalDetails[key] = value' to provide new reference for notifying listener
+    personalDetails = {...personalDetails, key: value};
+    notifyListeners();
+    debugPrint('$personalDetails');
+  }
 }

@@ -35,12 +35,7 @@ class ProfileSettingsListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppStyles.kSpac12,
               children: [
-                if (leadingIcon != null)
-                  SizedBox(
-                    height: AppStyles.kSize20,
-                    width: AppStyles.kSize20,
-                    child: getLeadingIcon(context),
-                  ),
+                if (leadingIcon != null) getLeadingIcon(context),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [getLabel(context), if (desc != null) getDesc(context)],
@@ -63,23 +58,24 @@ class ProfileSettingsListTile extends StatelessWidget {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on ProfileSettingsListTile {
-  // Icon
+  // Leading Icon
   Widget getLeadingIcon(BuildContext context) {
-    return FaIcon(
-      leadingIcon,
-      size: AppStyles.kSize20,
-      color: leadingIcon == FontAwesomeIcons.arrowRightFromBracket
-          ? AppColors.redColor
-          : context.theme.colorScheme.secondary,
+    return SizedBox(
+      height: AppStyles.kSize20,
+      width: AppStyles.kSize20,
+      child: FaIcon(
+        leadingIcon,
+        size: AppStyles.kSize20,
+        color: leadingIcon == FontAwesomeIcons.arrowRightFromBracket
+            ? AppColors.redColor
+            : context.theme.colorScheme.secondary,
+      ),
     );
   }
 
   // Label
   Widget getLabel(BuildContext context) {
-    return Text(
-      label,
-      style: _Styles.getLabelTextStyle(context),
-    );
+    return Text(label, style: _Styles.getLabelTextStyle(context));
   }
 
   // Chevron Icon
