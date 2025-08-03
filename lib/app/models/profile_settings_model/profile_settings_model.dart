@@ -1,4 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileSettingsModel {
@@ -109,43 +111,59 @@ class PersonalDetailsModel {
   PersonalDetailsModel({
     required this.label,
     required this.key,
-    required this.onTap,
+    this.unit,
+    required this.items,
   });
 
   final String label;
   final String key;
-  final VoidCallback onTap;
+  final String? unit;
+  final List<String> items;
 }
 
 List<PersonalDetailsModel> personalDetails(BuildContext context) => [
       PersonalDetailsModel(
         label: PersonalDetailsSettings.dob.label,
         key: PersonalDetailsSettings.dob.key,
-        onTap: () {},
+        items: [],
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.gender.label,
         key: PersonalDetailsSettings.gender.key,
-        onTap: () {},
+        items: [PlanSelectionValue.male.value, PlanSelectionValue.female.value],
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.weight.label,
         key: PersonalDetailsSettings.weight.key,
-        onTap: () {},
+        unit: Unit.kg.label,
+        // 20 to 150
+        items: List.generate(131, (index) => (index + 20).toString()),
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.height.label,
         key: PersonalDetailsSettings.height.key,
-        onTap: () {},
+        unit: Unit.cm.label,
+        // 100 to 250
+        items: List.generate(151, (index) => (index + 100).toString()),
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.activityLevel.label,
         key: PersonalDetailsSettings.activityLevel.key,
-        onTap: () {},
+        items: [
+          PlanSelectionValue.sedentary.value,
+          PlanSelectionValue.lightlyActive.value,
+          PlanSelectionValue.active.value,
+          PlanSelectionValue.veryActive.value,
+        ],
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.exerciseLevel.label,
         key: PersonalDetailsSettings.exerciseLevel.key,
-        onTap: () {},
+        items: [
+          PlanSelectionValue.light.value,
+          PlanSelectionValue.moderate.value,
+          PlanSelectionValue.frequent.value,
+          PlanSelectionValue.never.value
+        ],
       ),
     ];

@@ -199,9 +199,10 @@
     "ageLabel": "Age",
     "activityLevelLabel": "Activity Level",
     "exerciseLevelLabel": "Exercise Level",
-    "bmiLabel": "BMI",
+    "bmiLabel": "Body Mass Index (BMI)",
     "underweightLabel": "Underweight",
     "normalWeightLabel": "Normal weight",
     "overweightLabel": "Overweight",
-    "obesityLabel": "Obesity"
+    "obesityLabel": "Obesity",
+    "confirmLabel": "Confirm"
 }

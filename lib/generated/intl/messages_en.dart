@@ -45,7 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "barcodeNotRecognizedLabel":
             MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
-        "bmiLabel": MessageLookupByLibrary.simpleMessage("BMI"),
+        "bmiLabel":
+            MessageLookupByLibrary.simpleMessage("Body Mass Index (BMI)"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
         "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
+        "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(

@@ -23,6 +23,7 @@ class AppStyles {
   static const kPaddOR12 = EdgeInsets.only(right: 12.0);
   static const kPaddOR16 = EdgeInsets.only(right: 16.0);
   static const kPaddOR20 = EdgeInsets.only(right: 20.0);
+  static const kPaddOL12R12T16B8 = EdgeInsets.only(left: 12.0, right: 12.0, top: 16.0, bottom: 8.0);
   // Padding SIDES
   static const kPaddOL20R8 = EdgeInsets.only(left: 20.0, right: 8.0);
   // Padding SYMMETRIC
@@ -44,12 +45,14 @@ class AppStyles {
   static const kPaddSH16 = EdgeInsets.symmetric(horizontal: 16.0);
   static const kPaddSH20 = EdgeInsets.symmetric(horizontal: 20.0);
   static const kPaddSH28 = EdgeInsets.symmetric(horizontal: 28.0);
+  static const kPaddSH36 = EdgeInsets.symmetric(horizontal: 36.0);
   // Padding VERTICAL and HORIZONTAL
   static const kPaddSV2H6 = EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0);
   static const kPaddSV3H6 = EdgeInsets.symmetric(vertical: 3.0, horizontal: 6.0);
   static const kPaddSV3H12 = EdgeInsets.symmetric(vertical: 3.0, horizontal: 12.0);
   static const kPaddSV4H8 = EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0);
   static const kPaddSV12H20 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0);
+  static const kPaddSV8H12 = EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0);
   static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
   static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
   static const kPaddSV20H28 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 28.0);
@@ -78,6 +81,7 @@ class AppStyles {
   static const kSpac32 = 32.0;
 
   // Radius
+  static final kRad6 = BorderRadius.circular(6.0);
   static final kRad8 = BorderRadius.circular(8.0);
   static final kRad10 = BorderRadius.circular(10.0);
   static final kRad12 = BorderRadius.circular(12.0);

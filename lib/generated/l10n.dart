@@ -1930,10 +1930,10 @@ class S {
     );
   }
 
-  /// `BMI`
+  /// `Body Mass Index (BMI)`
   String get bmiLabel {
     return Intl.message(
-      'BMI',
+      'Body Mass Index (BMI)',
       name: 'bmiLabel',
       desc: '',
       args: [],
@@ -1975,6 +1975,16 @@ class S {
     return Intl.message(
       'Obesity',
       name: 'obesityLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirmLabel {
+    return Intl.message(
+      'Confirm',
+      name: 'confirmLabel',
       desc: '',
       args: [],
     );

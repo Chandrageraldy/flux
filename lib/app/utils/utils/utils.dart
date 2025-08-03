@@ -30,6 +30,78 @@ class WidgetUtils {
     }
   }
 
+  static void showPickerDialog(
+    BuildContext context,
+    List<String> items, {
+    String unit = '',
+    int initialItem = 0,
+    String? label,
+  }) {
+    int selectedItem = initialItem;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Theme.of(context).dialogBackgroundColor,
+          shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+          insetPadding: AppStyles.kPaddSH36,
+          child: Padding(
+            padding: AppStyles.kPaddOL12R12T16B8,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: AppStyles.kSpac4,
+              children: [
+                if (label != null) ...[
+                  Text(
+                    label,
+                    style: Quicksand.bold.withSize(FontSizes.mediumPlus),
+                  ),
+                ],
+                SizedBox(
+                  height: AppStyles.kSize100,
+                  child: CupertinoPicker(
+                    itemExtent: AppStyles.kSize30,
+                    scrollController: FixedExtentScrollController(initialItem: initialItem),
+                    onSelectedItemChanged: (int value) {
+                      selectedItem = value;
+                    },
+                    children: items
+                        .map(
+                          (item) => SizedBox(
+                            height: AppStyles.kSize30,
+                            child: Center(
+                              child: Text(
+                                '$item $unit',
+                                style: Quicksand.semiBold.withSize(FontSizes.medium),
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                Column(
+                  children: [
+                    AppDefaultButton(
+                      label: S.current.confirmLabel.toUpperCase(),
+                      onPressed: () => Navigator.of(context).pop(selectedItem),
+                      padding: AppStyles.kPaddSV8,
+                      borderRadius: AppStyles.kRad6,
+                      labelStyle: Quicksand.semiBold.withSize(FontSizes.small).copyWith(
+                            color: context.theme.colorScheme.onPrimary,
+                          ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static void showCupertinoPicker(
     BuildContext context,
     List<String> items, {

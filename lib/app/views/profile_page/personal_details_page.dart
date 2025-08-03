@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/personal_details_vm/personal_details_view_model.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
@@ -118,8 +119,10 @@ extension _WidgetFactories on _PersonalDetailsPageState {
         final setting = personalDetailsSettings[index];
         return ProfileSettingsListTile(
           label: setting.label,
-          onTap: setting.onTap,
           value: personalDetailsInfo[setting.key] ?? '',
+          onTap: () {
+            WidgetUtils.showPickerDialog(context, setting.items, unit: setting.unit ?? '', label: setting.label);
+          },
         );
       },
       separatorBuilder: (context, index) => Padding(
