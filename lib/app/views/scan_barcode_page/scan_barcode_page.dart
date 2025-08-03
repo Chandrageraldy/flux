@@ -188,7 +188,7 @@ extension _WidgetFactories on _ScanBarcodePageState {
   // Try Again Button
   Widget getTryAgainButton() {
     return AppDefaultButton(
-      label: S.current.tryAgainLabel,
+      label: S.current.tryAgainLabel.toUpperCase(),
       onPressed: _tryAgainPressed,
       padding: AppStyles.kPaddSV12,
       labelStyle: _Styles.tryAgainButtonTextStyle(context),
@@ -198,7 +198,7 @@ extension _WidgetFactories on _ScanBarcodePageState {
   // Use AI Meal Scan Button
   Widget getUseAiMealScanButton() {
     return AppDefaultButton(
-      label: S.current.useAiMealScanLabel,
+      label: S.current.useAiMealScanLabel.toUpperCase(),
       onPressed: _useAiMealScanPressed,
       padding: AppStyles.kPaddSV12,
       labelStyle: _Styles.useAiMealScanButtonTextStyle(context),
@@ -224,7 +224,7 @@ class _Styles {
 
   // Description Text Style
   static TextStyle descriptionTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Frame Container Decoration

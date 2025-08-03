@@ -111,6 +111,8 @@ abstract class _Styles {
 
   // Description Text Style
   static TextStyle descriptionTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return AltmannGrotesk.regular
+        .withSize(FontSizes.small)
+        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

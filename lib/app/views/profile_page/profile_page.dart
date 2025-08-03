@@ -379,7 +379,7 @@ class _Styles {
 
   // Plan Generation Description Text Style
   static TextStyle getPlanGenerationDescTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
+    return AltmannGrotesk.regular.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Plan Generation Button Container Decoration

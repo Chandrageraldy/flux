@@ -50,7 +50,7 @@ class ProfileSettingsListTile extends StatelessWidget {
             Row(
               spacing: AppStyles.kSpac12,
               children: [
-                if (value != null) Text(value!, style: AltmannGrotesk.medium.withSize(FontSizes.small)),
+                if (value != null) Text(value!, style: AltmannGrotesk.regular.withSize(FontSizes.small)),
                 getTrailingIcon(context),
               ],
             ),

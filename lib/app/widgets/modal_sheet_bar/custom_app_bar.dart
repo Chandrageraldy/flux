@@ -23,10 +23,7 @@ class CustomAppBar extends StatelessWidget {
           children: [
             Expanded(flex: 1, child: leadingButton),
             Text(title, style: _Styles.getTitleTextStyle()),
-            Expanded(
-              flex: 1,
-              child: Align(alignment: Alignment.centerRight, child: trailingButton),
-            )
+            Expanded(flex: 1, child: Align(alignment: Alignment.centerRight, child: trailingButton))
           ],
         ),
       ),
