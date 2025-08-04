@@ -1,11 +1,13 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
+import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/personal_details_vm/personal_details_view_model.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class PersonalDetailsPage extends StatelessWidget {
@@ -50,16 +52,37 @@ extension _Actions on _PersonalDetailsPageState {
     final initialItemIndex = setting.items.indexOf(currentSelectedValue);
 
     WidgetUtils.showPickerDialog(
-      context,
-      setting.label,
-      setting.items,
+      context: context,
+      label: setting.label,
+      items: setting.items,
       unit: setting.unit ?? '',
       desc: setting.desc,
+      initialItem: initialItemIndex,
       onItemSelected: (int index) {
         var selectedValue = setting.items[index];
         context.read<PersonalDetailsViewModel>().onItemSelected(setting.key, selectedValue);
       },
-      initialItem: initialItemIndex,
+    );
+  }
+
+  void _onDatePickerPressed(PersonalDetailsModel setting) {
+    // Retrieve the currently selected value
+    final currentSelectedValue = context.read<PersonalDetailsViewModel>().personalDetails[setting.key] ?? '';
+
+    final dateFormat = DateFormat.YEAR_MONTH_DAY;
+
+    DateTime initialDate = currentSelectedValue.toDateTime(dateFormat);
+
+    WidgetUtils.showDatePickerDialog(
+      context: context,
+      label: setting.label,
+      desc: setting.desc,
+      initialDate: initialDate,
+      onDateSelected: (selectedDate) {
+        context
+            .read<PersonalDetailsViewModel>()
+            .onItemSelected(setting.key, selectedDate.toFormattedString(dateFormat));
+      },
     );
   }
 }
@@ -140,7 +163,9 @@ extension _WidgetFactories on _PersonalDetailsPageState {
         return ProfileSettingsListTile(
           label: setting.label,
           value: personalDetailsInfo[setting.key] ?? '',
-          onTap: () => setting.key == PersonalDetailsSettings.dob.key ? null : _onPickerPressed(setting),
+          onTap: () => setting.key == PersonalDetailsSettings.dob.key
+              ? _onDatePickerPressed(setting)
+              : _onPickerPressed(setting),
         );
       },
       separatorBuilder: (context, index) => Padding(

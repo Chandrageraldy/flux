@@ -4,7 +4,8 @@ import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
 
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
-import 'package:flux/app/widgets/dialog/picker_dialog.dart';
+import 'package:flux/app/widgets/dialog/custom_date_picker_dialog.dart';
+import 'package:flux/app/widgets/dialog/custom_picker_dialog.dart';
 
 class WidgetUtils {
   static Future<void> showDefaultErrorDialog(
@@ -13,37 +14,32 @@ class WidgetUtils {
   ) async {
     final List<Widget> actionBuilders = [
       TextButton(
-        onPressed: () {
-          context.router.maybePop();
-        },
+        onPressed: () => context.router.maybePop(),
         child: Text(S.current.okLabel.capitalize()),
       ),
     ];
     if (context.mounted) {
       return showAdaptiveDialog<void>(
         context: context,
-        builder: (context) => AdaptiveAlertDialog(
-          errorMessage: errorMessage,
-          actionBuilders: actionBuilders,
-        ),
+        builder: (context) => AdaptiveAlertDialog(errorMessage: errorMessage, actionBuilders: actionBuilders),
         useRootNavigator: false,
       );
     }
   }
 
-  static void showPickerDialog(
-    BuildContext context,
-    String label,
-    List<String> items, {
+  static void showPickerDialog({
+    required BuildContext context,
+    required String label,
+    required List<String> items,
+    String? desc,
     String unit = '',
     int initialItem = 0,
-    String? desc,
     required void Function(int value) onItemSelected,
   }) {
     showDialog(
       context: context,
       builder: (context) {
-        return PickerDialog(
+        return CustomPickerDialog(
           context: context,
           items: items,
           label: label,
@@ -51,6 +47,27 @@ class WidgetUtils {
           onItemSelected: onItemSelected,
           initialItem: initialItem,
           unit: unit,
+        );
+      },
+    );
+  }
+
+  static void showDatePickerDialog({
+    required BuildContext context,
+    required String label,
+    String? desc,
+    required DateTime initialDate,
+    required Function(DateTime date) onDateSelected,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomDatePickerDialog(
+          context: context,
+          label: label,
+          desc: desc,
+          initialDate: initialDate,
+          onDateSelected: onDateSelected,
         );
       },
     );

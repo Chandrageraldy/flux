@@ -127,6 +127,8 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
         label: PersonalDetailsSettings.dob.label,
         key: PersonalDetailsSettings.dob.key,
         items: [],
+        desc:
+            '*"Your date of birth helps us tailor recommendations, track your progress accurately, and provide age-appropriate features. This information stays private."',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.gender.label,
