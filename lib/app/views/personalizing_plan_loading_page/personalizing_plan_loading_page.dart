@@ -392,6 +392,6 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   static TextStyle personalizingPlanLabelTextStyle() {
-    return AltmannGrotesk.medium.withSize(FontSizes.large);
+    return Quicksand.medium.withSize(FontSizes.large);
   }
 }

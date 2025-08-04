@@ -44,6 +44,6 @@ class CustomAppBarTappable extends StatelessWidget {
 abstract class _Styles {
   // Label Text Style
   static getLabelTextStyle(BuildContext context, Color color) {
-    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: color);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: color);
   }
 }

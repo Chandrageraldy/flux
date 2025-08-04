@@ -65,14 +65,12 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
 abstract class _Styles {
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.regular
-        .withSize(FontSizes.small)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Linear Progress Indicator Color

@@ -89,13 +89,11 @@ abstract class _Styles {
 
   // Text Form Field Text Style
   static TextStyle getTextFormFieldTextStyle() {
-    return AltmannGrotesk.light.withSize(FontSizes.small);
+    return Quicksand.light.withSize(FontSizes.small);
   }
 
   // Top Label Text Style
   static TextStyle getTopLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium
-        .withSize(FontSizes.extraSmall)
-        .copyWith(color: context.theme.colorScheme.tertiaryFixed);
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
   }
 }

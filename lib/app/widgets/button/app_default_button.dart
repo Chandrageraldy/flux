@@ -55,7 +55,7 @@ extension _WidgetFactories on AppDefaultButton {
 abstract class _Styles {
   // Button Label Style
   static TextStyle getButtonLabelTextStyle(BuildContext context, Color? labelColor) {
-    return AltmannGrotesk.regular.withSize(FontSizes.mediumPlus).copyWith(
+    return Quicksand.regular.withSize(FontSizes.mediumPlus).copyWith(
           color: labelColor ?? context.theme.colorScheme.onPrimary,
         );
   }

@@ -122,21 +122,21 @@ abstract class _Styles {
 
   // Picker Item Label Text Style
   static TextStyle getPickerItemLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 
   // Confirm Button Label Text Style
   static TextStyle getConfirmButtonLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.large);
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 
   // Desc Label Text Style
   static TextStyle getDescLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.thin.withSize(FontSizes.extraSmall);
+    return Quicksand.light.withSize(FontSizes.extraSmall);
   }
 }

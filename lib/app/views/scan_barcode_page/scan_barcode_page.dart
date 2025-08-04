@@ -219,12 +219,12 @@ class _Styles {
 
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Description Text Style
   static TextStyle descriptionTextStyle(BuildContext context) {
-    return AltmannGrotesk.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Frame Container Decoration
@@ -240,11 +240,11 @@ class _Styles {
 
   // Try Again Button Text Style
   static TextStyle tryAgainButtonTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Use AI Meal Scan Button Text Style
   static TextStyle useAiMealScanButtonTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }

@@ -316,12 +316,12 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
 abstract class _Styles {
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style
   static TextStyle getDescriptionLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.thin.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Linear Percent Indicator Line Height

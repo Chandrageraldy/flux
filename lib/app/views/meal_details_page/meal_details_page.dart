@@ -147,14 +147,12 @@ abstract class _Styles {
 
   // Remaining Label Label Text Style
   static TextStyle getRemainingNumberLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.extraMassive).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.extraMassive).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Calorie Formula Label Text Style
   static TextStyle getRemainingLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.regular
-        .withSize(FontSizes.large)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.regular.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Circular Percent Indicator Line Width
@@ -165,14 +163,12 @@ abstract class _Styles {
 
   // Meal Type Label Text Style
   static TextStyle getMealTypeLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.extraHuge);
+    return Quicksand.bold.withSize(FontSizes.extraHuge);
   }
 
   // Date Label Text Style
   static TextStyle getDateLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium
-        .withSize(FontSizes.small)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Date Container Decoration

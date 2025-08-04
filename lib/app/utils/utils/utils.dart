@@ -102,14 +102,13 @@ class WidgetUtils {
                       AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
-                        style: AltmannGrotesk.medium
+                        style: Quicksand.medium
                             .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style:
-                            AltmannGrotesk.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
+                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       )
                     ],
                   ),
@@ -195,14 +194,13 @@ class WidgetUtils {
                       AppStyles.kSizedBoxH16,
                       Text(
                         title ?? '',
-                        style: AltmannGrotesk.medium
+                        style: Quicksand.medium
                             .withSize(FontSizes.large)
                             .copyWith(color: context.theme.colorScheme.primary),
                       ),
                       Text(
                         description ?? '',
-                        style:
-                            AltmannGrotesk.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
+                        style: Quicksand.light.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary),
                       ),
                     ],
                   ),

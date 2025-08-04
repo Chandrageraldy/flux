@@ -46,6 +46,6 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 }

@@ -156,12 +156,12 @@ abstract class _Styles {
 
   // Header Label Text Style
   static TextStyle getHeaderLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Header Description Label Text Style
   static TextStyle getHeaderDescriptionLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.light.withSize(FontSizes.extraSmall);
+    return Quicksand.light.withSize(FontSizes.extraSmall);
   }
 
   // Save Container Decoration

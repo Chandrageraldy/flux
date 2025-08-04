@@ -168,13 +168,11 @@ extension _WidgetFactories on _SignUpPageState {
 class _Styles {
   // App Title Text Style
   static getAppTitleLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium
-        .withSize(FontSizes.extraHuge)
-        .copyWith(color: context.theme.colorScheme.primary, height: 1);
+    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Sign Up Description Text Style
   static getSignUpDescriptionLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.thin.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 }

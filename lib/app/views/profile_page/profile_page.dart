@@ -238,7 +238,7 @@ extension _WidgetFactories on _ProfilePageState {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac4,
       children: [
-        Text(S.current.personalInfoLabel, style: AltmannGrotesk.bold.withSize(FontSizes.small)),
+        Text(S.current.personalInfoLabel, style: Quicksand.bold.withSize(FontSizes.small)),
         Container(
           padding: AppStyles.kPaddSV12H20,
           decoration: _Styles.getPersonalInfoContainerDecoration(context),
@@ -278,7 +278,7 @@ extension _WidgetFactories on _ProfilePageState {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac4,
       children: [
-        Text(S.current.planCustomizationLabel, style: AltmannGrotesk.bold.withSize(FontSizes.small)),
+        Text(S.current.planCustomizationLabel, style: Quicksand.bold.withSize(FontSizes.small)),
         Container(
           padding: AppStyles.kPaddSV12H20,
           decoration: _Styles.getPersonalInfoContainerDecoration(context),
@@ -334,12 +334,12 @@ class _Styles {
 
   // Username Label Text Style
   static TextStyle getUsernameLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 
   // Age Label Text Style
   static TextStyle getAgeLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // User Profile Add Button Container Decoration
@@ -353,12 +353,12 @@ class _Styles {
 
   // Header Row Label Text Style
   static TextStyle getHeaderColumnLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.light.withSize(FontSizes.extraSmall);
+    return Quicksand.light.withSize(FontSizes.extraSmall);
   }
 
   // Header Row Value Label Text Style
   static TextStyle getHeaderColumnValueLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Personal Info Container Decoration
@@ -374,12 +374,12 @@ class _Styles {
 
   // Plan Generation Label Text Style
   static TextStyle getPlanGenerationLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Plan Generation Description Text Style
   static TextStyle getPlanGenerationDescTextStyle(BuildContext context) {
-    return AltmannGrotesk.regular.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
+    return Quicksand.regular.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Plan Generation Button Container Decoration
@@ -389,6 +389,6 @@ class _Styles {
 
   // Plan Generation Button Text Style
   static TextStyle getPlanGenerationButtonTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

@@ -39,6 +39,6 @@ extension _WidgetFactories on MealFoodDisplayCard {}
 abstract class _Styles {
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.small);
   }
 }

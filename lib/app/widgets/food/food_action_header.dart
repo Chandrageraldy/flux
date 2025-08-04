@@ -52,6 +52,6 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.small);
   }
 }

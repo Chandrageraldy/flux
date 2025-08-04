@@ -48,11 +48,11 @@ extension _WidgetFactories on OnboardContent {
 abstract class _Styles {
   // Title Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style
   static TextStyle getDescriptionLabelTextStyle() {
-    return AltmannGrotesk.regular.withSize(FontSizes.medium);
+    return Quicksand.regular.withSize(FontSizes.medium);
   }
 }

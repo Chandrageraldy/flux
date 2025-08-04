@@ -71,13 +71,11 @@ abstract class _Styles {
 
   // Macro Nutrient Label Text Style
   static TextStyle getMacroNutrientLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Macro Nutrient Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium
-        .withSize(FontSizes.small)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

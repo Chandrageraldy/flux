@@ -41,6 +41,6 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 abstract class _Styles {
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
   }
 }

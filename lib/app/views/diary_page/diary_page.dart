@@ -380,34 +380,32 @@ class _Styles {
 
   // Calorie Intake Label Text Style
   static TextStyle getIntakeLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.medium);
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 
   // Calorie Formula Label Text Style
   static TextStyle getCalorieFormulaLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.regular
-        .withSize(FontSizes.small)
-        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Remaining Label Label Text Style
   static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.medium.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withSize(FontSizes.large);
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Edit Label Text Style
   static TextStyle getEditLabelTextStyle(BuildContext context) {
-    return AltmannGrotesk.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 
   // Date Timeline Container Decoration
@@ -423,21 +421,21 @@ class _Styles {
 
   // Date Timeline Month Label Text Style
   static TextStyle getDateTimelineMonthLabelTextStyle(BuildContext context, bool isSelected) {
-    return AltmannGrotesk.medium
+    return Quicksand.medium
         .withSize(FontSizes.extraSmall)
         .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Date Timeline Day Label Text Style
   static TextStyle getDateTimelineDayLabelTextStyle(BuildContext context, bool isSelected) {
-    return AltmannGrotesk.bold
+    return Quicksand.bold
         .withSize(FontSizes.medium)
         .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Date Timeline Weekday Label Text Style
   static TextStyle getDateTimelineWeekdayLabelTextStyle(BuildContext context, bool isSelected) {
-    return AltmannGrotesk.medium
+    return Quicksand.medium
         .withSize(FontSizes.extraSmall)
         .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
