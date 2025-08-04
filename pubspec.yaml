@@ -89,30 +89,18 @@ flutter:
     - .env
 
   fonts:
-    - family: AltmannGrotesk
+    - family: Quicksand
       fonts:
-        - asset: fonts/AltmannGrotesk/AltmannGrotesk-Light.ttf
+        - asset: fonts/quicksand/Quicksand-Light.ttf
           weight: 300
-        - asset: fonts/AltmannGrotesk/AltmannGrotesk-Regular.ttf
+        - asset: fonts/quicksand/Quicksand-Regular.ttf
           weight: 400
-        - asset: fonts/AltmannGrotesk/AltmannGrotesk-Medium.ttf
+        - asset: fonts/quicksand/Quicksand-Medium.ttf
           weight: 500
-        - asset: fonts/AltmannGrotesk/AltmannGrotesk-medium.ttf
+        - asset: fonts/quicksand/Quicksand-SemiBold.ttf
           weight: 600
-        - asset: fonts/AltmannGrotesk/AltmannGrotesk-Bold.ttf
+        - asset: fonts/quicksand/Quicksand-Bold.ttf
           weight: 700
-    - family: Altmann Grotesk
-      fonts:
-        - asset: fonts/altmanngrotesk/AltmannGrotesk-Thin.ttf
-          weight: 400
-        - asset: fonts/altmanngrotesk/AltmannGrotesk-Light.ttf
-          weight: 500
-        - asset: fonts/altmanngrotesk/AltmannGrotesk-Regular.ttf
-          weight: 600
-        - asset: fonts/altmanngrotesk/AltmannGrotesk-Medium.ttf
-          weight: 700
-        - asset: fonts/altmanngrotesk/AltmannGrotesk-Bold.ttf
-          weight: 800
 
 flutter_intl:
         enabled: true
