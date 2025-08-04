@@ -55,7 +55,7 @@ enum Language {
   }
 }
 
-enum FormFields { email, password, username, search, servingUnit, mealType, quantity }
+enum FormFields { email, password, username, search, servingUnit, mealType, quantity, energyTarget }
 
 class TableName {
   static String user = 'user';
@@ -307,7 +307,7 @@ enum Unit {
     switch (this) {
       case kg:
         return 'Kg';
-      case Unit.cm:
+      case cm:
         return 'cm';
     }
   }

@@ -184,6 +184,7 @@
     "adjustCalorieIntakeLabel": "Adjust Calorie Intake",
     "adjustCalorieIntakeDesc": "kcal/day",
     "dietTypeLabel": "Diet Type",
+    "dietTypeDesc": "Select a diet type to adjust the ratio of carbs, protein, and fat.",
     "mealRatioDesc": "Breakfast, lunch, dinner, and snacks",
     "wantToStartFreshLabel": "Want to start fresh?",
     "wantToStartFreshDesc": "Generate a new personalized plan",
@@ -205,5 +206,10 @@
     "overweightLabel": "Overweight",
     "obesityLabel": "Obesity",
     "confirmLabel": "Confirm",
-    "nutritionGoalsLabel": "Nutrition Goals"
+    "nutritionGoalsLabel": "Nutrition Goals",
+    "energyTargetLabel": "Energy Target",
+    "energyTargetDesc": "This is your recommended daily energy intake to meet your goal.",
+    "basalMetabolicRateLabel": "Basal Metabolic Rate (BMR)",
+    "totalDailyEnergyExpenditureLabel": "Total Daily Energy Expenditure (TDEE)",
+    "percentTotalEnergyLabel": "Percent of Total Energy"
 }

@@ -1780,6 +1780,16 @@ class S {
     );
   }
 
+  /// `Select a diet type to adjust the ratio of carbs, protein, and fat.`
+  String get dietTypeDesc {
+    return Intl.message(
+      'Select a diet type to adjust the ratio of carbs, protein, and fat.',
+      name: 'dietTypeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Breakfast, lunch, dinner, and snacks`
   String get mealRatioDesc {
     return Intl.message(
@@ -1995,6 +2005,56 @@ class S {
     return Intl.message(
       'Nutrition Goals',
       name: 'nutritionGoalsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Energy Target`
+  String get energyTargetLabel {
+    return Intl.message(
+      'Energy Target',
+      name: 'energyTargetLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is your recommended daily energy intake to meet your goal.`
+  String get energyTargetDesc {
+    return Intl.message(
+      'This is your recommended daily energy intake to meet your goal.',
+      name: 'energyTargetDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basal Metabolic Rate (BMR)`
+  String get basalMetabolicRateLabel {
+    return Intl.message(
+      'Basal Metabolic Rate (BMR)',
+      name: 'basalMetabolicRateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Daily Energy Expenditure (TDEE)`
+  String get totalDailyEnergyExpenditureLabel {
+    return Intl.message(
+      'Total Daily Energy Expenditure (TDEE)',
+      name: 'totalDailyEnergyExpenditureLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Percent of Total Energy`
+  String get percentTotalEnergyLabel {
+    return Intl.message(
+      'Percent of Total Energy',
+      name: 'percentTotalEnergyLabel',
       desc: '',
       args: [],
     );

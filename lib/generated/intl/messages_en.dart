@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "barcodeNotRecognizedLabel":
             MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
+        "basalMetabolicRateLabel":
+            MessageLookupByLibrary.simpleMessage("Basal Metabolic Rate (BMR)"),
         "bmiLabel":
             MessageLookupByLibrary.simpleMessage("Body Mass Index (BMI)"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
@@ -67,10 +69,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Describe a meal"),
         "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
         "dietLabel": MessageLookupByLibrary.simpleMessage("Diet"),
+        "dietTypeDesc": MessageLookupByLibrary.simpleMessage(
+            "Select a diet type to adjust the ratio of carbs, protein, and fat."),
         "dietTypeLabel": MessageLookupByLibrary.simpleMessage("Diet Type"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "energyTargetDesc": MessageLookupByLibrary.simpleMessage(
+            "This is your recommended daily energy intake to meet your goal."),
+        "energyTargetLabel":
+            MessageLookupByLibrary.simpleMessage("Energy Target"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
         "exerciseLevelLabel":
             MessageLookupByLibrary.simpleMessage("Exercise Level"),
@@ -187,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Based on foods eaten by early humans."),
         "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "percentTotalEnergyLabel":
+            MessageLookupByLibrary.simpleMessage("Percent of Total Energy"),
         "permissionDenied": MessageLookupByLibrary.simpleMessage(
             "Session Expired or User is not Authenticated, Please Login Again."),
         "personalDetailsLabel":
@@ -291,6 +301,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),
+        "totalDailyEnergyExpenditureLabel":
+            MessageLookupByLibrary.simpleMessage(
+                "Total Daily Energy Expenditure (TDEE)"),
         "tryAgainLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
         "underweightLabel": MessageLookupByLibrary.simpleMessage("Underweight"),
         "useAiMealScanLabel":

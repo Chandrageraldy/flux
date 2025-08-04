@@ -39,7 +39,7 @@ List<ProfileSettingsModel> planCustomization(String currentCalorieRequired, Buil
         icon: FontAwesomeIcons.puzzlePiece,
         label: S.current.nutritionGoalsLabel,
         desc: '$currentCalorieRequired ${S.current.adjustCalorieIntakeDesc}',
-        onTap: () => context.router.push(PersonalDetailsRoute()),
+        onTap: () => context.router.push(NutritionGoalsRoute()),
       ),
       ProfileSettingsModel(
         icon: FontAwesomeIcons.percent,
