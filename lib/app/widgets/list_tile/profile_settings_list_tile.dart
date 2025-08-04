@@ -75,7 +75,14 @@ extension _WidgetFactories on ProfileSettingsListTile {
 
   // Label
   Widget getLabel(BuildContext context) {
-    return Text(label, style: _Styles.getLabelTextStyle(context));
+    return Text(
+      label,
+      style: _Styles.getLabelTextStyle(context).copyWith(
+        color: leadingIcon == FontAwesomeIcons.arrowRightFromBracket
+            ? AppColors.redColor
+            : context.theme.colorScheme.onTertiary,
+      ),
+    );
   }
 
   // Chevron Icon

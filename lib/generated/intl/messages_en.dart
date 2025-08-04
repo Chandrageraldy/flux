@@ -164,6 +164,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
         "normalWeightLabel":
             MessageLookupByLibrary.simpleMessage("Normal weight"),
+        "nutritionGoalsLabel":
+            MessageLookupByLibrary.simpleMessage("Nutrition Goals"),
         "nutritionalInformationLabel":
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "obesityLabel": MessageLookupByLibrary.simpleMessage("Obesity"),

@@ -1989,6 +1989,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Nutrition Goals`
+  String get nutritionGoalsLabel {
+    return Intl.message(
+      'Nutrition Goals',
+      name: 'nutritionGoalsLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

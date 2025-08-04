@@ -290,13 +290,8 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Plan Customization List View
   Widget getPlanCustomizationListView() {
-    final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
     final PlanModel? planModel = SharedPreferenceHandler().getPlan();
-    final planCustomizationSettings = planCustomization(
-      planModel?.calorieKcal.toString() ?? '',
-      userProfile?.bodyMetrics?.dietType?.capitalize() ?? '',
-      context,
-    );
+    final planCustomizationSettings = planCustomization(planModel?.calorieKcal.toString() ?? '', context);
 
     return ListView.separated(
       itemCount: planCustomizationSettings.length,
@@ -334,7 +329,7 @@ class _Styles {
 
   // Username Label Text Style
   static TextStyle getUsernameLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium);
+    return Quicksand.bold.withSize(FontSizes.medium);
   }
 
   // Age Label Text Style

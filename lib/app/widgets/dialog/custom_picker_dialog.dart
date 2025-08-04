@@ -143,7 +143,7 @@ abstract class _Styles {
 
   // Label Text Style
   static TextStyle getLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.large);
+    return Quicksand.semiBold.withSize(FontSizes.large);
   }
 
   // Desc Label Text Style

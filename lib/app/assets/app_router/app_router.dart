@@ -14,10 +14,8 @@ import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.d
 import 'package:flux/app/views/manual_plan_setup_page/manual_plan_setup_page.dart';
 import 'package:flux/app/views/meal_details_page/meal_details_page.dart';
 import 'package:flux/app/views/profile_page/account_page.dart';
-import 'package:flux/app/views/profile_page/adjust_calorie_intake_page.dart';
-import 'package:flux/app/views/profile_page/adjust_macronutrients_ratio_page.dart';
-import 'package:flux/app/views/profile_page/diet_type_page.dart';
 import 'package:flux/app/views/profile_page/meal_ratio_page.dart';
+import 'package:flux/app/views/profile_page/nutrition_goals_page.dart';
 import 'package:flux/app/views/profile_page/personal_details_page.dart';
 import 'package:flux/app/views/profile_page/profile_page.dart';
 import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
@@ -74,11 +72,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: ScanBarcodeRoute.page),
         CustomRoute(page: ErrorRoute.page, customRouteBuilder: _modalSheetBuilder),
         AutoRoute(page: PersonalDetailsRoute.page),
-        CustomRoute(page: AdjustCalorieIntakeRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
-        CustomRoute(page: AdjustMacronutrientsRatioRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
-        CustomRoute(page: MealRatioRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
-        CustomRoute(page: DietTypeRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
-        CustomRoute(page: AccountRoute.page, customRouteBuilder: _fullScreenModalSheetBuilder),
+        AutoRoute(page: NutritionGoalsRoute.page),
+        AutoRoute(page: MealRatioRoute.page),
+        AutoRoute(page: AccountRoute.page),
       ],
     );
   }
@@ -108,23 +104,23 @@ Route<T> _modalSheetBuilder<T>(
   );
 }
 
-Route<T> _fullScreenModalSheetBuilder<T>(
-  BuildContext _,
-  Widget child,
-  AutoRoutePage<T> page,
-) {
-  return ModalBottomSheetRoute(
-    settings: page,
-    builder: (context) => SafeArea(
-      child: Container(
-        decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10),
-        clipBehavior: Clip.hardEdge,
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.9,
-          child: child,
-        ),
-      ),
-    ),
-    isScrollControlled: true,
-  );
-}
+// Route<T> _fullScreenModalSheetBuilder<T>(
+//   BuildContext _,
+//   Widget child,
+//   AutoRoutePage<T> page,
+// ) {
+//   return ModalBottomSheetRoute(
+//     settings: page,
+//     builder: (context) => SafeArea(
+//       child: Container(
+//         decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10),
+//         clipBehavior: Clip.hardEdge,
+//         child: SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.9,
+//           child: child,
+//         ),
+//       ),
+//     ),
+//     isScrollControlled: true,
+//   );
+// }

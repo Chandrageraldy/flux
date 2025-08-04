@@ -29,37 +29,23 @@ List<ProfileSettingsModel> personalInfo(BuildContext context, VoidCallback logou
       ),
     ];
 
-List<ProfileSettingsModel> planCustomization(
-        String currentCalorieRequired, String currentDietType, BuildContext context) =>
-    [
+List<ProfileSettingsModel> planCustomization(String currentCalorieRequired, BuildContext context) => [
       ProfileSettingsModel(
         icon: FontAwesomeIcons.solidUser,
         label: S.current.personalDetailsLabel,
         onTap: () => context.router.push(PersonalDetailsRoute()),
       ),
       ProfileSettingsModel(
-        icon: FontAwesomeIcons.fire,
-        label: S.current.adjustCalorieIntakeLabel,
-        desc: '$currentCalorieRequired ${S.current.adjustCalorieIntakeDesc}',
-        onTap: () => context.router.push(AdjustCalorieIntakeRoute()),
-      ),
-      ProfileSettingsModel(
         icon: FontAwesomeIcons.puzzlePiece,
-        label: S.current.adjustMacroNutrientsLabel,
-        desc: S.current.adjustMacroNutrientsDesc,
-        onTap: () => context.router.push(AdjustMacronutrientsRatioRoute()),
+        label: S.current.nutritionGoalsLabel,
+        desc: '$currentCalorieRequired ${S.current.adjustCalorieIntakeDesc}',
+        onTap: () => context.router.push(PersonalDetailsRoute()),
       ),
       ProfileSettingsModel(
         icon: FontAwesomeIcons.percent,
         label: S.current.mealRatioLabel,
         desc: S.current.mealRatioDesc,
         onTap: () => context.router.push(MealRatioRoute()),
-      ),
-      ProfileSettingsModel(
-        icon: FontAwesomeIcons.apple,
-        label: S.current.dietTypeLabel,
-        desc: currentDietType,
-        onTap: () => context.router.push(DietTypeRoute()),
       ),
     ];
 

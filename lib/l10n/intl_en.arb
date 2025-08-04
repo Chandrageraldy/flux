@@ -204,5 +204,6 @@
     "normalWeightLabel": "Normal weight",
     "overweightLabel": "Overweight",
     "obesityLabel": "Obesity",
-    "confirmLabel": "Confirm"
+    "confirmLabel": "Confirm",
+    "nutritionGoalsLabel": "Nutrition Goals"
 }
