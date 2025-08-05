@@ -94,21 +94,16 @@ enum PersonalDetailsSettings {
 
 enum NutritionGoalsSettings {
   energyTarget,
-  basalMetabolicRate,
-  totalDailyEnergyExpenditure,
   dietType,
   proteinRatio,
   carbsRatio,
-  fatRatio;
+  fatRatio,
+  totalRatio;
 
   String get key {
     switch (this) {
       case NutritionGoalsSettings.energyTarget:
         return 'energyTarget';
-      case NutritionGoalsSettings.basalMetabolicRate:
-        return 'basalMetabolicRate';
-      case NutritionGoalsSettings.totalDailyEnergyExpenditure:
-        return 'totalDailyEnergyExpenditure';
       case NutritionGoalsSettings.dietType:
         return 'dietType';
       case NutritionGoalsSettings.proteinRatio:
@@ -117,6 +112,8 @@ enum NutritionGoalsSettings {
         return 'carbsRatio';
       case NutritionGoalsSettings.fatRatio:
         return 'fatRatio';
+      case NutritionGoalsSettings.totalRatio:
+        return 'totalRatio';
     }
   }
 }

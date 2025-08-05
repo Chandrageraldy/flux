@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Carbs, fat, and protein"),
         "adjustMacroNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Adjust Macronutrients Ratio"),
+        "adjustmentBasedOnWeightGoalLabel":
+            MessageLookupByLibrary.simpleMessage(
+                "Adjustment Based on Weight Goal"),
         "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
@@ -47,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Barcode not recognized"),
         "basalMetabolicRateLabel":
             MessageLookupByLibrary.simpleMessage("Basal Metabolic Rate (BMR)"),
+        "baselineActivityLabel":
+            MessageLookupByLibrary.simpleMessage("Baseline Activity"),
         "bmiLabel":
             MessageLookupByLibrary.simpleMessage("Body Mass Index (BMI)"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
@@ -82,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
         "exerciseLevelLabel":
             MessageLookupByLibrary.simpleMessage("Exercise Level"),
-        "fatLabel": MessageLookupByLibrary.simpleMessage("Fats"),
+        "fatLabel": MessageLookupByLibrary.simpleMessage("Fat"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
         "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),

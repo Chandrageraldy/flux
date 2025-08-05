@@ -148,44 +148,44 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   Map<String, double> getMacroRatio(String dietType) {
     late double proteinRatio;
     late double fatRatio;
-    late double carbRatio;
+    late double carbsRatio;
 
     switch (dietType) {
       case 'keto':
         proteinRatio = 0.20;
         fatRatio = 0.70;
-        carbRatio = 0.10;
+        carbsRatio = 0.10;
         break;
       case 'mediterranean':
         proteinRatio = 0.15;
         fatRatio = 0.30;
-        carbRatio = 0.55;
+        carbsRatio = 0.55;
         break;
       case 'vegetarian':
         proteinRatio = 0.30;
         fatRatio = 0.20;
-        carbRatio = 0.50;
+        carbsRatio = 0.50;
         break;
       case 'paleo':
         proteinRatio = 0.30;
         fatRatio = 0.35;
-        carbRatio = 0.35;
+        carbsRatio = 0.35;
         break;
       case 'lowCarbs':
         proteinRatio = 0.45;
         fatRatio = 0.35;
-        carbRatio = 0.20;
+        carbsRatio = 0.20;
         break;
       default:
         proteinRatio = 0.25;
         fatRatio = 0.25;
-        carbRatio = 0.50;
+        carbsRatio = 0.50;
     }
 
     return {
       'proteinRatio': proteinRatio * 100,
       'fatRatio': fatRatio * 100,
-      'carbsRatio': carbRatio * 100,
+      'carbsRatio': carbsRatio * 100,
     };
   }
 

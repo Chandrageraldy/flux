@@ -335,3 +335,23 @@ enum NutritionUnit {
     }
   }
 }
+
+enum ActivityLevel {
+  sedentary(1.2),
+  lightlyActive(1.375),
+  active(1.55),
+  veryActive(1.725);
+
+  final double factor;
+  const ActivityLevel(this.factor);
+}
+
+enum ExerciseLevel {
+  never(0.0),
+  light(0.1),
+  moderate(0.15),
+  frequent(0.2);
+
+  final double factor;
+  const ExerciseLevel(this.factor);
+}

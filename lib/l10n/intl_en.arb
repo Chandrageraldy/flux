@@ -145,7 +145,7 @@
 
     "calorieLabel": "Calorie",
     "proteinLabel": "Protein",
-    "fatLabel": "Fats",
+    "fatLabel": "Fat",
     "carbsLabel": "Carbs",
     "calciumLabel": "Calcium",
     "ironLabel": "Iron",
@@ -211,5 +211,7 @@
     "energyTargetDesc": "This is your recommended daily energy intake to meet your goal.",
     "basalMetabolicRateLabel": "Basal Metabolic Rate (BMR)",
     "totalDailyEnergyExpenditureLabel": "Total Daily Energy Expenditure (TDEE)",
-    "percentTotalEnergyLabel": "Percent of Total Energy"
+    "percentTotalEnergyLabel": "Percent of Total Energy",
+    "baselineActivityLabel": "Baseline Activity",
+    "adjustmentBasedOnWeightGoalLabel": "Adjustment Based on Weight Goal"
 }

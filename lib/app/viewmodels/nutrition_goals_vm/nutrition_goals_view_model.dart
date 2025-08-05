@@ -23,7 +23,26 @@ class NutritionGoalsViewModel extends BaseViewModel {
       NutritionGoalsSettings.carbsRatio.key: plan?.carbsRatio?.toStringAsFixed(0) ?? '',
       NutritionGoalsSettings.fatRatio.key: plan?.fatRatio?.toStringAsFixed(0) ?? '',
       NutritionGoalsSettings.dietType.key: user?.bodyMetrics?.dietType ?? '',
+      NutritionGoalsSettings.totalRatio.key: 100.toString(),
     };
     notifyListeners();
+  }
+
+  void onTextFieldSubmitted(String key, String value) {
+    nutritionGoals = {...nutritionGoals, key: value};
+
+    final protein = double.tryParse(nutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '') ?? 0;
+    final carbs = double.tryParse(nutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '') ?? 0;
+    final fat = double.tryParse(nutritionGoals[NutritionGoalsSettings.fatRatio.key] ?? '') ?? 0;
+
+    final total = protein + carbs + fat;
+
+    nutritionGoals = {
+      ...nutritionGoals,
+      NutritionGoalsSettings.totalRatio.key: total.toStringAsFixed(0),
+    };
+
+    notifyListeners();
+    debugPrint('$nutritionGoals');
   }
 }

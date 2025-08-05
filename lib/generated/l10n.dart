@@ -1410,10 +1410,10 @@ class S {
     );
   }
 
-  /// `Fats`
+  /// `Fat`
   String get fatLabel {
     return Intl.message(
-      'Fats',
+      'Fat',
       name: 'fatLabel',
       desc: '',
       args: [],
@@ -2055,6 +2055,26 @@ class S {
     return Intl.message(
       'Percent of Total Energy',
       name: 'percentTotalEnergyLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Baseline Activity`
+  String get baselineActivityLabel {
+    return Intl.message(
+      'Baseline Activity',
+      name: 'baselineActivityLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adjustment Based on Weight Goal`
+  String get adjustmentBasedOnWeightGoalLabel {
+    return Intl.message(
+      'Adjustment Based on Weight Goal',
+      name: 'adjustmentBasedOnWeightGoalLabel',
       desc: '',
       args: [],
     );
