@@ -1810,6 +1810,16 @@ class S {
     );
   }
 
+  /// `Modify the distribution of calories between breakfast, lunch, dinner, and snacks.`
+  String get mealRatioDesc2 {
+    return Intl.message(
+      'Modify the distribution of calories between breakfast, lunch, dinner, and snacks.',
+      name: 'mealRatioDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Want to start fresh?`
   String get wantToStartFreshLabel {
     return Intl.message(
@@ -2085,6 +2095,26 @@ class S {
     return Intl.message(
       'Adjustment Based on Weight Goal',
       name: 'adjustmentBasedOnWeightGoalLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Macronutrients Target`
+  String get macroNutrientsTargetLabel {
+    return Intl.message(
+      'Macronutrients Target',
+      name: 'macroNutrientsTargetLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Percent of Total Meal Ratio`
+  String get percentOfTotalMealRatioLabel {
+    return Intl.message(
+      'Percent of Total Meal Ratio',
+      name: 'percentOfTotalMealRatioLabel',
       desc: '',
       args: [],
     );

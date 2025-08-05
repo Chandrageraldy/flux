@@ -42,7 +42,6 @@ class NutritionGoalsViewModel extends BaseViewModel {
     };
 
     notifyListeners();
-    debugPrint('$nutritionGoals');
   }
 
   void onDietTypeChanged(String key, String value, Map<String, double> macroRatio) {

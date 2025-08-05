@@ -67,6 +67,10 @@ enum FormFields {
   proteinRatio,
   carbsRatio,
   fatRatio,
+  breakfastRatio,
+  lunchRatio,
+  dinnerRatio,
+  snackRatio,
 }
 
 class TableName {

@@ -187,6 +187,7 @@
     "dietTypeLabel": "Diet Type",
     "dietTypeDesc": "Diet type will adjust the ratio of carbs, protein, and fat.",
     "mealRatioDesc": "Breakfast, lunch, dinner, and snacks",
+    "mealRatioDesc2": "Modify the distribution of calories between breakfast, lunch, dinner, and snacks.",
     "wantToStartFreshLabel": "Want to start fresh?",
     "wantToStartFreshDesc": "Generate a new personalized plan",
     "generateLabel": "Generate",
@@ -214,5 +215,7 @@
     "totalDailyEnergyExpenditureLabel": "Total Daily Energy Expenditure (TDEE)",
     "percentTotalEnergyLabel": "Percent of Total Energy",
     "baselineActivityLabel": "Baseline Activity",
-    "adjustmentBasedOnWeightGoalLabel": "Adjustment Based on Weight Goal"
+    "adjustmentBasedOnWeightGoalLabel": "Adjustment Based on Weight Goal",
+    "macroNutrientsTargetLabel": "Macronutrients Target",
+    "percentOfTotalMealRatioLabel": "Percent of Total Meal Ratio"
 }

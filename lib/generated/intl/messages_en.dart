@@ -154,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Low-carb, high-protein diet."),
         "lowCarbsLabel": MessageLookupByLibrary.simpleMessage("Low Carbs"),
         "lunchLabel": MessageLookupByLibrary.simpleMessage("Lunch"),
+        "macroNutrientsTargetLabel":
+            MessageLookupByLibrary.simpleMessage("Macronutrients Target"),
         "macronutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Macronutrients"),
         "magnesiumLabel": MessageLookupByLibrary.simpleMessage("Magnesium"),
@@ -161,6 +163,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "manganeseLabel": MessageLookupByLibrary.simpleMessage("Manganese"),
         "mealRatioDesc": MessageLookupByLibrary.simpleMessage(
             "Breakfast, lunch, dinner, and snacks"),
+        "mealRatioDesc2": MessageLookupByLibrary.simpleMessage(
+            "Modify the distribution of calories between breakfast, lunch, dinner, and snacks."),
         "mealRatioLabel": MessageLookupByLibrary.simpleMessage("Meal Ratio"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
         "mediterraneanDesc":
@@ -201,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Based on foods eaten by early humans."),
         "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "percentOfTotalMealRatioLabel":
+            MessageLookupByLibrary.simpleMessage("Percent of Total Meal Ratio"),
         "percentTotalEnergyLabel":
             MessageLookupByLibrary.simpleMessage("Percent of Total Energy"),
         "permissionDenied": MessageLookupByLibrary.simpleMessage(

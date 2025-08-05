@@ -78,6 +78,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
                 MealDiaryCard(mealType: MealType.lunch),
                 MealDiaryCard(mealType: MealType.dinner),
                 MealDiaryCard(mealType: MealType.snack),
+                AppStyles.kEmptyWidget,
               ],
             ),
           ],

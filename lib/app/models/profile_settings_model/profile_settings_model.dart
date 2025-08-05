@@ -118,6 +118,29 @@ enum NutritionGoalsSettings {
   }
 }
 
+enum MealRatioSettings {
+  breakfastRatio,
+  lunchRatio,
+  dinnerRatio,
+  snackRatio,
+  totalRatio;
+
+  String get key {
+    switch (this) {
+      case MealRatioSettings.breakfastRatio:
+        return 'breakfastRatio';
+      case MealRatioSettings.lunchRatio:
+        return 'lunchRatio';
+      case MealRatioSettings.dinnerRatio:
+        return 'dinnerRatio';
+      case MealRatioSettings.snackRatio:
+        return 'snackRatio';
+      case MealRatioSettings.totalRatio:
+        return 'totalRatio';
+    }
+  }
+}
+
 class PersonalDetailsModel {
   PersonalDetailsModel({
     required this.label,

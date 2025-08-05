@@ -51,6 +51,10 @@ _$PlanModelImpl _$$PlanModelImplFromJson(Map<String, dynamic> json) =>
       proteinRatio: (json['proteinRatio'] as num?)?.toDouble(),
       fatRatio: (json['fatRatio'] as num?)?.toDouble(),
       carbsRatio: (json['carbsRatio'] as num?)?.toDouble(),
+      breakfastRatio: (json['breakfastRatio'] as num?)?.toDouble(),
+      lunchRatio: (json['lunchRatio'] as num?)?.toDouble(),
+      dinnerRatio: (json['dinnerRatio'] as num?)?.toDouble(),
+      snackRatio: (json['snackRatio'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$PlanModelImplToJson(_$PlanModelImpl instance) =>
@@ -90,4 +94,8 @@ Map<String, dynamic> _$$PlanModelImplToJson(_$PlanModelImpl instance) =>
       'proteinRatio': instance.proteinRatio,
       'fatRatio': instance.fatRatio,
       'carbsRatio': instance.carbsRatio,
+      'breakfastRatio': instance.breakfastRatio,
+      'lunchRatio': instance.lunchRatio,
+      'dinnerRatio': instance.dinnerRatio,
+      'snackRatio': instance.snackRatio,
     };

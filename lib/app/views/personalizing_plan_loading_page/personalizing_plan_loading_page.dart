@@ -309,6 +309,15 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     };
   }
 
+  Map<String, dynamic> mealDistribution() {
+    return {
+      'breakfastRatio': 0.25,
+      'lunchRatio': 0.35,
+      'dinnerRatio': 0.30,
+      'snackRatio': 0.10,
+    };
+  }
+
   Map<String, dynamic> calculateMealRatioMap({
     required double totalCalories,
     required double totalProtein,
@@ -330,41 +339,34 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     final double totalFat = (completeNutrients[Nutrition.fat.key] ?? 0).toDouble();
     final double totalCarbs = (completeNutrients[Nutrition.carbs.key] ?? 0).toDouble();
 
-    final Map<String, dynamic> mealDistribution = {
-      MealType.breakfast.key: 0.25,
-      MealType.lunch.key: 0.35,
-      MealType.dinner.key: 0.30,
-      MealType.snack.key: 0.10,
-    };
-
     final Map<String, dynamic> mealRatios = {
       MealType.breakfast.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution[MealType.breakfast.key]!,
+        portion: mealDistribution()['breakfastRatio']!,
       ),
       MealType.lunch.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution[MealType.lunch.key]!,
+        portion: mealDistribution()['lunchRatio']!,
       ),
       MealType.dinner.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution[MealType.dinner.key]!,
+        portion: mealDistribution()['dinnerRatio']!,
       ),
       MealType.snack.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution[MealType.snack.key]!,
+        portion: mealDistribution()['snackRatio']!,
       ),
     };
 
@@ -374,10 +376,11 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   void createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
     final mealRatio = getMealRatio(completeNutrients);
 
-    final personalizedPlan = {
-      ...completeNutrients,
-      ...mealRatio,
-    };
+    final updatedMealDistribution = mealDistribution().map(
+      (key, value) => MapEntry(key, value * 100),
+    );
+
+    final personalizedPlan = {...completeNutrients, ...mealRatio, ...updatedMealDistribution};
 
     final response =
         await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan)) ?? false;

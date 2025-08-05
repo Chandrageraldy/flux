@@ -46,7 +46,6 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
     return Column(
       spacing: AppStyles.kSpac12,
       children: [
-        AppStyles.kEmptyWidget,
         getCustomAppBar(),
         getEnergyTargetContainer(energyTarget),
         getEnergyTargetBreakdownContainer(),
@@ -148,6 +147,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: Container(
+        width: AppStyles.kDoubleInfinity,
         padding: AppStyles.kPaddSV12H16,
         decoration: _Styles.getEnergyTargetContainerDecoration(context),
         child: Row(
@@ -264,7 +264,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
 
     final isValidRatio = totalRatio == '100';
 
-    Widget macroRow(MacroNutrients macro) => getMacroNutrientRationRow(
+    Widget getMacroRow(MacroNutrients macro) => getMacroNutrientRationRow(
           macro,
           isValidRatio
               ? FunctionUtils.getMacronutrientValueInGrams(
@@ -294,11 +294,11 @@ extension _WidgetFactories on _NutritionGoalsPageState {
             children: [
               getDietTypeContainer(dietType),
               getDivider(context),
-              macroRow(MacroNutrients.protein),
+              getMacroRow(MacroNutrients.protein),
               getDivider(context),
-              macroRow(MacroNutrients.carbs),
+              getMacroRow(MacroNutrients.carbs),
               getDivider(context),
-              macroRow(MacroNutrients.fat),
+              getMacroRow(MacroNutrients.fat),
               getDivider(context),
               getTotalPercentEnergyRow(totalRatio),
             ],
@@ -313,7 +313,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle(totalRatio)),
+        Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle()),
         Text('$totalRatio%', style: _Styles.getPercentTotalEnergyValueTextStyle(totalRatio)),
       ],
     );
@@ -561,7 +561,7 @@ class _Styles {
   }
 
   // Percent Total Energy Label Text Style
-  static TextStyle getPercentTotalEnergyLabelTextStyle(String totalRatio) {
+  static TextStyle getPercentTotalEnergyLabelTextStyle() {
     return Quicksand.bold.withSize(FontSizes.small);
   }
 
