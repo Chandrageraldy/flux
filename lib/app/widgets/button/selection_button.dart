@@ -85,7 +85,7 @@ extension _WidgetFactories on SelectionButton {
 abstract class _Styles {
   // Title Text Style
   static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style

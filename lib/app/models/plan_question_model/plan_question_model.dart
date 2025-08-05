@@ -63,7 +63,8 @@ enum PlanSelectionValue {
   mediterranean,
   paleo,
   vegetarian,
-  lowCarbs;
+  lowCarbs,
+  custom;
 
   String get value {
     switch (this) {
@@ -100,7 +101,9 @@ enum PlanSelectionValue {
       case PlanSelectionValue.vegetarian:
         return 'vegetarian';
       case PlanSelectionValue.lowCarbs:
-        return 'lowCarbs';
+        return 'low carbs';
+      case PlanSelectionValue.custom:
+        return 'custom';
       case PlanSelectionValue.male:
         return 'male';
       case PlanSelectionValue.female:

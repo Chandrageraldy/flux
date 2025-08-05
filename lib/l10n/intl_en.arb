@@ -100,6 +100,7 @@
     "vegetarianDesc": "A diet that excludes meat and fish.",
     "lowCarbsLabel": "Low Carbs",
     "lowCarbsDesc": "Low-carb, high-protein diet.",
+    "customLabel": "Custom",
 
     "progressLabel": "Progress",
     "diaryLabel": "Diary",
@@ -184,7 +185,7 @@
     "adjustCalorieIntakeLabel": "Adjust Calorie Intake",
     "adjustCalorieIntakeDesc": "kcal/day",
     "dietTypeLabel": "Diet Type",
-    "dietTypeDesc": "Select a diet type to adjust the ratio of carbs, protein, and fat.",
+    "dietTypeDesc": "Diet type will adjust the ratio of carbs, protein, and fat.",
     "mealRatioDesc": "Breakfast, lunch, dinner, and snacks",
     "wantToStartFreshLabel": "Want to start fresh?",
     "wantToStartFreshDesc": "Generate a new personalized plan",

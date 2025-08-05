@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
 
@@ -291,5 +292,102 @@ class FunctionUtils {
       age--;
     }
     return age;
+  }
+
+  static double getActivityFactor(String level) {
+    switch (level) {
+      case 'sedentary':
+        return 1.2;
+      case 'lightly active':
+        return 1.375;
+      case 'active':
+        return 1.55;
+      case 'very active':
+        return 1.725;
+      default:
+        return 1.2;
+    }
+  }
+
+  static double getExerciseFactor(String exerciseLevel) {
+    switch (exerciseLevel) {
+      case 'never':
+        return 0.0;
+      case 'light':
+        return 0.1;
+      case 'moderate':
+        return 0.15;
+      case 'frequent':
+        return 0.2;
+      default:
+        return 0.0;
+    }
+  }
+
+  static double adjustCaloriesForTargetWeeklyGain({
+    required double tdee,
+    required double targetWeeklyGain,
+  }) {
+    double calorieAdjustment = targetWeeklyGain * 7700 / 7;
+    return tdee + calorieAdjustment;
+  }
+
+  static String getMacronutrientValueInGrams({
+    required double totalCalories,
+    required double ratio,
+    required MacroNutrients macro,
+  }) {
+    return ((totalCalories * (ratio / 100)) / macro.multiplier).toStringAsFixed(0);
+  }
+
+  static String getMacronutrientValueInKcal({
+    required double totalCalories,
+    required double ratio,
+  }) {
+    return (totalCalories * (ratio / 100)).toStringAsFixed(0);
+  }
+
+  static Map<String, double> getMacroRatio(String dietType) {
+    late double proteinRatio;
+    late double fatRatio;
+    late double carbsRatio;
+
+    switch (dietType) {
+      case 'keto':
+        proteinRatio = 0.20;
+        fatRatio = 0.70;
+        carbsRatio = 0.10;
+        break;
+      case 'mediterranean':
+        proteinRatio = 0.15;
+        fatRatio = 0.30;
+        carbsRatio = 0.55;
+        break;
+      case 'vegetarian':
+        proteinRatio = 0.30;
+        fatRatio = 0.20;
+        carbsRatio = 0.50;
+        break;
+      case 'paleo':
+        proteinRatio = 0.30;
+        fatRatio = 0.35;
+        carbsRatio = 0.35;
+        break;
+      case 'low carbs':
+        proteinRatio = 0.45;
+        fatRatio = 0.35;
+        carbsRatio = 0.20;
+        break;
+      default:
+        proteinRatio = 0.25;
+        fatRatio = 0.25;
+        carbsRatio = 0.50;
+    }
+
+    return {
+      NutritionGoalsSettings.proteinRatio.key: proteinRatio * 100,
+      NutritionGoalsSettings.fatRatio.key: fatRatio * 100,
+      NutritionGoalsSettings.carbsRatio.key: carbsRatio * 100,
+    };
   }
 }

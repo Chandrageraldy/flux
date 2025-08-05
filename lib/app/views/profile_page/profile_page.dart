@@ -137,8 +137,8 @@ extension _WidgetFactories on _ProfilePageState {
         Expanded(
           child: getHeaderStatsColumn(
             FaIcon(FontAwesomeIcons.bullseye, size: AppStyles.kSize16),
-            S.current.goalLabel,
-            '${userProfile?.bodyMetrics?.goal?.toString().capitalize()} ${S.current.weightLabel}',
+            '${S.current.weightLabel} ${S.current.goalLabel}',
+            '${userProfile?.bodyMetrics?.goal?.toString().capitalize()}',
           ),
         ),
       ],
@@ -182,8 +182,8 @@ extension _WidgetFactories on _ProfilePageState {
   Widget getHeaderStatsColumn(FaIcon icon, String label, String value) {
     return Column(
       children: [
-        Text(value, style: _Styles.getHeaderColumnValueLabelTextStyle(context)),
-        Text(label, style: _Styles.getHeaderColumnLabelTextStyle(context)),
+        Text(value, textAlign: TextAlign.center, style: _Styles.getHeaderColumnValueLabelTextStyle(context)),
+        Text(label, textAlign: TextAlign.center, style: _Styles.getHeaderColumnLabelTextStyle(context)),
       ],
     );
   }

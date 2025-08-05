@@ -1010,6 +1010,16 @@ class S {
     );
   }
 
+  /// `Custom`
+  String get customLabel {
+    return Intl.message(
+      'Custom',
+      name: 'customLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Progress`
   String get progressLabel {
     return Intl.message(
@@ -1780,10 +1790,10 @@ class S {
     );
   }
 
-  /// `Select a diet type to adjust the ratio of carbs, protein, and fat.`
+  /// `Diet type will adjust the ratio of carbs, protein, and fat.`
   String get dietTypeDesc {
     return Intl.message(
-      'Select a diet type to adjust the ratio of carbs, protein, and fat.',
+      'Diet type will adjust the ratio of carbs, protein, and fat.',
       name: 'dietTypeDesc',
       desc: '',
       args: [],

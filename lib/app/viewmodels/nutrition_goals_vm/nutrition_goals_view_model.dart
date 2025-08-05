@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-
 import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
@@ -28,7 +27,7 @@ class NutritionGoalsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void onTextFieldSubmitted(String key, String value) {
+  void onMacroRatioChanged(String key, String value) {
     nutritionGoals = {...nutritionGoals, key: value};
 
     final protein = double.tryParse(nutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '') ?? 0;
@@ -42,6 +41,18 @@ class NutritionGoalsViewModel extends BaseViewModel {
       NutritionGoalsSettings.totalRatio.key: total.toStringAsFixed(0),
     };
 
+    notifyListeners();
+    debugPrint('$nutritionGoals');
+  }
+
+  void onDietTypeChanged(String key, String value, Map<String, double> macroRatio) {
+    nutritionGoals = {
+      ...nutritionGoals,
+      key: value,
+      NutritionGoalsSettings.proteinRatio.key: macroRatio[NutritionGoalsSettings.proteinRatio.key]!.toStringAsFixed(0),
+      NutritionGoalsSettings.fatRatio.key: macroRatio[NutritionGoalsSettings.fatRatio.key]!.toStringAsFixed(0),
+      NutritionGoalsSettings.carbsRatio.key: macroRatio[NutritionGoalsSettings.carbsRatio.key]!.toStringAsFixed(0),
+    };
     notifyListeners();
     debugPrint('$nutritionGoals');
   }

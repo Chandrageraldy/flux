@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
+        "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
@@ -75,7 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
         "dietLabel": MessageLookupByLibrary.simpleMessage("Diet"),
         "dietTypeDesc": MessageLookupByLibrary.simpleMessage(
-            "Select a diet type to adjust the ratio of carbs, protein, and fat."),
+            "Diet type will adjust the ratio of carbs, protein, and fat."),
         "dietTypeLabel": MessageLookupByLibrary.simpleMessage("Diet Type"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),

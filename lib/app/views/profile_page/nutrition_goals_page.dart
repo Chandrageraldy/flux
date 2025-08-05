@@ -28,6 +28,8 @@ class _NutritionGoalsPage extends BaseStatefulPage {
 }
 
 class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
+  final _formKey = GlobalKey<FormBuilderState>();
+
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
@@ -39,6 +41,7 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
     final carbsRatio = nutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '';
     final fatRatio = nutritionGoals[NutritionGoalsSettings.fatRatio.key] ?? '';
     final totalRatio = nutritionGoals[NutritionGoalsSettings.totalRatio.key] ?? '';
+    final dietType = nutritionGoals[NutritionGoalsSettings.dietType.key] ?? '';
 
     return Column(
       spacing: AppStyles.kSpac12,
@@ -47,7 +50,7 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
         getCustomAppBar(),
         getEnergyTargetContainer(energyTarget),
         getEnergyTargetBreakdownContainer(),
-        getMacronutrientRatioContainer(energyTarget, proteinRatio, carbsRatio, fatRatio, totalRatio),
+        getMacronutrientRatioContainer(energyTarget, proteinRatio, carbsRatio, fatRatio, totalRatio, dietType),
       ],
     );
   }
@@ -55,8 +58,21 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _NutritionGoalsPageState {
-  void _onTextFieldSubmitted(String? value, NutritionGoalsSettings settings) {
-    context.read<NutritionGoalsViewModel>().onTextFieldSubmitted(settings.key, value ?? '');
+  void _onMacroRatioChanged(String? value, NutritionGoalsSettings settings) {
+    context.read<NutritionGoalsViewModel>().onMacroRatioChanged(settings.key, value ?? '');
+  }
+
+  void _onDietTypeChanged(String? value, NutritionGoalsSettings settings) {
+    Map<String, double> macroRatio = FunctionUtils.getMacroRatio(value ?? '');
+    context.read<NutritionGoalsViewModel>().onDietTypeChanged(settings.key, value ?? '', macroRatio);
+
+    // Update the form fields with the new macro ratios based on the selected diet type
+    _formKey.currentState?.fields[FormFields.proteinRatio.name]
+        ?.didChange(macroRatio[NutritionGoalsSettings.proteinRatio.key]?.toStringAsFixed(0));
+    _formKey.currentState?.fields[FormFields.carbsRatio.name]
+        ?.didChange(macroRatio[NutritionGoalsSettings.carbsRatio.key]?.toStringAsFixed(0));
+    _formKey.currentState?.fields[FormFields.fatRatio.name]
+        ?.didChange(macroRatio[NutritionGoalsSettings.fatRatio.key]?.toStringAsFixed(0));
   }
 }
 
@@ -81,8 +97,8 @@ extension _PrivateMethods on _NutritionGoalsPageState {
   double calculateBaselineActivity() {
     final UserProfileModel? user = SharedPreferenceHandler().getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
-    final activityFactor = getActivityFactor(bodyMetrics?.activityLevel ?? '');
-    final exerciseFactor = getExerciseFactor(bodyMetrics?.exerciseLevel ?? '');
+    final activityFactor = FunctionUtils.getActivityFactor(bodyMetrics?.activityLevel ?? '');
+    final exerciseFactor = FunctionUtils.getExerciseFactor(bodyMetrics?.exerciseLevel ?? '');
 
     final baselineActivity = (calculateBMR() * (activityFactor + exerciseFactor)) - calculateBMR();
     return baselineActivity;
@@ -91,75 +107,22 @@ extension _PrivateMethods on _NutritionGoalsPageState {
   double calculateTdee() {
     final UserProfileModel? user = SharedPreferenceHandler().getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
-    final activityFactor = getActivityFactor(bodyMetrics?.activityLevel ?? '');
-    final exerciseFactor = getExerciseFactor(bodyMetrics?.exerciseLevel ?? '');
+    final activityFactor = FunctionUtils.getActivityFactor(bodyMetrics?.activityLevel ?? '');
+    final exerciseFactor = FunctionUtils.getExerciseFactor(bodyMetrics?.exerciseLevel ?? '');
 
     return calculateBMR() * (activityFactor + exerciseFactor);
-  }
-
-  double getActivityFactor(String level) {
-    switch (level) {
-      case 'sedentary':
-        return 1.2;
-      case 'lightly active':
-        return 1.375;
-      case 'active':
-        return 1.55;
-      case 'very active':
-        return 1.725;
-      default:
-        return 1.2;
-    }
-  }
-
-  double getExerciseFactor(String exerciseLevel) {
-    switch (exerciseLevel) {
-      case 'never':
-        return 0.0;
-      case 'light':
-        return 0.1;
-      case 'moderate':
-        return 0.15;
-      case 'frequent':
-        return 0.2;
-      default:
-        return 0.0;
-    }
   }
 
   double calculateAdjustmentBasedOnWeightGoal() {
     final UserProfileModel? user = SharedPreferenceHandler().getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
-    final double adjustmentBasedOnWeightGoal = adjustCaloriesForTargetWeeklyGain(
+    final double adjustmentBasedOnWeightGoal = FunctionUtils.adjustCaloriesForTargetWeeklyGain(
           tdee: calculateTdee(),
           targetWeeklyGain: double.tryParse(bodyMetrics?.targetWeeklyGain?.toString() ?? '0') ?? 0,
         ) -
         calculateBMR() -
         calculateBaselineActivity();
     return adjustmentBasedOnWeightGoal;
-  }
-
-  double adjustCaloriesForTargetWeeklyGain({
-    required double tdee,
-    required double targetWeeklyGain,
-  }) {
-    double calorieAdjustment = targetWeeklyGain * 7700 / 7;
-    return tdee + calorieAdjustment;
-  }
-
-  String getMacronutrientValueInGrams({
-    required double totalCalories,
-    required double ratio,
-    required MacroNutrients macro,
-  }) {
-    return ((totalCalories * (ratio / 100)) / macro.multiplier).toStringAsFixed(0);
-  }
-
-  String getMacronutrientValueInKcal({
-    required double totalCalories,
-    required double ratio,
-  }) {
-    return (totalCalories * (ratio / 100)).toStringAsFixed(0);
   }
 }
 
@@ -190,27 +153,37 @@ extension _WidgetFactories on _NutritionGoalsPageState {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 4,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(S.current.energyTargetLabel, style: _Styles.getEnergyTargetLabelTextStyle(context)),
-                  Text(S.current.energyTargetDesc, style: _Styles.getEnergyTargetDescLabelTextStyle(context)),
-                ],
-              ),
-            ),
+            getEnergyTargetLabel(),
             Spacer(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(energyTarget, style: Quicksand.medium.withSize(FontSizes.large)),
-                Text(NutritionUnit.kcal.label, style: _Styles.getEnergyTargetUnitLabelTextStyle(context)),
-              ],
-            ),
+            getEnergyTargetValue(energyTarget),
           ],
         ),
       ),
+    );
+  }
+
+  // Energy Target Label
+  Widget getEnergyTargetLabel() {
+    return Expanded(
+      flex: 4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(S.current.energyTargetLabel, style: _Styles.getEnergyTargetLabelTextStyle(context)),
+          Text(S.current.energyTargetDesc, style: _Styles.getEnergyTargetDescLabelTextStyle(context)),
+        ],
+      ),
+    );
+  }
+
+  // Energy Target Value
+  Widget getEnergyTargetValue(String energyTarget) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(energyTarget, style: Quicksand.medium.withSize(FontSizes.large)),
+        Text(NutritionUnit.kcal.label, style: _Styles.getEnergyTargetUnitLabelTextStyle(context)),
+      ],
     );
   }
 
@@ -221,32 +194,34 @@ extension _WidgetFactories on _NutritionGoalsPageState {
       child: Container(
         padding: AppStyles.kPaddSV12H16,
         decoration: _Styles.getEnergyTargetBreakdownContainerDecoration(context),
-        child: Column(
-          spacing: AppStyles.kSpac4,
-          children: [
-            getEnergyTargetBreakdownRow(
-              S.current.basalMetabolicRateLabel,
-              calculateBMR().toStringAsFixed(0),
-              hasInfoIcon: true,
-            ),
-            getEnergyTargetBreakdownRow(
-              S.current.baselineActivityLabel,
-              calculateBaselineActivity().toStringAsFixed(0),
-              hasInfoIcon: true,
-            ),
-            getEnergyTargetBreakdownRow(
-              S.current.adjustmentBasedOnWeightGoalLabel,
-              calculateAdjustmentBasedOnWeightGoal().toStringAsFixed(0),
-              hasInfoIcon: true,
-            ),
-            getEnergyTargetBreakdownRow(
-              S.current.energyTargetLabel,
-              '= ${(calculateBMR() + calculateBaselineActivity() + calculateAdjustmentBasedOnWeightGoal()).toStringAsFixed(0)} ${NutritionUnit.kcal.label}',
-              isBold: true,
-            ),
-          ],
-        ),
+        child: getEnergyTargetBreakdownColumn(),
       ),
+    );
+  }
+
+  // Energy Target Breakdown Column
+  Widget getEnergyTargetBreakdownColumn() {
+    final UserProfileModel? user = SharedPreferenceHandler().getUser();
+    final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
+
+    final String bmr = calculateBMR().toStringAsFixed(0);
+    final String baselineActivity = calculateBaselineActivity().toStringAsFixed(0);
+    final String adjustmentBasedOnWeightGoal = calculateAdjustmentBasedOnWeightGoal().toStringAsFixed(0);
+    final String energyTarget =
+        (calculateBMR() + calculateBaselineActivity() + calculateAdjustmentBasedOnWeightGoal()).toStringAsFixed(0);
+
+    return Column(
+      spacing: AppStyles.kSpac4,
+      children: [
+        getEnergyTargetBreakdownRow(S.current.basalMetabolicRateLabel, bmr, hasInfoIcon: true),
+        getEnergyTargetBreakdownRow(S.current.baselineActivityLabel, baselineActivity, hasInfoIcon: true),
+        // If goal is maintain, do not show adjustment based on weight goal
+        if (bodyMetrics?.goal != PlanSelectionValue.maintain.value)
+          getEnergyTargetBreakdownRow(S.current.adjustmentBasedOnWeightGoalLabel, adjustmentBasedOnWeightGoal,
+              hasInfoIcon: true),
+        getEnergyTargetBreakdownRow(S.current.energyTargetLabel, '= $energyTarget ${NutritionUnit.kcal.label}',
+            isBold: true),
+      ],
     );
   }
 
@@ -260,6 +235,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
           children: [
             if (hasInfoIcon)
               GestureDetector(
+                onTap: () {},
                 child: Icon(Icons.info_outline, size: AppStyles.kSize16, color: context.theme.colorScheme.secondary),
               ),
             Text(label, style: _Styles.getEnergyTargetBreakdownLabelTextStyle(context, isBold)),
@@ -270,87 +246,76 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     );
   }
 
-  // Macronutrient Ratio Container
+// Macronutrient Ratio Container
   Widget getMacronutrientRatioContainer(
     String energyTarget,
     String proteinRatio,
     String carbsRatio,
     String fatRatio,
     String totalRatio,
+    String dietType,
   ) {
-    return Padding(
-      padding: AppStyles.kPaddSH16,
-      child: Container(
-        padding: AppStyles.kPaddSV12H16,
-        decoration: _Styles.getEnergyTargetContainerDecoration(context),
-        child: Column(
-          children: [
-            getDietTypeContainer(),
-            getDivider(context),
-            getMacroNutrientRationRow(
-              MacroNutrients.protein,
-              totalRatio == '100'
-                  ? getMacronutrientValueInGrams(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(proteinRatio) ?? 0,
-                      macro: MacroNutrients.protein,
-                    )
-                  : '-',
-              proteinRatio,
-              totalRatio == '100'
-                  ? getMacronutrientValueInKcal(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(proteinRatio) ?? 0,
-                    )
-                  : '-',
-            ),
-            getDivider(context),
-            getMacroNutrientRationRow(
-              MacroNutrients.carbs,
-              totalRatio == '100'
-                  ? getMacronutrientValueInGrams(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(carbsRatio) ?? 0,
-                      macro: MacroNutrients.carbs,
-                    )
-                  : '-',
-              carbsRatio,
-              totalRatio == '100'
-                  ? getMacronutrientValueInKcal(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(carbsRatio) ?? 0,
-                    )
-                  : '-',
-            ),
-            getDivider(context),
-            getMacroNutrientRationRow(
-              MacroNutrients.fat,
-              totalRatio == '100'
-                  ? getMacronutrientValueInGrams(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(fatRatio) ?? 0,
-                      macro: MacroNutrients.fat,
-                    )
-                  : '-',
-              fatRatio,
-              totalRatio == '100'
-                  ? getMacronutrientValueInKcal(
-                      totalCalories: double.tryParse(energyTarget) ?? 0,
-                      ratio: double.tryParse(fatRatio) ?? 0,
-                    )
-                  : '-',
-            ),
-            getDivider(context),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle(totalRatio)),
-                Text('$totalRatio%', style: _Styles.getPercentTotalEnergyValueTextStyle(totalRatio)),
-              ],
-            )
-          ],
+    final totalCalories = double.tryParse(energyTarget) ?? 0;
+    final ratios = {
+      MacroNutrients.protein: double.tryParse(proteinRatio) ?? 0,
+      MacroNutrients.carbs: double.tryParse(carbsRatio) ?? 0,
+      MacroNutrients.fat: double.tryParse(fatRatio) ?? 0,
+    };
+
+    final isValidRatio = totalRatio == '100';
+
+    Widget macroRow(MacroNutrients macro) => getMacroNutrientRationRow(
+          macro,
+          isValidRatio
+              ? FunctionUtils.getMacronutrientValueInGrams(
+                  totalCalories: totalCalories,
+                  ratio: ratios[macro]!,
+                  macro: macro,
+                )
+              : '-',
+          ratios[macro]!,
+          isValidRatio
+              ? FunctionUtils.getMacronutrientValueInKcal(
+                  totalCalories: totalCalories,
+                  ratio: ratios[macro]!,
+                )
+              : '-',
+          dietType,
+        );
+
+    return FormBuilder(
+      key: _formKey,
+      child: Padding(
+        padding: AppStyles.kPaddSH16,
+        child: Container(
+          padding: AppStyles.kPaddSV12H16,
+          decoration: _Styles.getEnergyTargetContainerDecoration(context),
+          child: Column(
+            children: [
+              getDietTypeContainer(dietType),
+              getDivider(context),
+              macroRow(MacroNutrients.protein),
+              getDivider(context),
+              macroRow(MacroNutrients.carbs),
+              getDivider(context),
+              macroRow(MacroNutrients.fat),
+              getDivider(context),
+              getTotalPercentEnergyRow(totalRatio),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  // Total Percent Energy Row
+  Widget getTotalPercentEnergyRow(String totalRatio) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle(totalRatio)),
+        Text('$totalRatio%', style: _Styles.getPercentTotalEnergyValueTextStyle(totalRatio)),
+      ],
     );
   }
 
@@ -366,12 +331,11 @@ extension _WidgetFactories on _NutritionGoalsPageState {
   }
 
   // Diet Type Container
-  Widget getDietTypeContainer() {
+  Widget getDietTypeContainer(String dietType) {
     return Row(
       spacing: AppStyles.kSpac12,
       children: [
         Expanded(
-          flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -381,8 +345,12 @@ extension _WidgetFactories on _NutritionGoalsPageState {
           ),
         ),
         Expanded(
-          flex: 1,
-          child: getCustomFormBuilderTextField(context, FormFields.energyTarget, NutritionGoalsSettings.dietType, ''),
+          child: getCustomFormBuilderDropDown(
+            context,
+            FormFields.dietType,
+            NutritionGoalsSettings.dietType,
+            dietType,
+          ),
         ),
       ],
     );
@@ -390,12 +358,19 @@ extension _WidgetFactories on _NutritionGoalsPageState {
 
   // Macronutrient Ratio Row
   Widget getMacroNutrientRationRow(
-      MacroNutrients macroNutrient, String valueInGrams, String ratio, String valueInKcal) {
-    final nutritionGoalsSettings = macroNutrient == MacroNutrients.protein
-        ? NutritionGoalsSettings.proteinRatio
-        : macroNutrient == MacroNutrients.carbs
-            ? NutritionGoalsSettings.carbsRatio
-            : NutritionGoalsSettings.fatRatio;
+      MacroNutrients macroNutrient, String valueInGrams, double ratio, String valueInKcal, String dietType) {
+    final nutritionGoalsSettings = {
+      MacroNutrients.protein: NutritionGoalsSettings.proteinRatio,
+      MacroNutrients.carbs: NutritionGoalsSettings.carbsRatio,
+      MacroNutrients.fat: NutritionGoalsSettings.fatRatio,
+    }[macroNutrient]!;
+
+    final formField = {
+      MacroNutrients.protein: FormFields.proteinRatio,
+      MacroNutrients.carbs: FormFields.carbsRatio,
+      MacroNutrients.fat: FormFields.fatRatio,
+    }[macroNutrient]!;
+
     return Row(
       spacing: AppStyles.kSpac12,
       children: [
@@ -418,8 +393,9 @@ extension _WidgetFactories on _NutritionGoalsPageState {
           children: [
             getCustomFormBuilderTextField(
               context,
-              FormFields.email,
+              formField,
               nutritionGoalsSettings,
+              dietType,
               ratio,
               width: AppStyles.kSize40,
             ),
@@ -430,8 +406,8 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     );
   }
 
-  // Custom Form Builder Text Field
-  Widget getCustomFormBuilderTextField(
+  // Custom Form Builder Drop Down
+  Widget getCustomFormBuilderDropDown(
     BuildContext context,
     FormFields field,
     NutritionGoalsSettings settings,
@@ -443,16 +419,55 @@ extension _WidgetFactories on _NutritionGoalsPageState {
       padding: AppStyles.kPaddSH6,
       height: height,
       width: width,
-      decoration: _Styles.textFieldContainerDecoration(context),
-      child: FormBuilderTextField(
-        initialValue: initialValue,
+      decoration: _Styles.getFieldContainerDecoration(context, true),
+      child: FormBuilderDropdown<String>(
         name: field.name,
-        style: _Styles.getCustomFormBuilderTextFieldLabelTextStyle(),
-        decoration: _Styles.textFieldInputDecoration(),
+        initialValue: initialValue,
+        items: [
+          DropdownMenuItem(value: PlanSelectionValue.balanced.value, child: Text(S.current.balancedLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.keto.value, child: Text(S.current.ketoLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.mediterranean.value, child: Text(S.current.mediterraneanLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.paleo.value, child: Text(S.current.paleoLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.vegetarian.value, child: Text(S.current.vegetarianLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.lowCarbs.value, child: Text(S.current.lowCarbsLabel)),
+          DropdownMenuItem(value: PlanSelectionValue.custom.value, child: Text(S.current.customLabel)),
+        ],
+        style: _Styles.getCustomFormBuilderDropDownTextStyle(context),
+        decoration: _Styles.getFieldInputDecoration(),
+        onChanged: (value) {
+          _onDietTypeChanged(value, settings);
+        },
+      ),
+    );
+  }
+
+  // Custom Form Builder Text Field
+  Widget getCustomFormBuilderTextField(
+    BuildContext context,
+    FormFields field,
+    NutritionGoalsSettings settings,
+    String dietType,
+    double initialValue, {
+    double? height,
+    double? width,
+  }) {
+    final isEnabled = dietType == PlanSelectionValue.custom.value;
+
+    return Container(
+      padding: AppStyles.kPaddSH6,
+      height: height,
+      width: width,
+      decoration: _Styles.getFieldContainerDecoration(context, isEnabled),
+      child: FormBuilderTextField(
+        enabled: isEnabled,
+        initialValue: initialValue.toStringAsFixed(0),
+        name: field.name,
+        style: _Styles.getCustomFormBuilderTextFieldLabelTextStyle(context),
+        decoration: _Styles.getFieldInputDecoration(),
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         onChanged: (value) {
-          _onTextFieldSubmitted(value, settings);
+          _onMacroRatioChanged(value, settings);
         },
       ),
     );
@@ -460,7 +475,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
 }
 
 // * ----------------------------- Styles ----------------------------
-abstract class _Styles {
+class _Styles {
   // Energy Target Container Decoration
   static BoxDecoration getEnergyTargetContainerDecoration(BuildContext context) {
     return BoxDecoration(
@@ -488,15 +503,15 @@ abstract class _Styles {
   }
 
   // Energy Target Text Field Container Decoration
-  static BoxDecoration textFieldContainerDecoration(BuildContext context) {
+  static BoxDecoration getFieldContainerDecoration(BuildContext context, bool isEnabled) {
     return BoxDecoration(
-      color: context.theme.colorScheme.tertiaryFixedDim,
+      color: isEnabled ? context.theme.colorScheme.tertiaryFixedDim : AppColors.transparentColor,
       borderRadius: AppStyles.kRad8,
     );
   }
 
   // Text Field Input Decoration
-  static InputDecoration textFieldInputDecoration() {
+  static InputDecoration getFieldInputDecoration() {
     return InputDecoration(border: InputBorder.none, isDense: true, contentPadding: AppStyles.kPaddOL4T6B6);
   }
 
@@ -541,8 +556,8 @@ abstract class _Styles {
   }
 
   // Custom Form Builder Text Field Label Text Style
-  static TextStyle getCustomFormBuilderTextFieldLabelTextStyle() {
-    return Quicksand.bold.withSize(FontSizes.medium);
+  static TextStyle getCustomFormBuilderTextFieldLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Percent Total Energy Label Text Style
@@ -556,5 +571,10 @@ abstract class _Styles {
     final isValid = total == 100;
 
     return Quicksand.bold.withSize(FontSizes.small).copyWith(color: isValid ? null : AppColors.redColor);
+  }
+
+  // Custom Form Builder Drop Down Text Style
+  static TextStyle getCustomFormBuilderDropDownTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 }
