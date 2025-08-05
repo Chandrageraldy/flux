@@ -77,11 +77,11 @@ enum Quicksand implements TypographyManager {
 
   @override
   TextStyle withSize(FontSizes size) {
-    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size.size, letterSpacing: 0);
+    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size.size, letterSpacing: 0.25);
   }
 
   @override
   TextStyle withCustomSize(double size) {
-    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size, letterSpacing: 0);
+    return TextStyle(fontFamily: fontFamily, fontWeight: weight, fontSize: size, letterSpacing: 0.25);
   }
 }

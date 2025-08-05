@@ -39,6 +39,9 @@ class PlanModel with _$PlanModel {
     MealRatioModel? lunch,
     MealRatioModel? dinner,
     MealRatioModel? snack,
+    double? proteinRatio,
+    double? fatRatio,
+    double? carbsRatio,
   }) = _PlanModel;
 
   factory PlanModel.fromJson(Map<String, Object?> json) => _$PlanModelFromJson(json);

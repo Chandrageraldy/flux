@@ -183,9 +183,9 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     }
 
     return {
-      'proteinRatio': proteinRatio,
-      'fatRatio': fatRatio,
-      'carbRatio': carbRatio,
+      'proteinRatio': proteinRatio * 100,
+      'fatRatio': fatRatio * 100,
+      'carbsRatio': carbRatio * 100,
     };
   }
 
@@ -295,15 +295,16 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     Map<String, double> macroRatio,
     Map<String, double> microNutrients,
   ) {
-    double protein = calorie * macroRatio['proteinRatio']!;
-    double fat = calorie * macroRatio['fatRatio']!;
-    double carb = calorie * macroRatio['carbRatio']!;
+    double protein = calorie * (macroRatio['proteinRatio']! / 100);
+    double fat = calorie * (macroRatio['fatRatio']! / 100);
+    double carb = calorie * (macroRatio['carbsRatio']! / 100);
 
     return {
       Nutrition.calorie.key: calorie.round(),
       Nutrition.protein.key: (protein / 4).round(),
       Nutrition.fat.key: (fat / 9).round(),
       Nutrition.carbs.key: (carb / 4).round(),
+      ...macroRatio,
       ...microNutrients,
     };
   }

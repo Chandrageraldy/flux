@@ -92,6 +92,35 @@ enum PersonalDetailsSettings {
   }
 }
 
+enum NutritionGoalsSettings {
+  energyTarget,
+  basalMetabolicRate,
+  totalDailyEnergyExpenditure,
+  dietType,
+  proteinRatio,
+  carbsRatio,
+  fatRatio;
+
+  String get key {
+    switch (this) {
+      case NutritionGoalsSettings.energyTarget:
+        return 'energyTarget';
+      case NutritionGoalsSettings.basalMetabolicRate:
+        return 'basalMetabolicRate';
+      case NutritionGoalsSettings.totalDailyEnergyExpenditure:
+        return 'totalDailyEnergyExpenditure';
+      case NutritionGoalsSettings.dietType:
+        return 'dietType';
+      case NutritionGoalsSettings.proteinRatio:
+        return 'proteinRatio';
+      case NutritionGoalsSettings.carbsRatio:
+        return 'carbsRatio';
+      case NutritionGoalsSettings.fatRatio:
+        return 'fatRatio';
+    }
+  }
+}
+
 class PersonalDetailsModel {
   PersonalDetailsModel({
     required this.label,
@@ -114,7 +143,7 @@ List<PersonalDetailsModel> personalDetails(BuildContext context) => [
         key: PersonalDetailsSettings.dob.key,
         items: [],
         desc:
-            '*"Your date of birth helps us tailor recommendations, track your progress accurately, and provide age-appropriate features. This information stays private."',
+            '*Your date of birth helps us tailor recommendations, track your progress accurately, and provide age-appropriate features. This information stays private.',
       ),
       PersonalDetailsModel(
         label: PersonalDetailsSettings.gender.label,

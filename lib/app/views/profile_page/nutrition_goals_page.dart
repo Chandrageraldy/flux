@@ -1,5 +1,6 @@
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/viewmodels/nutrition_goals_vm/nutrition_goals_view_model.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
@@ -26,14 +27,20 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
 
   @override
   Widget body() {
+    final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.nutritionGoals);
+    final energyTarget = nutritionGoals[NutritionGoalsSettings.energyTarget.key] ?? '';
+    final proteinRatio = nutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '';
+    final carbsRatio = nutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '';
+    final fatRatio = nutritionGoals[NutritionGoalsSettings.fatRatio.key] ?? '';
+
     return Column(
       spacing: AppStyles.kSpac12,
       children: [
         AppStyles.kEmptyWidget,
         getCustomAppBar(),
-        getEnergyTargetContainer(),
+        getEnergyTargetContainer(energyTarget),
         getEnergyTargetBreakdownContainer(),
-        getMacronutrientRatioContainer(),
+        getMacronutrientRatioContainer(proteinRatio, carbsRatio, fatRatio),
       ],
     );
   }
@@ -63,7 +70,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
   }
 
   // Energy Target Container
-  Widget getEnergyTargetContainer() {
+  Widget getEnergyTargetContainer(String energyTarget) {
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: Container(
@@ -87,7 +94,10 @@ extension _WidgetFactories on _NutritionGoalsPageState {
               child: Row(
                 spacing: AppStyles.kSpac8,
                 children: [
-                  Expanded(flex: 1, child: getCustomFormBuilderTextField(context, FormFields.energyTarget)),
+                  Expanded(
+                    flex: 1,
+                    child: getCustomFormBuilderTextField(context, FormFields.energyTarget, energyTarget),
+                  ),
                   Text(NutritionUnit.kcal.label, style: _Styles.getEnergyTargetUnitLabelTextStyle(context)),
                 ],
               ),
@@ -142,7 +152,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
   }
 
   // Macronutrient Ratio Container
-  Widget getMacronutrientRatioContainer() {
+  Widget getMacronutrientRatioContainer(String proteinRatio, String carbsRatio, String fatRatio) {
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: Container(
@@ -152,11 +162,11 @@ extension _WidgetFactories on _NutritionGoalsPageState {
           children: [
             getDietTypeContainer(),
             getDivider(context),
-            getMacroNutrientRationRow(MacroNutrients.protein, '124'),
+            getMacroNutrientRationRow(MacroNutrients.protein, '124', proteinRatio),
             getDivider(context),
-            getMacroNutrientRationRow(MacroNutrients.carbs, '225'),
+            getMacroNutrientRationRow(MacroNutrients.carbs, '225', carbsRatio),
             getDivider(context),
-            getMacroNutrientRationRow(MacroNutrients.fat, '66'),
+            getMacroNutrientRationRow(MacroNutrients.fat, '66', fatRatio),
             getDivider(context),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,13 +207,13 @@ extension _WidgetFactories on _NutritionGoalsPageState {
             ],
           ),
         ),
-        Expanded(flex: 1, child: getCustomFormBuilderTextField(context, FormFields.energyTarget)),
+        Expanded(flex: 1, child: getCustomFormBuilderTextField(context, FormFields.energyTarget, '')),
       ],
     );
   }
 
   // Macronutrient Ratio Row
-  Widget getMacroNutrientRationRow(MacroNutrients macroNutrient, String value) {
+  Widget getMacroNutrientRationRow(MacroNutrients macroNutrient, String value, String ratio) {
     return Row(
       spacing: AppStyles.kSpac12,
       children: [
@@ -223,7 +233,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
         Row(
           spacing: AppStyles.kSpac4,
           children: [
-            getCustomFormBuilderTextField(context, FormFields.email, width: AppStyles.kSize40),
+            getCustomFormBuilderTextField(context, FormFields.email, ratio, width: AppStyles.kSize40),
             Text('%', style: _Styles.getPercentLabelTextStyle()),
           ],
         )
@@ -232,13 +242,20 @@ extension _WidgetFactories on _NutritionGoalsPageState {
   }
 
   // Custom Form Builder Text Field
-  static Widget getCustomFormBuilderTextField(BuildContext context, FormFields field, {double? height, double? width}) {
+  static Widget getCustomFormBuilderTextField(
+    BuildContext context,
+    FormFields field,
+    String initialValue, {
+    double? height,
+    double? width,
+  }) {
     return Container(
       padding: AppStyles.kPaddSH6,
       height: height,
       width: width,
       decoration: _Styles.textFieldContainerDecoration(context),
       child: FormBuilderTextField(
+        initialValue: initialValue,
         name: field.name,
         style: _Styles.getCustomFormBuilderTextFieldLabelTextStyle(),
         decoration: _Styles.textFieldInputDecoration(),
@@ -274,7 +291,7 @@ abstract class _Styles {
 
   // Energy Target Unit Label Text Style
   static TextStyle getEnergyTargetUnitLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Energy Target Text Field Container Decoration
@@ -287,10 +304,7 @@ abstract class _Styles {
 
   // Text Field Input Decoration
   static InputDecoration textFieldInputDecoration() {
-    return InputDecoration(
-      border: InputBorder.none,
-      isDense: true,
-    );
+    return InputDecoration(border: InputBorder.none, isDense: true, contentPadding: AppStyles.kPaddOL4T6B6);
   }
 
   // Energy Target Breakdown Container Decoration
@@ -335,7 +349,7 @@ abstract class _Styles {
 
   // Custom Form Builder Text Field Label Text Style
   static TextStyle getCustomFormBuilderTextFieldLabelTextStyle() {
-    return Quicksand.regular.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.medium);
   }
 
   // Percent Total Energy Label Text Style
