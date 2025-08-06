@@ -174,6 +174,7 @@ class FoodRepository {
     UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
     final isCommonFood = foodResponseModel.tagId != null;
 
+    // Check if the item already exists in recent list
     final checkResponse = await foodServiceSupabase.checkIfRecent(
       isCommonFood: isCommonFood,
       tagId: foodResponseModel.tagId,
@@ -185,14 +186,31 @@ class FoodRepository {
 
     final List retrievedData = checkResponse.data ?? [];
 
+    // If item already exists → delete it to reinsert with the latest timestamp
     if (retrievedData.isNotEmpty) {
-      final int retrievedId = retrievedData.first['id'];
+      final int retrievedId = retrievedData.first[TableCol.id];
 
       final deleteResponse = await foodServiceSupabase.deleteBasedOnId(table: TableName.recentFood, id: retrievedId);
 
       if (deleteResponse.error != null) return deleteResponse;
     }
 
+    // If there are already 5 items, delete the oldest one based on lastViewedAt
+    final checkCountResponse = await foodServiceSupabase.getRecentFoods(userId: userProfile?.userId ?? '');
+    if (checkCountResponse.error != null) return checkCountResponse;
+
+    final List recentList = checkCountResponse.data ?? [];
+
+    if (recentList.length >= 5) {
+      recentList
+          .sort((a, b) => DateTime.parse(a[TableCol.lastViewedAt]).compareTo(DateTime.parse(b[TableCol.lastViewedAt])));
+      final int oldestId = recentList.first[TableCol.id];
+
+      final deleteOldestResponse = await foodServiceSupabase.deleteBasedOnId(table: TableName.recentFood, id: oldestId);
+      if (deleteOldestResponse.error != null) return deleteOldestResponse;
+    }
+
+    // Save new item
     final recentFoodModel = RecentFoodModel(
       tagId: foodResponseModel.tagId,
       foodName: foodResponseModel.foodName,

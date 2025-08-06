@@ -68,7 +68,7 @@ extension _Actions on _FoodSearchPageState {
   }
 
   void _onFoodCardPressedFromSavedTab(FoodResponseModel foodResponseModel) {
-    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: false)).then((_) {
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: true)).then((_) {
       if (mounted) {
         tryCatch(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
       }
