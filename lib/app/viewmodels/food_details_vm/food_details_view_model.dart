@@ -89,4 +89,9 @@ class FoodDetailsViewModel extends BaseViewModel {
 
     notifyListeners();
   }
+
+  Future<void> saveToRecent({required FoodResponseModel foodResponseModel}) async {
+    final response = await foodRepository.saveToRecent(foodResponseModel: foodResponseModel);
+    checkError(response);
+  }
 }

@@ -274,6 +274,14 @@ class FunctionUtils {
 
     final totalCalories = carbCalories + proteinCalories + fatCalories;
 
+    if (totalCalories == 0) {
+      return {
+        'carbs': 0.0,
+        'fat': 0.0,
+        'protein': 0.0,
+      };
+    }
+
     final carbPercent = (carbCalories / totalCalories);
     final fatPercent = (fatCalories / totalCalories);
     final proteinPercent = (proteinCalories / totalCalories);

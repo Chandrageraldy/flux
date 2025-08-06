@@ -122,32 +122,10 @@ extension _WidgetFactories on FoodDisplayCard {
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
-      label: calories.toString(),
+      label: calories.toStringAsFixed(1),
       icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
     );
   }
-
-  // Icon Container
-  // Widget getIconContainer(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: onCardPressed,
-  //     child: Container(
-  //       width: 32,
-  //       height: 32,
-  //       decoration: _Styles.getIconContainerDecoration(context),
-  //       child: Center(child: getIcon(context)),
-  //     ),
-  //   );
-  // }
-
-  // Get Icon
-  // Widget getIcon(BuildContext context) {
-  //   return FaIcon(
-  //     FontAwesomeIcons.add,
-  //     size: AppStyles.kSize20,
-  //     color: context.theme.colorScheme.onPrimary,
-  //   );
-  // }
 }
 
 // * ----------------------------- Styles -----------------------------
@@ -165,7 +143,7 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Serving and Brand Label Text Style

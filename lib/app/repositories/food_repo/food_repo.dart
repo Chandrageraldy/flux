@@ -3,6 +3,7 @@ import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
+import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
@@ -137,6 +138,18 @@ class FoodRepository {
     return response;
   }
 
+  Future<Response> getRecentFoods() async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final response = await foodServiceSupabase.getRecentFoods(userId: userProfile?.userId ?? '');
+
+    if (response.error == null) {
+      List retrievedData = response.data ?? [];
+      return Response.complete(retrievedData.map((item) => RecentFoodModel.fromJson(item)).toList());
+    }
+
+    return response;
+  }
+
   Future<Response> getFoodDetailsWithUPC({required String upc}) async {
     final response = await foodServiceNutritionix.getFoodDetailsWithUPC(upc: upc);
     if (response.error == null) {
@@ -155,5 +168,45 @@ class FoodRepository {
       return Response.complete(foodResponseModel);
     }
     return response;
+  }
+
+  Future<Response> saveToRecent({required FoodResponseModel foodResponseModel}) async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final isCommonFood = foodResponseModel.tagId != null;
+
+    final checkResponse = await foodServiceSupabase.checkIfRecent(
+      isCommonFood: isCommonFood,
+      tagId: foodResponseModel.tagId,
+      nixItemId: foodResponseModel.nixItemId,
+      userId: userProfile?.userId ?? '',
+    );
+
+    if (checkResponse.error != null) return checkResponse;
+
+    final List retrievedData = checkResponse.data ?? [];
+
+    if (retrievedData.isNotEmpty) {
+      final int retrievedId = retrievedData.first['id'];
+
+      final deleteResponse = await foodServiceSupabase.deleteBasedOnId(table: TableName.recentFood, id: retrievedId);
+
+      if (deleteResponse.error != null) return deleteResponse;
+    }
+
+    final recentFoodModel = RecentFoodModel(
+      tagId: foodResponseModel.tagId,
+      foodName: foodResponseModel.foodName,
+      calorieKcal: foodResponseModel.calorieKcal,
+      servingQty: foodResponseModel.servingQty,
+      servingUnit: foodResponseModel.servingUnit,
+      brandNameItemName: foodResponseModel.brandNameItemName,
+      brandName: foodResponseModel.brandName,
+      nixItemId: foodResponseModel.nixItemId,
+      userId: userProfile?.userId,
+    );
+
+    final saveResponse = await foodServiceSupabase.saveAsRecent(recentFoodModel: recentFoodModel);
+
+    return saveResponse;
   }
 }

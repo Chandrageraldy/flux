@@ -15,27 +15,33 @@ import 'package:flux/app/widgets/food/macronutrient_card.dart';
 import 'package:flux/app/widgets/skeleton/food_details_skeleton.dart';
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
 class FoodDetailsPage extends StatelessWidget {
-  const FoodDetailsPage({required this.foodResponseModel, super.key});
+  const FoodDetailsPage({required this.foodResponseModel, required this.fromAllTab, super.key});
 
   final FoodResponseModel foodResponseModel;
+  final bool fromAllTab;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => FoodDetailsViewModel(), child: _FoodDetailsPage(foodResponseModel: foodResponseModel));
+      create: (_) => FoodDetailsViewModel(),
+      child: _FoodDetailsPage(
+        foodResponseModel: foodResponseModel,
+        fromAllTab: fromAllTab,
+      ),
+    );
   }
 }
 
 class _FoodDetailsPage extends BaseStatefulPage {
-  const _FoodDetailsPage({required this.foodResponseModel});
+  const _FoodDetailsPage({required this.foodResponseModel, required this.fromAllTab});
 
   final FoodResponseModel foodResponseModel;
+  final bool fromAllTab;
 
   @override
   State<_FoodDetailsPage> createState() => _FoodDetailsPageState();
@@ -60,7 +66,9 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
   void initState() {
     super.initState();
     checkIfSaved();
+    checkIfFromAllTab();
     getFoodDetails();
+    print(widget.fromAllTab);
   }
 
   @override
@@ -129,6 +137,17 @@ extension _PrivateMethods on _FoodDetailsPageState {
   Future<void> getFoodDetails() async {
     await tryCatch(context,
         () => context.read<FoodDetailsViewModel>().getFoodDetails(foodResponseModel: widget.foodResponseModel));
+  }
+
+  void checkIfFromAllTab() {
+    if (widget.fromAllTab) {
+      saveToRecent();
+    }
+  }
+
+  Future<void> saveToRecent() async {
+    await tryCatch(
+        context, () => context.read<FoodDetailsViewModel>().saveToRecent(foodResponseModel: widget.foodResponseModel));
   }
 }
 
@@ -251,7 +270,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       keyboardType: TextInputType.number,
       height: AppStyles.kSize40,
       onChanged: (value) {
-        final qty = double.tryParse(value);
+        final qty = double.tryParse(value ?? '');
         if (qty != null && qty != 0) {
           context.read<FoodDetailsViewModel>().updateNutrientsData(servingQty: qty);
         }

@@ -77,6 +77,7 @@ class TableName {
   static String user = 'user';
   static String plan = 'plan';
   static String savedFood = 'saved_food';
+  static String recentFood = 'recent_food';
 }
 
 class TableCol {
@@ -84,6 +85,7 @@ class TableCol {
   static String id = 'id';
   static String tagId = 'tagId';
   static String nixItemId = 'nixItemId';
+  static String lastViewedAt = 'lastViewedAt';
 }
 
 enum MealType {

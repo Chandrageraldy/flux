@@ -22,7 +22,7 @@ class AppTextFormField extends StatelessWidget {
   final FaIcon? icon;
   final String? initialValue;
   final String? topLabel;
-  final void Function(String value)? onChanged;
+  final void Function(String? value)? onChanged;
   final TextInputType keyboardType;
   final double? height;
 
@@ -63,7 +63,7 @@ extension _WidgetFactories on AppTextFormField {
         onChanged: onChanged == null
             ? null
             : (value) {
-                if (value != null && value.isNotEmpty) onChanged!(value);
+                onChanged!(value);
               },
       ),
     );

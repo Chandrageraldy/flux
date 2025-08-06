@@ -73,7 +73,7 @@ extension _Actions on _ScanBarcodePageState {
 
     if (result == true) {
       final scannedFood = context.read<BarcodeScanViewModel>().scannedFood;
-      context.router.push(FoodDetailsRoute(foodResponseModel: scannedFood)).then((_) {
+      context.router.push(FoodDetailsRoute(foodResponseModel: scannedFood, fromAllTab: true)).then((_) {
         isProcessing = false;
       });
     } else {

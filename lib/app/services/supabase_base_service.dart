@@ -46,19 +46,17 @@ abstract class SupabaseBaseService {
     Map<dynamic, dynamic>? requestBody,
     Map<String, dynamic>? filters,
     String? column,
+    String? orderByColumn,
+    bool ascending = false,
   }) async {
     try {
       final supabase = Supabase.instance.client;
       final PostgrestList response;
-      PostgrestFilterBuilder? filterBuilder;
+      dynamic filterBuilder;
 
       switch (requestType) {
         case RequestType.GET:
-          if (column != null) {
-            filterBuilder = supabase.from(table).select(column);
-          } else {
-            filterBuilder = supabase.from(table).select();
-          }
+          filterBuilder = supabase.from(table).select(column ?? '*');
           break;
         case RequestType.POST:
           filterBuilder = supabase.from(table).insert(requestBody as Object);
@@ -71,6 +69,7 @@ abstract class SupabaseBaseService {
           break;
       }
 
+      // Apply filters
       if (filters != null) {
         filters.forEach((key, value) {
           if (value != null) {
@@ -79,16 +78,12 @@ abstract class SupabaseBaseService {
         });
       }
 
-      if (column != null) {
-        response = await filterBuilder ?? [];
-      } else {
-        response = await filterBuilder?.select() ?? [];
+      // Apply ordering
+      if (orderByColumn != null) {
+        filterBuilder = filterBuilder?.order(orderByColumn, ascending: ascending);
       }
 
-      // Return urgent error if response is empty
-      // if (response.isEmpty) {
-      //   return _handleSupabaseException(SupabaseExceptionType.permissionDenied);
-      // }
+      response = await filterBuilder ?? [];
 
       return Response.complete(response);
     } on PostgrestException catch (e) {

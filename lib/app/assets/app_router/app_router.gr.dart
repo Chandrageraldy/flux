@@ -149,12 +149,14 @@ class ErrorRouteArgs {
 class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
   FoodDetailsRoute({
     required FoodResponseModel foodResponseModel,
+    required bool fromAllTab,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          FoodDetailsRoute.name,
          args: FoodDetailsRouteArgs(
            foodResponseModel: foodResponseModel,
+           fromAllTab: fromAllTab,
            key: key,
          ),
          initialChildren: children,
@@ -168,6 +170,7 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
       final args = data.argsAs<FoodDetailsRouteArgs>();
       return FoodDetailsPage(
         foodResponseModel: args.foodResponseModel,
+        fromAllTab: args.fromAllTab,
         key: args.key,
       );
     },
@@ -175,15 +178,21 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
 }
 
 class FoodDetailsRouteArgs {
-  const FoodDetailsRouteArgs({required this.foodResponseModel, this.key});
+  const FoodDetailsRouteArgs({
+    required this.foodResponseModel,
+    required this.fromAllTab,
+    this.key,
+  });
 
   final FoodResponseModel foodResponseModel;
+
+  final bool fromAllTab;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'FoodDetailsRouteArgs{foodResponseModel: $foodResponseModel, key: $key}';
+    return 'FoodDetailsRouteArgs{foodResponseModel: $foodResponseModel, fromAllTab: $fromAllTab, key: $key}';
   }
 }
 

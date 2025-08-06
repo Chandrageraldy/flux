@@ -32,6 +32,7 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    _getRecentFoods();
   }
 
   @override
@@ -60,18 +61,23 @@ extension _Actions on _FoodSearchPageState {
   void _onMealScanPressed() {}
 
   void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
-    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel));
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: true));
   }
 
   void _onFoodCardPressedFromSavedTab(FoodResponseModel foodResponseModel) {
-    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel)).then((_) {
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: false)).then((_) {
       if (mounted) {
         tryCatch(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
       }
     });
   }
 
-  void _onChanged(String value) async {
+  void _onChanged(String? value) async {
+    if (value == null || value.isEmpty) {
+      _getRecentFoods();
+      return;
+    }
+
     await tryCatch(context, () => context.read<FoodSearchViewModel>().searchInstant(value));
 
     _scrollController.animateTo(
@@ -79,6 +85,10 @@ extension _Actions on _FoodSearchPageState {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _getRecentFoods() async {
+    await tryCatch(context, () => context.read<FoodSearchViewModel>().getRecentFoods());
   }
 }
 

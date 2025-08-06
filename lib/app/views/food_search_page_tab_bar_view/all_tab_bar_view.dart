@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
+import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
@@ -29,14 +30,19 @@ class AllTabBarView extends StatelessWidget {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on AllTabBarView {
-  // Food Sliver List
+// Food Sliver List
   Widget getFoodSliverList(BuildContext context) {
+    final isSearching = context.select((FoodSearchViewModel vm) => vm.isSearching);
     final foodSearchResults = context.select((FoodSearchViewModel vm) => vm.foodSearchResults);
+    final recentFoodResults = context.select((FoodSearchViewModel vm) => vm.recentFoodResults);
+
+    final List<FoodResponseModel> foodList =
+        isSearching ? foodSearchResults : recentFoodResults.map((e) => e.toFoodResponseModel()).toList();
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          final food = foodSearchResults[index];
+          final food = foodList[index];
           return Padding(
             padding: index == 0 ? AppStyles.kPaddSV12 : AppStyles.kPaddOB12,
             child: FoodDisplayCard(
@@ -49,7 +55,7 @@ extension _WidgetFactories on AllTabBarView {
             ),
           );
         },
-        childCount: foodSearchResults.length,
+        childCount: foodList.length, // ✅ Corrected this line
       ),
     );
   }
