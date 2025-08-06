@@ -68,7 +68,7 @@ class FoodServiceSupabase extends SupabaseBaseService {
       requestType: RequestType.GET,
       table: TableName.recentFood,
       filters: {TableCol.userId: userId},
-      orderByColumn: TableCol.lastViewedAt,
+      orderBy: TableCol.lastViewedAt,
     );
   }
 
