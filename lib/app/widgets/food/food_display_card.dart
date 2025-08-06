@@ -143,7 +143,7 @@ abstract class _Styles {
 
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withCustomSize(13).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Serving and Brand Label Text Style

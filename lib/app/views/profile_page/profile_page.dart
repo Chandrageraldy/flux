@@ -238,7 +238,7 @@ extension _WidgetFactories on _ProfilePageState {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac4,
       children: [
-        Text(S.current.personalInfoLabel, style: Quicksand.bold.withSize(FontSizes.small)),
+        Text(S.current.personalInfoLabel.toUpperCase(), style: _Styles.getSettingsLabelTextStyle(context)),
         Container(
           padding: AppStyles.kPaddSV12H20,
           decoration: _Styles.getPersonalInfoContainerDecoration(context),
@@ -278,7 +278,7 @@ extension _WidgetFactories on _ProfilePageState {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac4,
       children: [
-        Text(S.current.planCustomizationLabel, style: Quicksand.bold.withSize(FontSizes.small)),
+        Text(S.current.planCustomizationLabel.toUpperCase(), style: _Styles.getSettingsLabelTextStyle(context)),
         Container(
           padding: AppStyles.kPaddSV12H20,
           decoration: _Styles.getPersonalInfoContainerDecoration(context),
@@ -385,5 +385,10 @@ class _Styles {
   // Plan Generation Button Text Style
   static TextStyle getPlanGenerationButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+  }
+
+  // Settings Label Text Style
+  static TextStyle getSettingsLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withCustomSize(11);
   }
 }

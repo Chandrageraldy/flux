@@ -1,3 +1,4 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
@@ -27,6 +28,8 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
   late ScrollController _scrollController;
+
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
@@ -113,13 +116,16 @@ extension _WidgetFactories on _FoodSearchPageState {
 
   // Search Text Form Field
   Widget getSearchTextFormField() {
-    return AppTextFormField(
-      field: FormFields.search,
-      placeholder: S.current.searchFoodPlaceholder,
-      validator: FormBuilderValidators.compose([]),
-      icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kSize16),
-      height: AppStyles.kSize40,
-      onChanged: _onChanged,
+    return FormBuilder(
+      key: _formKey,
+      child: AppTextFormField(
+        field: FormFields.search,
+        placeholder: S.current.searchFoodPlaceholder,
+        validator: FormBuilderValidators.compose([]),
+        icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kSize16),
+        height: AppStyles.kSize40,
+        onChanged: _onChanged,
+      ),
     );
   }
 
@@ -168,6 +174,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       scrollController: _scrollController,
       onFoodCardPressed: _onFoodCardPressed,
       onMealScanPressed: _onMealScanPressed,
+      onRefresh: _getRecentFoods,
     );
   }
 

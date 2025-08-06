@@ -139,7 +139,7 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Date Shifter Label
   Widget getDateShifterLabel() {
-    return Text(_formatDate(_selectedDate), style: _Styles.getDateShifterLabelTextStyle(context));
+    return Text(_formatDate(_selectedDate).toUpperCase(), style: _Styles.getDateShifterLabelTextStyle(context));
   }
 
   // Date Shifter
@@ -354,7 +354,7 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Meals Logged Label
   Widget getMealsLoggedLabel() {
-    return Text(S.current.loggedMealsLabel, style: _Styles.getMealsLoggedLabelTextStyle(context));
+    return Text(S.current.loggedMealsLabel.toUpperCase(), style: _Styles.getMealsLoggedLabelTextStyle(context));
   }
 
   // Edit Button
@@ -396,12 +396,12 @@ class _Styles {
 
   // Date Shifter Label Text Style
   static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.large);
+    return Quicksand.semiBold.withSize(FontSizes.mediumPlus);
   }
 
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withCustomSize(13).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.semiBold.withCustomSize(11);
   }
 
   // Edit Label Text Style

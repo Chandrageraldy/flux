@@ -8,21 +8,29 @@ class AllTabBarView extends StatelessWidget {
   final ScrollController scrollController;
   final void Function(FoodResponseModel) onFoodCardPressed;
   final VoidCallback onMealScanPressed;
+  final VoidCallback onRefresh;
 
   const AllTabBarView({
     super.key,
     required this.scrollController,
     required this.onFoodCardPressed,
     required this.onMealScanPressed,
+    required this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: AppStyles.kPaddSH16,
-      child: CustomScrollView(
-        controller: scrollController,
-        slivers: [getHeader(context), getFoodSliverList(context)],
+      child: RefreshIndicator(
+        onRefresh: () async {
+          onRefresh();
+        },
+        child: CustomScrollView(
+          controller: scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [getHeader(context), ...getFoodSliverList(context)],
+        ),
       ),
     );
   }
@@ -31,7 +39,7 @@ class AllTabBarView extends StatelessWidget {
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on AllTabBarView {
 // Food Sliver List
-  Widget getFoodSliverList(BuildContext context) {
+  List<Widget> getFoodSliverList(BuildContext context) {
     final isSearching = context.select((FoodSearchViewModel vm) => vm.isSearching);
     final foodSearchResults = context.select((FoodSearchViewModel vm) => vm.foodSearchResults);
     final recentFoodResults = context.select((FoodSearchViewModel vm) => vm.recentFoodResults);
@@ -39,25 +47,49 @@ extension _WidgetFactories on AllTabBarView {
     final List<FoodResponseModel> foodList =
         isSearching ? foodSearchResults : recentFoodResults.map((e) => e.toFoodResponseModel()).toList();
 
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final food = foodList[index];
-          return Padding(
-            padding: index == 0 ? AppStyles.kPaddSV12 : AppStyles.kPaddOB12,
-            child: FoodDisplayCard(
-              foodName: food.foodName ?? '',
-              calories: food.calorieKcal ?? 0,
-              servingUnit: food.servingUnit ?? '',
-              servingQuantity: food.servingQty ?? 0,
-              brandName: food.brandName ?? '',
-              onCardPressed: () => onFoodCardPressed(food),
+    return [
+      if (foodList.isNotEmpty) ...[
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: AppStyles.kPaddOT16B6,
+            child: Text(
+              isSearching ? 'SEARCH RESULTS' : 'RECENTLY VIEWED',
+              style: Quicksand.semiBold.withCustomSize(11),
             ),
-          );
-        },
-        childCount: foodList.length, // ✅ Corrected this line
-      ),
-    );
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final food = foodList[index];
+              return Padding(
+                padding: AppStyles.kPaddOB12,
+                child: FoodDisplayCard(
+                  foodName: food.foodName ?? '',
+                  calories: food.calorieKcal ?? 0,
+                  servingUnit: food.servingUnit ?? '',
+                  servingQuantity: food.servingQty ?? 0,
+                  brandName: food.brandName ?? '',
+                  onCardPressed: () => onFoodCardPressed(food),
+                ),
+              );
+            },
+            childCount: foodList.length, // ✅ Corrected this line
+          ),
+        )
+      ] else ...[
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Center(
+            child: Text(
+              isSearching ? 'No results found.' : 'No recent items.',
+              style: Quicksand.semiBold.withCustomSize(11),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ]
+    ];
   }
 
   // Food Action Header
