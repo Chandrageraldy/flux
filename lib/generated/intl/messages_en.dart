@@ -356,6 +356,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "The password you entered is too weak. Please choose a stronger password."),
         "weightDesc": MessageLookupByLibrary.simpleMessage(
             "Used to determine your daily calorie needs."),
+        "weightGoalDesc": MessageLookupByLibrary.simpleMessage(
+            "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain."),
+        "weightGoalLabel": MessageLookupByLibrary.simpleMessage("Weight Goal"),
         "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
         "yearsLabel": MessageLookupByLibrary.simpleMessage("Years"),
         "zincLabel": MessageLookupByLibrary.simpleMessage("Zinc")

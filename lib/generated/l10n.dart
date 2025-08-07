@@ -2179,6 +2179,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Weight Goal`
+  String get weightGoalLabel {
+    return Intl.message(
+      'Weight Goal',
+      name: 'weightGoalLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain.`
+  String get weightGoalDesc {
+    return Intl.message(
+      'Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain.',
+      name: 'weightGoalDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

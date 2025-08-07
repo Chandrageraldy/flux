@@ -181,7 +181,7 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(energyTarget, style: Quicksand.medium.withSize(FontSizes.large)),
+        Text(energyTarget, style: _Styles.getEnergyTargetValueLabelTextStyle(context)),
         Text(NutritionUnit.kcal.label, style: _Styles.getEnergyTargetUnitLabelTextStyle(context)),
       ],
     );
@@ -590,5 +590,10 @@ class _Styles {
   // Ratio Error Message Label Text Style
   static TextStyle getRatioErrorMessageLabelTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.extraSmall).copyWith(color: AppColors.redColor);
+  }
+
+  // Energy Target Value Label Text Style
+  static TextStyle getEnergyTargetValueLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 }

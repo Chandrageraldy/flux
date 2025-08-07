@@ -151,9 +151,22 @@ extension _WidgetFactories on _PersonalDetailsPageState {
       child: Container(
         padding: AppStyles.kPaddSV12H16,
         decoration: _Styles.getContainerDecoration(context),
-        child: getWeightGoalListView(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [getWeightGoalLabel(), getWeightGoalDesc(), AppStyles.kSizedBoxH24, getWeightGoalListView()],
+        ),
       ),
     );
+  }
+
+  // Weight Goal Label
+  Widget getWeightGoalLabel() {
+    return Text(S.current.weightGoalLabel, style: _Styles.getWeightGoalLabelTextStyle(context));
+  }
+
+  // Weight Goal Desc
+  Widget getWeightGoalDesc() {
+    return Text(S.current.weightGoalDesc, style: _Styles.getWeightGoalDescLabelTextStyle(context));
   }
 
   // Weight Goal List View
@@ -250,5 +263,15 @@ abstract class _Styles {
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
+  }
+
+  // Weight Goal Label Text Style
+  static TextStyle getWeightGoalLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small);
+  }
+
+  // Weight Goal Desc Label Text Style
+  static TextStyle getWeightGoalDescLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.extraSmall);
   }
 }

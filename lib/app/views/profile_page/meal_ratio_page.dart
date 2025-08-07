@@ -353,12 +353,12 @@ abstract class _Styles {
 
   // Meal Ratio Desc Text Style
   static TextStyle getMealRatioDescTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.regular.withSize(FontSizes.extraSmall);
   }
 
   // Meal Label Text Style
   static TextStyle getMealLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 
   // Energy Target Text Field Container Decoration
