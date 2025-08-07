@@ -62,16 +62,16 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     final weight = double.tryParse(bm.weight ?? '') ?? 0;
     final height = double.tryParse(bm.height ?? '') ?? 0;
 
-    double targetWeeklyGain;
+    double targetWeeklyChange;
 
-    // Convert target weekly gain to negative value for weight loss
+    // Convert target weekly change to negative value for weight loss
     if (goal == PlanSelectionValue.maintain.value) {
-      targetWeeklyGain = 0.0;
+      targetWeeklyChange = 0.0;
     } else if (goal == PlanSelectionValue.gain.value) {
-      targetWeeklyGain = double.tryParse(bm.targetWeeklyGain ?? '') ?? -0.5;
+      targetWeeklyChange = double.tryParse(bm.targetWeeklyChange ?? '') ?? -0.5;
     } else {
-      final negativeWeeklyChange = double.tryParse(bm.targetWeeklyGain ?? '') ?? 0.5;
-      targetWeeklyGain = -negativeWeeklyChange;
+      final negativeWeeklyChange = double.tryParse(bm.targetWeeklyChange ?? '') ?? 0.5;
+      targetWeeklyChange = -negativeWeeklyChange;
     }
 
     final activityLevel = bm.activityLevel ?? PlanSelectionValue.sedentary.value;
@@ -85,15 +85,16 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 
     final tdee = bmr * (activityFactor + exerciseFactor);
 
-    // Adjust TDEE based on target weekly gain
-    final double adjustedKcalBasedOnTargetWeeklyGain = goal == PlanSelectionValue.maintain.value
+    // Adjust TDEE based on target weekly change
+    final double adjustedKcalBasedOnTargetWeeklyChange = goal == PlanSelectionValue.maintain.value
         ? tdee
-        : adjustCaloriesForTargetWeeklyGain(tdee: tdee, targetWeeklyGain: targetWeeklyGain);
+        : adjustCaloriesForTargetWeeklyChange(tdee: tdee, targetWeeklyChange: targetWeeklyChange);
 
     Map<String, double> macroRatio = getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
     Map<String, double> dailyMicronutrients = getDailyMicronutrients(gender, age);
 
-    final completeNutrient = getCompleteNutrients(adjustedKcalBasedOnTargetWeeklyGain, macroRatio, dailyMicronutrients);
+    final completeNutrient =
+        getCompleteNutrients(adjustedKcalBasedOnTargetWeeklyChange, macroRatio, dailyMicronutrients);
 
     // ignore: avoid_print
     print(completeNutrient);
@@ -282,11 +283,11 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     return {};
   }
 
-  double adjustCaloriesForTargetWeeklyGain({
+  double adjustCaloriesForTargetWeeklyChange({
     required double tdee,
-    required double targetWeeklyGain,
+    required double targetWeeklyChange,
   }) {
-    double calorieAdjustment = targetWeeklyGain * 7700 / 7;
+    double calorieAdjustment = targetWeeklyChange * 7700 / 7;
     return tdee + calorieAdjustment;
   }
 

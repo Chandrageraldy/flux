@@ -332,11 +332,11 @@ class FunctionUtils {
     }
   }
 
-  static double adjustCaloriesForTargetWeeklyGain({
+  static double adjustCaloriesForTargetWeeklyChange({
     required double tdee,
-    required double targetWeeklyGain,
+    required double targetWeeklyChange,
   }) {
-    double calorieAdjustment = targetWeeklyGain * 7700 / 7;
+    double calorieAdjustment = targetWeeklyChange * 7700 / 7;
     return tdee + calorieAdjustment;
   }
 

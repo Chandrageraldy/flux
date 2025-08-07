@@ -35,8 +35,9 @@ class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> 
       children: [
         AppStyles.kEmptyWidget,
         getCustomAppBar(),
-        getContainer(),
+        getPersonalDetailsContainer(),
         getBMIContainer(),
+        getWeightGoalContainer(),
         AppStyles.kEmptyWidget,
       ],
     );
@@ -45,11 +46,15 @@ class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> 
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _PersonalDetailsPageState {
-  void _onPickerPressed(PersonalDetailsModel setting) {
+  void _onPickerPressed(PersonalDetailsModel setting, bool isTargetWeeklyChangeEnabled) {
     // Retrieve the currently selected value
     final currentSelectedValue = context.read<PersonalDetailsViewModel>().personalDetails[setting.key] ?? '';
     // Get the index of the current selected value in the items list
     final initialItemIndex = setting.items.indexOf(currentSelectedValue);
+
+    if (setting.key == PersonalDetailsSettings.targetWeeklyChange.key && !isTargetWeeklyChangeEnabled) {
+      return;
+    }
 
     WidgetUtils.showPickerDialog(
       context: context,
@@ -139,33 +144,71 @@ extension _WidgetFactories on _PersonalDetailsPageState {
     );
   }
 
-  // Container
-  Widget getContainer() {
+  // Weight Goal Container
+  Widget getWeightGoalContainer() {
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: Container(
         padding: AppStyles.kPaddSV12H16,
         decoration: _Styles.getContainerDecoration(context),
-        child: getListView(),
+        child: getWeightGoalListView(),
       ),
     );
   }
 
-  // List View
-  Widget getListView() {
-    final personalDetailsSettings = personalDetails(context);
+  // Weight Goal List View
+  Widget getWeightGoalListView() {
     final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.personalDetails);
+    final bool isTargetWeeklyChangeEnabled =
+        context.select((PersonalDetailsViewModel vm) => vm.isTargetWeeklyChangeEnabled);
 
     return ListView.separated(
-      itemCount: personalDetailsSettings.length,
+      itemCount: weightGoal.length,
       itemBuilder: (context, index) {
-        final setting = personalDetailsSettings[index];
+        final setting = weightGoal[index];
+        return ProfileSettingsListTile(
+          label: setting.label,
+          value: personalDetailsInfo[setting.key] ?? '',
+          onTap: () => _onPickerPressed(setting, isTargetWeeklyChangeEnabled),
+        );
+      },
+      separatorBuilder: (context, index) => Padding(
+        padding: AppStyles.kPaddSV6,
+        child: Divider(color: context.theme.colorScheme.tertiaryFixedDim),
+      ),
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+    );
+  }
+
+  // Personal Details Container
+  Widget getPersonalDetailsContainer() {
+    return Padding(
+      padding: AppStyles.kPaddSH16,
+      child: Container(
+        padding: AppStyles.kPaddSV12H16,
+        decoration: _Styles.getContainerDecoration(context),
+        child: getPersonalDetailsListView(),
+      ),
+    );
+  }
+
+  // Personal Details List View
+  Widget getPersonalDetailsListView() {
+    final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.personalDetails);
+    final bool isTargetWeeklyChangeEnabled =
+        context.select((PersonalDetailsViewModel vm) => vm.isTargetWeeklyChangeEnabled);
+
+    return ListView.separated(
+      itemCount: personalDetails.length,
+      itemBuilder: (context, index) {
+        final setting = personalDetails[index];
         return ProfileSettingsListTile(
           label: setting.label,
           value: personalDetailsInfo[setting.key] ?? '',
           onTap: () => setting.key == PersonalDetailsSettings.dob.key
               ? _onDatePickerPressed(setting)
-              : _onPickerPressed(setting),
+              : _onPickerPressed(setting, isTargetWeeklyChangeEnabled),
         );
       },
       separatorBuilder: (context, index) => Padding(

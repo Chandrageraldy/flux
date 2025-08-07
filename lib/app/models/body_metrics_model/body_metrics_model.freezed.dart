@@ -26,7 +26,7 @@ mixin _$BodyMetricsModel {
   String? get weight => throw _privateConstructorUsedError;
   String? get dob => throw _privateConstructorUsedError;
   String? get targetWeight => throw _privateConstructorUsedError;
-  String? get targetWeeklyGain => throw _privateConstructorUsedError;
+  String? get targetWeeklyChange => throw _privateConstructorUsedError;
   String? get activityLevel => throw _privateConstructorUsedError;
   String? get exerciseLevel => throw _privateConstructorUsedError;
   String? get dietType => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $BodyMetricsModelCopyWith<$Res> {
       String? weight,
       String? dob,
       String? targetWeight,
-      String? targetWeeklyGain,
+      String? targetWeeklyChange,
       String? activityLevel,
       String? exerciseLevel,
       String? dietType});
@@ -81,7 +81,7 @@ class _$BodyMetricsModelCopyWithImpl<$Res, $Val extends BodyMetricsModel>
     Object? weight = freezed,
     Object? dob = freezed,
     Object? targetWeight = freezed,
-    Object? targetWeeklyGain = freezed,
+    Object? targetWeeklyChange = freezed,
     Object? activityLevel = freezed,
     Object? exerciseLevel = freezed,
     Object? dietType = freezed,
@@ -111,9 +111,9 @@ class _$BodyMetricsModelCopyWithImpl<$Res, $Val extends BodyMetricsModel>
           ? _value.targetWeight
           : targetWeight // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetWeeklyGain: freezed == targetWeeklyGain
-          ? _value.targetWeeklyGain
-          : targetWeeklyGain // ignore: cast_nullable_to_non_nullable
+      targetWeeklyChange: freezed == targetWeeklyChange
+          ? _value.targetWeeklyChange
+          : targetWeeklyChange // ignore: cast_nullable_to_non_nullable
               as String?,
       activityLevel: freezed == activityLevel
           ? _value.activityLevel
@@ -146,7 +146,7 @@ abstract class _$$BodyMetricsModelImplCopyWith<$Res>
       String? weight,
       String? dob,
       String? targetWeight,
-      String? targetWeeklyGain,
+      String? targetWeeklyChange,
       String? activityLevel,
       String? exerciseLevel,
       String? dietType});
@@ -171,7 +171,7 @@ class __$$BodyMetricsModelImplCopyWithImpl<$Res>
     Object? weight = freezed,
     Object? dob = freezed,
     Object? targetWeight = freezed,
-    Object? targetWeeklyGain = freezed,
+    Object? targetWeeklyChange = freezed,
     Object? activityLevel = freezed,
     Object? exerciseLevel = freezed,
     Object? dietType = freezed,
@@ -201,9 +201,9 @@ class __$$BodyMetricsModelImplCopyWithImpl<$Res>
           ? _value.targetWeight
           : targetWeight // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetWeeklyGain: freezed == targetWeeklyGain
-          ? _value.targetWeeklyGain
-          : targetWeeklyGain // ignore: cast_nullable_to_non_nullable
+      targetWeeklyChange: freezed == targetWeeklyChange
+          ? _value.targetWeeklyChange
+          : targetWeeklyChange // ignore: cast_nullable_to_non_nullable
               as String?,
       activityLevel: freezed == activityLevel
           ? _value.activityLevel
@@ -231,7 +231,7 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
       this.weight,
       this.dob,
       this.targetWeight,
-      this.targetWeeklyGain,
+      this.targetWeeklyChange,
       this.activityLevel,
       this.exerciseLevel,
       this.dietType});
@@ -252,7 +252,7 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
   @override
   final String? targetWeight;
   @override
-  final String? targetWeeklyGain;
+  final String? targetWeeklyChange;
   @override
   final String? activityLevel;
   @override
@@ -262,7 +262,7 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
 
   @override
   String toString() {
-    return 'BodyMetricsModel(goal: $goal, gender: $gender, height: $height, weight: $weight, dob: $dob, targetWeight: $targetWeight, targetWeeklyGain: $targetWeeklyGain, activityLevel: $activityLevel, exerciseLevel: $exerciseLevel, dietType: $dietType)';
+    return 'BodyMetricsModel(goal: $goal, gender: $gender, height: $height, weight: $weight, dob: $dob, targetWeight: $targetWeight, targetWeeklyChange: $targetWeeklyChange, activityLevel: $activityLevel, exerciseLevel: $exerciseLevel, dietType: $dietType)';
   }
 
   @override
@@ -277,8 +277,8 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
             (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.targetWeight, targetWeight) ||
                 other.targetWeight == targetWeight) &&
-            (identical(other.targetWeeklyGain, targetWeeklyGain) ||
-                other.targetWeeklyGain == targetWeeklyGain) &&
+            (identical(other.targetWeeklyChange, targetWeeklyChange) ||
+                other.targetWeeklyChange == targetWeeklyChange) &&
             (identical(other.activityLevel, activityLevel) ||
                 other.activityLevel == activityLevel) &&
             (identical(other.exerciseLevel, exerciseLevel) ||
@@ -297,7 +297,7 @@ class _$BodyMetricsModelImpl implements _BodyMetricsModel {
       weight,
       dob,
       targetWeight,
-      targetWeeklyGain,
+      targetWeeklyChange,
       activityLevel,
       exerciseLevel,
       dietType);
@@ -327,7 +327,7 @@ abstract class _BodyMetricsModel implements BodyMetricsModel {
       final String? weight,
       final String? dob,
       final String? targetWeight,
-      final String? targetWeeklyGain,
+      final String? targetWeeklyChange,
       final String? activityLevel,
       final String? exerciseLevel,
       final String? dietType}) = _$BodyMetricsModelImpl;
@@ -348,7 +348,7 @@ abstract class _BodyMetricsModel implements BodyMetricsModel {
   @override
   String? get targetWeight;
   @override
-  String? get targetWeeklyGain;
+  String? get targetWeeklyChange;
   @override
   String? get activityLevel;
   @override

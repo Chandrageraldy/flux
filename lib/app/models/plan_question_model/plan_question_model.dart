@@ -11,7 +11,7 @@ enum PlanSelectionKey {
   weight,
   dob,
   targetWeight,
-  targetWeeklyGain,
+  targetWeeklyChange,
   activityLevel,
   exerciseLevel,
   dietType;
@@ -32,8 +32,8 @@ enum PlanSelectionKey {
         return 'dob';
       case PlanSelectionKey.targetWeight:
         return 'targetWeight';
-      case PlanSelectionKey.targetWeeklyGain:
-        return 'targetWeeklyGain';
+      case PlanSelectionKey.targetWeeklyChange:
+        return 'targetWeeklyChange';
       case PlanSelectionKey.activityLevel:
         return 'activityLevel';
       case PlanSelectionKey.exerciseLevel:
@@ -221,13 +221,13 @@ final List<PlanQuestion> planQuestionData = [
     ],
   ),
   PlanQuestion(
-    key: PlanSelectionKey.targetWeeklyGain.key,
+    key: PlanSelectionKey.targetWeeklyChange.key,
     title: S.current.planQuestion3,
     description: S.current.planDescription3,
     type: PlanSelectionQuestionType.picker,
     pickers: [
       PlanPicker(
-        key: PlanSelectionKey.targetWeeklyGain.key,
+        key: PlanSelectionKey.targetWeeklyChange.key,
         title: S.current.targetWeightWeeklyLabel,
         description: S.current.targetWeightWeeklyDesc,
         unit: Unit.kg.label,

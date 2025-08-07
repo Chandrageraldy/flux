@@ -710,20 +710,20 @@ class S {
     );
   }
 
-  /// `Target Weekly Gain`
+  /// `Target Weekly Change`
   String get targetWeightWeeklyLabel {
     return Intl.message(
-      'Target Weekly Gain',
+      'Target Weekly Change',
       name: 'targetWeightWeeklyLabel',
       desc: '',
       args: [],
     );
   }
 
-  /// `0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk`
+  /// `0.1–0.2 kg: slow change, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast change, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk`
   String get targetWeightWeeklyDesc {
     return Intl.message(
-      '0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk',
+      '0.1–0.2 kg: slow change, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast change, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk',
       name: 'targetWeightWeeklyDesc',
       desc: '',
       args: [],
@@ -2115,6 +2115,66 @@ class S {
     return Intl.message(
       'Percent of Total Meal Ratio',
       name: 'percentOfTotalMealRatioLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found.`
+  String get noResultFoundLabel {
+    return Intl.message(
+      'No results found.',
+      name: 'noResultFoundLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No recent items.`
+  String get noRecentItemsLabel {
+    return Intl.message(
+      'No recent items.',
+      name: 'noRecentItemsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results. Check the spelling and try again. Or create your own food listing.`
+  String get noResultFoundMessage {
+    return Intl.message(
+      'No results. Check the spelling and try again. Or create your own food listing.',
+      name: 'noResultFoundMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You haven’t viewed any food items yet. Start searching to add items here.`
+  String get noRecentItemsMessage {
+    return Intl.message(
+      'You haven’t viewed any food items yet. Start searching to add items here.',
+      name: 'noRecentItemsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The total must equal 100%. Please adjust the values.`
+  String get ratioErrorMessage {
+    return Intl.message(
+      'The total must equal 100%. Please adjust the values.',
+      name: 'ratioErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Weekly Change`
+  String get targetWeeklyChangeLabel {
+    return Intl.message(
+      'Target Weekly Change',
+      name: 'targetWeeklyChangeLabel',
       desc: '',
       args: [],
     );

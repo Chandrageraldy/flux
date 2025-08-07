@@ -64,11 +64,11 @@ extension _Actions on _FoodSearchPageState {
   void _onMealScanPressed() {}
 
   void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
-    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: true));
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, saveRecent: true));
   }
 
   void _onFoodCardPressedFromSavedTab(FoodResponseModel foodResponseModel) {
-    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, fromAllTab: true)).then((_) {
+    context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, saveRecent: true)).then((_) {
       if (mounted) {
         tryCatch(context, () => context.read<FoodSearchViewModel>().getSavedFoods());
       }

@@ -55,7 +55,9 @@ enum PersonalDetailsSettings {
   weight,
   height,
   activityLevel,
-  exerciseLevel;
+  exerciseLevel,
+  targetWeight,
+  targetWeeklyChange;
 
   String get key {
     switch (this) {
@@ -71,6 +73,10 @@ enum PersonalDetailsSettings {
         return 'activityLevel';
       case PersonalDetailsSettings.exerciseLevel:
         return 'exerciseLevel';
+      case PersonalDetailsSettings.targetWeight:
+        return 'targetWeight';
+      case PersonalDetailsSettings.targetWeeklyChange:
+        return 'targetWeeklyChange';
     }
   }
 
@@ -88,6 +94,10 @@ enum PersonalDetailsSettings {
         return S.current.activityLevelLabel;
       case PersonalDetailsSettings.exerciseLevel:
         return S.current.exerciseLevelLabel;
+      case PersonalDetailsSettings.targetWeight:
+        return S.current.targetWeightLabel;
+      case PersonalDetailsSettings.targetWeeklyChange:
+        return S.current.targetWeeklyChangeLabel;
     }
   }
 }
@@ -157,67 +167,82 @@ class PersonalDetailsModel {
   final String? desc;
 }
 
-List<PersonalDetailsModel> personalDetails(BuildContext context) => [
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.dob.label,
-        key: PersonalDetailsSettings.dob.key,
-        items: [],
-        desc:
-            '*Your date of birth helps us tailor recommendations, track your progress accurately, and provide age-appropriate features. This information stays private.',
-      ),
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.gender.label,
-        key: PersonalDetailsSettings.gender.key,
-        items: [PlanSelectionValue.male.value, PlanSelectionValue.female.value],
-        desc:
-            '*Some gender identities are not yet scientifically supported in existing research used for creating personalized plans. Please select the closest available option to proceed.',
-      ),
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.weight.label,
-        key: PersonalDetailsSettings.weight.key,
-        unit: Unit.kg.label,
-        // 20 to 150
-        items: List.generate(131, (index) => (index + 20).toString()),
-        desc:
-            '*Used to estimate your daily calorie needs and track your progress. Please enter your current body weight as accurately as possible.',
-      ),
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.height.label,
-        key: PersonalDetailsSettings.height.key,
-        unit: Unit.cm.label,
-        // 100 to 250
-        items: List.generate(151, (index) => (index + 100).toString()),
-        desc:
-            '*Helps calculate your body metrics like BMI and ideal caloric intake. Please provide your current height in centimeters.',
-      ),
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.activityLevel.label,
-        key: PersonalDetailsSettings.activityLevel.key,
-        items: [
-          PlanSelectionValue.sedentary.value,
-          PlanSelectionValue.lightlyActive.value,
-          PlanSelectionValue.active.value,
-          PlanSelectionValue.veryActive.value,
-        ],
-        desc: '*Your general daily movement:\n'
-            '- Sedentary: Little to no physical activity.\n'
-            '- Lightly Active: Occasional movement.\n'
-            '- Active: Regular movement during the day.\n'
-            '- Very Active: Physically demanding routine.',
-      ),
-      PersonalDetailsModel(
-        label: PersonalDetailsSettings.exerciseLevel.label,
-        key: PersonalDetailsSettings.exerciseLevel.key,
-        items: [
-          PlanSelectionValue.light.value,
-          PlanSelectionValue.moderate.value,
-          PlanSelectionValue.frequent.value,
-          PlanSelectionValue.never.value
-        ],
-        desc: '*How often you engage in intentional exercise:\n'
-            '- Light: 1–2 times per week\n'
-            '- Moderate: 3–4 times per week\n'
-            '- Frequent: 5 or more times per week\n'
-            '- Never: No regular exercise routine',
-      ),
-    ];
+List<PersonalDetailsModel> weightGoal = [
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.targetWeight.label,
+    key: PersonalDetailsSettings.targetWeight.key,
+    // 100 to 250
+    items: List.generate(131, (index) => (index + 20).toString()),
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.targetWeeklyChange.label,
+    key: PersonalDetailsSettings.targetWeeklyChange.key,
+    // 0.10 to 1
+    items: List.generate(19, (index) => (0.1 + index * 0.05).toStringAsFixed(2)),
+  )
+];
+
+List<PersonalDetailsModel> personalDetails = [
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.dob.label,
+    key: PersonalDetailsSettings.dob.key,
+    items: [],
+    desc:
+        '*Your date of birth helps us tailor recommendations, track your progress accurately, and provide age-appropriate features. This information stays private.',
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.gender.label,
+    key: PersonalDetailsSettings.gender.key,
+    items: [PlanSelectionValue.male.value, PlanSelectionValue.female.value],
+    desc:
+        '*Some gender identities are not yet scientifically supported in existing research used for creating personalized plans. Please select the closest available option to proceed.',
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.weight.label,
+    key: PersonalDetailsSettings.weight.key,
+    unit: Unit.kg.label,
+    // 20 to 150
+    items: List.generate(131, (index) => (index + 20).toString()),
+    desc:
+        '*Used to estimate your daily calorie needs and track your progress. Please enter your current body weight as accurately as possible.',
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.height.label,
+    key: PersonalDetailsSettings.height.key,
+    unit: Unit.cm.label,
+    // 100 to 250
+    items: List.generate(151, (index) => (index + 100).toString()),
+    desc:
+        '*Helps calculate your body metrics like BMI and ideal caloric intake. Please provide your current height in centimeters.',
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.activityLevel.label,
+    key: PersonalDetailsSettings.activityLevel.key,
+    items: [
+      PlanSelectionValue.sedentary.value,
+      PlanSelectionValue.lightlyActive.value,
+      PlanSelectionValue.active.value,
+      PlanSelectionValue.veryActive.value,
+    ],
+    desc: '*Your general daily movement:\n'
+        '- Sedentary: Little to no physical activity.\n'
+        '- Lightly Active: Occasional movement.\n'
+        '- Active: Regular movement during the day.\n'
+        '- Very Active: Physically demanding routine.',
+  ),
+  PersonalDetailsModel(
+    label: PersonalDetailsSettings.exerciseLevel.label,
+    key: PersonalDetailsSettings.exerciseLevel.key,
+    items: [
+      PlanSelectionValue.light.value,
+      PlanSelectionValue.moderate.value,
+      PlanSelectionValue.frequent.value,
+      PlanSelectionValue.never.value
+    ],
+    desc: '*How often you engage in intentional exercise:\n'
+        '- Light: 1–2 times per week\n'
+        '- Moderate: 3–4 times per week\n'
+        '- Frequent: 5 or more times per week\n'
+        '- Never: No regular exercise routine',
+  ),
+];

@@ -115,9 +115,9 @@ extension _PrivateMethods on _NutritionGoalsPageState {
   double calculateAdjustmentBasedOnWeightGoal() {
     final UserProfileModel? user = SharedPreferenceHandler().getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
-    final double adjustmentBasedOnWeightGoal = FunctionUtils.adjustCaloriesForTargetWeeklyGain(
+    final double adjustmentBasedOnWeightGoal = FunctionUtils.adjustCaloriesForTargetWeeklyChange(
           tdee: calculateTdee(),
-          targetWeeklyGain: double.tryParse(bodyMetrics?.targetWeeklyGain?.toString() ?? '0') ?? 0,
+          targetWeeklyChange: double.tryParse(bodyMetrics?.targetWeeklyChange?.toString() ?? '0') ?? 0,
         ) -
         calculateBMR() -
         calculateBaselineActivity();
@@ -310,11 +310,20 @@ extension _WidgetFactories on _NutritionGoalsPageState {
 
   // Total Percent Energy Row
   Widget getTotalPercentEnergyRow(String totalRatio) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final totalRatioDouble = double.tryParse(totalRatio) ?? 0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle()),
-        Text('$totalRatio%', style: _Styles.getPercentTotalEnergyValueTextStyle(totalRatio)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(S.current.percentTotalEnergyLabel, style: _Styles.getPercentTotalEnergyLabelTextStyle()),
+            Text('$totalRatio%', style: _Styles.getPercentTotalEnergyValueTextStyle(totalRatio)),
+          ],
+        ),
+        if (totalRatioDouble != 100)
+          Text(S.current.ratioErrorMessage, style: _Styles.getRatioErrorMessageLabelTextStyle(context))
       ],
     );
   }
@@ -576,5 +585,10 @@ class _Styles {
   // Custom Form Builder Drop Down Text Style
   static TextStyle getCustomFormBuilderDropDownTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+  }
+
+  // Ratio Error Message Label Text Style
+  static TextStyle getRatioErrorMessageLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.extraSmall).copyWith(color: AppColors.redColor);
   }
 }

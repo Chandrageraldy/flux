@@ -12,7 +12,7 @@ class BodyMetricsModel with _$BodyMetricsModel {
     String? weight,
     String? dob,
     String? targetWeight,
-    String? targetWeeklyGain,
+    String? targetWeeklyChange,
     String? activityLevel,
     String? exerciseLevel,
     String? dietType,

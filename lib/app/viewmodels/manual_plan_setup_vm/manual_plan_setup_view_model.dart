@@ -16,7 +16,7 @@ class ManualPlanSetupViewModel extends BaseViewModel {
     String userWeight = bodyMetrics[PlanSelectionKey.weight.key] ?? '';
     String userTargetWeight = bodyMetrics[PlanSelectionKey.targetWeight.key] ?? '';
     if (userWeight == userTargetWeight) {
-      bodyMetrics.remove(PlanSelectionKey.targetWeeklyGain.key);
+      bodyMetrics.remove(PlanSelectionKey.targetWeeklyChange.key);
       bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.maintain.value;
     } else if (double.parse(userWeight) < double.parse(userTargetWeight)) {
       bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.gain.value;

@@ -126,6 +126,7 @@ class AppStyles {
   static final kSizedBoxH32 = const SizedBox(height: 32.0);
   static final kSizedBoxH48 = const SizedBox(height: 48.0);
   static final kSizedBoxH60 = const SizedBox(height: 60.0);
+  static final kSizedBoxH100 = const SizedBox(height: 100.0);
 
   // Size
   static double kDoubleInfinity = double.infinity;

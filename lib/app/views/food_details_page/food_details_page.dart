@@ -20,10 +20,10 @@ import 'package:percent_indicator/multi_segment_linear_indicator.dart';
 
 @RoutePage()
 class FoodDetailsPage extends StatelessWidget {
-  const FoodDetailsPage({required this.foodResponseModel, required this.fromAllTab, super.key});
+  const FoodDetailsPage({required this.foodResponseModel, required this.saveRecent, super.key});
 
   final FoodResponseModel foodResponseModel;
-  final bool fromAllTab;
+  final bool saveRecent;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +31,17 @@ class FoodDetailsPage extends StatelessWidget {
       create: (_) => FoodDetailsViewModel(),
       child: _FoodDetailsPage(
         foodResponseModel: foodResponseModel,
-        fromAllTab: fromAllTab,
+        saveRecent: saveRecent,
       ),
     );
   }
 }
 
 class _FoodDetailsPage extends BaseStatefulPage {
-  const _FoodDetailsPage({required this.foodResponseModel, required this.fromAllTab});
+  const _FoodDetailsPage({required this.foodResponseModel, required this.saveRecent});
 
   final FoodResponseModel foodResponseModel;
-  final bool fromAllTab;
+  final bool saveRecent;
 
   @override
   State<_FoodDetailsPage> createState() => _FoodDetailsPageState();
@@ -68,7 +68,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
     checkIfSaved();
     checkIfFromAllTab();
     getFoodDetails();
-    print(widget.fromAllTab);
+    print(widget.saveRecent);
   }
 
   @override
@@ -140,7 +140,7 @@ extension _PrivateMethods on _FoodDetailsPageState {
   }
 
   void checkIfFromAllTab() {
-    if (widget.fromAllTab) {
+    if (widget.saveRecent) {
       saveToRecent();
     }
   }

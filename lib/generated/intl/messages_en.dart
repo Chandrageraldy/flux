@@ -180,6 +180,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
+        "noRecentItemsLabel":
+            MessageLookupByLibrary.simpleMessage("No recent items."),
+        "noRecentItemsMessage": MessageLookupByLibrary.simpleMessage(
+            "You haven’t viewed any food items yet. Start searching to add items here."),
+        "noResultFoundLabel":
+            MessageLookupByLibrary.simpleMessage("No results found."),
+        "noResultFoundMessage": MessageLookupByLibrary.simpleMessage(
+            "No results. Check the spelling and try again. Or create your own food listing."),
         "normalWeightLabel":
             MessageLookupByLibrary.simpleMessage("Normal weight"),
         "nutritionGoalsLabel":
@@ -261,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
         "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),
+        "ratioErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "The total must equal 100%. Please adjust the values."),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
@@ -301,14 +311,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "sodiumLabel": MessageLookupByLibrary.simpleMessage("Sodium"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
+        "targetWeeklyChangeLabel":
+            MessageLookupByLibrary.simpleMessage("Target Weekly Change"),
         "targetWeightDesc": MessageLookupByLibrary.simpleMessage(
             "Set your goal weight — if it’s higher, we’ll help you gain; if lower, lose; if the same, maintain."),
         "targetWeightLabel":
             MessageLookupByLibrary.simpleMessage("Target Weight"),
         "targetWeightWeeklyDesc": MessageLookupByLibrary.simpleMessage(
-            "0.1–0.2 kg: slow gain, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast gain, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk"),
+            "0.1–0.2 kg: slow change, minimal fat | 0.25–0.4 kg: balanced & recommended | 0.45–0.6 kg: fast change, more aggressive | 0.65–1.0 kg: very aggressive, higher fat risk"),
         "targetWeightWeeklyLabel":
-            MessageLookupByLibrary.simpleMessage("Target Weekly Gain"),
+            MessageLookupByLibrary.simpleMessage("Target Weekly Change"),
         "targetsLabel": MessageLookupByLibrary.simpleMessage("Targets"),
         "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(

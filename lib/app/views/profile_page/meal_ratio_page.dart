@@ -315,11 +315,19 @@ extension _WidgetFactories on _MealRatioPageState {
 
   // Total Percent Row
   Widget getTotalPercentRow(String totalRatio) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final totalRatioDouble = double.tryParse(totalRatio) ?? 0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(S.current.percentOfTotalMealRatioLabel, style: _Styles.getPercentTotalLabelTextStyle()),
-        Text('$totalRatio%', style: _Styles.getPercentTotalValueTextStyle(totalRatio)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(S.current.percentOfTotalMealRatioLabel, style: _Styles.getPercentTotalLabelTextStyle()),
+            Text('$totalRatio%', style: _Styles.getPercentTotalValueTextStyle(totalRatio)),
+          ],
+        ),
+        if (totalRatioDouble != 100)
+          Text(S.current.ratioErrorMessage, style: _Styles.getRatioErrorMessageLabelTextStyle(context))
       ],
     );
   }
@@ -350,7 +358,7 @@ abstract class _Styles {
 
   // Meal Label Text Style
   static TextStyle getMealLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
+    return Quicksand.medium.withSize(FontSizes.small);
   }
 
   // Energy Target Text Field Container Decoration
@@ -411,5 +419,10 @@ abstract class _Styles {
   // Target Label Text Style
   static TextStyle getTargetLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.small);
+  }
+
+  // Ratio Error Message Label Text Style
+  static TextStyle getRatioErrorMessageLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.extraSmall).copyWith(color: AppColors.redColor);
   }
 }

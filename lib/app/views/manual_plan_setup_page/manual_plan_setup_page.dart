@@ -177,10 +177,10 @@ extension _Actions on _ManualPlanSetupPageState {
   void _onContinueButtonPressed(Map<String, String> bodyMetrics) {
     final nextIndex = _currentQuestionIndex + 1;
 
-    final shouldSkipTargetWeeklyGain = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeeklyGain.key &&
+    final shouldSkipTargetWeeklyChange = planQuestionData[nextIndex].key == PlanSelectionKey.targetWeeklyChange.key &&
         bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
-    if (shouldSkipTargetWeeklyGain && nextIndex + 1 < planQuestionData.length) {
+    if (shouldSkipTargetWeeklyChange && nextIndex + 1 < planQuestionData.length) {
       _setState(() => _currentQuestionIndex = nextIndex + 1);
     } else {
       _setState(() => _currentQuestionIndex = nextIndex);
@@ -194,11 +194,11 @@ extension _Actions on _ManualPlanSetupPageState {
     final bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
     final previousIndex = _currentQuestionIndex - 1;
 
-    final shouldSkipTargetWeeklyGain =
-        planQuestionData[_currentQuestionIndex - 1].key == PlanSelectionKey.targetWeeklyGain.key &&
+    final shouldSkipTargetWeeklyChange =
+        planQuestionData[_currentQuestionIndex - 1].key == PlanSelectionKey.targetWeeklyChange.key &&
             bodyMetrics[PlanSelectionKey.targetWeight.key] == bodyMetrics[PlanSelectionKey.weight.key];
 
-    if (shouldSkipTargetWeeklyGain && previousIndex - 1 >= 0) {
+    if (shouldSkipTargetWeeklyChange && previousIndex - 1 >= 0) {
       _setState(() => _currentQuestionIndex = previousIndex - 1);
     } else {
       _setState(() => _currentQuestionIndex = previousIndex);

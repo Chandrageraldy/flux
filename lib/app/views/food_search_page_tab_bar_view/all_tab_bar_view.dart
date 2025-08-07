@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
+import 'package:flux/app/widgets/empty_result/empty_result.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 
 class AllTabBarView extends StatelessWidget {
@@ -20,6 +21,8 @@ class AllTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSearching = context.select((FoodSearchViewModel vm) => vm.isSearching);
+
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: RefreshIndicator(
@@ -29,7 +32,7 @@ class AllTabBarView extends StatelessWidget {
         child: CustomScrollView(
           controller: scrollController,
           physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [getHeader(context), ...getFoodSliverList(context)],
+          slivers: [if (!isSearching) getHeader(context), ...getFoodSliverList(context)],
         ),
       ),
     );
@@ -48,16 +51,16 @@ extension _WidgetFactories on AllTabBarView {
         isSearching ? foodSearchResults : recentFoodResults.map((e) => e.toFoodResponseModel()).toList();
 
     return [
-      if (foodList.isNotEmpty) ...[
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: AppStyles.kPaddOT16B6,
-            child: Text(
-              isSearching ? 'SEARCH RESULTS' : 'RECENTLY VIEWED',
-              style: Quicksand.semiBold.withCustomSize(11),
-            ),
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: AppStyles.kPaddOT16B6,
+          child: Text(
+            isSearching ? 'SEARCH RESULTS' : 'RECENTLY VIEWED',
+            style: Quicksand.semiBold.withCustomSize(11),
           ),
         ),
+      ),
+      if (foodList.isNotEmpty) ...[
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -80,12 +83,10 @@ extension _WidgetFactories on AllTabBarView {
       ] else ...[
         SliverFillRemaining(
           hasScrollBody: false,
-          child: Center(
-            child: Text(
-              isSearching ? 'No results found.' : 'No recent items.',
-              style: Quicksand.semiBold.withCustomSize(11),
-              textAlign: TextAlign.center,
-            ),
+          child: EmptyResult(
+            imagePath: ImagePath.pizza,
+            title: isSearching ? S.current.noResultFoundLabel : S.current.noRecentItemsLabel,
+            message: isSearching ? S.current.noResultFoundMessage : S.current.noRecentItemsMessage,
           ),
         ),
       ]

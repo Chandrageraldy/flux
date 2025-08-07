@@ -8,6 +8,8 @@ class PersonalDetailsViewModel extends BaseViewModel {
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
   Map<String, String> personalDetails = {};
 
+  bool isTargetWeeklyChangeEnabled = true;
+
   PersonalDetailsViewModel() {
     _init();
   }
@@ -15,6 +17,7 @@ class PersonalDetailsViewModel extends BaseViewModel {
   void _init() {
     final UserProfileModel? user = sharedPreferenceHandler.getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
+
     personalDetails = {
       PersonalDetailsSettings.dob.key: bodyMetrics?.dob ?? '',
       PersonalDetailsSettings.gender.key: bodyMetrics?.gender ?? '',
@@ -22,13 +25,26 @@ class PersonalDetailsViewModel extends BaseViewModel {
       PersonalDetailsSettings.height.key: bodyMetrics?.height ?? '',
       PersonalDetailsSettings.activityLevel.key: bodyMetrics?.activityLevel ?? '',
       PersonalDetailsSettings.exerciseLevel.key: bodyMetrics?.exerciseLevel ?? '',
+      PersonalDetailsSettings.targetWeight.key: bodyMetrics?.targetWeight ?? '',
+      PersonalDetailsSettings.targetWeeklyChange.key: bodyMetrics?.targetWeeklyChange ?? '',
     };
+
+    isTargetWeeklyChangeEnabled = (personalDetails[PersonalDetailsSettings.weight.key] ?? '') !=
+        (personalDetails[PersonalDetailsSettings.targetWeight.key] ?? '');
+
     notifyListeners();
   }
 
   void onItemSelected(String key, String value) {
     // Use this instead of 'personalDetails[key] = value' to provide new reference for notifying listener
     personalDetails = {...personalDetails, key: value};
+    isTargetWeeklyChangeEnabled = (personalDetails[PersonalDetailsSettings.weight.key] ?? '') !=
+        (personalDetails[PersonalDetailsSettings.targetWeight.key] ?? '');
+
+    if (!isTargetWeeklyChangeEnabled) {
+      personalDetails[PersonalDetailsSettings.targetWeeklyChange.key] = '';
+    }
+
     notifyListeners();
     debugPrint('$personalDetails');
   }
