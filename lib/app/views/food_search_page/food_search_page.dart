@@ -175,6 +175,7 @@ extension _WidgetFactories on _FoodSearchPageState {
       onFoodCardPressed: _onFoodCardPressed,
       onMealScanPressed: _onMealScanPressed,
       onRefresh: _getRecentFoods,
+      onBarcodeScanPressed: _onBarcodeScannerPressed,
     );
   }
 

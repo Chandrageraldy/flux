@@ -10,6 +10,7 @@ class AllTabBarView extends StatelessWidget {
   final void Function(FoodResponseModel) onFoodCardPressed;
   final VoidCallback onMealScanPressed;
   final VoidCallback onRefresh;
+  final VoidCallback onBarcodeScanPressed;
 
   const AllTabBarView({
     super.key,
@@ -17,6 +18,7 @@ class AllTabBarView extends StatelessWidget {
     required this.onFoodCardPressed,
     required this.onMealScanPressed,
     required this.onRefresh,
+    required this.onBarcodeScanPressed,
   });
 
   @override
@@ -99,87 +101,53 @@ extension _WidgetFactories on AllTabBarView {
       child: Column(
         children: [
           AppStyles.kSizedBoxH12,
-          Container(
-            decoration: _Styles.getHeaderContainerDecoration(context),
-            width: AppStyles.kDoubleInfinity,
-            child: Padding(
-              padding: AppStyles.kPaddSV12H16,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: AppStyles.kSpac8,
-                children: [
-                  Expanded(
-                    child: Column(
-                      spacing: AppStyles.kSpac4,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [getHeaderLabel(context), getHeaderDescriptionLabel(context)],
-                    ),
-                  ),
-                  getMealScanButton(context)
-                ],
-              ),
-            ),
-          ),
+          Row(
+            spacing: AppStyles.kSpac8,
+            children: [
+              getHeaderActionButton(
+                  context, S.current.scanABarcodeLabel, Icons.qr_code_scanner_outlined, onBarcodeScanPressed),
+              getHeaderActionButton(context, S.current.scanYourMealLabel, Icons.camera_enhance, onMealScanPressed),
+            ],
+          )
         ],
       ),
     );
   }
 
-  // Meal Scan Button
-  Widget getMealScanButton(BuildContext context) {
-    return Container(
-      padding: AppStyles.kPadd6,
-      decoration: _Styles.getMealScanContainerDecoration(context),
-      child: Icon(Icons.camera_enhance),
-    );
-  }
-
-  // Header Label
-  Widget getHeaderLabel(BuildContext context) {
-    return Text(
-      S.current.scanYourMealLabel,
-      style: _Styles.getHeaderLabelTextStyle(context),
-      textAlign: TextAlign.center,
-    );
-  }
-
-  // Header Description Label
-  Widget getHeaderDescriptionLabel(BuildContext context) {
-    return Text(
-      S.current.scanYourMealDesc,
-      style: _Styles.getHeaderDescriptionLabelTextStyle(context),
+  // Header Action Button
+  Widget getHeaderActionButton(BuildContext context, String label, IconData icon, VoidCallback onPressed) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          padding: AppStyles.kPaddSV8H12,
+          decoration: _Styles.getHeaderActionButtonContainerDecoration(context),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: AppStyles.kSpac4,
+            children: [
+              Icon(icon, size: AppStyles.kSize20, color: context.theme.colorScheme.secondary),
+              Text(label, style: _Styles.getHeaderActionLabelTextStyle(context))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
-  // Header Container Decoration
-  static BoxDecoration getHeaderContainerDecoration(BuildContext context) {
+  // Header Action Label Text Style
+  static TextStyle getHeaderActionLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+  }
+
+  // Header Action Row Button Container Decoration
+  static BoxDecoration getHeaderActionButtonContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
-      ],
-    );
-  }
-
-  // Header Label Text Style
-  static TextStyle getHeaderLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
-  }
-
-  // Header Description Label Text Style
-  static TextStyle getHeaderDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.extraSmall);
-  }
-
-  // Save Container Decoration
-  static BoxDecoration getMealScanContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.tertiaryFixedDim,
-      borderRadius: AppStyles.kRad100,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
