@@ -1690,10 +1690,10 @@ class S {
     );
   }
 
-  /// `Tap the camera icon to scan your meal with AI and get instant nutrition details.`
+  /// `Make sure your meal fits in the frame`
   String get scanYourMealDesc {
     return Intl.message(
-      'Tap the camera icon to scan your meal with AI and get instant nutrition details.',
+      'Make sure your meal fits in the frame',
       name: 'scanYourMealDesc',
       desc: '',
       args: [],

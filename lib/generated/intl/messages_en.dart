@@ -284,7 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),
         "scanYourMealDesc": MessageLookupByLibrary.simpleMessage(
-            "Tap the camera icon to scan your meal with AI and get instant nutrition details."),
+            "Make sure your meal fits in the frame"),
         "scanYourMealLabel":
             MessageLookupByLibrary.simpleMessage("Scan Your Meal"),
         "searchFoodPlaceholder":

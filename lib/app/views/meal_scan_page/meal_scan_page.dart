@@ -1,6 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:camera/camera.dart';
 import 'package:flux/app/utils/handler/starter_handler.dart';
+import 'package:flux/app/utils/utils/painters.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()
@@ -42,19 +43,32 @@ class _MealScanPageState extends BaseStatefulState<MealScanPage> {
   @override
   Widget body() {
     if (controller == null || !controller!.value.isInitialized) {
-      return const Center(child: CircularProgressIndicator());
+      return Container();
     }
 
     return Stack(
-      children: [getCameraPreview(), getTopNavigationBar(), getSnapPictureButton()],
+      children: [
+        getCameraPreview(),
+        getTopNavigationBar(),
+        SafeArea(
+          child: Column(
+            children: [
+              AppStyles.kSizedBoxH60,
+              getLabelColumn(),
+              AppStyles.kSizedBoxH48,
+              Expanded(child: getFrameContainer()),
+              AppStyles.kSizedBoxH48,
+              getSnapPictureButton(),
+              AppStyles.kSizedBoxH32,
+            ],
+          ),
+        ),
+      ],
     );
   }
 
-  // Enable Set State inside Extension
   void _setState(VoidCallback fn) {
-    if (mounted) {
-      setState(fn);
-    }
+    if (mounted) setState(fn);
   }
 }
 
@@ -84,7 +98,7 @@ extension _Actions on _MealScanPageState {
   }
 }
 
-// * ------------------------ PrivateMethods -------------------------
+// * ------------------------ Private Methods ------------------------
 extension _PrivateMethods on _MealScanPageState {
   Future<void> initCamera() async {
     controller = CameraController(cameras[0], ResolutionPreset.high, enableAudio: false);
@@ -107,7 +121,7 @@ extension _PrivateMethods on _MealScanPageState {
   }
 }
 
-// * ------------------------ WidgetFactories ------------------------
+// * ------------------------ Widget Factories ------------------------
 extension _WidgetFactories on _MealScanPageState {
   // Camera Preview
   Widget getCameraPreview() {
@@ -160,28 +174,63 @@ extension _WidgetFactories on _MealScanPageState {
 
   // Snap Picture Button
   Widget getSnapPictureButton() {
-    return Positioned(
-      bottom: 30,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: GestureDetector(
-          onTap: snapPicture,
-          child: Container(width: 70, height: 70, decoration: _Styles.snapPictureButtonDecoration),
+    return Center(
+      child: GestureDetector(
+        onTap: snapPicture,
+        child: Container(
+          width: 70,
+          height: 70,
+          decoration: _Styles.snapPictureButtonDecoration,
         ),
+      ),
+    );
+  }
+
+  // Label Column
+  Widget getLabelColumn() {
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.camera_enhance_rounded, color: context.theme.colorScheme.onPrimary),
+            const SizedBox(width: 8),
+            Text(S.current.scanYourMealLabel, style: _Styles.labelTextStyle(context)),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(S.current.scanYourMealDesc, style: _Styles.descriptionTextStyle(context), textAlign: TextAlign.center),
+      ],
+    );
+  }
+
+  // Frame Container with corner-only border
+  Widget getFrameContainer() {
+    return Padding(
+      padding: AppStyles.kPaddSH20,
+      child: CustomPaint(
+        painter: CornerFramePainter(color: context.theme.colorScheme.onPrimary),
+        child: SizedBox(width: double.infinity),
       ),
     );
   }
 }
 
-// * ----------------------------- Styles ----------------------------
+// * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  // Snap Picture Button Container Decoration
   static BoxDecoration get snapPictureButtonDecoration {
     return BoxDecoration(
       shape: BoxShape.circle,
       color: Colors.white,
       border: Border.all(color: Colors.grey, width: 4),
     );
+  }
+
+  static TextStyle labelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  static TextStyle descriptionTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 }

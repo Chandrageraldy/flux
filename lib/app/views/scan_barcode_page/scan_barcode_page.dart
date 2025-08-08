@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/utils/utils/painters.dart';
 import 'package:flux/app/viewmodels/barcode_scan_vm/barcode_scan_view_model.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -170,16 +171,17 @@ extension _WidgetFactories on _ScanBarcodePageState {
     );
   }
 
-  // Frame Container
   Widget getFrameContainer() {
     return Align(
       alignment: Alignment.center,
       child: Padding(
         padding: AppStyles.kPaddSH20,
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
-          height: AppStyles.kSize150,
-          decoration: _Styles.frameContainerDecoration(context),
+          height: 150,
+          child: CustomPaint(
+            painter: CornerFramePainter(color: context.theme.colorScheme.onPrimary),
+          ),
         ),
       ),
     );
@@ -225,17 +227,6 @@ class _Styles {
   // Description Text Style
   static TextStyle descriptionTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
-  }
-
-  // Frame Container Decoration
-  static BoxDecoration frameContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      border: Border.all(
-        color: context.theme.colorScheme.onPrimary,
-        width: 2,
-      ),
-      borderRadius: BorderRadius.circular(12),
-    );
   }
 
   // Try Again Button Text Style
