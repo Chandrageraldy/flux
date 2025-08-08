@@ -68,7 +68,6 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
     checkIfSaved();
     checkIfFromAllTab();
     getFoodDetails();
-    print(widget.saveRecent);
   }
 
   @override

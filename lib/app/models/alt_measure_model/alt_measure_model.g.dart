@@ -11,7 +11,6 @@ _$AltMeasureModelImpl _$$AltMeasureModelImplFromJson(
     _$AltMeasureModelImpl(
       servingWeight: (json['serving_weight'] as num?)?.toDouble(),
       measure: json['measure'] as String?,
-      seq: (json['seq'] as num?)?.toDouble(),
       qty: (json['qty'] as num?)?.toDouble(),
     );
 
@@ -20,6 +19,5 @@ Map<String, dynamic> _$$AltMeasureModelImplToJson(
     <String, dynamic>{
       'serving_weight': instance.servingWeight,
       'measure': instance.measure,
-      'seq': instance.seq,
       'qty': instance.qty,
     };

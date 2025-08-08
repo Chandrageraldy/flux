@@ -23,7 +23,6 @@ mixin _$AltMeasureModel {
   @JsonKey(name: 'serving_weight')
   double? get servingWeight => throw _privateConstructorUsedError;
   String? get measure => throw _privateConstructorUsedError;
-  double? get seq => throw _privateConstructorUsedError;
   double? get qty => throw _privateConstructorUsedError;
 
   /// Serializes this AltMeasureModel to a JSON map.
@@ -45,7 +44,6 @@ abstract class $AltMeasureModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'serving_weight') double? servingWeight,
       String? measure,
-      double? seq,
       double? qty});
 }
 
@@ -66,7 +64,6 @@ class _$AltMeasureModelCopyWithImpl<$Res, $Val extends AltMeasureModel>
   $Res call({
     Object? servingWeight = freezed,
     Object? measure = freezed,
-    Object? seq = freezed,
     Object? qty = freezed,
   }) {
     return _then(_value.copyWith(
@@ -78,10 +75,6 @@ class _$AltMeasureModelCopyWithImpl<$Res, $Val extends AltMeasureModel>
           ? _value.measure
           : measure // ignore: cast_nullable_to_non_nullable
               as String?,
-      seq: freezed == seq
-          ? _value.seq
-          : seq // ignore: cast_nullable_to_non_nullable
-              as double?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -101,7 +94,6 @@ abstract class _$$AltMeasureModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'serving_weight') double? servingWeight,
       String? measure,
-      double? seq,
       double? qty});
 }
 
@@ -120,7 +112,6 @@ class __$$AltMeasureModelImplCopyWithImpl<$Res>
   $Res call({
     Object? servingWeight = freezed,
     Object? measure = freezed,
-    Object? seq = freezed,
     Object? qty = freezed,
   }) {
     return _then(_$AltMeasureModelImpl(
@@ -132,10 +123,6 @@ class __$$AltMeasureModelImplCopyWithImpl<$Res>
           ? _value.measure
           : measure // ignore: cast_nullable_to_non_nullable
               as String?,
-      seq: freezed == seq
-          ? _value.seq
-          : seq // ignore: cast_nullable_to_non_nullable
-              as double?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -150,7 +137,6 @@ class _$AltMeasureModelImpl implements _AltMeasureModel {
   _$AltMeasureModelImpl(
       {@JsonKey(name: 'serving_weight') this.servingWeight,
       this.measure,
-      this.seq,
       this.qty});
 
   factory _$AltMeasureModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -162,13 +148,11 @@ class _$AltMeasureModelImpl implements _AltMeasureModel {
   @override
   final String? measure;
   @override
-  final double? seq;
-  @override
   final double? qty;
 
   @override
   String toString() {
-    return 'AltMeasureModel(servingWeight: $servingWeight, measure: $measure, seq: $seq, qty: $qty)';
+    return 'AltMeasureModel(servingWeight: $servingWeight, measure: $measure, qty: $qty)';
   }
 
   @override
@@ -179,14 +163,12 @@ class _$AltMeasureModelImpl implements _AltMeasureModel {
             (identical(other.servingWeight, servingWeight) ||
                 other.servingWeight == servingWeight) &&
             (identical(other.measure, measure) || other.measure == measure) &&
-            (identical(other.seq, seq) || other.seq == seq) &&
             (identical(other.qty, qty) || other.qty == qty));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, servingWeight, measure, seq, qty);
+  int get hashCode => Object.hash(runtimeType, servingWeight, measure, qty);
 
   /// Create a copy of AltMeasureModel
   /// with the given fields replaced by the non-null parameter values.
@@ -209,7 +191,6 @@ abstract class _AltMeasureModel implements AltMeasureModel {
   factory _AltMeasureModel(
       {@JsonKey(name: 'serving_weight') final double? servingWeight,
       final String? measure,
-      final double? seq,
       final double? qty}) = _$AltMeasureModelImpl;
 
   factory _AltMeasureModel.fromJson(Map<String, dynamic> json) =
@@ -220,8 +201,6 @@ abstract class _AltMeasureModel implements AltMeasureModel {
   double? get servingWeight;
   @override
   String? get measure;
-  @override
-  double? get seq;
   @override
   double? get qty;
 

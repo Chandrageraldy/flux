@@ -1,43 +1,76 @@
-// import 'package:camera/camera.dart';
-// import 'package:flutter_gemini/flutter_gemini.dart';
-// import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-// import 'package:flux/app/models/response_model.dart';
+import 'package:camera/camera.dart';
+import 'package:firebase_ai/firebase_ai.dart';
+import 'package:flutter/services.dart';
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
-// enum GeminiRequestType {
-//   text,
-//   imageWithText,
-// }
+enum GeminiRequestType {
+  text,
+  imageWithText,
+}
 
-// class GeminiBaseService {
-//   final Gemini _gemini = Gemini.instance;
+final jsonSchema = Schema.object(
+  properties: {
+    'food_name': Schema.string(),
+    'nf_calories': Schema.number(), // double
+    'nf_total_fat': Schema.number(), // double
+    'nf_total_carbohydrate': Schema.number(), // double
+    'nf_protein': Schema.number(), // double
+    'alt_measures': Schema.array(
+      items: Schema.object(
+        properties: {
+          'serving_weight': Schema.number(),
+          'measure': Schema.string(),
+          'qty': Schema.number(),
+        },
+      ),
+    ),
+  },
+);
 
-//   Future<Response> callGeminiApi({
-//     required GeminiRequestType requestType,
-//     required String prompt,
-//     XFile? imageFile,
-//   }) async {
-//     try {
-//       final Candidates? response;
+class GeminiBaseService {
+  final model = FirebaseAI.googleAI().generativeModel(
+      model: 'gemini-2.5-flash',
+      generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema));
 
-//       switch (requestType) {
-//         case GeminiRequestType.text:
-//           response = await _gemini.prompt(parts: [Part.text(prompt)]);
-//           break;
-//         case GeminiRequestType.imageWithText:
-//           final imageBytes = await imageFile!.readAsBytes();
-//           response = await _gemini.prompt(parts: [Part.text(prompt), Part.bytes(imageBytes)]);
-//           break;
-//       }
+  Future<Response> callGemini({
+    required GeminiRequestType requestType,
+    required String textPrompt,
+    XFile? imageFile,
+  }) async {
+    try {
+      GenerateContentResponse response;
 
-//       if (response != null && response.output != null) {
-//         print(response.output!);
-//         return Response.complete(response.output!);
-//       }
-//       print('ASU');
-//       return Response.error('Gemini API returned no output.');
-//     } on GeminiException catch (e) {
-//       print(e.message);
-//       return Response.error(e);
-//     }
-//   }
-// }
+      switch (requestType) {
+        case GeminiRequestType.text:
+          final prompt = [Content.text(textPrompt)];
+          response = await model.generateContent(prompt);
+          break;
+        case GeminiRequestType.imageWithText:
+          // final prompt = TextPart(textPrompt);
+          // final image = await imageFile!.readAsBytes();
+          // final imagePart = InlineDataPart('image/jpeg', image);
+          // response = await model.generateContent([
+          //   Content.multi([prompt, imagePart])
+          // ]);
+          final prompt = TextPart(textPrompt);
+
+          // Load dummy image from assets
+          final image = await rootBundle.load(ImagePath.fluxLogo);
+          final imageBytes = image.buffer.asUint8List();
+
+          final imagePart = InlineDataPart('image/jpeg', imageBytes);
+
+          response = await model.generateContent([
+            Content.multi([prompt, imagePart])
+          ]);
+          break;
+      }
+
+      print(response.text);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    return Response.complete('');
+  }
+}

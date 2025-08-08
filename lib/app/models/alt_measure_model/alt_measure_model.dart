@@ -10,7 +10,6 @@ class AltMeasureModel with _$AltMeasureModel {
   factory AltMeasureModel({
     @JsonKey(name: 'serving_weight') double? servingWeight,
     String? measure,
-    double? seq,
     double? qty,
   }) = _AltMeasureModel;
 

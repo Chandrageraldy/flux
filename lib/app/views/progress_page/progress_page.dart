@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 
@@ -37,7 +38,11 @@ extension _PrivateMethods on _ProgressPageState {
     await tryLoad(context, () => context.read<PlanViewModel>().getPersonalizedPlan()) ?? false;
   }
 
-  void _testAPI() async {}
+  void _testAPI() async {
+    GeminiBaseService().callGemini(
+        requestType: GeminiRequestType.text,
+        textPrompt: 'I will give you a food as a sample, and generate me as the json model i need? the food is apple');
+  }
 
   void _onLogoutPressed() async {
     final response = await tryLoad(context, () => context.read<UserViewModel>().logout());

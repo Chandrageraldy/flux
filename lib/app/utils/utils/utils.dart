@@ -264,16 +264,20 @@ class FunctionUtils {
     required double fat,
     required double protein,
   }) {
+    // Calories per gram
     final carbCaloriesPerGram = MacroNutrients.carbs.multiplier;
     final proteinCaloriesPerGram = MacroNutrients.protein.multiplier;
     final fatCaloriesPerGram = MacroNutrients.fat.multiplier;
 
+    // Total calories for each macro
     final carbCalories = carbs * carbCaloriesPerGram;
     final proteinCalories = protein * proteinCaloriesPerGram;
     final fatCalories = fat * fatCaloriesPerGram;
 
+    // Total calories
     final totalCalories = carbCalories + proteinCalories + fatCalories;
 
+    // Handle zero calories case
     if (totalCalories == 0) {
       return {
         'carbs': 0.0,
@@ -282,15 +286,34 @@ class FunctionUtils {
       };
     }
 
-    final carbPercent = (carbCalories / totalCalories);
-    final fatPercent = (fatCalories / totalCalories);
-    final proteinPercent = (proteinCalories / totalCalories);
+    // Raw percentages
+    double carbPercent = carbCalories / totalCalories;
+    double fatPercent = fatCalories / totalCalories;
+    double proteinPercent = proteinCalories / totalCalories;
 
-    return {
+    // Rounding helper
+    double roundTo(double value, [int places = 6]) => double.parse(value.toStringAsFixed(places));
+
+    // Round values first
+    carbPercent = roundTo(carbPercent);
+    fatPercent = roundTo(fatPercent);
+    proteinPercent = roundTo(proteinPercent);
+
+    // Normalize to ensure total is exactly 1.0
+    final total = roundTo(carbPercent + fatPercent + proteinPercent);
+    final correction = roundTo(1.0 - total);
+
+    // Apply correction to the largest macro
+    final macroMap = {
       'carbs': carbPercent,
       'fat': fatPercent,
       'protein': proteinPercent,
     };
+
+    final largestKey = macroMap.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+    macroMap[largestKey] = roundTo(macroMap[largestKey]! + correction);
+
+    return macroMap;
   }
 
   static int calculateAge(DateTime dob) {
