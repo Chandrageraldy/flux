@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:flux/app/repositories/food_repo/food_repo.dart';
 import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 
@@ -38,15 +37,7 @@ extension _PrivateMethods on _ProgressPageState {
     await tryLoad(context, () => context.read<PlanViewModel>().getPersonalizedPlan()) ?? false;
   }
 
-  void _testAPI() async {
-    await FoodRepository().searchInstant(query: 'Eggs');
-
-    // if (response.status == ResponseStatus.COMPLETE) {
-    //   debugPrint('API Response: ${response.data}');
-    // } else {
-    //   debugPrint('API Error: ${response.error}');
-    // }
-  }
+  void _testAPI() async {}
 
   void _onLogoutPressed() async {
     final response = await tryLoad(context, () => context.read<UserViewModel>().logout());

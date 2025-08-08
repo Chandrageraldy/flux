@@ -2,17 +2,25 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:camera/camera.dart';
 import 'package:flux/app/utils/handler/starter_handler.dart';
 import 'package:flux/app/utils/utils/painters.dart';
+import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()
-class MealScanPage extends BaseStatefulPage {
+class MealScanPage extends StatelessWidget {
   const MealScanPage({super.key});
 
   @override
-  State<MealScanPage> createState() => _MealScanPageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(create: (_) => MealScanViewModel(), child: _MealScanPage());
+  }
 }
 
-class _MealScanPageState extends BaseStatefulState<MealScanPage> {
+class _MealScanPage extends BaseStatefulPage {
+  @override
+  State<_MealScanPage> createState() => _MealScanPageState();
+}
+
+class _MealScanPageState extends BaseStatefulState<_MealScanPage> {
   CameraController? controller;
   FlashMode currentFlashMode = FlashMode.off;
 
@@ -178,8 +186,8 @@ extension _WidgetFactories on _MealScanPageState {
       child: GestureDetector(
         onTap: snapPicture,
         child: Container(
-          width: 70,
-          height: 70,
+          width: AppStyles.kSize64,
+          height: AppStyles.kSize64,
           decoration: _Styles.snapPictureButtonDecoration,
         ),
       ),
@@ -192,13 +200,12 @@ extension _WidgetFactories on _MealScanPageState {
       children: [
         Row(
           mainAxisSize: MainAxisSize.min,
+          spacing: AppStyles.kSpac8,
           children: [
             Icon(Icons.camera_enhance_rounded, color: context.theme.colorScheme.onPrimary),
-            const SizedBox(width: 8),
             Text(S.current.scanYourMealLabel, style: _Styles.labelTextStyle(context)),
           ],
         ),
-        const SizedBox(height: 4),
         Text(S.current.scanYourMealDesc, style: _Styles.descriptionTextStyle(context), textAlign: TextAlign.center),
       ],
     );
