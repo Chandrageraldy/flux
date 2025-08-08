@@ -9,6 +9,7 @@ import 'package:flux/app/views/diary_page/diary_page.dart';
 import 'package:flux/app/views/error_modal/error_modal.dart';
 import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
+import 'package:flux/app/views/meal_scan_page/meal_scan_page.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.dart';
 import 'package:flux/app/views/manual_plan_setup_page/manual_plan_setup_page.dart';
@@ -75,6 +76,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: NutritionGoalsRoute.page),
         AutoRoute(page: MealRatioRoute.page),
         AutoRoute(page: AccountRoute.page),
+        AutoRoute(page: MealScanRoute.page)
       ],
     );
   }

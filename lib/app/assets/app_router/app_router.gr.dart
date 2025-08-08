@@ -13,8 +13,7 @@ part of 'app_router.dart';
 /// generated route for
 /// [AccountPage]
 class AccountRoute extends PageRouteInfo<void> {
-  const AccountRoute({List<PageRouteInfo>? children})
-    : super(AccountRoute.name, initialChildren: children);
+  const AccountRoute({List<PageRouteInfo>? children}) : super(AccountRoute.name, initialChildren: children);
 
   static const String name = 'AccountRoute';
 
@@ -30,7 +29,7 @@ class AccountRoute extends PageRouteInfo<void> {
 /// [DashboardNavigatorPage]
 class DashboardNavigatorRoute extends PageRouteInfo<void> {
   const DashboardNavigatorRoute({List<PageRouteInfo>? children})
-    : super(DashboardNavigatorRoute.name, initialChildren: children);
+      : super(DashboardNavigatorRoute.name, initialChildren: children);
 
   static const String name = 'DashboardNavigatorRoute';
 
@@ -45,8 +44,7 @@ class DashboardNavigatorRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [DashboardPage]
 class DashboardRoute extends PageRouteInfo<void> {
-  const DashboardRoute({List<PageRouteInfo>? children})
-    : super(DashboardRoute.name, initialChildren: children);
+  const DashboardRoute({List<PageRouteInfo>? children}) : super(DashboardRoute.name, initialChildren: children);
 
   static const String name = 'DashboardRoute';
 
@@ -61,8 +59,7 @@ class DashboardRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [DiaryPage]
 class DiaryRoute extends PageRouteInfo<void> {
-  const DiaryRoute({List<PageRouteInfo>? children})
-    : super(DiaryRoute.name, initialChildren: children);
+  const DiaryRoute({List<PageRouteInfo>? children}) : super(DiaryRoute.name, initialChildren: children);
 
   static const String name = 'DiaryRoute';
 
@@ -86,17 +83,17 @@ class ErrorRoute extends PageRouteInfo<ErrorRouteArgs> {
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
-         ErrorRoute.name,
-         args: ErrorRouteArgs(
-           icon: icon,
-           iconBackgroundColor: iconBackgroundColor,
-           label: label,
-           description: description,
-           actions: actions,
-           key: key,
-         ),
-         initialChildren: children,
-       );
+          ErrorRoute.name,
+          args: ErrorRouteArgs(
+            icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            label: label,
+            description: description,
+            actions: actions,
+            key: key,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'ErrorRoute';
 
@@ -153,14 +150,14 @@ class FoodDetailsRoute extends PageRouteInfo<FoodDetailsRouteArgs> {
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
-         FoodDetailsRoute.name,
-         args: FoodDetailsRouteArgs(
-           foodResponseModel: foodResponseModel,
-           saveRecent: saveRecent,
-           key: key,
-         ),
-         initialChildren: children,
-       );
+          FoodDetailsRoute.name,
+          args: FoodDetailsRouteArgs(
+            foodResponseModel: foodResponseModel,
+            saveRecent: saveRecent,
+            key: key,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'FoodDetailsRoute';
 
@@ -199,8 +196,7 @@ class FoodDetailsRouteArgs {
 /// generated route for
 /// [FoodSearchPage]
 class FoodSearchRoute extends PageRouteInfo<void> {
-  const FoodSearchRoute({List<PageRouteInfo>? children})
-    : super(FoodSearchRoute.name, initialChildren: children);
+  const FoodSearchRoute({List<PageRouteInfo>? children}) : super(FoodSearchRoute.name, initialChildren: children);
 
   static const String name = 'FoodSearchRoute';
 
@@ -216,7 +212,7 @@ class FoodSearchRoute extends PageRouteInfo<void> {
 /// [LoggingSelectionModal]
 class LoggingSelectionRoute extends PageRouteInfo<void> {
   const LoggingSelectionRoute({List<PageRouteInfo>? children})
-    : super(LoggingSelectionRoute.name, initialChildren: children);
+      : super(LoggingSelectionRoute.name, initialChildren: children);
 
   static const String name = 'LoggingSelectionRoute';
 
@@ -231,8 +227,7 @@ class LoggingSelectionRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
-    : super(LoginRoute.name, initialChildren: children);
+  const LoginRoute({List<PageRouteInfo>? children}) : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
@@ -248,7 +243,7 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [ManualPlanSetupPage]
 class ManualPlanSetupRoute extends PageRouteInfo<void> {
   const ManualPlanSetupRoute({List<PageRouteInfo>? children})
-    : super(ManualPlanSetupRoute.name, initialChildren: children);
+      : super(ManualPlanSetupRoute.name, initialChildren: children);
 
   static const String name = 'ManualPlanSetupRoute';
 
@@ -268,10 +263,10 @@ class MealDetailsRoute extends PageRouteInfo<MealDetailsRouteArgs> {
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
-         MealDetailsRoute.name,
-         args: MealDetailsRouteArgs(mealType: mealType, key: key),
-         initialChildren: children,
-       );
+          MealDetailsRoute.name,
+          args: MealDetailsRouteArgs(mealType: mealType, key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'MealDetailsRoute';
 
@@ -300,8 +295,7 @@ class MealDetailsRouteArgs {
 /// generated route for
 /// [MealRatioPage]
 class MealRatioRoute extends PageRouteInfo<void> {
-  const MealRatioRoute({List<PageRouteInfo>? children})
-    : super(MealRatioRoute.name, initialChildren: children);
+  const MealRatioRoute({List<PageRouteInfo>? children}) : super(MealRatioRoute.name, initialChildren: children);
 
   static const String name = 'MealRatioRoute';
 
@@ -314,10 +308,25 @@ class MealRatioRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MealScanPage]
+class MealScanRoute extends PageRouteInfo<void> {
+  const MealScanRoute({List<PageRouteInfo>? children}) : super(MealScanRoute.name, initialChildren: children);
+
+  static const String name = 'MealScanRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MealScanPage();
+    },
+  );
+}
+
+/// generated route for
 /// [NutritionGoalsPage]
 class NutritionGoalsRoute extends PageRouteInfo<void> {
   const NutritionGoalsRoute({List<PageRouteInfo>? children})
-    : super(NutritionGoalsRoute.name, initialChildren: children);
+      : super(NutritionGoalsRoute.name, initialChildren: children);
 
   static const String name = 'NutritionGoalsRoute';
 
@@ -333,7 +342,7 @@ class NutritionGoalsRoute extends PageRouteInfo<void> {
 /// [PersonalDetailsPage]
 class PersonalDetailsRoute extends PageRouteInfo<void> {
   const PersonalDetailsRoute({List<PageRouteInfo>? children})
-    : super(PersonalDetailsRoute.name, initialChildren: children);
+      : super(PersonalDetailsRoute.name, initialChildren: children);
 
   static const String name = 'PersonalDetailsRoute';
 
@@ -349,7 +358,7 @@ class PersonalDetailsRoute extends PageRouteInfo<void> {
 /// [PersonalizingPlanLoadingPage]
 class PersonalizingPlanLoadingRoute extends PageRouteInfo<void> {
   const PersonalizingPlanLoadingRoute({List<PageRouteInfo>? children})
-    : super(PersonalizingPlanLoadingRoute.name, initialChildren: children);
+      : super(PersonalizingPlanLoadingRoute.name, initialChildren: children);
 
   static const String name = 'PersonalizingPlanLoadingRoute';
 
@@ -364,8 +373,7 @@ class PersonalizingPlanLoadingRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [PlanSelectionModal]
 class PlanSelectionRoute extends PageRouteInfo<void> {
-  const PlanSelectionRoute({List<PageRouteInfo>? children})
-    : super(PlanSelectionRoute.name, initialChildren: children);
+  const PlanSelectionRoute({List<PageRouteInfo>? children}) : super(PlanSelectionRoute.name, initialChildren: children);
 
   static const String name = 'PlanSelectionRoute';
 
@@ -380,8 +388,7 @@ class PlanSelectionRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children})
-    : super(ProfileRoute.name, initialChildren: children);
+  const ProfileRoute({List<PageRouteInfo>? children}) : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
@@ -396,8 +403,7 @@ class ProfileRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ProgressPage]
 class ProgressRoute extends PageRouteInfo<void> {
-  const ProgressRoute({List<PageRouteInfo>? children})
-    : super(ProgressRoute.name, initialChildren: children);
+  const ProgressRoute({List<PageRouteInfo>? children}) : super(ProgressRoute.name, initialChildren: children);
 
   static const String name = 'ProgressRoute';
 
@@ -412,8 +418,7 @@ class ProgressRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [RootNavigatorPage]
 class RootNavigatorRoute extends PageRouteInfo<void> {
-  const RootNavigatorRoute({List<PageRouteInfo>? children})
-    : super(RootNavigatorRoute.name, initialChildren: children);
+  const RootNavigatorRoute({List<PageRouteInfo>? children}) : super(RootNavigatorRoute.name, initialChildren: children);
 
   static const String name = 'RootNavigatorRoute';
 
@@ -428,8 +433,7 @@ class RootNavigatorRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [RootPage]
 class RootRoute extends PageRouteInfo<void> {
-  const RootRoute({List<PageRouteInfo>? children})
-    : super(RootRoute.name, initialChildren: children);
+  const RootRoute({List<PageRouteInfo>? children}) : super(RootRoute.name, initialChildren: children);
 
   static const String name = 'RootRoute';
 
@@ -444,8 +448,7 @@ class RootRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ScanBarcodePage]
 class ScanBarcodeRoute extends PageRouteInfo<void> {
-  const ScanBarcodeRoute({List<PageRouteInfo>? children})
-    : super(ScanBarcodeRoute.name, initialChildren: children);
+  const ScanBarcodeRoute({List<PageRouteInfo>? children}) : super(ScanBarcodeRoute.name, initialChildren: children);
 
   static const String name = 'ScanBarcodeRoute';
 
@@ -465,10 +468,10 @@ class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
-         SignUpRoute.name,
-         args: SignUpRouteArgs(bodyMetrics: bodyMetrics, key: key),
-         initialChildren: children,
-       );
+          SignUpRoute.name,
+          args: SignUpRouteArgs(bodyMetrics: bodyMetrics, key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'SignUpRoute';
 
@@ -497,8 +500,7 @@ class SignUpRouteArgs {
 /// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
-  const SplashRoute({List<PageRouteInfo>? children})
-    : super(SplashRoute.name, initialChildren: children);
+  const SplashRoute({List<PageRouteInfo>? children}) : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 

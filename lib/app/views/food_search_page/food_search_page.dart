@@ -61,7 +61,9 @@ extension _Actions on _FoodSearchPageState {
     context.router.push(ScanBarcodeRoute());
   }
 
-  void _onMealScanPressed() {}
+  void _onMealScanPressed() {
+    context.router.push(MealScanRoute());
+  }
 
   void _onFoodCardPressed(FoodResponseModel foodResponseModel) {
     context.router.push(FoodDetailsRoute(foodResponseModel: foodResponseModel, saveRecent: true));
