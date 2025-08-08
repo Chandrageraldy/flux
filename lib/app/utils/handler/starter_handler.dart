@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flux/firebase_options.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
@@ -7,6 +9,7 @@ late List<CameraDescription> cameras;
 
 Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   cameras = await availableCameras();
   await SharedPreferenceHandler().initialize();
   try {
