@@ -82,7 +82,7 @@ class _MealScanPageState extends BaseStatefulState<_MealScanPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _MealScanPageState {
-  Future<void> cycleFlashMode() async {
+  Future<void> _cycleFlashMode() async {
     if (controller == null || !controller!.value.isInitialized) return;
 
     FlashMode newMode;
@@ -171,7 +171,7 @@ extension _WidgetFactories on _MealScanPageState {
   // Flash Mode Button
   Widget getFlashModeButton() {
     return GestureDetector(
-      onTap: cycleFlashMode,
+      onTap: _cycleFlashMode,
       child: FaIcon(
         getFlashIcon(),
         color: context.theme.colorScheme.onPrimary,
@@ -188,7 +188,7 @@ extension _WidgetFactories on _MealScanPageState {
         child: Container(
           width: AppStyles.kSize64,
           height: AppStyles.kSize64,
-          decoration: _Styles.snapPictureButtonDecoration,
+          decoration: _Styles.getSnapPictureButtonDecoration(),
         ),
       ),
     );
@@ -203,10 +203,10 @@ extension _WidgetFactories on _MealScanPageState {
           spacing: AppStyles.kSpac8,
           children: [
             Icon(Icons.camera_enhance_rounded, color: context.theme.colorScheme.onPrimary),
-            Text(S.current.scanYourMealLabel, style: _Styles.labelTextStyle(context)),
+            Text(S.current.scanYourMealLabel, style: _Styles.getLabelTextStyle(context)),
           ],
         ),
-        Text(S.current.scanYourMealDesc, style: _Styles.descriptionTextStyle(context), textAlign: TextAlign.center),
+        Text(S.current.scanYourMealDesc, style: _Styles.getDescriptionTextStyle(context), textAlign: TextAlign.center),
       ],
     );
   }
@@ -225,7 +225,8 @@ extension _WidgetFactories on _MealScanPageState {
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  static BoxDecoration get snapPictureButtonDecoration {
+  // Snap Picture Button Container Decoration
+  static BoxDecoration getSnapPictureButtonDecoration() {
     return BoxDecoration(
       shape: BoxShape.circle,
       color: Colors.white,
@@ -233,11 +234,13 @@ abstract class _Styles {
     );
   }
 
-  static TextStyle labelTextStyle(BuildContext context) {
+  // Label Text Style
+  static TextStyle getLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
-  static TextStyle descriptionTextStyle(BuildContext context) {
+  // Description Label Text Style
+  static TextStyle getDescriptionTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 }

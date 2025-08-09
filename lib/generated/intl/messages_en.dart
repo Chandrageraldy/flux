@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
+        "barcodeLabel": MessageLookupByLibrary.simpleMessage("Barcode"),
         "barcodeNotRecognizedDesc": MessageLookupByLibrary.simpleMessage(
             "Sorry, we couldn’t find that barcode in our database. Please try another one :("),
         "barcodeNotRecognizedLabel":
@@ -166,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mealRatioDesc2": MessageLookupByLibrary.simpleMessage(
             "Modify the distribution of calories between breakfast, lunch, dinner, and snacks."),
         "mealRatioLabel": MessageLookupByLibrary.simpleMessage("Meal Ratio"),
+        "mealScanLabel": MessageLookupByLibrary.simpleMessage("Meal Scan"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
         "mediterraneanDesc":
             MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),

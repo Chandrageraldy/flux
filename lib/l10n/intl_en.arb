@@ -225,5 +225,7 @@
     "ratioErrorMessage": "The total must equal 100%. Please adjust the values.",
     "targetWeeklyChangeLabel": "Target Weekly Change",
     "weightGoalLabel": "Weight Goal",
-    "weightGoalDesc": "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain."
+    "weightGoalDesc": "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain.",
+    "mealScanLabel": "Meal Scan",
+    "barcodeLabel": "Barcode"
 }

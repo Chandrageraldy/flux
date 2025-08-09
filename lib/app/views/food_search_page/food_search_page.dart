@@ -58,7 +58,7 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _FoodSearchPageState {
   void _onBarcodeScannerPressed() {
-    context.router.push(ScanBarcodeRoute());
+    context.router.push(BarcodeScanRoute());
   }
 
   void _onMealScanPressed() {

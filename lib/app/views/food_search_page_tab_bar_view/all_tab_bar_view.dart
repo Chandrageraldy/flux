@@ -4,6 +4,7 @@ import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
 import 'package:flux/app/widgets/empty_result/empty_result.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
+import 'package:flux/app/widgets/skeleton/food_list_skeleton.dart';
 
 class AllTabBarView extends StatelessWidget {
   final ScrollController scrollController;
@@ -49,13 +50,15 @@ extension _WidgetFactories on AllTabBarView {
     final foodSearchResults = context.select((FoodSearchViewModel vm) => vm.foodSearchResults);
     final recentFoodResults = context.select((FoodSearchViewModel vm) => vm.recentFoodResults);
 
+    final isRecentFoodLoading = context.select((FoodSearchViewModel vm) => vm.isRecentFoodLoading);
+
     final List<FoodResponseModel> foodList =
         isSearching ? foodSearchResults : recentFoodResults.map((e) => e.toFoodResponseModel()).toList();
 
     return [
       SliverToBoxAdapter(
         child: Padding(
-          padding: AppStyles.kPaddOT16B6,
+          padding: isRecentFoodLoading ? AppStyles.kPaddOT16 : AppStyles.kPaddOT16B6,
           child: Text(
             isSearching ? 'SEARCH RESULTS' : 'RECENTLY VIEWED',
             style: Quicksand.semiBold.withCustomSize(11),
@@ -83,14 +86,17 @@ extension _WidgetFactories on AllTabBarView {
           ),
         )
       ] else ...[
-        SliverFillRemaining(
-          hasScrollBody: false,
-          child: EmptyResult(
-            imagePath: ImagePath.pizza,
-            title: isSearching ? S.current.noResultFoundLabel : S.current.noRecentItemsLabel,
-            message: isSearching ? S.current.noResultFoundMessage : S.current.noRecentItemsMessage,
+        if (isRecentFoodLoading)
+          FoodListSkeleton()
+        else
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: EmptyResult(
+              imagePath: ImagePath.pizza,
+              title: isSearching ? S.current.noResultFoundLabel : S.current.noRecentItemsLabel,
+              message: isSearching ? S.current.noResultFoundMessage : S.current.noRecentItemsMessage,
+            ),
           ),
-        ),
       ]
     ];
   }

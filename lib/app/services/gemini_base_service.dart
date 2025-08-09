@@ -27,10 +27,14 @@ final jsonSchema = Schema.object(
   },
 );
 
+final systemInstruction = Content.system('');
+
 class GeminiBaseService {
   final model = FirebaseAI.googleAI().generativeModel(
-      model: 'gemini-2.5-flash',
-      generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema));
+    model: 'gemini-2.5-flash',
+    generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema),
+    systemInstruction: systemInstruction,
+  );
 
   Future<Response> callGemini({
     required GeminiRequestType requestType,

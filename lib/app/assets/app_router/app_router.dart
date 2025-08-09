@@ -9,7 +9,9 @@ import 'package:flux/app/views/diary_page/diary_page.dart';
 import 'package:flux/app/views/error_modal/error_modal.dart';
 import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
+import 'package:flux/app/views/ingredient_details_page.dart/ingredient_details_page.dart';
 import 'package:flux/app/views/meal_scan_page/meal_scan_page.dart';
+import 'package:flux/app/views/meal_scan_result_page.dart/meal_scan_result_page.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.dart';
 import 'package:flux/app/views/manual_plan_setup_page/manual_plan_setup_page.dart';
@@ -23,7 +25,7 @@ import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
 import 'package:flux/app/views/progress_page/progress_page.dart';
 import 'package:flux/app/views/root_page/root_page.dart';
 import 'package:flux/app/views/root_page/root_navigator_page.dart';
-import 'package:flux/app/views/scan_barcode_page/scan_barcode_page.dart';
+import 'package:flux/app/views/barcode_scan_page.dart/barcode_scan_page.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page|Screen|Modal,Route')
@@ -70,13 +72,15 @@ class AppRouter extends RootStackRouter {
         CustomRoute(page: LoggingSelectionRoute.page, customRouteBuilder: _modalSheetBuilder),
         AutoRoute(page: FoodDetailsRoute.page),
         AutoRoute(page: MealDetailsRoute.page),
-        AutoRoute(page: ScanBarcodeRoute.page),
+        AutoRoute(page: BarcodeScanRoute.page),
         CustomRoute(page: ErrorRoute.page, customRouteBuilder: _modalSheetBuilder),
         AutoRoute(page: PersonalDetailsRoute.page),
         AutoRoute(page: NutritionGoalsRoute.page),
         AutoRoute(page: MealRatioRoute.page),
         AutoRoute(page: AccountRoute.page),
-        AutoRoute(page: MealScanRoute.page)
+        AutoRoute(page: MealScanRoute.page),
+        AutoRoute(page: MealScanResultRoute.page),
+        AutoRoute(page: IngredientDetailsRoute.page)
       ],
     );
   }

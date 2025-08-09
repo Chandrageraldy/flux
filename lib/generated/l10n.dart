@@ -2199,6 +2199,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Meal Scan`
+  String get mealScanLabel {
+    return Intl.message(
+      'Meal Scan',
+      name: 'mealScanLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Barcode`
+  String get barcodeLabel {
+    return Intl.message(
+      'Barcode',
+      name: 'barcodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

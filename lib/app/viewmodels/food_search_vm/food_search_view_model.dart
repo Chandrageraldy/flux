@@ -16,6 +16,9 @@ class FoodSearchViewModel extends BaseViewModel {
   bool _isSavedFoodLoading = false;
   bool get isSavedFoodLoading => _isSavedFoodLoading;
 
+  bool _isRecentFoodLoading = false;
+  bool get isRecentFoodLoading => _isRecentFoodLoading;
+
   Future<void> searchInstant(String query) async {
     isSearching = true;
     final response = await foodRepository.searchInstant(query: query);
@@ -35,11 +38,12 @@ class FoodSearchViewModel extends BaseViewModel {
 
   Future<void> getRecentFoods() async {
     isSearching = false;
+    _isRecentFoodLoading = true;
     foodSearchResults = [];
     final response = await foodRepository.getRecentFoods();
     checkError(response);
     recentFoodResults = response.data as List<RecentFoodModel>;
-    print(recentFoodResults);
+    _isRecentFoodLoading = false;
     notifyListeners();
   }
 }

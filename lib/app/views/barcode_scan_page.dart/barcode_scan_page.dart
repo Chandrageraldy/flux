@@ -6,21 +6,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 @RoutePage()
-class ScanBarcodePage extends StatelessWidget {
-  const ScanBarcodePage({super.key});
+class BarcodeScanPage extends StatelessWidget {
+  const BarcodeScanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => BarcodeScanViewModel(), child: _ScanBarcodePage());
+    return ChangeNotifierProvider(create: (_) => BarcodeScanViewModel(), child: _BarcodeScanPage());
   }
 }
 
-class _ScanBarcodePage extends BaseStatefulPage {
+class _BarcodeScanPage extends BaseStatefulPage {
   @override
-  State<_ScanBarcodePage> createState() => _ScanBarcodePageState();
+  State<_BarcodeScanPage> createState() => _BarcodeScanPageState();
 }
 
-class _ScanBarcodePageState extends BaseStatefulState<_ScanBarcodePage> {
+class _BarcodeScanPageState extends BaseStatefulState<_BarcodeScanPage> {
   @override
   EdgeInsets defaultPadding() => AppStyles.kPadd0;
 
@@ -58,7 +58,7 @@ class _ScanBarcodePageState extends BaseStatefulState<_ScanBarcodePage> {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _ScanBarcodePageState {
+extension _Actions on _BarcodeScanPageState {
   _onBarcodeDetected(BarcodeCapture capture) async {
     if (isProcessing) return;
 
@@ -100,7 +100,7 @@ extension _Actions on _ScanBarcodePageState {
 }
 
 // * ------------------------ WidgetFactories ------------------------
-extension _WidgetFactories on _ScanBarcodePageState {
+extension _WidgetFactories on _BarcodeScanPageState {
   // Top Navigation Bar
   Widget getTopNavigationBar() {
     return Positioned(
@@ -136,10 +136,10 @@ extension _WidgetFactories on _ScanBarcodePageState {
         });
       },
       child: Container(
-        decoration: _Styles.flashlightButtonContainerDecoration(context, isFlashOn),
+        decoration: _Styles.getFlashlightButtonContainerDecoration(context, isFlashOn),
         padding: AppStyles.kPadd6,
         child: Icon(
-          isFlashOn == true ? Icons.flashlight_on_outlined : Icons.flashlight_off_outlined,
+          isFlashOn == true ? Icons.flash_on : Icons.flash_off_outlined,
           color: isFlashOn == true ? context.theme.colorScheme.onTertiary : context.theme.colorScheme.onPrimary,
           size: AppStyles.kSize20,
         ),
@@ -161,10 +161,10 @@ extension _WidgetFactories on _ScanBarcodePageState {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.qr_code_scanner_sharp, color: context.theme.colorScheme.onPrimary),
-                Text(S.current.locatingBarcodeLabel, style: _Styles.labelTextStyle(context)),
+                Text(S.current.locatingBarcodeLabel, style: _Styles.getLabelTextStyle(context)),
               ],
             ),
-            Text(S.current.locatingBarcodeDesc, style: _Styles.descriptionTextStyle(context)),
+            Text(S.current.locatingBarcodeDesc, style: _Styles.getDescriptionTextStyle(context)),
           ],
         ),
       ),
@@ -193,7 +193,7 @@ extension _WidgetFactories on _ScanBarcodePageState {
       label: S.current.tryAgainLabel.toUpperCase(),
       onPressed: _tryAgainPressed,
       padding: AppStyles.kPaddSV12,
-      labelStyle: _Styles.tryAgainButtonTextStyle(context),
+      labelStyle: _Styles.getTryAgainButtonTextStyle(context),
     );
   }
 
@@ -203,7 +203,7 @@ extension _WidgetFactories on _ScanBarcodePageState {
       label: S.current.useAiMealScanLabel.toUpperCase(),
       onPressed: _useAiMealScanPressed,
       padding: AppStyles.kPaddSV12,
-      labelStyle: _Styles.useAiMealScanButtonTextStyle(context),
+      labelStyle: _Styles.getUseAiMealScanButtonTextStyle(context),
       backgroundColor: context.theme.colorScheme.secondary.withAlpha(20),
     );
   }
@@ -212,7 +212,7 @@ extension _WidgetFactories on _ScanBarcodePageState {
 // * ----------------------------- Styles ----------------------------
 class _Styles {
   // Flashlight Button Container Decoration
-  static BoxDecoration flashlightButtonContainerDecoration(BuildContext context, bool isFlashOn) {
+  static BoxDecoration getFlashlightButtonContainerDecoration(BuildContext context, bool isFlashOn) {
     return BoxDecoration(
       color: isFlashOn == true ? context.theme.colorScheme.onPrimary : AppColors.transparentColor,
       shape: BoxShape.circle,
@@ -220,22 +220,22 @@ class _Styles {
   }
 
   // Label Text Style
-  static TextStyle labelTextStyle(BuildContext context) {
+  static TextStyle getLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.large).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Description Text Style
-  static TextStyle descriptionTextStyle(BuildContext context) {
+  static TextStyle getDescriptionTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Try Again Button Text Style
-  static TextStyle tryAgainButtonTextStyle(BuildContext context) {
+  static TextStyle getTryAgainButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 
   // Use AI Meal Scan Button Text Style
-  static TextStyle useAiMealScanButtonTextStyle(BuildContext context) {
+  static TextStyle getUseAiMealScanButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }
