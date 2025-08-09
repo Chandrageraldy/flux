@@ -2,30 +2,22 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:camera/camera.dart';
 import 'package:flux/app/utils/handler/starter_handler.dart';
 import 'package:flux/app/utils/utils/painters.dart';
-import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()
-class MealScanPage extends StatelessWidget {
+class MealScanPage extends BaseStatefulPage {
   const MealScanPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => MealScanViewModel(), child: _MealScanPage());
-  }
+  State<MealScanPage> createState() => _MealScanPageState();
 }
 
-class _MealScanPage extends BaseStatefulPage {
-  @override
-  State<_MealScanPage> createState() => _MealScanPageState();
-}
-
-class _MealScanPageState extends BaseStatefulState<_MealScanPage> {
+class _MealScanPageState extends BaseStatefulState<MealScanPage> {
   CameraController? controller;
   FlashMode currentFlashMode = FlashMode.off;
 
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   void initState() {
@@ -37,15 +29,6 @@ class _MealScanPageState extends BaseStatefulState<_MealScanPage> {
   void dispose() {
     controller?.dispose();
     super.dispose();
-  }
-
-  Future<void> snapPicture() async {
-    if (controller == null || !controller!.value.isInitialized || controller!.value.isTakingPicture) {
-      return;
-    }
-
-    final XFile picture = await controller!.takePicture();
-    debugPrint('Picture taken: ${picture.path}');
   }
 
   @override
@@ -103,6 +86,25 @@ extension _Actions on _MealScanPageState {
     _setState(() {
       currentFlashMode = newMode;
     });
+  }
+
+  Future<void> snapPicture() async {
+    if (controller == null || !controller!.value.isInitialized || controller!.value.isTakingPicture) {
+      return;
+    }
+
+    final XFile imageFile = await controller!.takePicture();
+
+    controller?.dispose();
+    _setState(() {
+      controller = null; // Prevent getCameraPreview() from running with a disposed controller
+    });
+
+    if (mounted) {
+      debugPrint('Picture taken: ${imageFile.path}');
+      await context.router.push(MealScanResultRoute(imageFile: imageFile));
+      initCamera();
+    }
   }
 }
 

@@ -31,8 +31,7 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
-
+  bool hasDefaultPadding() => false;
   @override
   Widget body() {
     final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.nutritionGoals);

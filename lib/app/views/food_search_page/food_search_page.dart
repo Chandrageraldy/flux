@@ -25,7 +25,7 @@ class _FoodSearchPage extends BaseStatefulPage {
 
 class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   late ScrollController _scrollController;
 

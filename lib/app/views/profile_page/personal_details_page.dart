@@ -26,7 +26,7 @@ class _PersonalDetailsPage extends BaseStatefulPage {
 
 class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> {
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   Widget body() {

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';

@@ -20,7 +20,7 @@ class _MealDetailsPageState extends BaseStatefulState<MealDetailsPage> {
   PreferredSizeWidget? appbar() => DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary);
 
   @override
-  defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   Widget body() {

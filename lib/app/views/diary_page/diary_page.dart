@@ -23,7 +23,7 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   final EasyDatePickerController _datePickerController = EasyDatePickerController();
 
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   bool useGradientBackground() {
@@ -35,8 +35,8 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
     return AppBar(
       backgroundColor: AppColors.transparentColor,
       title: Image.asset(
-        ImagePath.fluxPadding,
-        height: AppStyles.kSize80,
+        ImagePath.fluxLogo2,
+        height: AppStyles.kSize50,
       ),
       scrolledUnderElevation: 0,
       actions: [getProfileActionButton()],

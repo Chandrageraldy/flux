@@ -355,18 +355,39 @@ class MealScanRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MealScanResultPage]
-class MealScanResultRoute extends PageRouteInfo<void> {
-  const MealScanResultRoute({List<PageRouteInfo>? children})
-      : super(MealScanResultRoute.name, initialChildren: children);
+class MealScanResultRoute extends PageRouteInfo<MealScanResultRouteArgs> {
+  MealScanResultRoute({
+    required XFile imageFile,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MealScanResultRoute.name,
+          args: MealScanResultRouteArgs(imageFile: imageFile, key: key),
+          initialChildren: children,
+        );
 
   static const String name = 'MealScanResultRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MealScanResultPage();
+      final args = data.argsAs<MealScanResultRouteArgs>();
+      return MealScanResultPage(imageFile: args.imageFile, key: args.key);
     },
   );
+}
+
+class MealScanResultRouteArgs {
+  const MealScanResultRouteArgs({required this.imageFile, this.key});
+
+  final XFile imageFile;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MealScanResultRouteArgs{imageFile: $imageFile, key: $key}';
+  }
 }
 
 /// generated route for

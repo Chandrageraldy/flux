@@ -57,7 +57,7 @@ class _FoodDetailsPageState extends BaseStatefulState<_FoodDetailsPage> {
       DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary, actionButton: getSaveContainer());
 
   @override
-  defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   bool resizeToAvoidBottomInset() => true;

@@ -22,7 +22,7 @@ class _BarcodeScanPage extends BaseStatefulPage {
 
 class _BarcodeScanPageState extends BaseStatefulState<_BarcodeScanPage> {
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   bool useGradientBackground() => false;

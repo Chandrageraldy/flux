@@ -27,7 +27,7 @@ class _MealRatioPageState extends BaseStatefulState<_MealRatioPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  EdgeInsets defaultPadding() => AppStyles.kPadd0;
+  bool hasDefaultPadding() => false;
 
   @override
   Widget body() {

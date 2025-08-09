@@ -14,6 +14,9 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
   bool bottomSafeAreaEnabled() => false;
 
   @override
+  bool hasDefaultPadding() => false;
+
+  @override
   Widget body() {
     return AutoTabsRouter.tabBar(
       physics: NeverScrollableScrollPhysics(),
@@ -75,11 +78,6 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
         );
       },
     );
-  }
-
-  @override
-  bool hasDefaultPadding() {
-    return false;
   }
 }
 

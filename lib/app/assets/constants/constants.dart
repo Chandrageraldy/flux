@@ -15,10 +15,10 @@ class ImagePath {
   static const String onboarding2 = 'lib/app/assets/images/onboarding2.png';
   static const String onboarding3 = 'lib/app/assets/images/onboarding3.png';
   static const String fluxStar = 'lib/app/assets/images/flux-star.png';
-  static const String fluxApple = 'lib/app/assets/images/flux-apple.png';
   static const String profilePlaceholder = 'lib/app/assets/images/profile-placeholder.png';
   static const String pizza = 'lib/app/assets/images/pizza-30.png';
   static const String fastFood = 'lib/app/assets/images/fast-food-19.png';
+  static const String fluxLogo2 = 'lib/app/assets/images/flux_logo2.png';
 }
 
 class AnimationPath {
