@@ -11,7 +11,7 @@ final jsonSchema = GeminiJsonSchema.mealScan;
 
 final systemInstruction = Content.system(GeminiSystemInstruction.mealScan);
 
-class GeminiBaseService {
+abstract class GeminiBaseService {
   final model = FirebaseAI.googleAI().generativeModel(
     model: 'gemini-2.5-flash',
     generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema),
@@ -51,12 +51,11 @@ class GeminiBaseService {
           // ]);
           break;
       }
-
-      debugPrint(response.text);
+      // debugPrint(response.text);
+      return Response.complete(response.text);
     } catch (e) {
       debugPrint(e.toString());
+      return Response.error(e.toString());
     }
-
-    return Response.complete('');
   }
 }

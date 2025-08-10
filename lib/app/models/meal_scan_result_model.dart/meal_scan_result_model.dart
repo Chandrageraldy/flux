@@ -1,3 +1,4 @@
+import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'meal_scan_result_model.freezed.dart';
@@ -10,6 +11,7 @@ class MealScanResultModel with _$MealScanResultModel {
     double? healthScore,
     String? healthScoreDesc,
     double? quantity,
+    List<IngredientModel>? ingredients,
   }) = _MealScanResultModel;
 
   factory MealScanResultModel.fromJson(Map<String, dynamic> json) => _$MealScanResultModelFromJson(json);

@@ -2,7 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
-import 'package:flux/app/repositories/food_repo/food_repo.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class FoodDetailsViewModel extends BaseViewModel {

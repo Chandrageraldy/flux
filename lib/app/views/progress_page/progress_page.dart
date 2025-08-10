@@ -55,11 +55,11 @@ extension _PrivateMethods on _ProgressPageState {
       mimeType: 'image/jpeg', // Specify the mime type
     );
 
-    GeminiBaseService().callGemini(
-      requestType: GeminiRequestType.imageWithText,
-      textPrompt: 'I will give you a food as a sample, and generate me as the json model i need? the food is apple',
-      imageFile: dummyImageFile,
-    );
+    // GeminiBaseService().callGemini(
+    //   requestType: GeminiRequestType.imageWithText,
+    //   textPrompt: 'I will give you a food as a sample, and generate me as the json model i need? the food is apple',
+    //   imageFile: dummyImageFile,
+    // );
   }
 
   void _onLogoutPressed() async {

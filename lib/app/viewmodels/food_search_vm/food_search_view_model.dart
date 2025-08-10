@@ -1,7 +1,7 @@
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
-import 'package:flux/app/repositories/food_repo/food_repo.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class FoodSearchViewModel extends BaseViewModel {

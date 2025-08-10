@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
+import 'package:flux/app/widgets/skeleton/meal_scan_result_skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image/image.dart' as img;
 
@@ -40,6 +41,7 @@ class _MealScanResultPageState extends BaseStatefulState<_MealScanResultPage> {
   void initState() {
     super.initState();
     _cropImageToSquare();
+    _getFoodDetailsFromMealScan();
   }
 
   @override
@@ -121,6 +123,13 @@ extension _PrivateMethods on _MealScanResultPageState {
       });
     }
   }
+
+  Future<void> _getFoodDetailsFromMealScan() async {
+    await tryCatch(
+      context,
+      () => context.read<MealScanViewModel>().getFoodDetailsFromMealScan(imageFile: widget.imageFile),
+    );
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -162,20 +171,22 @@ extension _WidgetFactories on _MealScanResultPageState {
 
   // Scrollable Sheet
   Widget getScrollableSheet() {
+    final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
+
     return Positioned.fill(
       child: DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.7,
         maxChildSize: 0.88,
         builder: (context, scrollController) {
-          return getScrollableSheetContainer(scrollController);
+          return getScrollableSheetContainer(scrollController, isLoading);
         },
       ),
     );
   }
 
   // Scrollable Sheet Container
-  Widget getScrollableSheetContainer(ScrollController scrollController) {
+  Widget getScrollableSheetContainer(ScrollController scrollController, bool isLoading) {
     return Container(
       decoration: _Styles.getScrollableSheetDecoration(context),
       child: SingleChildScrollView(
@@ -186,17 +197,16 @@ extension _WidgetFactories on _MealScanResultPageState {
             spacing: AppStyles.kSpac16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                spacing: AppStyles.kSpac12,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text('Chinese Crepe Delight with Egg and Sausage',
-                        style: _Styles.getFoodNameLabelTextStyle(context)),
-                  ),
-                  getNumberStepper(),
-                ],
-              ),
+              // if (isLoading)
+              //   const MealScanResultSkeleton()
+              // else ...[
+              //   getHeader(),
+              //   getHealthScoreContainer(),
+              //   getCalorieContainer(),
+              //   getMacronutrientsRow(),
+              //   Text('Ingredients'.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11))
+              // ],
+              getHeader(),
               getHealthScoreContainer(),
               getCalorieContainer(),
               getMacronutrientsRow(),
@@ -205,6 +215,20 @@ extension _WidgetFactories on _MealScanResultPageState {
           ),
         ),
       ),
+    );
+  }
+
+  // Header
+  Widget getHeader() {
+    return Row(
+      spacing: AppStyles.kSpac12,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text('Chinese Crepe Delight with Egg and Sausage', style: _Styles.getFoodNameLabelTextStyle(context)),
+        ),
+        getNumberStepper(),
+      ],
     );
   }
 

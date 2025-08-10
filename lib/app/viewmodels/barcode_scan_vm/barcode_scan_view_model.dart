@@ -1,6 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
-import 'package:flux/app/repositories/food_repo/food_repo.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class BarcodeScanViewModel extends BaseViewModel {

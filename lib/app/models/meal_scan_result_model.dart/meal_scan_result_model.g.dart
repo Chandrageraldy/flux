@@ -13,6 +13,9 @@ _$MealScanResultModelImpl _$$MealScanResultModelImplFromJson(
       healthScore: (json['healthScore'] as num?)?.toDouble(),
       healthScoreDesc: json['healthScoreDesc'] as String?,
       quantity: (json['quantity'] as num?)?.toDouble(),
+      ingredients: (json['ingredients'] as List<dynamic>?)
+          ?.map((e) => IngredientModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$MealScanResultModelImplToJson(
@@ -22,4 +25,5 @@ Map<String, dynamic> _$$MealScanResultModelImplToJson(
       'healthScore': instance.healthScore,
       'healthScoreDesc': instance.healthScoreDesc,
       'quantity': instance.quantity,
+      'ingredients': instance.ingredients,
     };

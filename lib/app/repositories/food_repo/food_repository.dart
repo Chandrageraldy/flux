@@ -1,18 +1,24 @@
+import 'dart:convert';
+
+import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
+import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
+import 'package:flux/app/services/food_service/food_service_gemini.dart';
 import 'package:flux/app/services/food_service/food_service_nutritionix.dart';
 import 'package:flux/app/services/food_service/food_service_supabase.dart';
 
 class FoodRepository {
   FoodServiceNutritionix foodServiceNutritionix = FoodServiceNutritionix();
   FoodServiceSupabase foodServiceSupabase = FoodServiceSupabase();
+  FoodServiceGemini foodServiceGemini = FoodServiceGemini();
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
 
   Future<Response> searchInstant({required String query}) async {
@@ -226,5 +232,17 @@ class FoodRepository {
     final saveResponse = await foodServiceSupabase.saveAsRecent(recentFoodModel: recentFoodModel);
 
     return saveResponse;
+  }
+
+  Future<Response> getFoodDetailsFromMealScan({required XFile imageFile}) async {
+    final response = await foodServiceGemini.getFoodDetailsFromMealScan(imageFile: imageFile);
+
+    if (response.error == null) {
+      Map<String, dynamic> json = jsonDecode(response.data);
+      final mealScanResult = MealScanResultModel.fromJson(json);
+      return Response.complete(mealScanResult);
+    }
+
+    return response;
   }
 }

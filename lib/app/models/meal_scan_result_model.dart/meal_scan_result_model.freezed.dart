@@ -24,6 +24,7 @@ mixin _$MealScanResultModel {
   double? get healthScore => throw _privateConstructorUsedError;
   String? get healthScoreDesc => throw _privateConstructorUsedError;
   double? get quantity => throw _privateConstructorUsedError;
+  List<IngredientModel>? get ingredients => throw _privateConstructorUsedError;
 
   /// Serializes this MealScanResultModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $MealScanResultModelCopyWith<$Res> {
       {String? foodName,
       double? healthScore,
       String? healthScoreDesc,
-      double? quantity});
+      double? quantity,
+      List<IngredientModel>? ingredients});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$MealScanResultModelCopyWithImpl<$Res, $Val extends MealScanResultModel>
     Object? healthScore = freezed,
     Object? healthScoreDesc = freezed,
     Object? quantity = freezed,
+    Object? ingredients = freezed,
   }) {
     return _then(_value.copyWith(
       foodName: freezed == foodName
@@ -85,6 +88,10 @@ class _$MealScanResultModelCopyWithImpl<$Res, $Val extends MealScanResultModel>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double?,
+      ingredients: freezed == ingredients
+          ? _value.ingredients
+          : ingredients // ignore: cast_nullable_to_non_nullable
+              as List<IngredientModel>?,
     ) as $Val);
   }
 }
@@ -101,7 +108,8 @@ abstract class _$$MealScanResultModelImplCopyWith<$Res>
       {String? foodName,
       double? healthScore,
       String? healthScoreDesc,
-      double? quantity});
+      double? quantity,
+      List<IngredientModel>? ingredients});
 }
 
 /// @nodoc
@@ -121,6 +129,7 @@ class __$$MealScanResultModelImplCopyWithImpl<$Res>
     Object? healthScore = freezed,
     Object? healthScoreDesc = freezed,
     Object? quantity = freezed,
+    Object? ingredients = freezed,
   }) {
     return _then(_$MealScanResultModelImpl(
       foodName: freezed == foodName
@@ -139,6 +148,10 @@ class __$$MealScanResultModelImplCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double?,
+      ingredients: freezed == ingredients
+          ? _value._ingredients
+          : ingredients // ignore: cast_nullable_to_non_nullable
+              as List<IngredientModel>?,
     ));
   }
 }
@@ -147,7 +160,12 @@ class __$$MealScanResultModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MealScanResultModelImpl implements _MealScanResultModel {
   _$MealScanResultModelImpl(
-      {this.foodName, this.healthScore, this.healthScoreDesc, this.quantity});
+      {this.foodName,
+      this.healthScore,
+      this.healthScoreDesc,
+      this.quantity,
+      final List<IngredientModel>? ingredients})
+      : _ingredients = ingredients;
 
   factory _$MealScanResultModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MealScanResultModelImplFromJson(json);
@@ -160,10 +178,19 @@ class _$MealScanResultModelImpl implements _MealScanResultModel {
   final String? healthScoreDesc;
   @override
   final double? quantity;
+  final List<IngredientModel>? _ingredients;
+  @override
+  List<IngredientModel>? get ingredients {
+    final value = _ingredients;
+    if (value == null) return null;
+    if (_ingredients is EqualUnmodifiableListView) return _ingredients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'MealScanResultModel(foodName: $foodName, healthScore: $healthScore, healthScoreDesc: $healthScoreDesc, quantity: $quantity)';
+    return 'MealScanResultModel(foodName: $foodName, healthScore: $healthScore, healthScoreDesc: $healthScoreDesc, quantity: $quantity, ingredients: $ingredients)';
   }
 
   @override
@@ -178,13 +205,20 @@ class _$MealScanResultModelImpl implements _MealScanResultModel {
             (identical(other.healthScoreDesc, healthScoreDesc) ||
                 other.healthScoreDesc == healthScoreDesc) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            const DeepCollectionEquality()
+                .equals(other._ingredients, _ingredients));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, foodName, healthScore, healthScoreDesc, quantity);
+      runtimeType,
+      foodName,
+      healthScore,
+      healthScoreDesc,
+      quantity,
+      const DeepCollectionEquality().hash(_ingredients));
 
   /// Create a copy of MealScanResultModel
   /// with the given fields replaced by the non-null parameter values.
@@ -208,7 +242,8 @@ abstract class _MealScanResultModel implements MealScanResultModel {
       {final String? foodName,
       final double? healthScore,
       final String? healthScoreDesc,
-      final double? quantity}) = _$MealScanResultModelImpl;
+      final double? quantity,
+      final List<IngredientModel>? ingredients}) = _$MealScanResultModelImpl;
 
   factory _MealScanResultModel.fromJson(Map<String, dynamic> json) =
       _$MealScanResultModelImpl.fromJson;
@@ -221,6 +256,8 @@ abstract class _MealScanResultModel implements MealScanResultModel {
   String? get healthScoreDesc;
   @override
   double? get quantity;
+  @override
+  List<IngredientModel>? get ingredients;
 
   /// Create a copy of MealScanResultModel
   /// with the given fields replaced by the non-null parameter values.
