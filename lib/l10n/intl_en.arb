@@ -227,5 +227,7 @@
     "weightGoalLabel": "Weight Goal",
     "weightGoalDesc": "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain.",
     "mealScanLabel": "Meal Scan",
-    "barcodeLabel": "Barcode"
+    "barcodeLabel": "Barcode",
+    "enhanceWithAILabel": "Enhance with AI",
+    "nutritionScoreLabel": "AI's Nutrition Score"
 }

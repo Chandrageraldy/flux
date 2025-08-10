@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "energyTargetLabel":
             MessageLookupByLibrary.simpleMessage("Energy Target"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
+        "enhanceWithAILabel":
+            MessageLookupByLibrary.simpleMessage("Enhance with AI"),
         "exerciseLevelLabel":
             MessageLookupByLibrary.simpleMessage("Exercise Level"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fat"),
@@ -194,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Normal weight"),
         "nutritionGoalsLabel":
             MessageLookupByLibrary.simpleMessage("Nutrition Goals"),
+        "nutritionScoreLabel":
+            MessageLookupByLibrary.simpleMessage("AI\'s Nutrition Score"),
         "nutritionalInformationLabel":
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "obesityLabel": MessageLookupByLibrary.simpleMessage("Obesity"),

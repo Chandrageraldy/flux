@@ -51,7 +51,6 @@ extension _WidgetFactories on FoodDetailsSkeleton {
           Skeleton(height: AppStyles.kSize20),
           Skeleton(height: AppStyles.kSize20),
           Skeleton(height: AppStyles.kSize20),
-          AppStyles.kSizedBoxH12,
           Row(
             children: [
               Expanded(
@@ -85,7 +84,6 @@ extension _WidgetFactories on FoodDetailsSkeleton {
               ),
             ],
           ),
-          AppStyles.kSizedBoxH6,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac8,

@@ -2219,6 +2219,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Enhance with AI`
+  String get enhanceWithAILabel {
+    return Intl.message(
+      'Enhance with AI',
+      name: 'enhanceWithAILabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI's Nutrition Score`
+  String get nutritionScoreLabel {
+    return Intl.message(
+      'AI\'s Nutrition Score',
+      name: 'nutritionScoreLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

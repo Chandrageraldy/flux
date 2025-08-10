@@ -50,4 +50,13 @@ class GradientAppColors {
       Color(0xFF6D7BE4),
     ],
   );
+
+  static const LinearGradient tertiaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFFEEF5FF), // almost white blue
+      Color(0xFFEBEEFF), // almost white periwinkle
+    ],
+  );
 }

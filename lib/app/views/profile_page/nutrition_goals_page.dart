@@ -419,14 +419,10 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     BuildContext context,
     FormFields field,
     NutritionGoalsSettings settings,
-    String initialValue, {
-    double? height,
-    double? width,
-  }) {
+    String initialValue,
+  ) {
     return Container(
       padding: AppStyles.kPaddSH6,
-      height: height,
-      width: width,
       decoration: _Styles.getFieldContainerDecoration(context, true),
       child: FormBuilderDropdown<String>(
         name: field.name,
@@ -510,7 +506,7 @@ class _Styles {
     return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(height: 1);
   }
 
-  // Energy Target Text Field Container Decoration
+  // Field Container Decoration
   static BoxDecoration getFieldContainerDecoration(BuildContext context, bool isEnabled) {
     return BoxDecoration(
       color: isEnabled ? context.theme.colorScheme.tertiaryFixedDim : AppColors.transparentColor,
@@ -518,7 +514,7 @@ class _Styles {
     );
   }
 
-  // Text Field Input Decoration
+  // Field Input Decoration
   static InputDecoration getFieldInputDecoration() {
     return InputDecoration(border: InputBorder.none, isDense: true, contentPadding: AppStyles.kPaddOL4T6B6);
   }

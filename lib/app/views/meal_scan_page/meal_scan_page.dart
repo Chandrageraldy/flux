@@ -48,7 +48,7 @@ class _MealScanPageState extends BaseStatefulState<MealScanPage> {
               getLabelColumn(),
               AppStyles.kSizedBoxH48,
               Expanded(child: getFrameContainer()),
-              AppStyles.kSizedBoxH48,
+              AppStyles.kSizedBoxH100,
               getSnapPictureButton(),
               AppStyles.kSizedBoxH32,
             ],

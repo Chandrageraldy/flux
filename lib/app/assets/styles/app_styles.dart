@@ -10,6 +10,7 @@ class AppStyles {
   static const kPadd16 = EdgeInsets.all(16.0);
   static const kPadd24 = EdgeInsets.all(24.0);
   // Padding ONLY
+  static const kPaddOL4T2B2 = EdgeInsets.only(left: 4.0, top: 2.0, bottom: 2.0);
   static const kPaddOL4T6B6 = EdgeInsets.only(left: 4.0, top: 6.0, bottom: 6.0);
   static const kPaddOB12 = EdgeInsets.only(bottom: 12.0);
   static const kPaddOB20 = EdgeInsets.only(bottom: 20.0);
@@ -58,6 +59,7 @@ class AppStyles {
   static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
   static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
   static const kPaddSV20H28 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 28.0);
+  static const kPaddSV10H8 = EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0);
   static const kPaddSV10H12 = EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);
   static const kPaddSV6H12 = EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0);
   static const kPaddSV4H6 = EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0);
@@ -94,6 +96,7 @@ class AppStyles {
   // Radius VERTICAL
   static final kRadVT10 = BorderRadius.vertical(top: Radius.circular(10.0));
   static final kRadVT15 = BorderRadius.vertical(top: Radius.circular(15.0));
+  static final kRadVT20 = BorderRadius.vertical(top: Radius.circular(20.0));
   static final kRadVT24 = BorderRadius.vertical(top: Radius.circular(24.0));
   // Radius SIDES
   static final kRadOTL10TR10 = BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10));
@@ -127,6 +130,7 @@ class AppStyles {
   static final kSizedBoxH32 = const SizedBox(height: 32.0);
   static final kSizedBoxH48 = const SizedBox(height: 48.0);
   static final kSizedBoxH60 = const SizedBox(height: 60.0);
+  static final kSizedBoxH80 = const SizedBox(height: 80.0);
   static final kSizedBoxH100 = const SizedBox(height: 100.0);
 
   // Size
