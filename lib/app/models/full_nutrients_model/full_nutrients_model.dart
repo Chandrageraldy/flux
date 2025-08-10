@@ -6,11 +6,11 @@ part 'full_nutrients_model.freezed.dart';
 part 'full_nutrients_model.g.dart';
 
 @freezed
-class FullNutrient with _$FullNutrient {
-  factory FullNutrient({
+class FullNutrientsModel with _$FullNutrientsModel {
+  factory FullNutrientsModel({
     @JsonKey(name: 'attr_id') int? attrId,
     double? value,
-  }) = _FullNutrient;
+  }) = _FullNutrientsModel;
 
-  factory FullNutrient.fromJson(Map<String, dynamic> json) => _$FullNutrientFromJson(json);
+  factory FullNutrientsModel.fromJson(Map<String, dynamic> json) => _$FullNutrientsModelFromJson(json);
 }

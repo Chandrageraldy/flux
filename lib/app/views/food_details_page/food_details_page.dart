@@ -421,7 +421,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
   }
 
   // Nutritional Information Container
-  Widget getNutritionalInfoContainer(List<FullNutrient> fullNutrients) {
+  Widget getNutritionalInfoContainer(List<FullNutrientsModel> fullNutrients) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppStyles.kSpac8,

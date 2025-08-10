@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:firebase_ai/firebase_ai.dart';
-import 'package:flutter/services.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
 enum GeminiRequestType {

@@ -6,13 +6,15 @@ part of 'full_nutrients_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FullNutrientImpl _$$FullNutrientImplFromJson(Map<String, dynamic> json) =>
-    _$FullNutrientImpl(
+_$FullNutrientsModelImpl _$$FullNutrientsModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$FullNutrientsModelImpl(
       attrId: (json['attr_id'] as num?)?.toInt(),
       value: (json['value'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$FullNutrientImplToJson(_$FullNutrientImpl instance) =>
+Map<String, dynamic> _$$FullNutrientsModelImplToJson(
+        _$FullNutrientsModelImpl instance) =>
     <String, dynamic>{
       'attr_id': instance.attrId,
       'value': instance.value,

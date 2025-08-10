@@ -14,46 +14,46 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-FullNutrient _$FullNutrientFromJson(Map<String, dynamic> json) {
-  return _FullNutrient.fromJson(json);
+FullNutrientsModel _$FullNutrientsModelFromJson(Map<String, dynamic> json) {
+  return _FullNutrientsModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FullNutrient {
+mixin _$FullNutrientsModel {
   @JsonKey(name: 'attr_id')
   int? get attrId => throw _privateConstructorUsedError;
   double? get value => throw _privateConstructorUsedError;
 
-  /// Serializes this FullNutrient to a JSON map.
+  /// Serializes this FullNutrientsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of FullNutrient
+  /// Create a copy of FullNutrientsModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FullNutrientCopyWith<FullNutrient> get copyWith =>
+  $FullNutrientsModelCopyWith<FullNutrientsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FullNutrientCopyWith<$Res> {
-  factory $FullNutrientCopyWith(
-          FullNutrient value, $Res Function(FullNutrient) then) =
-      _$FullNutrientCopyWithImpl<$Res, FullNutrient>;
+abstract class $FullNutrientsModelCopyWith<$Res> {
+  factory $FullNutrientsModelCopyWith(
+          FullNutrientsModel value, $Res Function(FullNutrientsModel) then) =
+      _$FullNutrientsModelCopyWithImpl<$Res, FullNutrientsModel>;
   @useResult
   $Res call({@JsonKey(name: 'attr_id') int? attrId, double? value});
 }
 
 /// @nodoc
-class _$FullNutrientCopyWithImpl<$Res, $Val extends FullNutrient>
-    implements $FullNutrientCopyWith<$Res> {
-  _$FullNutrientCopyWithImpl(this._value, this._then);
+class _$FullNutrientsModelCopyWithImpl<$Res, $Val extends FullNutrientsModel>
+    implements $FullNutrientsModelCopyWith<$Res> {
+  _$FullNutrientsModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FullNutrient
+  /// Create a copy of FullNutrientsModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -75,25 +75,25 @@ class _$FullNutrientCopyWithImpl<$Res, $Val extends FullNutrient>
 }
 
 /// @nodoc
-abstract class _$$FullNutrientImplCopyWith<$Res>
-    implements $FullNutrientCopyWith<$Res> {
-  factory _$$FullNutrientImplCopyWith(
-          _$FullNutrientImpl value, $Res Function(_$FullNutrientImpl) then) =
-      __$$FullNutrientImplCopyWithImpl<$Res>;
+abstract class _$$FullNutrientsModelImplCopyWith<$Res>
+    implements $FullNutrientsModelCopyWith<$Res> {
+  factory _$$FullNutrientsModelImplCopyWith(_$FullNutrientsModelImpl value,
+          $Res Function(_$FullNutrientsModelImpl) then) =
+      __$$FullNutrientsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'attr_id') int? attrId, double? value});
 }
 
 /// @nodoc
-class __$$FullNutrientImplCopyWithImpl<$Res>
-    extends _$FullNutrientCopyWithImpl<$Res, _$FullNutrientImpl>
-    implements _$$FullNutrientImplCopyWith<$Res> {
-  __$$FullNutrientImplCopyWithImpl(
-      _$FullNutrientImpl _value, $Res Function(_$FullNutrientImpl) _then)
+class __$$FullNutrientsModelImplCopyWithImpl<$Res>
+    extends _$FullNutrientsModelCopyWithImpl<$Res, _$FullNutrientsModelImpl>
+    implements _$$FullNutrientsModelImplCopyWith<$Res> {
+  __$$FullNutrientsModelImplCopyWithImpl(_$FullNutrientsModelImpl _value,
+      $Res Function(_$FullNutrientsModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FullNutrient
+  /// Create a copy of FullNutrientsModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -101,7 +101,7 @@ class __$$FullNutrientImplCopyWithImpl<$Res>
     Object? attrId = freezed,
     Object? value = freezed,
   }) {
-    return _then(_$FullNutrientImpl(
+    return _then(_$FullNutrientsModelImpl(
       attrId: freezed == attrId
           ? _value.attrId
           : attrId // ignore: cast_nullable_to_non_nullable
@@ -116,11 +116,11 @@ class __$$FullNutrientImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FullNutrientImpl implements _FullNutrient {
-  _$FullNutrientImpl({@JsonKey(name: 'attr_id') this.attrId, this.value});
+class _$FullNutrientsModelImpl implements _FullNutrientsModel {
+  _$FullNutrientsModelImpl({@JsonKey(name: 'attr_id') this.attrId, this.value});
 
-  factory _$FullNutrientImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FullNutrientImplFromJson(json);
+  factory _$FullNutrientsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FullNutrientsModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'attr_id')
@@ -130,14 +130,14 @@ class _$FullNutrientImpl implements _FullNutrient {
 
   @override
   String toString() {
-    return 'FullNutrient(attrId: $attrId, value: $value)';
+    return 'FullNutrientsModel(attrId: $attrId, value: $value)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FullNutrientImpl &&
+            other is _$FullNutrientsModelImpl &&
             (identical(other.attrId, attrId) || other.attrId == attrId) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -146,29 +146,30 @@ class _$FullNutrientImpl implements _FullNutrient {
   @override
   int get hashCode => Object.hash(runtimeType, attrId, value);
 
-  /// Create a copy of FullNutrient
+  /// Create a copy of FullNutrientsModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FullNutrientImplCopyWith<_$FullNutrientImpl> get copyWith =>
-      __$$FullNutrientImplCopyWithImpl<_$FullNutrientImpl>(this, _$identity);
+  _$$FullNutrientsModelImplCopyWith<_$FullNutrientsModelImpl> get copyWith =>
+      __$$FullNutrientsModelImplCopyWithImpl<_$FullNutrientsModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FullNutrientImplToJson(
+    return _$$FullNutrientsModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _FullNutrient implements FullNutrient {
-  factory _FullNutrient(
+abstract class _FullNutrientsModel implements FullNutrientsModel {
+  factory _FullNutrientsModel(
       {@JsonKey(name: 'attr_id') final int? attrId,
-      final double? value}) = _$FullNutrientImpl;
+      final double? value}) = _$FullNutrientsModelImpl;
 
-  factory _FullNutrient.fromJson(Map<String, dynamic> json) =
-      _$FullNutrientImpl.fromJson;
+  factory _FullNutrientsModel.fromJson(Map<String, dynamic> json) =
+      _$FullNutrientsModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'attr_id')
@@ -176,10 +177,10 @@ abstract class _FullNutrient implements FullNutrient {
   @override
   double? get value;
 
-  /// Create a copy of FullNutrient
+  /// Create a copy of FullNutrientsModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FullNutrientImplCopyWith<_$FullNutrientImpl> get copyWith =>
+  _$$FullNutrientsModelImplCopyWith<_$FullNutrientsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

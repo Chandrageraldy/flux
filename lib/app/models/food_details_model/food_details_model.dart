@@ -24,7 +24,7 @@ class FoodDetailsModel with _$FoodDetailsModel {
     @JsonKey(name: 'nix_item_id') String? nixItemId,
     @JsonKey(name: 'tag_id') String? tagId,
     @JsonKey(name: 'nf_ingredient_statement') String? ingredientStatement,
-    @JsonKey(name: 'full_nutrients') List<FullNutrient>? fullNutrients,
+    @JsonKey(name: 'full_nutrients') List<FullNutrientsModel>? fullNutrients,
     @JsonKey(name: 'alt_measures') List<AltMeasureModel>? altMeasures,
   }) = _FoodDetailsModel;
 

@@ -49,7 +49,8 @@ mixin _$FoodDetailsModel {
   @JsonKey(name: 'nf_ingredient_statement')
   String? get ingredientStatement => throw _privateConstructorUsedError;
   @JsonKey(name: 'full_nutrients')
-  List<FullNutrient>? get fullNutrients => throw _privateConstructorUsedError;
+  List<FullNutrientsModel>? get fullNutrients =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'alt_measures')
   List<AltMeasureModel>? get altMeasures => throw _privateConstructorUsedError;
 
@@ -84,7 +85,7 @@ abstract class $FoodDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'nix_item_id') String? nixItemId,
       @JsonKey(name: 'tag_id') String? tagId,
       @JsonKey(name: 'nf_ingredient_statement') String? ingredientStatement,
-      @JsonKey(name: 'full_nutrients') List<FullNutrient>? fullNutrients,
+      @JsonKey(name: 'full_nutrients') List<FullNutrientsModel>? fullNutrients,
       @JsonKey(name: 'alt_measures') List<AltMeasureModel>? altMeasures});
 }
 
@@ -180,7 +181,7 @@ class _$FoodDetailsModelCopyWithImpl<$Res, $Val extends FoodDetailsModel>
       fullNutrients: freezed == fullNutrients
           ? _value.fullNutrients
           : fullNutrients // ignore: cast_nullable_to_non_nullable
-              as List<FullNutrient>?,
+              as List<FullNutrientsModel>?,
       altMeasures: freezed == altMeasures
           ? _value.altMeasures
           : altMeasures // ignore: cast_nullable_to_non_nullable
@@ -212,7 +213,7 @@ abstract class _$$FoodDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'nix_item_id') String? nixItemId,
       @JsonKey(name: 'tag_id') String? tagId,
       @JsonKey(name: 'nf_ingredient_statement') String? ingredientStatement,
-      @JsonKey(name: 'full_nutrients') List<FullNutrient>? fullNutrients,
+      @JsonKey(name: 'full_nutrients') List<FullNutrientsModel>? fullNutrients,
       @JsonKey(name: 'alt_measures') List<AltMeasureModel>? altMeasures});
 }
 
@@ -306,7 +307,7 @@ class __$$FoodDetailsModelImplCopyWithImpl<$Res>
       fullNutrients: freezed == fullNutrients
           ? _value._fullNutrients
           : fullNutrients // ignore: cast_nullable_to_non_nullable
-              as List<FullNutrient>?,
+              as List<FullNutrientsModel>?,
       altMeasures: freezed == altMeasures
           ? _value._altMeasures
           : altMeasures // ignore: cast_nullable_to_non_nullable
@@ -333,7 +334,8 @@ class _$FoodDetailsModelImpl implements _FoodDetailsModel {
       @JsonKey(name: 'nix_item_id') this.nixItemId,
       @JsonKey(name: 'tag_id') this.tagId,
       @JsonKey(name: 'nf_ingredient_statement') this.ingredientStatement,
-      @JsonKey(name: 'full_nutrients') final List<FullNutrient>? fullNutrients,
+      @JsonKey(name: 'full_nutrients')
+      final List<FullNutrientsModel>? fullNutrients,
       @JsonKey(name: 'alt_measures') final List<AltMeasureModel>? altMeasures})
       : _fullNutrients = fullNutrients,
         _altMeasures = altMeasures;
@@ -383,10 +385,10 @@ class _$FoodDetailsModelImpl implements _FoodDetailsModel {
   @override
   @JsonKey(name: 'nf_ingredient_statement')
   final String? ingredientStatement;
-  final List<FullNutrient>? _fullNutrients;
+  final List<FullNutrientsModel>? _fullNutrients;
   @override
   @JsonKey(name: 'full_nutrients')
-  List<FullNutrient>? get fullNutrients {
+  List<FullNutrientsModel>? get fullNutrients {
     final value = _fullNutrients;
     if (value == null) return null;
     if (_fullNutrients is EqualUnmodifiableListView) return _fullNutrients;
@@ -501,7 +503,8 @@ abstract class _FoodDetailsModel implements FoodDetailsModel {
       @JsonKey(name: 'tag_id') final String? tagId,
       @JsonKey(name: 'nf_ingredient_statement')
       final String? ingredientStatement,
-      @JsonKey(name: 'full_nutrients') final List<FullNutrient>? fullNutrients,
+      @JsonKey(name: 'full_nutrients')
+      final List<FullNutrientsModel>? fullNutrients,
       @JsonKey(name: 'alt_measures')
       final List<AltMeasureModel>? altMeasures}) = _$FoodDetailsModelImpl;
 
@@ -552,7 +555,7 @@ abstract class _FoodDetailsModel implements FoodDetailsModel {
   String? get ingredientStatement;
   @override
   @JsonKey(name: 'full_nutrients')
-  List<FullNutrient>? get fullNutrients;
+  List<FullNutrientsModel>? get fullNutrients;
   @override
   @JsonKey(name: 'alt_measures')
   List<AltMeasureModel>? get altMeasures;

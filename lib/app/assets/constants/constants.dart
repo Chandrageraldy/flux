@@ -379,7 +379,7 @@ class GeminiJsonSchema {
   static Schema mealScan = Schema.object(
     properties: {
       'foodName': Schema.string(), // main meal name
-      'healthScoreDescription': Schema.string(), // extra: description of the meal
+      'healthScoreDesc': Schema.string(), // extra: description of the meal
       'healthScore': Schema.number(minimum: 1, maximum: 10), // extra: health score out of 10
       'quantity': Schema.number(description: 'must always be set to 1'), // added for meal scan quantity
 
@@ -387,15 +387,15 @@ class GeminiJsonSchema {
       'ingredients': Schema.array(
         items: Schema.object(
           properties: {
-            'food_name': Schema.string(),
-            'serving_qty': Schema.number(),
-            'serving_unit': Schema.string(),
-            'serving_weight_grams': Schema.number(),
-            'nf_calories': Schema.number(),
-            'nf_total_fat': Schema.number(),
-            'nf_total_carbohydrate': Schema.number(),
-            'nf_protein': Schema.number(),
-            'full_nutrients': Schema.array(
+            'foodName': Schema.string(),
+            'servingQty': Schema.number(),
+            'servingUnit': Schema.string(),
+            'servingWeight': Schema.number(),
+            'calorie': Schema.number(),
+            'fat': Schema.number(),
+            'carbs': Schema.number(),
+            'protein': Schema.number(),
+            'fullNutrients': Schema.array(
               items: Schema.object(
                 properties: {
                   'attr_id': Schema.number(),
@@ -403,7 +403,7 @@ class GeminiJsonSchema {
                 },
               ),
             ),
-            'alt_measures': Schema.array(
+            'altMeasures': Schema.array(
               items: Schema.object(
                 properties: {
                   'serving_weight': Schema.number(),
@@ -429,24 +429,24 @@ class GeminiSystemInstruction {
       -   If multiple foods are present, name the main meal and break down the components into "ingredients".
   
   2.  **Estimate portion size and volume**:
-      -   For each item in the "ingredients" array, provide its individual primary serving size using **"serving_qty"**, **"serving_unit"**, and **"serving_weight_grams"**.
+      -   For each item in the "ingredients" array, provide its individual primary serving size using **"servingQty"**, **"servingUnit"**, and **"servingWeight"**.
       -   Use real-world visual references (e.g., "the piece of chicken is about the size of a deck of cards" → ~85g).
       -   Consider the density of the food for accurate gram estimation (e.g., cooked rice is ~200g per cup).
-      -   **New Rule for `serving_qty` for each ingredient**: When there are multiple individual items of the same food (e.g., three chicken wings, five strawberries), set **"serving_qty"** to the total count of those items. The **"serving_unit"** should then be the singular form of the item (e.g., "wing," "strawberry"). The **"serving_weight_grams"** should be the total weight of all items combined.
+      -   **New Rule for `servingQty` for each ingredient**: When there are multiple individual items of the same food (e.g., three chicken wings, five strawberries), set **"servingQty"** to the total count of those items. The **"servingUnit"** should then be the singular form of the item (e.g., "wing," "strawberry"). The **"servingWeight"** should be the total weight of all items combined.
 
   3.  **Nutrition data**:
-      -   For each item in the "ingredients" array, include its own **"full_nutrients"** array with all micronutrients, using the correct **"attr_id"** and value from the mapping table below.
+      -   For each item in the "ingredients" array, include its own **"fullNutrients"** array with all micronutrients, using the correct **"attr_id"** and value from the mapping table below.
 
   4.  **Alternative measures**:
-      -   For each ingredient, provide exactly **3 alternative serving measures** in the **"alt_measures"** array.
-      -   One of the `alt_measures` for each ingredient **must** correspond to the primary serving size defined by its **"serving_qty"**, **"serving_unit"**, and **"serving_weight_grams"**. Another measure must be a weight in grams, and the last measure must be different from the other measures.
+      -   For each ingredient, provide exactly **3 alternative serving measures** in the **"altMeasures"** array.
+      -   One of the `altMeasures` for each ingredient **must** correspond to the primary serving size defined by its **"servingQty"**, **"servingUnit"**, and **"servingWeight"**. Another measure must be a weight in grams, and the last measure must be different from the other measures.
 
   5.  **Health score**:
       -   Provide a **"health_score"** from **1-10**, where 10 is very healthy (nutrient-dense, low in added sugar/salt) and 1 is unhealthy.
-      -   Also, provide a **"healthScoreDescription"** explaining the score.
+      -   Also, provide a **"healthScoreDesc"** explaining the score.
 
   6.  **Ingredients**:
-      -   Each item in the **"ingredients"** array must be a complete JSON object with its own name, primary serving size, macros, micronutrients, and `alt_measures`.
+      -   Each item in the **"ingredients"** array must be a complete JSON object with its own name, primary serving size, macros, micronutrients, and `altMeasures`.
 
   7.  **Unit consistency**:
       -   Use the following units:

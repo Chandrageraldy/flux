@@ -24,7 +24,7 @@ _$FoodDetailsModelImpl _$$FoodDetailsModelImplFromJson(
       tagId: json['tag_id'] as String?,
       ingredientStatement: json['nf_ingredient_statement'] as String?,
       fullNutrients: (json['full_nutrients'] as List<dynamic>?)
-          ?.map((e) => FullNutrient.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => FullNutrientsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       altMeasures: (json['alt_measures'] as List<dynamic>?)
           ?.map((e) => AltMeasureModel.fromJson(e as Map<String, dynamic>))
