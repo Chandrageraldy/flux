@@ -8,26 +8,9 @@ enum GeminiRequestType {
   imageWithText,
 }
 
-final jsonSchema = Schema.object(
-  properties: {
-    'food_name': Schema.string(),
-    'nf_calories': Schema.number(), // double
-    'nf_total_fat': Schema.number(), // double
-    'nf_total_carbohydrate': Schema.number(), // double
-    'nf_protein': Schema.number(), // double
-    'alt_measures': Schema.array(
-      items: Schema.object(
-        properties: {
-          'serving_weight': Schema.number(),
-          'measure': Schema.string(),
-          'qty': Schema.number(),
-        },
-      ),
-    ),
-  },
-);
+final jsonSchema = GeminiJsonSchema.mealScan;
 
-final systemInstruction = Content.system('');
+final systemInstruction = Content.system(GeminiSystemInstruction.mealScan);
 
 class GeminiBaseService {
   final model = FirebaseAI.googleAI().generativeModel(
@@ -50,27 +33,27 @@ class GeminiBaseService {
           response = await model.generateContent(prompt);
           break;
         case GeminiRequestType.imageWithText:
-          // final prompt = TextPart(textPrompt);
-          // final image = await imageFile!.readAsBytes();
-          // final imagePart = InlineDataPart('image/jpeg', image);
-          // response = await model.generateContent([
-          //   Content.multi([prompt, imagePart])
-          // ]);
           final prompt = TextPart(textPrompt);
-
-          // Load dummy image from assets
-          final image = await rootBundle.load(ImagePath.fluxLogo);
-          final imageBytes = image.buffer.asUint8List();
-
-          final imagePart = InlineDataPart('image/jpeg', imageBytes);
-
+          final image = await imageFile!.readAsBytes();
+          final imagePart = InlineDataPart('image/jpeg', image);
           response = await model.generateContent([
             Content.multi([prompt, imagePart])
           ]);
+          // final prompt = TextPart(textPrompt);
+
+          // // Load dummy image from assets
+          // final image = await rootBundle.load(ImagePath.fluxLogo);
+          // final imageBytes = image.buffer.asUint8List();
+
+          // final imagePart = InlineDataPart('image/jpeg', imageBytes);
+
+          // response = await model.generateContent([
+          //   Content.multi([prompt, imagePart])
+          // ]);
           break;
       }
 
-      print(response.text);
+      debugPrint(response.text);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -1,3 +1,4 @@
+import 'package:firebase_ai/firebase_ai.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 
 class Env {
@@ -19,12 +20,10 @@ class ImagePath {
   static const String pizza = 'lib/app/assets/images/pizza-30.png';
   static const String fastFood = 'lib/app/assets/images/fast-food-19.png';
   static const String fluxLogo2 = 'lib/app/assets/images/flux_logo2.png';
+  static const String foodSample = 'lib/app/assets/images/food_sample.jpg';
 }
 
 class AnimationPath {
-  static const String loadingAnimation = 'lib/app/assets/animations/loading.json';
-  static const String orangeAnimation = 'lib/app/assets/animations/Walking Orange.json';
-  static const String loadingSpinnerAnimation = 'lib/app/assets/animations/Loading Spinner.json';
   static const String starAIAnimation = 'lib/app/assets/animations/Star AI loader activated state.json';
 }
 
@@ -374,4 +373,117 @@ enum ExerciseLevel {
 
   final double factor;
   const ExerciseLevel(this.factor);
+}
+
+class GeminiJsonSchema {
+  static Schema mealScan = Schema.object(
+    properties: {
+      'foodName': Schema.string(), // main meal name
+      'healthScoreDescription': Schema.string(), // extra: description of the meal
+      'healthScore': Schema.number(minimum: 1, maximum: 10), // extra: health score out of 10
+      'quantity': Schema.number(description: 'must always be set to 1'), // added for meal scan quantity
+
+      // ingredients list (each one uses full base food details model)
+      'ingredients': Schema.array(
+        items: Schema.object(
+          properties: {
+            'food_name': Schema.string(),
+            'serving_qty': Schema.number(),
+            'serving_unit': Schema.string(),
+            'serving_weight_grams': Schema.number(),
+            'nf_calories': Schema.number(),
+            'nf_total_fat': Schema.number(),
+            'nf_total_carbohydrate': Schema.number(),
+            'nf_protein': Schema.number(),
+            'full_nutrients': Schema.array(
+              items: Schema.object(
+                properties: {
+                  'attr_id': Schema.number(),
+                  'value': Schema.number(),
+                },
+              ),
+            ),
+            'alt_measures': Schema.array(
+              items: Schema.object(
+                properties: {
+                  'serving_weight': Schema.number(),
+                  'measure': Schema.string(),
+                  'qty': Schema.number(),
+                },
+              ),
+            ),
+          },
+        ),
+      ),
+    },
+  );
+}
+
+class GeminiSystemInstruction {
+  static const String mealScan = '''
+  You are a nutrition analysis AI that receives a meal image and optional text description. Your task is to analyze the food and return a structured JSON strictly following the provided schema.
+
+  Instructions:
+  1.  **Identify the meal**:
+      -   Accurately name the dish or food item in "foodName".
+      -   If multiple foods are present, name the main meal and break down the components into "ingredients".
+  
+  2.  **Estimate portion size and volume**:
+      -   For each item in the "ingredients" array, provide its individual primary serving size using **"serving_qty"**, **"serving_unit"**, and **"serving_weight_grams"**.
+      -   Use real-world visual references (e.g., "the piece of chicken is about the size of a deck of cards" → ~85g).
+      -   Consider the density of the food for accurate gram estimation (e.g., cooked rice is ~200g per cup).
+      -   **New Rule for `serving_qty` for each ingredient**: When there are multiple individual items of the same food (e.g., three chicken wings, five strawberries), set **"serving_qty"** to the total count of those items. The **"serving_unit"** should then be the singular form of the item (e.g., "wing," "strawberry"). The **"serving_weight_grams"** should be the total weight of all items combined.
+
+  3.  **Nutrition data**:
+      -   For each item in the "ingredients" array, include its own **"full_nutrients"** array with all micronutrients, using the correct **"attr_id"** and value from the mapping table below.
+
+  4.  **Alternative measures**:
+      -   For each ingredient, provide exactly **3 alternative serving measures** in the **"alt_measures"** array.
+      -   One of the `alt_measures` for each ingredient **must** correspond to the primary serving size defined by its **"serving_qty"**, **"serving_unit"**, and **"serving_weight_grams"**. Another measure must be a weight in grams, and the last measure must be different from the other measures.
+
+  5.  **Health score**:
+      -   Provide a **"health_score"** from **1-10**, where 10 is very healthy (nutrient-dense, low in added sugar/salt) and 1 is unhealthy.
+      -   Also, provide a **"healthScoreDescription"** explaining the score.
+
+  6.  **Ingredients**:
+      -   Each item in the **"ingredients"** array must be a complete JSON object with its own name, primary serving size, macros, micronutrients, and `alt_measures`.
+
+  7.  **Unit consistency**:
+      -   Use the following units:
+          -   kcal for calories
+          -   g for protein, fat, carbs
+          -   mg for calcium, iron, magnesium, phosphorus, potassium, sodium, zinc, copper, manganese, vitamin E, vitamin C, thiamin, riboflavin, niacin, vitamin B6, choline
+          -   µg for selenium, vitamin B12, vitamin K, folate
+          -   IU for vitamin A and vitamin D
+
+  Nutrient Mapping (attr_id → label, unit):
+  208: Calories (kcal)
+  203: Protein (g)
+  204: Total Fat (g)
+  205: Total Carbohydrate (g)
+  301: Calcium (mg)
+  303: Iron (mg)
+  304: Magnesium (mg)
+  305: Phosphorus (mg)
+  306: Potassium (mg)
+  307: Sodium (mg)
+  309: Zinc (mg)
+  312: Copper (mg)
+  315: Manganese (mg)
+  317: Selenium (µg)
+  318: Vitamin A (IU)
+  323: Vitamin E (mg)
+  324: Vitamin D (IU)
+  401: Vitamin C (mg)
+  404: Thiamin (mg)
+  405: Riboflavin (mg)
+  406: Niacin (mg)
+  415: Vitamin B6 (mg)
+  418: Vitamin B12 (µg)
+  421: Choline (mg)
+  430: Vitamin K (µg)
+  417: Folate (µg)
+
+  Return only valid JSON matching the provided schema. Do not include any extra commentary.
+    ''';
 }
