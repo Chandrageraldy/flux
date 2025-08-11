@@ -16,6 +16,8 @@ class MealScanViewModel extends BaseViewModel {
     final response = await foodRepository.getFoodDetailsFromMealScan(imageFile: imageFile);
     checkError(response);
     mealScanResult = response.data as MealScanResultModel;
+    _isLoading = false;
+    notifyListeners();
     print(mealScanResult);
   }
 }

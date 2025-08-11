@@ -2,7 +2,10 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
+import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
+import 'package:flux/app/widgets/food/ingredient_card.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
 import 'package:flux/app/widgets/skeleton/meal_scan_result_skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -173,20 +176,32 @@ extension _WidgetFactories on _MealScanResultPageState {
   Widget getScrollableSheet() {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
 
+    final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
+
     return Positioned.fill(
       child: DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.7,
         maxChildSize: 0.88,
         builder: (context, scrollController) {
-          return getScrollableSheetContainer(scrollController, isLoading);
+          return getScrollableSheetContainer(scrollController, isLoading, mealScanResult: mealScanResult);
         },
       ),
     );
   }
 
   // Scrollable Sheet Container
-  Widget getScrollableSheetContainer(ScrollController scrollController, bool isLoading) {
+  Widget getScrollableSheetContainer(
+    ScrollController scrollController,
+    bool isLoading, {
+    required MealScanResultModel mealScanResult,
+  }) {
+    final foodName = mealScanResult.foodName;
+    final quantity = mealScanResult.quantity;
+    final healthScore = mealScanResult.healthScore;
+    final healthScoreDesc = mealScanResult.healthScoreDesc;
+    final ingredients = mealScanResult.ingredients;
+
     return Container(
       decoration: _Styles.getScrollableSheetDecoration(context),
       child: SingleChildScrollView(
@@ -197,20 +212,23 @@ extension _WidgetFactories on _MealScanResultPageState {
             spacing: AppStyles.kSpac16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // if (isLoading)
-              //   const MealScanResultSkeleton()
-              // else ...[
-              //   getHeader(),
-              //   getHealthScoreContainer(),
-              //   getCalorieContainer(),
-              //   getMacronutrientsRow(),
-              //   Text('Ingredients'.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11))
-              // ],
-              getHeader(),
-              getHealthScoreContainer(),
-              getCalorieContainer(),
-              getMacronutrientsRow(),
-              Text('Ingredients'.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11))
+              if (isLoading)
+                const MealScanResultSkeleton()
+              else ...[
+                getHeader(foodName: foodName, quantity: quantity),
+                getNutritionScoreContainer(healthScore: healthScore, healthScoreDesc: healthScoreDesc),
+                getCalorieContainer(),
+                getMacronutrientsRow(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: AppStyles.kSpac4,
+                  children: [
+                    Text('Ingredients'.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11)),
+                    getIngredientListView(ingredients: ingredients),
+                  ],
+                ),
+                AppStyles.kSizedBoxH32,
+              ],
             ],
           ),
         ),
@@ -219,21 +237,21 @@ extension _WidgetFactories on _MealScanResultPageState {
   }
 
   // Header
-  Widget getHeader() {
+  Widget getHeader({required String? foodName, required double? quantity}) {
     return Row(
       spacing: AppStyles.kSpac12,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text('Chinese Crepe Delight with Egg and Sausage', style: _Styles.getFoodNameLabelTextStyle(context)),
+          child: Text(foodName ?? '', style: _Styles.getFoodNameLabelTextStyle(context)),
         ),
-        getNumberStepper(),
+        getNumberStepper(quantity: quantity),
       ],
     );
   }
 
   // Number Stepper
-  Widget getNumberStepper() {
+  Widget getNumberStepper({required double? quantity}) {
     return Container(
       decoration: _Styles.getNumberStepperContainerDecoration(context),
       padding: AppStyles.kPaddSV4H6,
@@ -241,7 +259,7 @@ extension _WidgetFactories on _MealScanResultPageState {
         spacing: AppStyles.kSpac24,
         children: [
           GestureDetector(onTap: _decrementStepper, child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12)),
-          Text('$stepperCount', style: _Styles.getNumberStepperLabelTextStyle(context)),
+          Text(quantity?.toStringAsFixed(0) ?? '0', style: _Styles.getNumberStepperLabelTextStyle(context)),
           GestureDetector(onTap: _incrementStepper, child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12)),
         ],
       ),
@@ -311,18 +329,18 @@ extension _WidgetFactories on _MealScanResultPageState {
     );
   }
 
-  // Health Score Container
-  Widget getHealthScoreContainer() {
+  // Nutrition Score Container
+  Widget getNutritionScoreContainer({required double? healthScore, required String? healthScoreDesc}) {
     return Container(
       width: AppStyles.kDoubleInfinity,
-      decoration: _Styles.getHealthScoreContainerDecoration(context),
+      decoration: _Styles.getNutritionScoreContainerDecoration(context),
       padding: AppStyles.kPaddSV10H12,
       child: Column(
         spacing: AppStyles.kSpac4,
         children: [
-          getNutritionScoreHeader(),
+          getNutritionScoreHeader(healthScore: healthScore),
           Text(
-            'A protein-packed breakfast 🥚🥓 with eggs and sausage, offering sustained energy ⚡ from the crepe. Slightly high in sodium 🧂, but well-balanced for an active day 💪.',
+            healthScoreDesc ?? '',
             style: _Styles.getNutritionScoreContentTextStyle(context),
             textAlign: TextAlign.justify,
           ),
@@ -332,7 +350,7 @@ extension _WidgetFactories on _MealScanResultPageState {
   }
 
   // Nutrition Score Header
-  Widget getNutritionScoreHeader() {
+  Widget getNutritionScoreHeader({required double? healthScore}) {
     return Row(
       spacing: AppStyles.kSpac4,
       children: [
@@ -342,13 +360,27 @@ extension _WidgetFactories on _MealScanResultPageState {
           children: [Text(S.current.nutritionScoreLabel, style: _Styles.getNutritionScoreLabelTextStyle(context))],
         ),
         Spacer(),
-        Text('7/10', style: _Styles.getNutritionScoreValueTextStyle(context)),
+        Text('${healthScore?.toStringAsFixed(0) ?? '0'}/10', style: _Styles.getNutritionScoreValueTextStyle(context)),
       ],
+    );
+  }
+
+  // Ingredient List View
+  Widget getIngredientListView({required List<IngredientModel>? ingredients}) {
+    return ListView.builder(
+      itemCount: ingredients?.length ?? 0,
+      itemBuilder: (context, index) {
+        final ingredient = ingredients![index];
+        return IngredientCard(ingredient: ingredient);
+      },
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
     );
   }
 
   // Action Button Row
   Widget getActionButtonRow() {
+    final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
     return Positioned(
       left: 0,
       right: 0,
@@ -358,7 +390,15 @@ extension _WidgetFactories on _MealScanResultPageState {
         decoration: _Styles.getActionButtonContainerDecoration(context),
         child: Row(
           spacing: AppStyles.kSpac12,
-          children: [getEnhanceWithAIButton(), getLogFoodButton()],
+          children: [
+            if (isLoading) ...[
+              MealScanActionButtonRowSkeleton(),
+              MealScanActionButtonRowSkeleton()
+            ] else ...[
+              getEnhanceWithAIButton(),
+              getLogFoodButton(),
+            ],
+          ],
         ),
       ),
     );
@@ -367,17 +407,20 @@ extension _WidgetFactories on _MealScanResultPageState {
   // Enhance with AI Button
   Widget getEnhanceWithAIButton() {
     return Expanded(
-      child: Container(
-        padding: AppStyles.kPaddSV12,
-        decoration: _Styles.getEnhanceWithAIButtonDecoration(context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: AppStyles.kSpac8,
-          children: [
-            FaIcon(FontAwesomeIcons.edit, size: AppStyles.kSize16),
-            Text(S.current.enhanceWithAILabel, style: _Styles.getEnhanceWithAIButtonTextStyle(context)),
-          ],
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          padding: AppStyles.kPaddSV12,
+          decoration: _Styles.getEnhanceWithAIButtonDecoration(context),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: AppStyles.kSpac8,
+            children: [
+              FaIcon(FontAwesomeIcons.edit, size: AppStyles.kSize16),
+              Text(S.current.enhanceWithAILabel, style: _Styles.getEnhanceWithAIButtonTextStyle(context)),
+            ],
+          ),
         ),
       ),
     );
@@ -386,11 +429,16 @@ extension _WidgetFactories on _MealScanResultPageState {
   // Log Food Button
   Widget getLogFoodButton() {
     return Expanded(
-      child: Container(
-        padding: AppStyles.kPaddSV12,
-        decoration: _Styles.getLogFoodButtonDecoration(context),
-        child: Center(
-          child: Text(S.current.logFoodLabel, style: _Styles.getLogFoodButtonTextStyle(context)),
+      child: GestureDetector(
+        onTap: () {
+          debugPrint(context.read<MealScanViewModel>().mealScanResult.toString());
+        },
+        child: Container(
+          padding: AppStyles.kPaddSV12,
+          decoration: _Styles.getLogFoodButtonDecoration(context),
+          child: Center(
+            child: Text(S.current.logFoodLabel, style: _Styles.getLogFoodButtonTextStyle(context)),
+          ),
         ),
       ),
     );
@@ -398,18 +446,15 @@ extension _WidgetFactories on _MealScanResultPageState {
 
   // Meal Form Builder Drop Down
   Widget getMealFormBuilderDropDown() {
+    final mealTypes = [MealType.breakfast.label, MealType.lunch.label, MealType.dinner.label, MealType.snack.label];
     return Container(
       padding: AppStyles.kPaddSH6,
       width: AppStyles.kSize100,
       decoration: _Styles.getFieldContainerDecoration(context),
       child: FormBuilderDropdown<String>(
         name: FormFields.mealType.name,
-        items: [
-          DropdownMenuItem(value: MealType.breakfast.label, child: Text(MealType.breakfast.label)),
-          DropdownMenuItem(value: MealType.lunch.label, child: Text(MealType.lunch.label)),
-          DropdownMenuItem(value: MealType.dinner.label, child: Text(MealType.dinner.label)),
-          DropdownMenuItem(value: MealType.snack.label, child: Text(MealType.snack.label)),
-        ],
+        initialValue: MealType.breakfast.label,
+        items: mealTypes.map((type) => DropdownMenuItem(value: type, child: Text(type))).toList(),
         style: _Styles.getFieldDropDownTextStyle(context),
         decoration: _Styles.getFieldInputDecoration(),
       ),
@@ -495,8 +540,8 @@ abstract class _Styles {
     );
   }
 
-  // Health Score Container Decoration
-  static BoxDecoration getHealthScoreContainerDecoration(BuildContext context) {
+  // Nutrition Score Container Decoration
+  static BoxDecoration getNutritionScoreContainerDecoration(BuildContext context) {
     return BoxDecoration(
       gradient: GradientAppColors.tertiaryGradient,
       borderRadius: AppStyles.kRad10,

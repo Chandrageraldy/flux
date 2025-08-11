@@ -443,7 +443,7 @@ class GeminiSystemInstruction {
 
   5.  **Health score**:
       -   Provide a **"health_score"** from **1-10**, where 10 is very healthy (nutrient-dense, low in added sugar/salt) and 1 is unhealthy.
-      -   Also, provide a **"healthScoreDesc"** explaining the score.
+      -   Also, provide a "healthScoreDesc" explaining the score.
 
   6.  **Ingredients**:
       -   Each item in the **"ingredients"** array must be a complete JSON object with its own name, primary serving size, macros, micronutrients, and `altMeasures`.
