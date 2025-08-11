@@ -281,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
+        "saveLabel": MessageLookupByLibrary.simpleMessage("Save"),
         "saveYourFoodDesc": MessageLookupByLibrary.simpleMessage(
             "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."),
         "saveYourFoodLabel":

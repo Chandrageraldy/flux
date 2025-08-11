@@ -230,18 +230,54 @@ class FoodSearchRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [IngredientDetailsPage]
-class IngredientDetailsRoute extends PageRouteInfo<void> {
-  const IngredientDetailsRoute({List<PageRouteInfo>? children})
-    : super(IngredientDetailsRoute.name, initialChildren: children);
+class IngredientDetailsRoute extends PageRouteInfo<IngredientDetailsRouteArgs> {
+  IngredientDetailsRoute({
+    required IngredientModel ingredient,
+    required int index,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         IngredientDetailsRoute.name,
+         args: IngredientDetailsRouteArgs(
+           ingredient: ingredient,
+           index: index,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'IngredientDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const IngredientDetailsPage();
+      final args = data.argsAs<IngredientDetailsRouteArgs>();
+      return IngredientDetailsPage(
+        ingredient: args.ingredient,
+        index: args.index,
+        key: args.key,
+      );
     },
   );
+}
+
+class IngredientDetailsRouteArgs {
+  const IngredientDetailsRouteArgs({
+    required this.ingredient,
+    required this.index,
+    this.key,
+  });
+
+  final IngredientModel ingredient;
+
+  final int index;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'IngredientDetailsRouteArgs{ingredient: $ingredient, index: $index, key: $key}';
+  }
 }
 
 /// generated route for

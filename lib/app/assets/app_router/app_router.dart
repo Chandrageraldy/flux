@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
+import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
 import 'package:flux/app/views/auth_page/signup_page.dart';
@@ -81,7 +82,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AccountRoute.page),
         AutoRoute(page: MealScanRoute.page),
         AutoRoute(page: MealScanResultRoute.page),
-        AutoRoute(page: IngredientDetailsRoute.page)
+        AutoRoute(page: IngredientDetailsRoute.page),
       ],
     );
   }

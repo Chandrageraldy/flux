@@ -91,6 +91,10 @@ extension _Actions on _MealScanResultPageState {
       });
     }
   }
+
+  void _onIngredientPressed(IngredientModel ingredient, int index) {
+    context.router.push(IngredientDetailsRoute(ingredient: ingredient, index: index));
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -371,7 +375,10 @@ extension _WidgetFactories on _MealScanResultPageState {
       itemCount: ingredients?.length ?? 0,
       itemBuilder: (context, index) {
         final ingredient = ingredients![index];
-        return IngredientCard(ingredient: ingredient);
+        return IngredientCard(
+          ingredient: ingredient,
+          onPressed: (ingredient) => _onIngredientPressed(ingredient, index),
+        );
       },
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,

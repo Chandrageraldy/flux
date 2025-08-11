@@ -2239,6 +2239,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Save`
+  String get saveLabel {
+    return Intl.message(
+      'Save',
+      name: 'saveLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

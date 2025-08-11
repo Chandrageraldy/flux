@@ -229,5 +229,6 @@
     "mealScanLabel": "Meal Scan",
     "barcodeLabel": "Barcode",
     "enhanceWithAILabel": "Enhance with AI",
-    "nutritionScoreLabel": "AI's Nutrition Score"
+    "nutritionScoreLabel": "AI's Nutrition Score",
+    "saveLabel": "Save"
 }

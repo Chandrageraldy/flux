@@ -4,51 +4,63 @@ import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IngredientCard extends StatelessWidget {
-  const IngredientCard({super.key, required this.ingredient});
+  const IngredientCard({super.key, required this.ingredient, required this.onPressed});
 
   final IngredientModel ingredient;
+  final void Function(IngredientModel) onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: AppStyles.kPaddOB12,
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.theme.colorScheme.onPrimary,
-          borderRadius: AppStyles.kRad10,
-          boxShadow: [
-            BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
-          ],
-        ),
-        padding: AppStyles.kPaddSV8H12,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(ingredient.foodName ?? 'Unknown Ingredient', style: _Styles.getFoodNameLabelTextStyle(context)),
-                Row(
-                  spacing: AppStyles.kSpac4,
+      child: GestureDetector(
+        onTap: () => onPressed(ingredient),
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.onPrimary,
+            borderRadius: AppStyles.kRad10,
+            boxShadow: [
+              BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+            ],
+          ),
+          padding: AppStyles.kPaddSV8H12,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: AppStyles.kSpac8,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${ingredient.servingQty} ${ingredient.servingUnit}',
-                        style: _Styles.getServingLabelTextStyle(context)),
-                    NutritionTag(
-                      label: '${ingredient.calorie?.toStringAsFixed(1)}kcal',
-                      icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
+                    Text(
+                      ingredient.foodName ?? 'Unknown Ingredient',
+                      style: _Styles.getFoodNameLabelTextStyle(context),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
+                    Row(
+                      spacing: AppStyles.kSpac4,
+                      children: [
+                        Text('${ingredient.servingQty} ${ingredient.servingUnit}',
+                            style: _Styles.getServingLabelTextStyle(context)),
+                        NutritionTag(
+                          label: '${ingredient.calorie?.toStringAsFixed(1)}kcal',
+                          icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-            Row(
-              spacing: AppStyles.kSpac12,
-              children: [
-                FaIcon(FontAwesomeIcons.edit, size: AppStyles.kSize14),
-                FaIcon(FontAwesomeIcons.trashCan, size: AppStyles.kSize14, color: AppColors.redColor),
-              ],
-            )
-          ],
+                ),
+              ),
+              Row(
+                spacing: AppStyles.kSpac12,
+                children: [
+                  FaIcon(FontAwesomeIcons.edit, size: AppStyles.kSize14),
+                  FaIcon(FontAwesomeIcons.trashCan, size: AppStyles.kSize14, color: AppColors.redColor),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

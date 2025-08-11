@@ -13,6 +13,7 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.keyboardType = TextInputType.text,
     this.height,
+    this.borderRadius,
     super.key,
   });
 
@@ -25,6 +26,7 @@ class AppTextFormField extends StatelessWidget {
   final void Function(String? value)? onChanged;
   final TextInputType keyboardType;
   final double? height;
+  final BorderRadiusGeometry? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class AppTextFormField extends StatelessWidget {
         Container(
           padding: AppStyles.kPaddSH20,
           height: height ?? AppStyles.kSize48,
-          decoration: _Styles.getContainerDecoration(context),
+          decoration: _Styles.getContainerDecoration(context, borderRadius),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [if (icon != null) icon!, if (icon != null) AppStyles.kSizedBoxW8, getTextFormField(context)],
@@ -73,8 +75,9 @@ extension _WidgetFactories on AppTextFormField {
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Container Decoration
-  static BoxDecoration getContainerDecoration(BuildContext context) {
-    return BoxDecoration(color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: AppStyles.kRad100);
+  static BoxDecoration getContainerDecoration(BuildContext context, BorderRadiusGeometry? borderRadius) {
+    return BoxDecoration(
+        color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: borderRadius ?? AppStyles.kRad100);
   }
 
   // Text Form Field Input Decoration
