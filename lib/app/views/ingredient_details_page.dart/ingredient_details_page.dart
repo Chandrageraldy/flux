@@ -4,6 +4,7 @@ import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/full_nutrients_model/full_nutrients_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/nutrition_mapping_model/nutrition_mapping_model.dart';
+import 'package:flux/app/utils/regexp/regexp.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
@@ -47,11 +48,19 @@ class _IngredientDetailsPageState extends BaseStatefulState<IngredientDetailsPag
 
   @override
   Widget body() {
+    final currentSelectedIngredient = context.select((MealScanViewModel vm) => vm.currentSelectedModifiedIngredient);
     final macroNutrientPercentage = FunctionUtils.calculateMacronutrientPercentage(
-      carbs: widget.ingredient.carbs ?? 0.0,
-      fat: widget.ingredient.fat ?? 0.0,
-      protein: widget.ingredient.protein ?? 0.0,
+      carbs: currentSelectedIngredient.carbs ?? 0.0,
+      fat: currentSelectedIngredient.fat ?? 0.0,
+      protein: currentSelectedIngredient.protein ?? 0.0,
     );
+
+    final vm = context.watch<MealScanViewModel>();
+
+    if (vm.selectedAltMeasure == null) {
+      return const SizedBox.shrink();
+    }
+
     return Stack(
       children: [
         SingleChildScrollView(
@@ -64,10 +73,10 @@ class _IngredientDetailsPageState extends BaseStatefulState<IngredientDetailsPag
                 child: Column(
                   spacing: AppStyles.kSpac12,
                   children: [
-                    getCalorieContainer(macroNutrientPercentage, widget.ingredient.calorie ?? 0.0),
-                    getMacronutrientsRow(macroNutrientPercentage, widget.ingredient.carbs ?? 0.0,
-                        widget.ingredient.fat ?? 0.0, widget.ingredient.protein ?? 0.0),
-                    getNutritionalInfoContainer(widget.ingredient.fullNutrients ?? []),
+                    getCalorieContainer(macroNutrientPercentage, currentSelectedIngredient.calorie ?? 0.0),
+                    getMacronutrientsRow(macroNutrientPercentage, currentSelectedIngredient.carbs ?? 0.0,
+                        currentSelectedIngredient.fat ?? 0.0, currentSelectedIngredient.protein ?? 0.0),
+                    getNutritionalInfoContainer(currentSelectedIngredient.fullNutrients ?? []),
                   ],
                 ),
               ),
@@ -81,7 +90,15 @@ class _IngredientDetailsPageState extends BaseStatefulState<IngredientDetailsPag
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _IngredientDetailsPageState {}
+extension _Actions on _IngredientDetailsPageState {
+  Future<void> _onServingQtyChanged(String? selectedUnit, List<AltMeasureModel> altMeasures) async {
+    final selectedMeasure = selectedUnit!.replaceAll(Regexp.removeTrailingParentheses, '').trim();
+    final selectedAlt = altMeasures.firstWhere((alt) => alt.measure == selectedMeasure);
+    context.read<MealScanViewModel>().selectAltMeasureForCurrentSelectedIngredient(selectedAltMeasure: selectedAlt);
+    context.read<MealScanViewModel>().updateNutrientsDataForCurrentSelectedIngredient();
+    _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
+  }
+}
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _IngredientDetailsPageState {
@@ -136,18 +153,20 @@ extension _WidgetFactories on _IngredientDetailsPageState {
 
   // Quantity Text Form Field
   Widget getQuantityTextFormField(List<AltMeasureModel> altMeasures) {
+    final selectedQty = context.read<MealScanViewModel>().currentSelectedModifiedIngredient.servingQty;
+
     return AppTextFormField(
       field: FormFields.quantity,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
       topLabel: S.current.quantityLabel,
-      initialValue: altMeasures.first.qty.toString(),
+      initialValue: selectedQty.toString(),
       keyboardType: TextInputType.number,
       height: AppStyles.kSize40,
       borderRadius: AppStyles.kRad10,
       onChanged: (value) {
         final qty = double.tryParse(value ?? '');
         if (qty != null && qty != 0) {
-          // context.read<FoodDetailsViewModel>().updateNutrientsData(servingQty: qty);
+          context.read<MealScanViewModel>().updateNutrientsDataForCurrentSelectedIngredient(servingQty: qty);
         }
       },
     );
@@ -155,26 +174,22 @@ extension _WidgetFactories on _IngredientDetailsPageState {
 
   // Serving Unit Dropdown Form
   Widget getServingUnitDropdownForm(String servingUnit, double servingWeightGrams, List<AltMeasureModel> altMeasures) {
-    List<String> servingUnits = [];
+    List<String> servingUnits =
+        altMeasures.map((alt) => '${alt.measure} (${alt.servingWeight?.toStringAsFixed(0) ?? 0}g)').toList();
 
-    for (final alt in altMeasures) {
-      final String? measure = alt.measure;
-      final double? weight = alt.servingWeight;
-
-      if (measure != null && weight != null) {
-        servingUnits.add('$measure (${weight.toStringAsFixed(0)}g)');
-      }
-    }
+    final vm = context.read<MealScanViewModel>();
+    final currentSelectedUnit =
+        '${vm.selectedAltMeasure!.measure} (${vm.selectedAltMeasure!.servingWeight?.toStringAsFixed(0) ?? 0}g)';
 
     return AppDropdownForm(
       field: FormFields.servingUnit,
       validator: FormBuilderValidators.compose([]),
       items: servingUnits.map((unit) => DropdownMenuItem<String>(value: unit, child: Text(unit))).toList(),
-      initialValue: servingUnits.first,
+      initialValue: currentSelectedUnit,
       topLabel: S.current.servingUnitLabel,
       height: AppStyles.kSize40,
       onChanged: (String? selectedUnit) {
-        // _onServingQtyChanged(selectedUnit, altMeasures);
+        _onServingQtyChanged(selectedUnit, altMeasures);
       },
     );
   }
@@ -346,7 +361,14 @@ extension _WidgetFactories on _IngredientDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(label: S.current.saveLabel, onPressed: () {}),
+      child: AppDefaultButton(
+        label: S.current.saveLabel,
+        onPressed: () {
+          context.read<MealScanViewModel>().updateIngredients(widget.index);
+          context.read<MealScanViewModel>().clearCurrentSelectedIngredient();
+          context.router.maybePop();
+        },
+      ),
     );
   }
 }

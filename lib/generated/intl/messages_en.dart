@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Helps calculate your body mass index (BMI)."),
         "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
         "hiLabel": MessageLookupByLibrary.simpleMessage("Hi"),
+        "ingredientsLabel": MessageLookupByLibrary.simpleMessage("Ingredients"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
         "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),

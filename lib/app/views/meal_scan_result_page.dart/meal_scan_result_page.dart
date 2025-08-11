@@ -79,7 +79,15 @@ extension _Actions on _MealScanResultPageState {
   }
 
   void _onIngredientPressed(IngredientModel ingredient, int index) {
-    context.router.push(IngredientDetailsRoute(ingredient: ingredient, index: index));
+    context.router.push(IngredientDetailsRoute(ingredient: ingredient, index: index)).then((_) {
+      if (mounted) {
+        context.read<MealScanViewModel>().clearCurrentSelectedIngredient();
+      }
+    });
+  }
+
+  void _onDeleteIngredientPressed(index) {
+    context.read<MealScanViewModel>().deleteIngredient(index);
   }
 }
 
@@ -122,6 +130,29 @@ extension _PrivateMethods on _MealScanResultPageState {
       context,
       () => context.read<MealScanViewModel>().getFoodDetailsFromMealScan(imageFile: widget.imageFile),
     );
+  }
+
+  Map<String, double> _calculateTotalNutrition(List<IngredientModel>? ingredients) {
+    double totalCalories = 0;
+    double totalProtein = 0;
+    double totalCarbs = 0;
+    double totalFat = 0;
+
+    if (ingredients != null) {
+      for (final ingredient in ingredients) {
+        totalCalories += ingredient.calorie ?? 0;
+        totalProtein += ingredient.protein ?? 0;
+        totalCarbs += ingredient.carbs ?? 0;
+        totalFat += ingredient.fat ?? 0;
+      }
+    }
+
+    return {
+      Nutrition.calorie.key: totalCalories,
+      Nutrition.protein.key: totalProtein,
+      Nutrition.carbs.key: totalCarbs,
+      Nutrition.fat.key: totalFat,
+    };
   }
 }
 
@@ -192,6 +223,8 @@ extension _WidgetFactories on _MealScanResultPageState {
     final healthScoreDesc = mealScanResult.healthScoreDesc;
     final ingredients = mealScanResult.ingredients;
 
+    final nutritionTotals = _calculateTotalNutrition(ingredients);
+
     return Container(
       decoration: _Styles.getScrollableSheetDecoration(context),
       child: SingleChildScrollView(
@@ -207,13 +240,17 @@ extension _WidgetFactories on _MealScanResultPageState {
               else ...[
                 getHeader(foodName: foodName, quantity: quantity),
                 getNutritionScoreContainer(healthScore: healthScore, healthScoreDesc: healthScoreDesc),
-                getCalorieContainer(),
-                getMacronutrientsRow(),
+                getCalorieContainer(calories: nutritionTotals[Nutrition.calorie.key] ?? 0),
+                getMacronutrientsRow(
+                  protein: nutritionTotals[Nutrition.protein.key] ?? 0,
+                  carbs: nutritionTotals[Nutrition.carbs.key] ?? 0,
+                  fat: nutritionTotals[Nutrition.fat.key] ?? 0,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: AppStyles.kSpac4,
                   children: [
-                    Text('Ingredients'.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11)),
+                    Text(S.current.ingredientsLabel.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11)),
                     getIngredientListView(ingredients: ingredients),
                   ],
                 ),
@@ -257,7 +294,7 @@ extension _WidgetFactories on _MealScanResultPageState {
   }
 
   // Calories Container
-  Widget getCalorieContainer() {
+  Widget getCalorieContainer({required double calories}) {
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getCalorieContainerDecoration(context),
@@ -273,7 +310,7 @@ extension _WidgetFactories on _MealScanResultPageState {
                 children: [getCalorieIconContainer(), getCalorieLabel()],
               ),
               RichText(
-                text: TextSpan(children: [getCalorieValueLabel(500), getCalorieUnitLabel()]),
+                text: TextSpan(children: [getCalorieValueLabel(calories), getCalorieUnitLabel()]),
               ),
             ],
           ),
@@ -289,7 +326,7 @@ extension _WidgetFactories on _MealScanResultPageState {
 
   // Calorie Value Label
   TextSpan getCalorieValueLabel(double calorie) {
-    return TextSpan(text: calorie.toString(), style: _Styles.getCalorieValueLabelTextStyle(context));
+    return TextSpan(text: calorie.toStringAsFixed(1), style: _Styles.getCalorieValueLabelTextStyle(context));
   }
 
   // Calorie Unit Label
@@ -308,13 +345,17 @@ extension _WidgetFactories on _MealScanResultPageState {
   }
 
   // Macronutrients Row
-  Widget getMacronutrientsRow() {
+  Widget getMacronutrientsRow({
+    required double protein,
+    required double carbs,
+    required double fat,
+  }) {
     return Row(
       spacing: AppStyles.kSpac12,
       children: [
-        MealScanMacronutrientCard(nutrient: MacroNutrients.protein, value: 22, icon: FontAwesomeIcons.fish),
-        MealScanMacronutrientCard(nutrient: MacroNutrients.carbs, value: 10, icon: FontAwesomeIcons.wheatAwn),
-        MealScanMacronutrientCard(nutrient: MacroNutrients.fat, value: 5, icon: FontAwesomeIcons.bacon)
+        MealScanMacronutrientCard(nutrient: MacroNutrients.protein, value: protein, icon: FontAwesomeIcons.fish),
+        MealScanMacronutrientCard(nutrient: MacroNutrients.carbs, value: carbs, icon: FontAwesomeIcons.wheatAwn),
+        MealScanMacronutrientCard(nutrient: MacroNutrients.fat, value: fat, icon: FontAwesomeIcons.bacon)
       ],
     );
   }
@@ -364,6 +405,7 @@ extension _WidgetFactories on _MealScanResultPageState {
         return IngredientCard(
           ingredient: ingredient,
           onPressed: (ingredient) => _onIngredientPressed(ingredient, index),
+          onDeletePressed: () => _onDeleteIngredientPressed(index),
         );
       },
       physics: NeverScrollableScrollPhysics(),

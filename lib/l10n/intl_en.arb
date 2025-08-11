@@ -230,5 +230,6 @@
     "barcodeLabel": "Barcode",
     "enhanceWithAILabel": "Enhance with AI",
     "nutritionScoreLabel": "AI's Nutrition Score",
-    "saveLabel": "Save"
+    "saveLabel": "Save",
+    "ingredientsLabel": "Ingredients"
 }

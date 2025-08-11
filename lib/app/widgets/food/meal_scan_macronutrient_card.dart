@@ -33,7 +33,7 @@ class MealScanMacronutrientCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text('${value}g', style: _Styles.getValueLabelTextStyle(context))
+                  Text('${value.toStringAsFixed(1)}g', style: _Styles.getValueLabelTextStyle(context))
                 ],
               ),
             )

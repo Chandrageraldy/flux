@@ -4,10 +4,11 @@ import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IngredientCard extends StatelessWidget {
-  const IngredientCard({super.key, required this.ingredient, required this.onPressed});
+  const IngredientCard({super.key, required this.ingredient, required this.onPressed, required this.onDeletePressed});
 
   final IngredientModel ingredient;
   final void Function(IngredientModel) onPressed;
+  final void Function() onDeletePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,9 @@ class IngredientCard extends StatelessWidget {
                 spacing: AppStyles.kSpac12,
                 children: [
                   FaIcon(FontAwesomeIcons.edit, size: AppStyles.kSize14),
-                  FaIcon(FontAwesomeIcons.trashCan, size: AppStyles.kSize14, color: AppColors.redColor),
+                  GestureDetector(
+                      onTap: onDeletePressed,
+                      child: FaIcon(FontAwesomeIcons.trashCan, size: AppStyles.kSize14, color: AppColors.redColor)),
                 ],
               )
             ],
