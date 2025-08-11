@@ -12,30 +12,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image/image.dart' as img;
 
 @RoutePage()
-class MealScanResultPage extends StatelessWidget {
-  const MealScanResultPage({required this.imageFile, super.key});
-
+class MealScanResultPage extends BaseStatefulPage {
   final XFile imageFile;
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => MealScanViewModel(),
-      child: _MealScanResultPage(imageFile: imageFile),
-    );
-  }
-}
-
-class _MealScanResultPage extends BaseStatefulPage {
-  final XFile imageFile;
-
-  const _MealScanResultPage({required this.imageFile});
+  const MealScanResultPage({super.key, required this.imageFile});
 
   @override
-  State<_MealScanResultPage> createState() => _MealScanResultPageState();
+  State<MealScanResultPage> createState() => _MealScanResultPageState();
 }
 
-class _MealScanResultPageState extends BaseStatefulState<_MealScanResultPage> {
+class _MealScanResultPageState extends BaseStatefulState<MealScanResultPage> {
   File? croppedImageFile;
   bool isProcessing = true;
   int stepperCount = 1;

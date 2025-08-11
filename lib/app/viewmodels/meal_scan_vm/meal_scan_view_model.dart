@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
@@ -10,6 +11,7 @@ class MealScanViewModel extends BaseViewModel {
   bool get isLoading => _isLoading;
 
   MealScanResultModel mealScanResult = MealScanResultModel();
+  IngredientModel currentSelectedIngredient = IngredientModel();
 
   Future<void> getFoodDetailsFromMealScan({required XFile imageFile}) async {
     _isLoading = true;
@@ -18,6 +20,11 @@ class MealScanViewModel extends BaseViewModel {
     mealScanResult = response.data as MealScanResultModel;
     _isLoading = false;
     notifyListeners();
-    print(mealScanResult);
+  }
+
+  void setCurrentSelectedIngredient(IngredientModel ingredient) {
+    currentSelectedIngredient = ingredient;
+    notifyListeners();
+    print(currentSelectedIngredient);
   }
 }

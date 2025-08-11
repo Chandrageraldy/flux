@@ -13,6 +13,7 @@ import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
 import 'package:flux/app/views/ingredient_details_page.dart/ingredient_details_page.dart';
 import 'package:flux/app/views/meal_scan_page/meal_scan_page.dart';
+import 'package:flux/app/views/meal_scan_result_page.dart/meal_scan_navigator_page.dart';
 import 'package:flux/app/views/meal_scan_result_page.dart/meal_scan_result_page.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/views/logging_selection_modal/logging_selection_modal.dart';
@@ -81,7 +82,16 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: MealRatioRoute.page),
         AutoRoute(page: AccountRoute.page),
         AutoRoute(page: MealScanRoute.page),
-        AutoRoute(page: MealScanResultRoute.page),
+        getMealScanRoutes(),
+      ],
+    );
+  }
+
+  AutoRoute getMealScanRoutes() {
+    return AutoRoute(
+      page: MealScanNavigatorRoute.page,
+      children: [
+        AutoRoute(page: MealScanResultRoute.page, initial: true),
         AutoRoute(page: IngredientDetailsRoute.page),
       ],
     );

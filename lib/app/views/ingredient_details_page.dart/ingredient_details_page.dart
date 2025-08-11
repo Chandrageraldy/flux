@@ -5,6 +5,7 @@ import 'package:flux/app/models/full_nutrients_model/full_nutrients_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/nutrition_mapping_model/nutrition_mapping_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
+import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dropdown_form/app_dropdown_form.dart';
@@ -35,6 +36,14 @@ class _IngredientDetailsPageState extends BaseStatefulState<IngredientDetailsPag
 
   @override
   bool resizeToAvoidBottomInset() => true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _setCurrentSelectedIngredient(widget.ingredient);
+    });
+  }
 
   @override
   Widget body() {
@@ -75,7 +84,11 @@ class _IngredientDetailsPageState extends BaseStatefulState<IngredientDetailsPag
 extension _Actions on _IngredientDetailsPageState {}
 
 // * ------------------------ PrivateMethods -------------------------
-extension _PrivateMethods on _IngredientDetailsPageState {}
+extension _PrivateMethods on _IngredientDetailsPageState {
+  void _setCurrentSelectedIngredient(IngredientModel ingredient) {
+    context.read<MealScanViewModel>().setCurrentSelectedIngredient(ingredient);
+  }
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _IngredientDetailsPageState {

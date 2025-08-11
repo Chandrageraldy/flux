@@ -102,7 +102,7 @@ extension _Actions on _MealScanPageState {
 
     if (mounted) {
       debugPrint('Picture taken: ${imageFile.path}');
-      await context.router.push(MealScanResultRoute(imageFile: imageFile));
+      await context.router.push(MealScanNavigatorRoute(children: [MealScanResultRoute(imageFile: imageFile)]));
       initCamera();
     }
   }
