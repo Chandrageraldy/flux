@@ -22,6 +22,7 @@ class MealScanResultPage extends BaseStatefulPage {
 }
 
 class _MealScanResultPageState extends BaseStatefulState<MealScanResultPage> {
+  final _formKey = GlobalKey<FormBuilderState>();
   File? croppedImageFile;
   bool isProcessing = true;
   int stepperCount = 1;
@@ -83,6 +84,12 @@ extension _Actions on _MealScanResultPageState {
   void _onDeleteIngredientPressed(index) {
     context.read<MealScanViewModel>().deleteIngredient(index);
   }
+
+  Future<void> _onLogFoodPressed({required Map<String, double> nutritionTotals}) async {
+    final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
+    tryLoad(
+        context, () => context.read<MealScanViewModel>().logFood(mealType: mealType, nutritionTotals: nutritionTotals));
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -141,11 +148,15 @@ extension _PrivateMethods on _MealScanResultPageState {
       }
     }
 
+    double qty = quantity ?? 1;
+
+    double round2(double val) => double.parse(val.toStringAsFixed(2));
+
     return {
-      Nutrition.calorie.key: totalCalories * (quantity ?? 1),
-      Nutrition.protein.key: totalProtein * (quantity ?? 1),
-      Nutrition.carbs.key: totalCarbs * (quantity ?? 1),
-      Nutrition.fat.key: totalFat * (quantity ?? 1),
+      Nutrition.calorie.key: round2(totalCalories * qty),
+      Nutrition.protein.key: round2(totalProtein * qty),
+      Nutrition.carbs.key: round2(totalCarbs * qty),
+      Nutrition.fat.key: round2(totalFat * qty),
     };
   }
 }
@@ -154,27 +165,30 @@ extension _PrivateMethods on _MealScanResultPageState {
 extension _WidgetFactories on _MealScanResultPageState {
 // Top Bar
   Widget getTopBar() {
-    return Positioned(
-      top: 30,
-      left: 20,
-      right: 20,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => context.router.maybePop(),
-            child: Container(
-              padding: AppStyles.kPadd6,
-              decoration: _Styles.getBackButtonDecoration(context),
-              child: FaIcon(
-                FontAwesomeIcons.arrowLeft,
-                color: context.theme.colorScheme.onTertiary,
-                size: AppStyles.kSize16,
+    return FormBuilder(
+      key: _formKey,
+      child: Positioned(
+        top: 30,
+        left: 20,
+        right: 20,
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () => context.router.maybePop(),
+              child: Container(
+                padding: AppStyles.kPadd6,
+                decoration: _Styles.getBackButtonDecoration(context),
+                child: FaIcon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: context.theme.colorScheme.onTertiary,
+                  size: AppStyles.kSize16,
+                ),
               ),
             ),
-          ),
-          Spacer(),
-          getMealFormBuilderDropDown(),
-        ],
+            Spacer(),
+            getMealFormBuilderDropDown(),
+          ],
+        ),
       ),
     );
   }
@@ -320,7 +334,7 @@ extension _WidgetFactories on _MealScanResultPageState {
 
   // Calorie Value Label
   TextSpan getCalorieValueLabel(double calorie) {
-    return TextSpan(text: calorie.toStringAsFixed(1), style: _Styles.getCalorieValueLabelTextStyle(context));
+    return TextSpan(text: calorie.toStringAsFixed(2), style: _Styles.getCalorieValueLabelTextStyle(context));
   }
 
   // Calorie Unit Label
@@ -410,6 +424,12 @@ extension _WidgetFactories on _MealScanResultPageState {
   // Action Button Row
   Widget getActionButtonRow() {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
+    final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
+
+    final quantity = mealScanResult.quantity;
+    final ingredients = mealScanResult.ingredients;
+
+    final nutritionTotals = _calculateTotalNutrition(ingredients, quantity);
     return Positioned(
       left: 0,
       right: 0,
@@ -425,7 +445,7 @@ extension _WidgetFactories on _MealScanResultPageState {
               MealScanActionButtonRowSkeleton()
             ] else ...[
               getEnhanceWithAIButton(),
-              getLogFoodButton(),
+              getLogFoodButton(nutritionTotals: nutritionTotals),
             ],
           ],
         ),
@@ -456,12 +476,10 @@ extension _WidgetFactories on _MealScanResultPageState {
   }
 
   // Log Food Button
-  Widget getLogFoodButton() {
+  Widget getLogFoodButton({required Map<String, double> nutritionTotals}) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          debugPrint(context.read<MealScanViewModel>().mealScanResult.toString());
-        },
+        onTap: () => _onLogFoodPressed(nutritionTotals: nutritionTotals),
         child: Container(
           padding: AppStyles.kPaddSV12,
           decoration: _Styles.getLogFoodButtonDecoration(context),

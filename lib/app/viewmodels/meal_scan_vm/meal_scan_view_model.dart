@@ -138,4 +138,10 @@ class MealScanViewModel extends BaseViewModel {
 
     notifyListeners();
   }
+
+  Future<void> logFood({required String mealType, required Map<String, double> nutritionTotals}) async {
+    final response = await foodRepository.logFoodWithMealScan(
+        mealScanResult: mealScanResult, mealType: mealType, nutritionTotals: nutritionTotals);
+    checkError(response);
+  }
 }

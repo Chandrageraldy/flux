@@ -45,7 +45,7 @@ class IngredientCard extends StatelessWidget {
                         Text('${ingredient.servingQty} ${ingredient.servingUnit}',
                             style: _Styles.getServingLabelTextStyle(context)),
                         NutritionTag(
-                          label: '${ingredient.calorie?.toStringAsFixed(1)}kcal',
+                          label: '${ingredient.calorie?.toStringAsFixed(2)}kcal',
                           icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
                         ),
                       ],

@@ -275,4 +275,30 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> logFoodWithMealScan({
+    required MealScanResultModel mealScanResult,
+    required String mealType,
+    required Map<String, double> nutritionTotals,
+  }) async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final loggedFoodModel = LoggedFoodModel(
+      foodName: mealScanResult.foodName,
+      calorieKcal: nutritionTotals[Nutrition.calorie.key],
+      fatG: nutritionTotals[Nutrition.fat.key],
+      carbsG: nutritionTotals[Nutrition.carbs.key],
+      proteinG: nutritionTotals[Nutrition.protein.key],
+      healthScore: mealScanResult.healthScore,
+      healthScoreDesc: mealScanResult.healthScoreDesc,
+      quantity: mealScanResult.quantity,
+      ingredients: mealScanResult.ingredients,
+      userId: userProfile?.userId,
+      source: LogSource.mealScan.value,
+      mealType: mealType,
+    );
+
+    final response = await foodServiceSupabase.logFood(loggedFoodModel: loggedFoodModel);
+
+    return response;
+  }
 }
