@@ -79,6 +79,7 @@ class TableName {
   static String plan = 'plan';
   static String savedFood = 'saved_food';
   static String recentFood = 'recent_food';
+  static String loggedFood = 'logged_food';
 }
 
 class TableCol {
@@ -87,6 +88,7 @@ class TableCol {
   static String tagId = 'tagId';
   static String nixItemId = 'nixItemId';
   static String lastViewedAt = 'lastViewedAt';
+  static String loggedAt = 'loggedAt';
 }
 
 enum MealType {
@@ -462,4 +464,18 @@ class GeminiJsonSchema {
 
 class GeminiSystemInstruction {
   static const String mealScan = '';
+}
+
+enum LogSource {
+  foodSearch,
+  mealScan;
+
+  String get value {
+    switch (this) {
+      case foodSearch:
+        return 'Food Search';
+      case mealScan:
+        return 'Meal Scan';
+    }
+  }
 }

@@ -122,7 +122,7 @@ extension _WidgetFactories on FoodDisplayCard {
   // Calorie Tag
   Widget getCalorieTag(BuildContext context) {
     return NutritionTag(
-      label: calories.toStringAsFixed(1),
+      label: calories.toStringAsFixed(2),
       icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10),
     );
   }

@@ -38,12 +38,20 @@ class FoodDetailsViewModel extends BaseViewModel {
     unmodifiedFoodDetails = response.data as FoodDetailsModel;
     // To modify and display food details
     modifiedFoodDetails = response.data as FoodDetailsModel;
-    // Select the first alt measure by default
-    selectedAltMeasure = unmodifiedFoodDetails.altMeasures?.first;
+
+    // Pick the altMeasure whose measure matches the topLevel servingUnit
+    // If none match, use the first altMeasure as fallback
+    selectedAltMeasure = unmodifiedFoodDetails.altMeasures!.firstWhere(
+      (alt) => alt.measure?.trim().toLowerCase() == unmodifiedFoodDetails.servingUnit!.trim().toLowerCase(),
+      orElse: () => unmodifiedFoodDetails.altMeasures!.first,
+    );
+
     // Update nutrients data based on the selected alt measure
     updateNutrientsData();
     _isLoading = false;
     notifyListeners();
+
+    print(unmodifiedFoodDetails);
   }
 
   void selectAltMeasure({required AltMeasureModel selectedAltMeasure}) {
@@ -78,6 +86,12 @@ class FoodDetailsViewModel extends BaseViewModel {
     }
 
     modifiedFoodDetails = unmodifiedFoodDetails.copyWith(
+      // Update serving info
+      servingQty: usedQty,
+      servingUnit: selectedAltMeasure?.measure,
+      servingWeightGrams: newWeight,
+
+      // Update nutrients according to the ratio
       calorieKcal: roundDouble((unmodifiedFoodDetails.calorieKcal ?? 0) * ratio),
       fatG: roundDouble((unmodifiedFoodDetails.fatG ?? 0) * ratio),
       carbsG: roundDouble((unmodifiedFoodDetails.carbsG ?? 0) * ratio),
@@ -92,6 +106,11 @@ class FoodDetailsViewModel extends BaseViewModel {
 
   Future<void> saveToRecent({required FoodResponseModel foodResponseModel}) async {
     final response = await foodRepository.saveToRecent(foodResponseModel: foodResponseModel);
+    checkError(response);
+  }
+
+  Future<void> logFood({required String mealType}) async {
+    final response = await foodRepository.logFoodWithFoodSearch(foodDetails: modifiedFoodDetails, mealType: mealType);
     checkError(response);
   }
 }

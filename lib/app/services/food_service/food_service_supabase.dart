@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/services/supabase_base_service.dart';
@@ -112,6 +113,18 @@ class FoodServiceSupabase extends SupabaseBaseService {
     return callSupabaseDB(
       requestType: RequestType.POST,
       table: TableName.recentFood,
+      requestBody: requestBody,
+    );
+  }
+
+  Future<Response> logFood({required LoggedFoodModel loggedFoodModel}) async {
+    final requestBody = loggedFoodModel.toJson();
+    requestBody.remove(TableCol.id);
+    requestBody.remove(TableCol.loggedAt);
+
+    return callSupabaseDB(
+      requestType: RequestType.POST,
+      table: TableName.loggedFood,
       requestBody: requestBody,
     );
   }

@@ -180,6 +180,11 @@ extension _Actions on _FoodDetailsPageState {
     context.read<FoodDetailsViewModel>().updateNutrientsData();
     _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
   }
+
+  Future<void> _onLogFoodPressed() async {
+    final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
+    tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -261,13 +266,16 @@ extension _WidgetFactories on _FoodDetailsPageState {
 
   // Quantity Text Form Field
   Widget getQuantityTextFormField(List<AltMeasureModel> altMeasures) {
+    final selectedQty = context.read<FoodDetailsViewModel>().unmodifiedFoodDetails.servingQty;
+
     return AppTextFormField(
       field: FormFields.quantity,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
       topLabel: S.current.quantityLabel,
-      initialValue: altMeasures.first.qty.toString(),
+      initialValue: selectedQty?.toString() ?? '1.0',
       keyboardType: TextInputType.number,
       height: AppStyles.kSize40,
+      borderRadius: AppStyles.kRad10,
       onChanged: (value) {
         final qty = double.tryParse(value ?? '');
         if (qty != null && qty != 0) {
@@ -279,22 +287,18 @@ extension _WidgetFactories on _FoodDetailsPageState {
 
   // Serving Unit Dropdown Form
   Widget getServingUnitDropdownForm(String servingUnit, double servingWeightGrams, List<AltMeasureModel> altMeasures) {
-    List<String> servingUnits = [];
+    List<String> servingUnits =
+        altMeasures.map((alt) => '${alt.measure} (${alt.servingWeight?.toStringAsFixed(1) ?? 0}g)').toList();
 
-    for (final alt in altMeasures) {
-      final String? measure = alt.measure;
-      final double? weight = alt.servingWeight;
-
-      if (measure != null && weight != null) {
-        servingUnits.add('$measure (${weight.toStringAsFixed(0)}g)');
-      }
-    }
+    final vm = context.read<FoodDetailsViewModel>();
+    final currentSelectedUnit =
+        '${vm.selectedAltMeasure!.measure} (${vm.selectedAltMeasure!.servingWeight?.toStringAsFixed(1) ?? 0}g)';
 
     return AppDropdownForm(
       field: FormFields.servingUnit,
       validator: FormBuilderValidators.compose([]),
       items: servingUnits.map((unit) => DropdownMenuItem<String>(value: unit, child: Text(unit))).toList(),
-      initialValue: servingUnits.first,
+      initialValue: currentSelectedUnit,
       topLabel: S.current.servingUnitLabel,
       height: AppStyles.kSize40,
       onChanged: (String? selectedUnit) {
@@ -305,7 +309,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
 
   // Meal Type Dropdown Form
   Widget getMealTypeDropdownForm() {
-    final mealTypes = [S.current.breakfastLabel, S.current.lunchLabel, S.current.dinnerLabel, S.current.snackLabel];
+    final mealTypes = [MealType.breakfast.label, MealType.lunch.label, MealType.dinner.label, MealType.snack.label];
     return AppDropdownForm(
       field: FormFields.mealType,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
@@ -416,7 +420,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(label: S.current.logFoodLabel, onPressed: () {}),
+      child: AppDefaultButton(label: S.current.logFoodLabel, onPressed: _onLogFoodPressed),
     );
   }
 

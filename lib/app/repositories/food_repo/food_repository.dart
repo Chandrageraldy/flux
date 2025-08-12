@@ -6,6 +6,7 @@ import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/branded_food_model/branded_food_model.dart';
 import 'package:flux/app/models/common_food_model/common_food_model.dart';
 import 'package:flux/app/models/food_details_model/food_details_model.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
@@ -242,6 +243,35 @@ class FoodRepository {
       final mealScanResult = MealScanResultModel.fromJson(json);
       return Response.complete(mealScanResult);
     }
+
+    return response;
+  }
+
+  Future<Response> logFoodWithFoodSearch({required FoodDetailsModel foodDetails, required String mealType}) async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+    final loggedFoodModel = LoggedFoodModel(
+      foodName: foodDetails.foodName,
+      brandName: foodDetails.brandName,
+      servingQty: foodDetails.servingQty,
+      servingUnit: foodDetails.servingUnit,
+      servingWeightGrams: foodDetails.servingWeightGrams,
+      calorieKcal: foodDetails.calorieKcal,
+      fatG: foodDetails.fatG,
+      carbsG: foodDetails.carbsG,
+      proteinG: foodDetails.proteinG,
+      nixBrandName: foodDetails.nixBrandName,
+      nixItemName: foodDetails.nixItemName,
+      nixItemId: foodDetails.nixItemId,
+      tagId: foodDetails.tagId,
+      ingredientStatement: foodDetails.ingredientStatement,
+      fullNutrients: foodDetails.fullNutrients,
+      altMeasures: foodDetails.altMeasures,
+      userId: userProfile?.userId,
+      source: LogSource.foodSearch.value,
+      mealType: mealType,
+    );
+
+    final response = await foodServiceSupabase.logFood(loggedFoodModel: loggedFoodModel);
 
     return response;
   }
