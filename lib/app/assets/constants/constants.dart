@@ -91,6 +91,10 @@ class TableCol {
   static String loggedAt = 'loggedAt';
 }
 
+class BucketName {
+  static String loggedFoodImageBucket = 'logged_food_image_bucket';
+}
+
 enum MealType {
   breakfast,
   lunch,

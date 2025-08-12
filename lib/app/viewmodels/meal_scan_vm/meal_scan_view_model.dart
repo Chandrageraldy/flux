@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
@@ -139,9 +141,16 @@ class MealScanViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> logFood({required String mealType, required Map<String, double> nutritionTotals}) async {
+  Future<void> logFood(
+      {required String mealType, required Map<String, double> nutritionTotals, required File imageFile}) async {
     final response = await foodRepository.logFoodWithMealScan(
-        mealScanResult: mealScanResult, mealType: mealType, nutritionTotals: nutritionTotals);
+      mealScanResult: mealScanResult,
+      mealType: mealType,
+      nutritionTotals: nutritionTotals,
+      imageFile: imageFile,
+    );
     checkError(response);
+    log(response.data.toString());
+    notifyListeners();
   }
 }

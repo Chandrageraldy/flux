@@ -87,8 +87,15 @@ extension _Actions on _MealScanResultPageState {
 
   Future<void> _onLogFoodPressed({required Map<String, double> nutritionTotals}) async {
     final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
+    File imageFile = File(widget.imageFile.path);
     tryLoad(
-        context, () => context.read<MealScanViewModel>().logFood(mealType: mealType, nutritionTotals: nutritionTotals));
+      context,
+      () => context.read<MealScanViewModel>().logFood(
+            mealType: mealType,
+            nutritionTotals: nutritionTotals,
+            imageFile: imageFile,
+          ),
+    );
   }
 }
 
@@ -127,6 +134,9 @@ extension _PrivateMethods on _MealScanResultPageState {
   }
 
   Future<void> _getFoodDetailsFromMealScan() async {
+    File file = File(widget.imageFile.path);
+    print(file.path);
+
     await tryCatch(
       context,
       () => context.read<MealScanViewModel>().getFoodDetailsFromMealScan(imageFile: widget.imageFile),

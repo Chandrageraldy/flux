@@ -154,7 +154,7 @@ abstract class SupabaseBaseService {
   }
 
   Future<Response> callSupabaseBucket({
-    required BucketRequestType requestType,
+    required BucketRequestType bucketRequestType,
     required String bucketName,
     required String filePath,
     File? file,
@@ -165,12 +165,11 @@ abstract class SupabaseBaseService {
 
       dynamic result;
 
-      switch (requestType) {
+      switch (bucketRequestType) {
         case BucketRequestType.upload:
           await storage.upload(filePath, file!);
           result = storage.getPublicUrl(filePath);
           break;
-
         case BucketRequestType.delete:
           result = await storage.remove([filePath]);
           break;
@@ -178,7 +177,7 @@ abstract class SupabaseBaseService {
 
       return Response.complete(result);
     } on StorageException catch (e) {
-      debugPrint('Supabase Storage Error: ${e.message}');
+      debugPrint('Supabase Storage Error: ${e.error}');
       return Response.error(e.message);
     } catch (e) {
       debugPrint('Unknown Error: $e');

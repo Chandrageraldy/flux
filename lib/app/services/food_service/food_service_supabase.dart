@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/services/supabase_base_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:path/path.dart';
 
 class FoodServiceSupabase extends SupabaseBaseService {
   final supabase = Supabase.instance.client;
@@ -120,7 +123,6 @@ class FoodServiceSupabase extends SupabaseBaseService {
   Future<Response> logFood({required LoggedFoodModel loggedFoodModel}) async {
     final requestBody = loggedFoodModel.toJson();
     requestBody.remove(TableCol.id);
-    requestBody.remove(TableCol.loggedAt);
 
     return callSupabaseDB(
       requestType: RequestType.POST,
@@ -148,6 +150,15 @@ class FoodServiceSupabase extends SupabaseBaseService {
           'lt': startOfNextDay.toIso8601String(),
         },
       },
+    );
+  }
+
+  Future<Response> uploadMealScanImage({required File imageFile, required String filePath}) async {
+    return callSupabaseBucket(
+      bucketRequestType: BucketRequestType.upload,
+      bucketName: BucketName.loggedFoodImageBucket,
+      filePath: filePath,
+      file: imageFile,
     );
   }
 }

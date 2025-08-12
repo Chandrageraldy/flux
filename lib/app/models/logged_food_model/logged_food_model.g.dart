@@ -42,6 +42,7 @@ _$LoggedFoodModelImpl _$$LoggedFoodModelImplFromJson(
       loggedAt: json['loggedAt'] == null
           ? null
           : DateTime.parse(json['loggedAt'] as String),
+      imageUrl: json['imageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$LoggedFoodModelImplToJson(
@@ -72,4 +73,5 @@ Map<String, dynamic> _$$LoggedFoodModelImplToJson(
       'source': instance.source,
       'mealType': instance.mealType,
       'loggedAt': instance.loggedAt?.toIso8601String(),
+      'imageUrl': instance.imageUrl,
     };

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
@@ -269,6 +270,7 @@ class FoodRepository {
       userId: userProfile?.userId,
       source: LogSource.foodSearch.value,
       mealType: mealType,
+      loggedAt: DateTime.now(),
     );
 
     final response = await foodServiceSupabase.logFood(loggedFoodModel: loggedFoodModel);
@@ -280,26 +282,36 @@ class FoodRepository {
     required MealScanResultModel mealScanResult,
     required String mealType,
     required Map<String, double> nutritionTotals,
+    required File imageFile,
   }) async {
-    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
-    final loggedFoodModel = LoggedFoodModel(
-      foodName: mealScanResult.foodName,
-      calorieKcal: nutritionTotals[Nutrition.calorie.key],
-      fatG: nutritionTotals[Nutrition.fat.key],
-      carbsG: nutritionTotals[Nutrition.carbs.key],
-      proteinG: nutritionTotals[Nutrition.protein.key],
-      healthScore: mealScanResult.healthScore,
-      healthScoreDesc: mealScanResult.healthScoreDesc,
-      quantity: mealScanResult.quantity,
-      ingredients: mealScanResult.ingredients,
-      userId: userProfile?.userId,
-      source: LogSource.mealScan.value,
-      mealType: mealType,
-    );
+    final filePath = imageFile.path.split('/').last;
+    final uploadResponse = await foodServiceSupabase.uploadMealScanImage(imageFile: imageFile, filePath: filePath);
 
-    final response = await foodServiceSupabase.logFood(loggedFoodModel: loggedFoodModel);
+    if (uploadResponse.error == null) {
+      UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+      final loggedFoodModel = LoggedFoodModel(
+        foodName: mealScanResult.foodName,
+        calorieKcal: nutritionTotals[Nutrition.calorie.key],
+        fatG: nutritionTotals[Nutrition.fat.key],
+        carbsG: nutritionTotals[Nutrition.carbs.key],
+        proteinG: nutritionTotals[Nutrition.protein.key],
+        healthScore: mealScanResult.healthScore,
+        healthScoreDesc: mealScanResult.healthScoreDesc,
+        quantity: mealScanResult.quantity,
+        ingredients: mealScanResult.ingredients,
+        userId: userProfile?.userId,
+        source: LogSource.mealScan.value,
+        mealType: mealType,
+        imageUrl: uploadResponse.data,
+        loggedAt: DateTime.now(),
+      );
 
-    return response;
+      final response = await foodServiceSupabase.logFood(loggedFoodModel: loggedFoodModel);
+
+      return response;
+    } else {
+      return uploadResponse;
+    }
   }
 
   Future<Response> getLoggedFoods({required DateTime selectedDate}) async {

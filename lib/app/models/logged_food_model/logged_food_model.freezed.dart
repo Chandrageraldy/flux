@@ -46,6 +46,7 @@ mixin _$LoggedFoodModel {
   String? get source => throw _privateConstructorUsedError;
   String? get mealType => throw _privateConstructorUsedError;
   DateTime? get loggedAt => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this LoggedFoodModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -88,7 +89,8 @@ abstract class $LoggedFoodModelCopyWith<$Res> {
       List<IngredientModel>? ingredients,
       String? source,
       String? mealType,
-      DateTime? loggedAt});
+      DateTime? loggedAt,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -131,6 +133,7 @@ class _$LoggedFoodModelCopyWithImpl<$Res, $Val extends LoggedFoodModel>
     Object? source = freezed,
     Object? mealType = freezed,
     Object? loggedAt = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -233,6 +236,10 @@ class _$LoggedFoodModelCopyWithImpl<$Res, $Val extends LoggedFoodModel>
           ? _value.loggedAt
           : loggedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -270,7 +277,8 @@ abstract class _$$LoggedFoodModelImplCopyWith<$Res>
       List<IngredientModel>? ingredients,
       String? source,
       String? mealType,
-      DateTime? loggedAt});
+      DateTime? loggedAt,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -311,6 +319,7 @@ class __$$LoggedFoodModelImplCopyWithImpl<$Res>
     Object? source = freezed,
     Object? mealType = freezed,
     Object? loggedAt = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$LoggedFoodModelImpl(
       id: freezed == id
@@ -413,6 +422,10 @@ class __$$LoggedFoodModelImplCopyWithImpl<$Res>
           ? _value.loggedAt
           : loggedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -445,7 +458,8 @@ class _$LoggedFoodModelImpl implements _LoggedFoodModel {
       final List<IngredientModel>? ingredients,
       this.source,
       this.mealType,
-      this.loggedAt})
+      this.loggedAt,
+      this.imageUrl})
       : _fullNutrients = fullNutrients,
         _altMeasures = altMeasures,
         _ingredients = ingredients;
@@ -527,10 +541,12 @@ class _$LoggedFoodModelImpl implements _LoggedFoodModel {
   final String? mealType;
   @override
   final DateTime? loggedAt;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'LoggedFoodModel(id: $id, userId: $userId, foodName: $foodName, brandName: $brandName, servingQty: $servingQty, servingUnit: $servingUnit, servingWeightGrams: $servingWeightGrams, calorieKcal: $calorieKcal, fatG: $fatG, carbsG: $carbsG, proteinG: $proteinG, nixBrandName: $nixBrandName, nixItemName: $nixItemName, nixItemId: $nixItemId, tagId: $tagId, ingredientStatement: $ingredientStatement, fullNutrients: $fullNutrients, altMeasures: $altMeasures, healthScore: $healthScore, healthScoreDesc: $healthScoreDesc, quantity: $quantity, ingredients: $ingredients, source: $source, mealType: $mealType, loggedAt: $loggedAt)';
+    return 'LoggedFoodModel(id: $id, userId: $userId, foodName: $foodName, brandName: $brandName, servingQty: $servingQty, servingUnit: $servingUnit, servingWeightGrams: $servingWeightGrams, calorieKcal: $calorieKcal, fatG: $fatG, carbsG: $carbsG, proteinG: $proteinG, nixBrandName: $nixBrandName, nixItemName: $nixItemName, nixItemId: $nixItemId, tagId: $tagId, ingredientStatement: $ingredientStatement, fullNutrients: $fullNutrients, altMeasures: $altMeasures, healthScore: $healthScore, healthScoreDesc: $healthScoreDesc, quantity: $quantity, ingredients: $ingredients, source: $source, mealType: $mealType, loggedAt: $loggedAt, imageUrl: $imageUrl)';
   }
 
   @override
@@ -581,7 +597,9 @@ class _$LoggedFoodModelImpl implements _LoggedFoodModel {
             (identical(other.mealType, mealType) ||
                 other.mealType == mealType) &&
             (identical(other.loggedAt, loggedAt) ||
-                other.loggedAt == loggedAt));
+                other.loggedAt == loggedAt) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -612,7 +630,8 @@ class _$LoggedFoodModelImpl implements _LoggedFoodModel {
         const DeepCollectionEquality().hash(_ingredients),
         source,
         mealType,
-        loggedAt
+        loggedAt,
+        imageUrl
       ]);
 
   /// Create a copy of LoggedFoodModel
@@ -658,7 +677,8 @@ abstract class _LoggedFoodModel implements LoggedFoodModel {
       final List<IngredientModel>? ingredients,
       final String? source,
       final String? mealType,
-      final DateTime? loggedAt}) = _$LoggedFoodModelImpl;
+      final DateTime? loggedAt,
+      final String? imageUrl}) = _$LoggedFoodModelImpl;
 
   factory _LoggedFoodModel.fromJson(Map<String, dynamic> json) =
       _$LoggedFoodModelImpl.fromJson;
@@ -713,6 +733,8 @@ abstract class _LoggedFoodModel implements LoggedFoodModel {
   String? get mealType;
   @override
   DateTime? get loggedAt;
+  @override
+  String? get imageUrl;
 
   /// Create a copy of LoggedFoodModel
   /// with the given fields replaced by the non-null parameter values.

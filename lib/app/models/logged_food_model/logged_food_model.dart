@@ -34,6 +34,7 @@ class LoggedFoodModel with _$LoggedFoodModel {
     String? source,
     String? mealType,
     DateTime? loggedAt,
+    String? imageUrl,
   }) = _LoggedFoodModel;
 
   factory LoggedFoodModel.fromJson(Map<String, dynamic> json) => _$LoggedFoodModelFromJson(json);
