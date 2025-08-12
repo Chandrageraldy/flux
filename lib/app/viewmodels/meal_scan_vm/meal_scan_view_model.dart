@@ -34,14 +34,12 @@ class MealScanViewModel extends BaseViewModel {
     // Create a working copy for user edits
     currentSelectedModifiedIngredient = ingredient.copyWith();
 
-    if (ingredient.servingUnit != null && ingredient.altMeasures != null) {
-      selectedAltMeasure = ingredient.altMeasures!.firstWhere(
-        (alt) => alt.measure?.trim().toLowerCase() == ingredient.servingUnit!.trim().toLowerCase(),
-        orElse: () => ingredient.altMeasures!.first,
-      );
-    } else {
-      selectedAltMeasure = ingredient.altMeasures?.first;
-    }
+    // Pick the altMeasure whose measure matches the ingredient's servingUnit
+    // If none match, use the first altMeasure as fallback
+    selectedAltMeasure = ingredient.altMeasures!.firstWhere(
+      (alt) => alt.measure?.trim().toLowerCase() == ingredient.servingUnit!.trim().toLowerCase(),
+      orElse: () => ingredient.altMeasures!.first,
+    );
 
     notifyListeners();
   }
@@ -77,17 +75,16 @@ class MealScanViewModel extends BaseViewModel {
     }
 
     currentSelectedModifiedIngredient = currentSelectedUnmodifiedIngredient.copyWith(
-      // ✅ Update serving info so future calculations are correct
+      // Update serving info so future calculations are correct
       servingQty: usedQty,
       servingUnit: selectedAltMeasure?.measure,
       servingWeight: newWeight,
 
-      // ✅ Update nutrients according to the ratio
+      // Update nutrients according to the ratio
       calorie: roundDouble((currentSelectedUnmodifiedIngredient.calorie ?? 0) * ratio),
       fat: roundDouble((currentSelectedUnmodifiedIngredient.fat ?? 0) * ratio),
       carbs: roundDouble((currentSelectedUnmodifiedIngredient.carbs ?? 0) * ratio),
       protein: roundDouble((currentSelectedUnmodifiedIngredient.protein ?? 0) * ratio),
-
       fullNutrients: currentSelectedUnmodifiedIngredient.fullNutrients?.map((nutrient) {
         return nutrient.copyWith(value: roundDouble(nutrient.value! * ratio));
       }).toList(),
@@ -97,16 +94,16 @@ class MealScanViewModel extends BaseViewModel {
   }
 
   void updateIngredients(int index) {
-    if (index < 0 || index >= mealScanResult.ingredients!.length) {
-      return;
-    }
-
+    // Clone list
     final updatedList = List<IngredientModel>.from(mealScanResult.ingredients!);
+    // Replace the ingredient based on index in the cloned list
     updatedList[index] = currentSelectedModifiedIngredient.copyWith();
+    // Update meal scan result with the updated list
     mealScanResult = mealScanResult.copyWith(ingredients: updatedList);
     notifyListeners();
   }
 
+  // Keep the current selected ingredient fresh after disposing
   void clearCurrentSelectedIngredient() {
     currentSelectedModifiedIngredient = IngredientModel();
     currentSelectedUnmodifiedIngredient = IngredientModel();
@@ -115,12 +112,11 @@ class MealScanViewModel extends BaseViewModel {
   }
 
   void deleteIngredient(int index) {
-    if (index < 0 || index >= mealScanResult.ingredients!.length) {
-      return;
-    }
-
+    // Clone list
     final updatedList = List<IngredientModel>.from(mealScanResult.ingredients!);
+    // Remove the ingredient based on index in the cloned list
     updatedList.removeAt(index);
+    // Update meal scan result with the updated list
     mealScanResult = mealScanResult.copyWith(ingredients: updatedList);
     notifyListeners();
   }
