@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flux/app/models/error_model/error_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -47,6 +49,7 @@ abstract class SupabaseBaseService {
     Map<String, dynamic>? filters,
     String? column,
     String? orderBy,
+    Map<String, Map<String, dynamic>>? rangeFilters,
     bool ascending = false,
   }) async {
     try {
@@ -74,11 +77,36 @@ abstract class SupabaseBaseService {
           break;
       }
 
+      // Apply equality filters
       if (filters != null) {
         filters.forEach((key, value) {
           if (value != null) {
             filterBuilder = filterBuilder?.eq(key, value);
           }
+        });
+      }
+
+      // Apply range filters
+      if (rangeFilters != null) {
+        rangeFilters.forEach((columnName, conditions) {
+          conditions.forEach((operator, value) {
+            if (value != null) {
+              switch (operator) {
+                case 'gte':
+                  filterBuilder = filterBuilder?.gte(columnName, value);
+                  break;
+                case 'gt':
+                  filterBuilder = filterBuilder?.gt(columnName, value);
+                  break;
+                case 'lte':
+                  filterBuilder = filterBuilder?.lte(columnName, value);
+                  break;
+                case 'lt':
+                  filterBuilder = filterBuilder?.lt(columnName, value);
+                  break;
+              }
+            }
+          });
         });
       }
 
@@ -124,6 +152,39 @@ abstract class SupabaseBaseService {
 
     return Response.error(ErrorModel(code: e, message: message));
   }
+
+  Future<Response> callSupabaseBucket({
+    required BucketRequestType requestType,
+    required String bucketName,
+    required String filePath,
+    File? file,
+  }) async {
+    try {
+      final supabase = Supabase.instance.client;
+      final storage = supabase.storage.from(bucketName);
+
+      dynamic result;
+
+      switch (requestType) {
+        case BucketRequestType.upload:
+          await storage.upload(filePath, file!);
+          result = storage.getPublicUrl(filePath);
+          break;
+
+        case BucketRequestType.delete:
+          result = await storage.remove([filePath]);
+          break;
+      }
+
+      return Response.complete(result);
+    } on StorageException catch (e) {
+      debugPrint('Supabase Storage Error: ${e.message}');
+      return Response.error(e.message);
+    } catch (e) {
+      debugPrint('Unknown Error: $e');
+      return Response.error(e);
+    }
+  }
 }
 
 enum RequestType { GET, POST, PUT, DELETE }
@@ -135,3 +196,5 @@ class SupabaseExceptionType {
   static const userAlreadyExists = 'user_already_exists';
   static const permissionDenied = 'permission_denied';
 }
+
+enum BucketRequestType { upload, delete }

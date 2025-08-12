@@ -122,6 +122,19 @@ enum MealType {
         return 'snack';
     }
   }
+
+  String get value {
+    switch (this) {
+      case breakfast:
+        return 'Breakfast';
+      case lunch:
+        return 'Lunch';
+      case dinner:
+        return 'Dinner';
+      case snack:
+        return 'Snack';
+    }
+  }
 }
 
 enum MacroNutrients {

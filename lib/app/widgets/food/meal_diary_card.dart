@@ -1,12 +1,14 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/widgets/food/meal_food_display_card.dart';
 import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MealDiaryCard extends StatelessWidget {
-  const MealDiaryCard({required this.mealType, super.key});
+  const MealDiaryCard({super.key, required this.mealType, required this.meals});
 
   final MealType mealType;
+  final List<LoggedFoodModel> meals;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +20,23 @@ class MealDiaryCard extends StatelessWidget {
         child: Column(
           children: [
             getHeaderContainer(context),
-            ListView.separated(
-              padding: AppStyles.kPadd16,
-              itemCount: 1,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => MealFoodDisplayCard(),
-              separatorBuilder: (context, index) => const SizedBox(height: AppStyles.kSize12),
-            ),
+            if (meals.isNotEmpty)
+              ListView.separated(
+                padding: AppStyles.kPadd16,
+                itemCount: meals.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final meal = meals[index];
+                  return MealFoodDisplayCard(meal: meal);
+                },
+                separatorBuilder: (_, __) => const SizedBox(height: AppStyles.kSize12),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text('No meals logged', style: Theme.of(context).textTheme.bodySmall),
+              ),
           ],
         ),
       ),

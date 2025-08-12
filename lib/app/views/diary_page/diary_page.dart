@@ -1,6 +1,8 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
+import 'package:flux/app/viewmodels/diary_vm/diary_view_model.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
 import 'package:flux/app/widgets/food/meal_diary_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,14 +10,21 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 
 @RoutePage()
-class DiaryPage extends BaseStatefulPage {
+class DiaryPage extends StatelessWidget {
   const DiaryPage({super.key});
 
   @override
-  State<DiaryPage> createState() => _DiaryPageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(create: (_) => DiaryViewModel(), child: _DiaryPage());
+  }
 }
 
-class _DiaryPageState extends BaseStatefulState<DiaryPage> {
+class _DiaryPage extends BaseStatefulPage {
+  @override
+  State<_DiaryPage> createState() => _DiaryPageState();
+}
+
+class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
   final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
 
   DateTime _selectedDate = DateTime.now();
@@ -28,6 +37,12 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
   @override
   bool useGradientBackground() {
     return true;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getLoggedFoods();
   }
 
   @override
@@ -45,43 +60,52 @@ class _DiaryPageState extends BaseStatefulState<DiaryPage> {
 
   @override
   Widget body() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: AppStyles.kPaddSH16,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppStyles.kSizedBoxH4,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: AppStyles.kSpac12,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [getDateShifterLabel(), getDateShifter()],
-                ),
-                getDateTimeline()
-              ],
-            ),
-            AppStyles.kSizedBoxH16,
-            getTargetsContainer(),
-            AppStyles.kSizedBoxH20,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
-            ),
-            AppStyles.kSizedBoxH4,
-            Column(
-              spacing: AppStyles.kSpac16,
-              children: [
-                MealDiaryCard(mealType: MealType.breakfast),
-                MealDiaryCard(mealType: MealType.lunch),
-                MealDiaryCard(mealType: MealType.dinner),
-                MealDiaryCard(mealType: MealType.snack),
-                AppStyles.kEmptyWidget,
-              ],
-            ),
-          ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        _getLoggedFoods();
+      },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: AppStyles.kPaddSH16,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppStyles.kSizedBoxH4,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: AppStyles.kSpac12,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [getDateShifterLabel(), getDateShifter()],
+                  ),
+                  getDateTimeline()
+                ],
+              ),
+              AppStyles.kSizedBoxH16,
+              getTargetsContainer(),
+              AppStyles.kSizedBoxH20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
+              ),
+              AppStyles.kSizedBoxH4,
+              Column(
+                spacing: AppStyles.kSpac16,
+                children: [
+                  ...MealType.values.map((type) {
+                    final meals = context.select<DiaryViewModel, List<LoggedFoodModel>>(
+                      (vm) => vm.loggedFoodList.where((m) => m.mealType == type.value).toList(),
+                    );
+                    return MealDiaryCard(
+                      mealType: type,
+                      meals: meals,
+                    );
+                  }),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -112,6 +136,18 @@ extension _PrivateMethods on _DiaryPageState {
       _selectedDate = _selectedDate.add(Duration(days: days));
     });
     _datePickerController.animateToDate(_selectedDate);
+    _getLoggedFoods();
+  }
+
+  void _onDateChanged(DateTime newDate) {
+    _setState(() {
+      _selectedDate = newDate;
+    });
+    _getLoggedFoods();
+  }
+
+  Future<void> _getLoggedFoods() async {
+    await tryLoad(context, () => context.read<DiaryViewModel>().getLoggedFoods(selectedDate: _selectedDate));
   }
 }
 
@@ -213,9 +249,7 @@ extension _WidgetFactories on _DiaryPageState {
         );
       },
       onDateChange: (date) {
-        _setState(() {
-          _selectedDate = date;
-        });
+        _onDateChanged(date);
       },
     );
   }

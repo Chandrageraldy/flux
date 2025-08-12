@@ -493,7 +493,7 @@ extension _WidgetFactories on _MealScanResultPageState {
 
   // Meal Form Builder Drop Down
   Widget getMealFormBuilderDropDown() {
-    final mealTypes = [MealType.breakfast.label, MealType.lunch.label, MealType.dinner.label, MealType.snack.label];
+    final mealTypes = [MealType.breakfast.value, MealType.lunch.value, MealType.dinner.value, MealType.snack.value];
     return Container(
       padding: AppStyles.kPaddSH6,
       width: AppStyles.kSize100,

@@ -309,7 +309,7 @@ extension _WidgetFactories on _FoodDetailsPageState {
 
   // Meal Type Dropdown Form
   Widget getMealTypeDropdownForm() {
-    final mealTypes = [MealType.breakfast.label, MealType.lunch.label, MealType.dinner.label, MealType.snack.label];
+    final mealTypes = [MealType.breakfast.value, MealType.lunch.value, MealType.dinner.value, MealType.snack.value];
     return AppDropdownForm(
       field: FormFields.mealType,
       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
