@@ -62,20 +62,14 @@ class _MealScanResultPageState extends BaseStatefulState<MealScanResultPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _MealScanResultPageState {
-  // Increment Stepper Count
+  // Increment Meal Quantity
   void _incrementStepper() {
-    _setState(() {
-      stepperCount++;
-    });
+    context.read<MealScanViewModel>().incrementMealQuantity();
   }
 
-  // Decrement Stepper Count
+  // Decrement Meal Quantity
   void _decrementStepper() {
-    if (stepperCount > 1) {
-      _setState(() {
-        stepperCount--;
-      });
-    }
+    context.read<MealScanViewModel>().decrementMealQuantity();
   }
 
   void _onIngredientPressed(IngredientModel ingredient, int index) {
@@ -132,7 +126,7 @@ extension _PrivateMethods on _MealScanResultPageState {
     );
   }
 
-  Map<String, double> _calculateTotalNutrition(List<IngredientModel>? ingredients) {
+  Map<String, double> _calculateTotalNutrition(List<IngredientModel>? ingredients, double? quantity) {
     double totalCalories = 0;
     double totalProtein = 0;
     double totalCarbs = 0;
@@ -148,10 +142,10 @@ extension _PrivateMethods on _MealScanResultPageState {
     }
 
     return {
-      Nutrition.calorie.key: totalCalories,
-      Nutrition.protein.key: totalProtein,
-      Nutrition.carbs.key: totalCarbs,
-      Nutrition.fat.key: totalFat,
+      Nutrition.calorie.key: totalCalories * (quantity ?? 1),
+      Nutrition.protein.key: totalProtein * (quantity ?? 1),
+      Nutrition.carbs.key: totalCarbs * (quantity ?? 1),
+      Nutrition.fat.key: totalFat * (quantity ?? 1),
     };
   }
 }
@@ -223,7 +217,7 @@ extension _WidgetFactories on _MealScanResultPageState {
     final healthScoreDesc = mealScanResult.healthScoreDesc;
     final ingredients = mealScanResult.ingredients;
 
-    final nutritionTotals = _calculateTotalNutrition(ingredients);
+    final nutritionTotals = _calculateTotalNutrition(ingredients, quantity);
 
     return Container(
       decoration: _Styles.getScrollableSheetDecoration(context),
@@ -286,7 +280,7 @@ extension _WidgetFactories on _MealScanResultPageState {
         spacing: AppStyles.kSpac24,
         children: [
           GestureDetector(onTap: _decrementStepper, child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12)),
-          Text(quantity?.toStringAsFixed(0) ?? '0', style: _Styles.getNumberStepperLabelTextStyle(context)),
+          Text(quantity?.toStringAsFixed(1) ?? '0', style: _Styles.getNumberStepperLabelTextStyle(context)),
           GestureDetector(onTap: _incrementStepper, child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12)),
         ],
       ),

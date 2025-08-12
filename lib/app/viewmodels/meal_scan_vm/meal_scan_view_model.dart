@@ -120,4 +120,22 @@ class MealScanViewModel extends BaseViewModel {
     mealScanResult = mealScanResult.copyWith(ingredients: updatedList);
     notifyListeners();
   }
+
+  void incrementMealQuantity() {
+    final currentQty = mealScanResult.quantity ?? 0;
+    mealScanResult = mealScanResult.copyWith(
+      quantity: currentQty + 0.5,
+    );
+
+    notifyListeners();
+  }
+
+  void decrementMealQuantity() {
+    final currentQty = mealScanResult.quantity ?? 0;
+    mealScanResult = mealScanResult.copyWith(
+      quantity: (currentQty - 0.5).clamp(0, double.infinity),
+    );
+
+    notifyListeners();
+  }
 }
