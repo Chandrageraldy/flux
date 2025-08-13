@@ -329,18 +329,55 @@ class IngredientDetailsRouteArgs {
 
 /// generated route for
 /// [LoggedFoodIngredientDetailsPage]
-class LoggedFoodIngredientDetailsRoute extends PageRouteInfo<void> {
-  const LoggedFoodIngredientDetailsRoute({List<PageRouteInfo>? children})
-    : super(LoggedFoodIngredientDetailsRoute.name, initialChildren: children);
+class LoggedFoodIngredientDetailsRoute
+    extends PageRouteInfo<LoggedFoodIngredientDetailsRouteArgs> {
+  LoggedFoodIngredientDetailsRoute({
+    required IngredientModel ingredient,
+    required int index,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         LoggedFoodIngredientDetailsRoute.name,
+         args: LoggedFoodIngredientDetailsRouteArgs(
+           ingredient: ingredient,
+           index: index,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'LoggedFoodIngredientDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const LoggedFoodIngredientDetailsPage();
+      final args = data.argsAs<LoggedFoodIngredientDetailsRouteArgs>();
+      return LoggedFoodIngredientDetailsPage(
+        ingredient: args.ingredient,
+        index: args.index,
+        key: args.key,
+      );
     },
   );
+}
+
+class LoggedFoodIngredientDetailsRouteArgs {
+  const LoggedFoodIngredientDetailsRouteArgs({
+    required this.ingredient,
+    required this.index,
+    this.key,
+  });
+
+  final IngredientModel ingredient;
+
+  final int index;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoggedFoodIngredientDetailsRouteArgs{ingredient: $ingredient, index: $index, key: $key}';
+  }
 }
 
 /// generated route for
@@ -446,28 +483,44 @@ class MealRatioRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MealScanLoggedFoodDetailsPage]
-class MealScanLoggedFoodDetailsRoute
-    extends PageRouteInfo<MealScanLoggedFoodDetailsRouteArgs> {
-  MealScanLoggedFoodDetailsRoute({
-    required LoggedFoodModel loggedFood,
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-         MealScanLoggedFoodDetailsRoute.name,
-         args: MealScanLoggedFoodDetailsRouteArgs(
-           loggedFood: loggedFood,
-           key: key,
-         ),
-         initialChildren: children,
-       );
+class MealScanLoggedFoodDetailsRoute extends PageRouteInfo<void> {
+  const MealScanLoggedFoodDetailsRoute({List<PageRouteInfo>? children})
+    : super(MealScanLoggedFoodDetailsRoute.name, initialChildren: children);
 
   static const String name = 'MealScanLoggedFoodDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<MealScanLoggedFoodDetailsRouteArgs>();
-      return MealScanLoggedFoodDetailsPage(
+      return const MealScanLoggedFoodDetailsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [MealScanLoggedFoodNavigatorPage]
+class MealScanLoggedFoodNavigatorRoute
+    extends PageRouteInfo<MealScanLoggedFoodNavigatorRouteArgs> {
+  MealScanLoggedFoodNavigatorRoute({
+    required LoggedFoodModel loggedFood,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         MealScanLoggedFoodNavigatorRoute.name,
+         args: MealScanLoggedFoodNavigatorRouteArgs(
+           loggedFood: loggedFood,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'MealScanLoggedFoodNavigatorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MealScanLoggedFoodNavigatorRouteArgs>();
+      return MealScanLoggedFoodNavigatorPage(
         loggedFood: args.loggedFood,
         key: args.key,
       );
@@ -475,8 +528,8 @@ class MealScanLoggedFoodDetailsRoute
   );
 }
 
-class MealScanLoggedFoodDetailsRouteArgs {
-  const MealScanLoggedFoodDetailsRouteArgs({
+class MealScanLoggedFoodNavigatorRouteArgs {
+  const MealScanLoggedFoodNavigatorRouteArgs({
     required this.loggedFood,
     this.key,
   });
@@ -487,24 +540,8 @@ class MealScanLoggedFoodDetailsRouteArgs {
 
   @override
   String toString() {
-    return 'MealScanLoggedFoodDetailsRouteArgs{loggedFood: $loggedFood, key: $key}';
+    return 'MealScanLoggedFoodNavigatorRouteArgs{loggedFood: $loggedFood, key: $key}';
   }
-}
-
-/// generated route for
-/// [MealScanLoggedFoodNavigatorPage]
-class MealScanLoggedFoodNavigatorRoute extends PageRouteInfo<void> {
-  const MealScanLoggedFoodNavigatorRoute({List<PageRouteInfo>? children})
-    : super(MealScanLoggedFoodNavigatorRoute.name, initialChildren: children);
-
-  static const String name = 'MealScanLoggedFoodNavigatorRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MealScanLoggedFoodNavigatorPage();
-    },
-  );
 }
 
 /// generated route for

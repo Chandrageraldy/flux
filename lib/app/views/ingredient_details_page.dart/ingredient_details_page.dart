@@ -145,10 +145,7 @@ extension _WidgetFactories on _IngredientDetailsPageState {
 
   // Food Name Label
   Widget getFoodNameLabel(String foodName) {
-    return Text(
-      foodName,
-      style: _Styles.getFoodNameLabelTextStyle(context),
-    );
+    return Text(foodName, style: _Styles.getFoodNameLabelTextStyle(context));
   }
 
   // Quantity Text Form Field

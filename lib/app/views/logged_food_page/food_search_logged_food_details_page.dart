@@ -8,6 +8,7 @@ import 'package:flux/app/utils/regexp/regexp.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/logged_food_vm/food_search_logged_food_details_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
+import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dropdown_form/app_dropdown_form.dart';
 import 'package:flux/app/widgets/food/macronutrient_card.dart';
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
@@ -82,6 +83,7 @@ class _FoodSearchLoggedFoodDetailsPageState extends BaseStatefulState<_FoodSearc
             ],
           ),
         ),
+        getEditButton(),
       ],
     );
   }
@@ -95,6 +97,11 @@ extension _Actions on _FoodSearchLoggedFoodDetailsPageState {
     context.read<FoodSearchLoggedFoodDetailsViewModel>().selectAltMeasure(selectedAltMeasure: selectedAlt);
     context.read<FoodSearchLoggedFoodDetailsViewModel>().updateNutrientsData();
     _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
+  }
+
+  Future<void> _onEditFoodPressed() async {
+    // final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
+    // tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
   }
 }
 
@@ -377,6 +384,16 @@ extension _WidgetFactories on _FoodSearchLoggedFoodDetailsPageState {
       style: _Styles.getNutrientUnitLabelTextStyle(context),
     );
   }
+
+  // Edit Button
+  Widget getEditButton() {
+    return Positioned(
+      bottom: _Styles.getButtonBottomPositition,
+      left: _Styles.getButtonHorizontalPosition,
+      right: _Styles.getButtonHorizontalPosition,
+      child: AppDefaultButton(label: S.current.editFoodLabel, onPressed: _onEditFoodPressed),
+    );
+  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -461,4 +478,10 @@ abstract class _Styles {
   static TextStyle getNutrientUnitLabelTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
+
+  // Button Positioning
+  static double getButtonBottomPositition = 10.0;
+
+  // Button Positioning
+  static double getButtonHorizontalPosition = 16.0;
 }

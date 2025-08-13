@@ -2259,6 +2259,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit Food`
+  String get editFoodLabel {
+    return Intl.message(
+      'Edit Food',
+      name: 'editFoodLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

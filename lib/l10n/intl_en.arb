@@ -231,5 +231,6 @@
     "enhanceWithAILabel": "Enhance with AI",
     "nutritionScoreLabel": "AI's Nutrition Score",
     "saveLabel": "Save",
-    "ingredientsLabel": "Ingredients"
+    "ingredientsLabel": "Ingredients",
+    "editFoodLabel": "Edit Food"
 }

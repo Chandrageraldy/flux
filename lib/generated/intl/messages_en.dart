@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Diet type will adjust the ratio of carbs, protein, and fat."),
         "dietTypeLabel": MessageLookupByLibrary.simpleMessage("Diet Type"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
+        "editFoodLabel": MessageLookupByLibrary.simpleMessage("Edit Food"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "energyTargetDesc": MessageLookupByLibrary.simpleMessage(

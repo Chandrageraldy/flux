@@ -55,7 +55,7 @@ extension _Actions on MealDiaryCard {
       context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood));
     } else {
       context.router.push(
-        MealScanLoggedFoodNavigatorRoute(children: [MealScanLoggedFoodDetailsRoute(loggedFood: loggedFood)]),
+        MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood),
       );
     }
   }

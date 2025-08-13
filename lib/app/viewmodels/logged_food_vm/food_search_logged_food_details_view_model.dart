@@ -1,7 +1,6 @@
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
-import 'dart:developer';
 
 class FoodSearchLoggedFoodDetailsViewModel extends BaseViewModel {
   LoggedFoodModel unmodifiedFoodDetails = LoggedFoodModel();
@@ -32,7 +31,6 @@ class FoodSearchLoggedFoodDetailsViewModel extends BaseViewModel {
   void updateMealType({required String mealType}) {
     modifiedFoodDetails = modifiedFoodDetails.copyWith(mealType: mealType);
     notifyListeners();
-    log(modifiedFoodDetails.toString());
   }
 
   void updateNutrientsData({double? servingQty}) {
