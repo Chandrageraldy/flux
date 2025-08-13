@@ -12,8 +12,8 @@ class MacronutrientIntakeProgress extends StatelessWidget {
 
   final MacroNutrients macroNutrient;
   final double percentage;
-  final double currentValue;
-  final double targetValue;
+  final int currentValue;
+  final int targetValue;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ extension _WidgetFactories on MacronutrientIntakeProgress {
   // Linear Progress Indicator
   Widget getLinearProgressIndicator(BuildContext context) {
     return LinearPercentIndicator(
-      percent: percentage,
+      percent: percentage > 1 ? 1 : percentage,
       backgroundColor: context.theme.colorScheme.tertiary,
       progressColor: _Styles.getLinearProgressIndicatorColor(macroNutrient),
       animation: true,

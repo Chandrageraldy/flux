@@ -320,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sodiumLabel": MessageLookupByLibrary.simpleMessage("Sodium"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
+        "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
         "targetWeeklyChangeLabel":
             MessageLookupByLibrary.simpleMessage("Target Weekly Change"),
         "targetWeightDesc": MessageLookupByLibrary.simpleMessage(

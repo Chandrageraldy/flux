@@ -2269,6 +2269,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Surplus`
+  String get surplusLabel {
+    return Intl.message(
+      'Surplus',
+      name: 'surplusLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -61,20 +61,60 @@ extension _Actions on MealDiaryCard {
   }
 }
 
+// * ------------------------ PrivateMethods -------------------------
+extension _PrivateMethods on MealDiaryCard {
+  Map<String, double> _calculateTotalNutrition(List<LoggedFoodModel>? meals) {
+    double totalCalories = 0;
+    double totalProtein = 0;
+    double totalCarbs = 0;
+    double totalFat = 0;
+
+    if (meals != null) {
+      for (final meal in meals) {
+        totalCalories += meal.calorieKcal ?? 0;
+        totalProtein += meal.proteinG ?? 0;
+        totalCarbs += meal.carbsG ?? 0;
+        totalFat += meal.fatG ?? 0;
+      }
+    }
+
+    double round2(double val) => double.parse(val.toStringAsFixed(2));
+
+    return {
+      Nutrition.calorie.key: round2(totalCalories),
+      Nutrition.protein.key: round2(totalProtein),
+      Nutrition.carbs.key: round2(totalCarbs),
+      Nutrition.fat.key: round2(totalFat),
+    };
+  }
+}
+
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on MealDiaryCard {
   // Header Container
   Widget getHeaderContainer(BuildContext context) {
+    final totalNutrition = _calculateTotalNutrition(meals);
     return Container(
       padding: AppStyles.kPaddOL16R16T16,
       child: Row(
         spacing: AppStyles.kSpac4,
         children: [
-          getMealTypeLabel(context),
-          getCalorieTag(context),
-          getProteinTag(context),
-          getCarbsTag(context),
-          getFatTag(context),
+          Column(
+            spacing: AppStyles.kSpac4,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              getMealTypeLabel(context),
+              Row(
+                spacing: AppStyles.kSpac4,
+                children: [
+                  getCalorieTag(context, totalNutrition[Nutrition.calorie.key] ?? 0),
+                  getProteinTag(context, totalNutrition[Nutrition.protein.key] ?? 0),
+                  getCarbsTag(context, totalNutrition[Nutrition.carbs.key] ?? 0),
+                  getFatTag(context, totalNutrition[Nutrition.fat.key] ?? 0),
+                ],
+              ),
+            ],
+          ),
           Spacer(),
           Container(
             padding: AppStyles.kPadd6,
@@ -92,23 +132,23 @@ extension _WidgetFactories on MealDiaryCard {
   }
 
   // Calorie Tag
-  Widget getCalorieTag(BuildContext context) {
-    return NutritionTag(label: '500/360', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10));
+  Widget getCalorieTag(BuildContext context, double value) {
+    return NutritionTag(label: '$value', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10));
   }
 
   // Protein Tag
-  Widget getProteinTag(BuildContext context) {
-    return NutritionTag(tag: MacroNutrients.protein.tag, label: '31');
+  Widget getProteinTag(BuildContext context, double value) {
+    return NutritionTag(label: '$value', tag: MacroNutrients.protein.tag);
   }
 
   // Carbs Tag
-  Widget getCarbsTag(BuildContext context) {
-    return NutritionTag(tag: MacroNutrients.carbs.tag, label: '20');
+  Widget getCarbsTag(BuildContext context, double value) {
+    return NutritionTag(label: '$value', tag: MacroNutrients.carbs.tag);
   }
 
   // Fat Tag
-  Widget getFatTag(BuildContext context) {
-    return NutritionTag(tag: MacroNutrients.fat.tag, label: '62');
+  Widget getFatTag(BuildContext context, double value) {
+    return NutritionTag(label: '$value', tag: MacroNutrients.fat.tag);
   }
 }
 

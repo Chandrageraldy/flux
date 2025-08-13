@@ -1,6 +1,7 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/viewmodels/diary_vm/diary_view_model.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
@@ -71,16 +72,23 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppStyles.kSizedBoxH4,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: AppStyles.kSpac12,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [getDateShifterLabel(), getDateShifter()],
-                  ),
-                  getDateTimeline()
-                ],
+              Container(
+                padding: AppStyles.kPaddSV10,
+                decoration: _Styles.getDateContainerDecoration(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: AppStyles.kSpac12,
+                  children: [
+                    Padding(
+                      padding: AppStyles.kPaddSH16,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [getDateShifterLabel(), getDateShifter()],
+                      ),
+                    ),
+                    getDateTimeline()
+                  ],
+                ),
               ),
               AppStyles.kSizedBoxH16,
               getTargetsContainer(),
@@ -93,15 +101,18 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
               Column(
                 spacing: AppStyles.kSpac16,
                 children: [
-                  ...MealType.values.map((type) {
-                    final meals = context.select<DiaryViewModel, List<LoggedFoodModel>>(
-                      (vm) => vm.loggedFoodList.where((m) => m.mealType == type.value).toList(),
-                    );
-                    return MealDiaryCard(
-                      mealType: type,
-                      meals: meals,
-                    );
-                  }),
+                  ...MealType.values.map(
+                    (type) {
+                      final meals = context.select<DiaryViewModel, List<LoggedFoodModel>>(
+                        (vm) => vm.loggedFoodsList.where((m) => m.mealType == type.value).toList(),
+                      );
+                      return MealDiaryCard(
+                        mealType: type,
+                        meals: meals,
+                      );
+                    },
+                  ),
+                  AppStyles.kSizedBoxH8,
                 ],
               ),
             ],
@@ -121,13 +132,18 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
 
 // * ------------------------ PrivateMethods ------------------------
 extension _PrivateMethods on _DiaryPageState {
-  String _formatDate(DateTime selectedDate) {
+  String _formatDay(DateTime selectedDate) {
     final now = DateTime.now();
+    final difference = selectedDate.difference(DateTime(now.year, now.month, now.day)).inDays;
 
-    if (DateUtils.isSameDay(selectedDate, now)) {
-      return 'Today, ${DateFormat('MMMM d').format(selectedDate)}'; // Today, July 18
+    if (difference == 0) {
+      return 'Today';
+    } else if (difference == -1) {
+      return 'Yesterday';
+    } else if (difference == 1) {
+      return 'Tomorrow';
     } else {
-      return DateFormat('EEEE, MMMM d').format(selectedDate); // Wednesday, July 17
+      return DateFormat('EEEE').format(selectedDate); // e.g., "Wednesday"
     }
   }
 
@@ -148,6 +164,29 @@ extension _PrivateMethods on _DiaryPageState {
 
   Future<void> _getLoggedFoods() async {
     await tryLoad(context, () => context.read<DiaryViewModel>().getLoggedFoods(selectedDate: _selectedDate));
+  }
+
+  Map<String, int> _calculateTotalNutrition(List<LoggedFoodModel>? meals) {
+    int totalCalories = 0;
+    int totalProtein = 0;
+    int totalCarbs = 0;
+    int totalFat = 0;
+
+    if (meals != null) {
+      for (final meal in meals) {
+        totalCalories += (meal.calorieKcal ?? 0).round();
+        totalProtein += (meal.proteinG ?? 0).round();
+        totalCarbs += (meal.carbsG ?? 0).round();
+        totalFat += (meal.fatG ?? 0).round();
+      }
+    }
+
+    return {
+      Nutrition.calorie.key: totalCalories,
+      Nutrition.protein.key: totalProtein,
+      Nutrition.carbs.key: totalCarbs,
+      Nutrition.fat.key: totalFat,
+    };
   }
 }
 
@@ -175,7 +214,22 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Date Shifter Label
   Widget getDateShifterLabel() {
-    return Text(_formatDate(_selectedDate).toUpperCase(), style: _Styles.getDateShifterLabelTextStyle(context));
+    final dayLabel = _formatDay(_selectedDate);
+    final monthDateLabel = DateFormat('MMMM d').format(_selectedDate);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '$dayLabel,',
+          style: _Styles.getDateShifterDayLabelTextStyle(context),
+        ),
+        Text(
+          monthDateLabel,
+          style: _Styles.getDateShifterMonthDateLabelTextStyle(context),
+        ),
+      ],
+    );
   }
 
   // Date Shifter
@@ -280,35 +334,44 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Calorie Intake Container
   Widget getTargetsContainer() {
+    final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
+
+    final loggedFoods = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
+
+    final totalNutrition = _calculateTotalNutrition(loggedFoods);
+
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getIntakeContainerDecoration(context),
       padding: AppStyles.kPaddSV8,
       child: Column(
         children: [
-          getCalorieIntakeLabel(),
+          getTargetsLabel(),
           getCalorieFormulaLabel(),
           AppStyles.kSizedBoxH16,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getCalorieInformationLabel('3000', S.current.goalLabel),
-              getCalorieCircularPercentIndicator(),
-              getCalorieInformationLabel('1000', S.current.loggedLabel),
+              getCalorieGoalColumn((userPlan?.calorieKcal ?? 0).toInt(), S.current.goalLabel),
+              getCalorieCircularPercentIndicator(
+                (userPlan?.calorieKcal ?? 0).toInt(),
+                (totalNutrition[Nutrition.calorie.key] ?? 0).toInt(),
+              ),
+              getCalorieLoggedColumn(totalNutrition[Nutrition.calorie.key] ?? 0, S.current.loggedLabel),
             ],
           ),
           AppStyles.kSizedBoxH12,
           Padding(
             padding: AppStyles.kPaddSH12,
-            child: getMacroNutrientIntakeProgressRow(),
+            child: getMacroNutrientIntakeProgressRow(totalNutrition, userPlan),
           )
         ],
       ),
     );
   }
 
-  // Calorie Intake Label
-  Widget getCalorieIntakeLabel() {
+  // Targets Label
+  Widget getTargetsLabel() {
     return Text(S.current.targetsLabel, style: _Styles.getIntakeLabelTextStyle(context));
   }
 
@@ -318,14 +381,16 @@ extension _WidgetFactories on _DiaryPageState {
   }
 
   // Calorie Circular Percent Indicator
-  Widget getCalorieCircularPercentIndicator() {
+  Widget getCalorieCircularPercentIndicator(int goal, int logged) {
+    final remaining = goal - logged;
+
     return SizedBox(
       child: CircularPercentIndicator(
         lineWidth: AppStyles.kSize7,
         radius: AppStyles.kSize56,
-        percent: 0.66,
+        percent: goal > 0 ? (logged / goal).clamp(0, 1) : 0,
         progressColor: context.theme.colorScheme.secondary,
-        center: getCalorieCircularCenterLabel(),
+        center: getCalorieCircularCenterLabel(remaining),
         circularStrokeCap: CircularStrokeCap.round,
         animation: true,
         animateFromLastPercent: true,
@@ -336,51 +401,71 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
-  // Calorie Information Label
-  Widget getCalorieInformationLabel(String value, String label) {
+  // Calorie Goal Column
+  Widget getCalorieGoalColumn(int value, String label) {
     return Column(
       spacing: AppStyles.kSpac4,
       children: [
-        Text(value, style: _Styles.getIntakeLabelTextStyle(context)),
+        Text('$value', style: _Styles.getIntakeLabelTextStyle(context)),
         Text(label, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
       ],
     );
   }
 
-  // Calorie Circular Center Label
-  Widget getCalorieCircularCenterLabel() {
+  // Calorie Logged Column
+  Widget getCalorieLoggedColumn(int value, String label) {
+    return Column(
+      spacing: AppStyles.kSpac4,
+      children: [
+        Text('$value', style: _Styles.getIntakeLabelTextStyle(context)),
+        Text(label, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
+      ],
+    );
+  }
+
+// Calorie Circular Center Label
+  Widget getCalorieCircularCenterLabel(int remaining) {
+    final isOverTarget = remaining < 0;
+    final displayValue = isOverTarget ? '+${remaining.abs()}' : '$remaining';
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('2000', style: _Styles.getRemainingValueLabelTextStyle(context)),
-        Text(S.current.remainingLabel, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
+        Text(
+          displayValue,
+          style: _Styles.getRemainingValueLabelTextStyle(context),
+        ),
+        Text(
+          isOverTarget ? S.current.surplusLabel : S.current.remainingLabel,
+          style: _Styles.getCalorieFormulaLabelTextStyle(context),
+        ),
         AppStyles.kSizedBoxH4
       ],
     );
   }
 
   // Macro Nutrient Intake Progress Row
-  Widget getMacroNutrientIntakeProgressRow() {
+  Widget getMacroNutrientIntakeProgressRow(Map<String, int> totalNutrition, PlanModel? logged) {
     return Row(
       spacing: AppStyles.kSpac8,
       children: [
         MacronutrientIntakeProgress(
           macroNutrient: MacroNutrients.protein,
-          percentage: 0.8,
-          currentValue: 80,
-          targetValue: 100,
+          percentage: (totalNutrition[Nutrition.protein.key] ?? 0) / (logged?.proteinG ?? 1),
+          currentValue: totalNutrition[Nutrition.protein.key] ?? 0,
+          targetValue: (logged?.proteinG ?? 0).toInt(),
         ),
         MacronutrientIntakeProgress(
           macroNutrient: MacroNutrients.carbs,
-          percentage: 0.6,
-          currentValue: 60,
-          targetValue: 100,
+          percentage: (totalNutrition[Nutrition.carbs.key] ?? 0) / (logged?.carbsG ?? 1),
+          currentValue: totalNutrition[Nutrition.carbs.key] ?? 0,
+          targetValue: (logged?.carbsG ?? 0).toInt(),
         ),
         MacronutrientIntakeProgress(
           macroNutrient: MacroNutrients.fat,
-          percentage: 0.5,
-          currentValue: 50,
-          targetValue: 100,
+          percentage: (totalNutrition[Nutrition.fat.key] ?? 0) / (logged?.fatG ?? 1),
+          currentValue: totalNutrition[Nutrition.fat.key] ?? 0,
+          targetValue: (logged?.fatG ?? 0).toInt(),
         ),
       ],
     );
@@ -415,7 +500,7 @@ class _Styles {
 
   // Calorie Intake Label Text Style
   static TextStyle getIntakeLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.medium);
+    return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 
   // Calorie Formula Label Text Style
@@ -428,9 +513,14 @@ class _Styles {
     return Quicksand.medium.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
 
-  // Date Shifter Label Text Style
-  static TextStyle getDateShifterLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.mediumPlus);
+  // Date Shifter Day Label Text Style
+  static TextStyle getDateShifterDayLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  }
+
+  // Date Shifter Month Date Label Text Style
+  static TextStyle getDateShifterMonthDateLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.mediumPlus);
   }
 
   // Meals Logged Label Text Style
@@ -446,7 +536,7 @@ class _Styles {
   // Date Timeline Container Decoration
   static BoxDecoration getDateTimelineContainerDecoration(BuildContext context, bool isSelected) {
     return BoxDecoration(
-      color: isSelected ? context.theme.colorScheme.secondary : context.theme.colorScheme.onPrimary,
+      color: isSelected ? context.theme.colorScheme.secondary : context.theme.colorScheme.tertiaryContainer,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
@@ -480,6 +570,17 @@ class _Styles {
     return BoxDecoration(
       color: context.theme.colorScheme.tertiaryContainer,
       shape: BoxShape.circle,
+    );
+  }
+
+  // Date Container Decoration
+  static BoxDecoration getDateContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
     );
   }
 }

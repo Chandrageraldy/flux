@@ -6,12 +6,12 @@ import 'package:flux/app/viewmodels/base_view_model.dart';
 class DiaryViewModel extends BaseViewModel {
   FoodRepository foodRepository = FoodRepository();
 
-  List<LoggedFoodModel> loggedFoodList = [];
+  List<LoggedFoodModel> loggedFoodsList = [];
 
   Future<void> getLoggedFoods({required DateTime selectedDate}) async {
     final response = await foodRepository.getLoggedFoods(selectedDate: selectedDate);
-    loggedFoodList = response.data as List<LoggedFoodModel>;
+    loggedFoodsList = response.data as List<LoggedFoodModel>;
     notifyListeners();
-    log(loggedFoodList.toString());
+    log(loggedFoodsList.toString());
   }
 }
