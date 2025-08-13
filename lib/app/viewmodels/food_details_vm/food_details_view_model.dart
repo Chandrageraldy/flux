@@ -50,8 +50,6 @@ class FoodDetailsViewModel extends BaseViewModel {
     updateNutrientsData();
     _isLoading = false;
     notifyListeners();
-
-    print(unmodifiedFoodDetails);
   }
 
   void selectAltMeasure({required AltMeasureModel selectedAltMeasure}) {

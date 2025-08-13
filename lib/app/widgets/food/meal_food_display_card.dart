@@ -26,6 +26,16 @@ class MealFoodDisplayCard extends StatelessWidget {
                 Row(
                   spacing: AppStyles.kSpac4,
                   children: [
+                    if (meal.servingQty != null && meal.servingUnit != null)
+                      Text(
+                        '${meal.servingQty} ${meal.servingUnit}',
+                        style: Quicksand.medium.withSize(FontSizes.extraSmall),
+                      ),
+                    if (meal.quantity != null)
+                      Text(
+                        '${meal.quantity} quantity',
+                        style: Quicksand.medium.withSize(FontSizes.extraSmall),
+                      ),
                     NutritionTag(
                         label: meal.calorieKcal.toString(),
                         icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
