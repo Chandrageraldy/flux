@@ -29,6 +29,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
   final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
 
   DateTime _selectedDate = DateTime.now();
+  int _currentPageIndex = 0;
 
   final EasyDatePickerController _datePickerController = EasyDatePickerController();
 
@@ -91,7 +92,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
                 ),
               ),
               AppStyles.kSizedBoxH16,
-              getTargetsContainer(),
+              getPageViewContainer(),
               AppStyles.kSizedBoxH20,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +144,7 @@ extension _PrivateMethods on _DiaryPageState {
     } else if (difference == 1) {
       return 'Tomorrow';
     } else {
-      return DateFormat('EEEE').format(selectedDate); // e.g., "Wednesday"
+      return DateFormat('EEEE').format(selectedDate);
     }
   }
 
@@ -332,41 +333,106 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
-  // Calorie Intake Container
-  Widget getTargetsContainer() {
-    final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
-
-    final loggedFoods = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
-
-    final totalNutrition = _calculateTotalNutrition(loggedFoods);
-
+  // Page View
+  Widget getPageViewContainer() {
     return Container(
       width: AppStyles.kDoubleInfinity,
       decoration: _Styles.getIntakeContainerDecoration(context),
       padding: AppStyles.kPaddSV8,
       child: Column(
         children: [
-          getTargetsLabel(),
-          getCalorieFormulaLabel(),
-          AppStyles.kSizedBoxH16,
+          SizedBox(
+            height: 240,
+            child: PageView(
+              onPageChanged: (index) {
+                _setState(() {
+                  _currentPageIndex = index;
+                });
+              },
+              children: getPages(),
+            ),
+          ),
+          AppStyles.kSizedBoxH8,
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: AppStyles.kSpac8,
             children: [
-              getCalorieGoalColumn((userPlan?.calorieKcal ?? 0).toInt(), S.current.goalLabel),
-              getCalorieCircularPercentIndicator(
-                (userPlan?.calorieKcal ?? 0).toInt(),
-                (totalNutrition[Nutrition.calorie.key] ?? 0).toInt(),
+              FaIcon(FontAwesomeIcons.chevronLeft, size: AppStyles.kSize10),
+              Row(
+                spacing: AppStyles.kSpac4,
+                children: List.generate(
+                  getPages().length,
+                  (index) => getPageIndicator(index),
+                ),
               ),
-              getCalorieLoggedColumn(totalNutrition[Nutrition.calorie.key] ?? 0, S.current.loggedLabel),
+              FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize10),
             ],
           ),
-          AppStyles.kSizedBoxH12,
-          Padding(
-            padding: AppStyles.kPaddSH12,
-            child: getMacroNutrientIntakeProgressRow(totalNutrition, userPlan),
-          )
         ],
       ),
+    );
+  }
+
+  List<Widget> getPages() {
+    return [
+      getCalorieAndMacroTargetContainer(),
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Different Content',
+              style: _Styles.getIntakeLabelTextStyle(context),
+            ),
+            Text(
+              'This is the second page of information!',
+              style: _Styles.getCalorieFormulaLabelTextStyle(context),
+            ),
+          ],
+        ),
+      ),
+    ];
+  }
+
+  // Calorie and Macro Target Container
+  Widget getCalorieAndMacroTargetContainer() {
+    final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
+    final loggedFoods = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
+    final totalNutrition = _calculateTotalNutrition(loggedFoods);
+
+    return Column(
+      children: [
+        getTargetsLabel(),
+        getCalorieFormulaLabel(),
+        AppStyles.kSizedBoxH16,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: getCalorieGoalColumn(
+                (userPlan?.calorieKcal ?? 0).toInt(),
+                S.current.goalLabel,
+              ),
+            ),
+            getCalorieCircularPercentIndicator(
+              (userPlan?.calorieKcal ?? 0).toInt(),
+              (totalNutrition[Nutrition.calorie.key] ?? 0).toInt(),
+            ),
+            Expanded(
+              child: getCalorieLoggedColumn(
+                totalNutrition[Nutrition.calorie.key] ?? 0,
+                S.current.loggedLabel,
+              ),
+            ),
+          ],
+        ),
+        AppStyles.kSizedBoxH8,
+        Padding(
+          padding: AppStyles.kPaddSH12,
+          child: getMacroNutrientIntakeProgressRow(totalNutrition, userPlan),
+        ),
+      ],
     );
   }
 
@@ -423,7 +489,7 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
-// Calorie Circular Center Label
+  // Calorie Circular Center Label
   Widget getCalorieCircularCenterLabel(int remaining) {
     final isOverTarget = remaining < 0;
     final displayValue = isOverTarget ? '+${remaining.abs()}' : '$remaining';
@@ -481,6 +547,15 @@ extension _WidgetFactories on _DiaryPageState {
     return GestureDetector(
       onTap: onPressed,
       child: Text(S.current.editLabel.toUpperCase(), style: _Styles.getEditLabelTextStyle(context)),
+    );
+  }
+
+  // Page Indicator
+  Widget getPageIndicator(int index) {
+    return Container(
+      width: AppStyles.kSize8,
+      height: AppStyles.kSize8,
+      decoration: _Styles.getPageIndicatorContainerDecoration(context, index, _currentPageIndex),
     );
   }
 }
@@ -581,6 +656,14 @@ class _Styles {
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
+    );
+  }
+
+  // Page Indicator Container Decoration
+  static BoxDecoration getPageIndicatorContainerDecoration(BuildContext context, int index, int currentPageIndex) {
+    return BoxDecoration(
+      color: currentPageIndex == index ? context.theme.colorScheme.secondary : context.theme.colorScheme.tertiary,
+      borderRadius: AppStyles.kRad100,
     );
   }
 }

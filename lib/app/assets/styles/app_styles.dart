@@ -56,6 +56,7 @@ class AppStyles {
   static const kPaddSV4H8 = EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0);
   static const kPaddSV12H20 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0);
   static const kPaddSV8H12 = EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0);
+  static const kPaddSV12H12 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0);
   static const kPaddSV12H16 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0);
   static const kPaddSV12H28 = EdgeInsets.symmetric(vertical: 12.0, horizontal: 28.0);
   static const kPaddSV20H28 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 28.0);
@@ -71,6 +72,7 @@ class AppStyles {
   static const kPaddSV10H16 = EdgeInsets.symmetric(vertical: 10, horizontal: 16);
   static const kPaddSV16H16 = EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0);
   static const kPaddSV20H16 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0);
+  static const kPaddSV20H12 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0);
 
   static const kPaddSV20H20 = EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0);
 
