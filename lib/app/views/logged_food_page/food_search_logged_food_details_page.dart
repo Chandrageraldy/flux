@@ -29,8 +29,8 @@ class _FoodSearchLoggedFoodDetailsPage extends BaseStatefulPage {
 class _FoodSearchLoggedFoodDetailsPageState extends BaseStatefulState<_FoodSearchLoggedFoodDetailsPage> {
   @override
   Widget body() {
-    return const Center(
-      child: Text('_FoodSearchLoggedFoodDetailsPage body'),
+    return Center(
+      child: Text(widget.loggedFood.foodName ?? ''),
     );
   }
 }

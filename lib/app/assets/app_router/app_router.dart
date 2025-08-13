@@ -88,6 +88,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AccountRoute.page),
         AutoRoute(page: MealScanRoute.page),
         getMealScanRoutes(),
+        AutoRoute(page: FoodSearchLoggedFoodDetailsRoute.page),
         getMealScanLoggedFoodDetailsRoutes(),
       ],
     );

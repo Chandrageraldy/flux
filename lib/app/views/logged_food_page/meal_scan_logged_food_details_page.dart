@@ -1,8 +1,11 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 
 @RoutePage()
 class MealScanLoggedFoodDetailsPage extends BaseStatefulPage {
-  const MealScanLoggedFoodDetailsPage({super.key});
+  const MealScanLoggedFoodDetailsPage({required this.loggedFood, super.key});
+
+  final LoggedFoodModel loggedFood;
 
   @override
   State<MealScanLoggedFoodDetailsPage> createState() => _MealScanLoggedFoodDetailsPageState();
@@ -11,8 +14,8 @@ class MealScanLoggedFoodDetailsPage extends BaseStatefulPage {
 class _MealScanLoggedFoodDetailsPageState extends BaseStatefulState<MealScanLoggedFoodDetailsPage> {
   @override
   Widget body() {
-    return const Center(
-      child: Text('MealScanLoggedFoodDetailsPage body'),
+    return Center(
+      child: Text(widget.loggedFood.foodName ?? ''),
     );
   }
 }

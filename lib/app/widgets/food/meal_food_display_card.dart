@@ -4,34 +4,42 @@ import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MealFoodDisplayCard extends StatelessWidget {
-  const MealFoodDisplayCard({super.key, required this.meal});
+  const MealFoodDisplayCard({super.key, required this.meal, required this.onLoggedFoodTap});
 
   final LoggedFoodModel meal;
+  final VoidCallback onLoggedFoodTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          spacing: AppStyles.kSpac4,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: onLoggedFoodTap,
+      child: Container(
+        color: context.theme.colorScheme.onPrimary,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(meal.foodName ?? '', style: _Styles.labelTextStyle(context)),
-            Row(
+            Column(
               spacing: AppStyles.kSpac4,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NutritionTag(
-                    label: meal.calorieKcal.toString(), icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
-                NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG.toString()),
-                NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG.toString()),
-                NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG.toString()),
+                Text(meal.foodName ?? '', style: _Styles.labelTextStyle(context)),
+                Row(
+                  spacing: AppStyles.kSpac4,
+                  children: [
+                    NutritionTag(
+                        label: meal.calorieKcal.toString(),
+                        icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
+                    NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG.toString()),
+                    NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG.toString()),
+                    NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG.toString()),
+                  ],
+                ),
               ],
             ),
+            FaIcon(FontAwesomeIcons.bars, size: AppStyles.kSize16)
           ],
         ),
-        FaIcon(FontAwesomeIcons.bars, size: AppStyles.kSize16)
-      ],
+      ),
     );
   }
 }

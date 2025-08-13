@@ -28,7 +28,7 @@ class MealDiaryCard extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final meal = meals[index];
-                  return MealFoodDisplayCard(meal: meal);
+                  return MealFoodDisplayCard(meal: meal, onLoggedFoodTap: () => _onLoggedFoodTap(meal, context));
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: AppStyles.kSize12),
               )
@@ -48,6 +48,16 @@ class MealDiaryCard extends StatelessWidget {
 extension _Actions on MealDiaryCard {
   void _onHeaderTap(BuildContext context) {
     context.router.push(MealDetailsRoute(mealType: mealType));
+  }
+
+  void _onLoggedFoodTap(LoggedFoodModel loggedFood, BuildContext context) {
+    if (loggedFood.source == LogSource.foodSearch.value) {
+      context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood));
+    } else {
+      context.router.push(
+        MealScanLoggedFoodNavigatorRoute(children: [MealScanLoggedFoodDetailsRoute(loggedFood: loggedFood)]),
+      );
+    }
   }
 }
 
