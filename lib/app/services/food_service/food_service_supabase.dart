@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/recent_food_model.dart/recent_food_model.dart';
 import 'package:flux/app/models/saved_food_model.dart/saved_food_model.dart';
 import 'package:flux/app/services/supabase_base_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:path/path.dart';
 
 class FoodServiceSupabase extends SupabaseBaseService {
   final supabase = Supabase.instance.client;

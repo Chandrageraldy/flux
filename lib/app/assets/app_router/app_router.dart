@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
 import 'package:flux/app/views/auth_page/signup_page.dart';
@@ -12,6 +13,10 @@ import 'package:flux/app/views/error_modal/error_modal.dart';
 import 'package:flux/app/views/food_details_page/food_details_page.dart';
 import 'package:flux/app/views/food_search_page/food_search_page.dart';
 import 'package:flux/app/views/ingredient_details_page.dart/ingredient_details_page.dart';
+import 'package:flux/app/views/logged_food_page/food_search_logged_food_details_page.dart';
+import 'package:flux/app/views/logged_food_page/logged_food_ingredient_details_page.dart';
+import 'package:flux/app/views/logged_food_page/meal_scan_logged_food_details_page.dart';
+import 'package:flux/app/views/logged_food_page/meal_scan_logged_food_navigator_page.dart';
 import 'package:flux/app/views/meal_scan_page/meal_scan_page.dart';
 import 'package:flux/app/views/meal_scan_result_page.dart/meal_scan_navigator_page.dart';
 import 'package:flux/app/views/meal_scan_result_page.dart/meal_scan_result_page.dart';
@@ -83,6 +88,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: AccountRoute.page),
         AutoRoute(page: MealScanRoute.page),
         getMealScanRoutes(),
+        getMealScanLoggedFoodDetailsRoutes(),
       ],
     );
   }
@@ -93,6 +99,16 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(page: MealScanResultRoute.page, initial: true),
         AutoRoute(page: IngredientDetailsRoute.page),
+      ],
+    );
+  }
+
+  AutoRoute getMealScanLoggedFoodDetailsRoutes() {
+    return AutoRoute(
+      page: MealScanLoggedFoodNavigatorRoute.page,
+      children: [
+        AutoRoute(page: MealScanLoggedFoodDetailsRoute.page, initial: true),
+        AutoRoute(page: LoggedFoodIngredientDetailsRoute.page)
       ],
     );
   }
