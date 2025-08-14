@@ -2279,6 +2279,26 @@ class S {
       args: [],
     );
   }
+
+  /// `No Meals Logged`
+  String get noMealsLoggedLabel {
+    return Intl.message(
+      'No Meals Logged',
+      name: 'noMealsLoggedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have not logged any meals yet. Start tracking your meals by pressing the + button.`
+  String get noMealsLoggedDesc {
+    return Intl.message(
+      'You have not logged any meals yet. Start tracking your meals by pressing the + button.',
+      name: 'noMealsLoggedDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

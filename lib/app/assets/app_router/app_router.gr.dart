@@ -432,12 +432,17 @@ class ManualPlanSetupRoute extends PageRouteInfo<void> {
 /// [MealDetailsPage]
 class MealDetailsRoute extends PageRouteInfo<MealDetailsRouteArgs> {
   MealDetailsRoute({
-    required MealType mealType,
     Key? key,
+    required MealType mealType,
+    required DateTime selectedDate,
     List<PageRouteInfo>? children,
   }) : super(
          MealDetailsRoute.name,
-         args: MealDetailsRouteArgs(mealType: mealType, key: key),
+         args: MealDetailsRouteArgs(
+           key: key,
+           mealType: mealType,
+           selectedDate: selectedDate,
+         ),
          initialChildren: children,
        );
 
@@ -447,21 +452,31 @@ class MealDetailsRoute extends PageRouteInfo<MealDetailsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<MealDetailsRouteArgs>();
-      return MealDetailsPage(mealType: args.mealType, key: args.key);
+      return MealDetailsPage(
+        key: args.key,
+        mealType: args.mealType,
+        selectedDate: args.selectedDate,
+      );
     },
   );
 }
 
 class MealDetailsRouteArgs {
-  const MealDetailsRouteArgs({required this.mealType, this.key});
-
-  final MealType mealType;
+  const MealDetailsRouteArgs({
+    this.key,
+    required this.mealType,
+    required this.selectedDate,
+  });
 
   final Key? key;
 
+  final MealType mealType;
+
+  final DateTime selectedDate;
+
   @override
   String toString() {
-    return 'MealDetailsRouteArgs{mealType: $mealType, key: $key}';
+    return 'MealDetailsRouteArgs{key: $key, mealType: $mealType, selectedDate: $selectedDate}';
   }
 }
 

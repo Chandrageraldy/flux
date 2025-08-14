@@ -89,6 +89,7 @@ class TableCol {
   static String nixItemId = 'nixItemId';
   static String lastViewedAt = 'lastViewedAt';
   static String loggedAt = 'loggedAt';
+  static String mealType = 'mealType';
 }
 
 class BucketName {

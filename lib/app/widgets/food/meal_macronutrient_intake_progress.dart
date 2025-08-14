@@ -2,9 +2,18 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 
 class MealMacronutrientIntakeProgress extends StatelessWidget {
-  const MealMacronutrientIntakeProgress({required this.macroNutrient, super.key});
+  const MealMacronutrientIntakeProgress({
+    required this.macroNutrient,
+    required this.percentage,
+    required this.currentValue,
+    required this.targetValue,
+    super.key,
+  });
 
   final MacroNutrients macroNutrient;
+  final double percentage;
+  final int currentValue;
+  final int targetValue;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,7 @@ extension _WidgetFactories on MealMacronutrientIntakeProgress {
   // Macro Nutrient Linear Percent Indicator
   Widget getLinearProgressIndicator(BuildContext context) {
     return LinearPercentIndicator(
-      percent: 0.7,
+      percent: percentage > 1 ? 1 : percentage,
       backgroundColor: context.theme.colorScheme.tertiary,
       progressColor: _Styles.getLinearProgressIndicatorColor(macroNutrient),
       animation: true,
@@ -34,7 +43,7 @@ extension _WidgetFactories on MealMacronutrientIntakeProgress {
       animateToInitialPercent: false,
       padding: AppStyles.kPadd0,
       barRadius: Radius.circular(AppStyles.kSpac20),
-      lineHeight: _Styles.linearPercentIndicatorLineHeight,
+      lineHeight: 6,
     );
   }
 
@@ -49,7 +58,7 @@ extension _WidgetFactories on MealMacronutrientIntakeProgress {
   // Macro Nutrient Value Label
   Widget getMacroNutrientValueLabel(BuildContext context) {
     return Text(
-      '50/120 g',
+      '$currentValue/$targetValue ${NutritionUnit.g.label}',
       style: _Styles.getValueLabelTextStyle(context),
     );
   }
@@ -57,9 +66,6 @@ extension _WidgetFactories on MealMacronutrientIntakeProgress {
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  // Linear Percent Indicator Line Height
-  static const double linearPercentIndicatorLineHeight = 6.0;
-
   // Linear Progress Indicator Color
   static Color getLinearProgressIndicatorColor(MacroNutrients macroNutrient) {
     return macroNutrient == MacroNutrients.protein
@@ -71,11 +77,11 @@ abstract class _Styles {
 
   // Macro Nutrient Label Text Style
   static TextStyle getMacroNutrientLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
+    return Quicksand.bold.withCustomSize(11);
   }
 
   // Macro Nutrient Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+    return Quicksand.medium.withCustomSize(11).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

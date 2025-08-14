@@ -186,6 +186,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
+        "noMealsLoggedDesc": MessageLookupByLibrary.simpleMessage(
+            "You have not logged any meals yet. Start tracking your meals by pressing the + button."),
+        "noMealsLoggedLabel":
+            MessageLookupByLibrary.simpleMessage("No Meals Logged"),
         "noRecentItemsLabel":
             MessageLookupByLibrary.simpleMessage("No recent items."),
         "noRecentItemsMessage": MessageLookupByLibrary.simpleMessage(

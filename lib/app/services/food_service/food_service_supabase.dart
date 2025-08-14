@@ -159,4 +159,28 @@ class FoodServiceSupabase extends SupabaseBaseService {
       file: imageFile,
     );
   }
+
+  Future<Response> getLoggedFoodsByMeals({
+    required String userId,
+    required DateTime dateTime,
+    required String mealType,
+  }) async {
+    final startOfDay = DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final startOfNextDay = startOfDay.add(Duration(days: 1));
+
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.loggedFood,
+      filters: {
+        TableCol.userId: userId,
+        TableCol.mealType: mealType,
+      },
+      rangeFilters: {
+        TableCol.loggedAt: {
+          'gte': startOfDay.toIso8601String(),
+          'lt': startOfNextDay.toIso8601String(),
+        },
+      },
+    );
+  }
 }

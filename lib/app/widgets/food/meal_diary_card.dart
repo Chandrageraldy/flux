@@ -5,10 +5,11 @@ import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MealDiaryCard extends StatelessWidget {
-  const MealDiaryCard({super.key, required this.mealType, required this.meals});
+  const MealDiaryCard({super.key, required this.mealType, required this.meals, required this.selectedDate});
 
   final MealType mealType;
   final List<LoggedFoodModel> meals;
+  final DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class MealDiaryCard extends StatelessWidget {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on MealDiaryCard {
   void _onHeaderTap(BuildContext context) {
-    context.router.push(MealDetailsRoute(mealType: mealType));
+    context.router.push(MealDetailsRoute(mealType: mealType, selectedDate: selectedDate));
   }
 
   void _onLoggedFoodTap(LoggedFoodModel loggedFood, BuildContext context) {

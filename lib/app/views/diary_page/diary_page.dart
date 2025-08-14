@@ -56,7 +56,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
         height: AppStyles.kSize50,
       ),
       scrolledUnderElevation: 0,
-      actions: [getProfileActionButton()],
+      actions: [getProfileActionButton(), getAddActionButton()],
     );
   }
 
@@ -110,6 +110,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
                       return MealDiaryCard(
                         mealType: type,
                         meals: meals,
+                        selectedDate: _selectedDate,
                       );
                     },
                   ),
@@ -208,7 +209,18 @@ extension _WidgetFactories on _DiaryPageState {
       onTap: _onProfileActionPressed,
       child: Padding(
         padding: AppStyles.kPaddOR16,
-        child: FaIcon(FontAwesomeIcons.user, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
+        child: FaIcon(FontAwesomeIcons.solidUser, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
+      ),
+    );
+  }
+
+  // Add Action Button
+  Widget getAddActionButton() {
+    return GestureDetector(
+      onTap: _onProfileActionPressed,
+      child: Padding(
+        padding: AppStyles.kPaddOR16,
+        child: Icon(Icons.add_circle_rounded, size: AppStyles.kSize26, color: context.theme.colorScheme.primary),
       ),
     );
   }
@@ -342,7 +354,7 @@ extension _WidgetFactories on _DiaryPageState {
       child: Column(
         children: [
           SizedBox(
-            height: 240,
+            height: 215,
             child: PageView(
               onPageChanged: (index) {
                 _setState(() {
@@ -386,7 +398,7 @@ extension _WidgetFactories on _DiaryPageState {
             ),
             Text(
               'This is the second page of information!',
-              style: _Styles.getCalorieFormulaLabelTextStyle(context),
+              style: _Styles.getGoalLabelTextStyle(context),
             ),
           ],
         ),
@@ -401,9 +413,24 @@ extension _WidgetFactories on _DiaryPageState {
     final totalNutrition = _calculateTotalNutrition(loggedFoods);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        getTargetsLabel(),
-        getCalorieFormulaLabel(),
+        Padding(
+          padding: AppStyles.kPaddSH20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                spacing: AppStyles.kSpac4,
+                children: [
+                  FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12),
+                  getTargetsLabel(),
+                ],
+              ),
+              getEditButton(() {}),
+            ],
+          ),
+        ),
         AppStyles.kSizedBoxH16,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -438,12 +465,7 @@ extension _WidgetFactories on _DiaryPageState {
 
   // Targets Label
   Widget getTargetsLabel() {
-    return Text(S.current.targetsLabel, style: _Styles.getIntakeLabelTextStyle(context));
-  }
-
-  // Calorie Formula Label
-  Widget getCalorieFormulaLabel() {
-    return Text(S.current.calorieFormula, style: _Styles.getCalorieFormulaLabelTextStyle(context));
+    return Text(S.current.targetsLabel.toUpperCase(), style: _Styles.getTargetsLabelTextStyle(context));
   }
 
   // Calorie Circular Percent Indicator
@@ -473,7 +495,7 @@ extension _WidgetFactories on _DiaryPageState {
       spacing: AppStyles.kSpac4,
       children: [
         Text('$value', style: _Styles.getIntakeLabelTextStyle(context)),
-        Text(label, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
+        Text(label, style: _Styles.getGoalLabelTextStyle(context)),
       ],
     );
   }
@@ -484,7 +506,7 @@ extension _WidgetFactories on _DiaryPageState {
       spacing: AppStyles.kSpac4,
       children: [
         Text('$value', style: _Styles.getIntakeLabelTextStyle(context)),
-        Text(label, style: _Styles.getCalorieFormulaLabelTextStyle(context)),
+        Text(label, style: _Styles.getLoggedLabelTextStyle(context)),
       ],
     );
   }
@@ -503,7 +525,7 @@ extension _WidgetFactories on _DiaryPageState {
         ),
         Text(
           isOverTarget ? S.current.surplusLabel : S.current.remainingLabel,
-          style: _Styles.getCalorieFormulaLabelTextStyle(context),
+          style: _Styles.getRemainingLabelTextStyle(context),
         ),
         AppStyles.kSizedBoxH4
       ],
@@ -573,17 +595,32 @@ class _Styles {
     );
   }
 
+  // Targets Label Text Style
+  static TextStyle getTargetsLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withCustomSize(11);
+  }
+
   // Calorie Intake Label Text Style
   static TextStyle getIntakeLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.medium);
   }
 
-  // Calorie Formula Label Text Style
-  static TextStyle getCalorieFormulaLabelTextStyle(BuildContext context) {
+  // Goal Label Text Style
+  static TextStyle getGoalLabelTextStyle(BuildContext context) {
     return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
-  // Remaining Label Label Text Style
+  // Logged Label Text Style
+  static TextStyle getLoggedLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  }
+
+  // Remaining Label Text Style
+  static TextStyle getRemainingLabelTextStyle(BuildContext context) {
+    return Quicksand.regular.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  }
+
+  // Remaining Value Label Text Style
   static TextStyle getRemainingValueLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }

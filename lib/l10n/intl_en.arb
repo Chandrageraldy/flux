@@ -233,5 +233,7 @@
     "saveLabel": "Save",
     "ingredientsLabel": "Ingredients",
     "editFoodLabel": "Edit Food",
-    "surplusLabel": "Surplus"
+    "surplusLabel": "Surplus",
+    "noMealsLoggedLabel": "No Meals Logged",
+    "noMealsLoggedDesc": "You have not logged any meals yet. Start tracking your meals by pressing the + button."
 }

@@ -329,4 +329,21 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> getLoggedFoodsByMeals({required DateTime selectedDate, required String mealType}) async {
+    UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
+
+    final response = await foodServiceSupabase.getLoggedFoodsByMeals(
+      userId: userProfile?.userId ?? '',
+      dateTime: selectedDate,
+      mealType: mealType,
+    );
+
+    if (response.error == null) {
+      List retrievedData = response.data ?? [];
+      return Response.complete(retrievedData.map((item) => LoggedFoodModel.fromJson(item)).toList());
+    }
+
+    return response;
+  }
 }
