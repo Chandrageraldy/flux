@@ -7,6 +7,7 @@ import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dialog/custom_date_picker_dialog.dart';
+import 'package:flux/app/widgets/dialog/custom_field_dialog.dart';
 import 'package:flux/app/widgets/dialog/custom_picker_dialog.dart';
 
 class WidgetUtils {
@@ -65,6 +66,27 @@ class WidgetUtils {
         padding: AppStyles.kPadd12,
         elevation: 4,
       ),
+    );
+  }
+
+  static void showFieldDialog({
+    required BuildContext context,
+    required String label,
+    required FormFields formField,
+    String? desc,
+    String initialValue = '',
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomFieldDialog(
+          context: context,
+          label: label,
+          desc: desc,
+          formField: formField,
+          initialValue: initialValue,
+        );
+      },
     );
   }
 

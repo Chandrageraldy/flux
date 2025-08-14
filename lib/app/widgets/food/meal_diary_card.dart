@@ -113,7 +113,7 @@ extension _WidgetFactories on MealDiaryCard {
           Container(
             padding: AppStyles.kPadd6,
             decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
-            child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize16),
+            child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize12),
           )
         ],
       ),

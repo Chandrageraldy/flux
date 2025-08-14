@@ -270,7 +270,7 @@ extension _Actions on _MealDetailsPageState {
                 padding: AppStyles.kPadd6,
                 decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
                 child:
-                    FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize16),
+                    FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize12),
               )
             ],
           ),
