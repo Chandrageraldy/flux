@@ -237,5 +237,7 @@
     "noMealsLoggedLabel": "No Meals Logged",
     "noMealsLoggedDesc": "You have not logged any meals yet. Start tracking your meals by pressing the + button.",
     "highlightedMicroLabel": "Highlighted Micro",
-    "fullReportLabel": "Full Report"
+    "fullReportLabel": "Full Report",
+    "dismissLabel": "Dismiss",
+    "quantityErrorMessage": "Quantity must be greater than zero." 
 }

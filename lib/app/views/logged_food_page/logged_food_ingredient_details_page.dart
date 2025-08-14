@@ -101,6 +101,20 @@ extension _Actions on _LoggedFoodIngredientDetailsPageState {
     context.read<MealScanLoggedFoodDetailsViewModel>().updateNutrientsDataForCurrentSelectedIngredient();
     _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
   }
+
+  void _onSaveIngredient() {
+    final quantityStr = _formKey.currentState!.fields[FormFields.quantity.name]!.value as String;
+    final quantity = double.tryParse(quantityStr) ?? 0;
+
+    if (quantityStr.trim().isEmpty || quantity <= 0) {
+      WidgetUtils.showSnackBar(context, S.current.quantityErrorMessage);
+      return;
+    } else {
+      context.read<MealScanLoggedFoodDetailsViewModel>().updateIngredients(widget.index);
+      context.read<MealScanLoggedFoodDetailsViewModel>().clearCurrentSelectedIngredient();
+      context.router.maybePop();
+    }
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -363,14 +377,7 @@ extension _WidgetFactories on _LoggedFoodIngredientDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(
-        label: S.current.saveLabel,
-        onPressed: () {
-          context.read<MealScanLoggedFoodDetailsViewModel>().updateIngredients(widget.index);
-          context.read<MealScanLoggedFoodDetailsViewModel>().clearCurrentSelectedIngredient();
-          context.router.maybePop();
-        },
-      ),
+      child: AppDefaultButton(label: S.current.saveLabel, onPressed: _onSaveIngredient),
     );
   }
 }

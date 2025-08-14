@@ -17,35 +17,43 @@ class MealDetailsFoodDisplayCard extends StatelessWidget {
         decoration: BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRad10),
         padding: AppStyles.kPaddSV6H12,
         child: Row(
+          spacing: AppStyles.kSpac8,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              spacing: AppStyles.kSpac4,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(meal.foodName ?? '', style: _Styles.labelTextStyle(context)),
-                Row(
-                  spacing: AppStyles.kSpac4,
-                  children: [
-                    if (meal.servingQty != null && meal.servingUnit != null)
-                      Text(
-                        '${meal.servingQty} ${meal.servingUnit}',
-                        style: Quicksand.medium.withSize(FontSizes.extraSmall),
-                      ),
-                    if (meal.quantity != null)
-                      Text(
-                        '${meal.quantity} ${S.current.quantityLabel.toLowerCase()}',
-                        style: Quicksand.medium.withSize(FontSizes.extraSmall),
-                      ),
-                    NutritionTag(
-                        label: meal.calorieKcal.toString(),
-                        icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
-                    NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG.toString()),
-                    NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG.toString()),
-                    NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG.toString()),
-                  ],
-                ),
-              ],
+            Expanded(
+              child: Column(
+                spacing: AppStyles.kSpac4,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    meal.foodName ?? '',
+                    style: _Styles.labelTextStyle(context),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Row(
+                    spacing: AppStyles.kSpac4,
+                    children: [
+                      if (meal.servingQty != null && meal.servingUnit != null)
+                        Text(
+                          '${meal.servingQty} ${meal.servingUnit}',
+                          style: Quicksand.medium.withSize(FontSizes.extraSmall),
+                        ),
+                      if (meal.quantity != null)
+                        Text(
+                          '${meal.quantity} ${S.current.quantityLabel.toLowerCase()}',
+                          style: Quicksand.medium.withSize(FontSizes.extraSmall),
+                        ),
+                      NutritionTag(
+                          label: meal.calorieKcal.toString(),
+                          icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
+                      NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG.toString()),
+                      NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG.toString()),
+                      NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG.toString()),
+                    ],
+                  ),
+                ],
+              ),
             ),
             FaIcon(FontAwesomeIcons.bars, size: AppStyles.kSize16)
           ],

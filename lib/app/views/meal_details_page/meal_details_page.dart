@@ -41,7 +41,10 @@ class _MealDetailsPage extends BaseStatefulPage {
 
 class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary);
+  PreferredSizeWidget? appbar() => DefaultAppBar(
+        backgroundColor: context.theme.colorScheme.onPrimary,
+        popBoolean: isEdited,
+      );
 
   @override
   bool hasDefaultPadding() => false;
@@ -51,6 +54,8 @@ class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
     super.initState();
     getLoggedFoodsByMeals();
   }
+
+  bool isEdited = false;
 
   @override
   Widget body() {
@@ -74,11 +79,27 @@ class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
 extension _PrivateMethods on _MealDetailsPageState {
   void _onLoggedFoodTap(LoggedFoodModel loggedFood, BuildContext context) {
     if (loggedFood.source == LogSource.foodSearch.value) {
-      context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood));
+      context.router
+          .push(
+        FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood),
+      )
+          .then((result) {
+        if (result == true) {
+          getLoggedFoodsByMeals();
+          isEdited = true;
+        }
+      });
     } else {
-      context.router.push(
+      context.router
+          .push(
         MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood),
-      );
+      )
+          .then((result) {
+        if (result == true) {
+          getLoggedFoodsByMeals();
+          isEdited = true;
+        }
+      });
     }
   }
 

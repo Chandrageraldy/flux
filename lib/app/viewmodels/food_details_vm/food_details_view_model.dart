@@ -107,8 +107,9 @@ class FoodDetailsViewModel extends BaseViewModel {
     checkError(response);
   }
 
-  Future<void> logFood({required String mealType}) async {
+  Future<bool> logFood({required String mealType}) async {
     final response = await foodRepository.logFoodWithFoodSearch(foodDetails: modifiedFoodDetails, mealType: mealType);
     checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
   }
 }

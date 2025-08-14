@@ -29,6 +29,45 @@ class WidgetUtils {
     }
   }
 
+  static void showSnackBar(BuildContext context, String message) {
+    final messenger = ScaffoldMessenger.of(context);
+
+    messenger.hideCurrentSnackBar();
+
+    messenger.showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.error_outline, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize16),
+            SizedBox(width: AppStyles.kSpac8),
+            Expanded(
+              child: Text(
+                message,
+                style: Quicksand.medium.withSize(FontSizes.extraSmall),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            GestureDetector(
+              onTap: () => messenger.hideCurrentSnackBar(),
+              child: Text(
+                S.current.dismissLabel,
+                style: Quicksand.medium
+                    .withSize(FontSizes.extraSmall)
+                    .copyWith(color: context.theme.colorScheme.secondary),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xff262727),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 2),
+        shape: RoundedRectangleBorder(borderRadius: AppStyles.kRad10),
+        padding: AppStyles.kPadd12,
+        elevation: 4,
+      ),
+    );
+  }
+
   static void showPickerDialog({
     required BuildContext context,
     required String label,

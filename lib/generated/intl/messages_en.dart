@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Diet type will adjust the ratio of carbs, protein, and fat."),
         "dietTypeLabel": MessageLookupByLibrary.simpleMessage("Diet Type"),
         "dinnerLabel": MessageLookupByLibrary.simpleMessage("Dinner"),
+        "dismissLabel": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "editFoodLabel": MessageLookupByLibrary.simpleMessage("Edit Food"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
@@ -283,6 +284,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileLabel": MessageLookupByLibrary.simpleMessage("Profile"),
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
+        "quantityErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "Quantity must be greater than zero."),
         "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),
         "ratioErrorMessage": MessageLookupByLibrary.simpleMessage(
             "The total must equal 100%. Please adjust the values."),

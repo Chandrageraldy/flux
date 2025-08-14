@@ -6,12 +6,14 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.actionButton,
       this.centerTitle = false,
       this.title,
+      this.popBoolean = false,
       super.key});
 
   final Color backgroundColor;
   final Widget? actionButton;
   final String? title;
   final bool centerTitle;
+  final bool popBoolean;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: GestureDetector(
         onTap: () async {
-          context.router.maybePop();
+          context.router.maybePop(popBoolean);
         },
         child: const Icon(Icons.arrow_back_ios_rounded),
       ),

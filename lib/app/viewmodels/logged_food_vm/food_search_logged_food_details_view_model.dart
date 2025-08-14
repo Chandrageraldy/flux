@@ -91,4 +91,12 @@ class FoodSearchLoggedFoodDetailsViewModel extends BaseViewModel {
     checkError(response);
     return response.status == ResponseStatus.COMPLETE;
   }
+
+  Future<bool> deleteLoggedFood() async {
+    final response = await foodRepository.deleteLoggedFood(
+      loggedFood: unmodifiedFoodDetails,
+    );
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
+  }
 }

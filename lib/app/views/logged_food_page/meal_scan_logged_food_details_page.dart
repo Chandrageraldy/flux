@@ -89,7 +89,16 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
     }
   }
 
-  Future<void> _onDeleteFoodPressed() async {}
+  Future<void> _onDeleteFoodPressed() async {
+    final response = await tryLoad(
+      context,
+      () => context.read<MealScanLoggedFoodDetailsViewModel>().deleteLoggedFood(),
+    );
+
+    if (response == true && mounted) {
+      context.router.maybePop(true);
+    }
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------

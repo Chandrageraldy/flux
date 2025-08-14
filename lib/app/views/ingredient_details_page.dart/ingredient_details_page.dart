@@ -98,6 +98,20 @@ extension _Actions on _IngredientDetailsPageState {
     context.read<MealScanViewModel>().updateNutrientsDataForCurrentSelectedIngredient();
     _formKey.currentState?.fields[FormFields.quantity.name]?.didChange(selectedAlt.qty.toString());
   }
+
+  void _onSaveIngredient() {
+    final quantityStr = _formKey.currentState!.fields[FormFields.quantity.name]!.value as String;
+    final quantity = double.tryParse(quantityStr) ?? 0;
+
+    if (quantityStr.trim().isEmpty || quantity <= 0) {
+      WidgetUtils.showSnackBar(context, S.current.quantityErrorMessage);
+      return;
+    } else {
+      context.read<MealScanViewModel>().updateIngredients(widget.index);
+      context.read<MealScanViewModel>().clearCurrentSelectedIngredient();
+      context.router.maybePop();
+    }
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -358,14 +372,7 @@ extension _WidgetFactories on _IngredientDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(
-        label: S.current.saveLabel,
-        onPressed: () {
-          context.read<MealScanViewModel>().updateIngredients(widget.index);
-          context.read<MealScanViewModel>().clearCurrentSelectedIngredient();
-          context.router.maybePop();
-        },
-      ),
+      child: AppDefaultButton(label: S.current.saveLabel, onPressed: _onSaveIngredient),
     );
   }
 }

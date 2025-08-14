@@ -182,8 +182,20 @@ extension _Actions on _FoodDetailsPageState {
   }
 
   Future<void> _onLogFoodPressed() async {
-    final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
-    tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
+    final quantityStr = _formKey.currentState!.fields[FormFields.quantity.name]!.value as String;
+    final quantity = double.tryParse(quantityStr) ?? 0;
+
+    if (quantityStr.trim().isEmpty || quantity <= 0) {
+      WidgetUtils.showSnackBar(context, S.current.quantityErrorMessage);
+      return;
+    } else {
+      final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
+      final response = await tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
+
+      if (response == true && mounted) {
+        context.router.maybePop();
+      }
+    }
   }
 }
 

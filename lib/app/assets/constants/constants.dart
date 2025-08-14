@@ -299,7 +299,7 @@ enum Nutrition {
       case phosphorus:
         return S.current.phosphorusLabel;
       case potassium:
-        return 'Potassiummmm';
+        return S.current.potassiumLabel;
       case sodium:
         return S.current.sodiumLabel;
       case zinc:

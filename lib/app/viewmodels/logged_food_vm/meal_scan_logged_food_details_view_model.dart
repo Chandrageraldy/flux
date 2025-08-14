@@ -188,4 +188,12 @@ class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
     checkError(response);
     return response.status == ResponseStatus.COMPLETE;
   }
+
+  Future<bool> deleteLoggedFood() async {
+    final response = await foodRepository.deleteLoggedFood(
+      loggedFood: unmodifiedMealScanResult,
+    );
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
+  }
 }

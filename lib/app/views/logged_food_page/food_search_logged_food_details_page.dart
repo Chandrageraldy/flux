@@ -101,19 +101,36 @@ extension _Actions on _FoodSearchLoggedFoodDetailsPageState {
   }
 
   Future<void> _onEditFoodPressed() async {
+    final quantityStr = _formKey.currentState!.fields[FormFields.quantity.name]!.value as String;
+    final quantity = double.tryParse(quantityStr) ?? 0;
+
+    if (quantityStr.trim().isEmpty || quantity <= 0) {
+      WidgetUtils.showSnackBar(context, S.current.quantityErrorMessage);
+      return;
+    } else {
+      final response = await tryLoad(
+        context,
+        () => context.read<FoodSearchLoggedFoodDetailsViewModel>().editLoggedFood(),
+      );
+
+      if (response == true && mounted) {
+        context.router.maybePop(true);
+      } else if (response == null && mounted) {
+        context.router.maybePop();
+      }
+    }
+  }
+
+  Future<void> _onDeleteFoodPressed() async {
     final response = await tryLoad(
       context,
-      () => context.read<FoodSearchLoggedFoodDetailsViewModel>().editLoggedFood(),
+      () => context.read<FoodSearchLoggedFoodDetailsViewModel>().deleteLoggedFood(),
     );
 
     if (response == true && mounted) {
       context.router.maybePop(true);
-    } else if (response == null && mounted) {
-      context.router.maybePop();
     }
   }
-
-  Future<void> _onDeleteFoodPressed() async {}
 }
 
 // * ------------------------ PrivateMethods -------------------------

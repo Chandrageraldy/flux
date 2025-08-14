@@ -361,4 +361,9 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> deleteLoggedFood({required LoggedFoodModel loggedFood}) async {
+    final response = await foodServiceSupabase.deleteLoggedFood(loggedFood: loggedFood);
+    return response;
+  }
 }

@@ -192,4 +192,12 @@ class FoodServiceSupabase extends SupabaseBaseService {
       filters: {TableCol.id: loggedFood.id},
     );
   }
+
+  Future<Response> deleteLoggedFood({required LoggedFoodModel loggedFood}) async {
+    return callSupabaseDB(
+      requestType: RequestType.DELETE,
+      table: TableName.loggedFood,
+      filters: {TableCol.id: loggedFood.id},
+    );
+  }
 }

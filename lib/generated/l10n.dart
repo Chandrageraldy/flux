@@ -2319,6 +2319,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Dismiss`
+  String get dismissLabel {
+    return Intl.message(
+      'Dismiss',
+      name: 'dismissLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity must be greater than zero.`
+  String get quantityErrorMessage {
+    return Intl.message(
+      'Quantity must be greater than zero.',
+      name: 'quantityErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

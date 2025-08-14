@@ -56,26 +56,22 @@ class MealDiaryCard extends StatelessWidget {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on MealDiaryCard {
   void _onHeaderTap(BuildContext context) {
-    context.router.push(MealDetailsRoute(mealType: mealType, selectedDate: selectedDate));
+    context.router.push(MealDetailsRoute(mealType: mealType, selectedDate: selectedDate)).then((result) {
+      if (result == true) {
+        getLoggedFoods();
+      }
+    });
   }
 
   void _onLoggedFoodTap(LoggedFoodModel loggedFood, BuildContext context) {
     if (loggedFood.source == LogSource.foodSearch.value) {
-      context.router
-          .push(
-        FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood),
-      )
-          .then((result) {
+      context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood)).then((result) {
         if (result == true) {
           getLoggedFoods();
         }
       });
     } else {
-      context.router
-          .push(
-        MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood),
-      )
-          .then((result) {
+      context.router.push(MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood)).then((result) {
         if (result == true) {
           getLoggedFoods();
         }
