@@ -44,7 +44,8 @@ class _FoodSearchLoggedFoodDetailsPageState extends BaseStatefulState<_FoodSearc
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary);
+  PreferredSizeWidget? appbar() =>
+      DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary, actionButton: getDeleteContainer());
 
   @override
   bool hasDefaultPadding() => false;
@@ -103,6 +104,8 @@ extension _Actions on _FoodSearchLoggedFoodDetailsPageState {
     // final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
     // tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
   }
+
+  Future<void> _onDeleteFoodPressed() async {}
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -110,6 +113,18 @@ extension _PrivateMethods on _FoodSearchLoggedFoodDetailsPageState {}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _FoodSearchLoggedFoodDetailsPageState {
+  // Save Container
+  Widget getDeleteContainer() {
+    return GestureDetector(
+      onTap: _onDeleteFoodPressed,
+      child: Container(
+        padding: AppStyles.kPadd8,
+        decoration: _Styles.getDeleteContainerDecoration(context),
+        child: Icon(Icons.delete, color: AppColors.redColor),
+      ),
+    );
+  }
+
   // Header Container
   Widget getHeaderContainer(LoggedFoodModel foodDetails) {
     return Container(
@@ -398,6 +413,14 @@ extension _WidgetFactories on _FoodSearchLoggedFoodDetailsPageState {
 
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
+  // Delete Container Decoration
+  static BoxDecoration getDeleteContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.tertiaryFixedDim,
+      borderRadius: AppStyles.kRad10,
+    );
+  }
+
   // Header Container Decoration
   static BoxDecoration getHeaderContainerDecoration(BuildContext context) {
     return BoxDecoration(

@@ -6,6 +6,7 @@ import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/viewmodels/logged_food_vm/meal_scan_logged_food_details_view_model.dart';
 import 'package:flux/app/widgets/food/ingredient_card.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
+import 'package:flux/app/widgets/skeleton/skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image/image.dart' as img; // <-- for cropping
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
@@ -89,6 +90,8 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
     //       ),
     // );
   }
+
+  Future<void> _onDeleteFoodPressed() async {}
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -164,7 +167,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
   // Image
   Widget getImage() {
     if (isProcessing) {
-      return const Center(child: CircularProgressIndicator());
+      return Skeleton(height: AppStyles.kDoubleInfinity);
     } else {
       return Align(
         alignment: Alignment.topCenter,
@@ -186,8 +189,8 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
             GestureDetector(
               onTap: () => context.router.maybePop(),
               child: Container(
-                padding: AppStyles.kPadd6,
-                decoration: _Styles.getBackButtonDecoration(context),
+                padding: AppStyles.kPadd8,
+                decoration: _Styles.getTopBarButtonDecoration(context),
                 child: FaIcon(
                   FontAwesomeIcons.arrowLeft,
                   color: context.theme.colorScheme.onTertiary,
@@ -197,6 +200,19 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
             ),
             Spacer(),
             getMealFormBuilderDropDown(),
+            AppStyles.kSizedBoxW8,
+            GestureDetector(
+              onTap: _onDeleteFoodPressed,
+              child: Container(
+                padding: AppStyles.kPadd8,
+                decoration: _Styles.getTopBarButtonDecoration(context),
+                child: FaIcon(
+                  FontAwesomeIcons.trash,
+                  color: AppColors.redColor,
+                  size: AppStyles.kSize16,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -502,7 +518,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
   // Back Button Container Decoration
-  static BoxDecoration getBackButtonDecoration(BuildContext context) {
+  static BoxDecoration getTopBarButtonDecoration(BuildContext context) {
     return BoxDecoration(color: context.theme.colorScheme.tertiary.withAlpha(150), shape: BoxShape.circle);
   }
 

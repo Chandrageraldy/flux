@@ -186,7 +186,7 @@ extension _WidgetFactories on _MealScanResultPageState {
             GestureDetector(
               onTap: () => context.router.maybePop(),
               child: Container(
-                padding: AppStyles.kPadd6,
+                padding: AppStyles.kPadd8,
                 decoration: _Styles.getBackButtonDecoration(context),
                 child: FaIcon(
                   FontAwesomeIcons.arrowLeft,
