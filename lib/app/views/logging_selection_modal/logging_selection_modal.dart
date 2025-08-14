@@ -22,12 +22,14 @@ class _LoggingSelectionModalState extends BaseStatefulState<LoggingSelectionModa
 
   @override
   Widget body() {
-    return Padding(
-      padding: AppStyles.kPaddSV15,
-      child: Row(
-        spacing: AppStyles.kSpac16,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [...getLoggingSelectionButtonList()],
+    return SizedBox(
+      width: AppStyles.kDoubleInfinity,
+      child: Padding(
+        padding: AppStyles.kPaddSV16H12,
+        child: Column(
+          spacing: AppStyles.kSpac20,
+          children: [...getLoggingSelectionButtonList()],
+        ),
       ),
     );
   }
@@ -39,9 +41,13 @@ extension _Actions on _LoggingSelectionModalState {
     context.router.replaceAll([FoodSearchRoute()]);
   }
 
-  void _onMealScanIPressed() {}
+  void _onMealScanIPressed() {
+    context.router.push(BarcodeScanRoute());
+  }
 
-  void _onBarcodeScanPressed() {}
+  void _onBarcodeScanPressed() {
+    context.router.push(MealScanRoute());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -51,37 +57,22 @@ extension _WidgetFactories on _LoggingSelectionModalState {
     return [
       // Log Food
       LoggingSelectionButton(
-        icon: FaIcon(
-          FontAwesomeIcons.appleWhole,
-          color: context.theme.colorScheme.primary,
-          size: AppStyles.kSize16,
-        ),
+        icon: FaIcon(FontAwesomeIcons.appleWhole, color: MacroNutrients.protein.color, size: AppStyles.kSize16),
         label: S.current.loggingSelectionButtonTitle1,
         onPressed: _onLogFoodPressed,
       ),
       // Barcode Scan
       LoggingSelectionButton(
-        icon: FaIcon(
-          FontAwesomeIcons.qrcode,
-          color: context.theme.colorScheme.primary,
-          size: AppStyles.kSize16,
-        ),
+        icon: FaIcon(FontAwesomeIcons.qrcode, color: MacroNutrients.carbs.color, size: AppStyles.kSize16),
         label: S.current.loggingSelectionButtonTitle3,
         onPressed: _onBarcodeScanPressed,
       ),
       // Meal Scan
       LoggingSelectionButton(
-        icon: FaIcon(
-          FontAwesomeIcons.cameraRetro,
-          color: context.theme.colorScheme.primary,
-          size: AppStyles.kSize16,
-        ),
+        icon: FaIcon(FontAwesomeIcons.cameraRetro, color: MacroNutrients.fat.color, size: AppStyles.kSize16),
         label: S.current.loggingSelectionButtonTitle2,
         onPressed: _onMealScanIPressed,
       ),
     ];
   }
 }
-
-// * ----------------------------- Styles -----------------------------
-// abstract class _Styles {}
