@@ -1,10 +1,15 @@
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
-  LoggedFoodModel mealScanResult = LoggedFoodModel();
+  FoodRepository foodRepository = FoodRepository();
+
+  LoggedFoodModel modifiedMealScanResult = LoggedFoodModel();
+  LoggedFoodModel unmodifiedMealScanResult = LoggedFoodModel();
 
   AltMeasureModel? selectedAltMeasure;
 
@@ -16,22 +21,59 @@ class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
   }
 
   void init({required LoggedFoodModel loggedFood}) {
-    mealScanResult = loggedFood;
+    modifiedMealScanResult = loggedFood;
+    unmodifiedMealScanResult = loggedFood;
   }
 
   void incrementMealQuantity() {
-    final currentQty = mealScanResult.quantity ?? 0;
-    mealScanResult = mealScanResult.copyWith(
-      quantity: currentQty + 0.5,
-    );
+    final currentQty = modifiedMealScanResult.quantity ?? 0;
+    final newQty = currentQty + 0.5;
 
-    notifyListeners();
+    updateMealQuantitiesAndNutrients(newQty);
   }
 
   void decrementMealQuantity() {
-    final currentQty = mealScanResult.quantity ?? 0;
-    mealScanResult = mealScanResult.copyWith(
-      quantity: (currentQty - 0.5).clamp(0, double.infinity),
+    final currentQty = modifiedMealScanResult.quantity ?? 0.5;
+    final newQty = (currentQty - 0.5).clamp(0.5, double.infinity).toDouble();
+
+    updateMealQuantitiesAndNutrients(newQty);
+  }
+
+  void updateMealQuantitiesAndNutrients(double newQty) {
+    final oldQty = modifiedMealScanResult.quantity ?? 1;
+
+    final ratio = newQty / oldQty;
+
+    final updatedIngredients = List<IngredientModel>.from(modifiedMealScanResult.ingredients!);
+
+    double roundDouble(double value) {
+      final fixed = value.toStringAsFixed(2);
+      if (fixed.endsWith('0')) {
+        return double.parse(value.toStringAsFixed(1));
+      }
+      return double.parse(fixed);
+    }
+
+    // Iterate through each ingredient and update its nutrients
+    for (int i = 0; i < updatedIngredients.length; i++) {
+      final ingredient = updatedIngredients[i];
+
+      final updatedFullNutrients = ingredient.fullNutrients?.map((nutrient) {
+        return nutrient.copyWith(value: roundDouble(nutrient.value! * ratio));
+      }).toList();
+
+      updatedIngredients[i] = ingredient.copyWith(
+        calorie: roundDouble((ingredient.calorie ?? 0) * ratio),
+        fat: roundDouble((ingredient.fat ?? 0) * ratio),
+        carbs: roundDouble((ingredient.carbs ?? 0) * ratio),
+        protein: roundDouble((ingredient.protein ?? 0) * ratio),
+        fullNutrients: updatedFullNutrients,
+      );
+    }
+
+    modifiedMealScanResult = modifiedMealScanResult.copyWith(
+      quantity: newQty,
+      ingredients: updatedIngredients,
     );
 
     notifyListeners();
@@ -113,26 +155,37 @@ class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
 
   void deleteIngredient(int index) {
     // Clone list
-    final updatedList = List<IngredientModel>.from(mealScanResult.ingredients!);
+    final updatedList = List<IngredientModel>.from(modifiedMealScanResult.ingredients!);
     // Remove the ingredient based on index in the cloned list
     updatedList.removeAt(index);
     // Update meal scan result with the updated list
-    mealScanResult = mealScanResult.copyWith(ingredients: updatedList);
+    modifiedMealScanResult = modifiedMealScanResult.copyWith(ingredients: updatedList);
     notifyListeners();
   }
 
   void updateIngredients(int index) {
     // Clone list
-    final updatedList = List<IngredientModel>.from(mealScanResult.ingredients!);
+    final updatedList = List<IngredientModel>.from(modifiedMealScanResult.ingredients!);
     // Replace the ingredient based on index in the cloned list
     updatedList[index] = currentSelectedModifiedIngredient.copyWith();
     // Update meal scan result with the updated list
-    mealScanResult = mealScanResult.copyWith(ingredients: updatedList);
+    modifiedMealScanResult = modifiedMealScanResult.copyWith(ingredients: updatedList);
     notifyListeners();
   }
 
   void updateMealType({required String mealType}) {
-    mealScanResult = mealScanResult.copyWith(mealType: mealType);
+    modifiedMealScanResult = modifiedMealScanResult.copyWith(mealType: mealType);
     notifyListeners();
+  }
+
+  Future<bool?> editLoggedFood({required Map<String, double> nutritionTotals}) async {
+    if (unmodifiedMealScanResult == modifiedMealScanResult) return null;
+
+    final response = await foodRepository.editLoggedFood(
+      loggedFood: modifiedMealScanResult,
+      nutritionTotals: nutritionTotals,
+    );
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
   }
 }

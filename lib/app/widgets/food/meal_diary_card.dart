@@ -6,11 +6,18 @@ import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MealDiaryCard extends StatelessWidget {
-  const MealDiaryCard({super.key, required this.mealType, required this.meals, required this.selectedDate});
+  const MealDiaryCard({
+    super.key,
+    required this.mealType,
+    required this.meals,
+    required this.selectedDate,
+    required this.getLoggedFoods,
+  });
 
   final MealType mealType;
   final List<LoggedFoodModel> meals;
   final DateTime selectedDate;
+  final VoidCallback getLoggedFoods;
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +61,25 @@ extension _Actions on MealDiaryCard {
 
   void _onLoggedFoodTap(LoggedFoodModel loggedFood, BuildContext context) {
     if (loggedFood.source == LogSource.foodSearch.value) {
-      context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood));
+      context.router
+          .push(
+        FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood),
+      )
+          .then((result) {
+        if (result == true) {
+          getLoggedFoods();
+        }
+      });
     } else {
-      context.router.push(
+      context.router
+          .push(
         MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood),
-      );
+      )
+          .then((result) {
+        if (result == true) {
+          getLoggedFoods();
+        }
+      });
     }
   }
 }

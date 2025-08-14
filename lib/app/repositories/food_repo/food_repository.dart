@@ -346,4 +346,19 @@ class FoodRepository {
 
     return response;
   }
+
+  Future<Response> editLoggedFood({required LoggedFoodModel loggedFood, Map<String, double>? nutritionTotals}) async {
+    if (nutritionTotals != null) {
+      loggedFood = loggedFood.copyWith(
+        calorieKcal: nutritionTotals[Nutrition.calorie.key],
+        fatG: nutritionTotals[Nutrition.fat.key],
+        carbsG: nutritionTotals[Nutrition.carbs.key],
+        proteinG: nutritionTotals[Nutrition.protein.key],
+      );
+    }
+
+    final response = await foodServiceSupabase.editLoggedFood(loggedFood: loggedFood);
+
+    return response;
+  }
 }

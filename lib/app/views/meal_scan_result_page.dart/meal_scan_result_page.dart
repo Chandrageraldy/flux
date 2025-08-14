@@ -295,7 +295,7 @@ extension _WidgetFactories on _MealScanResultPageState {
     );
   }
 
-  // Number Stepper
+// Number Stepper
   Widget getNumberStepper({required double? quantity}) {
     return Container(
       decoration: _Styles.getNumberStepperContainerDecoration(context),
@@ -303,9 +303,21 @@ extension _WidgetFactories on _MealScanResultPageState {
       child: Row(
         spacing: AppStyles.kSpac24,
         children: [
-          GestureDetector(onTap: _decrementStepper, child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12)),
+          GestureDetector(
+            onTap: _decrementStepper,
+            child: Padding(
+              padding: AppStyles.kPadd3,
+              child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12),
+            ),
+          ),
           Text(quantity?.toStringAsFixed(1) ?? '0', style: _Styles.getNumberStepperLabelTextStyle(context)),
-          GestureDetector(onTap: _incrementStepper, child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12)),
+          GestureDetector(
+            onTap: _incrementStepper,
+            child: Padding(
+              padding: AppStyles.kPadd3,
+              child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12),
+            ),
+          ),
         ],
       ),
     );

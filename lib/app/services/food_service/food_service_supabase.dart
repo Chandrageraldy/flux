@@ -183,4 +183,13 @@ class FoodServiceSupabase extends SupabaseBaseService {
       },
     );
   }
+
+  Future<Response> editLoggedFood({required LoggedFoodModel loggedFood}) async {
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.loggedFood,
+      requestBody: loggedFood.toJson(),
+      filters: {TableCol.id: loggedFood.id},
+    );
+  }
 }

@@ -101,8 +101,16 @@ extension _Actions on _FoodSearchLoggedFoodDetailsPageState {
   }
 
   Future<void> _onEditFoodPressed() async {
-    // final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
-    // tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
+    final response = await tryLoad(
+      context,
+      () => context.read<FoodSearchLoggedFoodDetailsViewModel>().editLoggedFood(),
+    );
+
+    if (response == true && mounted) {
+      context.router.maybePop(true);
+    } else if (response == null && mounted) {
+      context.router.maybePop();
+    }
   }
 
   Future<void> _onDeleteFoodPressed() async {}

@@ -79,16 +79,14 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
   }
 
   Future<void> _onEditFoodPressed({required Map<String, double> nutritionTotals}) async {
-    // final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
-    // File imageFile = File(widget.imageFile.path);
-    // tryLoad(
-    //   context,
-    //   () => context.read<MealScanViewModel>().logFood(
-    //         mealType: mealType,
-    //         nutritionTotals: nutritionTotals,
-    //         imageFile: imageFile,
-    //       ),
-    // );
+    final response = await tryLoad(context,
+        () => context.read<MealScanLoggedFoodDetailsViewModel>().editLoggedFood(nutritionTotals: nutritionTotals));
+
+    if (response == true && mounted) {
+      context.router.maybePop(true);
+    } else if (response == null && mounted) {
+      context.router.maybePop();
+    }
   }
 
   Future<void> _onDeleteFoodPressed() async {}
@@ -98,7 +96,7 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
 extension _PrivateMethods on _MealScanLoggedFoodDetailsPageState {
   // Crops the center of the image
   Future<void> _cropImageToSquare() async {
-    final loggedFood = context.read<MealScanLoggedFoodDetailsViewModel>().mealScanResult;
+    final loggedFood = context.read<MealScanLoggedFoodDetailsViewModel>().modifiedMealScanResult;
 
     final uri = Uri.parse(loggedFood.imageUrl!);
     final httpClient = HttpClient();
@@ -223,7 +221,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
   Widget getMealFormBuilderDropDown() {
     final mealTypes = [MealType.breakfast.value, MealType.lunch.value, MealType.dinner.value, MealType.snack.value];
 
-    final loggedFood = context.read<MealScanLoggedFoodDetailsViewModel>().mealScanResult;
+    final loggedFood = context.read<MealScanLoggedFoodDetailsViewModel>().modifiedMealScanResult;
 
     return Container(
       padding: AppStyles.kPaddSH6,
@@ -244,7 +242,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
 
   // Scrollable Sheet
   Widget getScrollableSheet() {
-    final loggedFood = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.mealScanResult);
+    final loggedFood = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.modifiedMealScanResult);
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -314,7 +312,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
     );
   }
 
-  // Number Stepper
+// Number Stepper
   Widget getNumberStepper({required double? quantity}) {
     return Container(
       decoration: _Styles.getNumberStepperContainerDecoration(context),
@@ -322,9 +320,21 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
       child: Row(
         spacing: AppStyles.kSpac24,
         children: [
-          GestureDetector(onTap: _decrementStepper, child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12)),
+          GestureDetector(
+            onTap: _decrementStepper,
+            child: Padding(
+              padding: AppStyles.kPadd3,
+              child: FaIcon(FontAwesomeIcons.minus, size: AppStyles.kSize12),
+            ),
+          ),
           Text(quantity?.toStringAsFixed(1) ?? '0', style: _Styles.getNumberStepperLabelTextStyle(context)),
-          GestureDetector(onTap: _incrementStepper, child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12)),
+          GestureDetector(
+            onTap: _incrementStepper,
+            child: Padding(
+              padding: AppStyles.kPadd3,
+              child: FaIcon(FontAwesomeIcons.plus, size: AppStyles.kSize12),
+            ),
+          ),
         ],
       ),
     );
@@ -452,7 +462,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
 
   // Action Button Row
   Widget getActionButtonRow() {
-    final mealScanResult = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.mealScanResult);
+    final mealScanResult = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.modifiedMealScanResult);
 
     final quantity = mealScanResult.quantity;
     final ingredients = mealScanResult.ingredients;

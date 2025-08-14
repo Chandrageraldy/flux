@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
@@ -13,6 +13,6 @@ class DiaryViewModel extends BaseViewModel {
     checkError(response);
     loggedFoodsList = response.data as List<LoggedFoodModel>;
     notifyListeners();
-    log(loggedFoodsList.toString());
+    // log(loggedFoodsList.toString());
   }
 }

@@ -125,17 +125,53 @@ class MealScanViewModel extends BaseViewModel {
 
   void incrementMealQuantity() {
     final currentQty = mealScanResult.quantity ?? 0;
-    mealScanResult = mealScanResult.copyWith(
-      quantity: currentQty + 0.5,
-    );
+    final newQty = currentQty + 0.5;
 
-    notifyListeners();
+    updateMealQuantitiesAndNutrients(newQty);
   }
 
   void decrementMealQuantity() {
-    final currentQty = mealScanResult.quantity ?? 0;
+    final currentQty = mealScanResult.quantity ?? 0.5;
+    final newQty = (currentQty - 0.5).clamp(0.5, double.infinity).toDouble();
+
+    updateMealQuantitiesAndNutrients(newQty);
+  }
+
+  void updateMealQuantitiesAndNutrients(double newQty) {
+    final oldQty = mealScanResult.quantity ?? 1;
+
+    final ratio = newQty / oldQty;
+
+    final updatedIngredients = List<IngredientModel>.from(mealScanResult.ingredients!);
+
+    double roundDouble(double value) {
+      final fixed = value.toStringAsFixed(2);
+      if (fixed.endsWith('0')) {
+        return double.parse(value.toStringAsFixed(1));
+      }
+      return double.parse(fixed);
+    }
+
+    // Iterate through each ingredient and update its nutrients
+    for (int i = 0; i < updatedIngredients.length; i++) {
+      final ingredient = updatedIngredients[i];
+
+      final updatedFullNutrients = ingredient.fullNutrients?.map((nutrient) {
+        return nutrient.copyWith(value: roundDouble(nutrient.value! * ratio));
+      }).toList();
+
+      updatedIngredients[i] = ingredient.copyWith(
+        calorie: roundDouble((ingredient.calorie ?? 0) * ratio),
+        fat: roundDouble((ingredient.fat ?? 0) * ratio),
+        carbs: roundDouble((ingredient.carbs ?? 0) * ratio),
+        protein: roundDouble((ingredient.protein ?? 0) * ratio),
+        fullNutrients: updatedFullNutrients,
+      );
+    }
+
     mealScanResult = mealScanResult.copyWith(
-      quantity: (currentQty - 0.5).clamp(0, double.infinity),
+      quantity: newQty,
+      ingredients: updatedIngredients,
     );
 
     notifyListeners();

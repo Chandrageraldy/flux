@@ -114,6 +114,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
                         mealType: type,
                         meals: meals,
                         selectedDate: _selectedDate,
+                        getLoggedFoods: _getLoggedFoods,
                       );
                     },
                   ),

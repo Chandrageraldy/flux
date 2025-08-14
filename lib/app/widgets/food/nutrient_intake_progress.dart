@@ -22,7 +22,7 @@ class NutrientIntakeProgress extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [getMacroNutrientLabel(context), getMacroNutrientValueLabel(context)],
+          children: [Expanded(child: getMacroNutrientLabel(context)), getMacroNutrientValueLabel(context)],
         ),
         getLinearProgressIndicator(context),
       ],
@@ -47,18 +47,19 @@ extension _WidgetFactories on NutrientIntakeProgress {
     );
   }
 
-  // Macro Nutrient Label
   Widget getMacroNutrientLabel(BuildContext context) {
     return Text(
       nutrition.label,
       style: _Styles.getMacroNutrientLabelTextStyle(context),
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
     );
   }
 
   // Macro Nutrient Value Label
   Widget getMacroNutrientValueLabel(BuildContext context) {
     return Text(
-      '$currentValue/$targetValue ${NutritionUnit.g.label}',
+      '$currentValue/$targetValue ${nutrition.unit}',
       style: _Styles.getValueLabelTextStyle(context),
     );
   }
