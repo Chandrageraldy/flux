@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/widgets/food/meal_food_display_card.dart';
 import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -63,38 +64,13 @@ extension _Actions on MealDiaryCard {
 }
 
 // * ------------------------ PrivateMethods -------------------------
-extension _PrivateMethods on MealDiaryCard {
-  Map<String, double> _calculateTotalNutrition(List<LoggedFoodModel>? meals) {
-    double totalCalories = 0;
-    double totalProtein = 0;
-    double totalCarbs = 0;
-    double totalFat = 0;
-
-    if (meals != null) {
-      for (final meal in meals) {
-        totalCalories += meal.calorieKcal ?? 0;
-        totalProtein += meal.proteinG ?? 0;
-        totalCarbs += meal.carbsG ?? 0;
-        totalFat += meal.fatG ?? 0;
-      }
-    }
-
-    double round2(double val) => double.parse(val.toStringAsFixed(2));
-
-    return {
-      Nutrition.calorie.key: round2(totalCalories),
-      Nutrition.protein.key: round2(totalProtein),
-      Nutrition.carbs.key: round2(totalCarbs),
-      Nutrition.fat.key: round2(totalFat),
-    };
-  }
-}
+extension _PrivateMethods on MealDiaryCard {}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on MealDiaryCard {
   // Header Container
   Widget getHeaderContainer(BuildContext context) {
-    final totalNutrition = _calculateTotalNutrition(meals);
+    final totalNutrition = FunctionUtils.calculateTotalNutrition(meals);
     return Container(
       padding: AppStyles.kPaddOL16R16T16,
       child: Row(
@@ -133,22 +109,22 @@ extension _WidgetFactories on MealDiaryCard {
   }
 
   // Calorie Tag
-  Widget getCalorieTag(BuildContext context, double value) {
+  Widget getCalorieTag(BuildContext context, int value) {
     return NutritionTag(label: '$value', icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10));
   }
 
   // Protein Tag
-  Widget getProteinTag(BuildContext context, double value) {
+  Widget getProteinTag(BuildContext context, int value) {
     return NutritionTag(label: '$value', tag: MacroNutrients.protein.tag);
   }
 
   // Carbs Tag
-  Widget getCarbsTag(BuildContext context, double value) {
+  Widget getCarbsTag(BuildContext context, int value) {
     return NutritionTag(label: '$value', tag: MacroNutrients.carbs.tag);
   }
 
   // Fat Tag
-  Widget getFatTag(BuildContext context, double value) {
+  Widget getFatTag(BuildContext context, int value) {
     return NutritionTag(label: '$value', tag: MacroNutrients.fat.tag);
   }
 }

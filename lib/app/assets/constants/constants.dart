@@ -336,6 +336,99 @@ enum Nutrition {
         return S.current.folateLabel;
     }
   }
+
+  int get attrId {
+    switch (this) {
+      case calorie:
+        return 208;
+      case protein:
+        return 203;
+      case fat:
+        return 204;
+      case carbs:
+        return 205;
+      case calcium:
+        return 301;
+      case iron:
+        return 303;
+      case magnesium:
+        return 304;
+      case phosphorus:
+        return 305;
+      case potassium:
+        return 306;
+      case sodium:
+        return 307;
+      case zinc:
+        return 309;
+      case copper:
+        return 312;
+      case manganese:
+        return 315;
+      case selenium:
+        return 317;
+      case vitaminA:
+        return 318;
+      case vitaminE:
+        return 323;
+      case vitaminD:
+        return 324;
+      case vitaminC:
+        return 401;
+      case thiamin:
+        return 404;
+      case riboflavin:
+        return 405;
+      case niacin:
+        return 406;
+      case vitaminB6:
+        return 415;
+      case vitaminB12:
+        return 418;
+      case choline:
+        return 421;
+      case vitaminK:
+        return 430;
+      case folate:
+        return 417;
+    }
+  }
+
+  String get unit {
+    switch (this) {
+      case calorie:
+        return NutritionUnit.kcal.label;
+      case protein:
+      case fat:
+      case carbs:
+      case vitaminE:
+      case vitaminC:
+      case thiamin:
+      case riboflavin:
+      case niacin:
+      case vitaminB6:
+        return NutritionUnit.g.label;
+      case calcium:
+      case iron:
+      case magnesium:
+      case phosphorus:
+      case potassium:
+      case sodium:
+      case zinc:
+      case copper:
+      case manganese:
+      case choline:
+        return NutritionUnit.mg.label;
+      case selenium:
+      case vitaminB12:
+      case vitaminK:
+      case folate:
+        return NutritionUnit.ug.label;
+      case vitaminA:
+      case vitaminD:
+        return NutritionUnit.IU.label;
+    }
+  }
 }
 
 enum Unit {

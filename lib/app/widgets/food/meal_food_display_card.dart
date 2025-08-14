@@ -37,11 +37,11 @@ class MealFoodDisplayCard extends StatelessWidget {
                         style: Quicksand.medium.withSize(FontSizes.extraSmall),
                       ),
                     NutritionTag(
-                        label: meal.calorieKcal.toString(),
+                        label: meal.calorieKcal?.toStringAsFixed(0) ?? '',
                         icon: FaIcon(FontAwesomeIcons.fire, size: AppStyles.kSize10)),
-                    NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG.toString()),
-                    NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG.toString()),
-                    NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG.toString()),
+                    NutritionTag(tag: MacroNutrients.protein.tag, label: meal.proteinG?.toStringAsFixed(0) ?? ''),
+                    NutritionTag(tag: MacroNutrients.carbs.tag, label: meal.carbsG?.toStringAsFixed(0) ?? ''),
+                    NutritionTag(tag: MacroNutrients.fat.tag, label: meal.fatG?.toStringAsFixed(0) ?? ''),
                   ],
                 ),
               ],
@@ -61,6 +61,6 @@ extension _WidgetFactories on MealFoodDisplayCard {}
 abstract class _Styles {
   // Label Text Style
   static TextStyle labelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small);
+    return Quicksand.semiBold.withSize(FontSizes.small);
   }
 }

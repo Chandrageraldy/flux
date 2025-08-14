@@ -235,5 +235,7 @@
     "editFoodLabel": "Edit Food",
     "surplusLabel": "Surplus",
     "noMealsLoggedLabel": "No Meals Logged",
-    "noMealsLoggedDesc": "You have not logged any meals yet. Start tracking your meals by pressing the + button."
+    "noMealsLoggedDesc": "You have not logged any meals yet. Start tracking your meals by pressing the + button.",
+    "highlightedMicroLabel": "Highlighted Micro",
+    "fullReportLabel": "Full Report"
 }

@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "frequentDesc": MessageLookupByLibrary.simpleMessage(
             "I work out almost every day."),
         "frequentLabel": MessageLookupByLibrary.simpleMessage("5+ times/week"),
+        "fullReportLabel": MessageLookupByLibrary.simpleMessage("Full Report"),
         "genderDesc": MessageLookupByLibrary.simpleMessage(
             "Used to personalize your health and calorie estimates."),
         "genderLabel": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -111,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Helps calculate your body mass index (BMI)."),
         "heightLabel": MessageLookupByLibrary.simpleMessage("Height"),
         "hiLabel": MessageLookupByLibrary.simpleMessage("Hi"),
+        "highlightedMicroLabel":
+            MessageLookupByLibrary.simpleMessage("Highlighted Micro"),
         "ingredientsLabel": MessageLookupByLibrary.simpleMessage("Ingredients"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),

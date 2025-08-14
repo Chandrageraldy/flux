@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
@@ -419,6 +420,57 @@ class FunctionUtils {
       NutritionGoalsSettings.proteinRatio.key: proteinRatio * 100,
       NutritionGoalsSettings.fatRatio.key: fatRatio * 100,
       NutritionGoalsSettings.carbsRatio.key: carbsRatio * 100,
+    };
+  }
+
+  static Map<int, double> calculateTotalFullNutrients(List<LoggedFoodModel> loggedFoods) {
+    final Map<int, double> totals = {};
+
+    for (final loggedFood in loggedFoods) {
+      if (loggedFood.fullNutrients != null) {
+        for (final nutrient in loggedFood.fullNutrients!) {
+          if (nutrient.attrId != null) {
+            totals[nutrient.attrId!] = (totals[nutrient.attrId!] ?? 0) + (nutrient.value ?? 0);
+          }
+        }
+      }
+
+      if (loggedFood.ingredients != null) {
+        for (final ingredient in loggedFood.ingredients!) {
+          if (ingredient.fullNutrients != null) {
+            for (final nutrient in ingredient.fullNutrients!) {
+              if (nutrient.attrId != null) {
+                totals[nutrient.attrId!] = (totals[nutrient.attrId!] ?? 0) + (nutrient.value ?? 0);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return totals;
+  }
+
+  static Map<String, int> calculateTotalNutrition(List<LoggedFoodModel>? meals) {
+    int totalCalories = 0;
+    int totalProtein = 0;
+    int totalCarbs = 0;
+    int totalFat = 0;
+
+    if (meals != null) {
+      for (final meal in meals) {
+        totalCalories += (meal.calorieKcal ?? 0).round();
+        totalProtein += (meal.proteinG ?? 0).round();
+        totalCarbs += (meal.carbsG ?? 0).round();
+        totalFat += (meal.fatG ?? 0).round();
+      }
+    }
+
+    return {
+      Nutrition.calorie.key: totalCalories,
+      Nutrition.protein.key: totalProtein,
+      Nutrition.carbs.key: totalCarbs,
+      Nutrition.fat.key: totalFat,
     };
   }
 }

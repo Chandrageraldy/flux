@@ -1,11 +1,14 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/models/nutrient_progress_model/nutrient_progress_model.dart';
 import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/diary_vm/diary_view_model.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
 import 'package:flux/app/widgets/food/meal_diary_card.dart';
+import 'package:flux/app/widgets/food/nutrient_intake_progress.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
@@ -166,29 +169,6 @@ extension _PrivateMethods on _DiaryPageState {
 
   Future<void> _getLoggedFoods() async {
     await tryLoad(context, () => context.read<DiaryViewModel>().getLoggedFoods(selectedDate: _selectedDate));
-  }
-
-  Map<String, int> _calculateTotalNutrition(List<LoggedFoodModel>? meals) {
-    int totalCalories = 0;
-    int totalProtein = 0;
-    int totalCarbs = 0;
-    int totalFat = 0;
-
-    if (meals != null) {
-      for (final meal in meals) {
-        totalCalories += (meal.calorieKcal ?? 0).round();
-        totalProtein += (meal.proteinG ?? 0).round();
-        totalCarbs += (meal.carbsG ?? 0).round();
-        totalFat += (meal.fatG ?? 0).round();
-      }
-    }
-
-    return {
-      Nutrition.calorie.key: totalCalories,
-      Nutrition.protein.key: totalProtein,
-      Nutrition.carbs.key: totalCarbs,
-      Nutrition.fat.key: totalFat,
-    };
   }
 }
 
@@ -388,21 +368,7 @@ extension _WidgetFactories on _DiaryPageState {
   List<Widget> getPages() {
     return [
       getCalorieAndMacroTargetContainer(),
-      Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Different Content',
-              style: _Styles.getIntakeLabelTextStyle(context),
-            ),
-            Text(
-              'This is the second page of information!',
-              style: _Styles.getGoalLabelTextStyle(context),
-            ),
-          ],
-        ),
-      ),
+      getHighlightedNutrientsTargetContainer(),
     ];
   }
 
@@ -410,7 +376,7 @@ extension _WidgetFactories on _DiaryPageState {
   Widget getCalorieAndMacroTargetContainer() {
     final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
     final loggedFoods = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
-    final totalNutrition = _calculateTotalNutrition(loggedFoods);
+    final totalNutrition = FunctionUtils.calculateTotalNutrition(loggedFoods);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -422,50 +388,103 @@ extension _WidgetFactories on _DiaryPageState {
             children: [
               Row(
                 spacing: AppStyles.kSpac4,
-                children: [
-                  FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12),
-                  getTargetsLabel(),
-                ],
+                children: [FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12), getTargetsLabel()],
               ),
               getEditButton(() {}),
             ],
           ),
         ),
-        AppStyles.kSizedBoxH16,
+        AppStyles.kSizedBoxH8,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: getCalorieGoalColumn(
-                (userPlan?.calorieKcal ?? 0).toInt(),
-                S.current.goalLabel,
-              ),
+              child: getCalorieGoalColumn((userPlan?.calorieKcal ?? 0).toInt(), S.current.goalLabel),
             ),
             getCalorieCircularPercentIndicator(
               (userPlan?.calorieKcal ?? 0).toInt(),
               (totalNutrition[Nutrition.calorie.key] ?? 0).toInt(),
             ),
             Expanded(
-              child: getCalorieLoggedColumn(
-                totalNutrition[Nutrition.calorie.key] ?? 0,
-                S.current.loggedLabel,
-              ),
+              child: getCalorieLoggedColumn(totalNutrition[Nutrition.calorie.key] ?? 0, S.current.loggedLabel),
             ),
           ],
         ),
         AppStyles.kSizedBoxH8,
-        Padding(
-          padding: AppStyles.kPaddSH12,
-          child: getMacroNutrientIntakeProgressRow(totalNutrition, userPlan),
-        ),
+        Padding(padding: AppStyles.kPaddSH12, child: getMacroNutrientIntakeProgressRow(totalNutrition, userPlan)),
       ],
+    );
+  }
+
+  // Highlighted Nutrients Target Container
+  Widget getHighlightedNutrientsTargetContainer() {
+    final loggedFoodsList = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
+    final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
+
+    final highlightedList = [
+      Nutrition.calcium,
+      Nutrition.iron,
+      Nutrition.magnesium,
+      Nutrition.potassium,
+      Nutrition.sodium,
+      Nutrition.zinc,
+      Nutrition.vitaminA,
+      Nutrition.vitaminD,
+      Nutrition.vitaminC,
+      Nutrition.vitaminB12,
+    ];
+
+    final progressList = getNutrientProgressList(
+      loggedFoodsList,
+      userPlan,
+      highlightedList,
+    );
+
+    return Padding(
+      padding: AppStyles.kPaddSH20,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                spacing: AppStyles.kSpac4,
+                children: [FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12), getHighlightedMicroLabel()],
+              ),
+              getFullReportButton(() {}),
+            ],
+          ),
+          AppStyles.kSizedBoxH12,
+          GridView.count(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 4,
+            crossAxisSpacing: AppStyles.kSize8,
+            children: progressList.map((nutrient) {
+              return NutrientIntakeProgress(
+                nutrition: nutrient.nutrition,
+                percentage: (nutrient.currentValue / nutrient.targetValue).clamp(0, 1),
+                currentValue: nutrient.currentValue,
+                targetValue: nutrient.targetValue,
+              );
+            }).toList(),
+          )
+        ],
+      ),
     );
   }
 
   // Targets Label
   Widget getTargetsLabel() {
     return Text(S.current.targetsLabel.toUpperCase(), style: _Styles.getTargetsLabelTextStyle(context));
+  }
+
+  // Highlighted Micro Label
+  Widget getHighlightedMicroLabel() {
+    return Text(S.current.highlightedMicroLabel.toUpperCase(), style: _Styles.getTargetsLabelTextStyle(context));
   }
 
   // Calorie Circular Percent Indicator
@@ -569,6 +588,20 @@ extension _WidgetFactories on _DiaryPageState {
     return GestureDetector(
       onTap: onPressed,
       child: Text(S.current.editLabel.toUpperCase(), style: _Styles.getEditLabelTextStyle(context)),
+    );
+  }
+
+  // Edit Button
+  Widget getFullReportButton(VoidCallback? onPressed) {
+    return Row(
+      spacing: AppStyles.kSpac4,
+      children: [
+        GestureDetector(
+          onTap: onPressed,
+          child: Text(S.current.fullReportLabel.toUpperCase(), style: _Styles.getEditLabelTextStyle(context)),
+        ),
+        FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize12, color: context.theme.colorScheme.secondary),
+      ],
     );
   }
 

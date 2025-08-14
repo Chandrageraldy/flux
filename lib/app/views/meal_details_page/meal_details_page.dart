@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/meal_ratio_model.dart/meal_ratio_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_details_vm/meal_details_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/empty_result/empty_result.dart';
@@ -60,7 +61,8 @@ class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
       padding: AppStyles.kPaddOB70,
       child: Column(
         children: [
-          getHeaderContainer(_getMealRatioModel(widget.mealType), _calculateTotalNutrition(loggedFoodsList)),
+          getHeaderContainer(
+              _getMealRatioModel(widget.mealType), FunctionUtils.calculateTotalNutrition(loggedFoodsList)),
           getLoggedMeals(loggedFoodsList, isLoading),
         ],
       ),
@@ -88,29 +90,6 @@ extension _PrivateMethods on _MealDetailsPageState {
             mealType: widget.mealType.value,
           ),
     );
-  }
-
-  Map<String, int> _calculateTotalNutrition(List<LoggedFoodModel>? meals) {
-    int totalCalories = 0;
-    int totalProtein = 0;
-    int totalCarbs = 0;
-    int totalFat = 0;
-
-    if (meals != null) {
-      for (final meal in meals) {
-        totalCalories += (meal.calorieKcal ?? 0).round();
-        totalProtein += (meal.proteinG ?? 0).round();
-        totalCarbs += (meal.carbsG ?? 0).round();
-        totalFat += (meal.fatG ?? 0).round();
-      }
-    }
-
-    return {
-      Nutrition.calorie.key: totalCalories,
-      Nutrition.protein.key: totalProtein,
-      Nutrition.carbs.key: totalCarbs,
-      Nutrition.fat.key: totalFat,
-    };
   }
 
   MealRatioModel? _getMealRatioModel(MealType mealType) {

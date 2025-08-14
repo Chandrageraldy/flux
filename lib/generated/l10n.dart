@@ -2299,6 +2299,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Highlighted Micro`
+  String get highlightedMicroLabel {
+    return Intl.message(
+      'Highlighted Micro',
+      name: 'highlightedMicroLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Report`
+  String get fullReportLabel {
+    return Intl.message(
+      'Full Report',
+      name: 'fullReportLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
