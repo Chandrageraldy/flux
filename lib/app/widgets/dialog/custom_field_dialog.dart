@@ -96,6 +96,8 @@ extension _WidgetFactories on CustomFieldDialog {
       borderRadius: AppStyles.kRad10,
       padding: AppStyles.kPaddSV12H12,
       height: AppStyles.kSize80,
+      maxLines: 5,
+      minLines: 3,
     );
   }
 

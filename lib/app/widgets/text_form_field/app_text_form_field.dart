@@ -17,6 +17,8 @@ class AppTextFormField extends StatelessWidget {
     this.hasBorder = false,
     this.backgroundColor,
     this.padding,
+    this.maxLines = 1,
+    this.minLines,
     super.key,
   });
 
@@ -33,6 +35,8 @@ class AppTextFormField extends StatelessWidget {
   final bool? hasBorder;
   final Color? backgroundColor;
   final EdgeInsets? padding;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +66,8 @@ extension _WidgetFactories on AppTextFormField {
     return Expanded(
       child: FormBuilderTextField(
         initialValue: initialValue,
-        minLines: 3,
-        maxLines: 5,
+        minLines: minLines,
+        maxLines: maxLines,
         name: field.name,
         style: _Styles.getTextFormFieldTextStyle(),
         decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
