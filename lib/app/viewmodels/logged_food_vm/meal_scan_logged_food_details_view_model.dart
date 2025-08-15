@@ -3,10 +3,14 @@ import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
   FoodRepository foodRepository = FoodRepository();
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   LoggedFoodModel modifiedMealScanResult = LoggedFoodModel();
   LoggedFoodModel unmodifiedMealScanResult = LoggedFoodModel();
@@ -195,5 +199,29 @@ class MealScanLoggedFoodDetailsViewModel extends BaseViewModel {
     );
     checkError(response);
     return response.status == ResponseStatus.COMPLETE;
+  }
+
+  Future<GeminiMealScanStatus> enhanceWithAI({required String userInstruction}) async {
+    _isLoading = true;
+    notifyListeners();
+    final response = await foodRepository.enhanceWithAIForLoggedFood(
+      userInstruction: userInstruction,
+      loggedFood: modifiedMealScanResult,
+    );
+
+    if (response.status == ResponseStatus.COMPLETE) {
+      modifiedMealScanResult = response.data as LoggedFoodModel;
+    } else if (response.status == ResponseStatus.ERROR) {
+      if (response.error == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type) {
+        _isLoading = false;
+        notifyListeners();
+        return GeminiMealScanStatus.INSTRUCTIONSUNCLEAR;
+      } else {
+        checkError(response);
+      }
+    }
+    _isLoading = false;
+    notifyListeners();
+    return GeminiMealScanStatus.COMPLETE;
   }
 }

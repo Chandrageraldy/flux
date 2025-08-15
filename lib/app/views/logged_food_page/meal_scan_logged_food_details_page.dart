@@ -3,9 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/logged_food_vm/meal_scan_logged_food_details_view_model.dart';
 import 'package:flux/app/widgets/food/ingredient_card.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
+import 'package:flux/app/widgets/skeleton/meal_scan_result_skeleton.dart';
 import 'package:flux/app/widgets/skeleton/skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image/image.dart' as img; // <-- for cropping
@@ -21,6 +24,7 @@ class MealScanLoggedFoodDetailsPage extends BaseStatefulPage {
 
 class _MealScanLoggedFoodDetailsPageState extends BaseStatefulState<MealScanLoggedFoodDetailsPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  final _dialogFormKey = GlobalKey<FormBuilderState>();
 
   File? croppedImageFile;
   bool isProcessing = true;
@@ -97,6 +101,38 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
 
     if (response == true && mounted) {
       context.router.maybePop(true);
+    }
+  }
+
+  void _onEnhanceWithAIPressed() {
+    WidgetUtils.showFieldDialog(
+      context: context,
+      label: S.current.enhanceWithAILabel,
+      desc: S.current.enhanceWithAIDesc,
+      formField: FormFields.enhanceWithAi,
+      buttonLabel: S.current.enhanceLabel,
+      icon: FontAwesomeIcons.edit,
+      formKey: _dialogFormKey,
+      onPressed: _onEnhancePressed,
+    );
+  }
+
+  void _onEnhancePressed() async {
+    final content = _dialogFormKey.currentState?.fields[FormFields.enhanceWithAi.name]?.value ?? '';
+
+    if (content.isNotEmpty) {
+      final response = await tryCatch(
+          context, () => context.read<MealScanLoggedFoodDetailsViewModel>().enhanceWithAI(userInstruction: content));
+
+      if (response == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR && mounted) {
+        context.router.push(
+          ErrorRoute(
+            label: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.label,
+            description: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.message,
+            iconBackgroundColor: AppColors.redColor,
+          ),
+        );
+      }
     }
   }
 }
@@ -251,6 +287,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
 
   // Scrollable Sheet
   Widget getScrollableSheet() {
+    final isLoading = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.isLoading);
     final loggedFood = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.modifiedMealScanResult);
 
     return Positioned.fill(
@@ -259,7 +296,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
         minChildSize: 0.7,
         maxChildSize: 0.88,
         builder: (context, scrollController) {
-          return getScrollableSheetContainer(scrollController, loggedFood);
+          return getScrollableSheetContainer(scrollController, loggedFood, isLoading);
         },
       ),
     );
@@ -269,6 +306,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
   Widget getScrollableSheetContainer(
     ScrollController scrollController,
     LoggedFoodModel loggedFood,
+    bool isLoading,
   ) {
     final nutritionTotals = _calculateTotalNutrition(loggedFood.ingredients, loggedFood.quantity);
 
@@ -282,24 +320,28 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
             spacing: AppStyles.kSpac16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              getHeader(foodName: loggedFood.foodName, quantity: loggedFood.quantity),
-              getNutritionScoreContainer(
-                  healthScore: loggedFood.healthScore, healthScoreDesc: loggedFood.healthScoreDesc),
-              getCalorieContainer(calories: nutritionTotals[Nutrition.calorie.key] ?? 0),
-              getMacronutrientsRow(
-                protein: nutritionTotals[Nutrition.protein.key] ?? 0,
-                carbs: nutritionTotals[Nutrition.carbs.key] ?? 0,
-                fat: nutritionTotals[Nutrition.fat.key] ?? 0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: AppStyles.kSpac4,
-                children: [
-                  Text(S.current.ingredientsLabel.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11)),
-                  getIngredientListView(ingredients: loggedFood.ingredients),
-                ],
-              ),
-              AppStyles.kSizedBoxH32,
+              if (isLoading)
+                const MealScanResultSkeleton()
+              else ...[
+                getHeader(foodName: loggedFood.foodName, quantity: loggedFood.quantity),
+                getNutritionScoreContainer(
+                    healthScore: loggedFood.healthScore, healthScoreDesc: loggedFood.healthScoreDesc),
+                getCalorieContainer(calories: nutritionTotals[Nutrition.calorie.key] ?? 0),
+                getMacronutrientsRow(
+                  protein: nutritionTotals[Nutrition.protein.key] ?? 0,
+                  carbs: nutritionTotals[Nutrition.carbs.key] ?? 0,
+                  fat: nutritionTotals[Nutrition.fat.key] ?? 0,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: AppStyles.kSpac4,
+                  children: [
+                    Text(S.current.ingredientsLabel.toUpperCase(), style: Quicksand.semiBold.withCustomSize(11)),
+                    getIngredientListView(ingredients: loggedFood.ingredients),
+                  ],
+                ),
+                AppStyles.kSizedBoxH32,
+              ]
             ],
           ),
         ),
@@ -471,6 +513,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
 
   // Action Button Row
   Widget getActionButtonRow() {
+    final isLoading = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.isLoading);
     final mealScanResult = context.select((MealScanLoggedFoodDetailsViewModel vm) => vm.modifiedMealScanResult);
 
     final quantity = mealScanResult.quantity;
@@ -487,8 +530,13 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
         child: Row(
           spacing: AppStyles.kSpac12,
           children: [
-            getEnhanceWithAIButton(),
-            getEditFoodButton(nutritionTotals: nutritionTotals),
+            if (isLoading) ...[
+              MealScanActionButtonRowSkeleton(),
+              MealScanActionButtonRowSkeleton()
+            ] else ...[
+              getEnhanceWithAIButton(),
+              getEditFoodButton(nutritionTotals: nutritionTotals),
+            ]
           ],
         ),
       ),
@@ -499,7 +547,7 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
   Widget getEnhanceWithAIButton() {
     return Expanded(
       child: GestureDetector(
-        onTap: () {},
+        onTap: _onEnhanceWithAIPressed,
         child: Container(
           padding: AppStyles.kPaddSV12,
           decoration: _Styles.getEnhanceWithAIButtonDecoration(context),

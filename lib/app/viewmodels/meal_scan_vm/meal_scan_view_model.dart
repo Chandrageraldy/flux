@@ -207,7 +207,7 @@ class MealScanViewModel extends BaseViewModel {
   Future<GeminiMealScanStatus> enhanceWithAI({required String userInstruction}) async {
     _isLoading = true;
     notifyListeners();
-    final response = await foodRepository.enhanceWithAI(
+    final response = await foodRepository.enhanceWithAIForUnloggedFood(
       userInstruction: userInstruction,
       currentResult: mealScanResult.toJson().toString(),
     );

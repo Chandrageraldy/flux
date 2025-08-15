@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
@@ -375,7 +374,10 @@ class FoodRepository {
     return response;
   }
 
-  Future<Response> enhanceWithAI({required String userInstruction, required String currentResult}) async {
+  Future<Response> enhanceWithAIForUnloggedFood({
+    required String userInstruction,
+    required String currentResult,
+  }) async {
     final response = await foodServiceGemini.enhanceWithAI(
       userInstruction: userInstruction,
       currentResult: currentResult,
@@ -389,6 +391,49 @@ class FoodRepository {
         return Response.error(GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type);
       }
       return Response.complete(mealScanResult);
+    }
+
+    return response;
+  }
+
+  Future<Response> enhanceWithAIForLoggedFood({
+    required String userInstruction,
+    required LoggedFoodModel loggedFood,
+  }) async {
+    final MealScanResultModel mealScanResult = MealScanResultModel(
+      foodName: loggedFood.foodName,
+      healthScore: loggedFood.healthScore,
+      healthScoreDesc: loggedFood.healthScoreDesc,
+      quantity: loggedFood.quantity,
+      ingredients: loggedFood.ingredients,
+    );
+    final currentResult = mealScanResult.toJson().toString();
+
+    final response = await foodServiceGemini.enhanceWithAI(
+      userInstruction: userInstruction,
+      currentResult: currentResult,
+    );
+
+    if (response.error == null) {
+      Map<String, dynamic> json = jsonDecode(response.data);
+      final mealScanResult = MealScanResultModel.fromJson(json);
+      if (mealScanResult.foodName == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type) {
+        return Response.error(GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type);
+      }
+      final finalLoggedFood = LoggedFoodModel(
+        foodName: mealScanResult.foodName,
+        healthScore: mealScanResult.healthScore,
+        healthScoreDesc: mealScanResult.healthScoreDesc,
+        quantity: mealScanResult.quantity,
+        ingredients: mealScanResult.ingredients,
+        id: loggedFood.id,
+        userId: loggedFood.userId,
+        source: loggedFood.source,
+        mealType: loggedFood.mealType,
+        loggedAt: loggedFood.loggedAt,
+        imageUrl: loggedFood.imageUrl,
+      );
+      return Response.complete(finalLoggedFood);
     }
 
     return response;
