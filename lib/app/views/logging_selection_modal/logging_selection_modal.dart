@@ -42,11 +42,11 @@ extension _Actions on _LoggingSelectionModalState {
   }
 
   void _onMealScanIPressed() {
-    context.router.push(BarcodeScanRoute());
+    context.router.push(MealScanRoute());
   }
 
   void _onBarcodeScanPressed() {
-    context.router.push(MealScanRoute());
+    context.router.push(BarcodeScanRoute());
   }
 }
 

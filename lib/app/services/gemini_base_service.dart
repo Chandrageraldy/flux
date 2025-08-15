@@ -12,19 +12,21 @@ final jsonSchema = GeminiJsonSchema.mealScan;
 final systemInstruction = Content.system(GeminiSystemInstruction.mealScan);
 
 abstract class GeminiBaseService {
-  final model = FirebaseAI.googleAI().generativeModel(
-    model: 'gemini-2.5-flash',
-    generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema),
-    systemInstruction: systemInstruction,
-  );
-
   Future<Response> callGemini({
     required GeminiRequestType requestType,
     required String textPrompt,
     XFile? imageFile,
+    Schema? jsonSchema,
+    required String systemInstruction,
   }) async {
     try {
       GenerateContentResponse response;
+
+      final model = FirebaseAI.googleAI().generativeModel(
+        model: 'gemini-2.5-flash',
+        generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema),
+        systemInstruction: Content.system(systemInstruction),
+      );
 
       switch (requestType) {
         case GeminiRequestType.text:

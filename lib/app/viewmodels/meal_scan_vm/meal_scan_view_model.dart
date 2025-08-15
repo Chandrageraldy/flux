@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
@@ -201,7 +200,18 @@ class MealScanViewModel extends BaseViewModel {
       imageFile: imageFile,
     );
     checkError(response);
-    log(response.data.toString());
+    notifyListeners();
+  }
+
+  Future<void> enhanceWithAI({required String userInstruction}) async {
+    _isLoading = true;
+    final response = await foodRepository.enhanceWithAI(
+      userInstruction: userInstruction,
+      currentResult: mealScanResult.toJson().toString(),
+    );
+    checkError(response);
+    print(response.data);
+    _isLoading = false;
     notifyListeners();
   }
 }

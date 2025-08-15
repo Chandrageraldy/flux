@@ -89,6 +89,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "energyTargetLabel":
             MessageLookupByLibrary.simpleMessage("Energy Target"),
         "englishLabel": MessageLookupByLibrary.simpleMessage("English"),
+        "enhanceLabel": MessageLookupByLibrary.simpleMessage("Enhance"),
+        "enhanceWithAIDesc": MessageLookupByLibrary.simpleMessage(
+            "Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals."),
         "enhanceWithAILabel":
             MessageLookupByLibrary.simpleMessage("Enhance with AI"),
         "exerciseLevelLabel":

@@ -73,6 +73,7 @@ enum FormFields {
   lunchRatio,
   dinnerRatio,
   snackRatio,
+  enhanceWithAi,
 }
 
 class TableName {
@@ -577,6 +578,13 @@ class GeminiJsonSchema {
 class GeminiSystemInstruction {
   static const String mealScan =
       'Analyze the provided image for any food items. First, determine if the image is a photograph of a screen (e.g., a monitor, television, or phone display). If so, return a JSON object where the "foodName" is "Image taken from a screen". If no food is detected otherwise, return a JSON object where the "foodName" is "No food detected". If food is detected, generate a JSON object based on the given schema, detailing the meal and its ingredients.';
+  static String enhanceWithAI({required String userInstruction}) {
+    return 'The provided prompt includes an existing JSON object that describes a meal and its ingredients. '
+        'Your task is to enhance this JSON according to the user\'s instructions, while strictly maintaining JSON format. '
+        'Enhancements may involve adding ingredients, adjusting quantities, updating nutritional information, or making other relevant modifications based on the prompt. '
+        'Return only the final updated JSON object without additional text or explanations.'
+        'The instructions are: $userInstruction';
+  }
 }
 
 enum LogSource {

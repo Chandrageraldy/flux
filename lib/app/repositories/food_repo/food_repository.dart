@@ -374,4 +374,12 @@ class FoodRepository {
     final response = await foodServiceSupabase.deleteLoggedFood(loggedFood: loggedFood);
     return response;
   }
+
+  Future<Response> enhanceWithAI({required String userInstruction, required String currentResult}) async {
+    final response = await foodServiceGemini.enhanceWithAI(
+      userInstruction: userInstruction,
+      currentResult: currentResult,
+    );
+    return response;
+  }
 }

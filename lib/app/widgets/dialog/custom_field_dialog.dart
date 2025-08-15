@@ -1,5 +1,8 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
+import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class CustomFieldDialog extends StatelessWidget {
   const CustomFieldDialog({
@@ -8,6 +11,10 @@ class CustomFieldDialog extends StatelessWidget {
     required this.desc,
     required this.formField,
     required this.initialValue,
+    required this.buttonLabel,
+    required this.onPressed,
+    this.icon,
+    required this.formKey,
     super.key,
   });
 
@@ -16,6 +23,10 @@ class CustomFieldDialog extends StatelessWidget {
   final String? desc;
   final FormFields formField;
   final String initialValue;
+  final String buttonLabel;
+  final IconData? icon;
+  final VoidCallback onPressed;
+  final GlobalKey<FormBuilderState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +36,21 @@ class CustomFieldDialog extends StatelessWidget {
       insetPadding: AppStyles.kPaddSH36,
       child: Padding(
         padding: AppStyles.kPaddOL15R15T16B8,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: AppStyles.kSpac4,
-          children: [
-            getTopRow(),
-            getDescLabel(),
-            AppStyles.kSizedBoxH4,
-            getTextField(),
-            AppStyles.kSizedBoxH4,
-            getButton(),
-          ],
+        child: FormBuilder(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: AppStyles.kSpac4,
+            children: [
+              getTopRow(),
+              getDescLabel(),
+              AppStyles.kSizedBoxH4,
+              getTextField(),
+              AppStyles.kSizedBoxH4,
+              getButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -50,7 +64,13 @@ extension _WidgetFactories on CustomFieldDialog {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: _Styles.getLabelTextStyle(context)),
+        Row(
+          spacing: AppStyles.kSpac4,
+          children: [
+            if (icon != null) Icon(icon, size: AppStyles.kSize16, color: context.theme.colorScheme.primary),
+            Text(label, style: _Styles.getLabelTextStyle(context)),
+          ],
+        ),
         GestureDetector(
           onTap: () => Navigator.of(context).pop(),
           child: Icon(Icons.close, size: AppStyles.kSize20, color: context.theme.colorScheme.onTertiaryContainer),
@@ -70,16 +90,20 @@ extension _WidgetFactories on CustomFieldDialog {
 
   // Text Field
   Widget getTextField() {
-    return Container();
+    return AppTextFormField(
+      field: formField,
+      validator: FormBuilderValidators.compose([]),
+      borderRadius: AppStyles.kRad10,
+      padding: AppStyles.kPaddSV12H12,
+      height: AppStyles.kSize80,
+    );
   }
 
   // Button
   Widget getButton() {
     return AppDefaultButton(
-      label: S.current.confirmLabel,
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
+      label: buttonLabel,
+      onPressed: onPressed,
       padding: AppStyles.kPaddSV8,
       borderRadius: AppStyles.kRad6,
       labelStyle: _Styles.getButtonLabelTextStyle(context),

@@ -44,7 +44,8 @@ extension _WidgetFactories on AppDefaultButton {
         spacing: AppStyles.kSpac4,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: AppStyles.kSize20, color: labelColor ?? context.theme.colorScheme.onPrimary),
+          if (icon != null)
+            Icon(icon, size: AppStyles.kSize20, color: labelColor ?? context.theme.colorScheme.onPrimary),
           getButtonLabel(context, label),
         ],
       ),

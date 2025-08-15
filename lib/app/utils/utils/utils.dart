@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
@@ -75,6 +76,10 @@ class WidgetUtils {
     required FormFields formField,
     String? desc,
     String initialValue = '',
+    String? buttonLabel,
+    IconData? icon,
+    required VoidCallback onPressed,
+    required GlobalKey<FormBuilderState> formKey,
   }) {
     showDialog(
       context: context,
@@ -85,6 +90,10 @@ class WidgetUtils {
           desc: desc,
           formField: formField,
           initialValue: initialValue,
+          buttonLabel: buttonLabel ?? S.current.confirmLabel,
+          icon: icon,
+          onPressed: onPressed,
+          formKey: formKey,
         );
       },
     );

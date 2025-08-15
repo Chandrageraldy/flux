@@ -229,6 +229,7 @@
     "mealScanLabel": "Meal Scan",
     "barcodeLabel": "Barcode",
     "enhanceWithAILabel": "Enhance with AI",
+    "enhanceWithAIDesc": "Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals.",
     "nutritionScoreLabel": "AI's Nutrition Score",
     "saveLabel": "Save",
     "ingredientsLabel": "Ingredients",
@@ -244,5 +245,6 @@
     "noFoodDetectedMessage": "We couldn't find any food in the picture. Please try again with a clearer image.",
     "imageTakenFromScreenLabel": "Image taken from screen",
     "imageTakenFromScreenMessage": "It looks like this image was taken from a screen. Please upload an original photo of your meal.",
-    "scanAgainLabel": "Scan Again"
+    "scanAgainLabel": "Scan Again",
+    "enhanceLabel": "Enhance"
 }

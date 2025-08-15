@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/empty_result/empty_result.dart';
@@ -25,6 +26,7 @@ class MealScanResultPage extends BaseStatefulPage {
 
 class _MealScanResultPageState extends BaseStatefulState<MealScanResultPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  final _dialogFormKey = GlobalKey<FormBuilderState>();
   File? croppedImageFile;
   bool isProcessing = true;
   int stepperCount = 1;
@@ -98,6 +100,24 @@ extension _Actions on _MealScanResultPageState {
             imageFile: imageFile,
           ),
     );
+  }
+
+  void _onEnhanceWithAIPressed() {
+    WidgetUtils.showFieldDialog(
+      context: context,
+      label: S.current.enhanceWithAILabel,
+      desc: S.current.enhanceWithAIDesc,
+      formField: FormFields.enhanceWithAi,
+      buttonLabel: S.current.enhanceLabel,
+      icon: FontAwesomeIcons.edit,
+      formKey: _dialogFormKey,
+      onPressed: _onEnhancePressed,
+    );
+  }
+
+  void _onEnhancePressed() {
+    final content = _dialogFormKey.currentState!.fields[FormFields.enhanceWithAi.name]!.value as String;
+    tryLoad(context, () => context.read<MealScanViewModel>().enhanceWithAI(userInstruction: content));
   }
 }
 
@@ -305,15 +325,9 @@ extension _WidgetFactories on _MealScanResultPageState {
   // Error Result Column
   Widget getErrorResultColumn(String title, String message, IconData icon) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          children: [
-            AppStyles.kSizedBoxH100,
-            EmptyResult(title: title, message: message, icon: icon),
-          ],
-        ),
-        getScanAgainButton()
+        AppStyles.kSizedBoxH100,
+        EmptyResult(title: title, message: message, icon: icon),
       ],
     );
   }
@@ -505,10 +519,6 @@ extension _WidgetFactories on _MealScanResultPageState {
 
     final nutritionTotals = _calculateTotalNutrition(ingredients, quantity);
 
-    if (isNotDetected || isTakenFromScreen) {
-      return AppStyles.kEmptyWidget;
-    }
-
     return Positioned(
       left: 0,
       right: 0,
@@ -522,6 +532,8 @@ extension _WidgetFactories on _MealScanResultPageState {
             if (isLoading) ...[
               MealScanActionButtonRowSkeleton(),
               MealScanActionButtonRowSkeleton()
+            ] else if (isNotDetected || isTakenFromScreen) ...[
+              Expanded(child: getScanAgainButton())
             ] else ...[
               getEnhanceWithAIButton(),
               getLogFoodButton(nutritionTotals: nutritionTotals),
@@ -536,7 +548,7 @@ extension _WidgetFactories on _MealScanResultPageState {
   Widget getEnhanceWithAIButton() {
     return Expanded(
       child: GestureDetector(
-        onTap: () {},
+        onTap: _onEnhanceWithAIPressed,
         child: Container(
           padding: AppStyles.kPaddSV12,
           decoration: _Styles.getEnhanceWithAIButtonDecoration(context),

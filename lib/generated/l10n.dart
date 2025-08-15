@@ -2230,6 +2230,16 @@ class S {
     );
   }
 
+  /// `Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals.`
+  String get enhanceWithAIDesc {
+    return Intl.message(
+      'Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals.',
+      name: 'enhanceWithAIDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `AI's Nutrition Score`
   String get nutritionScoreLabel {
     return Intl.message(
@@ -2385,6 +2395,16 @@ class S {
     return Intl.message(
       'Scan Again',
       name: 'scanAgainLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enhance`
+  String get enhanceLabel {
+    return Intl.message(
+      'Enhance',
+      name: 'enhanceLabel',
       desc: '',
       args: [],
     );

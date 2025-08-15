@@ -14,6 +14,9 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.height,
     this.borderRadius,
+    this.hasBorder = false,
+    this.backgroundColor,
+    this.padding,
     super.key,
   });
 
@@ -27,6 +30,9 @@ class AppTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final double? height;
   final BorderRadiusGeometry? borderRadius;
+  final bool? hasBorder;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +42,9 @@ class AppTextFormField extends StatelessWidget {
         if (topLabel != null) Text(topLabel!, style: _Styles.getTopLabelTextStyle(context)),
         if (topLabel != null) AppStyles.kSizedBoxH4,
         Container(
-          padding: AppStyles.kPaddSH20,
+          padding: padding ?? AppStyles.kPaddSH20,
           height: height ?? AppStyles.kSize48,
-          decoration: _Styles.getContainerDecoration(context, borderRadius),
+          decoration: _Styles.getContainerDecoration(context, borderRadius, hasBorder, backgroundColor),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [if (icon != null) icon!, if (icon != null) AppStyles.kSizedBoxW8, getTextFormField(context)],
@@ -56,6 +62,8 @@ extension _WidgetFactories on AppTextFormField {
     return Expanded(
       child: FormBuilderTextField(
         initialValue: initialValue,
+        minLines: 3,
+        maxLines: 5,
         name: field.name,
         style: _Styles.getTextFormFieldTextStyle(),
         decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
@@ -75,9 +83,13 @@ extension _WidgetFactories on AppTextFormField {
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Container Decoration
-  static BoxDecoration getContainerDecoration(BuildContext context, BorderRadiusGeometry? borderRadius) {
+  static BoxDecoration getContainerDecoration(
+      BuildContext context, BorderRadiusGeometry? borderRadius, bool? hasBorder, Color? backgroundColor) {
     return BoxDecoration(
-        color: context.theme.colorScheme.tertiaryFixedDim, borderRadius: borderRadius ?? AppStyles.kRad100);
+      color: backgroundColor ?? context.theme.colorScheme.tertiaryFixedDim,
+      borderRadius: borderRadius ?? AppStyles.kRad100,
+      border: hasBorder == true ? Border.all(color: context.theme.colorScheme.onTertiary, width: 0.5) : null,
+    );
   }
 
   // Text Form Field Input Decoration
