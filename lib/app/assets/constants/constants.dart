@@ -21,6 +21,7 @@ class ImagePath {
   static const String fastFood = 'lib/app/assets/images/fast-food-19.png';
   static const String fluxLogo2 = 'lib/app/assets/images/flux_logo2.png';
   static const String foodSample = 'lib/app/assets/images/food_sample.jpg';
+  static const String notFound = 'lib/app/assets/images/404.png';
 }
 
 class AnimationPath {
@@ -574,7 +575,8 @@ class GeminiJsonSchema {
 }
 
 class GeminiSystemInstruction {
-  static const String mealScan = '';
+  static const String mealScan =
+      'Analyze the provided image for any food items. First, determine if the image is a photograph of a screen (e.g., a monitor, television, or phone display). If so, return a JSON object where the "foodName" is "Image taken from a screen". If no food is detected otherwise, return a JSON object where the "foodName" is "No food detected". If food is detected, generate a JSON object based on the given schema, detailing the meal and its ingredients.';
 }
 
 enum LogSource {

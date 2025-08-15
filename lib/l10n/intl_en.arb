@@ -239,5 +239,10 @@
     "highlightedMicroLabel": "Highlighted Micro",
     "fullReportLabel": "Full Report",
     "dismissLabel": "Dismiss",
-    "quantityErrorMessage": "Quantity must be greater than zero." 
+    "quantityErrorMessage": "Quantity must be greater than zero.",
+    "noFoodDetectedLabel": "No food detected",
+    "noFoodDetectedMessage": "We couldn't find any food in the picture. Please try again with a clearer image.",
+    "imageTakenFromScreenLabel": "Image taken from screen",
+    "imageTakenFromScreenMessage": "It looks like this image was taken from a screen. Please upload an original photo of your meal.",
+    "scanAgainLabel": "Scan Again"
 }

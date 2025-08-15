@@ -10,6 +10,7 @@ class AppDefaultButton extends StatelessWidget {
     this.labelColor,
     this.labelStyle,
     this.borderRadius,
+    this.icon,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class AppDefaultButton extends StatelessWidget {
   final Color? labelColor;
   final TextStyle? labelStyle;
   final BorderRadius? borderRadius;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,14 @@ extension _WidgetFactories on AppDefaultButton {
     return ElevatedButton(
       onPressed: onPressed,
       style: _Styles.getButtonStyle(context, backgroundColor, borderColor, padding, borderRadius),
-      child: getButtonLabel(context, label),
+      child: Row(
+        spacing: AppStyles.kSpac4,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: AppStyles.kSize20, color: labelColor ?? context.theme.colorScheme.onPrimary),
+          getButtonLabel(context, label),
+        ],
+      ),
     );
   }
 

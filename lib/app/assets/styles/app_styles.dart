@@ -38,6 +38,7 @@ class AppStyles {
   static const kPaddSV10 = EdgeInsets.symmetric(vertical: 10.0);
   static const kPaddSV12 = EdgeInsets.symmetric(vertical: 12.0);
   static const kPaddSV15 = EdgeInsets.symmetric(vertical: 15.0);
+  static const kPaddSV16 = EdgeInsets.symmetric(vertical: 16.0);
   static const kPaddSV18 = EdgeInsets.symmetric(vertical: 18.0);
   static const kPaddSV20 = EdgeInsets.symmetric(vertical: 20.0);
   static const kPaddSV28 = EdgeInsets.symmetric(vertical: 28.0);

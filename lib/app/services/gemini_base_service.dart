@@ -59,3 +59,26 @@ abstract class GeminiBaseService {
     }
   }
 }
+
+enum GeminiMealScanError {
+  noFoodDetected,
+  imageTakenFromScreen;
+
+  String get type {
+    switch (this) {
+      case GeminiMealScanError.noFoodDetected:
+        return 'No food detected';
+      case GeminiMealScanError.imageTakenFromScreen:
+        return 'Image taken from a screen';
+    }
+  }
+
+  String get message {
+    switch (this) {
+      case GeminiMealScanError.noFoodDetected:
+        return S.current.noFoodDetectedMessage;
+      case GeminiMealScanError.imageTakenFromScreen:
+        return S.current.imageTakenFromScreenMessage;
+    }
+  }
+}

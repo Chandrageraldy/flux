@@ -5,6 +5,8 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
+import 'package:flux/app/widgets/button/app_default_button.dart';
+import 'package:flux/app/widgets/empty_result/empty_result.dart';
 import 'package:flux/app/widgets/food/ingredient_card.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
 import 'package:flux/app/widgets/skeleton/meal_scan_result_skeleton.dart';
@@ -134,9 +136,6 @@ extension _PrivateMethods on _MealScanResultPageState {
   }
 
   Future<void> _getFoodDetailsFromMealScan() async {
-    File file = File(widget.imageFile.path);
-    print(file.path);
-
     await tryCatch(
       context,
       () => context.read<MealScanViewModel>().getFoodDetailsFromMealScan(imageFile: widget.imageFile),
@@ -214,8 +213,9 @@ extension _WidgetFactories on _MealScanResultPageState {
   // Scrollable Sheet
   Widget getScrollableSheet() {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
-
     final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
+    final isNotDetected = context.select((MealScanViewModel vm) => vm.isNotDetected);
+    final isTakenFromScreen = context.select((MealScanViewModel vm) => vm.isTakenFromScreen);
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -223,17 +223,25 @@ extension _WidgetFactories on _MealScanResultPageState {
         minChildSize: 0.7,
         maxChildSize: 0.88,
         builder: (context, scrollController) {
-          return getScrollableSheetContainer(scrollController, isLoading, mealScanResult: mealScanResult);
+          return getScrollableSheetContainer(
+            scrollController,
+            isLoading,
+            mealScanResult: mealScanResult,
+            isNotDetected: isNotDetected,
+            isTakenFromScreen: isTakenFromScreen,
+          );
         },
       ),
     );
   }
 
-  // Scrollable Sheet Container
+// Scrollable Sheet Container
   Widget getScrollableSheetContainer(
     ScrollController scrollController,
     bool isLoading, {
     required MealScanResultModel mealScanResult,
+    required bool isNotDetected,
+    required bool isTakenFromScreen,
   }) {
     final foodName = mealScanResult.foodName;
     final quantity = mealScanResult.quantity;
@@ -255,7 +263,20 @@ extension _WidgetFactories on _MealScanResultPageState {
             children: [
               if (isLoading)
                 const MealScanResultSkeleton()
+              else if (isNotDetected)
+                getErrorResultColumn(
+                  S.current.noFoodDetectedLabel,
+                  S.current.noFoodDetectedMessage,
+                  Icons.error_outline_sharp,
+                )
+              else if (isTakenFromScreen)
+                getErrorResultColumn(
+                  S.current.imageTakenFromScreenLabel,
+                  S.current.imageTakenFromScreenMessage,
+                  Icons.error_outline_sharp,
+                )
               else ...[
+                // The original detailed food result UI
                 getHeader(foodName: foodName, quantity: quantity),
                 getNutritionScoreContainer(healthScore: healthScore, healthScoreDesc: healthScoreDesc),
                 getCalorieContainer(calories: nutritionTotals[Nutrition.calorie.key] ?? 0),
@@ -278,6 +299,34 @@ extension _WidgetFactories on _MealScanResultPageState {
           ),
         ),
       ),
+    );
+  }
+
+  // Error Result Column
+  Widget getErrorResultColumn(String title, String message, IconData icon) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          children: [
+            AppStyles.kSizedBoxH100,
+            EmptyResult(title: title, message: message, icon: icon),
+          ],
+        ),
+        getScanAgainButton()
+      ],
+    );
+  }
+
+  // Scan Again Button
+  Widget getScanAgainButton() {
+    return AppDefaultButton(
+      label: S.current.scanAgainLabel,
+      onPressed: () {
+        context.router.maybePop();
+      },
+      padding: AppStyles.kPaddSV12,
+      icon: Icons.camera_enhance_outlined,
     );
   }
 
@@ -448,10 +497,18 @@ extension _WidgetFactories on _MealScanResultPageState {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
     final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
 
+    final isNotDetected = context.select((MealScanViewModel vm) => vm.isNotDetected);
+    final isTakenFromScreen = context.select((MealScanViewModel vm) => vm.isTakenFromScreen);
+
     final quantity = mealScanResult.quantity;
     final ingredients = mealScanResult.ingredients;
 
     final nutritionTotals = _calculateTotalNutrition(ingredients, quantity);
+
+    if (isNotDetected || isTakenFromScreen) {
+      return AppStyles.kEmptyWidget;
+    }
+
     return Positioned(
       left: 0,
       right: 0,

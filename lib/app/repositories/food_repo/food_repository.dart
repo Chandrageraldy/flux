@@ -16,6 +16,7 @@ import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/services/food_service/food_service_gemini.dart';
 import 'package:flux/app/services/food_service/food_service_nutritionix.dart';
 import 'package:flux/app/services/food_service/food_service_supabase.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
 
 class FoodRepository {
   FoodServiceNutritionix foodServiceNutritionix = FoodServiceNutritionix();
@@ -242,6 +243,13 @@ class FoodRepository {
     if (response.error == null) {
       Map<String, dynamic> json = jsonDecode(response.data);
       final mealScanResult = MealScanResultModel.fromJson(json);
+
+      if (mealScanResult.foodName == GeminiMealScanError.noFoodDetected.type) {
+        return Response.error(GeminiMealScanError.noFoodDetected.type);
+      } else if (mealScanResult.foodName == GeminiMealScanError.imageTakenFromScreen.type) {
+        return Response.error(GeminiMealScanError.imageTakenFromScreen.type);
+      }
+
       return Response.complete(mealScanResult);
     }
 

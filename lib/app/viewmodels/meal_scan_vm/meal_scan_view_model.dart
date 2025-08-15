@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'dart:developer';
 import 'package:camera/camera.dart';
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/alt_measure_model/alt_measure_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class MealScanViewModel extends BaseViewModel {
@@ -12,6 +14,12 @@ class MealScanViewModel extends BaseViewModel {
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
+
+  bool _isNotDetected = false;
+  bool get isNotDetected => _isNotDetected;
+
+  bool _isTakenFromScreen = false;
+  bool get isTakenFromScreen => _isTakenFromScreen;
 
   MealScanResultModel mealScanResult = MealScanResultModel();
 
@@ -23,8 +31,15 @@ class MealScanViewModel extends BaseViewModel {
   Future<void> getFoodDetailsFromMealScan({required XFile imageFile}) async {
     _isLoading = true;
     final response = await foodRepository.getFoodDetailsFromMealScan(imageFile: imageFile);
-    checkError(response);
-    mealScanResult = response.data as MealScanResultModel;
+    if (response.status == ResponseStatus.COMPLETE) {
+      mealScanResult = response.data as MealScanResultModel;
+    } else if (response.status == ResponseStatus.ERROR) {
+      if (response.error == GeminiMealScanError.noFoodDetected.type) {
+        _isNotDetected = true;
+      } else if (response.error == GeminiMealScanError.imageTakenFromScreen.type) {
+        _isTakenFromScreen = true;
+      }
+    }
     _isLoading = false;
     notifyListeners();
   }

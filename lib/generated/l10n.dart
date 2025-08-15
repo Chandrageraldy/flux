@@ -2339,6 +2339,56 @@ class S {
       args: [],
     );
   }
+
+  /// `No food detected`
+  String get noFoodDetectedLabel {
+    return Intl.message(
+      'No food detected',
+      name: 'noFoodDetectedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We couldn't find any food in the picture. Please try again with a clearer image.`
+  String get noFoodDetectedMessage {
+    return Intl.message(
+      'We couldn\'t find any food in the picture. Please try again with a clearer image.',
+      name: 'noFoodDetectedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image taken from screen`
+  String get imageTakenFromScreenLabel {
+    return Intl.message(
+      'Image taken from screen',
+      name: 'imageTakenFromScreenLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It looks like this image was taken from a screen. Please upload an original photo of your meal.`
+  String get imageTakenFromScreenMessage {
+    return Intl.message(
+      'It looks like this image was taken from a screen. Please upload an original photo of your meal.',
+      name: 'imageTakenFromScreenMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan Again`
+  String get scanAgainLabel {
+    return Intl.message(
+      'Scan Again',
+      name: 'scanAgainLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

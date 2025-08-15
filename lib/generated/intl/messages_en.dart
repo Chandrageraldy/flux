@@ -115,6 +115,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "hiLabel": MessageLookupByLibrary.simpleMessage("Hi"),
         "highlightedMicroLabel":
             MessageLookupByLibrary.simpleMessage("Highlighted Micro"),
+        "imageTakenFromScreenLabel":
+            MessageLookupByLibrary.simpleMessage("Image taken from screen"),
+        "imageTakenFromScreenMessage": MessageLookupByLibrary.simpleMessage(
+            "It looks like this image was taken from a screen. Please upload an original photo of your meal."),
         "ingredientsLabel": MessageLookupByLibrary.simpleMessage("Ingredients"),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
@@ -190,6 +194,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
+        "noFoodDetectedLabel":
+            MessageLookupByLibrary.simpleMessage("No food detected"),
+        "noFoodDetectedMessage": MessageLookupByLibrary.simpleMessage(
+            "We couldn\'t find any food in the picture. Please try again with a clearer image."),
         "noMealsLoggedDesc": MessageLookupByLibrary.simpleMessage(
             "You have not logged any meals yet. Start tracking your meals by pressing the + button."),
         "noMealsLoggedLabel":
@@ -302,6 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
         "scanAMealLabel": MessageLookupByLibrary.simpleMessage("Scan a meal"),
+        "scanAgainLabel": MessageLookupByLibrary.simpleMessage("Scan Again"),
         "scanYourMealDesc": MessageLookupByLibrary.simpleMessage(
             "Make sure your meal fits in the frame"),
         "scanYourMealLabel":
