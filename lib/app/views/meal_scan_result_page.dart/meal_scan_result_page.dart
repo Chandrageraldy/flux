@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/meal_scan_result_model.dart/meal_scan_result_model.dart';
+import 'package:flux/app/services/gemini_base_service.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_scan_vm/meal_scan_view_model.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
@@ -30,6 +31,9 @@ class _MealScanResultPageState extends BaseStatefulState<MealScanResultPage> {
   File? croppedImageFile;
   bool isProcessing = true;
   int stepperCount = 1;
+
+  bool isNotDetected = false;
+  bool isTakenFromScreen = false;
 
   @override
   void initState() {
@@ -94,11 +98,9 @@ extension _Actions on _MealScanResultPageState {
     File imageFile = File(widget.imageFile.path);
     tryLoad(
       context,
-      () => context.read<MealScanViewModel>().logFood(
-            mealType: mealType,
-            nutritionTotals: nutritionTotals,
-            imageFile: imageFile,
-          ),
+      () => context
+          .read<MealScanViewModel>()
+          .logFood(mealType: mealType, nutritionTotals: nutritionTotals, imageFile: imageFile),
     );
   }
 
@@ -115,9 +117,22 @@ extension _Actions on _MealScanResultPageState {
     );
   }
 
-  void _onEnhancePressed() {
-    final content = _dialogFormKey.currentState!.fields[FormFields.enhanceWithAi.name]!.value as String;
-    tryLoad(context, () => context.read<MealScanViewModel>().enhanceWithAI(userInstruction: content));
+  void _onEnhancePressed() async {
+    final content = _dialogFormKey.currentState?.fields[FormFields.enhanceWithAi.name]?.value ?? '';
+    if (content.isNotEmpty) {
+      final response =
+          await tryCatch(context, () => context.read<MealScanViewModel>().enhanceWithAI(userInstruction: content));
+
+      if (response == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR && mounted) {
+        context.router.push(
+          ErrorRoute(
+            label: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.label,
+            description: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.message,
+            iconBackgroundColor: AppColors.redColor,
+          ),
+        );
+      }
+    }
   }
 }
 
@@ -156,10 +171,19 @@ extension _PrivateMethods on _MealScanResultPageState {
   }
 
   Future<void> _getFoodDetailsFromMealScan() async {
-    await tryCatch(
+    final response = await tryCatch(
       context,
       () => context.read<MealScanViewModel>().getFoodDetailsFromMealScan(imageFile: widget.imageFile),
     );
+    if (response == GeminiMealScanStatus.NOFOODDETECTED) {
+      _setState(() {
+        isNotDetected = true;
+      });
+    } else if (response == GeminiMealScanStatus.IMAGETAKENFROMSCREEN) {
+      _setState(() {
+        isTakenFromScreen = true;
+      });
+    }
   }
 
   Map<String, double> _calculateTotalNutrition(List<IngredientModel>? ingredients, double? quantity) {
@@ -234,8 +258,6 @@ extension _WidgetFactories on _MealScanResultPageState {
   Widget getScrollableSheet() {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
     final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
-    final isNotDetected = context.select((MealScanViewModel vm) => vm.isNotDetected);
-    final isTakenFromScreen = context.select((MealScanViewModel vm) => vm.isTakenFromScreen);
 
     return Positioned.fill(
       child: DraggableScrollableSheet(
@@ -247,8 +269,6 @@ extension _WidgetFactories on _MealScanResultPageState {
             scrollController,
             isLoading,
             mealScanResult: mealScanResult,
-            isNotDetected: isNotDetected,
-            isTakenFromScreen: isTakenFromScreen,
           );
         },
       ),
@@ -260,8 +280,6 @@ extension _WidgetFactories on _MealScanResultPageState {
     ScrollController scrollController,
     bool isLoading, {
     required MealScanResultModel mealScanResult,
-    required bool isNotDetected,
-    required bool isTakenFromScreen,
   }) {
     final foodName = mealScanResult.foodName;
     final quantity = mealScanResult.quantity;
@@ -285,14 +303,14 @@ extension _WidgetFactories on _MealScanResultPageState {
                 const MealScanResultSkeleton()
               else if (isNotDetected)
                 getErrorResultColumn(
-                  S.current.noFoodDetectedLabel,
-                  S.current.noFoodDetectedMessage,
+                  GeminiMealScanStatus.NOFOODDETECTED.label,
+                  GeminiMealScanStatus.NOFOODDETECTED.message,
                   Icons.error_outline_sharp,
                 )
               else if (isTakenFromScreen)
                 getErrorResultColumn(
-                  S.current.imageTakenFromScreenLabel,
-                  S.current.imageTakenFromScreenMessage,
+                  GeminiMealScanStatus.IMAGETAKENFROMSCREEN.label,
+                  GeminiMealScanStatus.IMAGETAKENFROMSCREEN.message,
                   Icons.error_outline_sharp,
                 )
               else ...[
@@ -510,9 +528,6 @@ extension _WidgetFactories on _MealScanResultPageState {
   Widget getActionButtonRow() {
     final isLoading = context.select((MealScanViewModel vm) => vm.isLoading);
     final mealScanResult = context.select((MealScanViewModel vm) => vm.mealScanResult);
-
-    final isNotDetected = context.select((MealScanViewModel vm) => vm.isNotDetected);
-    final isTakenFromScreen = context.select((MealScanViewModel vm) => vm.isTakenFromScreen);
 
     final quantity = mealScanResult.quantity;
     final ingredients = mealScanResult.ingredients;

@@ -123,6 +123,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "imageTakenFromScreenMessage": MessageLookupByLibrary.simpleMessage(
             "It looks like this image was taken from a screen. Please upload an original photo of your meal."),
         "ingredientsLabel": MessageLookupByLibrary.simpleMessage("Ingredients"),
+        "instructionsUnclearLabel":
+            MessageLookupByLibrary.simpleMessage("Instructions unclear"),
+        "instructionsUnclearMessage": MessageLookupByLibrary.simpleMessage(
+            "Please provide clear and detailed instructions so we can process your request accurately."),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
         "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),

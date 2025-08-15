@@ -103,7 +103,10 @@ extension _WidgetFactories on CustomFieldDialog {
   Widget getButton() {
     return AppDefaultButton(
       label: buttonLabel,
-      onPressed: onPressed,
+      onPressed: () {
+        Navigator.of(context).pop();
+        onPressed();
+      },
       padding: AppStyles.kPaddSV8,
       borderRadius: AppStyles.kRad6,
       labelStyle: _Styles.getButtonLabelTextStyle(context),

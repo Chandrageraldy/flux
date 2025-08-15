@@ -244,10 +244,10 @@ class FoodRepository {
       Map<String, dynamic> json = jsonDecode(response.data);
       final mealScanResult = MealScanResultModel.fromJson(json);
 
-      if (mealScanResult.foodName == GeminiMealScanError.noFoodDetected.type) {
-        return Response.error(GeminiMealScanError.noFoodDetected.type);
-      } else if (mealScanResult.foodName == GeminiMealScanError.imageTakenFromScreen.type) {
-        return Response.error(GeminiMealScanError.imageTakenFromScreen.type);
+      if (mealScanResult.foodName == GeminiMealScanStatus.NOFOODDETECTED.type) {
+        return Response.error(GeminiMealScanStatus.NOFOODDETECTED.type);
+      } else if (mealScanResult.foodName == GeminiMealScanStatus.IMAGETAKENFROMSCREEN.type) {
+        return Response.error(GeminiMealScanStatus.IMAGETAKENFROMSCREEN.type);
       }
 
       return Response.complete(mealScanResult);
@@ -380,6 +380,17 @@ class FoodRepository {
       userInstruction: userInstruction,
       currentResult: currentResult,
     );
+
+    if (response.error == null) {
+      Map<String, dynamic> json = jsonDecode(response.data);
+      final mealScanResult = MealScanResultModel.fromJson(json);
+
+      if (mealScanResult.foodName == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type) {
+        return Response.error(GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type);
+      }
+      return Response.complete(mealScanResult);
+    }
+
     return response;
   }
 }

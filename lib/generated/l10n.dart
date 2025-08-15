@@ -2409,6 +2409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Instructions unclear`
+  String get instructionsUnclearLabel {
+    return Intl.message(
+      'Instructions unclear',
+      name: 'instructionsUnclearLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please provide clear and detailed instructions so we can process your request accurately.`
+  String get instructionsUnclearMessage {
+    return Intl.message(
+      'Please provide clear and detailed instructions so we can process your request accurately.',
+      name: 'instructionsUnclearMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -582,7 +582,8 @@ class GeminiSystemInstruction {
     return 'The provided prompt includes an existing JSON object that describes a meal and its ingredients. '
         'Your task is to enhance this JSON according to the user\'s instructions, while strictly maintaining JSON format. '
         'Enhancements may involve adding ingredients, adjusting quantities, updating nutritional information, or making other relevant modifications based on the prompt. '
-        'Return only the final updated JSON object without additional text or explanations.'
+        'If the user\'s instructions are unclear, return a JSON object where the "foodName" is "Instructions unclear". '
+        'Return only the final updated JSON object without additional text or explanations. '
         'The instructions are: $userInstruction';
   }
 }

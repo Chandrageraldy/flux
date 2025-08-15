@@ -19,6 +19,7 @@ class FoodServiceGemini extends GeminiBaseService {
       requestType: GeminiRequestType.text,
       textPrompt: currentResult,
       systemInstruction: GeminiSystemInstruction.enhanceWithAI(userInstruction: userInstruction),
+      jsonSchema: GeminiJsonSchema.mealScan,
     );
   }
 }

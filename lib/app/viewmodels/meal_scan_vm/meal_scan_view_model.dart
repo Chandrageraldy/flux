@@ -14,12 +14,6 @@ class MealScanViewModel extends BaseViewModel {
   bool _isLoading = true;
   bool get isLoading => _isLoading;
 
-  bool _isNotDetected = false;
-  bool get isNotDetected => _isNotDetected;
-
-  bool _isTakenFromScreen = false;
-  bool get isTakenFromScreen => _isTakenFromScreen;
-
   MealScanResultModel mealScanResult = MealScanResultModel();
 
   IngredientModel currentSelectedModifiedIngredient = IngredientModel();
@@ -27,20 +21,27 @@ class MealScanViewModel extends BaseViewModel {
 
   AltMeasureModel? selectedAltMeasure;
 
-  Future<void> getFoodDetailsFromMealScan({required XFile imageFile}) async {
+  Future<GeminiMealScanStatus> getFoodDetailsFromMealScan({required XFile imageFile}) async {
     _isLoading = true;
     final response = await foodRepository.getFoodDetailsFromMealScan(imageFile: imageFile);
     if (response.status == ResponseStatus.COMPLETE) {
       mealScanResult = response.data as MealScanResultModel;
     } else if (response.status == ResponseStatus.ERROR) {
-      if (response.error == GeminiMealScanError.noFoodDetected.type) {
-        _isNotDetected = true;
-      } else if (response.error == GeminiMealScanError.imageTakenFromScreen.type) {
-        _isTakenFromScreen = true;
+      if (response.error == GeminiMealScanStatus.NOFOODDETECTED.type) {
+        _isLoading = false;
+        notifyListeners();
+        return GeminiMealScanStatus.NOFOODDETECTED;
+      } else if (response.error == GeminiMealScanStatus.IMAGETAKENFROMSCREEN.type) {
+        _isLoading = false;
+        notifyListeners();
+        return GeminiMealScanStatus.IMAGETAKENFROMSCREEN;
+      } else {
+        checkError(response);
       }
     }
     _isLoading = false;
     notifyListeners();
+    return GeminiMealScanStatus.COMPLETE;
   }
 
   void setCurrentSelectedIngredient(IngredientModel ingredient) {
@@ -203,15 +204,27 @@ class MealScanViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> enhanceWithAI({required String userInstruction}) async {
+  Future<GeminiMealScanStatus> enhanceWithAI({required String userInstruction}) async {
     _isLoading = true;
+    notifyListeners();
     final response = await foodRepository.enhanceWithAI(
       userInstruction: userInstruction,
       currentResult: mealScanResult.toJson().toString(),
     );
-    checkError(response);
-    print(response.data);
+
+    if (response.status == ResponseStatus.COMPLETE) {
+      mealScanResult = response.data as MealScanResultModel;
+    } else if (response.status == ResponseStatus.ERROR) {
+      if (response.error == GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.type) {
+        _isLoading = false;
+        notifyListeners();
+        return GeminiMealScanStatus.INSTRUCTIONSUNCLEAR;
+      } else {
+        checkError(response);
+      }
+    }
     _isLoading = false;
     notifyListeners();
+    return GeminiMealScanStatus.COMPLETE;
   }
 }

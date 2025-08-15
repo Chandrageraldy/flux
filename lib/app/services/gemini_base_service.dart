@@ -62,25 +62,48 @@ abstract class GeminiBaseService {
   }
 }
 
-enum GeminiMealScanError {
-  noFoodDetected,
-  imageTakenFromScreen;
+enum GeminiMealScanStatus {
+  NOFOODDETECTED,
+  IMAGETAKENFROMSCREEN,
+  INSTRUCTIONSUNCLEAR,
+  COMPLETE;
 
   String get type {
     switch (this) {
-      case GeminiMealScanError.noFoodDetected:
+      case GeminiMealScanStatus.NOFOODDETECTED:
         return 'No food detected';
-      case GeminiMealScanError.imageTakenFromScreen:
+      case GeminiMealScanStatus.IMAGETAKENFROMSCREEN:
         return 'Image taken from a screen';
+      case GeminiMealScanStatus.INSTRUCTIONSUNCLEAR:
+        return 'Instructions unclear';
+      case GeminiMealScanStatus.COMPLETE:
+        return 'Complete';
+    }
+  }
+
+  String get label {
+    switch (this) {
+      case GeminiMealScanStatus.NOFOODDETECTED:
+        return S.current.noFoodDetectedLabel;
+      case GeminiMealScanStatus.IMAGETAKENFROMSCREEN:
+        return S.current.imageTakenFromScreenLabel;
+      case GeminiMealScanStatus.INSTRUCTIONSUNCLEAR:
+        return S.current.instructionsUnclearLabel;
+      case GeminiMealScanStatus.COMPLETE:
+        return '';
     }
   }
 
   String get message {
     switch (this) {
-      case GeminiMealScanError.noFoodDetected:
+      case GeminiMealScanStatus.NOFOODDETECTED:
         return S.current.noFoodDetectedMessage;
-      case GeminiMealScanError.imageTakenFromScreen:
+      case GeminiMealScanStatus.IMAGETAKENFROMSCREEN:
         return S.current.imageTakenFromScreenMessage;
+      case GeminiMealScanStatus.INSTRUCTIONSUNCLEAR:
+        return S.current.instructionsUnclearMessage;
+      case GeminiMealScanStatus.COMPLETE:
+        return '';
     }
   }
 }
