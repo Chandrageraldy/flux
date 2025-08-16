@@ -83,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismissLabel": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "editFoodLabel": MessageLookupByLibrary.simpleMessage("Edit Food"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
+        "emailDesc": MessageLookupByLibrary.simpleMessage(
+            "Your registered email used for login and account recovery."),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
         "energyTargetDesc": MessageLookupByLibrary.simpleMessage(
             "This is your recommended daily energy intake to meet your goal."),
@@ -370,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),
         "usedEmail": MessageLookupByLibrary.simpleMessage(
             "This email address is already in use. Please use a different email."),
+        "usernameDesc": MessageLookupByLibrary.simpleMessage(
+            "Choose a username that identifies you in the app."),
         "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
         "vegetarianDesc": MessageLookupByLibrary.simpleMessage(
             "A diet that excludes meat and fish."),

@@ -19,6 +19,8 @@ class AppTextFormField extends StatelessWidget {
     this.padding,
     this.maxLines = 1,
     this.minLines,
+    this.topLabelTextStyle,
+    this.borderColor,
     super.key,
   });
 
@@ -37,18 +39,20 @@ class AppTextFormField extends StatelessWidget {
   final EdgeInsets? padding;
   final int? maxLines;
   final int? minLines;
+  final TextStyle? topLabelTextStyle;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (topLabel != null) Text(topLabel!, style: _Styles.getTopLabelTextStyle(context)),
+        if (topLabel != null) Text(topLabel!, style: _Styles.getTopLabelTextStyle(context, topLabelTextStyle)),
         if (topLabel != null) AppStyles.kSizedBoxH4,
         Container(
           padding: padding ?? AppStyles.kPaddSH20,
           height: height ?? AppStyles.kSize48,
-          decoration: _Styles.getContainerDecoration(context, borderRadius, hasBorder, backgroundColor),
+          decoration: _Styles.getContainerDecoration(context, borderRadius, hasBorder, backgroundColor, borderColor),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [if (icon != null) icon!, if (icon != null) AppStyles.kSizedBoxW8, getTextFormField(context)],
@@ -87,12 +91,13 @@ extension _WidgetFactories on AppTextFormField {
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Container Decoration
-  static BoxDecoration getContainerDecoration(
-      BuildContext context, BorderRadiusGeometry? borderRadius, bool? hasBorder, Color? backgroundColor) {
+  static BoxDecoration getContainerDecoration(BuildContext context, BorderRadiusGeometry? borderRadius, bool? hasBorder,
+      Color? backgroundColor, Color? borderColor) {
     return BoxDecoration(
       color: backgroundColor ?? context.theme.colorScheme.tertiaryFixedDim,
       borderRadius: borderRadius ?? AppStyles.kRad100,
-      border: hasBorder == true ? Border.all(color: context.theme.colorScheme.onTertiary, width: 0.5) : null,
+      border:
+          hasBorder == true ? Border.all(color: borderColor ?? context.theme.colorScheme.onTertiary, width: 0.5) : null,
     );
   }
 
@@ -112,7 +117,8 @@ abstract class _Styles {
   }
 
   // Top Label Text Style
-  static TextStyle getTopLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
+  static TextStyle getTopLabelTextStyle(BuildContext context, TextStyle? topLabelTextStyle) {
+    return topLabelTextStyle ??
+        Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.tertiaryFixed);
   }
 }

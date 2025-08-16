@@ -2429,6 +2429,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose a username that identifies you in the app.`
+  String get usernameDesc {
+    return Intl.message(
+      'Choose a username that identifies you in the app.',
+      name: 'usernameDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your registered email used for login and account recovery.`
+  String get emailDesc {
+    return Intl.message(
+      'Your registered email used for login and account recovery.',
+      name: 'emailDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

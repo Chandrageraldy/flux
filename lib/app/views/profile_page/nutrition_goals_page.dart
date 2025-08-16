@@ -32,6 +32,7 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
 
   @override
   bool hasDefaultPadding() => false;
+
   @override
   Widget body() {
     final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.nutritionGoals);

@@ -114,6 +114,8 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
       icon: FontAwesomeIcons.edit,
       formKey: _dialogFormKey,
       onPressed: _onEnhancePressed,
+      maxLines: 5,
+      minLines: 3,
     );
   }
 

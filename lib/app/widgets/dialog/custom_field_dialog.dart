@@ -15,6 +15,10 @@ class CustomFieldDialog extends StatelessWidget {
     required this.onPressed,
     this.icon,
     required this.formKey,
+    this.textFieldHeight,
+    this.maxLines = 1,
+    this.minLines,
+    this.textFieldPadding = AppStyles.kPaddSV12H12,
     super.key,
   });
 
@@ -27,6 +31,10 @@ class CustomFieldDialog extends StatelessWidget {
   final IconData? icon;
   final VoidCallback onPressed;
   final GlobalKey<FormBuilderState> formKey;
+  final double? textFieldHeight;
+  final EdgeInsets? textFieldPadding;
+  final int maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +102,11 @@ extension _WidgetFactories on CustomFieldDialog {
       field: formField,
       validator: FormBuilderValidators.compose([]),
       borderRadius: AppStyles.kRad10,
-      padding: AppStyles.kPaddSV12H12,
-      height: AppStyles.kSize80,
-      maxLines: 5,
-      minLines: 3,
+      padding: textFieldPadding,
+      height: textFieldHeight ?? AppStyles.kSize80,
+      maxLines: maxLines,
+      minLines: minLines,
+      initialValue: initialValue,
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -166,6 +167,67 @@ class PersonalDetailsModel {
   final List<String> items;
   final String? desc;
 }
+
+enum AccountSettings {
+  username,
+  email,
+  logout;
+
+  String get key {
+    switch (this) {
+      case AccountSettings.username:
+        return 'username';
+      case AccountSettings.email:
+        return 'email';
+      case AccountSettings.logout:
+        return 'logout';
+    }
+  }
+
+  String get label {
+    switch (this) {
+      case AccountSettings.username:
+        return S.current.usernameLabel;
+      case AccountSettings.email:
+        return S.current.emailLabel;
+      case AccountSettings.logout:
+        return S.current.logOutLabel;
+    }
+  }
+}
+
+class AccountModel {
+  AccountModel({
+    required this.label,
+    required this.key,
+    required this.formKey,
+    required this.formFields,
+    required this.desc,
+  });
+
+  final String label;
+  final String key;
+  final GlobalKey<FormBuilderState> formKey;
+  final FormFields formFields;
+  final String desc;
+}
+
+List<AccountModel> accountSettings({required usernameFormKey, required emailFormKey}) => [
+      AccountModel(
+        label: AccountSettings.username.label,
+        key: AccountSettings.username.key,
+        formKey: usernameFormKey,
+        formFields: FormFields.username,
+        desc: S.current.usernameDesc,
+      ),
+      AccountModel(
+        label: AccountSettings.email.label,
+        key: AccountSettings.email.key,
+        formKey: emailFormKey,
+        formFields: FormFields.email,
+        desc: S.current.emailDesc,
+      ),
+    ];
 
 List<PersonalDetailsModel> weightGoal = [
   PersonalDetailsModel(

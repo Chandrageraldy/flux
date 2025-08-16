@@ -248,5 +248,7 @@
     "scanAgainLabel": "Scan Again",
     "enhanceLabel": "Enhance",
     "instructionsUnclearLabel": "Instructions unclear",
-    "instructionsUnclearMessage": "Please provide clear and detailed instructions so we can process your request accurately."
+    "instructionsUnclearMessage": "Please provide clear and detailed instructions so we can process your request accurately.",
+    "usernameDesc": "Choose a username that identifies you in the app.",
+    "emailDesc": "Your registered email used for login and account recovery."
 }

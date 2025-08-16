@@ -5,6 +5,7 @@ import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
+import 'package:flux/app/widgets/image_profile/image_profile.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -147,27 +148,8 @@ extension _WidgetFactories on _ProfilePageState {
 
   // User Profile Image
   Widget getUserProfileImage() {
-    return Stack(
-      children: [
-        Image.asset(ImagePath.profilePlaceholder, width: AppStyles.kSize64, height: AppStyles.kSize64),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            width: AppStyles.kSize20,
-            height: AppStyles.kSize20,
-            decoration: _Styles.getUserProfileAddButtonContainerDecoration(context),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Padding(
-                padding: AppStyles.kPadd6,
-                child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
+    final userProfile = SharedPreferenceHandler().getUser();
+    return ImageProfile(photoUrl: userProfile?.photoUrl ?? '');
   }
 
   // Divider
@@ -335,15 +317,6 @@ class _Styles {
   // Age Label Text Style
   static TextStyle getAgeLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.primary);
-  }
-
-  // User Profile Add Button Container Decoration
-  static BoxDecoration getUserProfileAddButtonContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.secondary,
-      shape: BoxShape.circle,
-      border: Border.all(color: context.theme.colorScheme.onPrimary, width: 1),
-    );
   }
 
   // Header Row Label Text Style

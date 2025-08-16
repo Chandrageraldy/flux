@@ -33,7 +33,6 @@ class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> 
     return Column(
       spacing: AppStyles.kSpac12,
       children: [
-        AppStyles.kEmptyWidget,
         getCustomAppBar(),
         getPersonalDetailsContainer(),
         getBMIContainer(),

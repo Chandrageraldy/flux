@@ -80,6 +80,10 @@ class WidgetUtils {
     IconData? icon,
     required VoidCallback onPressed,
     required GlobalKey<FormBuilderState> formKey,
+    double? textFieldHeight,
+    int maxLines = 1,
+    int? minLines,
+    EdgeInsets? textFieldPadding,
   }) {
     showDialog(
       context: context,
@@ -94,6 +98,10 @@ class WidgetUtils {
           icon: icon,
           onPressed: onPressed,
           formKey: formKey,
+          textFieldHeight: textFieldHeight,
+          maxLines: maxLines,
+          minLines: minLines,
+          textFieldPadding: textFieldPadding,
         );
       },
     );

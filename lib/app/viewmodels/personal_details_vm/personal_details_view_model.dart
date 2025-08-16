@@ -46,6 +46,5 @@ class PersonalDetailsViewModel extends BaseViewModel {
     }
 
     notifyListeners();
-    debugPrint('$personalDetails');
   }
 }
