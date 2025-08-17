@@ -36,7 +36,13 @@ class UserRepository {
     required Map<String, String> bodyMetrics,
   }) async {
     UserProfileModel model = UserProfileModel(
-        userId: userId, email: email, username: username, bodyMetrics: BodyMetricsModel.fromJson(bodyMetrics));
+      userId: userId,
+      email: email,
+      username: username,
+      photoUrl:
+          'https://boatxsvwhwnhmbmuiesv.supabase.co/storage/v1/object/public/profile_image/profile-placeholder.png',
+      bodyMetrics: BodyMetricsModel.fromJson(bodyMetrics),
+    );
     final response = await userService.createUserProfile(model: model);
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);
@@ -46,6 +52,24 @@ class UserRepository {
 
   Future<Response> getUserProfile({required String userId}) async {
     final response = await userService.getUserProfile(userId: userId);
+    if (response.error == null) {
+      await processUserProfile(response.data as List<Map<String, dynamic>>);
+    }
+    return response;
+  }
+
+  Future<Response> updateBodyMetrics({required Map<String, String> bodyMetrics}) async {
+    final UserProfileModel? user = sharedPreferenceHandler.getUser();
+
+    final userProfile = {
+      TableCol.userId: user?.userId ?? '',
+      TableCol.username: user?.username ?? '',
+      TableCol.email: user?.email ?? '',
+      TableCol.photoUrl: user?.photoUrl ?? '',
+      TableCol.bodyMetrics: bodyMetrics,
+    };
+
+    final response = await userService.updateUserProfile(userProfile: userProfile);
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);
     }

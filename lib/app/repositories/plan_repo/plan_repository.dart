@@ -26,6 +26,18 @@ class PlanRepository {
     }
     return response;
   }
+
+  Future<Response> updatePersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
+    final userProfile = sharedPreferenceHandler.getUser();
+    personalizedPlan[TableCol.userId] = userProfile?.userId ?? '';
+
+    final response =
+        await planService.updatePersonalizedPlan(personalizedPlan: personalizedPlan, userId: userProfile?.userId ?? '');
+    if (response.error == null) {
+      await processPersonalizedPlan(response.data as List<Map<String, dynamic>>);
+    }
+    return response;
+  }
 }
 
 // * ------------------------ PrivateMethods ------------------------

@@ -92,6 +92,12 @@ class TableCol {
   static String lastViewedAt = 'lastViewedAt';
   static String loggedAt = 'loggedAt';
   static String mealType = 'mealType';
+  static String bodyMetrics = 'bodyMetrics';
+  static String username = 'username';
+  static String email = 'email';
+  static String photoUrl = 'photoUrl';
+  static String dietType = 'dietType';
+  static String goal = 'goal';
 }
 
 class BucketName {

@@ -7,9 +7,16 @@ import 'package:flux/app/viewmodels/plan_vm/plan_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
+enum PlanAction {
+  CREATE,
+  UPDATE,
+}
+
 @RoutePage()
 class PersonalizingPlanLoadingPage extends BaseStatefulPage {
-  const PersonalizingPlanLoadingPage({super.key});
+  const PersonalizingPlanLoadingPage({super.key, this.planAction = PlanAction.CREATE});
+
+  final PlanAction? planAction;
 
   @override
   State<PersonalizingPlanLoadingPage> createState() => _PersonalizingPlanLoadingPageState();
@@ -99,7 +106,7 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     // ignore: avoid_print
     print(completeNutrient);
 
-    createPersonalizedPlan(completeNutrient);
+    createOrUpdatePersonalizedPlan(completeNutrient);
   }
 
   // Basal Metabolic Rate (BMR)
@@ -374,7 +381,7 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     return mealRatios;
   }
 
-  void createPersonalizedPlan(Map<String, dynamic> completeNutrients) async {
+  void createOrUpdatePersonalizedPlan(Map<String, dynamic> completeNutrients) async {
     final mealRatio = getMealRatio(completeNutrients);
 
     final updatedMealDistribution = mealDistribution().map(
@@ -383,6 +390,14 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 
     final personalizedPlan = {...completeNutrients, ...mealRatio, ...updatedMealDistribution};
 
+    if (widget.planAction == PlanAction.CREATE) {
+      await createPersonalizedPlan(personalizedPlan);
+    } else {
+      await updatePersonalizedPlan(personalizedPlan);
+    }
+  }
+
+  Future<void> createPersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
     final response =
         await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan)) ?? false;
 
@@ -390,6 +405,17 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 
     if (response && mounted) {
       context.router.replaceAll([DashboardNavigatorRoute()]);
+    }
+  }
+
+  Future<void> updatePersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
+    final response =
+        await tryCatch(context, () => context.read<PlanViewModel>().updatePersonalizedPlan(personalizedPlan)) ?? false;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    if (response && mounted) {
+      context.router.replaceAll([ProfileRoute()]);
     }
   }
 }

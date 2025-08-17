@@ -18,4 +18,13 @@ class PlanService extends SupabaseBaseService {
       filters: {TableCol.userId: userId},
     );
   }
+
+  Future<Response> updatePersonalizedPlan({required Map<String, dynamic> personalizedPlan, required String userId}) {
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.plan,
+      requestBody: personalizedPlan,
+      filters: {TableCol.userId: userId},
+    );
+  }
 }

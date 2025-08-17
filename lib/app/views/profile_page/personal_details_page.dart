@@ -3,6 +3,7 @@ import 'package:flux/app/models/profile_settings_model/profile_settings_model.da
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/personal_details_vm/personal_details_view_model.dart';
+import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
@@ -47,7 +48,7 @@ class _PersonalDetailsPageState extends BaseStatefulState<_PersonalDetailsPage> 
 extension _Actions on _PersonalDetailsPageState {
   void _onPickerPressed(PersonalDetailsModel setting, bool isTargetWeeklyChangeEnabled) {
     // Retrieve the currently selected value
-    final currentSelectedValue = context.read<PersonalDetailsViewModel>().personalDetails[setting.key] ?? '';
+    final currentSelectedValue = context.read<PersonalDetailsViewModel>().modifiedPersonalDetails[setting.key] ?? '';
     // Get the index of the current selected value in the items list
     final initialItemIndex = setting.items.indexOf(currentSelectedValue);
 
@@ -71,7 +72,7 @@ extension _Actions on _PersonalDetailsPageState {
 
   void _onDatePickerPressed(PersonalDetailsModel setting) {
     // Retrieve the currently selected value
-    final currentSelectedValue = context.read<PersonalDetailsViewModel>().personalDetails[setting.key] ?? '';
+    final currentSelectedValue = context.read<PersonalDetailsViewModel>().modifiedPersonalDetails[setting.key] ?? '';
 
     final dateFormat = DateFormat.YEAR_MONTH_DAY;
 
@@ -89,12 +90,22 @@ extension _Actions on _PersonalDetailsPageState {
       },
     );
   }
+
+  Future<void> _onSavePressed() async {
+    final response = await tryLoad(context, () => context.read<PersonalDetailsViewModel>().updateBodyMetrics());
+
+    if (response == true && mounted) {
+      context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE)]);
+    } else if (mounted) {
+      context.router.maybePop();
+    }
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _PersonalDetailsPageState {
   String _calculateBMI() {
-    final personalDetailsInfo = context.read<PersonalDetailsViewModel>().personalDetails;
+    final personalDetailsInfo = context.read<PersonalDetailsViewModel>().modifiedPersonalDetails;
 
     final heightStr = personalDetailsInfo[PersonalDetailsSettings.height.key];
     final weightStr = personalDetailsInfo[PersonalDetailsSettings.weight.key];
@@ -138,7 +149,13 @@ extension _WidgetFactories on _PersonalDetailsPageState {
         modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
         onTap: () => context.router.maybePop(),
       ),
-      trailingButton: AppStyles.kEmptyWidget,
+      trailingButton: GestureDetector(
+        onTap: _onSavePressed,
+        child: Text(
+          S.current.saveLabel,
+          style: Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary),
+        ),
+      ),
       title: S.current.personalDetailsLabel,
     );
   }
@@ -170,7 +187,7 @@ extension _WidgetFactories on _PersonalDetailsPageState {
 
   // Weight Goal List View
   Widget getWeightGoalListView() {
-    final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.personalDetails);
+    final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.modifiedPersonalDetails);
     final bool isTargetWeeklyChangeEnabled =
         context.select((PersonalDetailsViewModel vm) => vm.isTargetWeeklyChangeEnabled);
 
@@ -207,7 +224,7 @@ extension _WidgetFactories on _PersonalDetailsPageState {
 
   // Personal Details List View
   Widget getPersonalDetailsListView() {
-    final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.personalDetails);
+    final personalDetailsInfo = context.select((PersonalDetailsViewModel vm) => vm.modifiedPersonalDetails);
     final bool isTargetWeeklyChangeEnabled =
         context.select((PersonalDetailsViewModel vm) => vm.isTargetWeeklyChangeEnabled);
 

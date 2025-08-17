@@ -662,18 +662,51 @@ class PersonalDetailsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [PersonalizingPlanLoadingPage]
-class PersonalizingPlanLoadingRoute extends PageRouteInfo<void> {
-  const PersonalizingPlanLoadingRoute({List<PageRouteInfo>? children})
-    : super(PersonalizingPlanLoadingRoute.name, initialChildren: children);
+class PersonalizingPlanLoadingRoute
+    extends PageRouteInfo<PersonalizingPlanLoadingRouteArgs> {
+  PersonalizingPlanLoadingRoute({
+    Key? key,
+    PlanAction? planAction = PlanAction.CREATE,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PersonalizingPlanLoadingRoute.name,
+         args: PersonalizingPlanLoadingRouteArgs(
+           key: key,
+           planAction: planAction,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'PersonalizingPlanLoadingRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const PersonalizingPlanLoadingPage();
+      final args = data.argsAs<PersonalizingPlanLoadingRouteArgs>(
+        orElse: () => const PersonalizingPlanLoadingRouteArgs(),
+      );
+      return PersonalizingPlanLoadingPage(
+        key: args.key,
+        planAction: args.planAction,
+      );
     },
   );
+}
+
+class PersonalizingPlanLoadingRouteArgs {
+  const PersonalizingPlanLoadingRouteArgs({
+    this.key,
+    this.planAction = PlanAction.CREATE,
+  });
+
+  final Key? key;
+
+  final PlanAction? planAction;
+
+  @override
+  String toString() {
+    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction}';
+  }
 }
 
 /// generated route for

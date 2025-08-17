@@ -16,4 +16,10 @@ class PlanViewModel extends BaseViewModel {
     checkError(response);
     return response.status == ResponseStatus.COMPLETE;
   }
+
+  Future<bool> updatePersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
+    final response = await planRepository.updatePersonalizedPlan(personalizedPlan);
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
+  }
 }
