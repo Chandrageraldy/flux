@@ -2479,6 +2479,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Daily Full Report`
+  String get dailyFullReportLabel {
+    return Intl.message(
+      'Daily Full Report',
+      name: 'dailyFullReportLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Macronutrients Progress`
+  String get macronutrientsProgressLabel {
+    return Intl.message(
+      'Macronutrients Progress',
+      name: 'macronutrientsProgressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Nutrients`
+  String get completeNutrientsLabel {
+    return Intl.message(
+      'Complete Nutrients',
+      name: 'completeNutrientsLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

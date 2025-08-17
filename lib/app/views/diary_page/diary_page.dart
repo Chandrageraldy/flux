@@ -454,7 +454,7 @@ extension _WidgetFactories on _DiaryPageState {
                 spacing: AppStyles.kSpac4,
                 children: [FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12), getHighlightedMicroLabel()],
               ),
-              getFullReportButton(() {}),
+              getFullReportButton(),
             ],
           ),
           AppStyles.kSizedBoxH12,
@@ -593,12 +593,15 @@ extension _WidgetFactories on _DiaryPageState {
   }
 
   // Edit Button
-  Widget getFullReportButton(VoidCallback? onPressed) {
+  Widget getFullReportButton() {
+    final loggedFoodsList = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
     return Row(
       spacing: AppStyles.kSpac4,
       children: [
         GestureDetector(
-          onTap: onPressed,
+          onTap: () {
+            context.router.push(DailyReportRoute(selectedDate: _selectedDate, loggedFoodsList: loggedFoodsList));
+          },
           child: Text(S.current.fullReportLabel.toUpperCase(), style: _Styles.getEditLabelTextStyle(context)),
         ),
         FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize12, color: context.theme.colorScheme.secondary),

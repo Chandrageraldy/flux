@@ -8,12 +8,14 @@ class NutrientIntakeProgress extends StatelessWidget {
     required this.percentage,
     required this.currentValue,
     required this.targetValue,
+    this.lineHeight = 6,
   });
 
   final Nutrition nutrition;
   final double percentage;
   final int currentValue;
   final int targetValue;
+  final double lineHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +39,13 @@ extension _WidgetFactories on NutrientIntakeProgress {
     return LinearPercentIndicator(
       percent: percentage > 1 ? 1 : percentage,
       backgroundColor: context.theme.colorScheme.tertiary,
-      progressColor: context.theme.colorScheme.primary,
+      progressColor: _Styles.getProgressColor(context, nutrition),
       animation: true,
       animateFromLastPercent: true,
       animateToInitialPercent: false,
       padding: AppStyles.kPadd0,
       barRadius: Radius.circular(AppStyles.kSpac20),
-      lineHeight: 6,
+      lineHeight: lineHeight,
     );
   }
 
@@ -75,5 +77,18 @@ abstract class _Styles {
   // Macro Nutrient Value Label Text Style
   static TextStyle getValueLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withCustomSize(11).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
+  }
+
+  // Progress Color
+  static Color getProgressColor(BuildContext context, Nutrition nutrition) {
+    return nutrition == Nutrition.calorie
+        ? context.theme.colorScheme.secondary
+        : nutrition == Nutrition.protein
+            ? MacroNutrients.protein.color
+            : nutrition == Nutrition.carbs
+                ? MacroNutrients.carbs.color
+                : nutrition == Nutrition.fat
+                    ? MacroNutrients.fat.color
+                    : context.theme.colorScheme.primary;
   }
 }

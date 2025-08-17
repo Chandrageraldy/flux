@@ -253,5 +253,8 @@
     "emailDesc": "Your registered email used for login and account recovery.",
     "ratioError": "Total ratio must equal to 100%",
     "targetWeeklyChangeError": "Target weekly change must be set.",
-    "impactOnTargetsLabel": "Impact on Targets"
+    "impactOnTargetsLabel": "Impact on Targets",
+    "dailyFullReportLabel": "Daily Full Report",
+    "macronutrientsProgressLabel": "Macronutrients Progress",
+    "completeNutrientsLabel": "Complete Nutrients"
 }

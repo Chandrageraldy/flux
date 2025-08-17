@@ -64,10 +64,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
+        "completeNutrientsLabel":
+            MessageLookupByLibrary.simpleMessage("Complete Nutrients"),
         "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
+        "dailyFullReportLabel":
+            MessageLookupByLibrary.simpleMessage("Daily Full Report"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
@@ -182,6 +186,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Macronutrients Target"),
         "macronutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Macronutrients"),
+        "macronutrientsProgressLabel":
+            MessageLookupByLibrary.simpleMessage("Macronutrients Progress"),
         "magnesiumLabel": MessageLookupByLibrary.simpleMessage("Magnesium"),
         "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
         "manganeseLabel": MessageLookupByLibrary.simpleMessage("Manganese"),
