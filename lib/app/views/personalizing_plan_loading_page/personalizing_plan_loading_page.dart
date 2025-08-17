@@ -1,5 +1,6 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
+import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
@@ -14,9 +15,14 @@ enum PlanAction {
 
 @RoutePage()
 class PersonalizingPlanLoadingPage extends BaseStatefulPage {
-  const PersonalizingPlanLoadingPage({super.key, this.planAction = PlanAction.CREATE});
+  const PersonalizingPlanLoadingPage({
+    super.key,
+    this.planAction = PlanAction.CREATE,
+    this.mealRatio,
+  });
 
   final PlanAction? planAction;
+  final Map<String, String>? mealRatio;
 
   @override
   State<PersonalizingPlanLoadingPage> createState() => _PersonalizingPlanLoadingPageState();
@@ -87,8 +93,8 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     final age = FunctionUtils.calculateAge(dob);
     final bmr = calculateBMR(gender: gender, weightKg: weight, heightCm: height, age: age);
 
-    final activityFactor = getActivityFactor(activityLevel);
-    final exerciseFactor = getExerciseFactor(exerciseLevel);
+    final activityFactor = FunctionUtils.getActivityFactor(activityLevel);
+    final exerciseFactor = FunctionUtils.getExerciseFactor(exerciseLevel);
 
     final tdee = bmr * (activityFactor + exerciseFactor);
 
@@ -97,7 +103,7 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
         ? tdee
         : adjustCaloriesForTargetWeeklyChange(tdee: tdee, targetWeeklyChange: targetWeeklyChange);
 
-    Map<String, double> macroRatio = getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
+    Map<String, double> macroRatio = FunctionUtils.getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
     Map<String, double> dailyMicronutrients = getDailyMicronutrients(gender, age);
 
     final completeNutrient =
@@ -121,80 +127,6 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     } else {
       return 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
     }
-  }
-
-  double getActivityFactor(String level) {
-    switch (level) {
-      case 'sedentary':
-        return 1.2;
-      case 'lightly active':
-        return 1.375;
-      case 'active':
-        return 1.55;
-      case 'very active':
-        return 1.725;
-      default:
-        return 1.2;
-    }
-  }
-
-  double getExerciseFactor(String exerciseLevel) {
-    switch (exerciseLevel) {
-      case 'never':
-        return 0.0;
-      case 'light':
-        return 0.1;
-      case 'moderate':
-        return 0.15;
-      case 'frequent':
-        return 0.2;
-      default:
-        return 0.0;
-    }
-  }
-
-  Map<String, double> getMacroRatio(String dietType) {
-    late double proteinRatio;
-    late double fatRatio;
-    late double carbsRatio;
-
-    switch (dietType) {
-      case 'keto':
-        proteinRatio = 0.20;
-        fatRatio = 0.70;
-        carbsRatio = 0.10;
-        break;
-      case 'mediterranean':
-        proteinRatio = 0.15;
-        fatRatio = 0.30;
-        carbsRatio = 0.55;
-        break;
-      case 'vegetarian':
-        proteinRatio = 0.30;
-        fatRatio = 0.20;
-        carbsRatio = 0.50;
-        break;
-      case 'paleo':
-        proteinRatio = 0.30;
-        fatRatio = 0.35;
-        carbsRatio = 0.35;
-        break;
-      case 'lowCarbs':
-        proteinRatio = 0.45;
-        fatRatio = 0.35;
-        carbsRatio = 0.20;
-        break;
-      default:
-        proteinRatio = 0.25;
-        fatRatio = 0.25;
-        carbsRatio = 0.50;
-    }
-
-    return {
-      'proteinRatio': proteinRatio * 100,
-      'fatRatio': fatRatio * 100,
-      'carbsRatio': carbsRatio * 100,
-    };
   }
 
   Map<String, double> getDailyMicronutrients(String gender, int age) {
@@ -317,12 +249,26 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     };
   }
 
-  Map<String, dynamic> mealDistribution() {
+  Map<String, double> mealDistribution() {
+    if (widget.mealRatio != null) {
+      return {
+        MealRatioSettings.breakfastRatio.key:
+            double.tryParse(widget.mealRatio![MealRatioSettings.breakfastRatio.key]?.toString() ?? '0')! / 100,
+        MealRatioSettings.lunchRatio.key:
+            double.tryParse(widget.mealRatio![MealRatioSettings.lunchRatio.key]?.toString() ?? '0')! / 100,
+        MealRatioSettings.dinnerRatio.key:
+            double.tryParse(widget.mealRatio![MealRatioSettings.dinnerRatio.key]?.toString() ?? '0')! / 100,
+        MealRatioSettings.snackRatio.key:
+            double.tryParse(widget.mealRatio![MealRatioSettings.snackRatio.key]?.toString() ?? '0')! / 100,
+      };
+    }
+
+    // Default ratios in decimal form
     return {
-      'breakfastRatio': 0.25,
-      'lunchRatio': 0.35,
-      'dinnerRatio': 0.30,
-      'snackRatio': 0.10,
+      MealRatioSettings.breakfastRatio.key: 0.25,
+      MealRatioSettings.lunchRatio.key: 0.35,
+      MealRatioSettings.dinnerRatio.key: 0.30,
+      MealRatioSettings.snackRatio.key: 0.10,
     };
   }
 
@@ -353,28 +299,28 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution()['breakfastRatio']!,
+        portion: mealDistribution()[MealRatioSettings.breakfastRatio.key]!,
       ),
       MealType.lunch.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution()['lunchRatio']!,
+        portion: mealDistribution()[MealRatioSettings.lunchRatio.key]!,
       ),
       MealType.dinner.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution()['dinnerRatio']!,
+        portion: mealDistribution()[MealRatioSettings.dinnerRatio.key]!,
       ),
       MealType.snack.key: calculateMealRatioMap(
         totalCalories: totalCalories,
         totalProtein: totalProtein,
         totalFat: totalFat,
         totalCarbs: totalCarbs,
-        portion: mealDistribution()['snackRatio']!,
+        portion: mealDistribution()[MealRatioSettings.snackRatio.key]!,
       ),
     };
 

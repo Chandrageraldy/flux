@@ -1,8 +1,11 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_ratio_vm/meal_ratio_view_model.dart';
+import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
@@ -54,6 +57,16 @@ extension _Actions on _MealRatioPageState {
   void onMealRatioChanged(String key, String? value) {
     context.read<MealRatioViewModel>().onMealRatioChanged(key, value ?? '');
   }
+
+  Future<void> _onSavePressed() async {
+    final mealRatio = context.read<MealRatioViewModel>().mealRatio;
+    if (mealRatio[MealRatioSettings.totalRatio.key] == '100') {
+      context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, mealRatio: mealRatio)]);
+    } else {
+      WidgetUtils.showSnackBar(context, S.current.ratioError);
+      return;
+    }
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -71,7 +84,13 @@ extension _WidgetFactories on _MealRatioPageState {
         modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
         onTap: () => context.router.maybePop(),
       ),
-      trailingButton: AppStyles.kEmptyWidget,
+      trailingButton: GestureDetector(
+        onTap: _onSavePressed,
+        child: Text(
+          S.current.saveLabel,
+          style: Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary),
+        ),
+      ),
       title: S.current.mealRatioLabel,
     );
   }
@@ -295,6 +314,9 @@ extension _WidgetFactories on _MealRatioPageState {
         decoration: _Styles.getFieldInputDecoration(),
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+        ],
         onChanged: (value) {
           onMealRatioChanged(settings.key, value);
         },

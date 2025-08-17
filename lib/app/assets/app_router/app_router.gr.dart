@@ -667,12 +667,14 @@ class PersonalizingPlanLoadingRoute
   PersonalizingPlanLoadingRoute({
     Key? key,
     PlanAction? planAction = PlanAction.CREATE,
+    Map<String, String>? mealRatio,
     List<PageRouteInfo>? children,
   }) : super(
          PersonalizingPlanLoadingRoute.name,
          args: PersonalizingPlanLoadingRouteArgs(
            key: key,
            planAction: planAction,
+           mealRatio: mealRatio,
          ),
          initialChildren: children,
        );
@@ -688,6 +690,7 @@ class PersonalizingPlanLoadingRoute
       return PersonalizingPlanLoadingPage(
         key: args.key,
         planAction: args.planAction,
+        mealRatio: args.mealRatio,
       );
     },
   );
@@ -697,15 +700,18 @@ class PersonalizingPlanLoadingRouteArgs {
   const PersonalizingPlanLoadingRouteArgs({
     this.key,
     this.planAction = PlanAction.CREATE,
+    this.mealRatio,
   });
 
   final Key? key;
 
   final PlanAction? planAction;
 
+  final Map<String, String>? mealRatio;
+
   @override
   String toString() {
-    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction}';
+    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction, mealRatio: $mealRatio}';
   }
 }
 

@@ -2449,6 +2449,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Total ratio must equal to 100%`
+  String get ratioError {
+    return Intl.message(
+      'Total ratio must equal to 100%',
+      name: 'ratioError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

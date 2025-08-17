@@ -304,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "quantityErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Quantity must be greater than zero."),
         "quantityLabel": MessageLookupByLibrary.simpleMessage("Quantity"),
+        "ratioError": MessageLookupByLibrary.simpleMessage(
+            "Total ratio must equal to 100%"),
         "ratioErrorMessage": MessageLookupByLibrary.simpleMessage(
             "The total must equal 100%. Please adjust the values."),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
