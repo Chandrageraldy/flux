@@ -2469,6 +2469,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Impact on Targets`
+  String get impactOnTargetsLabel {
+    return Intl.message(
+      'Impact on Targets',
+      name: 'impactOnTargetsLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

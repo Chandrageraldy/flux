@@ -14,8 +14,8 @@ class MealDetailsFoodDisplayCard extends StatelessWidget {
     return GestureDetector(
       onTap: onLoggedFoodTap,
       child: Container(
-        decoration: BoxDecoration(color: context.theme.colorScheme.onPrimary, borderRadius: AppStyles.kRad10),
-        padding: AppStyles.kPaddSV6H12,
+        decoration: _Styles.getContainerDecoration(context),
+        padding: AppStyles.kPaddSV8H12,
         child: Row(
           spacing: AppStyles.kSpac8,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +27,7 @@ class MealDetailsFoodDisplayCard extends StatelessWidget {
                 children: [
                   Text(
                     meal.foodName ?? '',
-                    style: _Styles.labelTextStyle(context),
+                    style: _Styles.getLabelTextStyle(context),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
@@ -69,7 +69,18 @@ extension _WidgetFactories on MealDetailsFoodDisplayCard {}
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Label Text Style
-  static TextStyle labelTextStyle(BuildContext context) {
+  static TextStyle getLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.small);
+  }
+
+  // Container Decoration
+  static BoxDecoration getContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
+    );
   }
 }

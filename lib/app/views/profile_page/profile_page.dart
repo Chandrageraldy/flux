@@ -74,7 +74,10 @@ extension _WidgetFactories on _ProfilePageState {
   Widget getCustomAppBar() {
     return CustomAppBar(
       leadingButton: AppStyles.kEmptyWidget,
-      trailingButton: AppStyles.kEmptyWidget,
+      trailingButton: GestureDetector(
+        onTap: () => context.router.push(AccountRoute()),
+        child: FaIcon(FontAwesomeIcons.gear, size: AppStyles.kSize18),
+      ),
       title: S.current.profileLabel,
     );
   }

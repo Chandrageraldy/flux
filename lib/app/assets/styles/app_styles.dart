@@ -155,6 +155,7 @@ class AppStyles {
   static const kSize45 = 45.0;
   static const kSize48 = 48.0;
   static const kSize50 = 50.0;
+  static const kSize52 = 52.0;
   static const kSize56 = 56.0;
   static const kSize64 = 64.0;
   static const kSize70 = 70.0;

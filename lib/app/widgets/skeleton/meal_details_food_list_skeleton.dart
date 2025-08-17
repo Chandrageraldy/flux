@@ -19,7 +19,7 @@ class MealDetailsFoodListSkeleton extends StatelessWidget {
 
   Widget getSkeletonCard(BuildContext context) {
     return Skeleton(
-      height: AppStyles.kSize50,
+      height: AppStyles.kSize52,
     );
   }
 }

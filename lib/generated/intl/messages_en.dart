@@ -124,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Image taken from screen"),
         "imageTakenFromScreenMessage": MessageLookupByLibrary.simpleMessage(
             "It looks like this image was taken from a screen. Please upload an original photo of your meal."),
+        "impactOnTargetsLabel":
+            MessageLookupByLibrary.simpleMessage("Impact on Targets"),
         "ingredientsLabel": MessageLookupByLibrary.simpleMessage("Ingredients"),
         "instructionsUnclearLabel":
             MessageLookupByLibrary.simpleMessage("Instructions unclear"),

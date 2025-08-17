@@ -8,6 +8,7 @@ import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/empty_result/empty_result.dart';
 import 'package:flux/app/widgets/food/meal_details_food_display_card.dart';
 import 'package:flux/app/widgets/food/meal_macronutrient_intake_progress.dart';
+import 'package:flux/app/widgets/food/nutrient_intake_progress.dart';
 import 'package:flux/app/widgets/skeleton/meal_details_food_list_skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -67,8 +68,11 @@ class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
       child: Column(
         children: [
           getHeaderContainer(
-              _getMealRatioModel(widget.mealType), FunctionUtils.calculateTotalNutrition(loggedFoodsList)),
+            _getMealRatioModel(widget.mealType),
+            FunctionUtils.calculateTotalNutrition(loggedFoodsList),
+          ),
           getLoggedMeals(loggedFoodsList, isLoading),
+          getImpactOnTargets(FunctionUtils.calculateTotalNutrition(loggedFoodsList), loggedFoodsList, isLoading),
         ],
       ),
     );
@@ -131,7 +135,10 @@ extension _PrivateMethods on _MealDetailsPageState {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _MealDetailsPageState {
+extension _Actions on _MealDetailsPageState {}
+
+// * ------------------------ WidgetFactories ------------------------
+extension _WidgetFactories on _MealDetailsPageState {
   // Header Container
   Widget getHeaderContainer(MealRatioModel? mealRatio, Map<String, int> totalNutrition) {
     return Container(
@@ -304,10 +311,70 @@ extension _Actions on _MealDetailsPageState {
       ),
     );
   }
-}
 
-// * ------------------------ WidgetFactories ------------------------
-extension _WidgetFactories on _MealDetailsPageState {}
+  // Impact on Targets
+  Widget getImpactOnTargets(Map<String, int> totalNutrition, List<LoggedFoodModel> loggedFoodsList, bool isLoading) {
+    final plan = SharedPreferenceHandler().getPlan();
+
+    final targetCalorie = (plan?.calorieKcal ?? 0).toInt();
+    final targetProtein = (plan?.proteinG ?? 0).toInt();
+    final targetCarbs = (plan?.carbsG ?? 0).toInt();
+    final targetFat = (plan?.fatG ?? 0).toInt();
+
+    final currentCalorie = totalNutrition[Nutrition.calorie.key] ?? 0;
+    final currentProtein = totalNutrition[Nutrition.protein.key] ?? 0;
+    final currentCarbs = totalNutrition[Nutrition.carbs.key] ?? 0;
+    final currentFat = totalNutrition[Nutrition.fat.key] ?? 0;
+
+    if (isLoading || loggedFoodsList.isEmpty) {
+      return AppStyles.kEmptyWidget;
+    }
+
+    return Padding(
+      padding: AppStyles.kPaddSV12H16,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppStyles.kSpac8,
+        children: [
+          Text(S.current.impactOnTargetsLabel.toUpperCase(), style: _Styles.getMealsLoggedLabelTextStyle(context)),
+          Container(
+            decoration: _Styles.getImpactOnTargetsDecoration(context),
+            padding: AppStyles.kPaddSV12H12,
+            child: Column(
+              spacing: AppStyles.kSpac12,
+              children: [
+                NutrientIntakeProgress(
+                  nutrition: Nutrition.calorie,
+                  percentage: (currentCalorie / targetCalorie).clamp(0, 1),
+                  currentValue: currentCalorie,
+                  targetValue: targetCalorie,
+                ),
+                NutrientIntakeProgress(
+                  nutrition: Nutrition.protein,
+                  percentage: (currentProtein / targetProtein).clamp(0, 1),
+                  currentValue: currentProtein,
+                  targetValue: targetProtein,
+                ),
+                NutrientIntakeProgress(
+                  nutrition: Nutrition.carbs,
+                  percentage: (currentCarbs / targetCarbs).clamp(0, 1),
+                  currentValue: currentCarbs,
+                  targetValue: targetCarbs,
+                ),
+                NutrientIntakeProgress(
+                  nutrition: Nutrition.fat,
+                  percentage: (currentFat / targetFat).clamp(0, 1),
+                  currentValue: currentFat,
+                  targetValue: targetFat,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
@@ -345,5 +412,16 @@ abstract class _Styles {
   // Meals Logged Label Text Style
   static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withCustomSize(11);
+  }
+
+  // Impact on Targets Container
+  static BoxDecoration getImpactOnTargetsDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
+    );
   }
 }
