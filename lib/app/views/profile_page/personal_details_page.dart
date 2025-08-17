@@ -92,6 +92,15 @@ extension _Actions on _PersonalDetailsPageState {
   }
 
   Future<void> _onSavePressed() async {
+    final personalDetails = context.read<PersonalDetailsViewModel>().modifiedPersonalDetails;
+
+    if (personalDetails[PersonalDetailsSettings.weight.key] !=
+            personalDetails[PersonalDetailsSettings.targetWeight.key] &&
+        personalDetails[PersonalDetailsSettings.targetWeeklyChange.key] == '') {
+      WidgetUtils.showSnackBar(context, S.current.targetWeeklyChangeError);
+      return;
+    }
+
     final response = await tryLoad(context, () => context.read<PersonalDetailsViewModel>().updateBodyMetrics());
 
     if (response == true && mounted) {

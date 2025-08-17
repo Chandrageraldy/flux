@@ -668,6 +668,7 @@ class PersonalizingPlanLoadingRoute
     Key? key,
     PlanAction? planAction = PlanAction.CREATE,
     Map<String, String>? mealRatio,
+    Map<String, String>? nutritionGoals,
     List<PageRouteInfo>? children,
   }) : super(
          PersonalizingPlanLoadingRoute.name,
@@ -675,6 +676,7 @@ class PersonalizingPlanLoadingRoute
            key: key,
            planAction: planAction,
            mealRatio: mealRatio,
+           nutritionGoals: nutritionGoals,
          ),
          initialChildren: children,
        );
@@ -691,6 +693,7 @@ class PersonalizingPlanLoadingRoute
         key: args.key,
         planAction: args.planAction,
         mealRatio: args.mealRatio,
+        nutritionGoals: args.nutritionGoals,
       );
     },
   );
@@ -701,6 +704,7 @@ class PersonalizingPlanLoadingRouteArgs {
     this.key,
     this.planAction = PlanAction.CREATE,
     this.mealRatio,
+    this.nutritionGoals,
   });
 
   final Key? key;
@@ -709,9 +713,11 @@ class PersonalizingPlanLoadingRouteArgs {
 
   final Map<String, String>? mealRatio;
 
+  final Map<String, String>? nutritionGoals;
+
   @override
   String toString() {
-    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction, mealRatio: $mealRatio}';
+    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction, mealRatio: $mealRatio, nutritionGoals: $nutritionGoals}';
   }
 }
 

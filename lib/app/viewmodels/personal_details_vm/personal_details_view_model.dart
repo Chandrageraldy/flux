@@ -51,8 +51,6 @@ class PersonalDetailsViewModel extends BaseViewModel {
 
     if (!isTargetWeeklyChangeEnabled) {
       modifiedPersonalDetails[PersonalDetailsSettings.targetWeeklyChange.key] = '';
-    } else {
-      modifiedPersonalDetails[PersonalDetailsSettings.targetWeeklyChange.key] = '0.5';
     }
 
     final weightStr = modifiedPersonalDetails[PersonalDetailsSettings.weight.key];
@@ -78,6 +76,7 @@ class PersonalDetailsViewModel extends BaseViewModel {
     }
 
     final response = await userRepository.updateBodyMetrics(bodyMetrics: modifiedPersonalDetails);
+    checkError(response);
     return response.status == ResponseStatus.COMPLETE;
   }
 }

@@ -42,11 +42,21 @@ class _MealRatioPageState extends BaseStatefulState<_MealRatioPage> {
     final totalRatio = mealRatio[MealRatioSettings.totalRatio.key] ?? '';
 
     return Column(
-      spacing: AppStyles.kSpac12,
       children: [
         getCustomAppBar(),
-        getMealRatioContainer(breakfastRatio, lunchRatio, dinnerRatio, snackRatio, totalRatio),
-        getNutrientInfoContainer(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: AppStyles.kPaddSV16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: AppStyles.kSpac12,
+              children: [
+                getMealRatioContainer(breakfastRatio, lunchRatio, dinnerRatio, snackRatio, totalRatio),
+                getNutrientInfoContainer(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

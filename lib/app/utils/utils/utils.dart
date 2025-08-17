@@ -457,12 +457,22 @@ class FunctionUtils {
     return (totalCalories * (ratio / 100)).toStringAsFixed(0);
   }
 
-  static Map<String, double> getMacroRatio(String dietType) {
+  static Map<String, double> getMacroRatio(
+    String dietType, {
+    double? customProteinRatio,
+    double? customFatRatio,
+    double? customCarbsRatio,
+  }) {
     late double proteinRatio;
     late double fatRatio;
     late double carbsRatio;
 
     switch (dietType) {
+      case 'balanced':
+        proteinRatio = 0.25;
+        fatRatio = 0.25;
+        carbsRatio = 0.50;
+        break;
       case 'keto':
         proteinRatio = 0.20;
         fatRatio = 0.70;
@@ -489,9 +499,9 @@ class FunctionUtils {
         carbsRatio = 0.20;
         break;
       default:
-        proteinRatio = 0.25;
-        fatRatio = 0.25;
-        carbsRatio = 0.50;
+        proteinRatio = (customProteinRatio ?? 25) / 100;
+        fatRatio = (customFatRatio ?? 25) / 100;
+        carbsRatio = (customCarbsRatio ?? 50) / 100;
     }
 
     return {

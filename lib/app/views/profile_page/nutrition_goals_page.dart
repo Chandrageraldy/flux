@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
@@ -7,6 +8,7 @@ import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/nutrition_goals_vm/nutrition_goals_view_model.dart';
+import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,6 +36,9 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
   bool hasDefaultPadding() => false;
 
   @override
+  bool resizeToAvoidBottomInset() => true;
+
+  @override
   Widget body() {
     final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.nutritionGoals);
     final energyTarget = nutritionGoals[NutritionGoalsSettings.energyTarget.key] ?? '';
@@ -44,12 +49,22 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
     final dietType = nutritionGoals[NutritionGoalsSettings.dietType.key] ?? '';
 
     return Column(
-      spacing: AppStyles.kSpac12,
       children: [
         getCustomAppBar(),
-        getEnergyTargetContainer(energyTarget),
-        getEnergyTargetBreakdownContainer(),
-        getMacronutrientRatioContainer(energyTarget, proteinRatio, carbsRatio, fatRatio, totalRatio, dietType),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: AppStyles.kPaddSV16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: AppStyles.kSpac12,
+              children: [
+                getEnergyTargetContainer(energyTarget),
+                getEnergyTargetBreakdownContainer(),
+                getMacronutrientRatioContainer(energyTarget, proteinRatio, carbsRatio, fatRatio, totalRatio, dietType),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -72,6 +87,25 @@ extension _Actions on _NutritionGoalsPageState {
         ?.didChange(macroRatio[NutritionGoalsSettings.carbsRatio.key]?.toStringAsFixed(0));
     _formKey.currentState?.fields[FormFields.fatRatio.name]
         ?.didChange(macroRatio[NutritionGoalsSettings.fatRatio.key]?.toStringAsFixed(0));
+  }
+
+  Future<void> _onSavePressed() async {
+    final nutritionGoals = context.read<NutritionGoalsViewModel>().nutritionGoals;
+
+    if (nutritionGoals[NutritionGoalsSettings.totalRatio.key] == '100') {
+      final response = await tryLoad(context, () => context.read<NutritionGoalsViewModel>().updateBodyMetrics());
+
+      if (response == true && mounted) {
+        context.router.replaceAll(
+          [PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, nutritionGoals: nutritionGoals)],
+        );
+      } else if (mounted) {
+        context.router.maybePop();
+      }
+    } else {
+      WidgetUtils.showSnackBar(context, S.current.ratioError);
+      return;
+    }
   }
 }
 
@@ -137,7 +171,13 @@ extension _WidgetFactories on _NutritionGoalsPageState {
         modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
         onTap: () => context.router.maybePop(),
       ),
-      trailingButton: AppStyles.kEmptyWidget,
+      trailingButton: GestureDetector(
+        onTap: _onSavePressed,
+        child: Text(
+          S.current.saveLabel,
+          style: Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary),
+        ),
+      ),
       title: S.current.nutritionGoalsLabel,
     );
   }
@@ -471,6 +511,9 @@ extension _WidgetFactories on _NutritionGoalsPageState {
         decoration: _Styles.getFieldInputDecoration(),
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+        ],
         onChanged: (value) {
           _onMacroRatioChanged(value, settings);
         },

@@ -351,6 +351,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
+        "targetWeeklyChangeError": MessageLookupByLibrary.simpleMessage(
+            "Target weekly change must be set."),
         "targetWeeklyChangeLabel":
             MessageLookupByLibrary.simpleMessage("Target Weekly Change"),
         "targetWeightDesc": MessageLookupByLibrary.simpleMessage(

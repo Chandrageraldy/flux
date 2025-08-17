@@ -1,4 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
@@ -19,10 +20,12 @@ class PersonalizingPlanLoadingPage extends BaseStatefulPage {
     super.key,
     this.planAction = PlanAction.CREATE,
     this.mealRatio,
+    this.nutritionGoals,
   });
 
   final PlanAction? planAction;
   final Map<String, String>? mealRatio;
+  final Map<String, String>? nutritionGoals;
 
   @override
   State<PersonalizingPlanLoadingPage> createState() => _PersonalizingPlanLoadingPageState();
@@ -103,14 +106,39 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
         ? tdee
         : adjustCaloriesForTargetWeeklyChange(tdee: tdee, targetWeeklyChange: targetWeeklyChange);
 
-    Map<String, double> macroRatio = FunctionUtils.getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
+    Map<String, double> macroRatio = {};
+    final PlanModel? plan = SharedPreferenceHandler().getPlan();
+
+    if (widget.nutritionGoals != null) {
+      // If update from nutrition goals settings, use updated ratio
+      macroRatio = FunctionUtils.getMacroRatio(
+        bm.dietType ?? PlanSelectionValue.balanced.value,
+        customCarbsRatio: double.tryParse(
+          widget.nutritionGoals?[NutritionGoalsSettings.carbsRatio.key] ?? '0',
+        ),
+        customProteinRatio: double.tryParse(
+          widget.nutritionGoals?[NutritionGoalsSettings.proteinRatio.key] ?? '0',
+        ),
+        customFatRatio: double.tryParse(
+          widget.nutritionGoals?[NutritionGoalsSettings.fatRatio.key] ?? '0',
+        ),
+      );
+    } else if (widget.nutritionGoals == null && widget.planAction == PlanAction.UPDATE) {
+      // If update from other plan customization settings, use current ratio
+      macroRatio = FunctionUtils.getMacroRatio(
+        bm.dietType ?? PlanSelectionValue.balanced.value,
+        customCarbsRatio: plan?.carbsRatio,
+        customProteinRatio: plan?.proteinRatio,
+        customFatRatio: plan?.fatRatio,
+      );
+    } else {
+      macroRatio = FunctionUtils.getMacroRatio(bm.dietType ?? PlanSelectionValue.balanced.value);
+    }
+
     Map<String, double> dailyMicronutrients = getDailyMicronutrients(gender, age);
 
     final completeNutrient =
         getCompleteNutrients(adjustedKcalBasedOnTargetWeeklyChange, macroRatio, dailyMicronutrients);
-
-    // ignore: avoid_print
-    print(completeNutrient);
 
     createOrUpdatePersonalizedPlan(completeNutrient);
   }
@@ -250,7 +278,10 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   }
 
   Map<String, double> mealDistribution() {
+    final PlanModel? plan = SharedPreferenceHandler().getPlan();
+
     if (widget.mealRatio != null) {
+      // If update from meal ratio settings, use updated ratio
       return {
         MealRatioSettings.breakfastRatio.key:
             double.tryParse(widget.mealRatio![MealRatioSettings.breakfastRatio.key]?.toString() ?? '0')! / 100,
@@ -260,6 +291,16 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
             double.tryParse(widget.mealRatio![MealRatioSettings.dinnerRatio.key]?.toString() ?? '0')! / 100,
         MealRatioSettings.snackRatio.key:
             double.tryParse(widget.mealRatio![MealRatioSettings.snackRatio.key]?.toString() ?? '0')! / 100,
+      };
+    }
+
+    if (widget.mealRatio == null && widget.planAction == PlanAction.UPDATE) {
+      // If update from other plan customization settings, use current ratio
+      return {
+        MealRatioSettings.breakfastRatio.key: (plan?.breakfastRatio ?? 0) / 100,
+        MealRatioSettings.lunchRatio.key: (plan?.lunchRatio ?? 0) / 100,
+        MealRatioSettings.dinnerRatio.key: (plan?.dinnerRatio ?? 0) / 100,
+        MealRatioSettings.snackRatio.key: (plan?.snackRatio ?? 0) / 100,
       };
     }
 

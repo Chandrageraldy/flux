@@ -251,5 +251,6 @@
     "instructionsUnclearMessage": "Please provide clear and detailed instructions so we can process your request accurately.",
     "usernameDesc": "Choose a username that identifies you in the app.",
     "emailDesc": "Your registered email used for login and account recovery.",
-    "ratioError": "Total ratio must equal to 100%"
+    "ratioError": "Total ratio must equal to 100%",
+    "targetWeeklyChangeError": "Target weekly change must be set."
 }

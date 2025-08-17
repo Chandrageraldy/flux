@@ -2459,6 +2459,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Target weekly change must be set.`
+  String get targetWeeklyChangeError {
+    return Intl.message(
+      'Target weekly change must be set.',
+      name: 'targetWeeklyChangeError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
