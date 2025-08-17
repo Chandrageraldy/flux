@@ -5,7 +5,8 @@ import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class MealRatioViewModel extends BaseViewModel {
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
-  Map<String, String> mealRatio = {};
+  Map<String, String> modifiedMealRatio = {};
+  Map<String, String> unmodifiedMealRatio = {};
 
   MealRatioViewModel() {
     init();
@@ -14,30 +15,36 @@ class MealRatioViewModel extends BaseViewModel {
   void init() {
     final PlanModel? plan = sharedPreferenceHandler.getPlan();
 
-    mealRatio = {
+    modifiedMealRatio = {
       MealRatioSettings.breakfastRatio.key: plan?.breakfastRatio?.toStringAsFixed(0) ?? '',
       MealRatioSettings.lunchRatio.key: plan?.lunchRatio?.toStringAsFixed(0) ?? '',
       MealRatioSettings.dinnerRatio.key: plan?.dinnerRatio?.toStringAsFixed(0) ?? '',
       MealRatioSettings.snackRatio.key: plan?.snackRatio?.toStringAsFixed(0) ?? '',
       MealRatioSettings.totalRatio.key: 100.toString(),
     };
+    unmodifiedMealRatio = modifiedMealRatio;
+    notifyListeners();
   }
 
   void onMealRatioChanged(String key, String value) {
-    mealRatio = {...mealRatio, key: value};
+    modifiedMealRatio = {...modifiedMealRatio, key: value};
 
-    final breakfast = double.tryParse(mealRatio[MealRatioSettings.breakfastRatio.key] ?? '') ?? 0;
-    final lunch = double.tryParse(mealRatio[MealRatioSettings.lunchRatio.key] ?? '') ?? 0;
-    final dinner = double.tryParse(mealRatio[MealRatioSettings.dinnerRatio.key] ?? '') ?? 0;
-    final snack = double.tryParse(mealRatio[MealRatioSettings.snackRatio.key] ?? '') ?? 0;
+    final breakfast = double.tryParse(modifiedMealRatio[MealRatioSettings.breakfastRatio.key] ?? '') ?? 0;
+    final lunch = double.tryParse(modifiedMealRatio[MealRatioSettings.lunchRatio.key] ?? '') ?? 0;
+    final dinner = double.tryParse(modifiedMealRatio[MealRatioSettings.dinnerRatio.key] ?? '') ?? 0;
+    final snack = double.tryParse(modifiedMealRatio[MealRatioSettings.snackRatio.key] ?? '') ?? 0;
 
     final total = breakfast + lunch + dinner + snack;
 
-    mealRatio = {
-      ...mealRatio,
+    modifiedMealRatio = {
+      ...modifiedMealRatio,
       MealRatioSettings.totalRatio.key: total.toStringAsFixed(0),
     };
 
     notifyListeners();
+  }
+
+  bool checkIfNotEdited() {
+    return modifiedMealRatio == unmodifiedMealRatio;
   }
 }

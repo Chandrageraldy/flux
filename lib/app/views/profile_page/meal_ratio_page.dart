@@ -34,7 +34,7 @@ class _MealRatioPageState extends BaseStatefulState<_MealRatioPage> {
 
   @override
   Widget body() {
-    final mealRatio = context.select((MealRatioViewModel vm) => vm.mealRatio);
+    final mealRatio = context.select((MealRatioViewModel vm) => vm.modifiedMealRatio);
     final breakfastRatio = mealRatio[MealRatioSettings.breakfastRatio.key] ?? '';
     final lunchRatio = mealRatio[MealRatioSettings.lunchRatio.key] ?? '';
     final dinnerRatio = mealRatio[MealRatioSettings.dinnerRatio.key] ?? '';
@@ -69,12 +69,18 @@ extension _Actions on _MealRatioPageState {
   }
 
   Future<void> _onSavePressed() async {
-    final mealRatio = context.read<MealRatioViewModel>().mealRatio;
-    if (mealRatio[MealRatioSettings.totalRatio.key] == '100') {
-      context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, mealRatio: mealRatio)]);
+    final isNotEdited = context.read<MealRatioViewModel>().checkIfNotEdited();
+
+    if (isNotEdited) {
+      context.router.maybePop();
     } else {
-      WidgetUtils.showSnackBar(context, S.current.ratioError);
-      return;
+      final mealRatio = context.read<MealRatioViewModel>().modifiedMealRatio;
+      if (mealRatio[MealRatioSettings.totalRatio.key] == '100') {
+        context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, mealRatio: mealRatio)]);
+      } else {
+        WidgetUtils.showSnackBar(context, S.current.ratioError);
+        return;
+      }
     }
   }
 }

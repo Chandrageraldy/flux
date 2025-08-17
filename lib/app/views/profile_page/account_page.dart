@@ -77,8 +77,8 @@ extension _Actions on _AccountPageState {
       formKey: account.formKey,
       initialValue: currentValue,
       maxLines: 1,
-      textFieldHeight: AppStyles.kSize56,
-      textFieldPadding: null,
+      textFieldHeight: AppStyles.kSize45,
+      textFieldPadding: AppStyles.kPaddSH12,
       desc: account.desc,
     );
   }

@@ -116,6 +116,7 @@ extension _Actions on _MealScanResultPageState {
       onPressed: _onEnhancePressed,
       maxLines: 5,
       minLines: 3,
+      textFieldPadding: AppStyles.kPaddSH12,
     );
   }
 

@@ -40,7 +40,7 @@ class _NutritionGoalsPageState extends BaseStatefulState<_NutritionGoalsPage> {
 
   @override
   Widget body() {
-    final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.nutritionGoals);
+    final nutritionGoals = context.select((NutritionGoalsViewModel vm) => vm.modifiedNutritionGoals);
     final energyTarget = nutritionGoals[NutritionGoalsSettings.energyTarget.key] ?? '';
     final proteinRatio = nutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '';
     final carbsRatio = nutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '';
@@ -90,7 +90,7 @@ extension _Actions on _NutritionGoalsPageState {
   }
 
   Future<void> _onSavePressed() async {
-    final nutritionGoals = context.read<NutritionGoalsViewModel>().nutritionGoals;
+    final nutritionGoals = context.read<NutritionGoalsViewModel>().modifiedNutritionGoals;
 
     if (nutritionGoals[NutritionGoalsSettings.totalRatio.key] == '100') {
       final response = await tryLoad(context, () => context.read<NutritionGoalsViewModel>().updateBodyMetrics());

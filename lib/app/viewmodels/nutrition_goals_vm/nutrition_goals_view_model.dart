@@ -9,7 +9,8 @@ import 'package:flux/app/viewmodels/base_view_model.dart';
 class NutritionGoalsViewModel extends BaseViewModel {
   final UserRepository userRepository = UserRepository();
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
-  Map<String, String> nutritionGoals = {};
+  Map<String, String> modifiedNutritionGoals = {};
+  Map<String, String> unmodifiedNutritionGoals = {};
 
   NutritionGoalsViewModel() {
     _init();
@@ -19,7 +20,7 @@ class NutritionGoalsViewModel extends BaseViewModel {
     final UserProfileModel? user = sharedPreferenceHandler.getUser();
     final PlanModel? plan = sharedPreferenceHandler.getPlan();
 
-    nutritionGoals = {
+    modifiedNutritionGoals = {
       NutritionGoalsSettings.energyTarget.key: plan?.calorieKcal?.toStringAsFixed(0) ?? '',
       NutritionGoalsSettings.proteinRatio.key: plan?.proteinRatio?.toStringAsFixed(0) ?? '',
       NutritionGoalsSettings.carbsRatio.key: plan?.carbsRatio?.toStringAsFixed(0) ?? '',
@@ -27,20 +28,21 @@ class NutritionGoalsViewModel extends BaseViewModel {
       NutritionGoalsSettings.dietType.key: user?.bodyMetrics?.dietType ?? '',
       NutritionGoalsSettings.totalRatio.key: 100.toString(),
     };
+    unmodifiedNutritionGoals = modifiedNutritionGoals;
     notifyListeners();
   }
 
   void onMacroRatioChanged(String key, String value) {
-    nutritionGoals = {...nutritionGoals, key: value};
+    modifiedNutritionGoals = {...modifiedNutritionGoals, key: value};
 
-    final protein = double.tryParse(nutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '') ?? 0;
-    final carbs = double.tryParse(nutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '') ?? 0;
-    final fat = double.tryParse(nutritionGoals[NutritionGoalsSettings.fatRatio.key] ?? '') ?? 0;
+    final protein = double.tryParse(modifiedNutritionGoals[NutritionGoalsSettings.proteinRatio.key] ?? '') ?? 0;
+    final carbs = double.tryParse(modifiedNutritionGoals[NutritionGoalsSettings.carbsRatio.key] ?? '') ?? 0;
+    final fat = double.tryParse(modifiedNutritionGoals[NutritionGoalsSettings.fatRatio.key] ?? '') ?? 0;
 
     final total = protein + carbs + fat;
 
-    nutritionGoals = {
-      ...nutritionGoals,
+    modifiedNutritionGoals = {
+      ...modifiedNutritionGoals,
       NutritionGoalsSettings.totalRatio.key: total.toStringAsFixed(0),
     };
 
@@ -48,18 +50,22 @@ class NutritionGoalsViewModel extends BaseViewModel {
   }
 
   void onDietTypeChanged(String key, String value, Map<String, double> macroRatio) {
-    nutritionGoals = {
-      ...nutritionGoals,
+    modifiedNutritionGoals = {
+      ...modifiedNutritionGoals,
       key: value,
       NutritionGoalsSettings.proteinRatio.key: macroRatio[NutritionGoalsSettings.proteinRatio.key]!.toStringAsFixed(0),
       NutritionGoalsSettings.fatRatio.key: macroRatio[NutritionGoalsSettings.fatRatio.key]!.toStringAsFixed(0),
       NutritionGoalsSettings.carbsRatio.key: macroRatio[NutritionGoalsSettings.carbsRatio.key]!.toStringAsFixed(0),
     };
     notifyListeners();
-    debugPrint('$nutritionGoals');
+    debugPrint('$modifiedNutritionGoals');
   }
 
   Future<bool> updateBodyMetrics() async {
+    if (modifiedNutritionGoals == unmodifiedNutritionGoals) {
+      return false;
+    }
+
     final UserProfileModel? user = sharedPreferenceHandler.getUser();
     final BodyMetricsModel? bodyMetrics = user?.bodyMetrics;
 
@@ -72,7 +78,7 @@ class NutritionGoalsViewModel extends BaseViewModel {
       PersonalDetailsSettings.exerciseLevel.key: bodyMetrics?.exerciseLevel ?? '',
       PersonalDetailsSettings.targetWeight.key: bodyMetrics?.targetWeight ?? '',
       PersonalDetailsSettings.targetWeeklyChange.key: bodyMetrics?.targetWeeklyChange ?? '',
-      TableCol.dietType: nutritionGoals[NutritionGoalsSettings.dietType.key] ?? '',
+      TableCol.dietType: modifiedNutritionGoals[NutritionGoalsSettings.dietType.key] ?? '',
       TableCol.goal: bodyMetrics?.goal ?? '',
     };
 
