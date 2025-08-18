@@ -7,58 +7,85 @@ enum GeminiRequestType {
   imageWithText,
 }
 
+enum GeminiResponseMimeType {
+  json('application/json'),
+  text('text/plain');
+
+  final String mimeType;
+
+  const GeminiResponseMimeType(this.mimeType);
+}
+
 final jsonSchema = GeminiJsonSchema.mealScan;
 
 final systemInstruction = Content.system(GeminiSystemInstruction.mealScan);
 
 abstract class GeminiBaseService {
+  // keep chat history in memory
+  final List<Content> _chatHistory = [];
+
   Future<Response> callGemini({
     required GeminiRequestType requestType,
     required String textPrompt,
     XFile? imageFile,
     Schema? jsonSchema,
     required String systemInstruction,
+    bool isChat = false, // 👈 flag to know if it's multi-turn
   }) async {
     try {
       GenerateContentResponse response;
 
       final model = FirebaseAI.googleAI().generativeModel(
         model: 'gemini-2.5-flash',
-        generationConfig: GenerationConfig(responseMimeType: 'application/json', responseSchema: jsonSchema),
+        generationConfig: GenerationConfig(
+          responseMimeType: 'application/json',
+          responseSchema: jsonSchema,
+        ),
         systemInstruction: Content.system(systemInstruction),
       );
 
+      List<Content> prompt = [];
+
+      if (isChat) {
+        prompt.addAll(_chatHistory);
+      }
+
       switch (requestType) {
         case GeminiRequestType.text:
-          final prompt = [Content.text(textPrompt)];
-          response = await model.generateContent(prompt);
+          final userMessage = Content.text(textPrompt);
+          prompt.add(userMessage);
           break;
+
         case GeminiRequestType.imageWithText:
-          final prompt = TextPart(textPrompt);
+          final textPart = TextPart(textPrompt);
           final image = await imageFile!.readAsBytes();
           final imagePart = InlineDataPart('image/jpeg', image);
-          response = await model.generateContent([
-            Content.multi([prompt, imagePart])
-          ]);
-          // final prompt = TextPart(textPrompt);
-
-          // // Load dummy image from assets
-          // final image = await rootBundle.load(ImagePath.fluxLogo);
-          // final imageBytes = image.buffer.asUint8List();
-
-          // final imagePart = InlineDataPart('image/jpeg', imageBytes);
-
-          // response = await model.generateContent([
-          //   Content.multi([prompt, imagePart])
-          // ]);
+          final userMessage = Content.multi([textPart, imagePart]);
+          prompt.add(userMessage);
           break;
       }
-      // debugPrint(response.text);
-      return Response.complete(response.text);
+
+      // send to model
+      response = await model.generateContent(prompt);
+
+      final reply = response.text ?? '';
+
+      if (isChat) {
+        // store both user + model messages in history
+        _chatHistory.add(Content.text(textPrompt));
+        _chatHistory.add(Content.model([TextPart(reply)]));
+      }
+
+      return Response.complete(reply);
     } catch (e) {
       debugPrint(e.toString());
       return Response.error(e.toString());
     }
+  }
+
+  // 👇 optional helper to clear conversation
+  void resetChat() {
+    _chatHistory.clear();
   }
 }
 

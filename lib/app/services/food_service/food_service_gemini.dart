@@ -9,8 +9,8 @@ class FoodServiceGemini extends GeminiBaseService {
       requestType: GeminiRequestType.imageWithText,
       textPrompt: 'Analyze this food image based on the provided system instruction and json schema',
       imageFile: imageFile,
-      jsonSchema: GeminiJsonSchema.mealScan,
       systemInstruction: GeminiSystemInstruction.mealScan,
+      jsonSchema: GeminiJsonSchema.mealScan,
     );
   }
 
