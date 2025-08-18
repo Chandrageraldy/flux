@@ -41,6 +41,38 @@ class BarcodeScanRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ChiaChatbotLoadingPage]
+class ChiaChatbotLoadingRoute extends PageRouteInfo<void> {
+  const ChiaChatbotLoadingRoute({List<PageRouteInfo>? children})
+      : super(ChiaChatbotLoadingRoute.name, initialChildren: children);
+
+  static const String name = 'ChiaChatbotLoadingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChiaChatbotLoadingPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ChiaChatbotNavigatorPage]
+class ChiaChatbotNavigatorRoute extends PageRouteInfo<void> {
+  const ChiaChatbotNavigatorRoute({List<PageRouteInfo>? children})
+      : super(ChiaChatbotNavigatorRoute.name, initialChildren: children);
+
+  static const String name = 'ChiaChatbotNavigatorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChiaChatbotNavigatorPage();
+    },
+  );
+}
+
+/// generated route for
 /// [ChiaChatbotPage]
 class ChiaChatbotRoute extends PageRouteInfo<void> {
   const ChiaChatbotRoute({List<PageRouteInfo>? children}) : super(ChiaChatbotRoute.name, initialChildren: children);

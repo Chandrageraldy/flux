@@ -54,7 +54,7 @@ class _PersonalizingPlanLoadingPageState extends BaseStatefulState<Personalizing
             padding: AppStyles.kPaddSH20,
             child: Text(
               S.current.personalizingYourPlanLoadingText,
-              style: _Styles.personalizingPlanLabelTextStyle(),
+              style: _Styles.getPersonalizingPlanLabelTextStyle(),
               textAlign: TextAlign.center,
             ),
           ),
@@ -409,7 +409,8 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
-  static TextStyle personalizingPlanLabelTextStyle() {
+  // Personalizing Plan Label Text Style
+  static TextStyle getPersonalizingPlanLabelTextStyle() {
     return Quicksand.medium.withSize(FontSizes.large);
   }
 }

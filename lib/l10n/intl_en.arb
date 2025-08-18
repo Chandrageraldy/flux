@@ -256,5 +256,9 @@
     "impactOnTargetsLabel": "Impact on Targets",
     "dailyFullReportLabel": "Daily Full Report",
     "macronutrientsProgressLabel": "Macronutrients Progress",
-    "completeNutrientsLabel": "Complete Nutrients"
+    "completeNutrientsLabel": "Complete Nutrients",
+    "chiaLabel": "Chia",
+    "gemini25Label": "Gemini 2.5",
+    "nutritionSpecialistLabel": "Nutrition Specialist",
+    "typeToStartChattingLabel": "Type to start chatting..."
 }

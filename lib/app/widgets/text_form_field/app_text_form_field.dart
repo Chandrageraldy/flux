@@ -21,6 +21,7 @@ class AppTextFormField extends StatelessWidget {
     this.minLines,
     this.topLabelTextStyle,
     this.borderColor,
+    this.isEnabled = true,
     super.key,
   });
 
@@ -41,6 +42,7 @@ class AppTextFormField extends StatelessWidget {
   final int? minLines;
   final TextStyle? topLabelTextStyle;
   final Color? borderColor;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,7 @@ extension _WidgetFactories on AppTextFormField {
         obscureText: field == FormFields.password,
         keyboardType: keyboardType,
         validator: validator,
+        enabled: isEnabled,
         onChanged: onChanged == null
             ? null
             : (value) {

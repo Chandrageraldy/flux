@@ -2509,6 +2509,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Chia`
+  String get chiaLabel {
+    return Intl.message(
+      'Chia',
+      name: 'chiaLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gemini 2.5`
+  String get gemini25Label {
+    return Intl.message(
+      'Gemini 2.5',
+      name: 'gemini25Label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nutrition Specialist`
+  String get nutritionSpecialistLabel {
+    return Intl.message(
+      'Nutrition Specialist',
+      name: 'nutritionSpecialistLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type to start chatting...`
+  String get typeToStartChattingLabel {
+    return Intl.message(
+      'Type to start chatting...',
+      name: 'typeToStartChattingLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

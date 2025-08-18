@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
+        "chiaLabel": MessageLookupByLibrary.simpleMessage("Chia"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
         "completeNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Complete Nutrients"),
@@ -112,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "I work out almost every day."),
         "frequentLabel": MessageLookupByLibrary.simpleMessage("5+ times/week"),
         "fullReportLabel": MessageLookupByLibrary.simpleMessage("Full Report"),
+        "gemini25Label": MessageLookupByLibrary.simpleMessage("Gemini 2.5"),
         "genderDesc": MessageLookupByLibrary.simpleMessage(
             "Used to personalize your health and calorie estimates."),
         "genderLabel": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -233,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nutrition Goals"),
         "nutritionScoreLabel":
             MessageLookupByLibrary.simpleMessage("AI\'s Nutrition Score"),
+        "nutritionSpecialistLabel":
+            MessageLookupByLibrary.simpleMessage("Nutrition Specialist"),
         "nutritionalInformationLabel":
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "obesityLabel": MessageLookupByLibrary.simpleMessage("Obesity"),
@@ -379,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Total Daily Energy Expenditure (TDEE)"),
         "tryAgainLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
+        "typeToStartChattingLabel":
+            MessageLookupByLibrary.simpleMessage("Type to start chatting..."),
         "underweightLabel": MessageLookupByLibrary.simpleMessage("Underweight"),
         "useAiMealScanLabel":
             MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),

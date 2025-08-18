@@ -37,7 +37,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
               ? null
               : FloatingActionButton(
                   onPressed: () {
-                    context.router.push(ChiaChatbotRoute());
+                    context.router.push(ChiaChatbotNavigatorRoute(children: [ChiaChatbotLoadingRoute()]));
                   },
                   backgroundColor: context.theme.colorScheme.secondary,
                   mini: true,

@@ -109,6 +109,18 @@ class AppStyles {
   static final kRadOBL10BR10 = BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10));
   static final kRadOBL15BR15 = BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15));
   static final kRadOBL20BR20 = BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20));
+  static final kRadOBL10BR10TL0TR10 = BorderRadius.only(
+    bottomLeft: Radius.circular(10),
+    bottomRight: Radius.circular(10),
+    topLeft: Radius.circular(0),
+    topRight: Radius.circular(10),
+  );
+  static final kRadOBL10BR10TL10TR0 = BorderRadius.only(
+    bottomLeft: Radius.circular(10),
+    bottomRight: Radius.circular(10),
+    topLeft: Radius.circular(10),
+    topRight: Radius.circular(0),
+  );
 
   // Sized Box
   static final kEmptyWidget = const SizedBox.shrink();

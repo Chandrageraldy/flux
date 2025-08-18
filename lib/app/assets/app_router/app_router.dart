@@ -6,6 +6,8 @@ import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
 import 'package:flux/app/views/auth_page/signup_page.dart';
+import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_loading_page.dart';
+import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_navigator_page.dart';
 import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_page.dart';
 import 'package:flux/app/views/daily_report_page/daily_report_page.dart';
 import 'package:flux/app/views/dashboard_page/dashboard_navigator_page.dart';
@@ -94,6 +96,7 @@ class AppRouter extends RootStackRouter {
         getMealScanLoggedFoodDetailsRoutes(),
         AutoRoute(page: DailyReportRoute.page),
         AutoRoute(page: ChiaChatbotRoute.page),
+        getChiaChatbotRoutes(),
       ],
     );
   }
@@ -114,6 +117,16 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(page: MealScanLoggedFoodDetailsRoute.page, initial: true),
         AutoRoute(page: LoggedFoodIngredientDetailsRoute.page)
+      ],
+    );
+  }
+
+  AutoRoute getChiaChatbotRoutes() {
+    return AutoRoute(
+      page: ChiaChatbotNavigatorRoute.page,
+      children: [
+        AutoRoute(page: ChiaChatbotLoadingRoute.page, initial: true),
+        AutoRoute(page: ChiaChatbotRoute.page),
       ],
     );
   }

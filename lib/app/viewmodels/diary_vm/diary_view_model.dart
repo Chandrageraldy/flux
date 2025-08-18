@@ -13,6 +13,5 @@ class DiaryViewModel extends BaseViewModel {
     checkError(response);
     loggedFoodsList = response.data as List<LoggedFoodModel>;
     notifyListeners();
-    // log(loggedFoodsList.toString());
   }
 }
