@@ -6,6 +6,7 @@ import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
 import 'package:flux/app/views/auth_page/signup_page.dart';
+import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_page.dart';
 import 'package:flux/app/views/daily_report_page/daily_report_page.dart';
 import 'package:flux/app/views/dashboard_page/dashboard_navigator_page.dart';
 import 'package:flux/app/views/dashboard_page/dashboard_page.dart';
@@ -91,7 +92,8 @@ class AppRouter extends RootStackRouter {
         getMealScanRoutes(),
         AutoRoute(page: FoodSearchLoggedFoodDetailsRoute.page),
         getMealScanLoggedFoodDetailsRoutes(),
-        AutoRoute(page: DailyReportRoute.page)
+        AutoRoute(page: DailyReportRoute.page),
+        AutoRoute(page: ChiaChatbotRoute.page),
       ],
     );
   }

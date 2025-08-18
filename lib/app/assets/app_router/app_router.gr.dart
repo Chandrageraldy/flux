@@ -41,6 +41,21 @@ class BarcodeScanRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ChiaChatbotPage]
+class ChiaChatbotRoute extends PageRouteInfo<void> {
+  const ChiaChatbotRoute({List<PageRouteInfo>? children}) : super(ChiaChatbotRoute.name, initialChildren: children);
+
+  static const String name = 'ChiaChatbotRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChiaChatbotPage();
+    },
+  );
+}
+
+/// generated route for
 /// [DailyReportPage]
 class DailyReportRoute extends PageRouteInfo<DailyReportRouteArgs> {
   DailyReportRoute({

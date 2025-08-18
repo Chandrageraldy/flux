@@ -5,7 +5,7 @@ import 'package:flux/app/widgets/food/meal_food_display_card.dart';
 import 'package:flux/app/widgets/food/nutrition_tag.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MealDiaryCard extends StatelessWidget {
+class MealDiaryCard extends StatefulWidget {
   const MealDiaryCard({
     super.key,
     required this.mealType,
@@ -20,6 +20,13 @@ class MealDiaryCard extends StatelessWidget {
   final VoidCallback getLoggedFoods;
 
   @override
+  State<MealDiaryCard> createState() => _MealDiaryCardState();
+}
+
+class _MealDiaryCardState extends State<MealDiaryCard> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _onHeaderTap(context),
@@ -29,36 +36,27 @@ class MealDiaryCard extends StatelessWidget {
         child: Column(
           children: [
             getHeaderContainer(context),
-            if (meals.isNotEmpty)
-              ListView.separated(
-                padding: AppStyles.kPadd16,
-                itemCount: meals.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final meal = meals[index];
-                  return MealFoodDisplayCard(meal: meal, onLoggedFoodTap: () => _onLoggedFoodTap(meal, context));
-                },
-                separatorBuilder: (_, __) => const SizedBox(height: AppStyles.kSize12),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text('No meals logged', style: Theme.of(context).textTheme.bodySmall),
-              ),
+            if (_isExpanded) getMealListView(context),
           ],
         ),
       ),
     );
   }
+
+  // Enable Set State inside Extension
+  void _setState(VoidCallback fn) {
+    if (mounted) {
+      setState(fn);
+    }
+  }
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on MealDiaryCard {
+extension _Actions on _MealDiaryCardState {
   void _onHeaderTap(BuildContext context) {
-    context.router.push(MealDetailsRoute(mealType: mealType, selectedDate: selectedDate)).then((result) {
+    context.router.push(MealDetailsRoute(mealType: widget.mealType, selectedDate: widget.selectedDate)).then((result) {
       if (result == true) {
-        getLoggedFoods();
+        widget.getLoggedFoods();
       }
     });
   }
@@ -67,29 +65,32 @@ extension _Actions on MealDiaryCard {
     if (loggedFood.source == LogSource.foodSearch.value) {
       context.router.push(FoodSearchLoggedFoodDetailsRoute(loggedFood: loggedFood)).then((result) {
         if (result == true) {
-          getLoggedFoods();
+          widget.getLoggedFoods();
         }
       });
     } else {
       context.router.push(MealScanLoggedFoodNavigatorRoute(loggedFood: loggedFood)).then((result) {
         if (result == true) {
-          getLoggedFoods();
+          widget.getLoggedFoods();
         }
       });
     }
   }
+
+  void _toggleExpanded() {
+    _setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
 }
 
-// * ------------------------ PrivateMethods -------------------------
-extension _PrivateMethods on MealDiaryCard {}
-
 // * ------------------------ WidgetFactories ------------------------
-extension _WidgetFactories on MealDiaryCard {
+extension _WidgetFactories on _MealDiaryCardState {
   // Header Container
   Widget getHeaderContainer(BuildContext context) {
-    final totalNutrition = FunctionUtils.calculateTotalNutrition(meals);
+    final totalNutrition = FunctionUtils.calculateTotalNutrition(widget.meals);
     return Container(
-      padding: AppStyles.kPaddOL16R16T16,
+      padding: AppStyles.kPaddSV12H16,
       child: Row(
         spacing: AppStyles.kSpac4,
         children: [
@@ -110,10 +111,20 @@ extension _WidgetFactories on MealDiaryCard {
             ],
           ),
           Spacer(),
-          Container(
-            padding: AppStyles.kPadd6,
-            decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
-            child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize12),
+          GestureDetector(
+            onTap: _toggleExpanded,
+            child: AnimatedRotation(
+              duration: const Duration(milliseconds: 200),
+              turns: _isExpanded ? 0.5 : 0,
+              child: Container(
+                padding: AppStyles.kPadd6,
+                child: FaIcon(
+                  FontAwesomeIcons.chevronDown,
+                  color: context.theme.colorScheme.primary,
+                  size: AppStyles.kSize16,
+                ),
+              ),
+            ),
           )
         ],
       ),
@@ -122,7 +133,7 @@ extension _WidgetFactories on MealDiaryCard {
 
   // Meal Type Label
   Widget getMealTypeLabel(BuildContext context) {
-    return Text(mealType.label, style: _Styles.getMealTypeLabelTextStyle(context));
+    return Text(widget.mealType.label, style: _Styles.getMealTypeLabelTextStyle(context));
   }
 
   // Calorie Tag
@@ -143,6 +154,26 @@ extension _WidgetFactories on MealDiaryCard {
   // Fat Tag
   Widget getFatTag(BuildContext context, int value) {
     return NutritionTag(label: '$value', tag: MacroNutrients.fat.tag);
+  }
+
+  // Meal List View
+  Widget getMealListView(BuildContext context) {
+    return widget.meals.isNotEmpty
+        ? ListView.separated(
+            padding: AppStyles.kPadd16,
+            itemCount: widget.meals.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final meal = widget.meals[index];
+              return MealFoodDisplayCard(meal: meal, onLoggedFoodTap: () => _onLoggedFoodTap(meal, context));
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: AppStyles.kSize12),
+          )
+        : Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text('No meals logged', style: Theme.of(context).textTheme.bodySmall),
+          );
   }
 }
 

@@ -33,6 +33,16 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
         return Scaffold(
           body: child,
           extendBody: true,
+          floatingActionButton: tabsRouter.activeIndex == 1
+              ? null
+              : FloatingActionButton(
+                  onPressed: () {
+                    context.router.push(ChiaChatbotRoute());
+                  },
+                  backgroundColor: context.theme.colorScheme.secondary,
+                  mini: true,
+                  child: Image.asset(ImagePath.aiStar, height: AppStyles.kSize26, width: AppStyles.kSize26),
+                ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               borderRadius: AppStyles.kRadOTL15TR15,
@@ -103,12 +113,19 @@ extension _WidgetFactories on _DashboardPageState {
 
   BottomNavigationBarItem getLogFoodBarItem() {
     final navigationItem = Container(
-      padding: AppStyles.kPaddSV6H8,
+      padding: AppStyles.kPadd6,
       decoration: BoxDecoration(
-        borderRadius: AppStyles.kRad100,
-        color: context.theme.colorScheme.secondary,
+        shape: BoxShape.circle,
+        color: context.theme.colorScheme.secondary.withAlpha(60),
       ),
-      child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize18),
+      child: Container(
+        padding: AppStyles.kPadd6,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: context.theme.colorScheme.secondary,
+        ),
+        child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize14),
+      ),
     );
 
     return BottomNavigationBarItem(

@@ -30,17 +30,15 @@ abstract class GeminiBaseService {
     XFile? imageFile,
     Schema? jsonSchema,
     required String systemInstruction,
-    bool isChat = false, // 👈 flag to know if it's multi-turn
+    bool isChat = false,
+    GeminiResponseMimeType responseMimeType = GeminiResponseMimeType.json,
   }) async {
     try {
       GenerateContentResponse response;
 
       final model = FirebaseAI.googleAI().generativeModel(
         model: 'gemini-2.5-flash',
-        generationConfig: GenerationConfig(
-          responseMimeType: 'application/json',
-          responseSchema: jsonSchema,
-        ),
+        generationConfig: GenerationConfig(responseMimeType: responseMimeType.mimeType, responseSchema: jsonSchema),
         systemInstruction: Content.system(systemInstruction),
       );
 

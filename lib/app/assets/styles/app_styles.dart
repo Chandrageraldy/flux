@@ -6,6 +6,7 @@ class AppStyles {
   static const kPadd3 = EdgeInsets.all(3.0);
   static const kPadd6 = EdgeInsets.all(6.0);
   static const kPadd8 = EdgeInsets.all(8.0);
+  static const kPadd10 = EdgeInsets.all(10.0);
   static const kPadd12 = EdgeInsets.all(12.0);
   static const kPadd16 = EdgeInsets.all(16.0);
   static const kPadd24 = EdgeInsets.all(24.0);

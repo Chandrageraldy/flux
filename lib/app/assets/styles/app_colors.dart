@@ -33,13 +33,24 @@ class BluePalette {
 
 // Gradient
 class GradientAppColors {
-  static const LinearGradient primaryGradient = LinearGradient(
+  static const LinearGradient primaryGradient2 = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
       Color(0xFFf0f2f9),
       Color(0xFFFFFFFF),
     ],
+  );
+
+  static const LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [
+      Color(0xFFEBF6FF), // softer blue (still noticeable, but gentle)
+      Color(0xFFFFFFFF), // white in the middle
+      Color(0xFFF7F4FF), // soft lavender
+    ],
+    stops: [0.0, 0.5, 1.0],
   );
 
   static const LinearGradient secondaryGradient = LinearGradient(
