@@ -7,6 +7,7 @@ import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:percent_indicator/flutter_percent_indicator.dart';
 
 @RoutePage()
 class DailyReportPage extends BaseStatefulPage {
@@ -36,7 +37,7 @@ class _DailyReportPageState extends BaseStatefulState<DailyReportPage> {
               spacing: AppStyles.kSpac12,
               children: [
                 getDateLabel(),
-                getListContainer(macronutrientsProgressList, S.current.macronutrientsProgressLabel),
+                getMacronutrientsProgressContainer(macronutrientsProgressList, S.current.macronutrientsProgressLabel),
                 getGridContainer(highlightedMicroList, S.current.highlightedMicroLabel),
                 getListContainer(completeNutrientList, S.current.completeNutrientsLabel),
               ],
@@ -71,7 +72,90 @@ extension _WidgetFactories on _DailyReportPageState {
     );
   }
 
-// List Container
+  // Macronutrients Progress Container
+  Widget getMacronutrientsProgressContainer(List<Nutrition> list, String label) {
+    final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
+
+    final macroProgressList = getNutrientProgressList(
+      widget.loggedFoodsList,
+      userPlan,
+      list,
+    );
+
+    final calorie = macroProgressList[0];
+
+    return Padding(
+      padding: AppStyles.kPaddSH12,
+      child: Container(
+        decoration: _Styles.getContainerDecoration(context),
+        padding: AppStyles.kPaddSV12H12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppStyles.kSpac12,
+          children: [
+            Text(label, style: Quicksand.bold.withSize(FontSizes.medium)),
+            Padding(
+              padding: AppStyles.kPaddSH12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: AppStyles.kSpac12,
+                children: [
+                  CircularPercentIndicator(
+                    center: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${calorie.currentValue.toInt()} / ${calorie.targetValue.toInt()}',
+                          style: Quicksand.bold.withSize(FontSizes.small),
+                        ),
+                        Text(NutritionUnit.kcal.label, style: Quicksand.regular.withSize(FontSizes.small)),
+                      ],
+                    ),
+                    progressColor: context.theme.colorScheme.secondary,
+                    percent: (calorie.currentValue / calorie.targetValue).clamp(0, 1),
+                    backgroundColor: context.theme.colorScheme.tertiary,
+                    radius: AppStyles.kSize56,
+                    lineWidth: AppStyles.kSize7,
+                    circularStrokeCap: CircularStrokeCap.round,
+                    animation: true,
+                    animateFromLastPercent: true,
+                    animateToInitialPercent: true,
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: AppStyles.kPaddOB20,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: AppStyles.kSpac12,
+                        children: macroProgressList.map((nutrient) {
+                          if (nutrient.nutrition == Nutrition.calorie) {
+                            return AppStyles.kEmptyWidget;
+                          }
+                          return NutrientIntakeProgress(
+                            nutrition: nutrient.nutrition,
+                            percentage: (nutrient.currentValue / nutrient.targetValue).clamp(0, 1),
+                            currentValue: nutrient.currentValue,
+                            targetValue: nutrient.targetValue,
+                            lineHeight: 7,
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  // List Container
   Widget getListContainer(List<Nutrition> list, String label) {
     final PlanModel? userPlan = SharedPreferenceHandler().getPlan();
 
