@@ -116,6 +116,9 @@ class FoodRepository {
     if (response.error == null) {
       final List foodDetails = response.data['foods'] ?? [];
       var foodDetail = FoodDetailsModel.fromJson(foodDetails.first);
+      if (foodDetail.servingWeightGrams == null) {
+        foodDetail = foodDetail.copyWith(servingWeightGrams: 100);
+      }
       // If the foodDetail does not have altMeasures (==null), create a default one using servingUnit, servingQty, and servingWeightGrams
       if (foodDetail.altMeasures == null) {
         foodDetail = foodDetail.copyWith(
