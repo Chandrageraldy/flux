@@ -262,5 +262,10 @@
     "nutritionSpecialistLabel": "Nutrition Specialist",
     "typeToStartChattingLabel": "Type to start chatting...",
     "experiencePointsLabel": "Experience Points",
-    "dailyGoalLabel": "Daily Goal"
+    "dailyGoalLabel": "Daily Goal",
+    "searchResultLabel": "Search Results",
+    "recentlyViewedLabel": "Recently Viewed",
+    "savedFoodLabel": "Saved Foods",
+    "noSavedItemsLabel": "No Saved Items",
+    "noSavedItemsMessage": "You haven’t saved any food items yet. Save foods to add items here."
 }

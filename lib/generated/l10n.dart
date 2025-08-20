@@ -2569,6 +2569,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Search Results`
+  String get searchResultLabel {
+    return Intl.message(
+      'Search Results',
+      name: 'searchResultLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recently Viewed`
+  String get recentlyViewedLabel {
+    return Intl.message(
+      'Recently Viewed',
+      name: 'recentlyViewedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Foods`
+  String get savedFoodLabel {
+    return Intl.message(
+      'Saved Foods',
+      name: 'savedFoodLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Saved Items`
+  String get noSavedItemsLabel {
+    return Intl.message(
+      'No Saved Items',
+      name: 'noSavedItemsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You haven’t saved any food items yet. Save foods to add items here.`
+  String get noSavedItemsMessage {
+    return Intl.message(
+      'You haven’t saved any food items yet. Save foods to add items here.',
+      name: 'noSavedItemsMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

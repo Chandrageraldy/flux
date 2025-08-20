@@ -2,6 +2,7 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/utils/mixins/error_handling_mixin.dart';
 import 'package:flux/app/viewmodels/food_search_vm/food_search_view_model.dart';
+import 'package:flux/app/widgets/empty_result/empty_result.dart';
 import 'package:flux/app/widgets/food/food_display_card.dart';
 import 'package:flux/app/widgets/skeleton/food_list_skeleton.dart';
 
@@ -26,7 +27,7 @@ class _SavedFoodTabBarViewState extends State<SavedFoodTabBarView> with ErrorHan
     return Padding(
       padding: AppStyles.kPaddSH16,
       child: CustomScrollView(
-        slivers: [getHeader(context), getFoodSliverList(context)],
+        slivers: [getHeader(context), ...getFoodSliverList(context)],
       ),
     );
   }
@@ -74,44 +75,65 @@ extension _WidgetFactories on _SavedFoodTabBarViewState {
   }
 
   // Food Sliver List
-  Widget getFoodSliverList(BuildContext context) {
+  List<Widget> getFoodSliverList(BuildContext context) {
     final savedFoodResults = context.select((FoodSearchViewModel vm) => vm.savedFoodResults);
     final isSavedFoodLoading = context.select((FoodSearchViewModel vm) => vm.isSavedFoodLoading);
 
-    if (isSavedFoodLoading) {
-      return FoodListSkeleton();
-    }
-
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final food = savedFoodResults[index];
-          return Padding(
-            padding: index == 0 ? AppStyles.kPaddSV12 : AppStyles.kPaddOB12,
-            child: FoodDisplayCard(
-              foodName: food.foodName ?? '',
-              calories: food.calorieKcal ?? 0,
-              servingUnit: food.servingUnit ?? '',
-              servingQuantity: food.servingQty ?? 0,
-              brandName: food.brandName ?? '',
-              onCardPressed: () => widget.onFoodCardPressed(
-                FoodResponseModel(
-                  tagId: food.tagId,
-                  foodName: food.foodName,
-                  brandName: food.brandName,
-                  calorieKcal: food.calorieKcal,
-                  servingQty: food.servingQty,
-                  servingUnit: food.servingUnit,
-                  brandNameItemName: food.brandNameItemName,
-                  nixItemId: food.nixItemId,
-                ),
-              ),
-            ),
-          );
-        },
-        childCount: savedFoodResults.length,
+    return [
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: AppStyles.kPaddOT16B6,
+          child: Text(
+            S.current.savedFoodLabel.toUpperCase(),
+            style: Quicksand.semiBold.withCustomSize(11),
+          ),
+        ),
       ),
-    );
+      if (savedFoodResults.isNotEmpty) ...[
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final food = savedFoodResults[index];
+              return Padding(
+                padding: AppStyles.kPaddOB12,
+                child: FoodDisplayCard(
+                  foodName: food.foodName ?? '',
+                  calories: food.calorieKcal ?? 0,
+                  servingUnit: food.servingUnit ?? '',
+                  servingQuantity: food.servingQty ?? 0,
+                  brandName: food.brandName ?? '',
+                  onCardPressed: () => widget.onFoodCardPressed(
+                    FoodResponseModel(
+                      tagId: food.tagId,
+                      foodName: food.foodName,
+                      brandName: food.brandName,
+                      calorieKcal: food.calorieKcal,
+                      servingQty: food.servingQty,
+                      servingUnit: food.servingUnit,
+                      brandNameItemName: food.brandNameItemName,
+                      nixItemId: food.nixItemId,
+                    ),
+                  ),
+                ),
+              );
+            },
+            childCount: savedFoodResults.length,
+          ),
+        ),
+      ] else ...[
+        if (isSavedFoodLoading)
+          FoodListSkeleton()
+        else
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: EmptyResult(
+              imagePath: ImagePath.pizza,
+              title: S.current.noSavedItemsLabel,
+              message: S.current.noSavedItemsMessage,
+            ),
+          ),
+      ]
+    ];
   }
 
   // Save Container

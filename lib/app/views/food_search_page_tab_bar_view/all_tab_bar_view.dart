@@ -60,7 +60,7 @@ extension _WidgetFactories on AllTabBarView {
         child: Padding(
           padding: isRecentFoodLoading ? AppStyles.kPaddOT16 : AppStyles.kPaddOT16B6,
           child: Text(
-            isSearching ? 'SEARCH RESULTS' : 'RECENTLY VIEWED',
+            isSearching ? S.current.searchResultLabel.toUpperCase() : S.current.recentlyViewedLabel.toUpperCase(),
             style: Quicksand.semiBold.withCustomSize(11),
           ),
         ),

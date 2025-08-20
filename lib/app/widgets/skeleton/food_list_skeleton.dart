@@ -9,7 +9,7 @@ class FoodListSkeleton extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) => Padding(
-          padding: AppStyles.kPaddOT12,
+          padding: index == 0 ? AppStyles.kPaddOT6 : AppStyles.kPaddOT12,
           child: getSkeletonCard(context),
         ),
         childCount: 7,

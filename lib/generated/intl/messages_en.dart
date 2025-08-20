@@ -232,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No results found."),
         "noResultFoundMessage": MessageLookupByLibrary.simpleMessage(
             "No results. Check the spelling and try again. Or create your own food listing."),
+        "noSavedItemsLabel":
+            MessageLookupByLibrary.simpleMessage("No Saved Items"),
+        "noSavedItemsMessage": MessageLookupByLibrary.simpleMessage(
+            "You haven’t saved any food items yet. Save foods to add items here."),
         "normalWeightLabel":
             MessageLookupByLibrary.simpleMessage("Normal weight"),
         "nutritionGoalsLabel":
@@ -323,6 +327,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Total ratio must equal to 100%"),
         "ratioErrorMessage": MessageLookupByLibrary.simpleMessage(
             "The total must equal 100%. Please adjust the values."),
+        "recentlyViewedLabel":
+            MessageLookupByLibrary.simpleMessage("Recently Viewed"),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
@@ -332,6 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."),
         "saveYourFoodLabel":
             MessageLookupByLibrary.simpleMessage("Save Your Food"),
+        "savedFoodLabel": MessageLookupByLibrary.simpleMessage("Saved Foods"),
         "savedLabel": MessageLookupByLibrary.simpleMessage("Saved"),
         "scanABarcodeLabel":
             MessageLookupByLibrary.simpleMessage("Scan a barcode"),
@@ -343,6 +350,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scan Your Meal"),
         "searchFoodPlaceholder":
             MessageLookupByLibrary.simpleMessage("Search foods..."),
+        "searchResultLabel":
+            MessageLookupByLibrary.simpleMessage("Search Results"),
         "sedentaryDesc": MessageLookupByLibrary.simpleMessage(
             "Mostly sitting all day (e.g., desk job, little movement)."),
         "sedentaryLabel": MessageLookupByLibrary.simpleMessage("Sedentary"),
