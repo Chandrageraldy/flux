@@ -23,10 +23,22 @@ class ImagePath {
   static const String foodSample = 'lib/app/assets/images/food_sample.jpg';
   static const String notFound = 'lib/app/assets/images/404.png';
   static const String aiStar = 'lib/app/assets/images/ai-star.png';
+  static const String vpBackground = 'lib/app/assets/images/vp-background.png';
 }
 
 class AnimationPath {
   static const String starAIAnimation = 'lib/app/assets/animations/Star AI loader activated state.json';
+  static const String loadingDotsBlue = 'lib/app/assets/animations/Loading Dots Blue.json';
+  static const String loadingAnimation = 'lib/app/assets/animations/Loading animation.json';
+  static const String chick = 'lib/app/assets/animations/Chick.json';
+  static const String walkingOrange = 'lib/app/assets/animations/Walking Orange.json';
+}
+
+class AnimationUrl {
+  static const String crackedEgg =
+      'https://boatxsvwhwnhmbmuiesv.supabase.co/storage/v1/object/public/virtual_pets/Cracked%20Egg.json';
+  static const String confetti =
+      'https://boatxsvwhwnhmbmuiesv.supabase.co/storage/v1/object/public/virtual_pets/Confetti.json';
 }
 
 class NutritionixEndpoint {
@@ -84,6 +96,8 @@ class TableName {
   static String savedFood = 'saved_food';
   static String recentFood = 'recent_food';
   static String loggedFood = 'logged_food';
+  static String userPet = 'user_pet';
+  static String userEnergy = 'user_energy';
 }
 
 class TableCol {
@@ -100,6 +114,8 @@ class TableCol {
   static String photoUrl = 'photoUrl';
   static String dietType = 'dietType';
   static String goal = 'goal';
+  static String isActive = 'isActive';
+  static String currentExp = 'currentExp';
 }
 
 class BucketName {

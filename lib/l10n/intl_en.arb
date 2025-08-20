@@ -260,5 +260,7 @@
     "chiaLabel": "Chia",
     "gemini25Label": "Gemini 2.5",
     "nutritionSpecialistLabel": "Nutrition Specialist",
-    "typeToStartChattingLabel": "Type to start chatting..."
+    "typeToStartChattingLabel": "Type to start chatting...",
+    "experiencePointsLabel": "Experience Points",
+    "dailyGoalLabel": "Daily Goal"
 }

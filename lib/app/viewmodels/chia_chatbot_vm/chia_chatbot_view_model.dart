@@ -11,15 +11,15 @@ class ChiaChatbotViewModel extends BaseViewModel {
   ChatbotRepository chatbotRepository = ChatbotRepository();
   FoodRepository foodRepository = FoodRepository();
 
+  PlanModel? userPlan = SharedPreferenceHandler().getPlan();
+  UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
+
   List<ChatMessageModel> chatMessages = [
     ChatMessageModel(
       text: "Hello! I'm Chia, your personal nutrition assistant. How can I help you today?",
       isUser: false,
     ),
   ];
-
-  PlanModel? userPlan = SharedPreferenceHandler().getPlan();
-  UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
 
   List<LoggedFoodModel> loggedFoodsList = [];
 
@@ -28,7 +28,7 @@ class ChiaChatbotViewModel extends BaseViewModel {
 
   Future<void> sendMessage({required String userMessage}) async {
     final userInformation =
-        'Profile Info: ${userProfile?.toJson()}, Plan Info: ${userPlan?.toJson()}, Logged Foods: ${loggedFoodsList.map((food) => food.toJson()).toList()}';
+        'Identify me as: ${userProfile?.username} Profile Info: ${userProfile?.toJson()}, Plan Info: ${userPlan?.toJson()}, Logged Foods: ${loggedFoodsList.map((food) => food.toJson()).toList()}';
 
     chatMessages = [
       ...chatMessages,

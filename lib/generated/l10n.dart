@@ -2549,6 +2549,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Experience Points`
+  String get experiencePointsLabel {
+    return Intl.message(
+      'Experience Points',
+      name: 'experiencePointsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Goal`
+  String get dailyGoalLabel {
+    return Intl.message(
+      'Daily Goal',
+      name: 'dailyGoalLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

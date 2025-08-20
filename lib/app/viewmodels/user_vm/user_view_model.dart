@@ -1,9 +1,13 @@
+import 'package:flux/app/repositories/energy_repo/energy_repository.dart';
+import 'package:flux/app/repositories/pet_repo/pet_repository.dart';
 import 'package:flux/app/repositories/user_repo/user_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserViewModel extends BaseViewModel {
   final UserRepository userRepository = UserRepository();
+  final PetRepository petRepository = PetRepository();
+  final EnergyRepository energyRepository = EnergyRepository();
 
   bool get isLoggedIn => userRepository.isLoggedIn;
 
@@ -31,6 +35,8 @@ class UserViewModel extends BaseViewModel {
     if (response.data is User) {
       User user = response.data;
       await createUserProfile(userId: user.id, email: user.email!, username: username, bodyMetrics: bodyMetrics);
+      await assignVirtualPet(userId: user.id);
+      await assignEnergies(userId: user.id);
     }
 
     return response.data is User;
@@ -55,6 +61,16 @@ class UserViewModel extends BaseViewModel {
 
   Future<void> getUserProfile({required String userId}) async {
     final response = await userRepository.getUserProfile(userId: userId);
+    checkError(response);
+  }
+
+  Future<void> assignVirtualPet({required String userId}) async {
+    final response = await petRepository.assignVirtualPet(userId: userId);
+    checkError(response);
+  }
+
+  Future<void> assignEnergies({required String userId}) async {
+    final response = await energyRepository.assignEnergies(userId: userId);
     checkError(response);
   }
 }

@@ -30,6 +30,7 @@ class AppStyles {
   static const kPaddOR20 = EdgeInsets.only(right: 20.0);
   static const kPaddOL15R15T16B8 = EdgeInsets.only(left: 15.0, right: 15.0, top: 16.0, bottom: 8.0);
   static const kPaddOL20R8 = EdgeInsets.only(left: 20.0, right: 8.0);
+  static const kPaddOL8 = EdgeInsets.only(left: 8.0);
   // Padding SYMMETRIC
   // Padding VERTICAL
   static const kPaddSV2 = EdgeInsets.symmetric(vertical: 2.0);

@@ -6,6 +6,7 @@ import 'package:flux/app/viewmodels/chia_chatbot_vm/chia_chatbot_view_model.dart
 import 'package:flux/app/widgets/text_form_field/app_text_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:typewritertext/typewritertext.dart';
 
 @RoutePage()
@@ -136,17 +137,22 @@ extension _WidgetFactories on _ChiaChatbotPageState {
     );
   }
 
-  // Chat Messages List View - Fixed scrolling
+  // Chat Messages List View
   Widget getChatMessagesListView() {
     final chatMessages = context.select((ChiaChatbotViewModel vm) => vm.chatMessages);
+    final isLoading = context.select((ChiaChatbotViewModel vm) => vm.isLoading);
 
     return ListView.builder(
       controller: _scrollController,
-      itemCount: chatMessages.length,
+      itemCount: chatMessages.length + (isLoading ? 1 : 0),
       padding: AppStyles.kPaddSV12H16.copyWith(
-        bottom: AppStyles.kPaddSV12H16.bottom + (20),
+        bottom: AppStyles.kPaddSV12H16.bottom + 20,
       ),
       itemBuilder: (context, index) {
+        if (index == chatMessages.length && isLoading) {
+          return Lottie.asset(AnimationPath.loadingAnimation, width: AppStyles.kSize70, height: AppStyles.kSize70);
+        }
+
         final chatMessage = chatMessages[index];
         return Padding(
           padding: AppStyles.kPaddSV6,

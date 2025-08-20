@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
         "dailyFullReportLabel":
             MessageLookupByLibrary.simpleMessage("Daily Full Report"),
+        "dailyGoalLabel": MessageLookupByLibrary.simpleMessage("Daily Goal"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
@@ -103,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enhance with AI"),
         "exerciseLevelLabel":
             MessageLookupByLibrary.simpleMessage("Exercise Level"),
+        "experiencePointsLabel":
+            MessageLookupByLibrary.simpleMessage("Experience Points"),
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fat"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
