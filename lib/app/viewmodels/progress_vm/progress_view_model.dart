@@ -1,4 +1,5 @@
 import 'package:flux/app/models/active_user_pet_model/active_user_pet_model.dart';
+import 'package:flux/app/models/response_model.dart';
 import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
 import 'package:flux/app/repositories/energy_repo/energy_repository.dart';
 import 'package:flux/app/repositories/pet_repo/pet_repository.dart';
@@ -16,7 +17,7 @@ class ProgressViewModel extends BaseViewModel {
   UserEnergyModel userEnergy = UserEnergyModel();
 
   bool _isUpdatingCurrentExp = false;
-  bool get isLoading => _isUpdatingCurrentExp;
+  bool get isUpdatingCurrentExp => _isUpdatingCurrentExp;
 
   Future<void> getPersonalizedPlan() async {
     final response = await planRepository.getPersonalizedPlan();
@@ -38,16 +39,27 @@ class ProgressViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> updateCurrentExp({required int addedExp}) async {
+  Future<void> updateCurrentExp({required int addedExp, required int energySpent}) async {
     _isUpdatingCurrentExp = true;
     notifyListeners();
     final user = userRepository.sharedPreferenceHandler.getUser();
     final currentExp = activeUserPet.currentExp ?? 0;
     final totalExp = currentExp + addedExp;
-    final response = await petRepository.updateCurrentExp(userId: user?.userId ?? '', totalExp: totalExp);
-    checkError(response);
+    final updateExpResponse = await petRepository.updateCurrentExp(userId: user?.userId ?? '', totalExp: totalExp);
+    checkError(updateExpResponse);
 
-    activeUserPet = response.data as ActiveUserPetModel;
+    if (updateExpResponse.status == ResponseStatus.COMPLETE) {
+      final currentEnergy = userEnergy.energies ?? 0;
+      final totalEnergy = currentEnergy - energySpent;
+      final updateEnergyResponse = await energyRepository.updateUserEnergies(
+        userId: user?.userId ?? '',
+        totalEnergy: totalEnergy,
+      );
+      userEnergy = updateEnergyResponse.data as UserEnergyModel;
+      checkError(updateEnergyResponse);
+    }
+
+    activeUserPet = updateExpResponse.data as ActiveUserPetModel;
     _isUpdatingCurrentExp = false;
     notifyListeners();
   }

@@ -20,4 +20,15 @@ class EnergyRepository {
     }
     return response;
   }
+
+  Future<Response> updateUserEnergies({required String userId, required int totalEnergy}) async {
+    final response = await energyService.updateUserEnergies(userId: userId, totalEnergy: totalEnergy);
+
+    if (response.error == null) {
+      List<Map<String, dynamic>> userEnergies = response.data;
+      UserEnergyModel model = UserEnergyModel.fromJson(userEnergies[0]);
+      return Response.complete(model);
+    }
+    return response;
+  }
 }

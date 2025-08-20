@@ -267,5 +267,6 @@
     "recentlyViewedLabel": "Recently Viewed",
     "savedFoodLabel": "Saved Foods",
     "noSavedItemsLabel": "No Saved Items",
-    "noSavedItemsMessage": "You haven’t saved any food items yet. Save foods to add items here."
+    "noSavedItemsMessage": "You haven’t saved any food items yet. Save foods to add items here.",
+    "notEnoughEnergyMessage": "You don't have sufficient energy."
 }

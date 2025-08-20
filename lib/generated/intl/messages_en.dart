@@ -238,6 +238,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You haven’t saved any food items yet. Save foods to add items here."),
         "normalWeightLabel":
             MessageLookupByLibrary.simpleMessage("Normal weight"),
+        "notEnoughEnergyMessage": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have sufficient energy."),
         "nutritionGoalsLabel":
             MessageLookupByLibrary.simpleMessage("Nutrition Goals"),
         "nutritionScoreLabel":

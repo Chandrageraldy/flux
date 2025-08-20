@@ -116,6 +116,7 @@ class TableCol {
   static String goal = 'goal';
   static String isActive = 'isActive';
   static String currentExp = 'currentExp';
+  static String energies = 'energies';
 }
 
 class BucketName {

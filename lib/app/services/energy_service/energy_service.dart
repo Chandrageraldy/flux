@@ -16,4 +16,13 @@ class EnergyService extends SupabaseBaseService {
       filters: {TableCol.userId: userId},
     );
   }
+
+  Future<Response> updateUserEnergies({required String userId, required int totalEnergy}) async {
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.userEnergy,
+      requestBody: {TableCol.energies: totalEnergy},
+      filters: {TableCol.userId: userId},
+    );
+  }
 }

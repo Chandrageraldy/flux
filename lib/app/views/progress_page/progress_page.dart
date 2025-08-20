@@ -1,5 +1,7 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/active_user_pet_model/active_user_pet_model.dart';
+import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/progress_vm/progress_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -90,6 +92,7 @@ extension _PrivateMethods on _ProgressPageState {
 
   Future<void> _onRefresh() async {
     await _getActiveUserPet();
+    await _getUserEnergies();
   }
 
   Future<void> _getUserEnergies() async {
@@ -99,12 +102,16 @@ extension _PrivateMethods on _ProgressPageState {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ProgressPageState {
-  void _onActionButtonPressed(VirtualPetActionModel action) async {
+  void _onActionButtonPressed({required VirtualPetActionModel action, required UserEnergyModel userEnergy}) async {
     final vm = context.read<ProgressViewModel>();
+
+    if ((userEnergy.energies ?? 0) < action.energy) {
+      WidgetUtils.showSnackBar(context, S.current.notEnoughEnergyMessage);
+      return;
+    }
+
     final previousLevel = vm.activeUserPet.getCurrentLevel();
-
-    await vm.updateCurrentExp(addedExp: action.exp);
-
+    await vm.updateCurrentExp(addedExp: action.exp, energySpent: action.energy);
     final newLevel = vm.activeUserPet.getCurrentLevel();
 
     if (newLevel > previousLevel) {
@@ -325,13 +332,16 @@ extension _WidgetFactories on _ProgressPageState {
 
   // Action Button
   Widget getActionButton(VirtualPetActionModel action) {
+    final userEnergy = context.select((ProgressViewModel vm) => vm.userEnergy);
+    final isUpdatingCurrentExp = context.select((ProgressViewModel vm) => vm.isUpdatingCurrentExp);
+
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          _onActionButtonPressed(action);
+          isUpdatingCurrentExp ? null : _onActionButtonPressed(action: action, userEnergy: userEnergy);
         },
         child: Container(
-          decoration: _Styles.getActionButtonDecoration(context),
+          decoration: _Styles.getActionButtonDecoration(context, isUpdatingCurrentExp),
           padding: AppStyles.kPaddSV4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -347,6 +357,7 @@ extension _WidgetFactories on _ProgressPageState {
                 ],
               ),
               Text('${action.exp} EXP'),
+              Text('${action.energy} ENERGY'),
             ],
           ),
         ),
@@ -395,9 +406,11 @@ abstract class _Styles {
   }
 
   // Action Button Decoration
-  static BoxDecoration getActionButtonDecoration(BuildContext context) {
+  static BoxDecoration getActionButtonDecoration(BuildContext context, bool isUpdatingCurrentExp) {
     return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary.withAlpha(150),
+      color: isUpdatingCurrentExp
+          ? context.theme.colorScheme.onPrimary.withAlpha(100)
+          : context.theme.colorScheme.onPrimary.withAlpha(150),
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),

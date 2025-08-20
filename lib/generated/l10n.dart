@@ -2619,6 +2619,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You don't have sufficient energy.`
+  String get notEnoughEnergyMessage {
+    return Intl.message(
+      'You don\'t have sufficient energy.',
+      name: 'notEnoughEnergyMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
