@@ -1,8 +1,11 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/active_user_pet_model/active_user_pet_model.dart';
 import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
+import 'package:flux/app/models/virtual_pet_action_model/virtual_pet_action_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/progress_vm/progress_view_model.dart';
+import 'package:flux/app/widgets/daily_goals_percent_indicator/daily_goals_percent_indicator.dart';
+import 'package:flux/app/widgets/virtual_pet_action_button/virtual_pet_action_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
@@ -34,10 +37,7 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
     super.initState();
     _petController = AnimationController(vsync: this);
     _confettiController = AnimationController(vsync: this);
-    _getPersonalizedPlan();
-    _getUserProfile();
-    _getActiveUserPet();
-    _getUserEnergies();
+    initialize();
   }
 
   @override
@@ -78,6 +78,10 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _ProgressPageState {
+  Future<void> initialize() async {
+    Future.wait([_getPersonalizedPlan(), _getUserProfile(), _getActiveUserPet(), _getUserEnergies(), _getDailyGoals()]);
+  }
+
   Future<void> _getPersonalizedPlan() async {
     await tryLoad(context, () => context.read<ProgressViewModel>().getPersonalizedPlan());
   }
@@ -91,18 +95,24 @@ extension _PrivateMethods on _ProgressPageState {
   }
 
   Future<void> _onRefresh() async {
-    await _getActiveUserPet();
-    await _getUserEnergies();
+    Future.wait([_getActiveUserPet(), _getUserEnergies(), _getDailyGoals()]);
   }
 
   Future<void> _getUserEnergies() async {
     await tryLoad(context, () => context.read<ProgressViewModel>().getUserEnergies());
   }
+
+  Future<void> _getDailyGoals() async {
+    await tryLoad(context, () => context.read<ProgressViewModel>().getDailyGoals());
+  }
 }
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ProgressPageState {
-  void _onActionButtonPressed({required VirtualPetActionModel action, required UserEnergyModel userEnergy}) async {
+  Future<void> _onActionButtonPressed({
+    required VirtualPetActionModel action,
+    required UserEnergyModel userEnergy,
+  }) async {
     final vm = context.read<ProgressViewModel>();
 
     if ((userEnergy.energies ?? 0) < action.energy) {
@@ -111,7 +121,7 @@ extension _Actions on _ProgressPageState {
     }
 
     final previousLevel = vm.activeUserPet.getCurrentLevel();
-    await vm.updateCurrentExp(addedExp: action.exp, energySpent: action.energy);
+    await tryCatch(context, () => vm.updateCurrentExp(addedExp: action.exp, energySpent: action.energy));
     final newLevel = vm.activeUserPet.getCurrentLevel();
 
     if (newLevel > previousLevel) {
@@ -126,6 +136,13 @@ extension _Actions on _ProgressPageState {
         });
       }
     }
+  }
+
+  Future<void> _onClaimPressed({required int goalId, required int energyReward}) async {
+    await tryLoad(
+      context,
+      () => context.read<ProgressViewModel>().claimReward(goalId: goalId, energyReward: energyReward),
+    );
   }
 }
 
@@ -324,44 +341,20 @@ extension _WidgetFactories on _ProgressPageState {
 
   // Action Row
   Widget getActionRow() {
-    return Row(
-      spacing: AppStyles.kSpac8,
-      children: virtualPetActions.map((action) => getActionButton(action)).toList(),
-    );
-  }
-
-  // Action Button
-  Widget getActionButton(VirtualPetActionModel action) {
     final userEnergy = context.select((ProgressViewModel vm) => vm.userEnergy);
     final isUpdatingCurrentExp = context.select((ProgressViewModel vm) => vm.isUpdatingCurrentExp);
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          isUpdatingCurrentExp ? null : _onActionButtonPressed(action: action, userEnergy: userEnergy);
-        },
-        child: Container(
-          decoration: _Styles.getActionButtonDecoration(context, isUpdatingCurrentExp),
-          padding: AppStyles.kPaddSV4,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: AppStyles.kSpac4,
-                children: [
-                  FaIcon(action.icon, size: AppStyles.kSize14, color: context.theme.colorScheme.primary),
-                  Text(action.label)
-                ],
-              ),
-              Text('${action.exp} EXP'),
-              Text('${action.energy} ENERGY'),
-            ],
-          ),
-        ),
-      ),
+    return Row(
+      spacing: AppStyles.kSpac8,
+      children: virtualPetActions
+          .map(
+            (action) => VirtualPetActionButton(
+              action: action,
+              userEnergy: userEnergy,
+              isUpdatingCurrentExp: isUpdatingCurrentExp,
+              onActionButtonPressed: _onActionButtonPressed,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -380,9 +373,16 @@ extension _WidgetFactories on _ProgressPageState {
 
   // Daily Goal Container
   Widget getDailyGoalContainer() {
+    final dailyGoals = context.select((ProgressViewModel vm) => vm.dailyGoals);
     return Container(
       decoration: _Styles.getDailyGoalContainerDecoration(context),
-      height: AppStyles.kSize64,
+      padding: AppStyles.kPaddSV10H8,
+      child: Column(
+        spacing: AppStyles.kSpac8,
+        children: dailyGoals.map((dailyGoal) {
+          return DailyGoalsPercentIndicator(dailyGoal: dailyGoal, onClaimPressed: _onClaimPressed);
+        }).toList(),
+      ),
     );
   }
 }
@@ -403,19 +403,6 @@ abstract class _Styles {
   // Experience Points Label Text Style
   static TextStyle getExperiencePointsLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.small);
-  }
-
-  // Action Button Decoration
-  static BoxDecoration getActionButtonDecoration(BuildContext context, bool isUpdatingCurrentExp) {
-    return BoxDecoration(
-      color: isUpdatingCurrentExp
-          ? context.theme.colorScheme.onPrimary.withAlpha(100)
-          : context.theme.colorScheme.onPrimary.withAlpha(150),
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
-      ],
-    );
   }
 
   // Level Label Text Style
@@ -461,38 +448,3 @@ abstract class _Styles {
     );
   }
 }
-
-class VirtualPetActionModel {
-  final String label;
-  final int exp;
-  final IconData icon;
-  final int energy;
-
-  VirtualPetActionModel({
-    required this.label,
-    required this.exp,
-    required this.icon,
-    required this.energy,
-  });
-}
-
-final List<VirtualPetActionModel> virtualPetActions = [
-  VirtualPetActionModel(
-    label: 'Feed',
-    exp: 10,
-    icon: FontAwesomeIcons.apple,
-    energy: 5,
-  ),
-  VirtualPetActionModel(
-    label: 'Play',
-    exp: 15,
-    icon: FontAwesomeIcons.baseball,
-    energy: 10,
-  ),
-  VirtualPetActionModel(
-    label: 'Groom',
-    exp: 20,
-    icon: FontAwesomeIcons.scissors,
-    energy: 15,
-  ),
-];

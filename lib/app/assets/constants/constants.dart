@@ -98,6 +98,7 @@ class TableName {
   static String loggedFood = 'logged_food';
   static String userPet = 'user_pet';
   static String userEnergy = 'user_energy';
+  static String dailyGoals = 'daily_goals';
 }
 
 class TableCol {
@@ -117,6 +118,9 @@ class TableCol {
   static String isActive = 'isActive';
   static String currentExp = 'currentExp';
   static String energies = 'energies';
+  static String createdAt = 'createdAt';
+  static String currentValue = 'currentValue';
+  static String isClaimed = 'isClaimed';
 }
 
 class BucketName {

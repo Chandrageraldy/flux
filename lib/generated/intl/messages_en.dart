@@ -59,12 +59,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":
             MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
+        "calorieGoalDesc":
+            MessageLookupByLibrary.simpleMessage("Hit your calorie target"),
         "calorieLabel": MessageLookupByLibrary.simpleMessage("Calorie"),
         "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "chiaLabel": MessageLookupByLibrary.simpleMessage("Chia"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
+        "claimLabel": MessageLookupByLibrary.simpleMessage("Claim"),
+        "claimedLabel": MessageLookupByLibrary.simpleMessage("Claimed"),
         "completeNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Complete Nutrients"),
         "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -203,6 +207,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mealRatioLabel": MessageLookupByLibrary.simpleMessage("Meal Ratio"),
         "mealScanLabel": MessageLookupByLibrary.simpleMessage("Meal Scan"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
+        "mealsGoalDesc":
+            MessageLookupByLibrary.simpleMessage("Eat 4 balanced meals"),
         "mediterraneanDesc":
             MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),
         "mediterraneanLabel":
@@ -321,6 +327,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "potassiumLabel": MessageLookupByLibrary.simpleMessage("Potassium"),
         "profileLabel": MessageLookupByLibrary.simpleMessage("Profile"),
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
+        "proteinGoalDesc":
+            MessageLookupByLibrary.simpleMessage("Get enough protein"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
         "quantityErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Quantity must be greater than zero."),

@@ -2629,6 +2629,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Claim`
+  String get claimLabel {
+    return Intl.message(
+      'Claim',
+      name: 'claimLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Claimed`
+  String get claimedLabel {
+    return Intl.message(
+      'Claimed',
+      name: 'claimedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hit your calorie target`
+  String get calorieGoalDesc {
+    return Intl.message(
+      'Hit your calorie target',
+      name: 'calorieGoalDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get enough protein`
+  String get proteinGoalDesc {
+    return Intl.message(
+      'Get enough protein',
+      name: 'proteinGoalDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eat 4 balanced meals`
+  String get mealsGoalDesc {
+    return Intl.message(
+      'Eat 4 balanced meals',
+      name: 'mealsGoalDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

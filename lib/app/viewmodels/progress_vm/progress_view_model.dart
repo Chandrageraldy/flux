@@ -1,7 +1,12 @@
+import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/active_user_pet_model/active_user_pet_model.dart';
+import 'package:flux/app/models/daily_goals_model/daily_goals_model.dart';
+import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/response_model.dart';
 import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
+import 'package:flux/app/repositories/daily_goals_repo/daily_goals_repository.dart';
 import 'package:flux/app/repositories/energy_repo/energy_repository.dart';
+import 'package:flux/app/repositories/food_repo/food_repository.dart';
 import 'package:flux/app/repositories/pet_repo/pet_repository.dart';
 import 'package:flux/app/repositories/plan_repo/plan_repository.dart';
 import 'package:flux/app/repositories/user_repo/user_repository.dart';
@@ -12,9 +17,13 @@ class ProgressViewModel extends BaseViewModel {
   final UserRepository userRepository = UserRepository();
   final PetRepository petRepository = PetRepository();
   final EnergyRepository energyRepository = EnergyRepository();
+  final DailyGoalsRepository dailyGoalsRepository = DailyGoalsRepository();
+  final FoodRepository foodRepository = FoodRepository();
 
   ActiveUserPetModel activeUserPet = ActiveUserPetModel();
   UserEnergyModel userEnergy = UserEnergyModel();
+  List<LoggedFoodModel> loggedFoods = [];
+  List<DailyGoalsModel> dailyGoals = [];
 
   bool _isUpdatingCurrentExp = false;
   bool get isUpdatingCurrentExp => _isUpdatingCurrentExp;
@@ -70,6 +79,58 @@ class ProgressViewModel extends BaseViewModel {
     checkError(response);
     userEnergy = response.data as UserEnergyModel;
     notifyListeners();
-    print(userEnergy);
+  }
+
+  Future<void> getDailyGoals() async {
+    final user = userRepository.sharedPreferenceHandler.getUser();
+
+    final getTodayLoggedFoodsResponse = await foodRepository.getLoggedFoods(selectedDate: DateTime.now());
+    checkError(getTodayLoggedFoodsResponse);
+    loggedFoods = getTodayLoggedFoodsResponse.data as List<LoggedFoodModel>;
+
+    var totalCalories = 0;
+    var totalProtein = 0;
+    var totalMeals = 0;
+    final mealTypes = <String>{};
+
+    if (loggedFoods.isNotEmpty) {
+      for (final food in loggedFoods) {
+        totalCalories += food.calorieKcal?.toInt() ?? 0;
+        totalProtein += food.proteinG?.toInt() ?? 0;
+
+        if (food.mealType != null && food.mealType!.isNotEmpty) {
+          mealTypes.add(food.mealType!);
+        }
+      }
+      totalMeals = mealTypes.length;
+    }
+
+    if (getTodayLoggedFoodsResponse.status == ResponseStatus.COMPLETE) {
+      final getDailyGoalsResponse = await dailyGoalsRepository.getDailyGoals(
+          userId: user?.userId ?? '', totalCalories: totalCalories, totalProtein: totalProtein, totalMeals: totalMeals);
+      checkError(getDailyGoalsResponse);
+      dailyGoals = getDailyGoalsResponse.data as List<DailyGoalsModel>;
+      notifyListeners();
+    }
+  }
+
+  Future<void> claimReward({required int goalId, required int energyReward}) async {
+    final user = userRepository.sharedPreferenceHandler.getUser();
+    final claimRewardResponse = await dailyGoalsRepository.claimReward(userId: user?.userId ?? '', goalId: goalId);
+    checkError(claimRewardResponse);
+    final updatedGoal = claimRewardResponse.data as DailyGoalsModel;
+    final index = dailyGoals.indexWhere((goal) => goal.id == updatedGoal.id);
+    dailyGoals[index] = updatedGoal;
+    notifyListeners();
+
+    final totalEnergy = (userEnergy.energies ?? 0) + energyReward;
+    final addEnergyResponse = await energyRepository.addUserEnergy(
+      userId: user?.userId ?? '',
+      totalEnergy: totalEnergy,
+    );
+    checkError(addEnergyResponse);
+    final updatedEnergy = addEnergyResponse.data as UserEnergyModel;
+    userEnergy = updatedEnergy;
+    notifyListeners();
   }
 }

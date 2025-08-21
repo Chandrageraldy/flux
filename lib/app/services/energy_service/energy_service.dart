@@ -25,4 +25,15 @@ class EnergyService extends SupabaseBaseService {
       filters: {TableCol.userId: userId},
     );
   }
+
+  Future<Response> addUserEnergy({required UserEnergyModel model}) async {
+    final json = model.toJson();
+    json.remove(TableCol.id);
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.userEnergy,
+      requestBody: json,
+      filters: {TableCol.userId: model.userId},
+    );
+  }
 }

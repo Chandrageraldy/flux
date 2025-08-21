@@ -268,5 +268,10 @@
     "savedFoodLabel": "Saved Foods",
     "noSavedItemsLabel": "No Saved Items",
     "noSavedItemsMessage": "You haven’t saved any food items yet. Save foods to add items here.",
-    "notEnoughEnergyMessage": "You don't have sufficient energy."
+    "notEnoughEnergyMessage": "You don't have sufficient energy.",
+    "claimLabel": "Claim",
+    "claimedLabel": "Claimed",
+    "calorieGoalDesc": "Hit your calorie target",
+    "proteinGoalDesc": "Get enough protein",
+    "mealsGoalDesc": "Eat 4 balanced meals"
 }
