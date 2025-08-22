@@ -144,6 +144,10 @@ extension _Actions on _ProgressPageState {
       () => context.read<ProgressViewModel>().claimReward(goalId: goalId, energyReward: energyReward),
     );
   }
+
+  void _onShopPressed() {
+    context.router.push(VirtualPetShopRoute());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -192,11 +196,14 @@ extension _WidgetFactories on _ProgressPageState {
 
   // Shop Button
   Widget getShopButton() {
-    return Container(
-      decoration: _Styles.getHeaderButtonContainerDecoration(context),
-      height: AppStyles.kSize32,
-      width: AppStyles.kSize32,
-      child: Center(child: FaIcon(FontAwesomeIcons.bagShopping, size: AppStyles.kSize16)),
+    return GestureDetector(
+      onTap: _onShopPressed,
+      child: Container(
+        decoration: _Styles.getHeaderButtonContainerDecoration(context),
+        height: AppStyles.kSize32,
+        width: AppStyles.kSize32,
+        child: Center(child: FaIcon(FontAwesomeIcons.bagShopping, size: AppStyles.kSize16)),
+      ),
     );
   }
 

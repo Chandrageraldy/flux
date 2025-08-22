@@ -24,6 +24,7 @@ class ImagePath {
   static const String notFound = 'lib/app/assets/images/404.png';
   static const String aiStar = 'lib/app/assets/images/ai-star.png';
   static const String vpBackground = 'lib/app/assets/images/vp-background.png';
+  static const String egg = 'lib/app/assets/images/egg.png';
 }
 
 class AnimationPath {
@@ -99,6 +100,7 @@ class TableName {
   static String userPet = 'user_pet';
   static String userEnergy = 'user_energy';
   static String dailyGoals = 'daily_goals';
+  static String virtualPets = 'virtual_pets';
 }
 
 class TableCol {
@@ -121,6 +123,7 @@ class TableCol {
   static String createdAt = 'createdAt';
   static String currentValue = 'currentValue';
   static String isClaimed = 'isClaimed';
+  static String petId = 'petId';
 }
 
 class BucketName {

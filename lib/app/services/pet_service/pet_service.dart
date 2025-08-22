@@ -29,4 +29,43 @@ class PetService extends SupabaseBaseService {
       requestBody: {TableCol.currentExp: totalExp},
     );
   }
+
+  Future<Response> getVirtualPets() {
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.virtualPets,
+    );
+  }
+
+  Future<Response> getUserPets({required String userId}) {
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.userPet,
+      filters: {TableCol.userId: userId},
+    );
+  }
+
+  Future<Response> unequipAllUserPets({required String userId}) {
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.userPet,
+      filters: {TableCol.userId: userId},
+      requestBody: {TableCol.isActive: false},
+    );
+  }
+
+  Future<Response> equipUserPet({required String userId, required int petId}) {
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.userPet,
+      filters: {TableCol.userId: userId, TableCol.petId: petId},
+      requestBody: {TableCol.isActive: true},
+    );
+  }
+
+  Future<Response> buyPet({required UserPetModel model}) {
+    final json = model.toJson();
+    json.remove(TableCol.id);
+    return callSupabaseDB(requestType: RequestType.POST, table: TableName.userPet, requestBody: json);
+  }
 }

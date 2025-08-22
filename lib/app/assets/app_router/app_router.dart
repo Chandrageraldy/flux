@@ -38,6 +38,7 @@ import 'package:flux/app/views/progress_page/progress_page.dart';
 import 'package:flux/app/views/root_page/root_page.dart';
 import 'package:flux/app/views/root_page/root_navigator_page.dart';
 import 'package:flux/app/views/barcode_scan_page.dart/barcode_scan_page.dart';
+import 'package:flux/app/views/virtual_pet_shop_page/virtual_pet_shop_page.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page|Screen|Modal,Route')
@@ -97,6 +98,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: DailyReportRoute.page),
         AutoRoute(page: ChiaChatbotRoute.page),
         getChiaChatbotRoutes(),
+        AutoRoute(page: VirtualPetShopRoute.page),
       ],
     );
   }

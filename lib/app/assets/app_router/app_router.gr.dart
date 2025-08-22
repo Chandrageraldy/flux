@@ -953,3 +953,19 @@ class SplashRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [VirtualPetShopPage]
+class VirtualPetShopRoute extends PageRouteInfo<void> {
+  const VirtualPetShopRoute({List<PageRouteInfo>? children})
+    : super(VirtualPetShopRoute.name, initialChildren: children);
+
+  static const String name = 'VirtualPetShopRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VirtualPetShopPage();
+    },
+  );
+}

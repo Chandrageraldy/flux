@@ -18,6 +18,7 @@ _$VirtualPetsModelImpl _$$VirtualPetsModelImplFromJson(
       requiredExpLvl1: (json['requiredExpLvl1'] as num?)?.toInt(),
       requiredExpLvl2: (json['requiredExpLvl2'] as num?)?.toInt(),
       requiredExpLvl3: (json['requiredExpLvl3'] as num?)?.toInt(),
+      energyCost: (json['energyCost'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$VirtualPetsModelImplToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$VirtualPetsModelImplToJson(
       'requiredExpLvl1': instance.requiredExpLvl1,
       'requiredExpLvl2': instance.requiredExpLvl2,
       'requiredExpLvl3': instance.requiredExpLvl3,
+      'energyCost': instance.energyCost,
     };
