@@ -25,6 +25,10 @@ class ImagePath {
   static const String aiStar = 'lib/app/assets/images/ai-star.png';
   static const String vpBackground = 'lib/app/assets/images/vp-background.png';
   static const String egg = 'lib/app/assets/images/egg.png';
+  static const String energy = 'lib/app/assets/images/energy.png';
+  static const String feed = 'lib/app/assets/images/feed.png';
+  static const String play = 'lib/app/assets/images/play.png';
+  static const String groom = 'lib/app/assets/images/groom.png';
 }
 
 class AnimationPath {

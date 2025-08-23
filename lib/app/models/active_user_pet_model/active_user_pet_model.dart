@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:flux/app/models/virtual_pets_model/virtual_pets_model.dart';
+import 'package:flux/generated/l10n.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'active_user_pet_model.freezed.dart';
@@ -60,7 +61,7 @@ extension ActiveUserPetExtensions on ActiveUserPetModel {
         break;
       case 4:
         baseExp = vp.requiredExpLvl3 ?? 0;
-        nextExp = baseExp; // maxed out, no next level
+        nextExp = baseExp;
         break;
     }
 
@@ -68,7 +69,6 @@ extension ActiveUserPetExtensions on ActiveUserPetModel {
     return progress.clamp(0.0, 1.0);
   }
 
-  /// Exp display text, like "150 / 300 EXP"
   String getExpProgressText() {
     final exp = currentExp ?? 0;
     final vp = virtualPet!;
@@ -92,14 +92,14 @@ extension ActiveUserPetExtensions on ActiveUserPetModel {
         break;
       case 4:
         baseExp = vp.requiredExpLvl3 ?? 0;
-        nextExp = baseExp; // max level
+        nextExp = baseExp;
         break;
     }
 
     if (level == 4) {
-      return '$exp EXP (MAX)';
+      return '$exp ${S.current.xpLabel} (${S.current.maxLabel.toUpperCase()})';
     } else {
-      return '${exp - baseExp} / ${nextExp - baseExp} EXP';
+      return '${exp - baseExp} / ${nextExp - baseExp} ${S.current.xpLabel}';
     }
   }
 

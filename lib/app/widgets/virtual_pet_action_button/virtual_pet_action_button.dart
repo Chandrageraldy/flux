@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
 import 'package:flux/app/models/virtual_pet_action_model/virtual_pet_action_model.dart';
@@ -29,21 +28,34 @@ class VirtualPetActionButton extends StatelessWidget {
         child: Container(
           decoration: _Styles.getVirtualPetActionButtonDecoration(context, isUpdatingCurrentExp),
           padding: AppStyles.kPaddSV4,
-          child: Column(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: AppStyles.kSpac4,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: AppStyles.kSpac4,
+              Container(
+                padding: AppStyles.kPadd8,
+                decoration: _Styles.getActionIconContainerDecoration(context, action.color),
+                child: FaIcon(action.icon, size: AppStyles.kSize12, color: context.theme.colorScheme.onPrimary),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  FaIcon(action.icon, size: AppStyles.kSize14, color: context.theme.colorScheme.primary),
-                  Text(action.label)
+                  Text(action.label, style: Quicksand.bold.withSize(FontSizes.small)),
+                  Row(
+                    children: [
+                      Text('${action.energy}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
+                      AppStyles.kSizedBoxW2,
+                      Image.asset(ImagePath.energy, height: AppStyles.kSize12),
+                      AppStyles.kSizedBoxW4,
+                      Text('${action.exp}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
+                      AppStyles.kSizedBoxW2,
+                      Text(S.current.xpLabel, style: Quicksand.bold.withCustomSize(8)),
+                    ],
+                  ),
                 ],
               ),
-              Text('${action.exp} EXP'),
-              Text('${action.energy} ENERGY'),
             ],
           ),
         ),
@@ -57,13 +69,16 @@ abstract class _Styles {
   // Action Button Decoration
   static BoxDecoration getVirtualPetActionButtonDecoration(BuildContext context, bool isUpdatingCurrentExp) {
     return BoxDecoration(
-      color: isUpdatingCurrentExp
-          ? context.theme.colorScheme.onPrimary.withAlpha(100)
-          : context.theme.colorScheme.onPrimary.withAlpha(150),
+      color: isUpdatingCurrentExp ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
       ],
     );
+  }
+
+  // Action Icon Container Decoration
+  static BoxDecoration getActionIconContainerDecoration(BuildContext context, Color color) {
+    return BoxDecoration(color: color, shape: BoxShape.circle);
   }
 }

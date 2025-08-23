@@ -52,17 +52,22 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            getIsometricRoomHeader(),
-            getIsometricRoomImage(),
-            getExperiencePointsColumn(),
-            AppStyles.kSizedBoxH12,
-            getActionRow(),
-            AppStyles.kSizedBoxH20,
-            getDailyGoal()
-          ],
+        physics: AlwaysScrollableScrollPhysics(),
+        child: Padding(
+          padding: AppStyles.kPaddOB20,
+          child: Column(
+            children: [
+              getIsometricRoomHeader(),
+              AppStyles.kSizedBoxH12,
+              getExperiencePointsContainer(),
+              AppStyles.kSizedBoxH12,
+              getIsometricRoomImage(),
+              AppStyles.kSizedBoxH12,
+              getActionRow(),
+              AppStyles.kSizedBoxH20,
+              getDailyGoalContainer(),
+            ],
+          ),
         ),
       ),
     );
@@ -139,7 +144,7 @@ extension _Actions on _ProgressPageState {
   }
 
   Future<void> _onClaimPressed({required int goalId, required int energyReward}) async {
-    await tryLoad(
+    await tryCatch(
       context,
       () => context.read<ProgressViewModel>().claimReward(goalId: goalId, energyReward: energyReward),
     );
@@ -169,7 +174,7 @@ extension _WidgetFactories on _ProgressPageState {
       child: Row(
         spacing: AppStyles.kSpac4,
         children: [
-          FaIcon(FontAwesomeIcons.boltLightning, size: AppStyles.kSize16),
+          Image.asset(ImagePath.energy, height: AppStyles.kSize16),
           Text('${userEnergy.energies}'),
         ],
       ),
@@ -293,56 +298,59 @@ extension _WidgetFactories on _ProgressPageState {
     );
   }
 
-  // Experience Points Column
-  Widget getExperiencePointsColumn() {
+  // Experience Points Container
+  Widget getExperiencePointsContainer() {
     final activeUserPet = context.select((ProgressViewModel vm) => vm.activeUserPet);
-
-    return Column(
-      spacing: AppStyles.kSpac4,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(S.current.experiencePointsLabel, style: _Styles.getExperiencePointsLabelTextStyle(context)),
-            Text(activeUserPet.getExpProgressText(), style: _Styles.getExperiencePointsLabelTextStyle(context))
-          ],
-        ),
-        getExperiencePointsContainer(activeUserPet: activeUserPet),
-      ],
+    return Container(
+      decoration: _Styles.getExperiencePointsContainerDecoration(context),
+      child: getExperiencePointsContent(activeUserPet: activeUserPet),
     );
   }
 
-  // Experience Points Container
-  Widget getExperiencePointsContainer({required ActiveUserPetModel activeUserPet}) {
-    return Container(
-      padding: AppStyles.kPaddSV4H8,
-      decoration: _Styles.getExperiencePointsContainerDecoration(context),
-      child: getExperiencePointsProgressIndicator(activeUserPet: activeUserPet),
+  // Experience Points Content
+  Widget getExperiencePointsContent({required ActiveUserPetModel activeUserPet}) {
+    final level = activeUserPet.getCurrentLevel();
+    return Column(
+      children: [
+        Padding(
+          padding: AppStyles.kPaddSV4H8,
+          child: Row(
+            spacing: AppStyles.kSpac4,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(activeUserPet.virtualPet?.name ?? '', style: _Styles.getVirtualPetNameLabelTextStyle(context)),
+              Text('Lv. $level', style: _Styles.getLevelLabelTextStyle(context)),
+            ],
+          ),
+        ),
+        getExperiencePointsProgressIndicator(activeUserPet: activeUserPet)
+      ],
     );
   }
 
   // Experience Points Progress Indicator
   Widget getExperiencePointsProgressIndicator({required ActiveUserPetModel activeUserPet}) {
-    return LinearPercentIndicator(
-      percent: activeUserPet.getLevelProgress(),
-      backgroundColor: context.theme.colorScheme.tertiary,
-      progressColor: context.theme.colorScheme.secondary,
-      animation: true,
-      animateFromLastPercent: true,
-      animateToInitialPercent: false,
-      padding: AppStyles.kPadd0,
-      barRadius: Radius.circular(AppStyles.kSpac20),
-      lineHeight: 10,
-      trailing: getLevelLabel(activeUserPet: activeUserPet),
-    );
-  }
-
-  // Level Label
-  Widget getLevelLabel({required ActiveUserPetModel activeUserPet}) {
-    final level = activeUserPet.getCurrentLevel();
-    return Padding(
-      padding: AppStyles.kPaddOL8,
-      child: Text('LVL $level', style: _Styles.getLevelLabelTextStyle(context)),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: AppStyles.kRadOBL10BR10,
+        color: context.theme.colorScheme.primary,
+      ),
+      padding: AppStyles.kPaddSV4H8,
+      child: LinearPercentIndicator(
+        percent: activeUserPet.getLevelProgress(),
+        backgroundColor: context.theme.colorScheme.tertiary,
+        progressColor: context.theme.colorScheme.secondary,
+        animation: true,
+        animateFromLastPercent: true,
+        animateToInitialPercent: false,
+        padding: AppStyles.kPadd0,
+        barRadius: Radius.circular(AppStyles.kSpac20),
+        lineHeight: 8,
+        trailing: Padding(
+          padding: AppStyles.kPaddOL8,
+          child: Text(activeUserPet.getExpProgressText(), style: _Styles.getExperiencePointsLabelTextStyle(context)),
+        ),
+      ),
     );
   }
 
@@ -365,30 +373,27 @@ extension _WidgetFactories on _ProgressPageState {
     );
   }
 
-  // Daily Goal
-  Widget getDailyGoal() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [getDailyGoalHeader(), getDailyGoalContainer()],
-    );
-  }
-
-  // Daily Goal Header
-  Widget getDailyGoalHeader() {
-    return Text(S.current.dailyGoalLabel, style: _Styles.getDailyGoalLabelTextStyle(context));
-  }
-
-  // Daily Goal Container
+// Daily Goal Container
   Widget getDailyGoalContainer() {
     final dailyGoals = context.select((ProgressViewModel vm) => vm.dailyGoals);
     return Container(
       decoration: _Styles.getDailyGoalContainerDecoration(context),
       padding: AppStyles.kPaddSV10H8,
       child: Column(
-        spacing: AppStyles.kSpac8,
-        children: dailyGoals.map((dailyGoal) {
-          return DailyGoalsPercentIndicator(dailyGoal: dailyGoal, onClaimPressed: _onClaimPressed);
-        }).toList(),
+        spacing: AppStyles.kSpac16,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            S.current.dailyGoalsLabel,
+            style: _Styles.getDailyGoalLabelTextStyle(context),
+          ),
+          ...dailyGoals.map((dailyGoal) {
+            return DailyGoalsPercentIndicator(
+              dailyGoal: dailyGoal,
+              onClaimPressed: _onClaimPressed,
+            );
+          }),
+        ],
       ),
     );
   }
@@ -399,8 +404,8 @@ abstract class _Styles {
   // Experience Points Container Decoration
   static BoxDecoration getExperiencePointsContainerDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary.withAlpha(150),
-      borderRadius: AppStyles.kRad100,
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
       ],
@@ -409,7 +414,12 @@ abstract class _Styles {
 
   // Experience Points Label Text Style
   static TextStyle getExperiencePointsLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
+    return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  // Virtual Pet Name Label Text Style
+  static TextStyle getVirtualPetNameLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.large);
   }
 
   // Level Label Text Style
@@ -420,7 +430,7 @@ abstract class _Styles {
   // Energies Container Decoration
   static BoxDecoration getEnergiesContainerDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary.withAlpha(150),
+      color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad100,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
@@ -431,7 +441,7 @@ abstract class _Styles {
   // Header Button Container Decoration
   static BoxDecoration getHeaderButtonContainerDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary.withAlpha(150),
+      color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
@@ -447,7 +457,7 @@ abstract class _Styles {
   // Daily Goal Container Decoration
   static BoxDecoration getDailyGoalContainerDecoration(BuildContext context) {
     return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary.withAlpha(150),
+      color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),

@@ -2560,11 +2560,11 @@ class S {
     );
   }
 
-  /// `Daily Goal`
-  String get dailyGoalLabel {
+  /// `Daily Goals`
+  String get dailyGoalsLabel {
     return Intl.message(
-      'Daily Goal',
-      name: 'dailyGoalLabel',
+      'Daily Goals',
+      name: 'dailyGoalsLabel',
       desc: '',
       args: [],
     );
@@ -2650,31 +2650,61 @@ class S {
     );
   }
 
-  /// `Hit your calorie target`
+  /// `Calorie target`
   String get calorieGoalDesc {
     return Intl.message(
-      'Hit your calorie target',
+      'Calorie target',
       name: 'calorieGoalDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Get enough protein`
+  /// `Protein target`
   String get proteinGoalDesc {
     return Intl.message(
-      'Get enough protein',
+      'Protein target',
       name: 'proteinGoalDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Eat 4 balanced meals`
+  /// `Meal balance`
   String get mealsGoalDesc {
     return Intl.message(
-      'Eat 4 balanced meals',
+      'Meal balance',
       name: 'mealsGoalDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `XP`
+  String get xpLabel {
+    return Intl.message(
+      'XP',
+      name: 'xpLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max`
+  String get maxLabel {
+    return Intl.message(
+      'Max',
+      name: 'maxLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get goLabel {
+    return Intl.message(
+      'Go',
+      name: 'goLabel',
       desc: '',
       args: [],
     );

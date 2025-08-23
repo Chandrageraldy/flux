@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "calorieFormula":
             MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
         "calorieGoalDesc":
-            MessageLookupByLibrary.simpleMessage("Hit your calorie target"),
+            MessageLookupByLibrary.simpleMessage("Calorie target"),
         "calorieLabel": MessageLookupByLibrary.simpleMessage("Calorie"),
         "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -77,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
         "dailyFullReportLabel":
             MessageLookupByLibrary.simpleMessage("Daily Full Report"),
-        "dailyGoalLabel": MessageLookupByLibrary.simpleMessage("Daily Goal"),
+        "dailyGoalsLabel": MessageLookupByLibrary.simpleMessage("Daily Goals"),
         "dateOfBirthDesc": MessageLookupByLibrary.simpleMessage(
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "genderLabel": MessageLookupByLibrary.simpleMessage("Gender"),
         "generateLabel": MessageLookupByLibrary.simpleMessage("Generate"),
         "getStartedLabel": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "goLabel": MessageLookupByLibrary.simpleMessage("Go"),
         "goalLabel": MessageLookupByLibrary.simpleMessage("Goal"),
         "heightDesc": MessageLookupByLibrary.simpleMessage(
             "Helps calculate your body mass index (BMI)."),
@@ -200,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "magnesiumLabel": MessageLookupByLibrary.simpleMessage("Magnesium"),
         "maleLabel": MessageLookupByLibrary.simpleMessage("Male"),
         "manganeseLabel": MessageLookupByLibrary.simpleMessage("Manganese"),
+        "maxLabel": MessageLookupByLibrary.simpleMessage("Max"),
         "mealRatioDesc": MessageLookupByLibrary.simpleMessage(
             "Breakfast, lunch, dinner, and snacks"),
         "mealRatioDesc2": MessageLookupByLibrary.simpleMessage(
@@ -207,8 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mealRatioLabel": MessageLookupByLibrary.simpleMessage("Meal Ratio"),
         "mealScanLabel": MessageLookupByLibrary.simpleMessage("Meal Scan"),
         "mealTypeLabel": MessageLookupByLibrary.simpleMessage("Meal Type"),
-        "mealsGoalDesc":
-            MessageLookupByLibrary.simpleMessage("Eat 4 balanced meals"),
+        "mealsGoalDesc": MessageLookupByLibrary.simpleMessage("Meal balance"),
         "mediterraneanDesc":
             MessageLookupByLibrary.simpleMessage("Plant-rich healthy fats."),
         "mediterraneanLabel":
@@ -328,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileLabel": MessageLookupByLibrary.simpleMessage("Profile"),
         "progressLabel": MessageLookupByLibrary.simpleMessage("Progress"),
         "proteinGoalDesc":
-            MessageLookupByLibrary.simpleMessage("Get enough protein"),
+            MessageLookupByLibrary.simpleMessage("Protein target"),
         "proteinLabel": MessageLookupByLibrary.simpleMessage("Protein"),
         "quantityErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Quantity must be greater than zero."),
@@ -440,6 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain."),
         "weightGoalLabel": MessageLookupByLibrary.simpleMessage("Weight Goal"),
         "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
+        "xpLabel": MessageLookupByLibrary.simpleMessage("XP"),
         "yearsLabel": MessageLookupByLibrary.simpleMessage("Years"),
         "zincLabel": MessageLookupByLibrary.simpleMessage("Zinc")
       };

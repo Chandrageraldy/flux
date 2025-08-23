@@ -91,6 +91,7 @@ class AppStyles {
   static const kSpac32 = 32.0;
 
   // Radius
+  static final kRad3 = BorderRadius.circular(3.0);
   static final kRad6 = BorderRadius.circular(6.0);
   static final kRad8 = BorderRadius.circular(8.0);
   static final kRad10 = BorderRadius.circular(10.0);

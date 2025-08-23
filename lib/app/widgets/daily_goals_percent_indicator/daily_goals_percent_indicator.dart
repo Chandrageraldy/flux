@@ -10,12 +10,30 @@ class DailyGoalsPercentIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       spacing: AppStyles.kSpac4,
       children: [
-        getHeaderLabel(context),
-        Row(children: [getLinearPercentIndicator(context), getClaimButton(context)])
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Image.asset(ImagePath.energy, width: 16, height: 16),
+              Text('x${dailyGoal.energyReward ?? 0}', style: _Styles.getHeaderTextStyle(context)),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Column(
+            spacing: AppStyles.kSpac4,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              getHeaderLabel(context),
+              getLinearPercentIndicator(context),
+            ],
+          ),
+        ),
+        Expanded(flex: 2, child: getClaimButton(context))
       ],
     );
   }
@@ -45,19 +63,16 @@ extension _Actions on DailyGoalsPercentIndicator {
     final target = dailyGoal.targetValue ?? 1; // avoid divide by zero
     final percent = (current / target).clamp(0.0, 1.0);
 
-    return Expanded(
-      flex: 7,
-      child: LinearPercentIndicator(
-        percent: percent,
-        backgroundColor: context.theme.colorScheme.tertiary,
-        progressColor: context.theme.colorScheme.secondary,
-        animation: true,
-        animateFromLastPercent: true,
-        animateToInitialPercent: false,
-        padding: AppStyles.kPadd0,
-        barRadius: Radius.circular(AppStyles.kSpac20),
-        lineHeight: 10,
-      ),
+    return LinearPercentIndicator(
+      percent: percent,
+      backgroundColor: context.theme.colorScheme.tertiary,
+      progressColor: context.theme.colorScheme.secondary,
+      animation: true,
+      animateFromLastPercent: true,
+      animateToInitialPercent: false,
+      padding: AppStyles.kPadd0,
+      barRadius: Radius.circular(AppStyles.kSpac20),
+      lineHeight: 10,
     );
   }
 
@@ -73,20 +88,20 @@ extension _Actions on DailyGoalsPercentIndicator {
         ? context.theme.colorScheme.tertiary
         : canClaim
             ? context.theme.colorScheme.secondary
-            : context.theme.colorScheme.tertiary;
+            : context.theme.colorScheme.secondary;
 
     final label = isClaimed
         ? S.current.claimedLabel
         : canClaim
             ? S.current.claimLabel
-            : S.current.claimLabel;
+            : S.current.goLabel;
 
-    return Expanded(
-      flex: 3,
-      child: Padding(
-        padding: AppStyles.kPaddOL8,
-        child: GestureDetector(
-          onTap: isClaimed || !canClaim
+    return GestureDetector(
+      onTap: !canClaim && !isClaimed
+          ? () {
+              context.router.push(LoggingSelectionRoute());
+            }
+          : isClaimed
               ? null
               : () {
                   onClaimPressed(
@@ -94,13 +109,11 @@ extension _Actions on DailyGoalsPercentIndicator {
                     energyReward: dailyGoal.energyReward ?? 0,
                   );
                 },
-          child: Container(
-            decoration: _Styles.getClaimButtonContainerDecoration(context, backgroundColor),
-            padding: AppStyles.kPaddSV2,
-            child: Center(
-              child: Text(label, style: _Styles.getClaimButtonTextStyle(context)),
-            ),
-          ),
+      child: Container(
+        decoration: _Styles.getClaimButtonContainerDecoration(context, backgroundColor),
+        padding: AppStyles.kPaddSV2,
+        child: Center(
+          child: Text(label, style: _Styles.getClaimButtonTextStyle(context)),
         ),
       ),
     );
@@ -116,10 +129,7 @@ abstract class _Styles {
 
   // Claim Button Container Decoration
   static BoxDecoration getClaimButtonContainerDecoration(BuildContext context, Color backgroundColor) {
-    return BoxDecoration(
-      color: backgroundColor,
-      borderRadius: AppStyles.kRad100,
-    );
+    return BoxDecoration(color: backgroundColor, borderRadius: AppStyles.kRad100);
   }
 
   // Claim Button Text Style
