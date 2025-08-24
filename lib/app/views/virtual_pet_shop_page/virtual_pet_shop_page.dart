@@ -1,6 +1,5 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/user_pet_model/user_pet_model.dart';
-import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/virtual_pet_shop_vm/virtual_pet_shop_view_model.dart';
 import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/skeleton/skeleton.dart';
@@ -63,7 +62,7 @@ class _VirtualPetShopPageState extends BaseStatefulState<_VirtualPetShopPage> {
           children: [
             getHeader(),
             if (isLoading) ...[
-              Skeleton(height: AppStyles.kSize200, width: AppStyles.kDoubleInfinity),
+              Skeleton(height: 220, width: AppStyles.kDoubleInfinity),
               Skeleton(height: AppStyles.kSize45, width: AppStyles.kDoubleInfinity)
             ] else ...[
               getPetsContainer(),
@@ -86,13 +85,6 @@ class _VirtualPetShopPageState extends BaseStatefulState<_VirtualPetShopPage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _VirtualPetShopPageState {
   Future<void> _buyPet({required int petId, required int energyCost}) async {
-    final userEnergy = context.read<VirtualPetShopViewModel>().userEnergy;
-
-    if ((userEnergy.energies ?? 0) < energyCost) {
-      WidgetUtils.showSnackBar(context, S.current.notEnoughEnergyMessage);
-      return;
-    }
-
     await tryLoad(context, () => context.read<VirtualPetShopViewModel>().buyPet(petId: petId, energyCost: energyCost));
     _needRefresh = true;
   }
@@ -124,7 +116,7 @@ extension _WidgetFactories on _VirtualPetShopPageState {
               Row(
                 spacing: AppStyles.kSpac8,
                 children: [
-                  FaIcon(FontAwesomeIcons.bagShopping, size: AppStyles.kSize16),
+                  FaIcon(FontAwesomeIcons.paw, size: AppStyles.kSize16),
                   Text(S.current.chooseYourCompanionLabel, style: _Styles.getHeaderTitleTextStyle(context)),
                 ],
               ),
@@ -232,7 +224,7 @@ extension _WidgetFactories on _VirtualPetShopPageState {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            getPetImage(),
+            getPetImage(item: item),
             getPetNameLabel(item: item),
             getEnergyCostContainer(energyCost: item.pet.energyCost ?? 0),
             AppStyles.kSizedBoxH24,
@@ -267,11 +259,34 @@ extension _WidgetFactories on _VirtualPetShopPageState {
     );
   }
 
-  // Pet Image
-  Widget getPetImage() {
-    return Image.asset(
-      ImagePath.egg,
+  Widget getPetImage({required ShopPetItem item}) {
+    return Image.network(
+      item.pet.imageUrl ?? ImagePath.egg,
       fit: BoxFit.contain,
+      height: AppStyles.kSize80,
+      width: AppStyles.kSize80,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+
+        return SizedBox(
+          height: AppStyles.kSize80,
+          width: AppStyles.kSize80,
+          child: Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                  : null,
+            ),
+          ),
+        );
+      },
+      errorBuilder: (context, error, stackTrace) {
+        return Image.asset(
+          ImagePath.egg,
+          fit: BoxFit.contain,
+        );
+      },
     );
   }
 
@@ -412,6 +427,6 @@ abstract class _Styles {
 
   // Action Button Label Text Style
   static TextStyle getActionButtonLabelTextStyle(BuildContext context, Color textColor) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: textColor);
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: textColor);
   }
 }

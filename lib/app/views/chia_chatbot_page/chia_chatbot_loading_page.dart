@@ -49,7 +49,7 @@ extension _PrivateMethods on _ChiaChatbotLoadingPageState {
     final response = await tryCatch(context, () => context.read<ChiaChatbotViewModel>().getLoggedFoods());
 
     if (response == true && mounted) {
-      context.router.push(ChiaChatbotRoute());
+      context.router.replace(ChiaChatbotRoute());
     }
   }
 }

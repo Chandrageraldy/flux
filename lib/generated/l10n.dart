@@ -2769,6 +2769,26 @@ class S {
       args: [],
     );
   }
+
+  /// `See progress over time`
+  String get seeProgressOverTimeLabel {
+    return Intl.message(
+      'See progress over time',
+      name: 'seeProgressOverTimeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Profile and Customize Plan`
+  String get updateProfileAndCustomizePlanLabel {
+    return Intl.message(
+      'Update Profile and Customize Plan',
+      name: 'updateProfileAndCustomizePlanLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

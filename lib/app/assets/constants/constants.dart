@@ -29,6 +29,8 @@ class ImagePath {
   static const String feed = 'lib/app/assets/images/feed.png';
   static const String play = 'lib/app/assets/images/play.png';
   static const String groom = 'lib/app/assets/images/groom.png';
+  static const String diary = 'lib/app/assets/images/diary.png';
+  static const String profile = 'lib/app/assets/images/profile.png';
 }
 
 class AnimationPath {

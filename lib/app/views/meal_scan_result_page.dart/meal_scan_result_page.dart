@@ -96,12 +96,16 @@ extension _Actions on _MealScanResultPageState {
   Future<void> _onLogFoodPressed({required Map<String, double> nutritionTotals}) async {
     final mealType = _formKey.currentState!.fields[FormFields.mealType.name]!.value as String;
     File imageFile = File(widget.imageFile.path);
-    tryLoad(
+    final response = await tryLoad(
       context,
       () => context
           .read<MealScanViewModel>()
           .logFood(mealType: mealType, nutritionTotals: nutritionTotals, imageFile: imageFile),
     );
+
+    if (response == true && mounted) {
+      context.router.maybePop();
+    }
   }
 
   void _onEnhanceWithAIPressed() {

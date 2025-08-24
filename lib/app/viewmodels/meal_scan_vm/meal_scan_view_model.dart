@@ -192,7 +192,7 @@ class MealScanViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> logFood(
+  Future<bool> logFood(
       {required String mealType, required Map<String, double> nutritionTotals, required File imageFile}) async {
     final response = await foodRepository.logFoodWithMealScan(
       mealScanResult: mealScanResult,
@@ -202,6 +202,7 @@ class MealScanViewModel extends BaseViewModel {
     );
     checkError(response);
     notifyListeners();
+    return response.status == ResponseStatus.COMPLETE;
   }
 
   Future<GeminiMealScanStatus> enhanceWithAI({required String userInstruction}) async {

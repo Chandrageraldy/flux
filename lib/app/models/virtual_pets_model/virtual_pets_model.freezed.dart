@@ -30,6 +30,7 @@ mixin _$VirtualPetsModel {
   int? get requiredExpLvl2 => throw _privateConstructorUsedError;
   int? get requiredExpLvl3 => throw _privateConstructorUsedError;
   int? get energyCost => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this VirtualPetsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,7 +58,8 @@ abstract class $VirtualPetsModelCopyWith<$Res> {
       int? requiredExpLvl1,
       int? requiredExpLvl2,
       int? requiredExpLvl3,
-      int? energyCost});
+      int? energyCost,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -85,6 +87,7 @@ class _$VirtualPetsModelCopyWithImpl<$Res, $Val extends VirtualPetsModel>
     Object? requiredExpLvl2 = freezed,
     Object? requiredExpLvl3 = freezed,
     Object? energyCost = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       petId: freezed == petId
@@ -127,6 +130,10 @@ class _$VirtualPetsModelCopyWithImpl<$Res, $Val extends VirtualPetsModel>
           ? _value.energyCost
           : energyCost // ignore: cast_nullable_to_non_nullable
               as int?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -149,7 +156,8 @@ abstract class _$$VirtualPetsModelImplCopyWith<$Res>
       int? requiredExpLvl1,
       int? requiredExpLvl2,
       int? requiredExpLvl3,
-      int? energyCost});
+      int? energyCost,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -175,6 +183,7 @@ class __$$VirtualPetsModelImplCopyWithImpl<$Res>
     Object? requiredExpLvl2 = freezed,
     Object? requiredExpLvl3 = freezed,
     Object? energyCost = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$VirtualPetsModelImpl(
       petId: freezed == petId
@@ -217,6 +226,10 @@ class __$$VirtualPetsModelImplCopyWithImpl<$Res>
           ? _value.energyCost
           : energyCost // ignore: cast_nullable_to_non_nullable
               as int?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -234,7 +247,8 @@ class _$VirtualPetsModelImpl implements _VirtualPetsModel {
       this.requiredExpLvl1,
       this.requiredExpLvl2,
       this.requiredExpLvl3,
-      this.energyCost});
+      this.energyCost,
+      this.imageUrl});
 
   factory _$VirtualPetsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$VirtualPetsModelImplFromJson(json);
@@ -259,10 +273,12 @@ class _$VirtualPetsModelImpl implements _VirtualPetsModel {
   final int? requiredExpLvl3;
   @override
   final int? energyCost;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'VirtualPetsModel(petId: $petId, name: $name, lvl1Url: $lvl1Url, lvl2Url: $lvl2Url, lvl3Url: $lvl3Url, lvl4Url: $lvl4Url, requiredExpLvl1: $requiredExpLvl1, requiredExpLvl2: $requiredExpLvl2, requiredExpLvl3: $requiredExpLvl3, energyCost: $energyCost)';
+    return 'VirtualPetsModel(petId: $petId, name: $name, lvl1Url: $lvl1Url, lvl2Url: $lvl2Url, lvl3Url: $lvl3Url, lvl4Url: $lvl4Url, requiredExpLvl1: $requiredExpLvl1, requiredExpLvl2: $requiredExpLvl2, requiredExpLvl3: $requiredExpLvl3, energyCost: $energyCost, imageUrl: $imageUrl)';
   }
 
   @override
@@ -283,7 +299,9 @@ class _$VirtualPetsModelImpl implements _VirtualPetsModel {
             (identical(other.requiredExpLvl3, requiredExpLvl3) ||
                 other.requiredExpLvl3 == requiredExpLvl3) &&
             (identical(other.energyCost, energyCost) ||
-                other.energyCost == energyCost));
+                other.energyCost == energyCost) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -299,7 +317,8 @@ class _$VirtualPetsModelImpl implements _VirtualPetsModel {
       requiredExpLvl1,
       requiredExpLvl2,
       requiredExpLvl3,
-      energyCost);
+      energyCost,
+      imageUrl);
 
   /// Create a copy of VirtualPetsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -329,7 +348,8 @@ abstract class _VirtualPetsModel implements VirtualPetsModel {
       final int? requiredExpLvl1,
       final int? requiredExpLvl2,
       final int? requiredExpLvl3,
-      final int? energyCost}) = _$VirtualPetsModelImpl;
+      final int? energyCost,
+      final String? imageUrl}) = _$VirtualPetsModelImpl;
 
   factory _VirtualPetsModel.fromJson(Map<String, dynamic> json) =
       _$VirtualPetsModelImpl.fromJson;
@@ -354,6 +374,8 @@ abstract class _VirtualPetsModel implements VirtualPetsModel {
   int? get requiredExpLvl3;
   @override
   int? get energyCost;
+  @override
+  String? get imageUrl;
 
   /// Create a copy of VirtualPetsModel
   /// with the given fields replaced by the non-null parameter values.

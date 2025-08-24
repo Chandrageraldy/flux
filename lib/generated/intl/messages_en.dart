@@ -375,6 +375,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sedentaryDesc": MessageLookupByLibrary.simpleMessage(
             "Mostly sitting all day (e.g., desk job, little movement)."),
         "sedentaryLabel": MessageLookupByLibrary.simpleMessage("Sedentary"),
+        "seeProgressOverTimeLabel":
+            MessageLookupByLibrary.simpleMessage("See progress over time"),
         "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
         "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
         "servingUnitLabel":
@@ -418,6 +420,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typeToStartChattingLabel":
             MessageLookupByLibrary.simpleMessage("Type to start chatting..."),
         "underweightLabel": MessageLookupByLibrary.simpleMessage("Underweight"),
+        "updateProfileAndCustomizePlanLabel":
+            MessageLookupByLibrary.simpleMessage(
+                "Update Profile and Customize Plan"),
         "useAiMealScanLabel":
             MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),
         "usedEmail": MessageLookupByLibrary.simpleMessage(

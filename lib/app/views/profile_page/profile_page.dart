@@ -7,7 +7,6 @@ import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 import 'package:flux/app/widgets/image_profile/image_profile.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -66,19 +65,50 @@ extension _PrivateMethods on _ProfilePageState {
       context.router.replaceAll([RootRoute()]);
     }
   }
+
+  void _onAccountActionPressed() {
+    context.router.push(AccountRoute());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ProfilePageState {
   // Top Bar
   Widget getCustomAppBar() {
-    return CustomAppBar(
-      leadingButton: AppStyles.kEmptyWidget,
-      trailingButton: GestureDetector(
-        onTap: () => context.router.push(AccountRoute()),
-        child: FaIcon(FontAwesomeIcons.gear, size: AppStyles.kSize18),
+    return Container(
+      padding: AppStyles.kPaddSV8,
+      decoration: _Styles.getCustomAppBarContainerDecoration(context),
+      child: Padding(
+        padding: AppStyles.kPaddSH16,
+        child: Row(
+          children: [
+            Expanded(child: AppStyles.kEmptyWidget),
+            Column(
+              children: [
+                Row(
+                  spacing: AppStyles.kSpac4,
+                  children: [
+                    Text(S.current.profileLabel, style: _Styles.getAppBarLabelTextStyle()),
+                  ],
+                ),
+                Text(S.current.updateProfileAndCustomizePlanLabel, style: _Styles.getAppBarDescTextStyle(context))
+              ],
+            ),
+            Expanded(child: getAccountActionButton()),
+          ],
+        ),
       ),
-      title: S.current.profileLabel,
+    );
+  }
+
+  // Account Action Button
+  Widget getAccountActionButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: GestureDetector(
+        onTap: _onAccountActionPressed,
+        child: Icon(Icons.settings, size: AppStyles.kSize20, color: context.theme.colorScheme.primary),
+      ),
     );
   }
 
@@ -366,5 +396,29 @@ class _Styles {
   // Settings Label Text Style
   static TextStyle getSettingsLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withCustomSize(11);
+  }
+
+  // Custom App Bar Container Decoration
+  static BoxDecoration getCustomAppBarContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRadOBL10BR10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+      ],
+    );
+  }
+
+  // App Bar Label Text Style
+  static TextStyle getAppBarLabelTextStyle() {
+    return Quicksand.bold.withSize(FontSizes.mediumPlus);
+  }
+
+  // App Bar Desc Text Style
+  static TextStyle getAppBarDescTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(
+          height: 1,
+          color: context.theme.colorScheme.onTertiaryContainer,
+        );
   }
 }

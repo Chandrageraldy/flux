@@ -282,5 +282,7 @@
     "buyLabel": "Buy",
     "equipLabel": "Equip",
     "equippedLabel": "Equipped",
-    "notEnoughEnergyLabel": "Not Enough Energy"
+    "notEnoughEnergyLabel": "Not Enough Energy",
+    "seeProgressOverTimeLabel": "See progress over time",
+    "updateProfileAndCustomizePlanLabel": "Update Profile and Customize Plan"
 }

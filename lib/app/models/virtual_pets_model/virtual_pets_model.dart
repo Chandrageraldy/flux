@@ -16,6 +16,7 @@ class VirtualPetsModel with _$VirtualPetsModel {
     int? requiredExpLvl2,
     int? requiredExpLvl3,
     int? energyCost,
+    String? imageUrl,
   }) = _VirtualPetsModel;
 
   factory VirtualPetsModel.fromJson(Map<String, dynamic> json) => _$VirtualPetsModelFromJson(json);

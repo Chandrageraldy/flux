@@ -46,11 +46,11 @@ class GradientAppColors {
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
     colors: [
-      Color(0xFFEBF6FF), // softer blue (still noticeable, but gentle)
+      Color(0xFFF3FAFF), // extra soft blue, almost pastel
       Color(0xFFFFFFFF), // white in the middle
-      Color(0xFFF7F4FF), // soft lavender
+      Color(0xFFF7F4FF), // extra soft lavender, pastel feel
     ],
-    stops: [0.0, 0.5, 1.0],
+    stops: [0.0, 0.45, 1.0],
   );
 
   static const LinearGradient secondaryGradient = LinearGradient(

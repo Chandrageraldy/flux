@@ -51,79 +51,38 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
   }
 
   @override
-  PreferredSizeWidget? appbar() {
-    return AppBar(
-      backgroundColor: AppColors.transparentColor,
-      title: Image.asset(
-        ImagePath.fluxLogo2,
-        height: AppStyles.kSize50,
-      ),
-      scrolledUnderElevation: 0,
-      actions: [getProfileActionButton(), getAddActionButton()],
-    );
-  }
-
-  @override
   Widget body() {
     return RefreshIndicator(
       onRefresh: () async {
         _getLoggedFoods();
       },
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: AppStyles.kPaddSH16,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppStyles.kSizedBoxH4,
-              Container(
-                padding: AppStyles.kPaddSV10,
-                decoration: _Styles.getDateContainerDecoration(context),
+      child: Column(
+        children: [
+          getCustomAppBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: AppStyles.kPaddSH16,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: AppStyles.kSpac12,
                   children: [
-                    Padding(
-                      padding: AppStyles.kPaddSH16,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [getDateShifterLabel(), getDateShifter()],
-                      ),
+                    AppStyles.kSizedBoxH12,
+                    getDateContainer(),
+                    AppStyles.kSizedBoxH16,
+                    getPageViewContainer(),
+                    AppStyles.kSizedBoxH20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
                     ),
-                    getDateTimeline()
+                    AppStyles.kSizedBoxH4,
+                    getLoggedMeals(),
                   ],
                 ),
               ),
-              AppStyles.kSizedBoxH16,
-              getPageViewContainer(),
-              AppStyles.kSizedBoxH20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
-              ),
-              AppStyles.kSizedBoxH4,
-              Column(
-                spacing: AppStyles.kSpac16,
-                children: [
-                  ...MealType.values.map(
-                    (type) {
-                      final meals = context.select<DiaryViewModel, List<LoggedFoodModel>>(
-                        (vm) => vm.loggedFoodsList.where((m) => m.mealType == type.value).toList(),
-                      );
-                      return MealDiaryCard(
-                        mealType: type,
-                        meals: meals,
-                        selectedDate: _selectedDate,
-                        getLoggedFoods: _getLoggedFoods,
-                      );
-                    },
-                  ),
-                  AppStyles.kSizedBoxH8,
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -180,28 +139,83 @@ extension _Actions on _DiaryPageState {
   void _onProfileActionPressed() {
     context.router.replaceAll([ProfileRoute()]);
   }
+
+  void _onAddActionPressed() {
+    context.router.push(LoggingSelectionRoute());
+  }
 }
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _DiaryPageState {
+  // Custom App Bar
+  Widget getCustomAppBar() {
+    return Container(
+      padding: AppStyles.kPaddSV8,
+      decoration: _Styles.getCustomAppBarContainerDecoration(context),
+      child: Padding(
+        padding: AppStyles.kPaddSH16,
+        child: Row(
+          children: [
+            Expanded(child: getProfileActionButton()),
+            Column(
+              children: [
+                Row(
+                  spacing: AppStyles.kSpac4,
+                  children: [
+                    Image.asset(ImagePath.diary, width: AppStyles.kSize26, height: AppStyles.kSize26),
+                    Text(S.current.diaryLabel, style: _Styles.getAppBarLabelTextStyle()),
+                  ],
+                ),
+                Text(S.current.seeProgressOverTimeLabel, style: _Styles.getAppBarDescTextStyle())
+              ],
+            ),
+            Expanded(child: getAddActionButton()),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Profile Action Button
   Widget getProfileActionButton() {
     return GestureDetector(
       onTap: _onProfileActionPressed,
       child: Padding(
         padding: AppStyles.kPaddOR16,
-        child: FaIcon(FontAwesomeIcons.solidUser, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
+        child: FaIcon(FontAwesomeIcons.bars, size: AppStyles.kSize18, color: context.theme.colorScheme.primary),
       ),
     );
   }
 
   // Add Action Button
   Widget getAddActionButton() {
-    return GestureDetector(
-      onTap: _onProfileActionPressed,
-      child: Padding(
-        padding: AppStyles.kPaddOR16,
-        child: Icon(Icons.add_circle_rounded, size: AppStyles.kSize26, color: context.theme.colorScheme.primary),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: GestureDetector(
+        onTap: _onAddActionPressed,
+        child: Icon(Icons.add, size: AppStyles.kSize26, color: context.theme.colorScheme.primary),
+      ),
+    );
+  }
+
+  // Date Container
+  Widget getDateContainer() {
+    return Container(
+      padding: AppStyles.kPaddSV10,
+      decoration: _Styles.getDateContainerDecoration(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppStyles.kSpac12,
+        children: [
+          Padding(
+            padding: AppStyles.kPaddSH16,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [getDateShifterLabel(), getDateShifter()],
+            ),
+          ),
+          getDateTimeline()
+        ],
       ),
     );
   }
@@ -592,6 +606,29 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
+  // Logged Meals
+  Widget getLoggedMeals() {
+    return Column(
+      spacing: AppStyles.kSpac16,
+      children: [
+        ...MealType.values.map(
+          (type) {
+            final meals = context.select<DiaryViewModel, List<LoggedFoodModel>>(
+              (vm) => vm.loggedFoodsList.where((m) => m.mealType == type.value).toList(),
+            );
+            return MealDiaryCard(
+              mealType: type,
+              meals: meals,
+              selectedDate: _selectedDate,
+              getLoggedFoods: _getLoggedFoods,
+            );
+          },
+        ),
+        AppStyles.kSizedBoxH8,
+      ],
+    );
+  }
+
   // Edit Button
   Widget getFullReportButton() {
     final loggedFoodsList = context.select((DiaryViewModel vm) => vm.loggedFoodsList);
@@ -739,5 +776,26 @@ class _Styles {
       color: currentPageIndex == index ? context.theme.colorScheme.secondary : context.theme.colorScheme.tertiary,
       borderRadius: AppStyles.kRad100,
     );
+  }
+
+  // Custom App Bar Container Decoration
+  static BoxDecoration getCustomAppBarContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.onPrimary,
+      borderRadius: AppStyles.kRadOBL10BR10,
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+      ],
+    );
+  }
+
+  // App Bar Label Text Style
+  static TextStyle getAppBarLabelTextStyle() {
+    return Quicksand.bold.withSize(FontSizes.mediumPlus);
+  }
+
+  // App Bar Desc Text Style
+  static TextStyle getAppBarDescTextStyle() {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(height: 1);
   }
 }

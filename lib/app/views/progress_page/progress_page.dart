@@ -182,7 +182,7 @@ extension _WidgetFactories on _ProgressPageState {
         spacing: AppStyles.kSpac4,
         children: [
           Image.asset(ImagePath.energy, height: AppStyles.kSize16),
-          Text('${userEnergy.energies}'),
+          Text('${userEnergy.energies}', style: _Styles.getEnergyLabelTextStyle(context)),
         ],
       ),
     );
@@ -214,7 +214,7 @@ extension _WidgetFactories on _ProgressPageState {
         decoration: _Styles.getHeaderButtonContainerDecoration(context),
         height: AppStyles.kSize32,
         width: AppStyles.kSize32,
-        child: Center(child: FaIcon(FontAwesomeIcons.bagShopping, size: AppStyles.kSize16)),
+        child: Center(child: FaIcon(FontAwesomeIcons.paw, size: AppStyles.kSize16)),
       ),
     );
   }
@@ -476,5 +476,10 @@ abstract class _Styles {
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
       ],
     );
+  }
+
+  // Energy Label Text Style
+  static TextStyle getEnergyLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small);
   }
 }
