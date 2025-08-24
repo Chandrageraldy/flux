@@ -42,10 +42,8 @@ class _MealDetailsPage extends BaseStatefulPage {
 
 class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar(
-        backgroundColor: context.theme.colorScheme.onPrimary,
-        popBoolean: isEdited,
-      );
+  PreferredSizeWidget? appbar() =>
+      DefaultAppBar(backgroundColor: context.theme.colorScheme.onPrimary, popBoolean: isEdited);
 
   @override
   bool hasDefaultPadding() => false;

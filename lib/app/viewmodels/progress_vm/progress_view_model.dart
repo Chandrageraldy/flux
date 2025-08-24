@@ -25,8 +25,30 @@ class ProgressViewModel extends BaseViewModel {
   List<LoggedFoodModel> loggedFoods = [];
   List<DailyGoalsModel> dailyGoals = [];
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   bool _isUpdatingCurrentExp = false;
   bool get isUpdatingCurrentExp => _isUpdatingCurrentExp;
+
+  Future<void> initialize() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final futures = [
+        getPersonalizedPlan(),
+        getUserProfile(),
+        getActiveUserPet(),
+        getUserEnergies(),
+        getDailyGoals(),
+      ];
+      await Future.wait(futures);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 
   Future<void> getPersonalizedPlan() async {
     final response = await planRepository.getPersonalizedPlan();

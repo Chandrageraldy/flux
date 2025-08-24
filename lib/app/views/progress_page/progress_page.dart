@@ -37,7 +37,9 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
     super.initState();
     _petController = AnimationController(vsync: this);
     _confettiController = AnimationController(vsync: this);
-    initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProgressViewModel>().initialize();
+    });
   }
 
   @override
@@ -49,6 +51,17 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
 
   @override
   Widget body() {
+    final isLoading = context.select((ProgressViewModel vm) => vm.isLoading);
+    final activeUserPet = context.select((ProgressViewModel vm) => vm.activeUserPet);
+
+    if (activeUserPet.virtualPet == null) {
+      return const SizedBox.shrink();
+    }
+
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: SingleChildScrollView(
@@ -83,18 +96,6 @@ class _ProgressPageState extends BaseStatefulState<_ProgressPage> with TickerPro
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _ProgressPageState {
-  Future<void> initialize() async {
-    Future.wait([_getPersonalizedPlan(), _getUserProfile(), _getActiveUserPet(), _getUserEnergies(), _getDailyGoals()]);
-  }
-
-  Future<void> _getPersonalizedPlan() async {
-    await tryLoad(context, () => context.read<ProgressViewModel>().getPersonalizedPlan());
-  }
-
-  Future<void> _getUserProfile() async {
-    await tryLoad(context, () => context.read<ProgressViewModel>().getUserProfile());
-  }
-
   Future<void> _getActiveUserPet() async {
     await tryLoad(context, () => context.read<ProgressViewModel>().getActiveUserPet());
   }
@@ -151,7 +152,13 @@ extension _Actions on _ProgressPageState {
   }
 
   void _onShopPressed() {
-    context.router.push(VirtualPetShopRoute());
+    context.router.push(VirtualPetShopRoute()).then(
+      (value) {
+        if (value == true) {
+          _onRefresh();
+        }
+      },
+    );
   }
 }
 
@@ -383,9 +390,15 @@ extension _WidgetFactories on _ProgressPageState {
         spacing: AppStyles.kSpac16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            S.current.dailyGoalsLabel,
-            style: _Styles.getDailyGoalLabelTextStyle(context),
+          Row(
+            spacing: AppStyles.kSpac4,
+            children: [
+              Icon(Icons.calendar_month, size: AppStyles.kSize16),
+              Text(
+                S.current.dailyGoalsLabel,
+                style: _Styles.getDailyGoalLabelTextStyle(context),
+              ),
+            ],
           ),
           ...dailyGoals.map((dailyGoal) {
             return DailyGoalsPercentIndicator(
@@ -407,7 +420,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
       ],
     );
   }
@@ -433,7 +446,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad100,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
       ],
     );
   }
@@ -444,7 +457,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
       ],
     );
   }
@@ -460,7 +473,7 @@ abstract class _Styles {
       color: context.theme.colorScheme.onPrimary,
       borderRadius: AppStyles.kRad10,
       boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
       ],
     );
   }

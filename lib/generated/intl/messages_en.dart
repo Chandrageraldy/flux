@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bmiLabel":
             MessageLookupByLibrary.simpleMessage("Body Mass Index (BMI)"),
         "breakfastLabel": MessageLookupByLibrary.simpleMessage("Breakfast"),
+        "buyLabel": MessageLookupByLibrary.simpleMessage("Buy"),
         "calciumLabel": MessageLookupByLibrary.simpleMessage("Calcium"),
         "calorieFormula":
             MessageLookupByLibrary.simpleMessage("Remaining = Goal - Logged"),
@@ -67,6 +68,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "chiaLabel": MessageLookupByLibrary.simpleMessage("Chia"),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
+        "chooseYourCompanionLabel":
+            MessageLookupByLibrary.simpleMessage("Choose Your Companion"),
+        "chooseYourCompanionMessage": MessageLookupByLibrary.simpleMessage(
+            "Pick a pet to accompany you on your journey. You can buy, equip, or switch anytime!"),
         "claimLabel": MessageLookupByLibrary.simpleMessage("Claim"),
         "claimedLabel": MessageLookupByLibrary.simpleMessage("Claimed"),
         "completeNutrientsLabel":
@@ -106,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals."),
         "enhanceWithAILabel":
             MessageLookupByLibrary.simpleMessage("Enhance with AI"),
+        "equipLabel": MessageLookupByLibrary.simpleMessage("Equip"),
+        "equippedLabel": MessageLookupByLibrary.simpleMessage("Equipped"),
         "exerciseLevelLabel":
             MessageLookupByLibrary.simpleMessage("Exercise Level"),
         "experiencePointsLabel":
@@ -245,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You haven’t saved any food items yet. Save foods to add items here."),
         "normalWeightLabel":
             MessageLookupByLibrary.simpleMessage("Normal weight"),
+        "notEnoughEnergyLabel":
+            MessageLookupByLibrary.simpleMessage("Not Enough Energy"),
         "notEnoughEnergyMessage": MessageLookupByLibrary.simpleMessage(
             "You don\'t have sufficient energy."),
         "nutritionGoalsLabel":

@@ -2709,6 +2709,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose Your Companion`
+  String get chooseYourCompanionLabel {
+    return Intl.message(
+      'Choose Your Companion',
+      name: 'chooseYourCompanionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a pet to accompany you on your journey. You can buy, equip, or switch anytime!`
+  String get chooseYourCompanionMessage {
+    return Intl.message(
+      'Pick a pet to accompany you on your journey. You can buy, equip, or switch anytime!',
+      name: 'chooseYourCompanionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy`
+  String get buyLabel {
+    return Intl.message(
+      'Buy',
+      name: 'buyLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Equip`
+  String get equipLabel {
+    return Intl.message(
+      'Equip',
+      name: 'equipLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Equipped`
+  String get equippedLabel {
+    return Intl.message(
+      'Equipped',
+      name: 'equippedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Enough Energy`
+  String get notEnoughEnergyLabel {
+    return Intl.message(
+      'Not Enough Energy',
+      name: 'notEnoughEnergyLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

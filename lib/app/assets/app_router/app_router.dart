@@ -98,7 +98,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: DailyReportRoute.page),
         AutoRoute(page: ChiaChatbotRoute.page),
         getChiaChatbotRoutes(),
-        AutoRoute(page: VirtualPetShopRoute.page),
+        CustomRoute(page: VirtualPetShopRoute.page, customRouteBuilder: _undismissibleModalSheetBuilder),
       ],
     );
   }
@@ -134,11 +134,7 @@ class AppRouter extends RootStackRouter {
   }
 }
 
-Route<T> _modalSheetBuilder<T>(
-  BuildContext context,
-  Widget child,
-  AutoRoutePage<T> page,
-) {
+Route<T> _modalSheetBuilder<T>(BuildContext context, Widget child, AutoRoutePage<T> page) {
   return ModalBottomSheetRoute(
     settings: page,
     builder: (context) => SafeArea(
@@ -154,6 +150,27 @@ Route<T> _modalSheetBuilder<T>(
       ),
     ),
     isScrollControlled: true,
+    backgroundColor: context.theme.colorScheme.onPrimary,
+  );
+}
+
+Route<T> _undismissibleModalSheetBuilder<T>(BuildContext context, Widget child, AutoRoutePage<T> page) {
+  return ModalBottomSheetRoute(
+    settings: page,
+    builder: (context) => SafeArea(
+      // Wrap to layout based on the intrinsic height of its content
+      child: Wrap(
+        children: [
+          Container(
+            decoration: BoxDecoration(borderRadius: AppStyles.kRadVT10, color: context.theme.colorScheme.onPrimary),
+            clipBehavior: Clip.hardEdge,
+            child: child,
+          ),
+        ],
+      ),
+    ),
+    isScrollControlled: true,
+    isDismissible: false,
     backgroundColor: context.theme.colorScheme.onPrimary,
   );
 }

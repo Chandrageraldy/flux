@@ -16,7 +16,26 @@ class VirtualPetShopViewModel extends BaseViewModel {
   List<UserPetModel> userPets = [];
   List<ShopPetItem> shopPets = [];
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   UserEnergyModel userEnergy = UserEnergyModel();
+
+  Future<void> initialize() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final futures = [
+        getVirtualPets(),
+        getUserEnergies(),
+      ];
+      await Future.wait(futures);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 
   Future<void> getVirtualPets() async {
     final getVirtualPetsResponse = await petRepository.getVirtualPets();
@@ -29,15 +48,25 @@ class VirtualPetShopViewModel extends BaseViewModel {
       checkError(getUserPetsResponse);
       userPets = getUserPetsResponse.data as List<UserPetModel>;
 
-      // Build shopPets by comparing petId
       final ownedPetIds = userPets.map((e) => e.petId).toSet();
 
-      shopPets = virtualPets.map((vPet) {
+      shopPets = virtualPets.map((virtualPet) {
+        final userPet = userPets.firstWhere(
+          (uPet) => uPet.petId == virtualPet.petId,
+          orElse: () => UserPetModel(),
+        );
         return ShopPetItem(
-          pet: vPet,
-          isOwned: ownedPetIds.contains(vPet.petId),
+          pet: virtualPet,
+          isOwned: ownedPetIds.contains(virtualPet.petId),
+          isActive: userPet.isActive ?? false,
         );
       }).toList();
+
+      // Sort so active pets is on top of the list
+      shopPets.sort((a, b) {
+        if (a.isActive == b.isActive) return 0;
+        return a.isActive ? -1 : 1;
+      });
 
       notifyListeners();
     }
@@ -58,8 +87,6 @@ class VirtualPetShopViewModel extends BaseViewModel {
 
     if (buyPetResponse.status == ResponseStatus.COMPLETE) {
       final totalEnergy = (userEnergy.energies ?? 0) - energyCost;
-      print(energyCost);
-      print(userEnergy.energies);
       final addEnergyResponse =
           await energyRepository.addUserEnergy(userId: user?.userId ?? '', totalEnergy: totalEnergy);
 
@@ -91,9 +118,11 @@ class VirtualPetShopViewModel extends BaseViewModel {
 class ShopPetItem {
   final VirtualPetsModel pet;
   final bool isOwned;
+  final bool isActive;
 
   ShopPetItem({
     required this.pet,
     required this.isOwned,
+    required this.isActive,
   });
 }

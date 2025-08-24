@@ -276,5 +276,11 @@
     "mealsGoalDesc": "Meal balance",
     "xpLabel": "XP",
     "maxLabel": "Max",
-    "goLabel": "Go"
+    "goLabel": "Go",
+    "chooseYourCompanionLabel": "Choose Your Companion",
+    "chooseYourCompanionMessage": "Pick a pet to accompany you on your journey. You can buy, equip, or switch anytime!",
+    "buyLabel": "Buy",
+    "equipLabel": "Equip",
+    "equippedLabel": "Equipped",
+    "notEnoughEnergyLabel": "Not Enough Energy"
 }
