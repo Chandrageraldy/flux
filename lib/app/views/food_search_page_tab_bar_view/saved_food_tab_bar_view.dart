@@ -26,8 +26,14 @@ class _SavedFoodTabBarViewState extends State<SavedFoodTabBarView> with ErrorHan
   Widget build(BuildContext context) {
     return Padding(
       padding: AppStyles.kPaddSH16,
-      child: CustomScrollView(
-        slivers: [getHeader(context), ...getFoodSliverList(context)],
+      child: RefreshIndicator(
+        onRefresh: () async {
+          getSavedFoods();
+        },
+        child: CustomScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          slivers: [getHeader(context), ...getFoodSliverList(context)],
+        ),
       ),
     );
   }

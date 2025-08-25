@@ -59,7 +59,7 @@ class _BarcodeScanPageState extends BaseStatefulState<_BarcodeScanPage> {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _BarcodeScanPageState {
-  _onBarcodeDetected(BarcodeCapture capture) async {
+  void _onBarcodeDetected(BarcodeCapture capture) async {
     if (isProcessing) return;
 
     final barcode = capture.barcodes.first;

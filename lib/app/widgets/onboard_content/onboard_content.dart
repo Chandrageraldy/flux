@@ -11,7 +11,12 @@ class OnboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: AppStyles.kSpac8,
-      children: [Expanded(child: getOnboardImage(context)), getTitleLabel(context), getDescriptionLabel()],
+      children: [
+        Expanded(child: getOnboardImage(context)),
+        AppStyles.kSizedBoxH4,
+        getTitleLabel(context),
+        getDescriptionLabel()
+      ],
     );
   }
 }
@@ -48,7 +53,7 @@ extension _WidgetFactories on OnboardContent {
 abstract class _Styles {
   // Title Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.mediumHuge).copyWith(color: context.theme.colorScheme.primary);
+    return Quicksand.semiBold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary);
   }
 
   // Description Text Style

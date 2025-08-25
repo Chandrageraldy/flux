@@ -480,10 +480,10 @@ class S {
     );
   }
 
-  /// `Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you.`
+  /// `Share your gender, weight, height, and birth date — so we can create your perfect plan.`
   String get planDescription1 {
     return Intl.message(
-      'Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you.',
+      'Share your gender, weight, height, and birth date — so we can create your perfect plan.',
       name: 'planDescription1',
       desc: '',
       args: [],

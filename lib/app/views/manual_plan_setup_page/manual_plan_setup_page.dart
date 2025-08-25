@@ -42,7 +42,7 @@ class _ManualPlanSetupPageState extends BaseStatefulState<_ManualPlanSetupPage> 
             _onBackNavigationPressed();
           }
         },
-        child: const Icon(Icons.arrow_back_ios_rounded),
+        child: Icon(Icons.arrow_back_ios_rounded),
       ),
     );
   }
@@ -128,13 +128,13 @@ extension _Actions on _ManualPlanSetupPageState {
         ? items.indexOf(currentSelectedValue)
         : getInitialItemIndex(key, items);
 
-    WidgetUtils.showCupertinoPicker(
-      context,
-      items,
+    WidgetUtils.showPickerDialog(
+      context: context,
+      label: title,
+      items: items,
       unit: unit,
+      desc: description,
       initialItem: initialItemIndex,
-      title: title,
-      description: description,
       onItemSelected: (int index) {
         var selectedValue = items[index];
         if (key == PlanSelectionKey.gender.key) {
@@ -153,11 +153,11 @@ extension _Actions on _ManualPlanSetupPageState {
     DateTime initialDate =
         currentSelectedValue != null ? currentSelectedValue.toDateTime(dateFormat) : DateTime(2000, 1, 1);
 
-    WidgetUtils.showDateCupertinoPicker(
-      context,
+    WidgetUtils.showDatePickerDialog(
+      context: context,
       initialDate: initialDate,
-      title: title,
-      description: description,
+      label: title,
+      desc: description,
       onDateSelected: (date) {
         final selectedDate = date;
         context.read<ManualPlanSetupViewModel>().savebodyMetrics(key, selectedDate.toFormattedString(dateFormat));
@@ -316,12 +316,12 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
 abstract class _Styles {
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style
   static TextStyle getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Linear Percent Indicator Line Height

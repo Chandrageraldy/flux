@@ -2,9 +2,9 @@ import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/nutrient_progress_model/nutrient_progress_model.dart';
 import 'package:flux/app/models/plan_model.dart/plan_model.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_with_desc.dart';
 import 'package:flux/app/widgets/food/nutrient_intake_progress.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
@@ -34,9 +34,8 @@ class _DailyReportPageState extends BaseStatefulState<DailyReportPage> {
             padding: AppStyles.kPaddSV16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: AppStyles.kSpac12,
+              spacing: AppStyles.kSpac24,
               children: [
-                getDateLabel(),
                 getMacronutrientsProgressContainer(macronutrientsProgressList, S.current.macronutrientsProgressLabel),
                 getGridContainer(highlightedMicroList, S.current.highlightedMicroLabel),
                 getListContainer(completeNutrientList, S.current.completeNutrientsLabel),
@@ -59,16 +58,25 @@ extension _PrivateMethods on _DailyReportPageState {}
 extension _WidgetFactories on _DailyReportPageState {
   // Custom App Bar
   Widget getCustomAppBar() {
-    return CustomAppBar(
-      leadingButton: CustomAppBarTappable(
-        icon: FontAwesomeIcons.chevronLeft,
-        color: context.theme.colorScheme.primary,
-        label: S.current.diaryLabel,
-        modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
-        onTap: () => context.router.maybePop(),
-      ),
+    final formattedDate = DateFormat('EEEE, MMMM d').format(widget.selectedDate);
+    return CustomAppBarWithDesc(
+      leadingButton: getBackActionButton(),
       trailingButton: AppStyles.kEmptyWidget,
       title: S.current.dailyFullReportLabel,
+      desc: formattedDate,
+      image: ImagePath.report,
+      imageSize: AppStyles.kSize20,
+    );
+  }
+
+  // Back Button
+  Widget getBackActionButton() {
+    return CustomAppBarTappable(
+      icon: FontAwesomeIcons.chevronLeft,
+      color: context.theme.colorScheme.primary,
+      label: S.current.diaryLabel,
+      modalSheetBarTappablePosition: CustomAppBarTappablePosition.LEADING,
+      onTap: () => context.router.maybePop(),
     );
   }
 
@@ -93,7 +101,13 @@ extension _WidgetFactories on _DailyReportPageState {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: AppStyles.kSpac12,
           children: [
-            Text(label, style: Quicksand.bold.withSize(FontSizes.medium)),
+            Row(
+              spacing: AppStyles.kSpac4,
+              children: [
+                Icon(Icons.pie_chart_sharp, size: AppStyles.kSize20),
+                Text(label, style: _Styles.getContainerHeaderLabelTextStyle()),
+              ],
+            ),
             Padding(
               padding: AppStyles.kPaddSH12,
               child: Row(
@@ -174,7 +188,13 @@ extension _WidgetFactories on _DailyReportPageState {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: AppStyles.kSpac12,
           children: [
-            Text(label, style: Quicksand.bold.withSize(FontSizes.medium)),
+            Row(
+              spacing: AppStyles.kSpac4,
+              children: [
+                Icon(Icons.format_line_spacing_outlined, size: AppStyles.kSize20),
+                Text(label, style: _Styles.getContainerHeaderLabelTextStyle()),
+              ],
+            ),
             Column(
               spacing: AppStyles.kSpac12,
               children: progressList.map((nutrient) {
@@ -212,7 +232,13 @@ extension _WidgetFactories on _DailyReportPageState {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: AppStyles.kSpac12,
           children: [
-            Text(label, style: Quicksand.bold.withSize(FontSizes.medium)),
+            Row(
+              spacing: AppStyles.kSpac4,
+              children: [
+                Icon(Icons.warning_rounded, size: AppStyles.kSize20),
+                Text(label, style: _Styles.getContainerHeaderLabelTextStyle()),
+              ],
+            ),
             GridView.count(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -234,15 +260,6 @@ extension _WidgetFactories on _DailyReportPageState {
       ),
     );
   }
-
-  // Date Label (below app bar)
-  Widget getDateLabel() {
-    final formattedDate = DateFormat('EEEE, MMMM d').format(widget.selectedDate);
-    return Padding(
-      padding: AppStyles.kPaddSH12,
-      child: Text(formattedDate, style: Quicksand.bold.withSize(FontSizes.medium)),
-    );
-  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -256,6 +273,11 @@ abstract class _Styles {
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
+  }
+
+  // Container Header Label
+  static TextStyle getContainerHeaderLabelTextStyle() {
+    return Quicksand.bold.withSize(FontSizes.small);
   }
 }
 

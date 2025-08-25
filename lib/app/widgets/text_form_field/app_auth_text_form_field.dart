@@ -12,18 +12,29 @@ class AppAuthTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: field.name,
-      decoration: InputDecoration(
-        hintText: placeholder,
-        filled: true,
-        fillColor: context.theme.colorScheme.onPrimary,
-        border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppStyles.kRad10),
-        contentPadding: AppStyles.kPaddSV20H16,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: AppStyles.kRad10,
+        boxShadow: [
+          BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+        ],
       ),
-      obscureText: field == FormFields.password ? true : false,
-      validator: validator,
-      style: Quicksand.light.withSize(FontSizes.medium),
+      child: FormBuilderTextField(
+        name: field.name,
+        decoration: InputDecoration(
+          hintText: placeholder,
+          filled: true,
+          fillColor: context.theme.colorScheme.onPrimary,
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: AppStyles.kRad10,
+          ),
+          contentPadding: AppStyles.kPaddSV20H16,
+        ),
+        obscureText: field == FormFields.password,
+        validator: validator,
+        style: Quicksand.light.withSize(FontSizes.medium),
+      ),
     );
   }
 }

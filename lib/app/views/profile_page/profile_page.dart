@@ -5,6 +5,7 @@ import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_with_desc.dart';
 import 'package:flux/app/widgets/image_profile/image_profile.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -75,29 +76,11 @@ extension _PrivateMethods on _ProfilePageState {
 extension _WidgetFactories on _ProfilePageState {
   // Top Bar
   Widget getCustomAppBar() {
-    return Container(
-      padding: AppStyles.kPaddSV8,
-      decoration: _Styles.getCustomAppBarContainerDecoration(context),
-      child: Padding(
-        padding: AppStyles.kPaddSH16,
-        child: Row(
-          children: [
-            Expanded(child: AppStyles.kEmptyWidget),
-            Column(
-              children: [
-                Row(
-                  spacing: AppStyles.kSpac4,
-                  children: [
-                    Text(S.current.profileLabel, style: _Styles.getAppBarLabelTextStyle()),
-                  ],
-                ),
-                Text(S.current.updateProfileAndCustomizePlanLabel, style: _Styles.getAppBarDescTextStyle(context))
-              ],
-            ),
-            Expanded(child: getAccountActionButton()),
-          ],
-        ),
-      ),
+    return CustomAppBarWithDesc(
+      leadingButton: AppStyles.kEmptyWidget,
+      trailingButton: getAccountActionButton(),
+      title: S.current.profileLabel,
+      desc: S.current.updateProfileAndCustomizePlanLabel,
     );
   }
 
@@ -396,29 +379,5 @@ class _Styles {
   // Settings Label Text Style
   static TextStyle getSettingsLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withCustomSize(11);
-  }
-
-  // Custom App Bar Container Decoration
-  static BoxDecoration getCustomAppBarContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRadOBL10BR10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
-      ],
-    );
-  }
-
-  // App Bar Label Text Style
-  static TextStyle getAppBarLabelTextStyle() {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus);
-  }
-
-  // App Bar Desc Text Style
-  static TextStyle getAppBarDescTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(
-          height: 1,
-          color: context.theme.colorScheme.onTertiaryContainer,
-        );
   }
 }

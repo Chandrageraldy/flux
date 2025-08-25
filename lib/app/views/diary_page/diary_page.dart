@@ -6,6 +6,7 @@ import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/diary_vm/diary_view_model.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_with_desc.dart';
 import 'package:flux/app/widgets/food/macronutrient_intake_progress.dart';
 import 'package:flux/app/widgets/food/meal_diary_card.dart';
 import 'package:flux/app/widgets/food/nutrient_intake_progress.dart';
@@ -73,7 +74,7 @@ class _DiaryPageState extends BaseStatefulState<_DiaryPage> {
                     AppStyles.kSizedBoxH20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [getMealsLoggedLabel(), getEditButton(_onEditMealRatioPressed)],
+                      children: [getLoggedMealsLabel(), getEditButton(_onEditMealRatioPressed)],
                     ),
                     AppStyles.kSizedBoxH4,
                     getLoggedMeals(),
@@ -134,7 +135,9 @@ extension _PrivateMethods on _DiaryPageState {
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _DiaryPageState {
-  void _onEditMealRatioPressed() {}
+  void _onEditMealRatioPressed() {
+    context.router.push(MealRatioRoute());
+  }
 
   void _onProfileActionPressed() {
     context.router.replaceAll([ProfileRoute()]);
@@ -149,30 +152,13 @@ extension _Actions on _DiaryPageState {
 extension _WidgetFactories on _DiaryPageState {
   // Custom App Bar
   Widget getCustomAppBar() {
-    return Container(
-      padding: AppStyles.kPaddSV8,
-      decoration: _Styles.getCustomAppBarContainerDecoration(context),
-      child: Padding(
-        padding: AppStyles.kPaddSH16,
-        child: Row(
-          children: [
-            Expanded(child: getProfileActionButton()),
-            Column(
-              children: [
-                Row(
-                  spacing: AppStyles.kSpac4,
-                  children: [
-                    Image.asset(ImagePath.diary, width: AppStyles.kSize26, height: AppStyles.kSize26),
-                    Text(S.current.diaryLabel, style: _Styles.getAppBarLabelTextStyle()),
-                  ],
-                ),
-                Text(S.current.seeProgressOverTimeLabel, style: _Styles.getAppBarDescTextStyle())
-              ],
-            ),
-            Expanded(child: getAddActionButton()),
-          ],
-        ),
-      ),
+    return CustomAppBarWithDesc(
+      leadingButton: getProfileActionButton(),
+      trailingButton: getAddActionButton(),
+      title: S.current.diaryLabel,
+      desc: S.current.seeProgressOverTimeLabel,
+      image: ImagePath.diary,
+      imageSize: AppStyles.kSize26,
     );
   }
 
@@ -405,7 +391,7 @@ extension _WidgetFactories on _DiaryPageState {
                 spacing: AppStyles.kSpac4,
                 children: [FaIcon(FontAwesomeIcons.crosshairs, size: AppStyles.kSize12), getTargetsLabel()],
               ),
-              getEditButton(() {}),
+              getFullReportButton(),
             ],
           ),
         ),
@@ -593,9 +579,9 @@ extension _WidgetFactories on _DiaryPageState {
     );
   }
 
-  // Meals Logged Label
-  Widget getMealsLoggedLabel() {
-    return Text(S.current.loggedMealsLabel.toUpperCase(), style: _Styles.getMealsLoggedLabelTextStyle(context));
+  // LoggedMeals Label
+  Widget getLoggedMealsLabel() {
+    return Text(S.current.loggedMealsLabel.toUpperCase(), style: _Styles.getLoggedMealsLabelTextStyle(context));
   }
 
   // Edit Button
@@ -709,8 +695,8 @@ class _Styles {
     return Quicksand.bold.withSize(FontSizes.mediumPlus);
   }
 
-  // Meals Logged Label Text Style
-  static TextStyle getMealsLoggedLabelTextStyle(BuildContext context) {
+  // Logged Meals Label Text Style
+  static TextStyle getLoggedMealsLabelTextStyle(BuildContext context) {
     return Quicksand.semiBold.withCustomSize(11);
   }
 
@@ -776,26 +762,5 @@ class _Styles {
       color: currentPageIndex == index ? context.theme.colorScheme.secondary : context.theme.colorScheme.tertiary,
       borderRadius: AppStyles.kRad100,
     );
-  }
-
-  // Custom App Bar Container Decoration
-  static BoxDecoration getCustomAppBarContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRadOBL10BR10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: const Offset(0, 2)),
-      ],
-    );
-  }
-
-  // App Bar Label Text Style
-  static TextStyle getAppBarLabelTextStyle() {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus);
-  }
-
-  // App Bar Desc Text Style
-  static TextStyle getAppBarDescTextStyle() {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(height: 1);
   }
 }

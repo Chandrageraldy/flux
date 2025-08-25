@@ -34,7 +34,7 @@ class AllTabBarView extends StatelessWidget {
         },
         child: CustomScrollView(
           controller: scrollController,
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: AlwaysScrollableScrollPhysics(),
           slivers: [if (!isSearching) getHeader(context), ...getFoodSliverList(context)],
         ),
       ),

@@ -27,7 +27,7 @@ class ManualPlanSetupPickerButton extends StatelessWidget {
         decoration: _Styles.getButtonContainerDecoration(context, isPicked),
         width: AppStyles.kDoubleInfinity,
         child: Padding(
-          padding: AppStyles.kPaddSV10H12,
+          padding: AppStyles.kPaddSV8H12,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [getIconContainer(context), AppStyles.kSizedBoxW12, getTextColumn(context)],
@@ -67,41 +67,40 @@ extension _WidgetFactories on ManualPlanSetupPickerButton {
 
   // Title Label
   Widget getTitleLabel(BuildContext context) {
-    return Text(title, style: _Styles.getTitleLabelTextStyle(context));
+    return Text(title, style: _Styles.getTitleLabelTextStyle(context, isPicked));
   }
 
   // Picked Value Label
   Widget getPickedValueLabel(BuildContext context) {
-    return Text(pickedValue, style: _Styles.getDescriptionLabelTextStyle(context));
+    return Text(pickedValue, style: _Styles.getDescriptionLabelTextStyle(context, isPicked));
   }
 
   // Unit Label
   Widget getUnitLabel(BuildContext context) {
-    return Text(unit, style: _Styles.getDescriptionLabelTextStyle(context));
+    return Text(unit, style: _Styles.getDescriptionLabelTextStyle(context, isPicked));
   }
 }
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Title Label Text Style
-  static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+  static getTitleLabelTextStyle(BuildContext context, bool isPicked) {
+    return Quicksand.semiBold
+        .withSize(FontSizes.medium)
+        .copyWith(color: isPicked ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style
-  static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+  static getDescriptionLabelTextStyle(BuildContext context, bool isPicked) {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(
+        color: isPicked ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Button Container Decoration
   static BoxDecoration getButtonContainerDecoration(BuildContext context, bool isPicked) {
     return BoxDecoration(
       borderRadius: AppStyles.kRad16,
-      border: Border.all(
-        color: isPicked ? context.theme.colorScheme.tertiaryFixed : context.theme.colorScheme.tertiary,
-        width: 1,
-      ),
-      color: isPicked ? context.theme.colorScheme.surfaceBright : context.theme.colorScheme.onPrimary,
+      color: isPicked ? context.theme.colorScheme.secondary.withAlpha(150) : context.theme.colorScheme.onPrimary,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],

@@ -71,7 +71,7 @@ extension _WidgetFactories on ManualPlanSetupOptionButton {
   Widget getTitleLabel(BuildContext context) {
     return Text(
       title,
-      style: _Styles.getTitleLabelTextStyle(context),
+      style: _Styles.getTitleLabelTextStyle(context, isSelected),
     );
   }
 
@@ -79,7 +79,7 @@ extension _WidgetFactories on ManualPlanSetupOptionButton {
   Widget getDescriptionLabel(BuildContext context) {
     return Text(
       description,
-      style: _Styles.getDescriptionLabelTextStyle(context),
+      style: _Styles.getDescriptionLabelTextStyle(context, isSelected),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
@@ -89,24 +89,23 @@ extension _WidgetFactories on ManualPlanSetupOptionButton {
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Title Label Text Style
-  static getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.regular.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+  static getTitleLabelTextStyle(BuildContext context, bool isSelected) {
+    return Quicksand.semiBold
+        .withSize(FontSizes.medium)
+        .copyWith(color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style
-  static getDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+  static getDescriptionLabelTextStyle(BuildContext context, bool isSelected) {
+    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(
+        color: isSelected ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Button Container Decoration
   static BoxDecoration getButtonContainerDecoration(BuildContext context, bool isSelected) {
     return BoxDecoration(
       borderRadius: AppStyles.kRad16,
-      border: Border.all(
-        color: isSelected ? context.theme.colorScheme.tertiaryFixed : context.theme.colorScheme.tertiary,
-        width: 1,
-      ),
-      color: isSelected ? context.theme.colorScheme.surfaceBright : context.theme.colorScheme.onPrimary,
+      color: isSelected ? context.theme.colorScheme.secondary.withAlpha(150) : context.theme.colorScheme.onPrimary,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],

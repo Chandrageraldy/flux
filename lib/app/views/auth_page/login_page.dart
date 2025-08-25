@@ -183,12 +183,12 @@ extension _WidgetFactories on _LoginPageState {
 abstract class _Styles {
   // App Title Label Text Style
   static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary, height: 1);
+    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Login Description Label Text Style
   static getLoginDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Button Label Text Style

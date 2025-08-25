@@ -7,8 +7,8 @@ import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/meal_ratio_vm/meal_ratio_view_model.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
 import 'package:flux/app/widgets/food/nutrition_tag.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 @RoutePage()

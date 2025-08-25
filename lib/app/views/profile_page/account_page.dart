@@ -8,8 +8,8 @@ import 'package:flux/app/viewmodels/account_vm/account_view_model.dart';
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
 import 'package:flux/app/widgets/image_profile/image_profile.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 

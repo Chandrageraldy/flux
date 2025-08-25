@@ -299,7 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "planCustomizationLabel":
             MessageLookupByLibrary.simpleMessage("Plan Customization"),
         "planDescription1": MessageLookupByLibrary.simpleMessage(
-            "Help us understand your body by sharing your gender, weight, height, and birth date — so we can create the perfect plan for you."),
+            "Share your gender, weight, height, and birth date — so we can create your perfect plan."),
         "planDescription2": MessageLookupByLibrary.simpleMessage(
             "Tell us your goal weight so we can guide your progress and adjust your plan as you move toward it."),
         "planDescription3": MessageLookupByLibrary.simpleMessage(

@@ -61,17 +61,23 @@ class _MealDetailsPageState extends BaseStatefulState<_MealDetailsPage> {
     final loggedFoodsList = context.select((MealDetailsViewModel vm) => vm.loggedFoodsList);
     final isLoading = context.select((MealDetailsViewModel vm) => vm.isLoading);
 
-    return SingleChildScrollView(
-      padding: AppStyles.kPaddOB70,
-      child: Column(
-        children: [
-          getHeaderContainer(
-            _getMealRatioModel(widget.mealType),
-            FunctionUtils.calculateTotalNutrition(loggedFoodsList),
-          ),
-          getLoggedMeals(loggedFoodsList, isLoading),
-          getImpactOnTargets(FunctionUtils.calculateTotalNutrition(loggedFoodsList), loggedFoodsList, isLoading),
-        ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        getLoggedFoodsByMeals();
+      },
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        padding: AppStyles.kPaddOB70,
+        child: Column(
+          children: [
+            getHeaderContainer(
+              _getMealRatioModel(widget.mealType),
+              FunctionUtils.calculateTotalNutrition(loggedFoodsList),
+            ),
+            getLoggedMeals(loggedFoodsList, isLoading),
+            getImpactOnTargets(FunctionUtils.calculateTotalNutrition(loggedFoodsList), loggedFoodsList, isLoading),
+          ],
+        ),
       ),
     );
   }
@@ -133,7 +139,11 @@ extension _PrivateMethods on _MealDetailsPageState {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on _MealDetailsPageState {}
+extension _Actions on _MealDetailsPageState {
+  void _onAddButtonPressed() {
+    context.router.push(LoggingSelectionRoute());
+  }
+}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _MealDetailsPageState {
@@ -261,6 +271,11 @@ extension _WidgetFactories on _MealDetailsPageState {
 
 // Logged Meals
   Widget getLoggedMeals(List<LoggedFoodModel> loggedFoodsList, bool isLoading) {
+    final now = DateTime.now();
+    final isToday = widget.selectedDate.year == now.year &&
+        widget.selectedDate.month == now.month &&
+        widget.selectedDate.day == now.day;
+
     return Padding(
       padding: AppStyles.kPaddSV12H16,
       child: Column(
@@ -271,12 +286,7 @@ extension _WidgetFactories on _MealDetailsPageState {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(S.current.loggedMealsLabel.toUpperCase(), style: _Styles.getMealsLoggedLabelTextStyle(context)),
-              Container(
-                padding: AppStyles.kPadd6,
-                decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
-                child:
-                    FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize12),
-              )
+              if (isToday) getAddButton(),
             ],
           ),
           if (isLoading) ...[
@@ -306,6 +316,18 @@ extension _WidgetFactories on _MealDetailsPageState {
             ),
           ]
         ],
+      ),
+    );
+  }
+
+  // Add Button
+  Widget getAddButton() {
+    return GestureDetector(
+      onTap: _onAddButtonPressed,
+      child: Container(
+        padding: AppStyles.kPadd6,
+        decoration: BoxDecoration(color: context.theme.colorScheme.secondary, shape: BoxShape.circle),
+        child: FaIcon(FontAwesomeIcons.add, color: context.theme.colorScheme.onSecondary, size: AppStyles.kSize12),
       ),
     );
   }
@@ -348,32 +370,44 @@ extension _WidgetFactories on _MealDetailsPageState {
                   targetValue: targetCalorie,
                   lineHeight: 7,
                 ),
-                NutrientIntakeProgress(
-                  nutrition: Nutrition.protein,
-                  percentage: (currentProtein / targetProtein).clamp(0, 1),
-                  currentValue: currentProtein,
-                  targetValue: targetProtein,
-                  lineHeight: 7,
-                ),
-                NutrientIntakeProgress(
-                  nutrition: Nutrition.carbs,
-                  percentage: (currentCarbs / targetCarbs).clamp(0, 1),
-                  currentValue: currentCarbs,
-                  targetValue: targetCarbs,
-                  lineHeight: 7,
-                ),
-                NutrientIntakeProgress(
-                  nutrition: Nutrition.fat,
-                  percentage: (currentFat / targetFat).clamp(0, 1),
-                  currentValue: currentFat,
-                  targetValue: targetFat,
-                  lineHeight: 7,
-                ),
+                Row(
+                  children: [
+                    Expanded(child: getMacroCircularPercentIndicator(currentProtein, targetProtein, Nutrition.protein)),
+                    Expanded(child: getMacroCircularPercentIndicator(currentCarbs, targetCarbs, Nutrition.carbs)),
+                    Expanded(child: getMacroCircularPercentIndicator(currentFat, targetFat, Nutrition.fat)),
+                  ],
+                )
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  // Macro Circular Percent Indicator
+  Widget getMacroCircularPercentIndicator(int currentValue, int targetValue, Nutrition nutrition) {
+    return Column(
+      spacing: AppStyles.kSpac4,
+      children: [
+        SizedBox(
+          height: 80,
+          width: 80,
+          child: CircularPercentIndicator(
+            radius: AppStyles.kSize40,
+            center: Text(nutrition.label, style: _Styles.getMacroImpactLabelTextStyle(context)),
+            lineWidth: 5,
+            percent: (currentValue / targetValue).clamp(0, 1),
+            backgroundColor: context.theme.colorScheme.tertiary,
+            progressColor: nutrition == Nutrition.protein
+                ? MacroNutrients.protein.color
+                : nutrition == Nutrition.carbs
+                    ? MacroNutrients.carbs.color
+                    : MacroNutrients.fat.color,
+          ),
+        ),
+        Text('${currentValue}g / ${targetValue}g', style: _Styles.getMacroImpactValueLabelTextStyle(context)),
+      ],
     );
   }
 }
@@ -425,5 +459,15 @@ abstract class _Styles {
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
     );
+  }
+
+  // Macro Impact Label Text Style
+  static TextStyle getMacroImpactLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small);
+  }
+
+  // Macro Impact Value Label Text Style
+  static TextStyle getMacroImpactValueLabelTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

@@ -30,7 +30,7 @@ class ImagePath {
   static const String play = 'lib/app/assets/images/play.png';
   static const String groom = 'lib/app/assets/images/groom.png';
   static const String diary = 'lib/app/assets/images/diary.png';
-  static const String profile = 'lib/app/assets/images/profile.png';
+  static const String report = 'lib/app/assets/images/report.png';
 }
 
 class AnimationPath {

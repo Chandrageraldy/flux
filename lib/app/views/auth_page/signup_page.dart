@@ -168,11 +168,11 @@ extension _WidgetFactories on _SignUpPageState {
 class _Styles {
   // App Title Text Style
   static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraHuge).copyWith(color: context.theme.colorScheme.primary, height: 1);
+    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Sign Up Description Text Style
   static getSignUpDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.light.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 }

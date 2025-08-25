@@ -9,8 +9,8 @@ import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/nutrition_goals_vm/nutrition_goals_view_model.dart';
 import 'package:flux/app/views/personalizing_plan_loading_page/personalizing_plan_loading_page.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar.dart';
-import 'package:flux/app/widgets/modal_sheet_bar/custom_app_bar_tappable.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_tappable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
