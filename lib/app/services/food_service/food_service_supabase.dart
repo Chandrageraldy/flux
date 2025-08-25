@@ -151,6 +151,23 @@ class FoodServiceSupabase extends SupabaseBaseService {
     );
   }
 
+  Future<Response> getLoggedFoodsBetweenDates(
+      {required String userId, required DateTime startDate, required DateTime endDate}) async {
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.loggedFood,
+      filters: {
+        TableCol.userId: userId,
+      },
+      rangeFilters: {
+        TableCol.loggedAt: {
+          'gte': startDate.toIso8601String(),
+          'lt': endDate.toIso8601String(),
+        },
+      },
+    );
+  }
+
   Future<Response> uploadMealScanImage({required File imageFile, required String filePath}) async {
     return callSupabaseBucket(
       bucketRequestType: BucketRequestType.upload,

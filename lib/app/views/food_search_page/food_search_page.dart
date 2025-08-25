@@ -31,6 +31,8 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 
   final _formKey = GlobalKey<FormBuilderState>();
 
+  bool _isSearchEmpty = true;
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +54,13 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
         children: [getHeaderContainer(), getTabBarView()],
       ),
     );
+  }
+
+  // Enable Set State inside Extension
+  void _setState(VoidCallback fn) {
+    if (mounted) {
+      setState(fn);
+    }
   }
 }
 
@@ -78,6 +87,10 @@ extension _Actions on _FoodSearchPageState {
   }
 
   void _onChanged(String? value) async {
+    _setState(() {
+      _isSearchEmpty = value?.isNotEmpty ?? false;
+    });
+
     if (value == null || value.isEmpty) {
       _getRecentFoods();
       return;
@@ -127,6 +140,10 @@ extension _WidgetFactories on _FoodSearchPageState {
         icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kSize16),
         height: AppStyles.kSize40,
         onChanged: _onChanged,
+        showClearIcon: _isSearchEmpty,
+        onClear: () {
+          _formKey.currentState?.fields[FormFields.search.name]?.didChange('');
+        },
       ),
     );
   }

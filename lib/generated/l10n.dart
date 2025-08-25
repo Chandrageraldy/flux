@@ -2789,6 +2789,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Chat with Chia AI`
+  String get chatWithChiaAILabel {
+    return Intl.message(
+      'Chat with Chia AI',
+      name: 'chatWithChiaAILabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Chat`
+  String get startChatLabel {
+    return Intl.message(
+      'Start Chat',
+      name: 'startChatLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One moment, Chia is gathering the facts...`
+  String get chiaLoadingMessage {
+    return Intl.message(
+      'One moment, Chia is gathering the facts...',
+      name: 'chiaLoadingMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

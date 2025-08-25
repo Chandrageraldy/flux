@@ -11,7 +11,9 @@ import 'package:typewritertext/typewritertext.dart';
 
 @RoutePage()
 class ChiaChatbotPage extends BaseStatefulPage {
-  const ChiaChatbotPage({super.key});
+  const ChiaChatbotPage({super.key, required this.initialPrompt});
+
+  final String initialPrompt;
 
   @override
   State<ChiaChatbotPage> createState() => _ChiaChatbotPageState();
@@ -21,8 +23,8 @@ class _ChiaChatbotPageState extends BaseStatefulState<ChiaChatbotPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   final ScrollController _scrollController = ScrollController();
 
-  bool isSendMessageEnabled = false;
-  bool isTypingEnabled = true;
+  bool _isSendMessageEnabled = false;
+  bool _isTypingEnabled = true;
 
   @override
   void dispose() {
@@ -35,6 +37,12 @@ class _ChiaChatbotPageState extends BaseStatefulState<ChiaChatbotPage> {
 
   @override
   bool resizeToAvoidBottomInset() => true;
+
+  @override
+  void initState() {
+    super.initState();
+    _isSendMessageEnabled = true;
+  }
 
   @override
   Widget body() {
@@ -66,8 +74,8 @@ extension _Actions on _ChiaChatbotPageState {
     FocusScope.of(context).unfocus();
 
     _setState(() {
-      isSendMessageEnabled = false;
-      isTypingEnabled = false;
+      _isSendMessageEnabled = false;
+      _isTypingEnabled = false;
     });
 
     if (_scrollController.hasClients) {
@@ -193,8 +201,8 @@ extension _WidgetFactories on _ChiaChatbotPageState {
                               .read<ChiaChatbotViewModel>()
                               .changeIsTypedComplete(index: index, isTypedComplete: true);
                           _setState(() {
-                            isTypingEnabled = true;
-                            isSendMessageEnabled = false;
+                            _isTypingEnabled = true;
+                            _isSendMessageEnabled = false;
                           });
                         },
                       ),
@@ -233,18 +241,18 @@ extension _WidgetFactories on _ChiaChatbotPageState {
     );
   }
 
-// Quick Prompt Scrollable Row
+  // Quick Prompt Scrollable Row
   Widget getQuickPromptScrollableRow() {
     return Padding(
       padding: AppStyles.kPaddSV12H12,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: quickPrompts
+          children: quickPromptsForChatbotPage
               .map(
-                (qp) => Padding(
+                (quickPrompt) => Padding(
                   padding: EdgeInsets.only(right: AppStyles.kSpac8),
-                  child: getQuickPromptContainer(qp.prompt),
+                  child: getQuickPromptContainer(quickPrompt.prompt),
                 ),
               )
               .toList(),
@@ -279,13 +287,14 @@ extension _WidgetFactories on _ChiaChatbotPageState {
       child: AppTextFormField(
         field: FormFields.prompt,
         validator: null,
+        initialValue: widget.initialPrompt,
         placeholder: S.current.typeToStartChattingLabel,
         icon: FaIcon(FontAwesomeIcons.paperPlane, size: AppStyles.kSize16),
         height: AppStyles.kSize40,
-        isEnabled: isTypingEnabled,
+        isEnabled: _isTypingEnabled,
         onChanged: (value) {
           _setState(() {
-            isSendMessageEnabled = value?.isNotEmpty ?? false;
+            _isSendMessageEnabled = value?.isNotEmpty ?? false;
           });
         },
       ),
@@ -295,9 +304,9 @@ extension _WidgetFactories on _ChiaChatbotPageState {
   // Send Message Button
   Widget getSendMessageButton() {
     return GestureDetector(
-      onTap: isSendMessageEnabled ? _onSendMessage : null,
+      onTap: _isSendMessageEnabled ? _onSendMessage : null,
       child: CircleAvatar(
-        backgroundColor: isSendMessageEnabled
+        backgroundColor: _isSendMessageEnabled
             ? context.theme.colorScheme.primary
             : context.theme.colorScheme.primary.withOpacity(0.5),
         child: Icon(Icons.send, color: context.theme.colorScheme.onPrimary, size: AppStyles.kSize16),

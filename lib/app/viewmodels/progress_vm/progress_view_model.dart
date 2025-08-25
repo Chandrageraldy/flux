@@ -23,6 +23,7 @@ class ProgressViewModel extends BaseViewModel {
   ActiveUserPetModel activeUserPet = ActiveUserPetModel();
   UserEnergyModel userEnergy = UserEnergyModel();
   List<LoggedFoodModel> loggedFoods = [];
+  List<LoggedFoodModel> loggedFoodsBetweenDates = [];
   List<DailyGoalsModel> dailyGoals = [];
 
   bool _isLoading = false;
@@ -42,6 +43,7 @@ class ProgressViewModel extends BaseViewModel {
         getActiveUserPet(),
         getUserEnergies(),
         getDailyGoals(),
+        getLoggedFoodsBetweenDates()
       ];
       await Future.wait(futures);
     } finally {
@@ -153,6 +155,16 @@ class ProgressViewModel extends BaseViewModel {
     checkError(addEnergyResponse);
     final updatedEnergy = addEnergyResponse.data as UserEnergyModel;
     userEnergy = updatedEnergy;
+    notifyListeners();
+  }
+
+  Future<void> getLoggedFoodsBetweenDates() async {
+    final response = await foodRepository.getLoggedFoodsBetweenDates(
+      startDate: DateTime.now().subtract(Duration(days: 6)),
+      endDate: DateTime.now(),
+    );
+    checkError(response);
+    loggedFoodsBetweenDates = response.data as List<LoggedFoodModel>;
     notifyListeners();
   }
 }

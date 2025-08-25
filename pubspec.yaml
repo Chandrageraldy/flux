@@ -67,6 +67,7 @@ dependencies:
   image: ^4.5.4
   image_picker: ^1.2.0
   typewritertext: ^3.0.9
+  fl_chart: ^1.0.0
 
   # Security
   flutter_dotenv: ^5.2.1

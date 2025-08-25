@@ -22,6 +22,8 @@ class AppTextFormField extends StatelessWidget {
     this.topLabelTextStyle,
     this.borderColor,
     this.isEnabled = true,
+    this.showClearIcon = false,
+    this.onClear,
     super.key,
   });
 
@@ -43,6 +45,8 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle? topLabelTextStyle;
   final Color? borderColor;
   final bool isEnabled;
+  final bool showClearIcon;
+  final VoidCallback? onClear;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,16 @@ class AppTextFormField extends StatelessWidget {
           decoration: _Styles.getContainerDecoration(context, borderRadius, hasBorder, backgroundColor, borderColor),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [if (icon != null) icon!, if (icon != null) AppStyles.kSizedBoxW8, getTextFormField(context)],
+            children: [
+              if (icon != null) icon!,
+              if (icon != null) AppStyles.kSizedBoxW8,
+              Expanded(child: getTextFormField(context)),
+              if (showClearIcon)
+                GestureDetector(
+                  onTap: onClear,
+                  child: Icon(Icons.clear, size: AppStyles.kSize18),
+                ),
+            ],
           ),
         ),
       ],

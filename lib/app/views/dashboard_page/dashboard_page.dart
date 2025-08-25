@@ -33,16 +33,16 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
         return Scaffold(
           body: child,
           extendBody: true,
-          floatingActionButton: tabsRouter.activeIndex == 1
-              ? null
-              : FloatingActionButton(
+          floatingActionButton: tabsRouter.activeIndex == 3
+              ? FloatingActionButton(
                   onPressed: () {
                     context.router.push(ChiaChatbotNavigatorRoute(children: [ChiaChatbotLoadingRoute()]));
                   },
                   backgroundColor: context.theme.colorScheme.secondary,
                   mini: true,
                   child: Image.asset(ImagePath.aiStar, height: AppStyles.kSize26, width: AppStyles.kSize26),
-                ),
+                )
+              : null,
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               borderRadius: AppStyles.kRadOTL15TR15,

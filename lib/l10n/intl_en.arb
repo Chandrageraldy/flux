@@ -284,5 +284,8 @@
     "equippedLabel": "Equipped",
     "notEnoughEnergyLabel": "Not Enough Energy",
     "seeProgressOverTimeLabel": "See progress over time",
-    "updateProfileAndCustomizePlanLabel": "Update Profile and Customize Plan"
+    "updateProfileAndCustomizePlanLabel": "Update Profile and Customize Plan",
+    "chatWithChiaAILabel": "Chat with Chia AI",
+    "startChatLabel": "Start Chat",
+    "chiaLoadingMessage": "One moment, Chia is gathering the facts..."
 }

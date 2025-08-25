@@ -66,7 +66,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "calorieUnit": MessageLookupByLibrary.simpleMessage("kcal"),
         "cancelLabel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
+        "chatWithChiaAILabel":
+            MessageLookupByLibrary.simpleMessage("Chat with Chia AI"),
         "chiaLabel": MessageLookupByLibrary.simpleMessage("Chia"),
+        "chiaLoadingMessage": MessageLookupByLibrary.simpleMessage(
+            "One moment, Chia is gathering the facts..."),
         "cholineLabel": MessageLookupByLibrary.simpleMessage("Choline"),
         "chooseYourCompanionLabel":
             MessageLookupByLibrary.simpleMessage("Choose Your Companion"),
@@ -396,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sodiumLabel": MessageLookupByLibrary.simpleMessage("Sodium"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
+        "startChatLabel": MessageLookupByLibrary.simpleMessage("Start Chat"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
         "targetWeeklyChangeError": MessageLookupByLibrary.simpleMessage(
             "Target weekly change must be set."),
