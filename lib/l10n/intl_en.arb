@@ -291,5 +291,6 @@
     "weeklyCalorieProgressLabel": "Weekly Calorie Progress",
     "averageLabel": "Average",
     "targetCalorieLabel": "Target Calorie",
-    "overviewLabel": "Overview"
+    "overviewLabel": "Overview",
+    "virtualPetLabel": "Virtual Pet"
 }

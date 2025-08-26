@@ -31,6 +31,7 @@ class ImagePath {
   static const String groom = 'lib/app/assets/images/groom.png';
   static const String diary = 'lib/app/assets/images/diary.png';
   static const String report = 'lib/app/assets/images/report.png';
+  static const String overview = 'lib/app/assets/images/overview.png';
 }
 
 class AnimationPath {

@@ -445,6 +445,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
             "Physically demanding job or lots of daily movement."),
         "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),
+        "virtualPetLabel": MessageLookupByLibrary.simpleMessage("Virtual Pet"),
         "vitaminALabel": MessageLookupByLibrary.simpleMessage("Vitamin A"),
         "vitaminB12Label": MessageLookupByLibrary.simpleMessage("Vitamin B12"),
         "vitaminB6Label": MessageLookupByLibrary.simpleMessage("Vitamin B6"),

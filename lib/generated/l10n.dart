@@ -2859,6 +2859,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Virtual Pet`
+  String get virtualPetLabel {
+    return Intl.message(
+      'Virtual Pet',
+      name: 'virtualPetLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
