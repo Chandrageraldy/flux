@@ -796,6 +796,22 @@ class NutritionGoalsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OverviewPage]
+class OverviewRoute extends PageRouteInfo<void> {
+  const OverviewRoute({List<PageRouteInfo>? children})
+    : super(OverviewRoute.name, initialChildren: children);
+
+  static const String name = 'OverviewRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OverviewPage();
+    },
+  );
+}
+
+/// generated route for
 /// [PersonalDetailsPage]
 class PersonalDetailsRoute extends PageRouteInfo<void> {
   const PersonalDetailsRoute({List<PageRouteInfo>? children})
@@ -900,22 +916,6 @@ class ProfileRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const ProfilePage();
-    },
-  );
-}
-
-/// generated route for
-/// [ProgressPage]
-class ProgressRoute extends PageRouteInfo<void> {
-  const ProgressRoute({List<PageRouteInfo>? children})
-    : super(ProgressRoute.name, initialChildren: children);
-
-  static const String name = 'ProgressRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ProgressPage();
     },
   );
 }

@@ -21,7 +21,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
     return AutoTabsRouter.tabBar(
       physics: NeverScrollableScrollPhysics(),
       routes: const [
-        ProgressRoute(),
+        OverviewRoute(),
         DiaryRoute(),
         LoggingSelectionRoute(),
         FoodSearchRoute(),
@@ -75,7 +75,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
                   unselectedLabelStyle: Quicksand.bold.withSize(FontSizes.extraSmall),
                   type: BottomNavigationBarType.fixed,
                   items: [
-                    getProgressBarItem(),
+                    getOverviewBarItem(),
                     getDiaryBarItem(),
                     getLogFoodBarItem(),
                     getFoodBarItem(),
@@ -93,12 +93,11 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _DashboardPageState {
-  BottomNavigationBarItem getProgressBarItem() {
+  BottomNavigationBarItem getOverviewBarItem() {
     return BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.chartLine, size: AppStyles.kSize20),
-      activeIcon:
-          FaIcon(FontAwesomeIcons.chartLine, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
-      label: S.current.progressLabel,
+      icon: FaIcon(FontAwesomeIcons.compass, size: AppStyles.kSize20),
+      activeIcon: FaIcon(FontAwesomeIcons.compass, color: context.theme.colorScheme.secondary, size: AppStyles.kSize20),
+      label: S.current.overviewLabel,
     );
   }
 

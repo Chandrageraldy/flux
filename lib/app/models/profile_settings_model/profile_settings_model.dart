@@ -235,12 +235,14 @@ List<PersonalDetailsModel> weightGoal = [
     key: PersonalDetailsSettings.targetWeight.key,
     // 100 to 250
     items: List.generate(131, (index) => (index + 20).toString()),
+    unit: Unit.kg.label,
   ),
   PersonalDetailsModel(
     label: PersonalDetailsSettings.targetWeeklyChange.label,
     key: PersonalDetailsSettings.targetWeeklyChange.key,
     // 0.10 to 1
     items: List.generate(19, (index) => (0.1 + index * 0.05).toStringAsFixed(2)),
+    unit: Unit.kg.label,
   )
 ];
 

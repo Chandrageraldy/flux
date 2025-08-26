@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Adjustment Based on Weight Goal"),
         "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
+        "averageLabel": MessageLookupByLibrary.simpleMessage("Average"),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
@@ -282,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AI Meal Scan: Track Smarter"),
         "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Fuel Up. Friend Up. Level Up"),
+        "overviewLabel": MessageLookupByLibrary.simpleMessage("Overview"),
         "overweightLabel": MessageLookupByLibrary.simpleMessage("Overweight"),
         "paleoDesc": MessageLookupByLibrary.simpleMessage(
             "Based on foods eaten by early humans."),
@@ -402,6 +404,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
         "startChatLabel": MessageLookupByLibrary.simpleMessage("Start Chat"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
+        "targetCalorieLabel":
+            MessageLookupByLibrary.simpleMessage("Target Calorie"),
         "targetWeeklyChangeError": MessageLookupByLibrary.simpleMessage(
             "Target weekly change must be set."),
         "targetWeeklyChangeLabel":
@@ -454,6 +458,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Want to start fresh?"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password you entered is too weak. Please choose a stronger password."),
+        "weeklyCalorieProgressLabel":
+            MessageLookupByLibrary.simpleMessage("Weekly Calorie Progress"),
         "weightDesc": MessageLookupByLibrary.simpleMessage(
             "Used to determine your daily calorie needs."),
         "weightGoalDesc": MessageLookupByLibrary.simpleMessage(

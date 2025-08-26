@@ -34,7 +34,7 @@ import 'package:flux/app/views/profile_page/nutrition_goals_page.dart';
 import 'package:flux/app/views/profile_page/personal_details_page.dart';
 import 'package:flux/app/views/profile_page/profile_page.dart';
 import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
-import 'package:flux/app/views/progress_page/progress_page.dart';
+import 'package:flux/app/views/overview_page/overview_page.dart';
 import 'package:flux/app/views/root_page/root_page.dart';
 import 'package:flux/app/views/root_page/root_navigator_page.dart';
 import 'package:flux/app/views/barcode_scan_page.dart/barcode_scan_page.dart';
@@ -75,7 +75,7 @@ class AppRouter extends RootStackRouter {
           page: DashboardRoute.page,
           initial: true,
           children: [
-            AutoRoute(page: ProgressRoute.page, initial: true, path: 'progress'),
+            AutoRoute(page: OverviewRoute.page, initial: true, path: 'progress'),
             AutoRoute(page: DiaryRoute.page, path: 'diary'),
             AutoRoute(page: LoggingSelectionRoute.page, path: 'logging-selection'),
             AutoRoute(page: FoodSearchRoute.page, path: 'food-search'),

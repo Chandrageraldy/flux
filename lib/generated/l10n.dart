@@ -2819,6 +2819,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Weekly Calorie Progress`
+  String get weeklyCalorieProgressLabel {
+    return Intl.message(
+      'Weekly Calorie Progress',
+      name: 'weeklyCalorieProgressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average`
+  String get averageLabel {
+    return Intl.message(
+      'Average',
+      name: 'averageLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Calorie`
+  String get targetCalorieLabel {
+    return Intl.message(
+      'Target Calorie',
+      name: 'targetCalorieLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overview`
+  String get overviewLabel {
+    return Intl.message(
+      'Overview',
+      name: 'overviewLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

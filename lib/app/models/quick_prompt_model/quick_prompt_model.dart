@@ -1,5 +1,4 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class QuickPrompt {
   final String prompt;

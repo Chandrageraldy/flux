@@ -12,7 +12,7 @@ import 'package:flux/app/repositories/plan_repo/plan_repository.dart';
 import 'package:flux/app/repositories/user_repo/user_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
-class ProgressViewModel extends BaseViewModel {
+class OverviewViewModel extends BaseViewModel {
   final PlanRepository planRepository = PlanRepository();
   final UserRepository userRepository = UserRepository();
   final PetRepository petRepository = PetRepository();
