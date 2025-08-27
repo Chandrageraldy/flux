@@ -170,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Occasional walking or standing (e.g., teacher, short walks)."),
         "lightlyActiveLabel":
             MessageLookupByLibrary.simpleMessage("Lightly Active"),
+        "loadingLabel": MessageLookupByLibrary.simpleMessage("Loading..."),
         "locatingBarcodeDesc": MessageLookupByLibrary.simpleMessage(
             "Align the barcode within the frame to scan"),
         "locatingBarcodeLabel":
@@ -426,6 +427,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalDailyEnergyExpenditureLabel":
             MessageLookupByLibrary.simpleMessage(
                 "Total Daily Energy Expenditure (TDEE)"),
+        "trackPlayAndGrowLabel":
+            MessageLookupByLibrary.simpleMessage("Track, Play, and Grow"),
         "tryAgainLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
         "typeToStartChattingLabel":
             MessageLookupByLibrary.simpleMessage("Type to start chatting..."),
@@ -447,6 +450,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Physically demanding job or lots of daily movement."),
         "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),
         "virtualPetLabel": MessageLookupByLibrary.simpleMessage("Virtual Pet"),
+        "virtualPetLoadingMessage": MessageLookupByLibrary.simpleMessage(
+            "Your pet is getting out of bed and preparing to see you..."),
         "vitaminALabel": MessageLookupByLibrary.simpleMessage("Vitamin A"),
         "vitaminB12Label": MessageLookupByLibrary.simpleMessage("Vitamin B12"),
         "vitaminB6Label": MessageLookupByLibrary.simpleMessage("Vitamin B6"),

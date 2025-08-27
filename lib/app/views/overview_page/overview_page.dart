@@ -52,15 +52,10 @@ class _OverviewPageState extends BaseStatefulState<_OverviewPage> with TickerPro
 
   @override
   Widget body() {
-    final isLoading = context.select((OverviewViewModel vm) => vm.isLoading);
     final activeUserPet = context.select((OverviewViewModel vm) => vm.activeUserPet);
 
     if (activeUserPet.virtualPet == null) {
-      return const SizedBox.shrink();
-    }
-
-    if (isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return AppStyles.kEmptyWidget;
     }
 
     return DefaultTabController(
@@ -82,31 +77,37 @@ class _OverviewPageState extends BaseStatefulState<_OverviewPage> with TickerPro
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _OverviewPageState {
   Future<void> _getActiveUserPet() async {
-    await tryLoad(context, () => context.read<OverviewViewModel>().getActiveUserPet());
+    await tryCatch(context, () => context.read<OverviewViewModel>().getActiveUserPet());
   }
 
   Future<void> _onProgressRefresh() async {
-    Future.wait([_getLoggedFoodsBetweenDates(), _getWeightLogs()]);
+    final vm = context.read<OverviewViewModel>();
+    vm.isLoading = true;
+    await Future.wait([_getLoggedFoodsBetweenDates(), _getWeightLogs()]);
+    vm.isLoading = false;
   }
 
   Future<void> _onVirtualPetRefresh() async {
-    Future.wait([_getActiveUserPet(), _getUserEnergies(), _getDailyGoals()]);
+    final vm = context.read<OverviewViewModel>();
+    vm.isLoading = true;
+    await Future.wait([_getActiveUserPet(), _getUserEnergies(), _getDailyGoals()]);
+    vm.isLoading = false;
   }
 
   Future<void> _getUserEnergies() async {
-    await tryLoad(context, () => context.read<OverviewViewModel>().getUserEnergies());
+    await tryCatch(context, () => context.read<OverviewViewModel>().getUserEnergies());
   }
 
   Future<void> _getDailyGoals() async {
-    await tryLoad(context, () => context.read<OverviewViewModel>().getDailyGoals());
+    await tryCatch(context, () => context.read<OverviewViewModel>().getDailyGoals());
   }
 
   Future<void> _getLoggedFoodsBetweenDates() async {
-    await tryLoad(context, () => context.read<OverviewViewModel>().getLoggedFoodsBetweenDates());
+    await tryCatch(context, () => context.read<OverviewViewModel>().getLoggedFoodsBetweenDates());
   }
 
   Future<void> _getWeightLogs() async {
-    await tryLoad(context, () => context.read<OverviewViewModel>().getWeightLogs());
+    await tryCatch(context, () => context.read<OverviewViewModel>().getWeightLogs());
   }
 
   void _onLoadedConfettiAnimation(LottieComposition composition) {
@@ -209,7 +210,7 @@ extension _WidgetFactories on _OverviewPageState {
                         Text(S.current.overviewLabel, style: _Styles.getCustomAppBarTitleTextStyle()),
                       ],
                     ),
-                    Text(S.current.progressLabel, style: _Styles.getCustomAppBarDescTextStyle(context)),
+                    Text(S.current.trackPlayAndGrowLabel, style: _Styles.getCustomAppBarDescTextStyle(context)),
                   ],
                 ),
                 getAddActionButton()
@@ -233,11 +234,15 @@ extension _WidgetFactories on _OverviewPageState {
 
   // Tab Bar View -> "Progress"
   Widget getProgressTabBarView() {
-    return ProgressTabBarView(onProgressRefresh: _onProgressRefresh);
+    final isLoading = context.select((OverviewViewModel vm) => vm.isLoading);
+
+    return ProgressTabBarView(onProgressRefresh: _onProgressRefresh, isLoading: isLoading);
   }
 
   // Tab Bar View -> "Virtual Pet"
   Widget getVirtualPetTabBarView() {
+    final isLoading = context.select((OverviewViewModel vm) => vm.isLoading);
+
     return VirtualPetTabBarView(
       onVirtualPetRefresh: _onVirtualPetRefresh,
       onShopPressed: _onShopPressed,
@@ -249,6 +254,7 @@ extension _WidgetFactories on _OverviewPageState {
       isShowingConfetti: _isShowingConfetti,
       onLoadedConfettiAnimation: _onLoadedConfettiAnimation,
       onLoadedPetAnimation: _onLoadedPetAnimation,
+      isLoading: isLoading,
     );
   }
 

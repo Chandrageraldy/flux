@@ -3,13 +3,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/viewmodels/overview_vm/overview_view_model.dart';
+import 'package:flux/app/widgets/skeleton/progress_skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class ProgressTabBarView extends StatelessWidget {
-  const ProgressTabBarView({super.key, required this.onProgressRefresh});
+  const ProgressTabBarView({super.key, required this.onProgressRefresh, required this.isLoading});
 
   final VoidCallback onProgressRefresh;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +26,14 @@ class ProgressTabBarView extends StatelessWidget {
           child: Column(
             spacing: AppStyles.kSpac12,
             children: [
-              AppStyles.kEmptyWidget,
-              getWeeklyCalorieProgressContainer(context: context),
-              getWeightProgressContainer(context: context),
-              AppStyles.kEmptyWidget,
+              if (isLoading) ...[
+                ProgressSkeleton()
+              ] else ...[
+                AppStyles.kEmptyWidget,
+                getWeeklyCalorieProgressContainer(context: context),
+                getWeightProgressContainer(context: context),
+                AppStyles.kEmptyWidget,
+              ]
             ],
           ),
         ),

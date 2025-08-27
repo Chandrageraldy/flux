@@ -158,7 +158,7 @@ extension _WidgetFactories on _ChiaChatbotPageState {
       ),
       itemBuilder: (context, index) {
         if (index == chatMessages.length && isLoading) {
-          return Lottie.asset(AnimationPath.loadingAnimation, width: AppStyles.kSize70, height: AppStyles.kSize70);
+          return Lottie.asset(AnimationPath.loadingAnimation, width: AppStyles.kSize80, height: AppStyles.kSize80);
         }
 
         final chatMessage = chatMessages[index];

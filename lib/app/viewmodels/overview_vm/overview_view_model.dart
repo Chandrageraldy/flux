@@ -34,6 +34,11 @@ class OverviewViewModel extends BaseViewModel {
   bool _isUpdatingCurrentExp = false;
   bool get isUpdatingCurrentExp => _isUpdatingCurrentExp;
 
+  set isLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
   Future<void> initialize() async {
     _isLoading = true;
     notifyListeners();

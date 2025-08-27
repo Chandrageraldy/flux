@@ -2889,6 +2889,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Track, Play, and Grow`
+  String get trackPlayAndGrowLabel {
+    return Intl.message(
+      'Track, Play, and Grow',
+      name: 'trackPlayAndGrowLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your pet is getting out of bed and preparing to see you...`
+  String get virtualPetLoadingMessage {
+    return Intl.message(
+      'Your pet is getting out of bed and preparing to see you...',
+      name: 'virtualPetLoadingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loadingLabel {
+    return Intl.message(
+      'Loading...',
+      name: 'loadingLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

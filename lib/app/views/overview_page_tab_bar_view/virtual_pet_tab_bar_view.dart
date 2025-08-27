@@ -4,6 +4,7 @@ import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
 import 'package:flux/app/models/virtual_pet_action_model/virtual_pet_action_model.dart';
 import 'package:flux/app/viewmodels/overview_vm/overview_view_model.dart';
 import 'package:flux/app/widgets/daily_goals_percent_indicator/daily_goals_percent_indicator.dart';
+import 'package:flux/app/widgets/skeleton/virtual_pet_skeleton.dart';
 import 'package:flux/app/widgets/virtual_pet_action_button/virtual_pet_action_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -22,6 +23,7 @@ class VirtualPetTabBarView extends StatelessWidget {
     required this.isShowingConfetti,
     required this.onLoadedConfettiAnimation,
     required this.onLoadedPetAnimation,
+    required this.isLoading,
   });
 
   final VoidCallback onVirtualPetRefresh;
@@ -36,9 +38,12 @@ class VirtualPetTabBarView extends StatelessWidget {
   final bool isShowingConfetti;
   final void Function(LottieComposition composition) onLoadedConfettiAnimation;
   final void Function(LottieComposition composition) onLoadedPetAnimation;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.select((OverviewViewModel vm) => vm.isLoading);
+
     return Padding(
       padding: AppStyles.kPaddSH12,
       child: RefreshIndicator(
@@ -47,9 +52,10 @@ class VirtualPetTabBarView extends StatelessWidget {
         },
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
-          child: Column(
-            spacing: AppStyles.kSpac12,
-            children: [
+          child: Column(spacing: AppStyles.kSpac12, children: [
+            if (isLoading) ...[
+              VirtualPetSkeleton(),
+            ] else ...[
               AppStyles.kEmptyWidget,
               getIsometricRoomHeader(context: context),
               getExperiencePointsContainer(context: context),
@@ -58,7 +64,7 @@ class VirtualPetTabBarView extends StatelessWidget {
               getDailyGoalContainer(context: context),
               AppStyles.kEmptyWidget,
             ],
-          ),
+          ]),
         ),
       ),
     );

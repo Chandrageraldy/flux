@@ -294,5 +294,8 @@
     "overviewLabel": "Overview",
     "virtualPetLabel": "Virtual Pet",
     "weightProgressLabel": "Weight Progress",
-    "logWeightLabel": "+ Log Weight"
+    "logWeightLabel": "+ Log Weight",
+    "trackPlayAndGrowLabel": "Track, Play, and Grow",
+    "virtualPetLoadingMessage": "Your pet is getting out of bed and preparing to see you...",
+    "loadingLabel": "Loading..."
 }
