@@ -86,7 +86,7 @@ extension _PrivateMethods on _OverviewPageState {
   }
 
   Future<void> _onProgressRefresh() async {
-    Future.wait([_getLoggedFoodsBetweenDates()]);
+    Future.wait([_getLoggedFoodsBetweenDates(), _getWeightLogs()]);
   }
 
   Future<void> _onVirtualPetRefresh() async {
@@ -103,6 +103,10 @@ extension _PrivateMethods on _OverviewPageState {
 
   Future<void> _getLoggedFoodsBetweenDates() async {
     await tryLoad(context, () => context.read<OverviewViewModel>().getLoggedFoodsBetweenDates());
+  }
+
+  Future<void> _getWeightLogs() async {
+    await tryLoad(context, () => context.read<OverviewViewModel>().getWeightLogs());
   }
 
   void _onLoadedConfettiAnimation(LottieComposition composition) {
@@ -222,7 +226,7 @@ extension _WidgetFactories on _OverviewPageState {
   Widget getTabBarView() {
     return Expanded(
       child: TabBarView(
-        children: [getProgressTabBarView(), getVirtualPetTabBarView()],
+        children: [getVirtualPetTabBarView(), getProgressTabBarView()],
       ),
     );
   }
@@ -260,7 +264,7 @@ extension _WidgetFactories on _OverviewPageState {
         labelColor: context.theme.colorScheme.onPrimary,
         unselectedLabelColor: context.theme.colorScheme.onTertiary,
         labelStyle: Quicksand.medium.withSize(FontSizes.small),
-        tabs: [Tab(text: S.current.progressLabel), Tab(text: S.current.virtualPetLabel)],
+        tabs: [Tab(text: S.current.virtualPetLabel), Tab(text: S.current.progressLabel)],
       ),
     );
   }
@@ -279,124 +283,6 @@ extension _WidgetFactories on _OverviewPageState {
 
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
-  // Experience Points Container Decoration
-  static BoxDecoration getExperiencePointsContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
-      ],
-    );
-  }
-
-  // Experience Points Label Text Style
-  static TextStyle getExperiencePointsLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
-  }
-
-  // Virtual Pet Name Label Text Style
-  static TextStyle getVirtualPetNameLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.large);
-  }
-
-  // Level Label Text Style
-  static TextStyle getLevelLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraSmall);
-  }
-
-  // Energies Container Decoration
-  static BoxDecoration getEnergiesContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad100,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
-      ],
-    );
-  }
-
-  // Header Button Container Decoration
-  static BoxDecoration getHeaderButtonContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
-      ],
-    );
-  }
-
-  // Daily Goal Label Text Style
-  static TextStyle getDailyGoalLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.small);
-  }
-
-  // Daily Goal Container Decoration
-  static BoxDecoration getDailyGoalContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 5, offset: Offset(0, 2)),
-      ],
-    );
-  }
-
-  // Energy Label Text Style
-  static TextStyle getEnergyLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.small);
-  }
-
-  // Chart Progress Container
-  static BoxDecoration getChartContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      color: context.theme.colorScheme.onPrimary,
-      borderRadius: AppStyles.kRad10,
-      boxShadow: [
-        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
-      ],
-    );
-  }
-
-  // Chart Bottom Titles Label Text Style
-  static TextStyle getChartBottomTitlesLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small);
-  }
-
-  // Chart Tooltip Text Style
-  static TextStyle getChartTooltipTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onPrimary);
-  }
-
-  // Chart Header Label Text Style
-  static TextStyle getChartHeaderLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
-  }
-
-  // Chart Value Label Text Style
-  static TextStyle getChartValueLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.mediumPlus);
-  }
-
-  // Chart Desc Label Text Style
-  static TextStyle getChartDescLabelTextStyle(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.extraSmall).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
-  }
-
-  // Chart Indicator Hint Text Style
-  static TextStyle getChartIndicatorHintTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.extraSmall);
-  }
-
-  // Experience Points Progress Indicator Container Decoration
-  static BoxDecoration getExperiencePointsProgressIndicatorContainerDecoration(BuildContext context) {
-    return BoxDecoration(
-      borderRadius: AppStyles.kRadOBL10BR10,
-      color: context.theme.colorScheme.primary,
-    );
-  }
-
   // Custom App Bar Title Label Text Style
   static getCustomAppBarTitleTextStyle() {
     return Quicksand.bold.withSize(FontSizes.mediumPlus);

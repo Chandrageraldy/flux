@@ -108,6 +108,7 @@ class TableName {
   static String userEnergy = 'user_energy';
   static String dailyGoals = 'daily_goals';
   static String virtualPets = 'virtual_pets';
+  static String weightLog = 'weight_log';
 }
 
 class TableCol {
@@ -131,6 +132,7 @@ class TableCol {
   static String currentValue = 'currentValue';
   static String isClaimed = 'isClaimed';
   static String petId = 'petId';
+  static String weight = 'weight';
 }
 
 class BucketName {

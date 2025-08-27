@@ -40,7 +40,7 @@ class VirtualPetTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppStyles.kPaddSV12H12,
+      padding: AppStyles.kPaddSH12,
       child: RefreshIndicator(
         onRefresh: () async {
           onVirtualPetRefresh();
@@ -50,11 +50,13 @@ class VirtualPetTabBarView extends StatelessWidget {
           child: Column(
             spacing: AppStyles.kSpac12,
             children: [
+              AppStyles.kEmptyWidget,
               getIsometricRoomHeader(context: context),
               getExperiencePointsContainer(context: context),
               getIsometricRoomImage(context: context),
               getActionRow(context: context),
               getDailyGoalContainer(context: context),
+              AppStyles.kEmptyWidget,
             ],
           ),
         ),

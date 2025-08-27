@@ -54,7 +54,7 @@ class ChiaChatbotViewModel extends BaseViewModel {
   }
 
   Future<bool> getLoggedFoods() async {
-    final response = await foodRepository.getLoggedFoods(selectedDate: DateTime.now());
+    final response = await foodRepository.getTodayLoggedFoods(selectedDate: DateTime.now());
     checkError(response);
     loggedFoodsList = response.data as List<LoggedFoodModel>;
     notifyListeners();

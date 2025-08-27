@@ -9,7 +9,7 @@ class DiaryViewModel extends BaseViewModel {
   List<LoggedFoodModel> loggedFoodsList = [];
 
   Future<void> getLoggedFoods({required DateTime selectedDate}) async {
-    final response = await foodRepository.getLoggedFoods(selectedDate: selectedDate);
+    final response = await foodRepository.getTodayLoggedFoods(selectedDate: selectedDate);
     checkError(response);
     loggedFoodsList = response.data as List<LoggedFoodModel>;
     notifyListeners();

@@ -324,7 +324,7 @@ class FoodRepository {
     }
   }
 
-  Future<Response> getLoggedFoods({required DateTime selectedDate}) async {
+  Future<Response> getTodayLoggedFoods({required DateTime selectedDate}) async {
     UserProfileModel? userProfile = sharedPreferenceHandler.getUser();
 
     final response = await foodServiceSupabase.getLoggedFoods(

@@ -31,7 +31,7 @@ class _FoodSearchPageState extends BaseStatefulState<_FoodSearchPage> {
 
   final _formKey = GlobalKey<FormBuilderState>();
 
-  bool _isSearchEmpty = true;
+  bool _isSearchNotEmpty = false;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ extension _Actions on _FoodSearchPageState {
 
   void _onChanged(String? value) async {
     _setState(() {
-      _isSearchEmpty = value?.isNotEmpty ?? false;
+      _isSearchNotEmpty = value?.isNotEmpty ?? false;
     });
 
     if (value == null || value.isEmpty) {
@@ -140,7 +140,7 @@ extension _WidgetFactories on _FoodSearchPageState {
         icon: FaIcon(FontAwesomeIcons.search, size: AppStyles.kSize16),
         height: AppStyles.kSize40,
         onChanged: _onChanged,
-        showClearIcon: _isSearchEmpty,
+        showClearIcon: _isSearchNotEmpty,
         onClear: () {
           _formKey.currentState?.fields[FormFields.search.name]?.didChange('');
         },

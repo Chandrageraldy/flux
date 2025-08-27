@@ -3,11 +3,13 @@ import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
+import 'package:flux/app/repositories/plan_repo/plan_repository.dart';
 import 'package:flux/app/repositories/user_repo/user_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class PersonalDetailsViewModel extends BaseViewModel {
   final UserRepository userRepository = UserRepository();
+  final PlanRepository planRepository = PlanRepository();
   final SharedPreferenceHandler sharedPreferenceHandler = SharedPreferenceHandler();
   Map<String, String> modifiedPersonalDetails = {};
   Map<String, String> unmodifiedPersonalDetails = {};
@@ -75,8 +77,18 @@ class PersonalDetailsViewModel extends BaseViewModel {
       return false;
     }
 
-    final response = await userRepository.updateBodyMetrics(bodyMetrics: modifiedPersonalDetails);
-    checkError(response);
-    return response.status == ResponseStatus.COMPLETE;
+    final updateBodyMetricsResponse = await userRepository.updateBodyMetrics(bodyMetrics: modifiedPersonalDetails);
+    checkError(updateBodyMetricsResponse);
+
+    if (updateBodyMetricsResponse.status == ResponseStatus.COMPLETE) {
+      if (modifiedPersonalDetails[PersonalDetailsSettings.weight.key] !=
+          unmodifiedPersonalDetails[PersonalDetailsSettings.weight.key]) {
+        final createLogResponse = await planRepository.createWeightLog();
+        checkError(createLogResponse);
+        return createLogResponse.status == ResponseStatus.COMPLETE;
+      }
+    }
+
+    return updateBodyMetricsResponse.status == ResponseStatus.COMPLETE;
   }
 }

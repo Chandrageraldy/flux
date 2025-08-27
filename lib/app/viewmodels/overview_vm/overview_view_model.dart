@@ -4,6 +4,7 @@ import 'package:flux/app/models/daily_goals_model/daily_goals_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/response_model.dart';
 import 'package:flux/app/models/user_energy_model/user_energy_model.dart';
+import 'package:flux/app/models/weight_log_model/weight_log_model.dart';
 import 'package:flux/app/repositories/daily_goals_repo/daily_goals_repository.dart';
 import 'package:flux/app/repositories/energy_repo/energy_repository.dart';
 import 'package:flux/app/repositories/food_repo/food_repository.dart';
@@ -25,6 +26,7 @@ class OverviewViewModel extends BaseViewModel {
   List<LoggedFoodModel> loggedFoods = [];
   List<LoggedFoodModel> loggedFoodsBetweenDates = [];
   List<DailyGoalsModel> dailyGoals = [];
+  List<WeightLogModel> weightLogs = [];
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -43,7 +45,8 @@ class OverviewViewModel extends BaseViewModel {
         getActiveUserPet(),
         getUserEnergies(),
         getDailyGoals(),
-        getLoggedFoodsBetweenDates()
+        getLoggedFoodsBetweenDates(),
+        getWeightLogs(),
       ];
       await Future.wait(futures);
     } finally {
@@ -108,7 +111,7 @@ class OverviewViewModel extends BaseViewModel {
   Future<void> getDailyGoals() async {
     final user = userRepository.sharedPreferenceHandler.getUser();
 
-    final getTodayLoggedFoodsResponse = await foodRepository.getLoggedFoods(selectedDate: DateTime.now());
+    final getTodayLoggedFoodsResponse = await foodRepository.getTodayLoggedFoods(selectedDate: DateTime.now());
     checkError(getTodayLoggedFoodsResponse);
     loggedFoods = getTodayLoggedFoodsResponse.data as List<LoggedFoodModel>;
 
@@ -165,6 +168,15 @@ class OverviewViewModel extends BaseViewModel {
     );
     checkError(response);
     loggedFoodsBetweenDates = response.data as List<LoggedFoodModel>;
+    notifyListeners();
+  }
+
+  Future<void> getWeightLogs() async {
+    final response = await planRepository.getWeightLogs();
+    checkError(response);
+    weightLogs = response.data as List<WeightLogModel>;
+    print(weightLogs);
+    print(weightLogs.length);
     notifyListeners();
   }
 }

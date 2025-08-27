@@ -13,7 +13,7 @@ class ProgressTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppStyles.kPaddSV12H12,
+      padding: AppStyles.kPaddSH12,
       child: RefreshIndicator(
         onRefresh: () async {
           onProgressRefresh();
@@ -21,8 +21,11 @@ class ProgressTabBarView extends StatelessWidget {
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
+            spacing: AppStyles.kSpac12,
             children: [
+              AppStyles.kEmptyWidget,
               getWeeklyCalorieProgressContainer(context: context),
+              AppStyles.kEmptyWidget,
             ],
           ),
         ),

@@ -51,6 +51,7 @@ abstract class SupabaseBaseService {
     String? orderBy,
     Map<String, Map<String, dynamic>>? rangeFilters,
     bool ascending = false,
+    int? limit,
   }) async {
     try {
       final supabase = Supabase.instance.client;
@@ -117,6 +118,8 @@ abstract class SupabaseBaseService {
 
       if (column != null) {
         response = await filterBuilder ?? [];
+      } else if (limit != null) {
+        response = await filterBuilder?.limit(limit) ?? [];
       } else {
         response = await filterBuilder?.select() ?? [];
       }
