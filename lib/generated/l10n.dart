@@ -2869,6 +2869,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Weight Progress`
+  String get weightProgressLabel {
+    return Intl.message(
+      'Weight Progress',
+      name: 'weightProgressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+ Log Weight`
+  String get logWeightLabel {
+    return Intl.message(
+      '+ Log Weight',
+      name: 'logWeightLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

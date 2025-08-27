@@ -174,9 +174,8 @@ class OverviewViewModel extends BaseViewModel {
   Future<void> getWeightLogs() async {
     final response = await planRepository.getWeightLogs();
     checkError(response);
-    weightLogs = response.data as List<WeightLogModel>;
-    print(weightLogs);
-    print(weightLogs.length);
+    final responseData = response.data as List<WeightLogModel>;
+    weightLogs = responseData.reversed.toList();
     notifyListeners();
   }
 }

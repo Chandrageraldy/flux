@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
+import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/viewmodels/overview_vm/overview_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -25,6 +26,7 @@ class ProgressTabBarView extends StatelessWidget {
             children: [
               AppStyles.kEmptyWidget,
               getWeeklyCalorieProgressContainer(context: context),
+              getWeightProgressContainer(context: context),
               AppStyles.kEmptyWidget,
             ],
           ),
@@ -102,21 +104,19 @@ extension _WidgetFactories on ProgressTabBarView {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(S.current.weeklyCalorieProgressLabel, style: _Styles.getChartHeaderLabelTextStyle(context)),
+            Text(
+              S.current.weeklyCalorieProgressLabel.toUpperCase(),
+              style: _Styles.getChartHeaderLabelTextStyle(context),
+            ),
             Row(
               spacing: AppStyles.kSpac4,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  '${average.toStringAsFixed(1)} ${NutritionUnit.kcal.label}',
-                  style: _Styles.getChartValueLabelTextStyle(context),
-                ),
+                Text('${average.toStringAsFixed(1)} ${NutritionUnit.kcal.label}',
+                    style: _Styles.getChartValueLabelTextStyle(context)),
                 Padding(
                   padding: AppStyles.kPaddOB3,
-                  child: Text(
-                    S.current.averageLabel,
-                    style: _Styles.getChartDescLabelTextStyle(context),
-                  ),
+                  child: Text(S.current.averageLabel, style: _Styles.getChartDescLabelTextStyle(context)),
                 ),
               ],
             ),
@@ -231,25 +231,34 @@ extension _WidgetFactories on ProgressTabBarView {
 
   // Weekly Calorie Progress Indicator Hint Column
   Widget getWeeklyCalorieProgressIndicatorHintColumn({required BuildContext context}) {
+    final userPlan = SharedPreferenceHandler().getPlan();
     return Column(
       spacing: AppStyles.kSpac4,
       children: [
-        getWeeklyCalorieProgressIndicatorHint(
+        getProgressIndicatorHint(
           color: context.theme.colorScheme.secondary,
           label: S.current.calorieLabel,
           context: context,
         ),
-        getWeeklyCalorieProgressIndicatorHint(
-          color: Colors.green,
-          label: S.current.targetCalorieLabel,
-          context: context,
+        Row(
+          children: [
+            getProgressIndicatorHint(
+              color: Colors.green,
+              label: S.current.targetCalorieLabel,
+              context: context,
+            ),
+            Text(
+              ' (${userPlan?.calorieKcal ?? 0} ${NutritionUnit.kcal.label})',
+              style: _Styles.getChartIndicatorHintTextStyle(context).copyWith(fontStyle: FontStyle.italic),
+            ),
+          ],
         ),
       ],
     );
   }
 
-  // Weekly Calorie Progress Indicator Hint
-  Widget getWeeklyCalorieProgressIndicatorHint({
+  // Progress Indicator Hint
+  Widget getProgressIndicatorHint({
     required Color color,
     required String label,
     required BuildContext context,
@@ -258,14 +267,206 @@ extension _WidgetFactories on ProgressTabBarView {
       spacing: AppStyles.kSpac8,
       children: [
         Container(
-          width: 20, // length of the line
-          height: 3, // thickness of the line
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(1.5), // optional, for slightly rounded edges
-          ),
+          width: 20,
+          height: 3,
+          decoration: _Styles.getProgressHintLineDecoration(context, color),
         ),
         Text(label, style: _Styles.getChartIndicatorHintTextStyle(context)),
+      ],
+    );
+  }
+
+  // Weight Progress Container
+  Widget getWeightProgressContainer({required BuildContext context}) {
+    return Container(
+      decoration: _Styles.getChartContainerDecoration(context),
+      width: double.infinity,
+      padding: AppStyles.kPaddSV12H12,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppStyles.kSpac8,
+        children: [
+          getWeightProgressHeader(context: context),
+          getWeightProgressChart(context: context),
+          getWeightProgressIndicatorHintColumn(context: context),
+        ],
+      ),
+    );
+  }
+
+  // Weight Progress Header
+  Widget getWeightProgressHeader({required BuildContext context}) {
+    final user = SharedPreferenceHandler().getUser();
+    final bodyMetrics = user?.bodyMetrics;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(S.current.weightProgressLabel.toUpperCase(), style: _Styles.getChartHeaderLabelTextStyle(context)),
+            Row(
+              spacing: AppStyles.kSpac4,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text('${bodyMetrics?.goal?.capitalize()}', style: _Styles.getChartValueLabelTextStyle(context)),
+                Padding(
+                  padding: AppStyles.kPaddOB3,
+                  child: Text(S.current.weightGoalLabel, style: _Styles.getChartDescLabelTextStyle(context)),
+                ),
+              ],
+            ),
+          ],
+        ),
+        GestureDetector(
+          onTap: () {
+            context.router.push(PersonalDetailsRoute());
+          },
+          child: Text(S.current.logWeightLabel, style: _Styles.getLogWeightButtonLabelTextStyle(context)),
+        )
+      ],
+    );
+  }
+
+  Widget getWeightProgressChart({required BuildContext context}) {
+    final user = SharedPreferenceHandler().getUser();
+    final bodyMetrics = user?.bodyMetrics;
+
+    final weightLogs = context.select((OverviewViewModel vm) => vm.weightLogs);
+
+    // Use the actual data points
+    final spots = List.generate(weightLogs.length, (i) {
+      return FlSpot(i.toDouble(), weightLogs[i].weight?.toDouble() ?? 0);
+    });
+
+    // Get minimum and maximum weight values for the line chart min and max y values
+    final minYvalue = (weightLogs.map((e) => e.weight).reduce((a, b) => a! < b! ? a : b)! - 2).toDouble();
+    final maxYvalue = (weightLogs.map((e) => e.weight).reduce((a, b) => a! > b! ? a : b)! + 2).toDouble();
+
+    return Container(
+      padding: AppStyles.kPaddSH16,
+      height: AppStyles.kSize150,
+      child: LineChart(
+        LineChartData(
+          minY: minYvalue,
+          maxY: maxYvalue,
+          borderData: FlBorderData(show: false),
+          gridData: FlGridData(show: false),
+
+          extraLinesData: ExtraLinesData(
+            horizontalLines: [
+              HorizontalLine(
+                y: (double.tryParse(bodyMetrics?.targetWeight ?? '0') ?? 0.0),
+                color: Colors.green,
+                strokeWidth: 2,
+                dashArray: [6, 4],
+              )
+            ],
+          ),
+
+          titlesData: FlTitlesData(
+            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                reservedSize: 34,
+                showTitles: true,
+                interval: 1,
+                getTitlesWidget: (value, meta) {
+                  final index = value.toInt();
+                  final log = weightLogs[index];
+                  return Padding(
+                    padding: AppStyles.kPaddOT12,
+                    child: Text(
+                      DateFormat('MM/dd').format(log.createdAt!),
+                      style: _Styles.getChartBottomTitlesLabelTextStyle(context),
+                    ),
+                  );
+                },
+              ),
+            ),
+            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          ),
+
+          lineBarsData: [
+            LineChartBarData(
+              spots: spots,
+              isCurved: true,
+              color: context.theme.colorScheme.secondary,
+              barWidth: 3,
+              belowBarData: BarAreaData(
+                show: true,
+                color: context.theme.colorScheme.secondary.withAlpha(60),
+              ),
+              // Show rounded dots on each points
+              dotData: FlDotData(
+                show: true,
+                getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
+                  radius: 6,
+                  color: context.theme.colorScheme.secondary,
+                  strokeWidth: 2,
+                  strokeColor: context.theme.colorScheme.onPrimary,
+                ),
+              ),
+            ),
+          ],
+
+          // Show visible tooltip
+          showingTooltipIndicators: [
+            for (int i = 0; i < spots.length; i++)
+              ShowingTooltipIndicators([LineBarSpot(LineChartBarData(spots: spots), 0, spots[i])])
+          ],
+
+          // Visible tooltip style
+          lineTouchData: LineTouchData(
+            enabled: false,
+            touchTooltipData: LineTouchTooltipData(
+              fitInsideVertically: true,
+              tooltipPadding: AppStyles.kPaddSV4H6,
+              getTooltipColor: (_) => context.theme.colorScheme.primary,
+              getTooltipItems: (spots) {
+                return spots.map((spot) {
+                  return LineTooltipItem(
+                    '${spot.y.toStringAsFixed(1)} ${Unit.kg.label}',
+                    _Styles.getChartTooltipTextStyle(context),
+                  );
+                }).toList();
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Weight Progress Indicator Hint Column
+  Widget getWeightProgressIndicatorHintColumn({required BuildContext context}) {
+    final user = SharedPreferenceHandler().getUser();
+    final bodyMetrics = user?.bodyMetrics;
+
+    return Column(
+      spacing: AppStyles.kSpac4,
+      children: [
+        getProgressIndicatorHint(
+          color: context.theme.colorScheme.secondary,
+          label: S.current.weightLabel,
+          context: context,
+        ),
+        Row(
+          children: [
+            getProgressIndicatorHint(
+              color: Colors.green,
+              label: S.current.targetWeightLabel,
+              context: context,
+            ),
+            Text(
+              ' (${bodyMetrics?.targetWeight ?? 0} ${Unit.kg.label})',
+              style: _Styles.getChartIndicatorHintTextStyle(context).copyWith(fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -312,5 +513,18 @@ abstract class _Styles {
   // Chart Indicator Hint Text Style
   static TextStyle getChartIndicatorHintTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.extraSmall);
+  }
+
+  // Progress Hint Line Decoration
+  static BoxDecoration getProgressHintLineDecoration(BuildContext context, Color color) {
+    return BoxDecoration(
+      color: color,
+      borderRadius: AppStyles.kRad100,
+    );
+  }
+
+  // Log Weight Button Label Text Style
+  static TextStyle getLogWeightButtonLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
   }
 }

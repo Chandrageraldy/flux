@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Locating Barcode"),
         "logFoodLabel": MessageLookupByLibrary.simpleMessage("Log Food"),
         "logOutLabel": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "logWeightLabel": MessageLookupByLibrary.simpleMessage("+ Log Weight"),
         "loggedLabel": MessageLookupByLibrary.simpleMessage("Logged"),
         "loggedMealsLabel":
             MessageLookupByLibrary.simpleMessage("Logged Meals"),
@@ -467,6 +468,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain."),
         "weightGoalLabel": MessageLookupByLibrary.simpleMessage("Weight Goal"),
         "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
+        "weightProgressLabel":
+            MessageLookupByLibrary.simpleMessage("Weight Progress"),
         "xpLabel": MessageLookupByLibrary.simpleMessage("XP"),
         "yearsLabel": MessageLookupByLibrary.simpleMessage("Years"),
         "zincLabel": MessageLookupByLibrary.simpleMessage("Zinc")

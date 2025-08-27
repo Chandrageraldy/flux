@@ -292,5 +292,7 @@
     "averageLabel": "Average",
     "targetCalorieLabel": "Target Calorie",
     "overviewLabel": "Overview",
-    "virtualPetLabel": "Virtual Pet"
+    "virtualPetLabel": "Virtual Pet",
+    "weightProgressLabel": "Weight Progress",
+    "logWeightLabel": "+ Log Weight"
 }
