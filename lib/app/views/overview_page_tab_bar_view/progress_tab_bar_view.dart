@@ -345,6 +345,7 @@ extension _WidgetFactories on ProgressTabBarView {
     );
   }
 
+  // Weight Progress Chart
   Widget getWeightProgressChart({required BuildContext context}) {
     final user = SharedPreferenceHandler().getUser();
     final bodyMetrics = user?.bodyMetrics;

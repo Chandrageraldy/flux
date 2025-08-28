@@ -239,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "neverDesc":
             MessageLookupByLibrary.simpleMessage("I don’t work out regularly."),
         "neverLabel": MessageLookupByLibrary.simpleMessage("Never"),
+        "newestToOldestLabel":
+            MessageLookupByLibrary.simpleMessage("Newest to Oldest"),
         "niacinLabel": MessageLookupByLibrary.simpleMessage("Niacin"),
         "noFoodDetectedLabel":
             MessageLookupByLibrary.simpleMessage("No food detected"),
@@ -276,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nutritional Information"),
         "obesityLabel": MessageLookupByLibrary.simpleMessage("Obesity"),
         "okLabel": MessageLookupByLibrary.simpleMessage("Ok"),
+        "oldestToNewestLabel":
+            MessageLookupByLibrary.simpleMessage("Oldest to Newest"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Chat with our AI to create a meal plan that fits your goals."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
@@ -478,6 +482,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Want to start fresh?"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password you entered is too weak. Please choose a stronger password."),
+        "weeklyCalorieProgressDesc": MessageLookupByLibrary.simpleMessage(
+            "Weekly calorie intake overview"),
         "weeklyCalorieProgressLabel":
             MessageLookupByLibrary.simpleMessage("Weekly Calorie Progress"),
         "weightDesc": MessageLookupByLibrary.simpleMessage(
@@ -486,6 +492,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weekly change is enabled when current and target weights differ, indicating a goal to maintain, lose, or gain."),
         "weightGoalLabel": MessageLookupByLibrary.simpleMessage("Weight Goal"),
         "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
+        "weightLogDesc": MessageLookupByLibrary.simpleMessage(
+            "Browse through your previous weight records and monitor changes over time."),
+        "weightLogLabel": MessageLookupByLibrary.simpleMessage("Weight Log"),
+        "weightProgressDesc":
+            MessageLookupByLibrary.simpleMessage("Track your weight changes"),
         "weightProgressLabel":
             MessageLookupByLibrary.simpleMessage("Weight Progress"),
         "xpLabel": MessageLookupByLibrary.simpleMessage("XP"),

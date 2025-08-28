@@ -289,11 +289,13 @@
     "startChatLabel": "Start Chat",
     "chiaLoadingMessage": "One moment, Chia is gathering the facts...",
     "weeklyCalorieProgressLabel": "Weekly Calorie Progress",
+    "weeklyCalorieProgressDesc": "Weekly calorie intake overview",
     "averageLabel": "Average",
     "targetCalorieLabel": "Target Calorie",
     "overviewLabel": "Overview",
     "virtualPetLabel": "Virtual Pet",
     "weightProgressLabel": "Weight Progress",
+    "weightProgressDesc": "Track your weight changes",
     "logWeightLabel": "+ Log Weight",
     "trackPlayAndGrowLabel": "Track, Play, and Grow",
     "virtualPetLoadingMessage": "Your pet is getting out of bed and preparing to see you...",
@@ -305,5 +307,9 @@
     "startEndDateErrorMessage1": "Start date cannot be after end date",
     "startEndDateErrorMessage2": "Date range cannot exceed 7 days",
     "selectDateLabel": "Select Date",
-    "selectDateDesc": "Choose a date range (up to 7 days) to view your progress."
+    "selectDateDesc": "Choose a date range (up to 7 days) to view your progress.",
+    "weightLogLabel": "Weight Log",
+    "weightLogDesc": "Browse through your previous weight records and monitor changes over time.",
+    "oldestToNewestLabel": "Oldest to Newest",
+    "newestToOldestLabel": "Newest to Oldest"
 }

@@ -2830,6 +2830,16 @@ class S {
     );
   }
 
+  /// `Weekly calorie intake overview`
+  String get weeklyCalorieProgressDesc {
+    return Intl.message(
+      'Weekly calorie intake overview',
+      name: 'weeklyCalorieProgressDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Average`
   String get averageLabel {
     return Intl.message(
@@ -2875,6 +2885,16 @@ class S {
     return Intl.message(
       'Weight Progress',
       name: 'weightProgressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track your weight changes`
+  String get weightProgressDesc {
+    return Intl.message(
+      'Track your weight changes',
+      name: 'weightProgressDesc',
       desc: '',
       args: [],
     );
@@ -2995,6 +3015,46 @@ class S {
     return Intl.message(
       'Choose a date range (up to 7 days) to view your progress.',
       name: 'selectDateDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight Log`
+  String get weightLogLabel {
+    return Intl.message(
+      'Weight Log',
+      name: 'weightLogLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse through your previous weight records and monitor changes over time.`
+  String get weightLogDesc {
+    return Intl.message(
+      'Browse through your previous weight records and monitor changes over time.',
+      name: 'weightLogDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oldest to Newest`
+  String get oldestToNewestLabel {
+    return Intl.message(
+      'Oldest to Newest',
+      name: 'oldestToNewestLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Newest to Oldest`
+  String get newestToOldestLabel {
+    return Intl.message(
+      'Newest to Oldest',
+      name: 'newestToOldestLabel',
       desc: '',
       args: [],
     );

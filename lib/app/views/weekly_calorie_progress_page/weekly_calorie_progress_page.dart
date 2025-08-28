@@ -3,8 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/weekly_calorie_progress_vm/weekly_calorie_progress_view_model.dart';
-import 'package:flux/app/widgets/app_bar/custom_app_bar.dart';
 import 'package:flux/app/widgets/app_bar/custom_app_bar_tappable.dart';
+import 'package:flux/app/widgets/app_bar/custom_app_bar_with_desc.dart';
 import 'package:flux/app/widgets/list_tile/profile_settings_list_tile.dart';
 import 'package:flux/app/widgets/skeleton/skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -145,7 +145,7 @@ extension _PrivateMethods on _WeeklyCalorieProgressPageState {
 extension _WidgetFactories on _WeeklyCalorieProgressPageState {
   // Custom App Bar
   Widget getCustomAppBar() {
-    return CustomAppBar(
+    return CustomAppBarWithDesc(
       leadingButton: CustomAppBarTappable(
         icon: FontAwesomeIcons.chevronLeft,
         color: context.theme.colorScheme.primary,
@@ -155,6 +155,7 @@ extension _WidgetFactories on _WeeklyCalorieProgressPageState {
       ),
       trailingButton: AppStyles.kEmptyWidget,
       title: S.current.weeklyCalorieProgressLabel,
+      desc: S.current.weeklyCalorieProgressDesc,
     );
   }
 
@@ -470,7 +471,7 @@ class _Styles {
     );
   }
 
-  // Container Decoration
+  // Date Settings Container Decoration
   static BoxDecoration getDateSettingsContainerDecoration(BuildContext context) {
     return BoxDecoration(
       color: context.theme.colorScheme.onPrimary,
