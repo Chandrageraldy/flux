@@ -313,5 +313,15 @@
     "oldestToNewestLabel": "Oldest to Newest",
     "newestToOldestLabel": "Newest to Oldest",
     "reportSummaryLabel": "Report Summary",
-    "averageOverTheWeekLabel": "Average Over The Week"
+    "reportSummaryDesc": "Monitor health stats",
+    "averageOverTheWeekLabel": "Average Over The Week",
+    "todayLabel": "Today",
+    "last1WeeksLabel": "Last 1 Week",
+    "last2WeeksLabel": "Last 2 Weeks",
+    "last3WeeksLabel": "Last 3 Weeks",
+    "last4WeeksLabel": "Last 4 Weeks",
+    "last3MonthsLabel": "Last 3 Months",
+    "last6MonthsLabel": "Last 6 Months",
+    "lastYearLabel": "Last Year",
+    "allTimeLabel": "All Time"
 }

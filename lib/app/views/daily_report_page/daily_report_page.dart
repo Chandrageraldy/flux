@@ -64,8 +64,6 @@ extension _WidgetFactories on _DailyReportPageState {
       trailingButton: AppStyles.kEmptyWidget,
       title: S.current.dailyFullReportLabel,
       desc: formattedDate,
-      image: ImagePath.report,
-      imageSize: AppStyles.kSize20,
     );
   }
 
@@ -104,7 +102,7 @@ extension _WidgetFactories on _DailyReportPageState {
             Row(
               spacing: AppStyles.kSpac4,
               children: [
-                Icon(Icons.pie_chart_sharp, size: AppStyles.kSize20),
+                Icon(Icons.insert_chart, size: AppStyles.kSize20),
                 Text(label, style: _Styles.getContainerHeaderLabelTextStyle()),
               ],
             ),
@@ -191,7 +189,7 @@ extension _WidgetFactories on _DailyReportPageState {
             Row(
               spacing: AppStyles.kSpac4,
               children: [
-                Icon(Icons.format_line_spacing_outlined, size: AppStyles.kSize20),
+                Icon(Icons.assignment_rounded, size: AppStyles.kSize20),
                 Text(label, style: _Styles.getContainerHeaderLabelTextStyle()),
               ],
             ),

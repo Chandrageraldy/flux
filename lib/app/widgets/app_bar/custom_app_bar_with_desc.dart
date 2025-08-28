@@ -8,7 +8,7 @@ class CustomAppBarWithDesc extends StatelessWidget {
     required this.title,
     required this.desc,
     this.image,
-    this.imageSize,
+    this.imageSize = AppStyles.kSize20,
   });
 
   final Widget leadingButton;
@@ -33,7 +33,7 @@ class CustomAppBarWithDesc extends StatelessWidget {
                 Row(
                   spacing: AppStyles.kSpac4,
                   children: [
-                    if (image != null) Image.asset(image!, width: AppStyles.kSize20, height: AppStyles.kSize20),
+                    if (image != null) Image.asset(image!, width: imageSize, height: imageSize),
                     Text(title, style: _Styles.getTitleTextStyle()),
                   ],
                 ),
@@ -57,10 +57,9 @@ abstract class _Styles {
 
   // Desc Label Text Style
   static getDescTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.extraSmall).copyWith(
-          height: 1,
-          color: context.theme.colorScheme.onTertiaryContainer,
-        );
+    return Quicksand.medium
+        .withSize(FontSizes.extraSmall)
+        .copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Container Decoration

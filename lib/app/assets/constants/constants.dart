@@ -96,6 +96,7 @@ enum FormFields {
   snackRatio,
   enhanceWithAi,
   prompt,
+  dateRange,
 }
 
 class TableName {

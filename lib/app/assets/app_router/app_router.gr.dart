@@ -905,6 +905,21 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ReportSummaryPage]
+class ReportSummaryRoute extends PageRouteInfo<void> {
+  const ReportSummaryRoute({List<PageRouteInfo>? children}) : super(ReportSummaryRoute.name, initialChildren: children);
+
+  static const String name = 'ReportSummaryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ReportSummaryPage();
+    },
+  );
+}
+
+/// generated route for
 /// [RootNavigatorPage]
 class RootNavigatorRoute extends PageRouteInfo<void> {
   const RootNavigatorRoute({List<PageRouteInfo>? children}) : super(RootNavigatorRoute.name, initialChildren: children);

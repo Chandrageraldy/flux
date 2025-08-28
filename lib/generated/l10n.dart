@@ -3070,11 +3070,111 @@ class S {
     );
   }
 
+  /// `Monitor health stats`
+  String get reportSummaryDesc {
+    return Intl.message(
+      'Monitor health stats',
+      name: 'reportSummaryDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Average Over The Week`
   String get averageOverTheWeekLabel {
     return Intl.message(
       'Average Over The Week',
       name: 'averageOverTheWeekLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get todayLabel {
+    return Intl.message(
+      'Today',
+      name: 'todayLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 1 Week`
+  String get last1WeeksLabel {
+    return Intl.message(
+      'Last 1 Week',
+      name: 'last1WeeksLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 2 Weeks`
+  String get last2WeeksLabel {
+    return Intl.message(
+      'Last 2 Weeks',
+      name: 'last2WeeksLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 3 Weeks`
+  String get last3WeeksLabel {
+    return Intl.message(
+      'Last 3 Weeks',
+      name: 'last3WeeksLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 4 Weeks`
+  String get last4WeeksLabel {
+    return Intl.message(
+      'Last 4 Weeks',
+      name: 'last4WeeksLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 3 Months`
+  String get last3MonthsLabel {
+    return Intl.message(
+      'Last 3 Months',
+      name: 'last3MonthsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last 6 Months`
+  String get last6MonthsLabel {
+    return Intl.message(
+      'Last 6 Months',
+      name: 'last6MonthsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Year`
+  String get lastYearLabel {
+    return Intl.message(
+      'Last Year',
+      name: 'lastYearLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Time`
+  String get allTimeLabel {
+    return Intl.message(
+      'All Time',
+      name: 'allTimeLabel',
       desc: '',
       args: [],
     );

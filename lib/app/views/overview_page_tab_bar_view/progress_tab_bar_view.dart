@@ -92,16 +92,21 @@ extension _WidgetFactories on ProgressTabBarView {
   // Report Summary Container
   Widget getReportSummaryContainer({required BuildContext context}) {
     final weeklyCalories = getWeeklyCaloriesList(context: context);
-    return Container(
-      decoration: _Styles.getChartContainerDecoration(context),
-      width: AppStyles.kDoubleInfinity,
-      padding: AppStyles.kPaddSV12H12,
-      child: Column(
-        spacing: AppStyles.kSpac8,
-        children: [
-          getReportSummaryHeader(weeklyCalories: weeklyCalories, context: context),
-          getReportSummaryGrid(context: context)
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.router.push(ReportSummaryRoute());
+      },
+      child: Container(
+        decoration: _Styles.getChartContainerDecoration(context),
+        width: AppStyles.kDoubleInfinity,
+        padding: AppStyles.kPaddSV12H12,
+        child: Column(
+          spacing: AppStyles.kSpac8,
+          children: [
+            getReportSummaryHeader(weeklyCalories: weeklyCalories, context: context),
+            getReportSummaryGrid(context: context)
+          ],
+        ),
       ),
     );
   }

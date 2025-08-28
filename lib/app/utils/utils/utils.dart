@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
+import 'package:flux/app/models/nutrient_progress_model/nutrient_progress_model.dart';
+import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
@@ -591,5 +593,71 @@ class FunctionUtils {
     });
 
     return averages;
+  }
+
+  static List<NutrientProgressModel> calculateAverageNutrientsWithPlan({
+    required List<LoggedFoodModel> loggedFoods,
+    required int dayRange,
+    required List<Nutrition> wantedNutrients,
+    PlanModel? plan,
+  }) {
+    if (dayRange <= 0) return [];
+
+    // 1️⃣ Sum all nutrients
+    final totals = <int, double>{};
+    for (final food in loggedFoods) {
+      if (food.fullNutrients == null) continue;
+
+      for (final nutrient in food.fullNutrients!) {
+        for (final wanted in wantedNutrients) {
+          if (nutrient.attrId == wanted.attrId) {
+            totals[wanted.attrId] = (totals[wanted.attrId] ?? 0) + (nutrient.value ?? 0);
+          }
+        }
+      }
+    }
+
+    // 2️⃣ Prepare target map from PlanModel
+    final Map<int, double?> targets = {
+      Nutrition.calorie.attrId: plan?.calorieKcal ?? 0,
+      Nutrition.protein.attrId: plan?.proteinG ?? 0,
+      Nutrition.fat.attrId: plan?.fatG ?? 0,
+      Nutrition.carbs.attrId: plan?.carbsG ?? 0,
+      Nutrition.calcium.attrId: plan?.calciumMg ?? 0,
+      Nutrition.iron.attrId: plan?.ironMg ?? 0,
+      Nutrition.magnesium.attrId: plan?.magnesiumMg ?? 0,
+      Nutrition.phosphorus.attrId: plan?.phosphorusMg ?? 0,
+      Nutrition.potassium.attrId: plan?.potassiumMg ?? 0,
+      Nutrition.sodium.attrId: plan?.sodiumMg ?? 0,
+      Nutrition.zinc.attrId: plan?.zincMg ?? 0,
+      Nutrition.copper.attrId: plan?.copperMg ?? 0,
+      Nutrition.manganese.attrId: plan?.manganeseMg ?? 0,
+      Nutrition.selenium.attrId: plan?.seleniumUg ?? 0,
+      Nutrition.vitaminA.attrId: plan?.vitaminAIu ?? 0,
+      Nutrition.vitaminE.attrId: plan?.vitaminEMg ?? 0,
+      Nutrition.vitaminD.attrId: plan?.vitaminDIu ?? 0,
+      Nutrition.vitaminC.attrId: plan?.vitaminCMg ?? 0,
+      Nutrition.thiamin.attrId: plan?.thiaminMg ?? 0,
+      Nutrition.riboflavin.attrId: plan?.riboflavinMg ?? 0,
+      Nutrition.niacin.attrId: plan?.niacinMg ?? 0,
+      Nutrition.vitaminB6.attrId: plan?.vitaminB6Mg ?? 0,
+      Nutrition.vitaminB12.attrId: plan?.vitaminB12Ug ?? 0,
+      Nutrition.choline.attrId: plan?.cholineMg ?? 0,
+      Nutrition.vitaminK.attrId: plan?.vitaminKUg ?? 0,
+      Nutrition.folate.attrId: plan?.folateUg ?? 0,
+    };
+
+    // 3️⃣ Create NutrientProgressModel list
+    return wantedNutrients.map((nutrient) {
+      final currentTotal = totals[nutrient.attrId] ?? 0;
+      final currentAverage = (currentTotal / dayRange).round();
+      final targetValue = (targets[nutrient.attrId] ?? 0).round();
+
+      return NutrientProgressModel(
+        nutrition: nutrient,
+        currentValue: currentAverage,
+        targetValue: targetValue,
+      );
+    }).toList();
   }
 }

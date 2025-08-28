@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Adjustment Based on Weight Goal"),
         "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
+        "allTimeLabel": MessageLookupByLibrary.simpleMessage("All Time"),
         "averageLabel": MessageLookupByLibrary.simpleMessage("Average"),
         "averageOverTheWeekLabel":
             MessageLookupByLibrary.simpleMessage("Average Over The Week"),
@@ -168,6 +169,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "ketoDesc": MessageLookupByLibrary.simpleMessage(
             "Low-carb, high-fat diet for weight loss."),
         "ketoLabel": MessageLookupByLibrary.simpleMessage("Keto"),
+        "last1WeeksLabel": MessageLookupByLibrary.simpleMessage("Last 1 Week"),
+        "last2WeeksLabel": MessageLookupByLibrary.simpleMessage("Last 2 Weeks"),
+        "last3MonthsLabel":
+            MessageLookupByLibrary.simpleMessage("Last 3 Months"),
+        "last3WeeksLabel": MessageLookupByLibrary.simpleMessage("Last 3 Weeks"),
+        "last4WeeksLabel": MessageLookupByLibrary.simpleMessage("Last 4 Weeks"),
+        "last6MonthsLabel":
+            MessageLookupByLibrary.simpleMessage("Last 6 Months"),
+        "lastYearLabel": MessageLookupByLibrary.simpleMessage("Last Year"),
         "lightDesc": MessageLookupByLibrary.simpleMessage(
             "Light or occasional workouts."),
         "lightLabel": MessageLookupByLibrary.simpleMessage("1–2 times/week"),
@@ -367,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "recentlyViewedLabel":
             MessageLookupByLibrary.simpleMessage("Recently Viewed"),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
+        "reportSummaryDesc":
+            MessageLookupByLibrary.simpleMessage("Monitor health stats"),
         "reportSummaryLabel":
             MessageLookupByLibrary.simpleMessage("Report Summary"),
         "requestError": MessageLookupByLibrary.simpleMessage(
@@ -443,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Target Weekly Change"),
         "targetsLabel": MessageLookupByLibrary.simpleMessage("Targets"),
         "thiaminLabel": MessageLookupByLibrary.simpleMessage("Thiamin"),
+        "todayLabel": MessageLookupByLibrary.simpleMessage("Today"),
         "tooManyRequests": MessageLookupByLibrary.simpleMessage(
             "We have blocked all requests from this device due to unusual activity. Try again later."),
         "totalDailyEnergyExpenditureLabel":
