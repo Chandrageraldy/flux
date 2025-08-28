@@ -106,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailDesc": MessageLookupByLibrary.simpleMessage(
             "Your registered email used for login and account recovery."),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "endDateDesc": MessageLookupByLibrary.simpleMessage(
+            "The ending date for the weekly calorie progress."),
+        "endDateLabel": MessageLookupByLibrary.simpleMessage("End Date"),
         "energyTargetDesc": MessageLookupByLibrary.simpleMessage(
             "This is your recommended daily energy intake to meet your goal."),
         "energyTargetLabel":
@@ -385,6 +388,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sedentaryLabel": MessageLookupByLibrary.simpleMessage("Sedentary"),
         "seeProgressOverTimeLabel":
             MessageLookupByLibrary.simpleMessage("See progress over time"),
+        "selectDateDesc": MessageLookupByLibrary.simpleMessage(
+            "Choose a date range (up to 7 days) to view your progress."),
+        "selectDateLabel": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
         "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
         "servingUnitLabel":
@@ -405,6 +411,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Oops, something went wrong"),
         "startChatLabel": MessageLookupByLibrary.simpleMessage("Start Chat"),
+        "startDateDesc": MessageLookupByLibrary.simpleMessage(
+            "The beginning date for the weekly calorie progress."),
+        "startDateLabel": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "startEndDateErrorMessage1": MessageLookupByLibrary.simpleMessage(
+            "Start date cannot be after end date"),
+        "startEndDateErrorMessage2": MessageLookupByLibrary.simpleMessage(
+            "Date range cannot exceed 7 days"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
         "targetCalorieLabel":
             MessageLookupByLibrary.simpleMessage("Target Calorie"),

@@ -2919,6 +2919,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Start Date`
+  String get startDateLabel {
+    return Intl.message(
+      'Start Date',
+      name: 'startDateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The beginning date for the weekly calorie progress.`
+  String get startDateDesc {
+    return Intl.message(
+      'The beginning date for the weekly calorie progress.',
+      name: 'startDateDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDateLabel {
+    return Intl.message(
+      'End Date',
+      name: 'endDateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The ending date for the weekly calorie progress.`
+  String get endDateDesc {
+    return Intl.message(
+      'The ending date for the weekly calorie progress.',
+      name: 'endDateDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date cannot be after end date`
+  String get startEndDateErrorMessage1 {
+    return Intl.message(
+      'Start date cannot be after end date',
+      name: 'startEndDateErrorMessage1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date range cannot exceed 7 days`
+  String get startEndDateErrorMessage2 {
+    return Intl.message(
+      'Date range cannot exceed 7 days',
+      name: 'startEndDateErrorMessage2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get selectDateLabel {
+    return Intl.message(
+      'Select Date',
+      name: 'selectDateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose a date range (up to 7 days) to view your progress.`
+  String get selectDateDesc {
+    return Intl.message(
+      'Choose a date range (up to 7 days) to view your progress.',
+      name: 'selectDateDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

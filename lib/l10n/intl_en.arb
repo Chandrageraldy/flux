@@ -297,5 +297,13 @@
     "logWeightLabel": "+ Log Weight",
     "trackPlayAndGrowLabel": "Track, Play, and Grow",
     "virtualPetLoadingMessage": "Your pet is getting out of bed and preparing to see you...",
-    "loadingLabel": "Loading..."
+    "loadingLabel": "Loading...",
+    "startDateLabel": "Start Date",
+    "startDateDesc": "The beginning date for the weekly calorie progress.",
+    "endDateLabel": "End Date",
+    "endDateDesc": "The ending date for the weekly calorie progress.",
+    "startEndDateErrorMessage1": "Start date cannot be after end date",
+    "startEndDateErrorMessage2": "Date range cannot exceed 7 days",
+    "selectDateLabel": "Select Date",
+    "selectDateDesc": "Choose a date range (up to 7 days) to view your progress."
 }

@@ -151,8 +151,14 @@ class FoodServiceSupabase extends SupabaseBaseService {
     );
   }
 
-  Future<Response> getLoggedFoodsBetweenDates(
-      {required String userId, required DateTime startDate, required DateTime endDate}) async {
+  Future<Response> getLoggedFoodsBetweenDates({
+    required String userId,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    final start = DateTime(startDate.year, startDate.month, startDate.day, 0, 0, 0);
+    final end = DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59);
+
     return callSupabaseDB(
       requestType: RequestType.GET,
       table: TableName.loggedFood,
@@ -161,8 +167,8 @@ class FoodServiceSupabase extends SupabaseBaseService {
       },
       rangeFilters: {
         TableCol.loggedAt: {
-          'gte': startDate.toIso8601String(),
-          'lt': endDate.toIso8601String(),
+          'gte': start.toIso8601String(),
+          'lte': end.toIso8601String(), // ✅ inclusive end
         },
       },
     );

@@ -43,7 +43,15 @@ class ProgressTabBarView extends StatelessWidget {
 }
 
 // * ---------------------------- Actions ----------------------------
-extension _Actions on ProgressTabBarView {}
+extension _Actions on ProgressTabBarView {
+  void _onWeeklyCalorieProgressPressed({required BuildContext context}) {
+    context.router.push(WeeklyCalorieProgressRoute());
+  }
+
+  void _onWeightProgressPressed({required BuildContext context}) {
+    context.router.push(WeightProgressRoute());
+  }
+}
 
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on ProgressTabBarView {
@@ -82,18 +90,21 @@ extension _WidgetFactories on ProgressTabBarView {
   // Weekly Calorie Progress Container
   Widget getWeeklyCalorieProgressContainer({required BuildContext context}) {
     final weeklyCalories = getWeeklyCaloriesList(context: context);
-    return Container(
-      decoration: _Styles.getChartContainerDecoration(context),
-      width: double.infinity,
-      padding: AppStyles.kPaddSV12H12,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: AppStyles.kSpac8,
-        children: [
-          getWeeklyCalorieProgressHeader(weeklyCalories: weeklyCalories, context: context),
-          getWeeklyCalorieProgressChart(weeklyCalories: weeklyCalories, context: context),
-          getWeeklyCalorieProgressIndicatorHintColumn(context: context),
-        ],
+    return GestureDetector(
+      onTap: () => _onWeeklyCalorieProgressPressed(context: context),
+      child: Container(
+        decoration: _Styles.getChartContainerDecoration(context),
+        width: double.infinity,
+        padding: AppStyles.kPaddSV12H12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppStyles.kSpac8,
+          children: [
+            getWeeklyCalorieProgressHeader(weeklyCalories: weeklyCalories, context: context),
+            getWeeklyCalorieProgressChart(weeklyCalories: weeklyCalories, context: context),
+            getWeeklyCalorieProgressIndicatorHintColumn(context: context),
+          ],
+        ),
       ),
     );
   }
@@ -284,18 +295,21 @@ extension _WidgetFactories on ProgressTabBarView {
 
   // Weight Progress Container
   Widget getWeightProgressContainer({required BuildContext context}) {
-    return Container(
-      decoration: _Styles.getChartContainerDecoration(context),
-      width: double.infinity,
-      padding: AppStyles.kPaddSV12H12,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: AppStyles.kSpac8,
-        children: [
-          getWeightProgressHeader(context: context),
-          getWeightProgressChart(context: context),
-          getWeightProgressIndicatorHintColumn(context: context),
-        ],
+    return GestureDetector(
+      onTap: () => _onWeightProgressPressed(context: context),
+      child: Container(
+        decoration: _Styles.getChartContainerDecoration(context),
+        width: double.infinity,
+        padding: AppStyles.kPaddSV12H12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppStyles.kSpac8,
+          children: [
+            getWeightProgressHeader(context: context),
+            getWeightProgressChart(context: context),
+            getWeightProgressIndicatorHintColumn(context: context),
+          ],
+        ),
       ),
     );
   }
@@ -326,12 +340,7 @@ extension _WidgetFactories on ProgressTabBarView {
             ),
           ],
         ),
-        GestureDetector(
-          onTap: () {
-            context.router.push(PersonalDetailsRoute());
-          },
-          child: Text(S.current.logWeightLabel, style: _Styles.getLogWeightButtonLabelTextStyle(context)),
-        )
+        FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize16)
       ],
     );
   }
@@ -471,6 +480,13 @@ extension _WidgetFactories on ProgressTabBarView {
               ' (${bodyMetrics?.targetWeight ?? 0} ${Unit.kg.label})',
               style: _Styles.getChartIndicatorHintTextStyle(context).copyWith(fontStyle: FontStyle.italic),
             ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                context.router.push(PersonalDetailsRoute());
+              },
+              child: Text(S.current.logWeightLabel, style: _Styles.getLogWeightButtonLabelTextStyle(context)),
+            )
           ],
         ),
       ],
