@@ -561,4 +561,35 @@ class FunctionUtils {
       Nutrition.fat.key: totalFat,
     };
   }
+
+  static Map<Nutrition, int> calculateAverageNutrients({
+    required List<LoggedFoodModel> loggedFoods,
+    required int dayRange,
+    required List<Nutrition> wantedNutrients,
+  }) {
+    if (dayRange <= 0) return {};
+
+    final totals = <Nutrition, double>{
+      for (var n in wantedNutrients) n: 0.0,
+    };
+
+    for (final food in loggedFoods) {
+      if (food.fullNutrients == null) continue;
+
+      for (final nutrient in food.fullNutrients!) {
+        for (final nutrition in wantedNutrients) {
+          if (nutrient.attrId == nutrition.attrId) {
+            totals[nutrition] = (totals[nutrition] ?? 0) + (nutrient.value ?? 0);
+          }
+        }
+      }
+    }
+
+    final averages = <Nutrition, int>{};
+    totals.forEach((nutrition, total) {
+      averages[nutrition] = (total / dayRange).round();
+    });
+
+    return averages;
+  }
 }

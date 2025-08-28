@@ -311,5 +311,7 @@
     "weightLogLabel": "Weight Log",
     "weightLogDesc": "Browse through your previous weight records and monitor changes over time.",
     "oldestToNewestLabel": "Oldest to Newest",
-    "newestToOldestLabel": "Newest to Oldest"
+    "newestToOldestLabel": "Newest to Oldest",
+    "reportSummaryLabel": "Report Summary",
+    "averageOverTheWeekLabel": "Average Over The Week"
 }

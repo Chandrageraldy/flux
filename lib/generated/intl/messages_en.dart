@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
         "allLabel": MessageLookupByLibrary.simpleMessage("All"),
         "averageLabel": MessageLookupByLibrary.simpleMessage("Average"),
+        "averageOverTheWeekLabel":
+            MessageLookupByLibrary.simpleMessage("Average Over The Week"),
         "balancedDesc": MessageLookupByLibrary.simpleMessage(
             "A balanced diet with a variety of foods."),
         "balancedLabel": MessageLookupByLibrary.simpleMessage("Balanced"),
@@ -365,6 +367,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "recentlyViewedLabel":
             MessageLookupByLibrary.simpleMessage("Recently Viewed"),
         "remainingLabel": MessageLookupByLibrary.simpleMessage("Remaining"),
+        "reportSummaryLabel":
+            MessageLookupByLibrary.simpleMessage("Report Summary"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),

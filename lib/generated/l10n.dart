@@ -3059,6 +3059,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Report Summary`
+  String get reportSummaryLabel {
+    return Intl.message(
+      'Report Summary',
+      name: 'reportSummaryLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average Over The Week`
+  String get averageOverTheWeekLabel {
+    return Intl.message(
+      'Average Over The Week',
+      name: 'averageOverTheWeekLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

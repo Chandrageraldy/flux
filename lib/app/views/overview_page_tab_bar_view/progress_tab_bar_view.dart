@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/utils/extensions/extension.dart';
+import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/overview_vm/overview_view_model.dart';
 import 'package:flux/app/widgets/skeleton/progress_skeleton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,6 +31,7 @@ class ProgressTabBarView extends StatelessWidget {
                 ProgressSkeleton()
               ] else ...[
                 AppStyles.kEmptyWidget,
+                getReportSummaryContainer(context: context),
                 getWeeklyCalorieProgressContainer(context: context),
                 getWeightProgressContainer(context: context),
                 AppStyles.kEmptyWidget,
@@ -87,6 +89,133 @@ extension _PrivateMethods on ProgressTabBarView {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on ProgressTabBarView {
+  // Report Summary Container
+  Widget getReportSummaryContainer({required BuildContext context}) {
+    final weeklyCalories = getWeeklyCaloriesList(context: context);
+    return Container(
+      decoration: _Styles.getChartContainerDecoration(context),
+      width: AppStyles.kDoubleInfinity,
+      padding: AppStyles.kPaddSV12H12,
+      child: Column(
+        spacing: AppStyles.kSpac8,
+        children: [
+          getReportSummaryHeader(weeklyCalories: weeklyCalories, context: context),
+          getReportSummaryGrid(context: context)
+        ],
+      ),
+    );
+  }
+
+  // Report Summary Header
+  Widget getReportSummaryHeader({required List<double> weeklyCalories, required BuildContext context}) {
+    var sum = weeklyCalories.reduce((a, b) => a + b);
+    var average = sum / weeklyCalories.length;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.current.reportSummaryLabel.toUpperCase(),
+              style: _Styles.getChartHeaderLabelTextStyle(context),
+            ),
+            Row(
+              spacing: AppStyles.kSpac4,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text('${average.toStringAsFixed(1)} ${NutritionUnit.kcal.label}',
+                    style: _Styles.getChartValueLabelTextStyle(context)),
+                Padding(
+                  padding: AppStyles.kPaddOB3,
+                  child: Text(S.current.averageOverTheWeekLabel, style: _Styles.getChartDescLabelTextStyle(context)),
+                ),
+              ],
+            ),
+          ],
+        ),
+        FaIcon(FontAwesomeIcons.chevronRight, size: AppStyles.kSize16)
+      ],
+    );
+  }
+
+  // Report Summary Grid
+  Widget getReportSummaryGrid({required BuildContext context}) {
+    final loggedFoodBetweenDates = context.select((OverviewViewModel vm) => vm.loggedFoodsBetweenDates);
+
+    final nutritionsAverage = FunctionUtils.calculateAverageNutrients(
+      loggedFoods: loggedFoodBetweenDates,
+      dayRange: 7,
+      wantedNutrients: [
+        Nutrition.calorie,
+        Nutrition.protein,
+        Nutrition.fat,
+        Nutrition.carbs,
+      ],
+    );
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        mainAxisExtent: AppStyles.kSize40,
+      ),
+      itemCount: nutritionsAverage.length,
+      itemBuilder: (context, index) {
+        final entry = nutritionsAverage.entries.elementAt(index);
+        return getReportSummaryGridItem(
+          context: context,
+          nutrition: entry.key,
+          value: entry.value,
+        );
+      },
+    );
+  }
+
+  // Report Summary Grid Item
+  Widget getReportSummaryGridItem({
+    required BuildContext context,
+    required Nutrition nutrition,
+    required int value,
+  }) {
+    return Container(
+      padding: AppStyles.kPaddSH12,
+      decoration: _Styles.getReportSummaryGridItemContainerDecoration(context),
+      child: Row(
+        spacing: AppStyles.kSpac12,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: AppStyles.kSize8,
+            height: AppStyles.kSize8,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: nutrition == Nutrition.calorie
+                  ? context.theme.colorScheme.secondary
+                  : nutrition == Nutrition.protein
+                      ? MacroNutrients.protein.color
+                      : nutrition == Nutrition.fat
+                          ? MacroNutrients.fat.color
+                          : MacroNutrients.carbs.color,
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(nutrition.label, style: _Styles.getReportSummaryNutritionLabelTextStyle(context)),
+              Text('$value', style: _Styles.getReportSummaryNutritionValueTextStyle(context)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   // Weekly Calorie Progress Container
   Widget getWeeklyCalorieProgressContainer({required BuildContext context}) {
     final weeklyCalories = getWeeklyCaloriesList(context: context);
@@ -549,5 +678,23 @@ abstract class _Styles {
   // Log Weight Button Label Text Style
   static TextStyle getLogWeightButtonLabelTextStyle(BuildContext context) {
     return Quicksand.bold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.secondary);
+  }
+
+  // Report Summary Nutrition Label Text Style
+  static TextStyle getReportSummaryNutritionLabelTextStyle(BuildContext context) {
+    return Quicksand.semiBold.withSize(FontSizes.small);
+  }
+
+  // Report Summary Nutrition Value Text Style
+  static TextStyle getReportSummaryNutritionValueTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.extraSmall);
+  }
+
+  // Report Summary Grid Item Container Decoration
+  static BoxDecoration getReportSummaryGridItemContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      borderRadius: AppStyles.kRad10,
+      color: context.theme.colorScheme.tertiary.withAlpha(100),
+    );
   }
 }
