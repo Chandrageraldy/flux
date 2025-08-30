@@ -24,12 +24,6 @@ class _SignUpPageState extends BaseStatefulState<SignUpPage> {
   PreferredSizeWidget? appbar() => DefaultAppBar();
 
   @override
-  void initState() => super.initState();
-
-  @override
-  void dispose() => super.dispose();
-
-  @override
   Widget body() {
     return CustomScrollView(
       slivers: [
@@ -40,7 +34,7 @@ class _SignUpPageState extends BaseStatefulState<SignUpPage> {
             spacing: AppStyles.kSpac16,
             children: [
               AppStyles.kSizedBoxH4,
-              getAppTitleLabel(),
+              getTitleLabel(),
               getSignUpDescriptionLabel(),
               AppStyles.kSizedBoxH16,
               Expanded(child: getFormBuilder()),
@@ -78,11 +72,11 @@ extension _Actions on _SignUpPageState {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _SignUpPageState {
-  // App Title Label
-  Widget getAppTitleLabel() {
+  // Title Label
+  Widget getTitleLabel() {
     return Text(
       S.current.signUpScreenTitle,
-      style: _Styles.getAppTitleLabelTextStyle(context),
+      style: _Styles.getTitleLabelTextStyle(context),
     );
   }
 
@@ -122,6 +116,7 @@ extension _WidgetFactories on _SignUpPageState {
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
       ]),
+      icon: Icons.person_outline,
     );
   }
 
@@ -134,6 +129,7 @@ extension _WidgetFactories on _SignUpPageState {
         FormBuilderValidators.required(),
         FormBuilderValidators.email(),
       ]),
+      icon: Icons.email_outlined,
     );
   }
 
@@ -146,6 +142,7 @@ extension _WidgetFactories on _SignUpPageState {
         FormBuilderValidators.required(),
         FormBuilderValidators.minLength(8),
       ]),
+      icon: Icons.lock_open_outlined,
     );
   }
 
@@ -166,13 +163,13 @@ extension _WidgetFactories on _SignUpPageState {
 
 // * ---------------------------- Styles -----------------------------
 class _Styles {
-  // App Title Text Style
-  static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.primary, height: 1);
+  // Title Text Style
+  static getTitleLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Sign Up Description Text Style
   static getSignUpDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 }

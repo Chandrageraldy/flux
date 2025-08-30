@@ -3179,6 +3179,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Forgot your password?`
+  String get forgotYourPasswordLabel {
+    return Intl.message(
+      'Forgot your password?',
+      name: 'forgotYourPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Reset Token`
+  String get sendResetTokenLabel {
+    return Intl.message(
+      'Send Reset Token',
+      name: 'sendResetTokenLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your registered email address, and we will send you a link to reset your password.`
+  String get sendResetTokenDesc {
+    return Intl.message(
+      'Please enter your registered email address, and we will send you a link to reset your password.',
+      name: 'sendResetTokenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have exceeded the maximum number of password reset requests. Please try again later.`
+  String get overEmailSendRateLimit {
+    return Intl.message(
+      'You have exceeded the maximum number of password reset requests. Please try again later.',
+      name: 'overEmailSendRateLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Email`
+  String get submitEmailLabel {
+    return Intl.message(
+      'Submit Email',
+      name: 'submitEmailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your email`
+  String get checkYourEmailLabel {
+    return Intl.message(
+      'Check your email',
+      name: 'checkYourEmailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the 6-digit verification code`
+  String get verifyEmailDesc {
+    return Intl.message(
+      'Enter the 6-digit verification code',
+      name: 'verifyEmailDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verifyLabel {
+    return Intl.message(
+      'Verify',
+      name: 'verifyLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP has expired or is invalid`
+  String get invalidOtp {
+    return Intl.message(
+      'OTP has expired or is invalid',
+      name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Your Password`
+  String get resetYourPasswordLabel {
+    return Intl.message(
+      'Reset Your Password',
+      name: 'resetYourPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPasswordLabel {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your new password below to reset your account password.`
+  String get resetPasswordDesc {
+    return Intl.message(
+      'Please enter your new password below to reset your account password.',
+      name: 'resetPasswordDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPasswordLabel {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordsDoNotMatchError {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordsDoNotMatchError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -4,8 +4,11 @@ import 'package:flux/app/models/food_response_model/food_response_model.dart';
 import 'package:flux/app/models/ingredient_model/ingredient_model.dart';
 import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/views/app_entry_page/splash_screen.dart';
+import 'package:flux/app/views/auth_page/reset_password_page.dart';
 import 'package:flux/app/views/auth_page/login_page.dart';
+import 'package:flux/app/views/auth_page/send_reset_token_page.dart';
 import 'package:flux/app/views/auth_page/signup_page.dart';
+import 'package:flux/app/views/auth_page/verify_otp_page.dart';
 import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_loading_page.dart';
 import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_navigator_page.dart';
 import 'package:flux/app/views/chia_chatbot_page/chia_chatbot_page.dart';
@@ -105,6 +108,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: WeightProgressRoute.page),
         AutoRoute(page: WeeklyCalorieProgressRoute.page),
         AutoRoute(page: ReportSummaryRoute.page),
+        AutoRoute(page: SendResetTokenRoute.page),
+        AutoRoute(page: VerifyOtpRoute.page),
+        AutoRoute(page: ResetPasswordRoute.page),
       ],
     );
   }

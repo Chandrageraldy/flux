@@ -45,10 +45,11 @@ extension _WidgetFactories on SelectionButton {
   // Icon Container
   Widget getIconContainer(BuildContext context) {
     return Container(
-        width: AppStyles.kSize40,
-        height: AppStyles.kSize40,
-        decoration: _Styles.getIconContainerDecoration(context),
-        child: Center(child: icon));
+      width: AppStyles.kSize40,
+      height: AppStyles.kSize40,
+      decoration: _Styles.getIconContainerDecoration(context),
+      child: Center(child: icon),
+    );
   }
 
   // Arrow Icon
@@ -98,7 +99,9 @@ abstract class _Styles {
     return BoxDecoration(
       borderRadius: AppStyles.kRad16,
       color: context.theme.colorScheme.onPrimary,
-      border: Border.all(width: 1, color: context.theme.colorScheme.tertiary),
+      boxShadow: [
+        BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
+      ],
     );
   }
 

@@ -27,6 +27,16 @@ abstract class SupabaseBaseService {
         case AuthType.LOGOUT:
           await supabase.auth.signOut();
           return Response.complete(true);
+        case AuthType.SENDRESETTOKEN:
+          await supabase.auth.resetPasswordForEmail(requestBody!['email']);
+          return Response.complete(true);
+        case AuthType.VERIFYOTP:
+          await supabase.auth
+              .verifyOTP(type: OtpType.recovery, token: requestBody!['otp'], email: requestBody['email']);
+          return Response.complete(true);
+        case AuthType.RESETPASSWORD:
+          await supabase.auth.updateUser(UserAttributes(password: requestBody!['password']));
+          return Response.complete(true);
       }
       return Response.complete(response.user);
     } on AuthException catch (e) {
@@ -149,6 +159,10 @@ abstract class SupabaseBaseService {
       case SupabaseExceptionType.permissionDenied:
         message = S.current.permissionDenied;
         return Response.error(ErrorModel(code: e, message: message, isUrgentError: true));
+      case SupabaseExceptionType.overEmailSendRateLimit:
+        message = S.current.overEmailSendRateLimit;
+      case SupabaseExceptionType.invalidOtp:
+        message = S.current.invalidOtp;
       default:
         message = S.current.requestError;
     }
@@ -191,12 +205,14 @@ abstract class SupabaseBaseService {
 
 enum RequestType { GET, POST, PUT, DELETE }
 
-enum AuthType { EMAILSIGNUP, EMAILLOGIN, LOGOUT }
+enum AuthType { EMAILSIGNUP, EMAILLOGIN, LOGOUT, SENDRESETTOKEN, VERIFYOTP, RESETPASSWORD }
 
 class SupabaseExceptionType {
   static const invalidCredentials = 'invalid_credentials';
   static const userAlreadyExists = 'user_already_exists';
   static const permissionDenied = 'permission_denied';
+  static const overEmailSendRateLimit = 'over_email_send_rate_limit';
+  static const invalidOtp = 'otp_expired';
 }
 
 enum BucketRequestType { upload, delete }

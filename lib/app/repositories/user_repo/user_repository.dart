@@ -29,6 +29,21 @@ class UserRepository {
     return response;
   }
 
+  Future<Response> sendResetToken({required String email}) async {
+    final response = await userService.sendResetToken(email: email);
+    return response;
+  }
+
+  Future<Response> verifyOtp({required String email, required String otp}) async {
+    final response = await userService.verifyOtp(email: email, otp: otp);
+    return response;
+  }
+
+  Future<Response> resetPassword({required String password}) async {
+    final response = await userService.resetPassword(password: password);
+    return response;
+  }
+
   Future<Response> createUserProfile({
     required String userId,
     required String email,

@@ -21,6 +21,18 @@ class UserService extends SupabaseBaseService {
     return authenticate(authType: AuthType.LOGOUT);
   }
 
+  Future<Response> sendResetToken({required String email}) {
+    return authenticate(authType: AuthType.SENDRESETTOKEN, requestBody: {'email': email});
+  }
+
+  Future<Response> verifyOtp({required String email, required String otp}) {
+    return authenticate(authType: AuthType.VERIFYOTP, requestBody: {'email': email, 'otp': otp});
+  }
+
+  Future<Response> resetPassword({required String password}) {
+    return authenticate(authType: AuthType.RESETPASSWORD, requestBody: {'password': password});
+  }
+
   Future<Response> createUserProfile({required UserProfileModel model}) {
     return callSupabaseDB(
       requestType: RequestType.POST,

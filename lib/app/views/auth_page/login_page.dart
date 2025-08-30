@@ -22,12 +22,6 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   PreferredSizeWidget? appbar() => DefaultAppBar();
 
   @override
-  void initState() => super.initState();
-
-  @override
-  void dispose() => super.dispose();
-
-  @override
   Widget body() {
     return CustomScrollView(
       slivers: [
@@ -38,7 +32,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
             spacing: AppStyles.kSpac16,
             children: [
               AppStyles.kSizedBoxH4,
-              getAppTitleLabel(),
+              getTitleLabel(),
               getLoginDescriptionLabel(),
               AppStyles.kSizedBoxH16,
               Expanded(child: getFormBuilder()),
@@ -75,24 +69,15 @@ extension _Actions on _LoginPageState {
       }
     }
   }
-
-  // void _onTestErrorPressed() async {
-  //   await tryLoad(
-  //       context, () => context.read<UserViewModel>().getUserProfile(userId: '62c1365a-55e4-413c-8195-1a8fa09cb032'));
-  // }
-
-  // void _onRemoveAllSP() async {
-  //   await SharedPreferenceHandler().removeAll();
-  // }
 }
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _LoginPageState {
   // Login Title Label
-  Widget getAppTitleLabel() {
+  Widget getTitleLabel() {
     return Text(
       S.current.loginScreenTitle,
-      style: _Styles.getAppTitleLabelTextStyle(context),
+      style: _Styles.getTitleLabelTextStyle(context),
     );
   }
 
@@ -133,6 +118,7 @@ extension _WidgetFactories on _LoginPageState {
         FormBuilderValidators.required(),
         FormBuilderValidators.email(),
       ]),
+      icon: Icons.email_outlined,
     );
   }
 
@@ -145,6 +131,7 @@ extension _WidgetFactories on _LoginPageState {
         FormBuilderValidators.required(),
         FormBuilderValidators.minLength(8),
       ]),
+      icon: Icons.lock_open_outlined,
     );
   }
 
@@ -153,7 +140,9 @@ extension _WidgetFactories on _LoginPageState {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          context.router.push(SendResetTokenRoute());
+        },
         style: _Styles.getForgotPasswordButtonStyle(),
         child: Text(
           S.current.forgotPasswordLabel,
@@ -181,14 +170,14 @@ extension _WidgetFactories on _LoginPageState {
 
 // * ---------------------------- Styles -----------------------------
 abstract class _Styles {
-  // App Title Label Text Style
-  static getAppTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.primary, height: 1);
+  // Title Label Text Style
+  static getTitleLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.primary, height: 1);
   }
 
   // Login Description Label Text Style
   static getLoginDescriptionLabelTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }
 
   // Button Label Text Style

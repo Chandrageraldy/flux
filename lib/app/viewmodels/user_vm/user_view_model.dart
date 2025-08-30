@@ -48,6 +48,24 @@ class UserViewModel extends BaseViewModel {
     return response.data;
   }
 
+  Future<bool> sendResetToken({required String email}) async {
+    final response = await userRepository.sendResetToken(email: email);
+    checkError(response);
+    return response.data;
+  }
+
+  Future<bool> verifyOtp({required String email, required String otp}) async {
+    final response = await userRepository.verifyOtp(email: email, otp: otp);
+    checkError(response);
+    return response.data;
+  }
+
+  Future<bool> resetPassword({required String password}) async {
+    final response = await userRepository.resetPassword(password: password);
+    checkError(response);
+    return response.data;
+  }
+
   Future<void> createUserProfile({
     required String userId,
     required String email,

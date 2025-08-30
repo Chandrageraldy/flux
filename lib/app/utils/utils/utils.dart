@@ -4,9 +4,7 @@ import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/models/nutrient_progress_model/nutrient_progress_model.dart';
 import 'package:flux/app/models/plan_model.dart/plan_model.dart';
 import 'package:flux/app/models/profile_settings_model/profile_settings_model.dart';
-import 'package:flux/app/utils/extensions/extension.dart';
 import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
-
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/dialog/custom_date_picker_dialog.dart';
@@ -19,9 +17,12 @@ class WidgetUtils {
     String errorMessage,
   ) async {
     final List<Widget> actionBuilders = [
-      TextButton(
+      AppDefaultButton(
+        label: S.current.okLabel.toUpperCase(),
         onPressed: () => context.router.maybePop(),
-        child: Text(S.current.okLabel.capitalize()),
+        padding: AppStyles.kPaddSV12,
+        backgroundColor: AppColors.redColor.withAlpha(40),
+        labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary),
       ),
     ];
     if (context.mounted) {

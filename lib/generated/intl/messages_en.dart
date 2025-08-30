@@ -72,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "carbsLabel": MessageLookupByLibrary.simpleMessage("Carbs"),
         "chatWithChiaAILabel":
             MessageLookupByLibrary.simpleMessage("Chat with Chia AI"),
+        "checkYourEmailLabel":
+            MessageLookupByLibrary.simpleMessage("Check your email"),
         "chiaLabel": MessageLookupByLibrary.simpleMessage("Chia"),
         "chiaLoadingMessage": MessageLookupByLibrary.simpleMessage(
             "One moment, Chia is gathering the facts..."),
@@ -85,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "completeNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Complete Nutrients"),
         "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirmPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
@@ -134,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),
         "forgotPasswordLabel":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
+        "forgotYourPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "frequentDesc": MessageLookupByLibrary.simpleMessage(
             "I work out almost every day."),
         "frequentLabel": MessageLookupByLibrary.simpleMessage("5+ times/week"),
@@ -165,6 +171,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please provide clear and detailed instructions so we can process your request accurately."),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
+        "invalidOtp": MessageLookupByLibrary.simpleMessage(
+            "OTP has expired or is invalid"),
         "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),
         "ketoDesc": MessageLookupByLibrary.simpleMessage(
             "Low-carb, high-fat diet for weight loss."),
@@ -304,12 +312,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AI Meal Scan: Track Smarter"),
         "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Fuel Up. Friend Up. Level Up"),
+        "overEmailSendRateLimit": MessageLookupByLibrary.simpleMessage(
+            "You have exceeded the maximum number of password reset requests. Please try again later."),
         "overviewLabel": MessageLookupByLibrary.simpleMessage("Overview"),
         "overweightLabel": MessageLookupByLibrary.simpleMessage("Overweight"),
         "paleoDesc": MessageLookupByLibrary.simpleMessage(
             "Based on foods eaten by early humans."),
         "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordsDoNotMatchError":
+            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "percentOfTotalMealRatioLabel":
             MessageLookupByLibrary.simpleMessage("Percent of Total Meal Ratio"),
         "percentTotalEnergyLabel":
@@ -383,6 +395,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Report Summary"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "There was an error with your request. Please try again later."),
+        "resetPasswordDesc": MessageLookupByLibrary.simpleMessage(
+            "Please enter your new password below to reset your account password."),
+        "resetPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "resetYourPasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Reset Your Password"),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
         "saveLabel": MessageLookupByLibrary.simpleMessage("Save"),
         "saveYourFoodDesc": MessageLookupByLibrary.simpleMessage(
@@ -413,6 +431,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectDateLabel": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
         "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
+        "sendResetTokenDesc": MessageLookupByLibrary.simpleMessage(
+            "Please enter your registered email address, and we will send you a link to reset your password."),
+        "sendResetTokenLabel":
+            MessageLookupByLibrary.simpleMessage("Send Reset Token"),
         "servingUnitLabel":
             MessageLookupByLibrary.simpleMessage("Serving Unit"),
         "signUpLabel": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -438,6 +460,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start date cannot be after end date"),
         "startEndDateErrorMessage2": MessageLookupByLibrary.simpleMessage(
             "Date range cannot exceed 7 days"),
+        "submitEmailLabel":
+            MessageLookupByLibrary.simpleMessage("Submit Email"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
         "targetCalorieLabel":
             MessageLookupByLibrary.simpleMessage("Target Calorie"),
@@ -480,6 +504,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "vegetarianDesc": MessageLookupByLibrary.simpleMessage(
             "A diet that excludes meat and fish."),
         "vegetarianLabel": MessageLookupByLibrary.simpleMessage("Vegetarian"),
+        "verifyEmailDesc": MessageLookupByLibrary.simpleMessage(
+            "Enter the 6-digit verification code"),
+        "verifyLabel": MessageLookupByLibrary.simpleMessage("Verify"),
         "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
             "Physically demanding job or lots of daily movement."),
         "veryActiveLabel": MessageLookupByLibrary.simpleMessage("Very Active"),

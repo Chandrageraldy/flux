@@ -323,5 +323,19 @@
     "last3MonthsLabel": "Last 3 Months",
     "last6MonthsLabel": "Last 6 Months",
     "lastYearLabel": "Last Year",
-    "allTimeLabel": "All Time"
+    "allTimeLabel": "All Time",
+    "forgotYourPasswordLabel": "Forgot your password?",
+    "sendResetTokenLabel": "Send Reset Token",
+    "sendResetTokenDesc": "Please enter your registered email address, and we will send you a link to reset your password.",
+    "overEmailSendRateLimit": "You have exceeded the maximum number of password reset requests. Please try again later.",
+    "submitEmailLabel": "Submit Email",
+    "checkYourEmailLabel": "Check your email",
+    "verifyEmailDesc": "Enter the 6-digit verification code",
+    "verifyLabel": "Verify",
+    "invalidOtp": "OTP has expired or is invalid",
+    "resetYourPasswordLabel": "Reset Your Password",
+    "resetPasswordLabel": "Reset Password",
+    "resetPasswordDesc": "Please enter your new password below to reset your account password.",
+    "confirmPasswordLabel": "Confirm Password",
+    "passwordsDoNotMatchError": "Passwords do not match"
 }
