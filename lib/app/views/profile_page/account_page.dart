@@ -126,7 +126,8 @@ extension _Actions on _AccountPageState {
             await tryLoad(context, () => context.read<AccountViewModel>().updateAccount(selectedImage: _selectedImage));
 
         if (response == true && mounted) {
-          context.router.replaceAll([ProfileRoute()]);
+          WidgetUtils.showSnackBar(context, S.current.accountDetailsUpdatedLabel);
+          context.router.pushAndPopUntil(ProfileRoute(), predicate: (_) => false);
         } else if (mounted) {
           context.router.maybePop();
         }

@@ -3429,6 +3429,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Personalized plan updated`
+  String get personalizedPlanUpdatedLabel {
+    return Intl.message(
+      'Personalized plan updated',
+      name: 'personalizedPlanUpdatedLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account details updated`
+  String get accountDetailsUpdatedLabel {
+    return Intl.message(
+      'Account details updated',
+      name: 'accountDetailsUpdatedLabel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

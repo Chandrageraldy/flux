@@ -48,18 +48,13 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       ],
     );
   }
-
-  // Enable Set State inside Extension
-  void _setState(VoidCallback fn) {
-    if (mounted) {
-      setState(fn);
-    }
-  }
 }
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _ProfilePageState {
-  void _onGeneratePlanPressed() {}
+  void _onGeneratePlanPressed() {
+    context.router.push(ManualPlanSetupRoute(isEdit: true));
+  }
 }
 
 // * ------------------------ PrivateMethods -------------------------
@@ -83,7 +78,7 @@ extension _PrivateMethods on _ProfilePageState {
   }
 
   void _onAccountActionPressed() {
-    context.router.push(AccountRoute()).then((_) => _setState(() {}));
+    context.router.push(AccountRoute());
   }
 }
 

@@ -34,18 +34,23 @@ class _WeightProgressPageState extends BaseStatefulState<_WeightProgressPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _getWeightLogs();
+      _getAllWeightLogs();
     });
   }
 
   @override
   Widget body() {
     final isLoading = context.select((WeightProgressViewModel vm) => vm.isLoading);
+    final weightLogs = context.select((WeightProgressViewModel vm) => vm.weightLogs);
     return Column(
       children: [
         getCustomAppBar(),
         Expanded(
           child: RefreshIndicator(
-            onRefresh: _getWeightLogs,
+            onRefresh: () async {
+              await _getWeightLogs();
+              await _getAllWeightLogs();
+            },
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               child: Padding(
@@ -57,10 +62,15 @@ class _WeightProgressPageState extends BaseStatefulState<_WeightProgressPage> {
                       AppStyles.kEmptyWidget,
                       Skeleton(width: AppStyles.kDoubleInfinity, height: 245),
                       Skeleton(width: AppStyles.kDoubleInfinity, height: 140),
+                    ] else if (weightLogs.isEmpty) ...[
+                      AppStyles.kEmptyWidget,
+                      Skeleton(width: AppStyles.kDoubleInfinity, height: 245),
+                      Skeleton(width: AppStyles.kDoubleInfinity, height: 140),
                     ] else ...[
                       AppStyles.kEmptyWidget,
                       getWeightProgressContainer(),
                       getWeightLogContainer(),
+                      AppStyles.kEmptyWidget,
                     ]
                   ],
                 ),
@@ -87,6 +97,10 @@ extension _Actions on _WeightProgressPageState {}
 extension _PrivateMethods on _WeightProgressPageState {
   Future<void> _getWeightLogs() async {
     await tryCatch(context, () => context.read<WeightProgressViewModel>().getWeightLogs());
+  }
+
+  Future<void> _getAllWeightLogs() async {
+    await tryCatch(context, () => context.read<WeightProgressViewModel>().getAllWeightLogs());
   }
 }
 
@@ -378,9 +392,9 @@ extension _WidgetFactories on _WeightProgressPageState {
     final weightLogs = [];
 
     if (_isNewestToOldest) {
-      weightLogs.addAll(context.select((WeightProgressViewModel vm) => vm.weightLogs));
+      weightLogs.addAll(context.select((WeightProgressViewModel vm) => vm.allWeightLogs));
     } else {
-      weightLogs.addAll(context.select((WeightProgressViewModel vm) => vm.weightLogs).reversed.toList());
+      weightLogs.addAll(context.select((WeightProgressViewModel vm) => vm.allWeightLogs).reversed.toList());
     }
 
     return ListView.separated(

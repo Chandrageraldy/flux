@@ -1,8 +1,10 @@
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/models/plan_question_model/plan_question_model.dart';
+import 'package:flux/app/repositories/user_repo/user_repository.dart';
 import 'package:flux/app/viewmodels/base_view_model.dart';
 
 class ManualPlanSetupViewModel extends BaseViewModel {
+  final UserRepository userRepository = UserRepository();
   Map<String, String> bodyMetrics = {};
 
   void savebodyMetrics(String key, String value) {
@@ -24,5 +26,11 @@ class ManualPlanSetupViewModel extends BaseViewModel {
       bodyMetrics[PlanSelectionKey.goal.key] = PlanSelectionValue.lose.value;
     }
     debugPrint('$bodyMetrics');
+  }
+
+  Future<bool> updateBodyMetrics() async {
+    final response = await userRepository.updateBodyMetrics(bodyMetrics: bodyMetrics);
+    checkError(response);
+    return response.status == ResponseStatus.COMPLETE;
   }
 }

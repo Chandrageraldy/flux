@@ -49,4 +49,14 @@ class PlanService extends SupabaseBaseService {
       limit: 5,
     );
   }
+
+  Future<Response> getAllWeightLogs({required String userId}) {
+    return callSupabaseDB(
+      requestType: RequestType.GET,
+      table: TableName.weightLog,
+      filters: {TableCol.userId: userId},
+      orderBy: TableCol.createdAt,
+      ascending: false,
+    );
+  }
 }

@@ -348,5 +348,7 @@
     "foodRemovedFromSavedMessage": "Food has been removed from your saved list",
     "confirmUpdateLabel": "Confirm Update",
     "confirmUpdateDesc": "Are you sure you want to save these changes? Updating your details will adjust your personalized plan.",
-    "confirmAccountUpdateDesc": "Are you sure you want to save these changes?"
+    "confirmAccountUpdateDesc": "Are you sure you want to save these changes?",
+    "personalizedPlanUpdatedLabel": "Personalized plan updated",
+    "accountDetailsUpdatedLabel": "Account details updated"
 }

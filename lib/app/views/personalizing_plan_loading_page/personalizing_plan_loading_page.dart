@@ -21,11 +21,13 @@ class PersonalizingPlanLoadingPage extends BaseStatefulPage {
     this.planAction = PlanAction.CREATE,
     this.mealRatio,
     this.nutritionGoals,
+    this.isEdit = false,
   });
 
   final PlanAction? planAction;
   final Map<String, String>? mealRatio;
   final Map<String, String>? nutritionGoals;
+  final bool isEdit;
 
   @override
   State<PersonalizingPlanLoadingPage> createState() => _PersonalizingPlanLoadingPageState();
@@ -393,7 +395,11 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
     await Future.delayed(Duration(seconds: 3));
 
     if (response && mounted) {
-      context.router.replaceAll([DashboardNavigatorRoute()]);
+      if (widget.isEdit) {
+        context.router.pushAndPopUntil(ProfileRoute(), predicate: (_) => false);
+      } else {
+        context.router.replaceAll([DashboardNavigatorRoute()]);
+      }
     }
   }
 
@@ -402,6 +408,7 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
         await tryCatch(context, () => context.read<PlanViewModel>().updatePersonalizedPlan(personalizedPlan)) ?? false;
 
     if (response && mounted) {
+      WidgetUtils.showSnackBar(context, S.current.personalizedPlanUpdatedLabel);
       context.router.replaceAll([ProfileRoute()]);
     }
   }

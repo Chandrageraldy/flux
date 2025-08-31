@@ -565,18 +565,41 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ManualPlanSetupPage]
-class ManualPlanSetupRoute extends PageRouteInfo<void> {
-  const ManualPlanSetupRoute({List<PageRouteInfo>? children})
-    : super(ManualPlanSetupRoute.name, initialChildren: children);
+class ManualPlanSetupRoute extends PageRouteInfo<ManualPlanSetupRouteArgs> {
+  ManualPlanSetupRoute({
+    Key? key,
+    bool isEdit = false,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ManualPlanSetupRoute.name,
+         args: ManualPlanSetupRouteArgs(key: key, isEdit: isEdit),
+         initialChildren: children,
+       );
 
   static const String name = 'ManualPlanSetupRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ManualPlanSetupPage();
+      final args = data.argsAs<ManualPlanSetupRouteArgs>(
+        orElse: () => const ManualPlanSetupRouteArgs(),
+      );
+      return ManualPlanSetupPage(key: args.key, isEdit: args.isEdit);
     },
   );
+}
+
+class ManualPlanSetupRouteArgs {
+  const ManualPlanSetupRouteArgs({this.key, this.isEdit = false});
+
+  final Key? key;
+
+  final bool isEdit;
+
+  @override
+  String toString() {
+    return 'ManualPlanSetupRouteArgs{key: $key, isEdit: $isEdit}';
+  }
 }
 
 /// generated route for
@@ -836,6 +859,7 @@ class PersonalizingPlanLoadingRoute
     PlanAction? planAction = PlanAction.CREATE,
     Map<String, String>? mealRatio,
     Map<String, String>? nutritionGoals,
+    bool isEdit = false,
     List<PageRouteInfo>? children,
   }) : super(
          PersonalizingPlanLoadingRoute.name,
@@ -844,6 +868,7 @@ class PersonalizingPlanLoadingRoute
            planAction: planAction,
            mealRatio: mealRatio,
            nutritionGoals: nutritionGoals,
+           isEdit: isEdit,
          ),
          initialChildren: children,
        );
@@ -861,6 +886,7 @@ class PersonalizingPlanLoadingRoute
         planAction: args.planAction,
         mealRatio: args.mealRatio,
         nutritionGoals: args.nutritionGoals,
+        isEdit: args.isEdit,
       );
     },
   );
@@ -872,6 +898,7 @@ class PersonalizingPlanLoadingRouteArgs {
     this.planAction = PlanAction.CREATE,
     this.mealRatio,
     this.nutritionGoals,
+    this.isEdit = false,
   });
 
   final Key? key;
@@ -882,9 +909,11 @@ class PersonalizingPlanLoadingRouteArgs {
 
   final Map<String, String>? nutritionGoals;
 
+  final bool isEdit;
+
   @override
   String toString() {
-    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction, mealRatio: $mealRatio, nutritionGoals: $nutritionGoals}';
+    return 'PersonalizingPlanLoadingRouteArgs{key: $key, planAction: $planAction, mealRatio: $mealRatio, nutritionGoals: $nutritionGoals, isEdit: $isEdit}';
   }
 }
 

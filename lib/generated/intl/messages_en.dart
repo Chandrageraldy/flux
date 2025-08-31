@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountDetailsUpdatedLabel":
+            MessageLookupByLibrary.simpleMessage("Account details updated"),
         "accountLabel": MessageLookupByLibrary.simpleMessage("Account"),
         "activeDesc": MessageLookupByLibrary.simpleMessage(
             "On your feet most of the day (e.g., retail, light labor)."),
@@ -352,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personal Details"),
         "personalInfoLabel":
             MessageLookupByLibrary.simpleMessage("Personal Info"),
+        "personalizedPlanUpdatedLabel":
+            MessageLookupByLibrary.simpleMessage("Personalized plan updated"),
         "personalizingYourPlanLoadingText": MessageLookupByLibrary.simpleMessage(
             "Hang tight! We\'re crafting a personalized plan just for you."),
         "phosphorusLabel": MessageLookupByLibrary.simpleMessage("Phosphorus"),

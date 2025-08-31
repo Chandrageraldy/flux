@@ -60,6 +60,18 @@ class PlanRepository {
 
     return response;
   }
+
+  Future<Response> getAllWeightLogs() async {
+    final userProfile = sharedPreferenceHandler.getUser();
+    final response = await planService.getAllWeightLogs(userId: userProfile?.userId ?? '');
+
+    if (response.error == null) {
+      List retrievedData = response.data ?? [];
+      return Response.complete(retrievedData.map((item) => WeightLogModel.fromJson(item)).toList());
+    }
+
+    return response;
+  }
 }
 
 // * ------------------------ PrivateMethods ------------------------

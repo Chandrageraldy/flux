@@ -12,15 +12,22 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 @RoutePage()
 class ManualPlanSetupPage extends StatelessWidget {
-  const ManualPlanSetupPage({super.key});
+  const ManualPlanSetupPage({super.key, this.isEdit = false});
+
+  final bool isEdit;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => ManualPlanSetupViewModel(), child: _ManualPlanSetupPage());
+    return ChangeNotifierProvider(
+        create: (_) => ManualPlanSetupViewModel(), child: _ManualPlanSetupPage(isEdit: isEdit));
   }
 }
 
 class _ManualPlanSetupPage extends BaseStatefulPage {
+  const _ManualPlanSetupPage({required this.isEdit});
+
+  final bool isEdit;
+
   @override
   State<_ManualPlanSetupPage> createState() => _ManualPlanSetupPageState();
 }
@@ -165,10 +172,18 @@ extension _Actions on _ManualPlanSetupPageState {
     );
   }
 
-  void _onLastQuestionContinueButtonPressed() {
+  Future<void> _onLastQuestionContinueButtonPressed() async {
     context.read<ManualPlanSetupViewModel>().cleanbodyMetrics();
-    Map<String, String> bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
-    context.router.push(SignUpRoute(bodyMetrics: bodyMetrics));
+
+    if (widget.isEdit) {
+      final response = await tryLoad(context, () => context.read<ManualPlanSetupViewModel>().updateBodyMetrics());
+      if (response == true && mounted) {
+        context.router.push(PersonalizingPlanLoadingRoute(isEdit: widget.isEdit));
+      }
+    } else {
+      Map<String, String> bodyMetrics = context.read<ManualPlanSetupViewModel>().bodyMetrics;
+      context.router.push(SignUpRoute(bodyMetrics: bodyMetrics));
+    }
   }
 
   // Advances to the next question.
