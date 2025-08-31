@@ -7,6 +7,7 @@ import 'package:flux/app/viewmodels/overview_vm/overview_view_model.dart';
 import 'package:flux/app/views/overview_page_tab_bar_view/progress_tab_bar_view.dart';
 import 'package:flux/app/views/overview_page_tab_bar_view/virtual_pet_tab_bar_view.dart';
 import 'package:lottie/lottie.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 @RoutePage()
 class OverviewPage extends StatelessWidget {
@@ -14,7 +15,16 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => OverviewViewModel(), child: _OverviewPage());
+    return ChangeNotifierProvider(
+      create: (_) => OverviewViewModel(),
+      child: ShowCaseWidget(
+        onFinish: () {
+          SharedPreferenceHandler().putIsCompleteTutorial(true);
+        },
+        enableShowcase: !(SharedPreferenceHandler().getIsCompleteTutorial() ?? false),
+        builder: (context) => _OverviewPage(),
+      ),
+    );
   }
 }
 
@@ -30,6 +40,13 @@ class _OverviewPageState extends BaseStatefulState<_OverviewPage> with TickerPro
   bool _isPlayingCrackedEggAnimation = false;
   bool _isShowingConfetti = false;
 
+  final GlobalKey petShowcaseKey = GlobalKey();
+  final GlobalKey xpShowcaseKey = GlobalKey();
+  final GlobalKey energyShowcaseKey = GlobalKey();
+  final GlobalKey petActionShowcaseKey = GlobalKey();
+  final GlobalKey dailyMissionsShowcaseKey = GlobalKey();
+  final GlobalKey petShopShowcaseKey = GlobalKey();
+
   @override
   bool hasDefaultPadding() => false;
 
@@ -39,7 +56,7 @@ class _OverviewPageState extends BaseStatefulState<_OverviewPage> with TickerPro
     _petController = AnimationController(vsync: this);
     _confettiController = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<OverviewViewModel>().initialize();
+      _initializeAndStartShowcase();
     });
   }
 
@@ -129,6 +146,27 @@ extension _PrivateMethods on _OverviewPageState {
           _isPlayingCrackedEggAnimation = false;
         });
       });
+    }
+  }
+
+  Future<void> _initializeAndStartShowcase() async {
+    await context.read<OverviewViewModel>().initialize();
+
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          if (mounted) {
+            ShowCaseWidget.of(context).startShowCase([
+              petShowcaseKey,
+              xpShowcaseKey,
+              energyShowcaseKey,
+              petActionShowcaseKey,
+              dailyMissionsShowcaseKey,
+              petShopShowcaseKey
+            ]);
+          }
+        },
+      );
     }
   }
 }
@@ -255,6 +293,14 @@ extension _WidgetFactories on _OverviewPageState {
       onLoadedConfettiAnimation: _onLoadedConfettiAnimation,
       onLoadedPetAnimation: _onLoadedPetAnimation,
       isLoading: isLoading,
+      showcaseKey: [
+        petShowcaseKey,
+        xpShowcaseKey,
+        energyShowcaseKey,
+        petActionShowcaseKey,
+        dailyMissionsShowcaseKey,
+        petShopShowcaseKey
+      ],
     );
   }
 

@@ -20,44 +20,42 @@ class VirtualPetActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          isUpdatingCurrentExp ? null : onActionButtonPressed(action: action, userEnergy: userEnergy);
-        },
-        child: Container(
-          decoration: _Styles.getVirtualPetActionButtonDecoration(context, isUpdatingCurrentExp),
-          padding: AppStyles.kPaddSV4,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: AppStyles.kSpac4,
-            children: [
-              Container(
-                padding: AppStyles.kPadd8,
-                decoration: _Styles.getActionIconContainerDecoration(context, action.color),
-                child: FaIcon(action.icon, size: AppStyles.kSize12, color: context.theme.colorScheme.onPrimary),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(action.label, style: Quicksand.bold.withSize(FontSizes.small)),
-                  Row(
-                    children: [
-                      Text('${action.energy}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
-                      AppStyles.kSizedBoxW2,
-                      Image.asset(ImagePath.energy, height: AppStyles.kSize12),
-                      AppStyles.kSizedBoxW4,
-                      Text('${action.exp}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
-                      AppStyles.kSizedBoxW2,
-                      Text(S.current.xpLabel, style: Quicksand.bold.withCustomSize(8)),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
+    return GestureDetector(
+      onTap: () {
+        isUpdatingCurrentExp ? null : onActionButtonPressed(action: action, userEnergy: userEnergy);
+      },
+      child: Container(
+        decoration: _Styles.getVirtualPetActionButtonDecoration(context, isUpdatingCurrentExp),
+        padding: AppStyles.kPaddSV4,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: AppStyles.kSpac4,
+          children: [
+            Container(
+              padding: AppStyles.kPadd8,
+              decoration: _Styles.getActionIconContainerDecoration(context, action.color),
+              child: FaIcon(action.icon, size: AppStyles.kSize12, color: context.theme.colorScheme.onPrimary),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(action.label, style: Quicksand.bold.withSize(FontSizes.small)),
+                Row(
+                  children: [
+                    Text('${action.energy}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
+                    AppStyles.kSizedBoxW2,
+                    Image.asset(ImagePath.energy, height: AppStyles.kSize12),
+                    AppStyles.kSizedBoxW4,
+                    Text('${action.exp}', style: Quicksand.medium.withSize(FontSizes.extraSmall)),
+                    AppStyles.kSizedBoxW2,
+                    Text(S.current.xpLabel, style: Quicksand.bold.withCustomSize(8)),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

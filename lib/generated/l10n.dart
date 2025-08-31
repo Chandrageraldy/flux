@@ -3449,6 +3449,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Meet Your Pet`
+  String get showcase1Title {
+    return Intl.message(
+      'Meet Your Pet',
+      name: 'showcase1Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is your virtual pet 🐾. Tap to interact and watch it grow 🌱.`
+  String get showcase1Desc {
+    return Intl.message(
+      'This is your virtual pet 🐾. Tap to interact and watch it grow 🌱.',
+      name: 'showcase1Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Progress`
+  String get showcase2Title {
+    return Intl.message(
+      'Level Progress',
+      name: 'showcase2Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your pet gains experience ⭐ from actions. Level up to unlock new stages 🐕.`
+  String get showcase2Desc {
+    return Intl.message(
+      'Your pet gains experience ⭐ from actions. Level up to unlock new stages 🐕.',
+      name: 'showcase2Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Energy`
+  String get showcase3Title {
+    return Intl.message(
+      'Your Energy',
+      name: 'showcase3Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Energy ⚡ is required to perform pet actions. Use it wisely 🧠.`
+  String get showcase3Desc {
+    return Intl.message(
+      'Energy ⚡ is required to perform pet actions. Use it wisely 🧠.',
+      name: 'showcase3Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet Actions`
+  String get showcase4Title {
+    return Intl.message(
+      'Pet Actions',
+      name: 'showcase4Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed 🍎, play 🎮, or groom 🧼 your pet. Each action spends energy ⚡ and gives EXP ⭐.`
+  String get showcase4Desc {
+    return Intl.message(
+      'Feed 🍎, play 🎮, or groom 🧼 your pet. Each action spends energy ⚡ and gives EXP ⭐.',
+      name: 'showcase4Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Missions`
+  String get showcase5Title {
+    return Intl.message(
+      'Daily Missions',
+      name: 'showcase5Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete daily goals ✅ to earn rewards 🎁 and extra energy ⚡.`
+  String get showcase5Desc {
+    return Intl.message(
+      'Complete daily goals ✅ to earn rewards 🎁 and extra energy ⚡.',
+      name: 'showcase5Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet Shop`
+  String get showcase6Title {
+    return Intl.message(
+      'Pet Shop',
+      name: 'showcase6Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visit the shop 🛒 to unlock new pets and upgrades 💎.`
+  String get showcase6Desc {
+    return Intl.message(
+      'Visit the shop 🛒 to unlock new pets and upgrades 💎.',
+      name: 'showcase6Desc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

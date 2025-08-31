@@ -33,6 +33,7 @@ class _AppWrapperState extends State<AppWrapper> {
   void initState() {
     super.initState();
     _setupEasyLoading();
+    _initTutorialSP();
   }
 
   @override
@@ -77,5 +78,12 @@ extension _PrivateMethods on _AppWrapperState {
   void _setupEasyLoading() {
     EasyLoading.instance.userInteractions = false;
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
+  }
+
+  Future<void> _initTutorialSP() async {
+    final isCompleteTutorial = SharedPreferenceHandler().getIsCompleteTutorial();
+    if (isCompleteTutorial == null) {
+      await SharedPreferenceHandler().putIsCompleteTutorial(false);
+    }
   }
 }

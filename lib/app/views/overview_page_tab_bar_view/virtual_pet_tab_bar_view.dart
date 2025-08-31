@@ -9,6 +9,7 @@ import 'package:flux/app/widgets/virtual_pet_action_button/virtual_pet_action_bu
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class VirtualPetTabBarView extends StatelessWidget {
   const VirtualPetTabBarView({
@@ -24,6 +25,7 @@ class VirtualPetTabBarView extends StatelessWidget {
     required this.onLoadedConfettiAnimation,
     required this.onLoadedPetAnimation,
     required this.isLoading,
+    required this.showcaseKey,
   });
 
   final VoidCallback onVirtualPetRefresh;
@@ -39,6 +41,7 @@ class VirtualPetTabBarView extends StatelessWidget {
   final void Function(LottieComposition composition) onLoadedConfettiAnimation;
   final void Function(LottieComposition composition) onLoadedPetAnimation;
   final bool isLoading;
+  final List<GlobalKey> showcaseKey;
 
   @override
   Widget build(BuildContext context) {
@@ -90,15 +93,21 @@ extension _WidgetFactories on VirtualPetTabBarView {
   // Energies Container
   Widget getEnergiesContainer({required BuildContext context}) {
     final userEnergy = context.select((OverviewViewModel vm) => vm.userEnergy);
-    return Container(
-      decoration: _Styles.getEnergiesContainerDecoration(context),
-      padding: AppStyles.kPaddSV6H12,
-      child: Row(
-        spacing: AppStyles.kSpac4,
-        children: [
-          Image.asset(ImagePath.energy, height: AppStyles.kSize16),
-          Text('${userEnergy.energies}', style: _Styles.getEnergyLabelTextStyle(context)),
-        ],
+    return getCustomShowcase(
+      context: context,
+      key: showcaseKey[2],
+      title: S.current.showcase3Title,
+      description: S.current.showcase3Desc,
+      child: Container(
+        decoration: _Styles.getEnergiesContainerDecoration(context),
+        padding: AppStyles.kPaddSV6H12,
+        child: Row(
+          spacing: AppStyles.kSpac4,
+          children: [
+            Image.asset(ImagePath.energy, height: AppStyles.kSize16),
+            Text('${userEnergy.energies}', style: _Styles.getEnergyLabelTextStyle(context)),
+          ],
+        ),
       ),
     );
   }
@@ -125,11 +134,17 @@ extension _WidgetFactories on VirtualPetTabBarView {
   Widget getShopButton({required BuildContext context}) {
     return GestureDetector(
       onTap: onShopPressed,
-      child: Container(
-        decoration: _Styles.getHeaderButtonContainerDecoration(context),
-        height: AppStyles.kSize32,
-        width: AppStyles.kSize32,
-        child: Center(child: FaIcon(FontAwesomeIcons.paw, size: AppStyles.kSize16)),
+      child: getCustomShowcase(
+        context: context,
+        key: showcaseKey[5],
+        title: S.current.showcase6Title,
+        description: S.current.showcase6Desc,
+        child: Container(
+          decoration: _Styles.getHeaderButtonContainerDecoration(context),
+          height: AppStyles.kSize32,
+          width: AppStyles.kSize32,
+          child: Center(child: FaIcon(FontAwesomeIcons.paw, size: AppStyles.kSize16)),
+        ),
       ),
     );
   }
@@ -155,7 +170,7 @@ extension _WidgetFactories on VirtualPetTabBarView {
           alignment: Alignment.center,
           children: [
             if (isShowingConfetti) getConfettiAnimation(),
-            getVirtualPetAnimation(activeUserPet: activeUserPet)
+            getVirtualPetAnimation(activeUserPet: activeUserPet, context: context)
           ],
         ),
       ),
@@ -185,7 +200,7 @@ extension _WidgetFactories on VirtualPetTabBarView {
   }
 
   // Virtual Pet Animation
-  Widget getVirtualPetAnimation({required ActiveUserPetModel activeUserPet}) {
+  Widget getVirtualPetAnimation({required ActiveUserPetModel activeUserPet, required BuildContext context}) {
     String petAnimationUrl =
         isPlayingCrackedEggAnimation ? AnimationUrl.crackedEgg : activeUserPet.getPetAnimationUrl();
     return GestureDetector(
@@ -196,14 +211,66 @@ extension _WidgetFactories on VirtualPetTabBarView {
             ..forward();
         }
       },
-      child: Lottie.network(
-        petAnimationUrl,
-        width: AppStyles.kSize150,
-        controller: petController,
-        onLoaded: (composition) {
-          onLoadedPetAnimation(composition);
+      child: getCustomShowcase(
+        context: context,
+        key: showcaseKey[0],
+        title: S.current.showcase1Title,
+        description: S.current.showcase1Desc,
+        child: SizedBox(
+          height: AppStyles.kSize150,
+          width: AppStyles.kSize150,
+          child: Lottie.network(
+            petAnimationUrl,
+            width: AppStyles.kSize150,
+            controller: petController,
+            onLoaded: (composition) {
+              onLoadedPetAnimation(composition);
+            },
+            errorBuilder: (context, error, stackTrace) => AppStyles.kEmptyWidget,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Custom Showcase
+  Widget getCustomShowcase({
+    required BuildContext context,
+    required GlobalKey key,
+    required String title,
+    required String description,
+    required Widget child,
+  }) {
+    return Showcase(
+      key: key,
+      title: title,
+      description: description,
+      titleTextStyle: Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.primary),
+      descTextStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary),
+      tooltipActionConfig: TooltipActionConfig(alignment: MainAxisAlignment.end),
+      tooltipPadding: AppStyles.kPaddSV8H16,
+      disableBarrierInteraction: true,
+      tooltipActions: [getTooltipActionButton(context: context)],
+      targetBorderRadius: AppStyles.kRad10,
+      titleAlignment: Alignment.centerLeft,
+      descriptionAlignment: Alignment.centerLeft,
+      enableAutoScroll: true,
+      child: child,
+    );
+  }
+
+  // Tooltip Action Button
+  TooltipActionButton getTooltipActionButton({required BuildContext context}) {
+    return TooltipActionButton.custom(
+      button: GestureDetector(
+        onTap: () {
+          ShowCaseWidget.of(context).next();
         },
-        errorBuilder: (context, error, stackTrace) => AppStyles.kEmptyWidget,
+        child: Container(
+          padding: AppStyles.kPadd8,
+          decoration: _Styles.getTooltipActionButtonContainerDecoration(context),
+          child: Icon(Icons.arrow_forward_rounded, color: Colors.white, size: AppStyles.kSize16),
+        ),
       ),
     );
   }
@@ -211,9 +278,15 @@ extension _WidgetFactories on VirtualPetTabBarView {
   // Experience Points Container
   Widget getExperiencePointsContainer({required BuildContext context}) {
     final activeUserPet = context.select((OverviewViewModel vm) => vm.activeUserPet);
-    return Container(
-      decoration: _Styles.getExperiencePointsContainerDecoration(context),
-      child: getExperiencePointsContent(activeUserPet: activeUserPet, context: context),
+    return getCustomShowcase(
+      context: context,
+      key: showcaseKey[1],
+      title: S.current.showcase2Title,
+      description: S.current.showcase2Desc,
+      child: Container(
+        decoration: _Styles.getExperiencePointsContainerDecoration(context),
+        child: getExperiencePointsContent(activeUserPet: activeUserPet, context: context),
+      ),
     );
   }
 
@@ -264,52 +337,72 @@ extension _WidgetFactories on VirtualPetTabBarView {
     );
   }
 
-  // Action Row
+// Action Row
   Widget getActionRow({required BuildContext context}) {
     final userEnergy = context.select((OverviewViewModel vm) => vm.userEnergy);
     final isUpdatingCurrentExp = context.select((OverviewViewModel vm) => vm.isUpdatingCurrentExp);
+
     return Row(
       spacing: AppStyles.kSpac8,
-      children: virtualPetActions
-          .map(
-            (action) => VirtualPetActionButton(
-              action: action,
-              userEnergy: userEnergy,
-              isUpdatingCurrentExp: isUpdatingCurrentExp,
-              onActionButtonPressed: onPetActionButtonPressed,
-            ),
-          )
-          .toList(),
+      children: virtualPetActions.asMap().entries.map((entry) {
+        final index = entry.key;
+        final action = entry.value;
+
+        final actionButton = VirtualPetActionButton(
+          action: action,
+          userEnergy: userEnergy,
+          isUpdatingCurrentExp: isUpdatingCurrentExp,
+          onActionButtonPressed: onPetActionButtonPressed,
+        );
+
+        final child = (index == 0)
+            ? getCustomShowcase(
+                context: context,
+                key: showcaseKey[3],
+                title: S.current.showcase4Title,
+                description: S.current.showcase4Desc,
+                child: actionButton,
+              )
+            : actionButton;
+
+        return Expanded(child: child);
+      }).toList(),
     );
   }
 
 // Daily Goal Container
   Widget getDailyGoalContainer({required BuildContext context}) {
     final dailyGoals = context.select((OverviewViewModel vm) => vm.dailyGoals);
-    return Container(
-      decoration: _Styles.getDailyGoalContainerDecoration(context),
-      padding: AppStyles.kPaddSV10H8,
-      child: Column(
-        spacing: AppStyles.kSpac16,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            spacing: AppStyles.kSpac4,
-            children: [
-              Icon(Icons.calendar_month, size: AppStyles.kSize16),
-              Text(
-                S.current.dailyGoalsLabel,
-                style: _Styles.getDailyGoalLabelTextStyle(context),
-              ),
-            ],
-          ),
-          ...dailyGoals.map((dailyGoal) {
-            return DailyGoalsPercentIndicator(
-              dailyGoal: dailyGoal,
-              onClaimPressed: onClaimPressed,
-            );
-          }),
-        ],
+    return getCustomShowcase(
+      context: context,
+      key: showcaseKey[4],
+      title: S.current.showcase5Title,
+      description: S.current.showcase5Desc,
+      child: Container(
+        decoration: _Styles.getDailyGoalContainerDecoration(context),
+        padding: AppStyles.kPaddSV10H8,
+        child: Column(
+          spacing: AppStyles.kSpac16,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              spacing: AppStyles.kSpac4,
+              children: [
+                Icon(Icons.calendar_month, size: AppStyles.kSize16),
+                Text(
+                  S.current.dailyGoalsLabel,
+                  style: _Styles.getDailyGoalLabelTextStyle(context),
+                ),
+              ],
+            ),
+            ...dailyGoals.map((dailyGoal) {
+              return DailyGoalsPercentIndicator(
+                dailyGoal: dailyGoal,
+                onClaimPressed: onClaimPressed,
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
@@ -391,6 +484,14 @@ abstract class _Styles {
     return BoxDecoration(
       borderRadius: AppStyles.kRadOBL10BR10,
       color: context.theme.colorScheme.primary,
+    );
+  }
+
+  // Tool Tip Action Button Container Decoration
+  static BoxDecoration getTooltipActionButtonContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.colorScheme.secondary,
+      borderRadius: AppStyles.kRad6,
     );
   }
 }

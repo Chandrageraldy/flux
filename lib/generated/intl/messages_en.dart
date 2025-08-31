@@ -462,6 +462,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send Reset Token"),
         "servingUnitLabel":
             MessageLookupByLibrary.simpleMessage("Serving Unit"),
+        "showcase1Desc": MessageLookupByLibrary.simpleMessage(
+            "This is your virtual pet 🐾. Tap to interact and watch it grow 🌱."),
+        "showcase1Title": MessageLookupByLibrary.simpleMessage("Meet Your Pet"),
+        "showcase2Desc": MessageLookupByLibrary.simpleMessage(
+            "Your pet gains experience ⭐ from actions. Level up to unlock new stages 🐕."),
+        "showcase2Title":
+            MessageLookupByLibrary.simpleMessage("Level Progress"),
+        "showcase3Desc": MessageLookupByLibrary.simpleMessage(
+            "Energy ⚡ is required to perform pet actions. Use it wisely 🧠."),
+        "showcase3Title": MessageLookupByLibrary.simpleMessage("Your Energy"),
+        "showcase4Desc": MessageLookupByLibrary.simpleMessage(
+            "Feed 🍎, play 🎮, or groom 🧼 your pet. Each action spends energy ⚡ and gives EXP ⭐."),
+        "showcase4Title": MessageLookupByLibrary.simpleMessage("Pet Actions"),
+        "showcase5Desc": MessageLookupByLibrary.simpleMessage(
+            "Complete daily goals ✅ to earn rewards 🎁 and extra energy ⚡."),
+        "showcase5Title":
+            MessageLookupByLibrary.simpleMessage("Daily Missions"),
+        "showcase6Desc": MessageLookupByLibrary.simpleMessage(
+            "Visit the shop 🛒 to unlock new pets and upgrades 💎."),
+        "showcase6Title": MessageLookupByLibrary.simpleMessage("Pet Shop"),
         "signUpLabel": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpPrimarySpanText":
             MessageLookupByLibrary.simpleMessage("Don’t have an account yet? "),
