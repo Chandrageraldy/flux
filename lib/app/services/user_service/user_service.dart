@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flux/app/assets/constants/constants.dart';
 import 'package:flux/app/models/auth_model/email_auth_request_model.dart';
 import 'package:flux/app/models/response_model.dart';
@@ -66,6 +68,38 @@ class UserService extends SupabaseBaseService {
       requestType: RequestType.POST,
       table: TableName.userPet,
       requestBody: json,
+    );
+  }
+
+  Future<Response> updateAccount({required String username, required String? selectedImage, required String userId}) {
+    if (selectedImage == null) {
+      return callSupabaseDB(
+        requestType: RequestType.PUT,
+        table: TableName.user,
+        requestBody: {
+          TableCol.username: username,
+        },
+        filters: {TableCol.userId: userId},
+      );
+    }
+
+    return callSupabaseDB(
+      requestType: RequestType.PUT,
+      table: TableName.user,
+      requestBody: {
+        TableCol.username: username,
+        TableCol.photoUrl: selectedImage,
+      },
+      filters: {TableCol.userId: userId},
+    );
+  }
+
+  Future<Response> uploadProfileImage({required File imageFile, required String filePath}) async {
+    return callSupabaseBucket(
+      bucketRequestType: BucketRequestType.upload,
+      bucketName: BucketName.profileImageBucket,
+      filePath: filePath,
+      file: imageFile,
     );
   }
 }

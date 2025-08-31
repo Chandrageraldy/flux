@@ -20,8 +20,6 @@ class ProfilePage extends BaseStatefulPage {
 }
 
 class _ProfilePageState extends BaseStatefulState<ProfilePage> {
-  final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
-
   @override
   bool hasDefaultPadding() => false;
 
@@ -50,6 +48,13 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       ],
     );
   }
+
+  // Enable Set State inside Extension
+  void _setState(VoidCallback fn) {
+    if (mounted) {
+      setState(fn);
+    }
+  }
 }
 
 // * ---------------------------- Actions ----------------------------
@@ -60,15 +65,25 @@ extension _Actions on _ProfilePageState {
 // * ------------------------ PrivateMethods -------------------------
 extension _PrivateMethods on _ProfilePageState {
   void _onLogoutPressed() async {
-    final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
+    WidgetUtils.showConfirmationDialog(
+      context: context,
+      label: S.current.leavingSoSoonLabel,
+      icon: Icons.logout,
+      desc: S.current.leavingSoSoonDesc,
+      confirmLabel: S.current.logOutLabel,
+      color: AppColors.redColor,
+      onConfirm: () async {
+        final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
 
-    if (response == true && mounted) {
-      context.router.replaceAll([RootRoute()]);
-    }
+        if (response == true && mounted) {
+          context.router.replaceAll([RootRoute()]);
+        }
+      },
+    );
   }
 
   void _onAccountActionPressed() {
-    context.router.push(AccountRoute());
+    context.router.push(AccountRoute()).then((_) => _setState(() {}));
   }
 }
 
@@ -109,6 +124,7 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Header Row
   Widget getHeaderRow() {
+    final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
     final dob = userProfile?.bodyMetrics?.dob?.toDateTime(DateFormat.YEAR_MONTH_DAY);
 
     return Row(
@@ -133,6 +149,7 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Header Stats Row
   Widget getHeaderStatsRow() {
+    final UserProfileModel? userProfile = SharedPreferenceHandler().getUser();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -248,7 +265,7 @@ extension _WidgetFactories on _ProfilePageState {
 
   // Profile Settings List View
   Widget getPersonalInfoListView() {
-    final personalInfoSettings = personalInfo(context, _onLogoutPressed);
+    final personalInfoSettings = personalInfo(context, _onLogoutPressed, _onAccountActionPressed);
 
     return ListView.separated(
       itemCount: personalInfoSettings.length,

@@ -165,7 +165,13 @@ extension _Actions on _FoodDetailsPageState {
           ),
     );
 
-    if (response == true) {
+    if (response == true && mounted) {
+      if (isSaved) {
+        WidgetUtils.showSnackBar(context, S.current.foodRemovedFromSavedMessage);
+      } else {
+        WidgetUtils.showSnackBar(context, S.current.foodAddedToSavedMessage);
+      }
+
       _setState(() {
         isSaved = !isSaved;
         isSavedEnabled = true;
@@ -193,6 +199,7 @@ extension _Actions on _FoodDetailsPageState {
       final response = await tryLoad(context, () => context.read<FoodDetailsViewModel>().logFood(mealType: mealType));
 
       if (response == true && mounted) {
+        WidgetUtils.showSnackBar(context, '${S.current.foodLoggedForLabel} $mealType');
         context.router.maybePop();
       }
     }

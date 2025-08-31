@@ -104,6 +104,7 @@ extension _Actions on _MealScanResultPageState {
     );
 
     if (response == true && mounted) {
+      WidgetUtils.showSnackBar(context, '${S.current.foodLoggedForLabel} $mealType');
       context.router.maybePop();
     }
   }

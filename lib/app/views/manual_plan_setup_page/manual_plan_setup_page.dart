@@ -316,7 +316,7 @@ extension _WidgetFactories on _ManualPlanSetupPageState {
 abstract class _Styles {
   // Title Label Text Style
   static TextStyle getTitleLabelTextStyle(BuildContext context) {
-    return Quicksand.semiBold.withSize(FontSizes.huge).copyWith(color: context.theme.colorScheme.onTertiary);
+    return Quicksand.bold.withSize(FontSizes.extraLarge).copyWith(color: context.theme.colorScheme.onTertiary);
   }
 
   // Description Label Text Style

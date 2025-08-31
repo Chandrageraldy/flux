@@ -33,15 +33,12 @@ class _ResetPasswordPageState extends BaseStatefulState<ResetPasswordPage> {
         SliverFillRemaining(
           hasScrollBody: false,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac16,
             children: [
-              AppStyles.kSizedBoxH100,
-              getIcon(),
-              AppStyles.kSizedBoxH2,
               getTitleLabel(),
               getResetPasswordDescriptionLabel(),
-              AppStyles.kSizedBoxH16,
+              AppStyles.kSizedBoxH4,
               Expanded(child: getFormBuilder()),
             ],
           ),
@@ -76,19 +73,6 @@ extension _PrivateMethods on _ResetPasswordPageState {}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _ResetPasswordPageState {
-  // Icon
-  Widget getIcon() {
-    return Container(
-      padding: AppStyles.kPadd8,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: context.theme.colorScheme.tertiary),
-        borderRadius: AppStyles.kRad10,
-      ),
-      child: Icon(Icons.lock_open_sharp, size: AppStyles.kSize24, color: context.theme.colorScheme.secondary),
-    );
-  }
-
   // Title Label
   Widget getTitleLabel() {
     return Text(
@@ -102,7 +86,6 @@ extension _WidgetFactories on _ResetPasswordPageState {
     return Text(
       S.current.resetPasswordDesc,
       style: _Styles.getResetPasswordDescriptionLabelTextStyle(context),
-      textAlign: TextAlign.center,
     );
   }
 
@@ -115,7 +98,9 @@ extension _WidgetFactories on _ResetPasswordPageState {
         children: [
           getPasswordTextField(),
           getConfirmPasswordTextField(),
+          Spacer(),
           getResetPasswordButton(),
+          AppStyles.kSizedBoxH4,
         ],
       ),
     );
@@ -157,7 +142,7 @@ extension _WidgetFactories on _ResetPasswordPageState {
       padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
       labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.secondary,
+      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

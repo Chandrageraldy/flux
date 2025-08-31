@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flux/app/models/auth_model/email_auth_request_model.dart';
 import 'package:flux/app/models/body_metrics_model/body_metrics_model.dart';
 import 'package:flux/app/models/user_profile_model/user_profile_model.dart';
@@ -41,6 +43,7 @@ class UserRepository {
 
   Future<Response> resetPassword({required String password}) async {
     final response = await userService.resetPassword(password: password);
+    sharedPreferenceHandler.logout();
     return response;
   }
 
@@ -89,6 +92,42 @@ class UserRepository {
       await processUserProfile(response.data as List<Map<String, dynamic>>);
     }
     return response;
+  }
+
+  Future<Response> updateAccount({required String username, required File? selectedImage}) async {
+    final UserProfileModel? user = sharedPreferenceHandler.getUser();
+
+    if (selectedImage != null) {
+      final fileExtension = selectedImage.path.split('.').last;
+      // Generate unique file path using userId and timestamp to prevent file name duplication
+      final filePath = '${user?.userId}_${DateTime.now().millisecondsSinceEpoch}.$fileExtension';
+
+      final uploadResponse = await userService.uploadProfileImage(imageFile: selectedImage, filePath: filePath);
+
+      if (uploadResponse.error == null) {
+        final response = await userService.updateAccount(
+          username: username,
+          selectedImage: uploadResponse.data,
+          userId: user?.userId ?? '',
+        );
+        if (response.error == null) {
+          await processUserProfile(response.data as List<Map<String, dynamic>>);
+        }
+        return response;
+      }
+      return uploadResponse;
+    } else {
+      final response = await userService.updateAccount(
+        username: username,
+        selectedImage: null,
+        userId: user?.userId ?? '',
+      );
+
+      if (response.error == null) {
+        await processUserProfile(response.data as List<Map<String, dynamic>>);
+      }
+      return response;
+    }
   }
 }
 

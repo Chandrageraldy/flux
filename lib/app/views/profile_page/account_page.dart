@@ -47,6 +47,7 @@ class _AccountPageState extends BaseStatefulState<_AccountPage> {
         AppStyles.kEmptyWidget,
         getHeaderContainer(),
         getAccountContainer(),
+        getActionContainer(),
       ],
     );
   }
@@ -62,7 +63,7 @@ class _AccountPageState extends BaseStatefulState<_AccountPage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _AccountPageState {
   void _onPressed(AccountModel account) {
-    final currentValue = context.read<AccountViewModel>().account[account.key] ?? '';
+    final currentValue = context.read<AccountViewModel>().modifiedAccount[account.key] ?? '';
 
     WidgetUtils.showFieldDialog(
       context: context,
@@ -95,10 +96,50 @@ extension _Actions on _AccountPageState {
   }
 
   void _onLogoutPressed() async {
-    final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
+    WidgetUtils.showConfirmationDialog(
+      context: context,
+      label: S.current.leavingSoSoonLabel,
+      icon: Icons.logout,
+      desc: S.current.leavingSoSoonDesc,
+      confirmLabel: S.current.logOutLabel,
+      color: AppColors.redColor,
+      onConfirm: () async {
+        final response = await tryLoad(context, () => context.read<UserViewModel>().logout());
+
+        if (response == true && mounted) {
+          context.router.replaceAll([RootRoute()]);
+        }
+      },
+    );
+  }
+
+  Future<void> _onSavePressed() async {
+    WidgetUtils.showConfirmationDialog(
+      context: context,
+      label: S.current.confirmUpdateLabel,
+      icon: Icons.warning_amber_rounded,
+      desc: S.current.confirmAccountUpdateDesc,
+      confirmLabel: S.current.confirmLabel,
+      color: context.theme.colorScheme.secondary,
+      onConfirm: () async {
+        final response =
+            await tryLoad(context, () => context.read<AccountViewModel>().updateAccount(selectedImage: _selectedImage));
+
+        if (response == true && mounted) {
+          context.router.replaceAll([ProfileRoute()]);
+        } else if (mounted) {
+          context.router.maybePop();
+        }
+      },
+    );
+  }
+
+  Future<void> _onResetPasswordPressed() async {
+    final response =
+        await tryLoad(context, () => context.read<UserViewModel>().sendResetToken(email: userProfile?.email ?? ''));
 
     if (response == true && mounted) {
-      context.router.replaceAll([RootRoute()]);
+      context.router.push(VerifyOtpRoute(email: userProfile?.email ?? ''));
     }
   }
 }
@@ -119,8 +160,11 @@ extension _WidgetFactories on _AccountPageState {
         onTap: () => context.router.maybePop(),
       ),
       trailingButton: GestureDetector(
-        onTap: _onLogoutPressed,
-        child: FaIcon(FontAwesomeIcons.arrowRightFromBracket, size: AppStyles.kSize16, color: AppColors.redColor),
+        onTap: _onSavePressed,
+        child: Text(
+          S.current.saveLabel,
+          style: Quicksand.bold.withSize(FontSizes.medium).copyWith(color: context.theme.colorScheme.secondary),
+        ),
       ),
       title: S.current.accountLabel,
     );
@@ -190,9 +234,42 @@ extension _WidgetFactories on _AccountPageState {
     );
   }
 
+  // Action Container
+  Widget getActionContainer() {
+    return Padding(
+      padding: AppStyles.kPaddSH16,
+      child: Container(
+        padding: AppStyles.kPaddSV12H16,
+        decoration: _Styles.getAccountContainerDecoration(context),
+        child: getActionListView(),
+      ),
+    );
+  }
+
+  // Action List View
+  Widget getActionListView() {
+    return Column(
+      children: [
+        ProfileSettingsListTile(
+          label: S.current.resetPasswordLabel,
+          onTap: _onResetPasswordPressed,
+        ),
+        Padding(
+          padding: AppStyles.kPaddSV6,
+          child: Divider(color: context.theme.colorScheme.tertiaryFixedDim),
+        ),
+        ProfileSettingsListTile(
+          label: S.current.logOutLabel,
+          onTap: _onLogoutPressed,
+          leadingIcon: FontAwesomeIcons.arrowRightFromBracket,
+        ),
+      ],
+    );
+  }
+
   // Account List View
   Widget getAccountListView() {
-    final accountInfo = context.select((AccountViewModel vm) => vm.account);
+    final accountInfo = context.select((AccountViewModel vm) => vm.modifiedAccount);
 
     final accountsSettings = accountSettings(usernameFormKey: _usernameFormKey, emailFormKey: _emailFormKey);
 
@@ -204,7 +281,7 @@ extension _WidgetFactories on _AccountPageState {
           label: setting.label,
           value: accountInfo[setting.key] ?? '',
           onTap: () {
-            _onPressed(setting);
+            setting.key == AccountSettings.email.key ? null : _onPressed(setting);
           },
         );
       },

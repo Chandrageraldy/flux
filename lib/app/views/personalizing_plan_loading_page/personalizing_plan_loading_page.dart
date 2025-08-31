@@ -53,7 +53,9 @@ class _PersonalizingPlanLoadingPageState extends BaseStatefulState<Personalizing
           Padding(
             padding: AppStyles.kPaddSH20,
             child: Text(
-              S.current.personalizingYourPlanLoadingText,
+              widget.planAction == PlanAction.CREATE
+                  ? S.current.personalizingYourPlanLoadingText
+                  : S.current.updateYourPlanLoadingText,
               style: _Styles.getPersonalizingPlanLabelTextStyle(),
               textAlign: TextAlign.center,
             ),
@@ -398,8 +400,6 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   Future<void> updatePersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
     final response =
         await tryCatch(context, () => context.read<PlanViewModel>().updatePersonalizedPlan(personalizedPlan)) ?? false;
-
-    await Future.delayed(Duration(seconds: 3));
 
     if (response && mounted) {
       context.router.replaceAll([ProfileRoute()]);

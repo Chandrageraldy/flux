@@ -30,15 +30,12 @@ class _SendResetTokenPageState extends BaseStatefulState<SendResetTokenPage> {
         SliverFillRemaining(
           hasScrollBody: false,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac16,
             children: [
-              AppStyles.kSizedBoxH100,
-              getIcon(),
-              AppStyles.kSizedBoxH2,
               getTitleLabel(),
               getSendResetTokenDescriptionLabel(),
-              AppStyles.kSizedBoxH16,
+              AppStyles.kSizedBoxH4,
               Expanded(child: getFormBuilder()),
             ],
           ),
@@ -67,19 +64,6 @@ extension _PrivateMethods on _SendResetTokenPageState {}
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _SendResetTokenPageState {
-  // Icon
-  Widget getIcon() {
-    return Container(
-      padding: AppStyles.kPadd8,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: context.theme.colorScheme.tertiary),
-        borderRadius: AppStyles.kRad10,
-      ),
-      child: Icon(Icons.fingerprint, size: AppStyles.kSize24, color: context.theme.colorScheme.secondary),
-    );
-  }
-
   // Title Label
   Widget getTitleLabel() {
     return Text(
@@ -93,7 +77,6 @@ extension _WidgetFactories on _SendResetTokenPageState {
     return Text(
       S.current.sendResetTokenDesc,
       style: _Styles.getendResetTokenDescriptionLabelTextStyle(context),
-      textAlign: TextAlign.center,
     );
   }
 
@@ -105,7 +88,9 @@ extension _WidgetFactories on _SendResetTokenPageState {
         spacing: AppStyles.kSpac16,
         children: [
           getEmailTextField(),
-          getSubmitEmailButton(),
+          Spacer(),
+          getSendCodeButton(),
+          AppStyles.kSizedBoxH6,
         ],
       ),
     );
@@ -125,15 +110,15 @@ extension _WidgetFactories on _SendResetTokenPageState {
     );
   }
 
-  // Submit Email Button
-  Widget getSubmitEmailButton() {
+  // Send Code Button
+  Widget getSendCodeButton() {
     return AppDefaultButton(
-      label: S.current.submitEmailLabel,
+      label: S.current.sendCodeLabel,
       onPressed: _onSendResetTokenPressed,
       padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
-      labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.secondary,
+      labelStyle: Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
+      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

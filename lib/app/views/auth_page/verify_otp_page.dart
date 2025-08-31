@@ -50,15 +50,12 @@ class _VerifyOtpPageState extends BaseStatefulState<VerifyOtpPage> {
         SliverFillRemaining(
           hasScrollBody: false,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: AppStyles.kSpac16,
             children: [
-              AppStyles.kSizedBoxH100,
-              getIcon(),
-              AppStyles.kSizedBoxH2,
               getTitleLabel(),
               getVerifyEmailDescriptionLabel(),
-              AppStyles.kSizedBoxH16,
+              AppStyles.kSizedBoxH4,
               Expanded(child: getFormBuilder()),
             ],
           ),
@@ -160,19 +157,6 @@ extension _PrivateMethods on _VerifyOtpPageState {
 
 // * ------------------------ WidgetFactories ------------------------
 extension _WidgetFactories on _VerifyOtpPageState {
-  // Icon
-  Widget getIcon() {
-    return Container(
-      padding: AppStyles.kPadd8,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: context.theme.colorScheme.tertiary),
-        borderRadius: AppStyles.kRad10,
-      ),
-      child: Icon(Icons.email_outlined, size: AppStyles.kSize24, color: context.theme.colorScheme.secondary),
-    );
-  }
-
   // Title Label
   Widget getTitleLabel() {
     return Text(
@@ -183,10 +167,23 @@ extension _WidgetFactories on _VerifyOtpPageState {
 
   // Verify Email Description Label
   Widget getVerifyEmailDescriptionLabel() {
-    return Text(
-      S.current.verifyEmailDesc,
-      style: _Styles.getVerifyEmailDescriptionLabelTextStyle(context),
-      textAlign: TextAlign.center,
+    return RichText(
+      text: TextSpan(
+        style: _Styles.getVerifyEmailDescriptionLabelTextStyle(context),
+        children: [
+          TextSpan(
+            text: S.current.verifyEmailDesc,
+            style: _Styles.getVerifyEmailDescriptionLabelTextStyle(context),
+          ),
+          TextSpan(
+            text: ' ${widget.email}',
+            style: _Styles.getVerifyEmailDescriptionLabelTextStyle(context).copyWith(
+              fontWeight: FontWeight.bold,
+              color: context.theme.colorScheme.onTertiary,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -208,7 +205,6 @@ extension _WidgetFactories on _VerifyOtpPageState {
               Expanded(child: getOtp6TextField()),
             ],
           ),
-          getVerifyButton(),
           _secondsRemaining > 0
               ? Text(
                   'Resend code in ${_formatTime(_secondsRemaining)}',
@@ -218,6 +214,9 @@ extension _WidgetFactories on _VerifyOtpPageState {
                   onTap: _onResendPressed,
                   child: Text('Resend Code', style: _Styles.getResendCodeButtonTextStyle(context)),
                 ),
+          Spacer(),
+          getVerifyButton(),
+          AppStyles.kSizedBoxH6,
         ],
       ),
     );
@@ -315,7 +314,7 @@ extension _WidgetFactories on _VerifyOtpPageState {
       padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
       labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.secondary,
+      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

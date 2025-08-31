@@ -1400,6 +1400,16 @@ class S {
     );
   }
 
+  /// `Hang tight! We're updating your personalized plan.`
+  String get updateYourPlanLoadingText {
+    return Intl.message(
+      'Hang tight! We\'re updating your personalized plan.',
+      name: 'updateYourPlanLoadingText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Calorie`
   String get calorieLabel {
     return Intl.message(
@@ -3220,11 +3230,11 @@ class S {
     );
   }
 
-  /// `Submit Email`
-  String get submitEmailLabel {
+  /// `Send Code`
+  String get sendCodeLabel {
     return Intl.message(
-      'Submit Email',
-      name: 'submitEmailLabel',
+      'Send Code',
+      name: 'sendCodeLabel',
       desc: '',
       args: [],
     );
@@ -3240,10 +3250,10 @@ class S {
     );
   }
 
-  /// `Enter the 6-digit verification code`
+  /// `We have sent the code to`
   String get verifyEmailDesc {
     return Intl.message(
-      'Enter the 6-digit verification code',
+      'We have sent the code to',
       name: 'verifyEmailDesc',
       desc: '',
       args: [],
@@ -3315,6 +3325,106 @@ class S {
     return Intl.message(
       'Passwords do not match',
       name: 'passwordsDoNotMatchError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leaving so soon?`
+  String get leavingSoSoonLabel {
+    return Intl.message(
+      'Leaving so soon?',
+      name: 'leavingSoSoonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout?`
+  String get leavingSoSoonDesc {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'leavingSoSoonDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Logged Food`
+  String get deleteLoggedFoodLabel {
+    return Intl.message(
+      'Delete Logged Food',
+      name: 'deleteLoggedFoodLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this food entry? This action cannot be undone.`
+  String get deleteLoggedFoodDesc {
+    return Intl.message(
+      'Are you sure you want to delete this food entry? This action cannot be undone.',
+      name: 'deleteLoggedFoodDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food logged for`
+  String get foodLoggedForLabel {
+    return Intl.message(
+      'Food logged for',
+      name: 'foodLoggedForLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food has been added to your saved list`
+  String get foodAddedToSavedMessage {
+    return Intl.message(
+      'Food has been added to your saved list',
+      name: 'foodAddedToSavedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food has been removed from your saved list`
+  String get foodRemovedFromSavedMessage {
+    return Intl.message(
+      'Food has been removed from your saved list',
+      name: 'foodRemovedFromSavedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Update`
+  String get confirmUpdateLabel {
+    return Intl.message(
+      'Confirm Update',
+      name: 'confirmUpdateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to save these changes? Updating your details will adjust your personalized plan.`
+  String get confirmUpdateDesc {
+    return Intl.message(
+      'Are you sure you want to save these changes? Updating your details will adjust your personalized plan.',
+      name: 'confirmUpdateDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to save these changes?`
+  String get confirmAccountUpdateDesc {
+    return Intl.message(
+      'Are you sure you want to save these changes?',
+      name: 'confirmAccountUpdateDesc',
       desc: '',
       args: [],
     );

@@ -190,7 +190,7 @@ extension _WidgetFactories on _BarcodeScanPageState {
   // Try Again Button
   Widget getTryAgainButton() {
     return AppDefaultButton(
-      label: S.current.tryAgainLabel.toUpperCase(),
+      label: S.current.tryAgainLabel,
       onPressed: _tryAgainPressed,
       padding: AppStyles.kPaddSV12,
       labelStyle: _Styles.getTryAgainButtonTextStyle(context),
@@ -200,7 +200,7 @@ extension _WidgetFactories on _BarcodeScanPageState {
   // Use AI Meal Scan Button
   Widget getUseAiMealScanButton() {
     return AppDefaultButton(
-      label: S.current.useAiMealScanLabel.toUpperCase(),
+      label: S.current.useAiMealScanLabel,
       onPressed: _useAiMealScanPressed,
       padding: AppStyles.kPaddSV12,
       labelStyle: _Styles.getUseAiMealScanButtonTextStyle(context),

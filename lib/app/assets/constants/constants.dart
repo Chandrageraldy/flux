@@ -145,6 +145,7 @@ class TableCol {
 
 class BucketName {
   static String loggedFoodImageBucket = 'logged_food_image_bucket';
+  static String profileImageBucket = 'profile_image';
 }
 
 enum MealType {

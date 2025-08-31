@@ -101,13 +101,23 @@ extension _Actions on _PersonalDetailsPageState {
       return;
     }
 
-    final response = await tryLoad(context, () => context.read<PersonalDetailsViewModel>().updateBodyMetrics());
+    WidgetUtils.showConfirmationDialog(
+      context: context,
+      label: S.current.confirmUpdateLabel,
+      icon: Icons.warning_amber_rounded,
+      desc: S.current.confirmUpdateDesc,
+      confirmLabel: S.current.confirmLabel,
+      color: context.theme.colorScheme.secondary,
+      onConfirm: () async {
+        final response = await tryLoad(context, () => context.read<PersonalDetailsViewModel>().updateBodyMetrics());
 
-    if (response == true && mounted) {
-      context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE)]);
-    } else if (mounted) {
-      context.router.maybePop();
-    }
+        if (response == true && mounted) {
+          context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE)]);
+        } else if (mounted) {
+          context.router.maybePop();
+        }
+      },
+    );
   }
 }
 

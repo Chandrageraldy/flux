@@ -94,14 +94,24 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
   }
 
   Future<void> _onDeleteFoodPressed() async {
-    final response = await tryLoad(
-      context,
-      () => context.read<MealScanLoggedFoodDetailsViewModel>().deleteLoggedFood(),
-    );
+    WidgetUtils.showConfirmationDialog(
+      context: context,
+      label: S.current.deleteLoggedFoodLabel,
+      icon: Icons.delete_outline,
+      desc: S.current.deleteLoggedFoodDesc,
+      confirmLabel: S.current.confirmLabel,
+      color: AppColors.redColor,
+      onConfirm: () async {
+        final response = await tryLoad(
+          context,
+          () => context.read<MealScanLoggedFoodDetailsViewModel>().deleteLoggedFood(),
+        );
 
-    if (response == true && mounted) {
-      context.router.maybePop(true);
-    }
+        if (response == true && mounted) {
+          context.router.maybePop(true);
+        }
+      },
+    );
   }
 
   void _onEnhanceWithAIPressed() {

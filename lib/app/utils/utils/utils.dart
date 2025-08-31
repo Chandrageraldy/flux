@@ -7,6 +7,7 @@ import 'package:flux/app/models/profile_settings_model/profile_settings_model.da
 import 'package:flux/app/widgets/dialog/adaptive_alert_dialog.dart';
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
+import 'package:flux/app/widgets/dialog/custom_confirmation_dialog.dart';
 import 'package:flux/app/widgets/dialog/custom_date_picker_dialog.dart';
 import 'package:flux/app/widgets/dialog/custom_field_dialog.dart';
 import 'package:flux/app/widgets/dialog/custom_picker_dialog.dart';
@@ -18,11 +19,11 @@ class WidgetUtils {
   ) async {
     final List<Widget> actionBuilders = [
       AppDefaultButton(
-        label: S.current.okLabel.toUpperCase(),
+        label: S.current.dismissLabel,
         onPressed: () => context.router.maybePop(),
         padding: AppStyles.kPaddSV12,
-        backgroundColor: AppColors.redColor.withAlpha(40),
-        labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary),
+        backgroundColor: AppColors.redColor,
+        labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
       ),
     ];
     if (context.mounted) {
@@ -70,6 +71,30 @@ class WidgetUtils {
         padding: AppStyles.kPadd12,
         elevation: 4,
       ),
+    );
+  }
+
+  static void showConfirmationDialog({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    required String desc,
+    required VoidCallback onConfirm,
+    required String confirmLabel,
+    required Color color,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomConfirmationDialog(
+          label: label,
+          icon: icon,
+          desc: desc,
+          onConfirm: onConfirm,
+          confirmLabel: confirmLabel,
+          color: color,
+        );
+      },
     );
   }
 

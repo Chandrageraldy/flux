@@ -86,9 +86,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "claimedLabel": MessageLookupByLibrary.simpleMessage("Claimed"),
         "completeNutrientsLabel":
             MessageLookupByLibrary.simpleMessage("Complete Nutrients"),
+        "confirmAccountUpdateDesc": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to save these changes?"),
         "confirmLabel": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPasswordLabel":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmUpdateDesc": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to save these changes? Updating your details will adjust your personalized plan."),
+        "confirmUpdateLabel":
+            MessageLookupByLibrary.simpleMessage("Confirm Update"),
         "continueLabel": MessageLookupByLibrary.simpleMessage("Continue"),
         "copperLabel": MessageLookupByLibrary.simpleMessage("Copper"),
         "customLabel": MessageLookupByLibrary.simpleMessage("Custom"),
@@ -99,6 +105,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "We use your age to estimate your metabolic rate."),
         "dateOfBirthLabel":
             MessageLookupByLibrary.simpleMessage("Date of Birth"),
+        "deleteLoggedFoodDesc": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this food entry? This action cannot be undone."),
+        "deleteLoggedFoodLabel":
+            MessageLookupByLibrary.simpleMessage("Delete Logged Food"),
         "describeAMealLabel":
             MessageLookupByLibrary.simpleMessage("Describe a meal"),
         "diaryLabel": MessageLookupByLibrary.simpleMessage("Diary"),
@@ -135,7 +145,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "fatLabel": MessageLookupByLibrary.simpleMessage("Fat"),
         "femaleLabel": MessageLookupByLibrary.simpleMessage("Female"),
         "folateLabel": MessageLookupByLibrary.simpleMessage("Folate"),
+        "foodAddedToSavedMessage": MessageLookupByLibrary.simpleMessage(
+            "Food has been added to your saved list"),
         "foodLabel": MessageLookupByLibrary.simpleMessage("Food"),
+        "foodLoggedForLabel":
+            MessageLookupByLibrary.simpleMessage("Food logged for"),
+        "foodRemovedFromSavedMessage": MessageLookupByLibrary.simpleMessage(
+            "Food has been removed from your saved list"),
         "forgotPasswordLabel":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "forgotYourPasswordLabel":
@@ -186,6 +202,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "last6MonthsLabel":
             MessageLookupByLibrary.simpleMessage("Last 6 Months"),
         "lastYearLabel": MessageLookupByLibrary.simpleMessage("Last Year"),
+        "leavingSoSoonDesc": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to logout?"),
+        "leavingSoSoonLabel":
+            MessageLookupByLibrary.simpleMessage("Leaving so soon?"),
         "lightDesc": MessageLookupByLibrary.simpleMessage(
             "Light or occasional workouts."),
         "lightLabel": MessageLookupByLibrary.simpleMessage("1–2 times/week"),
@@ -431,6 +451,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectDateLabel": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectLabel": MessageLookupByLibrary.simpleMessage("Select"),
         "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
+        "sendCodeLabel": MessageLookupByLibrary.simpleMessage("Send Code"),
         "sendResetTokenDesc": MessageLookupByLibrary.simpleMessage(
             "Please enter your registered email address, and we will send you a link to reset your password."),
         "sendResetTokenLabel":
@@ -460,8 +481,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start date cannot be after end date"),
         "startEndDateErrorMessage2": MessageLookupByLibrary.simpleMessage(
             "Date range cannot exceed 7 days"),
-        "submitEmailLabel":
-            MessageLookupByLibrary.simpleMessage("Submit Email"),
         "surplusLabel": MessageLookupByLibrary.simpleMessage("Surplus"),
         "targetCalorieLabel":
             MessageLookupByLibrary.simpleMessage("Target Calorie"),
@@ -494,6 +513,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "updateProfileAndCustomizePlanLabel":
             MessageLookupByLibrary.simpleMessage(
                 "Update Profile and Customize Plan"),
+        "updateYourPlanLoadingText": MessageLookupByLibrary.simpleMessage(
+            "Hang tight! We\'re updating your personalized plan."),
         "useAiMealScanLabel":
             MessageLookupByLibrary.simpleMessage("Use AI Meal Scan"),
         "usedEmail": MessageLookupByLibrary.simpleMessage(
@@ -504,8 +525,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "vegetarianDesc": MessageLookupByLibrary.simpleMessage(
             "A diet that excludes meat and fish."),
         "vegetarianLabel": MessageLookupByLibrary.simpleMessage("Vegetarian"),
-        "verifyEmailDesc": MessageLookupByLibrary.simpleMessage(
-            "Enter the 6-digit verification code"),
+        "verifyEmailDesc":
+            MessageLookupByLibrary.simpleMessage("We have sent the code to"),
         "verifyLabel": MessageLookupByLibrary.simpleMessage("Verify"),
         "veryActiveDesc": MessageLookupByLibrary.simpleMessage(
             "Physically demanding job or lots of daily movement."),

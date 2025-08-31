@@ -82,24 +82,22 @@ class AppTextFormField extends StatelessWidget {
 extension _WidgetFactories on AppTextFormField {
   // Get Text Form Field
   Widget getTextFormField(BuildContext context) {
-    return Expanded(
-      child: FormBuilderTextField(
-        initialValue: initialValue,
-        minLines: minLines,
-        maxLines: maxLines,
-        name: field.name,
-        style: _Styles.getTextFormFieldTextStyle(),
-        decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
-        obscureText: field == FormFields.password,
-        keyboardType: keyboardType,
-        validator: validator,
-        enabled: isEnabled,
-        onChanged: onChanged == null
-            ? null
-            : (value) {
-                onChanged!(value);
-              },
-      ),
+    return FormBuilderTextField(
+      initialValue: initialValue,
+      minLines: minLines,
+      maxLines: maxLines,
+      name: field.name,
+      style: _Styles.getTextFormFieldTextStyle(),
+      decoration: _Styles.getTextFormFieldInputDecoration(placeholder ?? ''),
+      obscureText: field == FormFields.password,
+      keyboardType: keyboardType,
+      validator: validator,
+      enabled: isEnabled,
+      onChanged: onChanged == null
+          ? null
+          : (value) {
+              onChanged!(value);
+            },
     );
   }
 }

@@ -71,12 +71,24 @@ extension _Actions on _MealRatioPageState {
   Future<void> _onSavePressed() async {
     final isNotEdited = context.read<MealRatioViewModel>().checkIfNotEdited();
 
+    final mealRatio = context.read<MealRatioViewModel>().modifiedMealRatio;
+
     if (isNotEdited) {
       context.router.maybePop();
     } else {
-      final mealRatio = context.read<MealRatioViewModel>().modifiedMealRatio;
       if (mealRatio[MealRatioSettings.totalRatio.key] == '100') {
-        context.router.replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, mealRatio: mealRatio)]);
+        WidgetUtils.showConfirmationDialog(
+          context: context,
+          label: S.current.confirmUpdateLabel,
+          icon: Icons.warning_amber_rounded,
+          desc: S.current.confirmUpdateDesc,
+          confirmLabel: S.current.confirmLabel,
+          color: context.theme.colorScheme.secondary,
+          onConfirm: () async {
+            context.router
+                .replaceAll([PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, mealRatio: mealRatio)]);
+          },
+        );
       } else {
         WidgetUtils.showSnackBar(context, S.current.ratioError);
         return;

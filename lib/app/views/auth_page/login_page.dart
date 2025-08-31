@@ -131,7 +131,7 @@ extension _WidgetFactories on _LoginPageState {
         FormBuilderValidators.required(),
         FormBuilderValidators.minLength(8),
       ]),
-      icon: Icons.lock_open_outlined,
+      icon: Icons.lock_outline,
     );
   }
 

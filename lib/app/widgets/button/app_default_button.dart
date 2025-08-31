@@ -88,6 +88,7 @@ abstract class _Styles {
       ),
       padding: padding ?? AppStyles.kPaddSV18,
       elevation: 0,
+      splashFactory: NoSplash.splashFactory,
     );
   }
 }

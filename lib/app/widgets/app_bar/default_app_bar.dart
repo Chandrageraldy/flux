@@ -30,7 +30,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: () async {
           context.router.maybePop(popBoolean);
         },
-        child: const Icon(Icons.arrow_back_ios_rounded),
+        child: Icon(Icons.arrow_back),
       ),
     );
   }

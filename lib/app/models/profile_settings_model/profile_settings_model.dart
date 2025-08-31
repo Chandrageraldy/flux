@@ -17,11 +17,13 @@ class ProfileSettingsModel {
   final VoidCallback onTap;
 }
 
-List<ProfileSettingsModel> personalInfo(BuildContext context, VoidCallback logoutPressed) => [
+List<ProfileSettingsModel> personalInfo(
+        BuildContext context, VoidCallback logoutPressed, VoidCallback onAccountPressed) =>
+    [
       ProfileSettingsModel(
         icon: FontAwesomeIcons.gear,
         label: S.current.accountLabel,
-        onTap: () => context.router.push(AccountRoute()),
+        onTap: onAccountPressed,
       ),
       ProfileSettingsModel(
         icon: FontAwesomeIcons.arrowRightFromBracket,

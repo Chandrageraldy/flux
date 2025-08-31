@@ -23,7 +23,7 @@ class AdaptiveAlertDialog extends StatelessWidget {
             ),
           ),
           AppStyles.kSizedBoxH16,
-          Text(S.current.somethingWentWrong, style: _Styles.titleLabelTextStyle3(context), textAlign: TextAlign.center),
+          Text(S.current.somethingWentWrong, style: _Styles.titleLabelTextStyle(context), textAlign: TextAlign.center),
           AppStyles.kSizedBoxH8,
           Text(errorMessage, style: _Styles.descLabelTextStyle(context), textAlign: TextAlign.center),
           AppStyles.kSizedBoxH12,
@@ -35,15 +35,6 @@ class AdaptiveAlertDialog extends StatelessWidget {
     );
   }
 }
-
-// * ---------------------------- Actions ----------------------------
-extension _Actions on AdaptiveAlertDialog {}
-
-// * ------------------------ PrivateMethods -------------------------
-extension _PrivateMethods on AdaptiveAlertDialog {}
-
-// * ------------------------ WidgetFactories ------------------------
-extension _WidgetFactories on AdaptiveAlertDialog {}
 
 // * ----------------------------- Styles ----------------------------
 abstract class _Styles {
@@ -63,12 +54,12 @@ abstract class _Styles {
     );
   }
 
-  // Title Label Text Style3
-  static TextStyle titleLabelTextStyle3(BuildContext context) {
-    return Quicksand.bold.withSize(FontSizes.medium);
+  // Title Label Text Style
+  static TextStyle titleLabelTextStyle(BuildContext context) {
+    return Quicksand.bold.withSize(FontSizes.mediumPlus);
   }
 
-  // Desc Label Text Style3
+  // Desc Label Text Style
   static TextStyle descLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
   }

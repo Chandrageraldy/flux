@@ -93,15 +93,25 @@ extension _Actions on _NutritionGoalsPageState {
     final nutritionGoals = context.read<NutritionGoalsViewModel>().modifiedNutritionGoals;
 
     if (nutritionGoals[NutritionGoalsSettings.totalRatio.key] == '100') {
-      final response = await tryLoad(context, () => context.read<NutritionGoalsViewModel>().updateBodyMetrics());
+      WidgetUtils.showConfirmationDialog(
+        context: context,
+        label: S.current.confirmUpdateLabel,
+        icon: Icons.warning_amber_rounded,
+        desc: S.current.confirmUpdateDesc,
+        confirmLabel: S.current.confirmLabel,
+        color: context.theme.colorScheme.secondary,
+        onConfirm: () async {
+          final response = await tryLoad(context, () => context.read<NutritionGoalsViewModel>().updateBodyMetrics());
 
-      if (response == true && mounted) {
-        context.router.replaceAll(
-          [PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, nutritionGoals: nutritionGoals)],
-        );
-      } else if (mounted) {
-        context.router.maybePop();
-      }
+          if (response == true && mounted) {
+            context.router.replaceAll(
+              [PersonalizingPlanLoadingRoute(planAction: PlanAction.UPDATE, nutritionGoals: nutritionGoals)],
+            );
+          } else if (mounted) {
+            context.router.maybePop();
+          }
+        },
+      );
     } else {
       WidgetUtils.showSnackBar(context, S.current.ratioError);
       return;
