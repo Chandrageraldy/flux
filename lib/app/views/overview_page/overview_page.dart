@@ -19,9 +19,8 @@ class OverviewPage extends StatelessWidget {
       create: (_) => OverviewViewModel(),
       child: ShowCaseWidget(
         onFinish: () {
-          SharedPreferenceHandler().putIsCompleteTutorial(true);
+          SharedPreferenceHandler().putIsTutorialComplete(true);
         },
-        enableShowcase: !(SharedPreferenceHandler().getIsCompleteTutorial() ?? false),
         builder: (context) => _OverviewPage(),
       ),
     );
@@ -152,7 +151,9 @@ extension _PrivateMethods on _OverviewPageState {
   Future<void> _initializeAndStartShowcase() async {
     await context.read<OverviewViewModel>().initialize();
 
-    if (mounted) {
+    final bool isCompleteTutorial = SharedPreferenceHandler().getIsTutorialComplete() ?? false;
+
+    if (mounted && isCompleteTutorial == false) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           if (mounted) {

@@ -122,11 +122,16 @@ extension _WidgetFactories on VirtualPetTabBarView {
 
   // Help Button
   Widget getHelpButton({required BuildContext context}) {
-    return Container(
-      decoration: _Styles.getHeaderButtonContainerDecoration(context),
-      height: AppStyles.kSize32,
-      width: AppStyles.kSize32,
-      child: Center(child: FaIcon(FontAwesomeIcons.question, size: AppStyles.kSize16)),
+    return GestureDetector(
+      onTap: () {
+        ShowCaseWidget.of(context).startShowCase(showcaseKey);
+      },
+      child: Container(
+        decoration: _Styles.getHeaderButtonContainerDecoration(context),
+        height: AppStyles.kSize32,
+        width: AppStyles.kSize32,
+        child: Center(child: FaIcon(FontAwesomeIcons.question, size: AppStyles.kSize16)),
+      ),
     );
   }
 

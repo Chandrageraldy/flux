@@ -12,7 +12,7 @@ class SharedPreferenceHandler {
   static const spHasOnboarded = 'hasOnboarded';
   static const spUser = 'user';
   static const spPlan = 'plan';
-  static const spIsCompleteTutorial = 'isCompleteTutorial';
+  static const spIsTutorialComplete = 'isTutorialComplete';
 
   // Factory constructor that returns the single instance.
   factory SharedPreferenceHandler() {
@@ -34,13 +34,13 @@ class SharedPreferenceHandler {
     return _sharedPreferences?.setString(spLocale, language ?? '');
   }
 
-  // Is Complete Tutorial
-  bool? getIsCompleteTutorial() {
-    return _sharedPreferences?.getBool(spIsCompleteTutorial);
+  // Is Tutorial Complete
+  bool? getIsTutorialComplete() {
+    return _sharedPreferences?.getBool(spIsTutorialComplete);
   }
 
-  Future<bool?> putIsCompleteTutorial(bool isCompleteTutorial) async {
-    return _sharedPreferences?.setBool(spIsCompleteTutorial, isCompleteTutorial);
+  Future<bool?> putIsTutorialComplete(bool isTutorialComplete) async {
+    return _sharedPreferences?.setBool(spIsTutorialComplete, isTutorialComplete);
   }
 
   // Is Dark Mode
@@ -110,7 +110,7 @@ class SharedPreferenceHandler {
       _sharedPreferences!.remove(spLocale),
       _sharedPreferences!.remove(spUser),
       _sharedPreferences!.remove(spPlan),
-      _sharedPreferences!.remove(spIsCompleteTutorial),
+      _sharedPreferences!.remove(spIsTutorialComplete),
     ]);
   }
 }
