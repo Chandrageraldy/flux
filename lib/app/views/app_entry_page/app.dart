@@ -81,9 +81,9 @@ extension _PrivateMethods on _AppWrapperState {
   }
 
   Future<void> _initTutorialSP() async {
-    final isCompleteTutorial = SharedPreferenceHandler().getIsTutorialComplete();
+    final isCompleteTutorial = SharedPreferenceHandler().getIsTutorialCompleted();
     if (isCompleteTutorial == null) {
-      await SharedPreferenceHandler().putIsTutorialComplete(false);
+      await SharedPreferenceHandler().putIsTutorialCompleted(false);
     }
   }
 }
