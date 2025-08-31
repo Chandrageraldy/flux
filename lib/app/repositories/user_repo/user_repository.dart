@@ -79,15 +79,7 @@ class UserRepository {
   Future<Response> updateBodyMetrics({required Map<String, String> bodyMetrics}) async {
     final UserProfileModel? user = sharedPreferenceHandler.getUser();
 
-    final userProfile = {
-      TableCol.userId: user?.userId ?? '',
-      TableCol.username: user?.username ?? '',
-      TableCol.email: user?.email ?? '',
-      TableCol.photoUrl: user?.photoUrl ?? '',
-      TableCol.bodyMetrics: bodyMetrics,
-    };
-
-    final response = await userService.updateUserProfile(userProfile: userProfile);
+    final response = await userService.updateUserProfile(bodyMetrics: bodyMetrics, userId: user?.userId ?? '');
     if (response.error == null) {
       await processUserProfile(response.data as List<Map<String, dynamic>>);
     }

@@ -51,12 +51,14 @@ class UserService extends SupabaseBaseService {
     );
   }
 
-  Future<Response> updateUserProfile({required Map<String, dynamic> userProfile}) {
+  Future<Response> updateUserProfile({required Map<String, dynamic> bodyMetrics, required String userId}) {
     return callSupabaseDB(
       requestType: RequestType.PUT,
       table: TableName.user,
-      requestBody: userProfile,
-      filters: {TableCol.userId: userProfile[TableCol.userId]},
+      requestBody: {
+        TableCol.bodyMetrics: bodyMetrics,
+      },
+      filters: {TableCol.userId: userId},
     );
   }
 
