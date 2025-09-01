@@ -918,22 +918,6 @@ class PersonalizingPlanLoadingRouteArgs {
 }
 
 /// generated route for
-/// [PlanSelectionModal]
-class PlanSelectionRoute extends PageRouteInfo<void> {
-  const PlanSelectionRoute({List<PageRouteInfo>? children})
-    : super(PlanSelectionRoute.name, initialChildren: children);
-
-  static const String name = 'PlanSelectionRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const PlanSelectionModal();
-    },
-  );
-}
-
-/// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})

@@ -65,14 +65,14 @@ extension _WidgetFactories on AppDefaultButton {
 abstract class _Styles {
   // Button Label Style
   static TextStyle getButtonLabelTextStyle(BuildContext context, Color? labelColor) {
-    return Quicksand.regular.withSize(FontSizes.mediumPlus).copyWith(
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(
           color: labelColor ?? context.theme.colorScheme.onPrimary,
         );
   }
 
   // Button Background Color
   static Color getButtonBackgroundColor(BuildContext context, Color? backgroundColor) {
-    return backgroundColor ?? context.theme.colorScheme.primary;
+    return backgroundColor ?? context.theme.colorScheme.secondary;
   }
 
   // Button Style
@@ -86,7 +86,7 @@ abstract class _Styles {
           color: borderColor ?? AppColors.transparentColor,
         ),
       ),
-      padding: padding ?? AppStyles.kPaddSV18,
+      padding: padding ?? AppStyles.kPaddSV20,
       elevation: 0,
       splashFactory: NoSplash.splashFactory,
     );

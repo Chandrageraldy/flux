@@ -372,7 +372,12 @@ extension _WidgetFactories on _IngredientDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(label: S.current.saveLabel, onPressed: _onSaveIngredient),
+      child: AppDefaultButton(
+        label: S.current.saveLabel,
+        onPressed: _onSaveIngredient,
+        backgroundColor: context.theme.colorScheme.primary,
+        padding: AppStyles.kPaddSV20,
+      ),
     );
   }
 }

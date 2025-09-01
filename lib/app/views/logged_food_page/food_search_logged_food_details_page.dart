@@ -440,7 +440,12 @@ extension _WidgetFactories on _FoodSearchLoggedFoodDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(label: S.current.editFoodLabel, onPressed: _onEditFoodPressed),
+      child: AppDefaultButton(
+        label: S.current.editFoodLabel,
+        onPressed: _onEditFoodPressed,
+        backgroundColor: context.theme.colorScheme.primary,
+        padding: AppStyles.kPaddSV20,
+      ),
     );
   }
 }

@@ -156,7 +156,9 @@ extension _WidgetFactories on _SignUpPageState {
     return AppTextSpanButton(
       primaryText: S.current.loginPrimarySpanText,
       secondaryText: S.current.loginSecondarySpanText,
-      onPressed: () {},
+      onPressed: () {
+        context.router.push(LoginRoute());
+      },
     );
   }
 }

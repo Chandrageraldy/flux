@@ -82,7 +82,7 @@ extension _Actions on _BarcodeScanPageState {
           .push(ErrorRoute(
         label: S.current.barcodeNotRecognizedLabel,
         description: S.current.barcodeNotRecognizedDesc,
-        actions: [getTryAgainButton(), getUseAiMealScanButton()],
+        actions: [getTryAgainButton()],
         icon: Icons.qr_code_scanner_outlined,
         iconBackgroundColor: AppColors.redColor,
       ))
@@ -95,8 +95,6 @@ extension _Actions on _BarcodeScanPageState {
   void _tryAgainPressed() {
     context.router.maybePop();
   }
-
-  void _useAiMealScanPressed() {}
 }
 
 // * ------------------------ WidgetFactories ------------------------
@@ -196,17 +194,6 @@ extension _WidgetFactories on _BarcodeScanPageState {
       labelStyle: _Styles.getTryAgainButtonTextStyle(context),
     );
   }
-
-  // Use AI Meal Scan Button
-  Widget getUseAiMealScanButton() {
-    return AppDefaultButton(
-      label: S.current.useAiMealScanLabel,
-      onPressed: _useAiMealScanPressed,
-      padding: AppStyles.kPaddSV12,
-      labelStyle: _Styles.getUseAiMealScanButtonTextStyle(context),
-      backgroundColor: context.theme.colorScheme.secondary.withAlpha(20),
-    );
-  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -232,10 +219,5 @@ class _Styles {
   // Try Again Button Text Style
   static TextStyle getTryAgainButtonTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
-  }
-
-  // Use AI Meal Scan Button Text Style
-  static TextStyle getUseAiMealScanButtonTextStyle(BuildContext context) {
-    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.primary);
   }
 }

@@ -18,6 +18,9 @@ class _RootPageState extends BaseStatefulState<RootPage> {
   var pageIndex = 0;
 
   @override
+  bool hasDefaultPadding() => false;
+
+  @override
   void initState() {
     _pageController = PageController(initialPage: 0);
     super.initState();
@@ -40,18 +43,25 @@ class _RootPageState extends BaseStatefulState<RootPage> {
   Widget body() {
     return Column(
       children: [
-        getFluxLogoImage(),
+        AppStyles.kSizedBoxH20,
         Flexible(fit: FlexFit.loose, child: getOnboardingPageView()),
         AppStyles.kSizedBoxH12,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [getGeneratedDotIndicator()],
         ),
-        AppStyles.kSizedBoxH20,
-        getGetStartedButton(),
-        AppStyles.kSizedBoxH24,
-        getTextSpanLoginButton(),
-        AppStyles.kSizedBoxH24,
+        Padding(
+          padding: AppStyles.kPaddSH16,
+          child: Column(
+            children: [
+              AppStyles.kSizedBoxH32,
+              getGetStartedButton(),
+              AppStyles.kSizedBoxH12,
+              getTextSpanLoginButton(),
+              AppStyles.kSizedBoxH24,
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -60,11 +70,11 @@ class _RootPageState extends BaseStatefulState<RootPage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _RootPageState {
   void _onGetStartedPressed() {
-    context.router.push(const PlanSelectionRoute());
+    context.router.push(ManualPlanSetupRoute());
   }
 
   void _onLoginPressed() {
-    context.router.push(const LoginRoute());
+    context.router.push(LoginRoute());
   }
 }
 
@@ -80,10 +90,13 @@ extension _WidgetFactories on _RootPageState {
           pageIndex = index;
         });
       },
-      itemBuilder: (context, index) => OnboardContent(
-        onboardTitle: onboardData[index].onboardTitle,
-        onboardImage: onboardData[index].onboardImage,
-        onboardDesc: onboardData[index].onboardDesc,
+      itemBuilder: (context, index) => Padding(
+        padding: AppStyles.kPaddSH16,
+        child: OnboardContent(
+          onboardTitle: onboardData[index].onboardTitle,
+          onboardImage: onboardData[index].onboardImage,
+          onboardDesc: onboardData[index].onboardDesc,
+        ),
       ),
     );
   }
@@ -111,7 +124,11 @@ extension _WidgetFactories on _RootPageState {
 
   // Get Started Button
   Widget getGetStartedButton() {
-    return AppDefaultButton(label: S.current.getStartedLabel, onPressed: _onGetStartedPressed);
+    return AppDefaultButton(
+      label: S.current.getStartedLabel,
+      onPressed: _onGetStartedPressed,
+      labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
+    );
   }
 
   // Text Span Login Button
@@ -122,24 +139,10 @@ extension _WidgetFactories on _RootPageState {
       onPressed: _onLoginPressed,
     );
   }
-
-  // Flux Logo Image
-  Widget getFluxLogoImage() {
-    return Image.asset(
-      ImagePath.fluxLogo,
-      width: _Styles.getFluxLogoImageSize(context),
-      height: _Styles.getFluxLogoImageSize(context),
-    );
-  }
 }
 
 // * ----------------------------- Styles -----------------------------
 abstract class _Styles {
   // Dot Indicator Style
-  static const dotIndicatorWidth = 12.0;
-
-  // Flux Logo Image Style
-  static double getFluxLogoImageSize(BuildContext context) {
-    return MediaQuery.of(context).size.width * 0.3;
-  }
+  static const dotIndicatorWidth = 10.0;
 }

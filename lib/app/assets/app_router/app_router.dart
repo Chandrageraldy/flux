@@ -36,7 +36,6 @@ import 'package:flux/app/views/profile_page/meal_ratio_page.dart';
 import 'package:flux/app/views/profile_page/nutrition_goals_page.dart';
 import 'package:flux/app/views/profile_page/personal_details_page.dart';
 import 'package:flux/app/views/profile_page/profile_page.dart';
-import 'package:flux/app/views/plan_selection_modal/plan_selection_modal.dart';
 import 'package:flux/app/views/overview_page/overview_page.dart';
 import 'package:flux/app/views/report_summary_page/report_summary_page.dart';
 import 'package:flux/app/views/root_page/root_page.dart';
@@ -65,7 +64,6 @@ class AppRouter extends RootStackRouter {
     return [
       AutoRoute(page: SplashRoute.page, initial: true),
       AutoRoute(page: RootRoute.page),
-      CustomRoute(page: PlanSelectionRoute.page, customRouteBuilder: _modalSheetBuilder),
       AutoRoute(page: LoginRoute.page),
       AutoRoute(page: SignUpRoute.page),
       AutoRoute(page: ManualPlanSetupRoute.page),

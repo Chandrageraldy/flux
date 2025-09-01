@@ -1,5 +1,4 @@
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
-import 'package:flux/app/widgets/app_bar/default_app_bar.dart';
 import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/button/app_text_span_button.dart';
 import 'package:flux/app/widgets/text_form_field/app_auth_text_form_field.dart';
@@ -19,7 +18,15 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  PreferredSizeWidget? appbar() => DefaultAppBar();
+  PreferredSizeWidget? appbar() => AppBar(
+        scrolledUnderElevation: 0.0,
+        leading: GestureDetector(
+          onTap: () async {
+            context.router.replaceAll([RootRoute()]);
+          },
+          child: Icon(Icons.arrow_back),
+        ),
+      );
 
   @override
   bool useGradientBackground() {
@@ -52,7 +59,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _LoginPageState {
   void _onSignUpPressed() {
-    context.router.push(const PlanSelectionRoute());
+    context.router.push(ManualPlanSetupRoute());
   }
 
   void _onLoginPressed() async {
@@ -160,7 +167,11 @@ extension _WidgetFactories on _LoginPageState {
 
   // Login Button
   Widget getLoginButton() {
-    return AppDefaultButton(label: S.current.loginLabel, onPressed: _onLoginPressed);
+    return AppDefaultButton(
+      label: S.current.loginLabel,
+      onPressed: _onLoginPressed,
+      backgroundColor: context.theme.colorScheme.secondary,
+    );
   }
 
   // Sign Up Button

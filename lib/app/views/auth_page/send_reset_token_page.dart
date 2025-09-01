@@ -115,10 +115,7 @@ extension _WidgetFactories on _SendResetTokenPageState {
     return AppDefaultButton(
       label: S.current.sendCodeLabel,
       onPressed: _onSendResetTokenPressed,
-      padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
-      labelStyle: Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

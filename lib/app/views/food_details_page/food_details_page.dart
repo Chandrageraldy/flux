@@ -439,7 +439,12 @@ extension _WidgetFactories on _FoodDetailsPageState {
       bottom: _Styles.getButtonBottomPositition,
       left: _Styles.getButtonHorizontalPosition,
       right: _Styles.getButtonHorizontalPosition,
-      child: AppDefaultButton(label: S.current.logFoodLabel, onPressed: _onLogFoodPressed),
+      child: AppDefaultButton(
+        label: S.current.logFoodLabel,
+        onPressed: _onLogFoodPressed,
+        backgroundColor: context.theme.colorScheme.primary,
+        padding: AppStyles.kPaddSV20,
+      ),
     );
   }
 

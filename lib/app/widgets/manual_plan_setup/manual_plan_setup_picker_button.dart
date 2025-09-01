@@ -100,7 +100,7 @@ abstract class _Styles {
   static BoxDecoration getButtonContainerDecoration(BuildContext context, bool isPicked) {
     return BoxDecoration(
       borderRadius: AppStyles.kRad16,
-      color: isPicked ? context.theme.colorScheme.secondary.withAlpha(150) : context.theme.colorScheme.onPrimary,
+      color: isPicked ? context.theme.colorScheme.secondary.withAlpha(160) : context.theme.colorScheme.onPrimary,
       boxShadow: [
         BoxShadow(color: context.theme.colorScheme.tertiaryFixedDim, blurRadius: 2, offset: const Offset(0, 1)),
       ],
