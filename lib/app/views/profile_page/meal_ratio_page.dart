@@ -80,7 +80,6 @@ extension _Actions on _MealRatioPageState {
         WidgetUtils.showConfirmationDialog(
           context: context,
           label: S.current.confirmUpdateLabel,
-          icon: Icons.warning_amber_rounded,
           desc: S.current.confirmUpdateDesc,
           confirmLabel: S.current.confirmLabel,
           color: context.theme.colorScheme.secondary,

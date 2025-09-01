@@ -99,7 +99,6 @@ extension _Actions on _AccountPageState {
     WidgetUtils.showConfirmationDialog(
       context: context,
       label: S.current.leavingSoSoonLabel,
-      icon: Icons.logout,
       desc: S.current.leavingSoSoonDesc,
       confirmLabel: S.current.logOutLabel,
       color: AppColors.redColor,
@@ -117,7 +116,6 @@ extension _Actions on _AccountPageState {
     WidgetUtils.showConfirmationDialog(
       context: context,
       label: S.current.confirmUpdateLabel,
-      icon: Icons.warning_amber_rounded,
       desc: S.current.confirmAccountUpdateDesc,
       confirmLabel: S.current.confirmLabel,
       color: context.theme.colorScheme.secondary,

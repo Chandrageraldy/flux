@@ -77,7 +77,6 @@ class WidgetUtils {
   static void showConfirmationDialog({
     required BuildContext context,
     required String label,
-    required IconData icon,
     required String desc,
     required VoidCallback onConfirm,
     required String confirmLabel,
@@ -88,7 +87,6 @@ class WidgetUtils {
       builder: (context) {
         return CustomConfirmationDialog(
           label: label,
-          icon: icon,
           desc: desc,
           onConfirm: onConfirm,
           confirmLabel: confirmLabel,

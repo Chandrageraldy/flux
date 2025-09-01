@@ -324,12 +324,9 @@ extension _WidgetFactories on _OverviewPageState {
 
   // Add Action Button
   Widget getAddActionButton() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: GestureDetector(
-        onTap: _onAddActionPressed,
-        child: Icon(Icons.add, size: AppStyles.kSize26, color: context.theme.colorScheme.primary),
-      ),
+    return GestureDetector(
+      onTap: _onAddActionPressed,
+      child: Icon(Icons.add, size: AppStyles.kSize26, color: context.theme.colorScheme.primary),
     );
   }
 }

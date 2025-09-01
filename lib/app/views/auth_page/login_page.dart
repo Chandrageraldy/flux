@@ -22,6 +22,11 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   PreferredSizeWidget? appbar() => DefaultAppBar();
 
   @override
+  bool useGradientBackground() {
+    return true;
+  }
+
+  @override
   Widget body() {
     return CustomScrollView(
       slivers: [

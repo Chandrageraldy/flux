@@ -5,7 +5,6 @@ class CustomConfirmationDialog extends StatelessWidget {
   const CustomConfirmationDialog({
     super.key,
     required this.label,
-    required this.icon,
     required this.desc,
     required this.onConfirm,
     required this.confirmLabel,
@@ -13,7 +12,6 @@ class CustomConfirmationDialog extends StatelessWidget {
   });
 
   final String label;
-  final IconData icon;
   final String desc;
   final VoidCallback? onConfirm;
   final String confirmLabel;
@@ -29,55 +27,64 @@ class CustomConfirmationDialog extends StatelessWidget {
         padding: AppStyles.kPaddOL15R15T16B8,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppStyles.kSizedBoxH4,
-            Container(
-              padding: AppStyles.kPadd8,
-              decoration: _Styles.iconOuterContainerDecoration(context, color),
-              child: Container(
-                padding: AppStyles.kPadd12,
-                decoration: _Styles.iconInnerContainerDecoration(context, color),
-                child: Icon(icon, size: AppStyles.kSize30, color: context.theme.colorScheme.onPrimary),
-              ),
-            ),
-            AppStyles.kSizedBoxH16,
-            Text(label, style: _Styles.getLabelTextStyle(context), textAlign: TextAlign.center),
+            getTopRow(context),
             AppStyles.kSizedBoxH8,
-            Text(desc, style: _Styles.getDescLabelTextStyle(context), textAlign: TextAlign.center),
+            Text(desc, style: _Styles.getDescLabelTextStyle(context), textAlign: TextAlign.start),
             AppStyles.kSizedBoxH20,
-            Row(
-              spacing: AppStyles.kSpac8,
-              children: [
-                Expanded(
-                  child: AppDefaultButton(
-                    label: S.current.cancelLabel,
-                    onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-                    padding: AppStyles.kPaddSV12,
-                    borderColor: context.theme.colorScheme.tertiary,
-                    backgroundColor: context.theme.colorScheme.onPrimary,
-                    labelStyle: Quicksand.medium
-                        .withSize(FontSizes.small)
-                        .copyWith(color: context.theme.colorScheme.onTertiary),
-                  ),
-                ),
-                Expanded(
-                  child: AppDefaultButton(
-                    label: confirmLabel,
-                    onPressed: () async {
-                      Navigator.of(context, rootNavigator: true).pop();
-                      onConfirm?.call();
-                    },
-                    padding: AppStyles.kPaddSV12,
-                    backgroundColor: color,
-                    labelStyle:
-                        Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-                  ),
-                ),
-              ],
-            )
+            getActionsRow(context),
           ],
         ),
       ),
+    );
+  }
+}
+
+// * ------------------------ WidgetFactories ------------------------
+extension _WidgetFactories on CustomConfirmationDialog {
+  // Top Row
+  Widget getTopRow(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: _Styles.getLabelTextStyle(context), textAlign: TextAlign.start),
+        GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.close, size: AppStyles.kSize20, color: context.theme.colorScheme.onTertiaryContainer),
+        )
+      ],
+    );
+  }
+
+  // Actions Row
+  Widget getActionsRow(BuildContext context) {
+    return Row(
+      spacing: AppStyles.kSpac8,
+      children: [
+        Expanded(
+          child: AppDefaultButton(
+            label: S.current.cancelLabel,
+            onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            padding: AppStyles.kPaddSV12,
+            backgroundColor: context.theme.colorScheme.tertiaryContainer,
+            labelStyle:
+                Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiary),
+          ),
+        ),
+        Expanded(
+          child: AppDefaultButton(
+            label: confirmLabel,
+            onPressed: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              onConfirm?.call();
+            },
+            padding: AppStyles.kPaddSV12,
+            backgroundColor: color,
+            labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -97,21 +104,5 @@ abstract class _Styles {
   // Desc Label Text Style
   static TextStyle getDescLabelTextStyle(BuildContext context) {
     return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onTertiaryContainer);
-  }
-
-  // Icon Outer Container Decoration
-  static BoxDecoration iconOuterContainerDecoration(BuildContext context, Color color) {
-    return BoxDecoration(
-      color: color.withAlpha(40),
-      borderRadius: AppStyles.kRad100,
-    );
-  }
-
-  // Icon Inner Container Decoration
-  static BoxDecoration iconInnerContainerDecoration(BuildContext context, Color color) {
-    return BoxDecoration(
-      color: color,
-      borderRadius: AppStyles.kRad100,
-    );
   }
 }

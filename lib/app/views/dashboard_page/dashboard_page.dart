@@ -33,7 +33,7 @@ class _DashboardPageState extends BaseStatefulState<DashboardPage> {
         return Scaffold(
           body: child,
           extendBody: true,
-          floatingActionButton: tabsRouter.activeIndex == 3
+          floatingActionButton: tabsRouter.activeIndex == 3 || tabsRouter.activeIndex == 0
               ? FloatingActionButton(
                   onPressed: () {
                     context.router.push(ChiaChatbotNavigatorRoute(children: [ChiaChatbotLoadingRoute()]));

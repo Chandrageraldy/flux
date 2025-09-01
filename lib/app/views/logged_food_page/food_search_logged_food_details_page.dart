@@ -125,7 +125,6 @@ extension _Actions on _FoodSearchLoggedFoodDetailsPageState {
     WidgetUtils.showConfirmationDialog(
       context: context,
       label: S.current.deleteLoggedFoodLabel,
-      icon: Icons.delete_outline,
       desc: S.current.deleteLoggedFoodDesc,
       confirmLabel: S.current.confirmLabel,
       color: AppColors.redColor,

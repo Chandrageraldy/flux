@@ -10,6 +10,7 @@ class ProfileSettingsListTile extends StatelessWidget {
     this.value,
     this.trailingIcon,
     this.trailingIconColor,
+    this.hasTrailingIcon = true,
     super.key,
   });
 
@@ -20,6 +21,7 @@ class ProfileSettingsListTile extends StatelessWidget {
   final String? value;
   final IconData? trailingIcon;
   final Color? trailingIconColor;
+  final bool? hasTrailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class ProfileSettingsListTile extends StatelessWidget {
               spacing: AppStyles.kSpac12,
               children: [
                 if (value != null) Text(value!, style: Quicksand.regular.withSize(FontSizes.small)),
-                getTrailingIcon(context),
+                if (hasTrailingIcon ?? true) getTrailingIcon(context),
               ],
             ),
           ],

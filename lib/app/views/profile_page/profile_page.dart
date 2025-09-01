@@ -63,7 +63,6 @@ extension _PrivateMethods on _ProfilePageState {
     WidgetUtils.showConfirmationDialog(
       context: context,
       label: S.current.leavingSoSoonLabel,
-      icon: Icons.logout,
       desc: S.current.leavingSoSoonDesc,
       confirmLabel: S.current.logOutLabel,
       color: AppColors.redColor,

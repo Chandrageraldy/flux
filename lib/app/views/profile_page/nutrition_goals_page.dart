@@ -96,7 +96,6 @@ extension _Actions on _NutritionGoalsPageState {
       WidgetUtils.showConfirmationDialog(
         context: context,
         label: S.current.confirmUpdateLabel,
-        icon: Icons.warning_amber_rounded,
         desc: S.current.confirmUpdateDesc,
         confirmLabel: S.current.confirmLabel,
         color: context.theme.colorScheme.secondary,
@@ -263,12 +262,11 @@ extension _WidgetFactories on _NutritionGoalsPageState {
     return Column(
       spacing: AppStyles.kSpac4,
       children: [
-        getEnergyTargetBreakdownRow(S.current.basalMetabolicRateLabel, bmr, hasInfoIcon: true),
-        getEnergyTargetBreakdownRow(S.current.baselineActivityLabel, baselineActivity, hasInfoIcon: true),
+        getEnergyTargetBreakdownRow(S.current.basalMetabolicRateLabel, bmr),
+        getEnergyTargetBreakdownRow(S.current.baselineActivityLabel, baselineActivity),
         // If goal is maintain, do not show adjustment based on weight goal
         if (bodyMetrics?.goal != PlanSelectionValue.maintain.value)
-          getEnergyTargetBreakdownRow(S.current.adjustmentBasedOnWeightGoalLabel, adjustmentBasedOnWeightGoal,
-              hasInfoIcon: true),
+          getEnergyTargetBreakdownRow(S.current.adjustmentBasedOnWeightGoalLabel, adjustmentBasedOnWeightGoal),
         getEnergyTargetBreakdownRow(S.current.energyTargetLabel, '= $energyTarget ${NutritionUnit.kcal.label}',
             isBold: true),
       ],
@@ -276,18 +274,13 @@ extension _WidgetFactories on _NutritionGoalsPageState {
   }
 
   // Energy Target Breakdown Row
-  Widget getEnergyTargetBreakdownRow(String label, String value, {bool isBold = false, bool hasInfoIcon = false}) {
+  Widget getEnergyTargetBreakdownRow(String label, String value, {bool isBold = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           spacing: AppStyles.kSpac4,
           children: [
-            if (hasInfoIcon)
-              GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.info_outline, size: AppStyles.kSize16, color: context.theme.colorScheme.secondary),
-              ),
             Text(label, style: _Styles.getEnergyTargetBreakdownLabelTextStyle(context, isBold)),
           ],
         ),

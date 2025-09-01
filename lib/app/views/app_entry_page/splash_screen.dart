@@ -1,7 +1,5 @@
 import 'package:flux/app/viewmodels/user_vm/user_view_model.dart';
-
 import 'package:flux/app/assets/exporter/exporter_app_general.dart';
-import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class SplashScreen extends BaseStatefulPage {
@@ -22,29 +20,20 @@ class _SplashScreenState extends BaseStatefulState<SplashScreen> {
 
   @override
   Widget body() {
-    return Center(child: getAppLogoAnimation());
+    return Center(child: getAppLogoImage());
   }
 }
 
 // * ------------------------ WidgetFactories -----------------------
 extension _WidgetFactories on _SplashScreenState {
-  // App Logo Animation
-  Widget getAppLogoAnimation() {
-    return Lottie.asset(
-      AnimationPath.starAIAnimation,
-      width: AppStyles.kSize64,
-      height: AppStyles.kSize64,
+  // App Logo
+  Widget getAppLogoImage() {
+    return Image.asset(
+      ImagePath.fluxLogo,
+      width: AppStyles.kSize100,
+      height: AppStyles.kSize100,
     );
   }
-
-  // App Logo
-  // Widget getAppLogoImage() {
-  //   return Image.asset(
-  //     ImagePath.fluxLogo,
-  //     width: _Styles.getFluxLogoImageSize(context),
-  //     height: _Styles.getFluxLogoImageSize(context),
-  //   );
-  // }
 }
 
 // * ------------------------ PrivateMethods ------------------------
