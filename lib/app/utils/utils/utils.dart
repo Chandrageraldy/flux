@@ -110,6 +110,7 @@ class WidgetUtils {
     int maxLines = 1,
     int? minLines,
     EdgeInsets? textFieldPadding,
+    String placeholder = '',
   }) {
     showDialog(
       context: context,
@@ -128,6 +129,7 @@ class WidgetUtils {
           maxLines: maxLines,
           minLines: minLines,
           textFieldPadding: textFieldPadding,
+          placeholder: placeholder,
         );
       },
     );

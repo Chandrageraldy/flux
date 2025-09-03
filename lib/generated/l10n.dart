@@ -310,10 +310,10 @@ class S {
     );
   }
 
-  /// `Log Food`
+  /// `Search Food`
   String get loggingSelectionButtonTitle1 {
     return Intl.message(
-      'Log Food',
+      'Search Food',
       name: 'loggingSelectionButtonTitle1',
       desc: '',
       args: [],
@@ -3210,10 +3210,10 @@ class S {
     );
   }
 
-  /// `Please enter your registered email address, and we will send you a link to reset your password.`
+  /// `Please enter your registered email address, and we will send you an OTP to reset your password.`
   String get sendResetTokenDesc {
     return Intl.message(
-      'Please enter your registered email address, and we will send you a link to reset your password.',
+      'Please enter your registered email address, and we will send you an OTP to reset your password.',
       name: 'sendResetTokenDesc',
       desc: '',
       args: [],
@@ -3565,6 +3565,76 @@ class S {
     return Intl.message(
       'Visit the shop 🛒 to unlock new pets and upgrades 💎.',
       name: 'showcase6Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add 2 slice of bread...`
+  String get enhanceWithAIPlaceholder {
+    return Intl.message(
+      'Add 2 slice of bread...',
+      name: 'enhanceWithAIPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username must be at least 8 characters`
+  String get usernameLengthError {
+    return Intl.message(
+      'Username must be at least 8 characters',
+      name: 'usernameLengthError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters`
+  String get passwordLengthError {
+    return Intl.message(
+      'Password must be at least 8 characters',
+      name: 'passwordLengthError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is required`
+  String get usernameRequiredError {
+    return Intl.message(
+      'Username is required',
+      name: 'usernameRequiredError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get passwordRequiredError {
+    return Intl.message(
+      'Password is required',
+      name: 'passwordRequiredError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is required`
+  String get emailRequiredError {
+    return Intl.message(
+      'Email is required',
+      name: 'emailRequiredError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email address`
+  String get invalidEmailError {
+    return Intl.message(
+      'Please enter a valid email address',
+      name: 'invalidEmailError',
       desc: '',
       args: [],
     );

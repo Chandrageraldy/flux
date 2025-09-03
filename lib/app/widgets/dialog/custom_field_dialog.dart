@@ -19,11 +19,13 @@ class CustomFieldDialog extends StatelessWidget {
     this.maxLines = 1,
     this.minLines,
     this.textFieldPadding = AppStyles.kPaddSV12H12,
+    required this.placeholder,
     super.key,
   });
 
   final BuildContext context;
   final String label;
+  final String placeholder;
   final String? desc;
   final FormFields formField;
   final String initialValue;
@@ -99,6 +101,7 @@ extension _WidgetFactories on CustomFieldDialog {
   // Text Field
   Widget getTextField() {
     return AppTextFormField(
+      placeholder: placeholder,
       field: formField,
       validator: FormBuilderValidators.compose([]),
       borderRadius: AppStyles.kRad10,

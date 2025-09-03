@@ -125,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailDesc": MessageLookupByLibrary.simpleMessage(
             "Your registered email used for login and account recovery."),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailRequiredError":
+            MessageLookupByLibrary.simpleMessage("Email is required"),
         "endDateDesc": MessageLookupByLibrary.simpleMessage(
             "The ending date for the weekly calorie progress."),
         "endDateLabel": MessageLookupByLibrary.simpleMessage("End Date"),
@@ -138,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let Flux AI add ingredients, adjust portions, and make thoughtful changes to improve your meals."),
         "enhanceWithAILabel":
             MessageLookupByLibrary.simpleMessage("Enhance with AI"),
+        "enhanceWithAIPlaceholder":
+            MessageLookupByLibrary.simpleMessage("Add 2 slice of bread..."),
         "equipLabel": MessageLookupByLibrary.simpleMessage("Equip"),
         "equippedLabel": MessageLookupByLibrary.simpleMessage("Equipped"),
         "exerciseLevelLabel":
@@ -189,6 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please provide clear and detailed instructions so we can process your request accurately."),
         "invalidCredential": MessageLookupByLibrary.simpleMessage(
             "The email or password you entered is incorrect. Please try again."),
+        "invalidEmailError": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid email address"),
         "invalidOtp": MessageLookupByLibrary.simpleMessage(
             "OTP has expired or is invalid"),
         "ironLabel": MessageLookupByLibrary.simpleMessage("Iron"),
@@ -233,7 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loggingSelectionButtonDesc3": MessageLookupByLibrary.simpleMessage(
             "Scan a barcode to log packaged food instantly."),
         "loggingSelectionButtonTitle1":
-            MessageLookupByLibrary.simpleMessage("Log Food"),
+            MessageLookupByLibrary.simpleMessage("Search Food"),
         "loggingSelectionButtonTitle2":
             MessageLookupByLibrary.simpleMessage("Meal Scan"),
         "loggingSelectionButtonTitle3":
@@ -342,6 +348,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Based on foods eaten by early humans."),
         "paleoLabel": MessageLookupByLibrary.simpleMessage("Paleo"),
         "passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordLengthError": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 8 characters"),
+        "passwordRequiredError":
+            MessageLookupByLibrary.simpleMessage("Password is required"),
         "passwordsDoNotMatchError":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "percentOfTotalMealRatioLabel":
@@ -457,7 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seleniumLabel": MessageLookupByLibrary.simpleMessage("Selenium"),
         "sendCodeLabel": MessageLookupByLibrary.simpleMessage("Send Code"),
         "sendResetTokenDesc": MessageLookupByLibrary.simpleMessage(
-            "Please enter your registered email address, and we will send you a link to reset your password."),
+            "Please enter your registered email address, and we will send you an OTP to reset your password."),
         "sendResetTokenLabel":
             MessageLookupByLibrary.simpleMessage("Send Reset Token"),
         "servingUnitLabel":
@@ -546,6 +556,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "usernameDesc": MessageLookupByLibrary.simpleMessage(
             "Choose a username that identifies you in the app."),
         "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
+        "usernameLengthError": MessageLookupByLibrary.simpleMessage(
+            "Username must be at least 8 characters"),
+        "usernameRequiredError":
+            MessageLookupByLibrary.simpleMessage("Username is required"),
         "vegetarianDesc": MessageLookupByLibrary.simpleMessage(
             "A diet that excludes meat and fish."),
         "vegetarianLabel": MessageLookupByLibrary.simpleMessage("Vegetarian"),

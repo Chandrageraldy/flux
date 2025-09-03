@@ -26,6 +26,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
           },
           child: Icon(Icons.arrow_back),
         ),
+        backgroundColor: AppColors.transparentColor,
       );
 
   @override
@@ -127,8 +128,8 @@ extension _WidgetFactories on _LoginPageState {
       field: FormFields.email,
       placeholder: S.current.emailLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.email(),
+        FormBuilderValidators.required(errorText: S.current.emailRequiredError),
+        FormBuilderValidators.email(errorText: S.current.invalidEmailError),
       ]),
       icon: Icons.email_outlined,
     );
@@ -140,8 +141,8 @@ extension _WidgetFactories on _LoginPageState {
       field: FormFields.password,
       placeholder: S.current.passwordLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(8),
+        FormBuilderValidators.required(errorText: S.current.passwordRequiredError),
+        FormBuilderValidators.minLength(8, errorText: S.current.passwordLengthError),
       ]),
       icon: Icons.lock_outline,
     );

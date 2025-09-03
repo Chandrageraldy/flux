@@ -6,6 +6,7 @@ import 'package:flux/app/models/logged_food_model/logged_food_model.dart';
 import 'package:flux/app/services/gemini_base_service.dart';
 import 'package:flux/app/utils/utils/utils.dart';
 import 'package:flux/app/viewmodels/logged_food_vm/meal_scan_logged_food_details_view_model.dart';
+import 'package:flux/app/widgets/button/app_default_button.dart';
 import 'package:flux/app/widgets/food/ingredient_card.dart';
 import 'package:flux/app/widgets/food/meal_scan_macronutrient_card.dart';
 import 'package:flux/app/widgets/skeleton/meal_scan_result_skeleton.dart';
@@ -115,6 +116,7 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
 
   void _onEnhanceWithAIPressed() {
     WidgetUtils.showFieldDialog(
+      placeholder: S.current.enhanceWithAIPlaceholder,
       context: context,
       label: S.current.enhanceWithAILabel,
       desc: S.current.enhanceWithAIDesc,
@@ -142,10 +144,15 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
             label: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.label,
             description: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.message,
             iconBackgroundColor: AppColors.redColor,
+            actions: [getDismissButton()],
           ),
         );
       }
     }
+  }
+
+  void _dismissPressed() {
+    context.router.maybePop();
   }
 }
 
@@ -592,6 +599,16 @@ extension _WidgetFactories on _MealScanLoggedFoodDetailsPageState {
       ),
     );
   }
+
+  // Dismiss Button
+  Widget getDismissButton() {
+    return AppDefaultButton(
+      label: S.current.dismissLabel,
+      onPressed: _dismissPressed,
+      padding: AppStyles.kPaddSV12,
+      labelStyle: _Styles.getDismissButtonTextStyle(context),
+    );
+  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -740,5 +757,10 @@ abstract class _Styles {
   // Edit Food Button Text Style
   static TextStyle getEditFoodButtonTextStyle(BuildContext context) {
     return Quicksand.semiBold.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
+  }
+
+  // Dismiss Button Text Style
+  static TextStyle getDismissButtonTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 }

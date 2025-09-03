@@ -111,6 +111,7 @@ extension _Actions on _MealScanResultPageState {
 
   void _onEnhanceWithAIPressed() {
     WidgetUtils.showFieldDialog(
+      placeholder: S.current.enhanceWithAIPlaceholder,
       context: context,
       label: S.current.enhanceWithAILabel,
       desc: S.current.enhanceWithAIDesc,
@@ -137,10 +138,15 @@ extension _Actions on _MealScanResultPageState {
             label: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.label,
             description: GeminiMealScanStatus.INSTRUCTIONSUNCLEAR.message,
             iconBackgroundColor: AppColors.redColor,
+            actions: [getDismissButton()],
           ),
         );
       }
     }
+  }
+
+  void _dismissPressed() {
+    context.router.maybePop();
   }
 }
 
@@ -621,6 +627,16 @@ extension _WidgetFactories on _MealScanResultPageState {
       ),
     );
   }
+
+  // Dismiss Button
+  Widget getDismissButton() {
+    return AppDefaultButton(
+      label: S.current.dismissLabel,
+      onPressed: _dismissPressed,
+      padding: AppStyles.kPaddSV12,
+      labelStyle: _Styles.getDismissButtonTextStyle(context),
+    );
+  }
 }
 
 // * ----------------------------- Styles ----------------------------
@@ -769,5 +785,10 @@ abstract class _Styles {
   // Text Field Input Decoration
   static InputDecoration getFieldInputDecoration() {
     return InputDecoration(border: InputBorder.none, isDense: true, contentPadding: AppStyles.kPaddOL4T2B2);
+  }
+
+  // Dismiss Button Text Style
+  static TextStyle getDismissButtonTextStyle(BuildContext context) {
+    return Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary);
   }
 }

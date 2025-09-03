@@ -114,7 +114,8 @@ extension _WidgetFactories on _SignUpPageState {
       field: FormFields.username,
       placeholder: S.current.usernameLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
+        FormBuilderValidators.required(errorText: S.current.usernameRequiredError),
+        FormBuilderValidators.minLength(8, errorText: S.current.usernameLengthError),
       ]),
       icon: Icons.person_outline,
     );
@@ -126,8 +127,8 @@ extension _WidgetFactories on _SignUpPageState {
       field: FormFields.email,
       placeholder: S.current.emailLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.email(),
+        FormBuilderValidators.required(errorText: S.current.emailRequiredError),
+        FormBuilderValidators.email(errorText: S.current.invalidEmailError),
       ]),
       icon: Icons.email_outlined,
     );
@@ -139,8 +140,8 @@ extension _WidgetFactories on _SignUpPageState {
       field: FormFields.password,
       placeholder: S.current.passwordLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(8),
+        FormBuilderValidators.required(errorText: S.current.passwordRequiredError),
+        FormBuilderValidators.minLength(8, errorText: S.current.passwordLengthError),
       ]),
       icon: Icons.lock_outline,
     );

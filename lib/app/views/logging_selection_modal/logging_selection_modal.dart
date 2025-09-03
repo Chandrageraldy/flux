@@ -37,7 +37,7 @@ class _LoggingSelectionModalState extends BaseStatefulState<LoggingSelectionModa
 
 // * ---------------------------- Actions ----------------------------
 extension _Actions on _LoggingSelectionModalState {
-  void _onLogFoodPressed() {
+  void _onSearchFoodPressed() {
     context.router.replaceAll([FoodSearchRoute()]);
   }
 
@@ -55,11 +55,11 @@ extension _WidgetFactories on _LoggingSelectionModalState {
   // Logging Selection Button List
   List<Widget> getLoggingSelectionButtonList() {
     return [
-      // Log Food
+      // Search Food
       LoggingSelectionButton(
         icon: FaIcon(FontAwesomeIcons.appleWhole, color: MacroNutrients.protein.color, size: AppStyles.kSize16),
         label: S.current.loggingSelectionButtonTitle1,
-        onPressed: _onLogFoodPressed,
+        onPressed: _onSearchFoodPressed,
       ),
       // Barcode Scan
       LoggingSelectionButton(

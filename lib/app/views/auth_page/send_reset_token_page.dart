@@ -102,8 +102,8 @@ extension _WidgetFactories on _SendResetTokenPageState {
       field: FormFields.email,
       placeholder: S.current.emailLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.email(),
+        FormBuilderValidators.required(errorText: S.current.emailRequiredError),
+        FormBuilderValidators.email(errorText: S.current.invalidEmailError),
       ]),
       icon: Icons.email_outlined,
       height: AppStyles.kSize50,

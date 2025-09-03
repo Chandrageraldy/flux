@@ -27,7 +27,7 @@
     "planSelectionButtonTitle2": "Smart Plan with AI",
     "planSelectionButtonDesc2": "Describe your body and goals — let AI build your perfect plan.",   
 
-    "loggingSelectionButtonTitle1": "Log Food",
+    "loggingSelectionButtonTitle1": "Search Food",
     "loggingSelectionButtonDesc1": "Search and select your food, then enter the portion.",
     "loggingSelectionButtonTitle2": "Meal Scan",
     "loggingSelectionButtonDesc2": "Snap a quick photo — we’ll handle the rest.",
@@ -327,7 +327,7 @@
     "allTimeLabel": "All Time",
     "forgotYourPasswordLabel": "Forgot your password?",
     "sendResetTokenLabel": "Send Reset Token",
-    "sendResetTokenDesc": "Please enter your registered email address, and we will send you a link to reset your password.",
+    "sendResetTokenDesc": "Please enter your registered email address, and we will send you an OTP to reset your password.",
     "overEmailSendRateLimit": "You have exceeded the maximum number of password reset requests. Please try again later.",
     "sendCodeLabel": "Send Code",
     "checkYourEmailLabel": "Check your email",
@@ -367,5 +367,12 @@
     "showcase5Desc": "Complete daily goals ✅ to earn rewards 🎁 and extra energy ⚡.",
 
     "showcase6Title": "Pet Shop",
-    "showcase6Desc": "Visit the shop 🛒 to unlock new pets and upgrades 💎."
+    "showcase6Desc": "Visit the shop 🛒 to unlock new pets and upgrades 💎.",
+    "enhanceWithAIPlaceholder": "Add 2 slice of bread...",
+    "usernameLengthError": "Username must be at least 8 characters",
+    "passwordLengthError": "Password must be at least 8 characters",
+    "usernameRequiredError": "Username is required",
+    "passwordRequiredError": "Password is required",
+    "emailRequiredError": "Email is required",
+    "invalidEmailError": "Please enter a valid email address"
 }

@@ -113,6 +113,16 @@ extension _Actions on _AccountPageState {
   }
 
   Future<void> _onSavePressed() async {
+    final username = context.read<AccountViewModel>().modifiedAccount[AccountSettings.username.key] ?? '';
+
+    if (username.isEmpty) {
+      WidgetUtils.showSnackBar(context, S.current.usernameRequiredError);
+      return;
+    } else if (username.length < 8) {
+      WidgetUtils.showSnackBar(context, S.current.usernameLengthError);
+      return;
+    }
+
     WidgetUtils.showConfirmationDialog(
       context: context,
       label: S.current.confirmUpdateLabel,
