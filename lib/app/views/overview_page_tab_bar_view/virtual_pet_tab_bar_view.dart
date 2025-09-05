@@ -167,7 +167,7 @@ extension _WidgetFactories on VirtualPetTabBarView {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      bottom: activeUserPet.getCurrentLevel() == 1 || isPlayingCrackedEggAnimation ? 50 : 10,
+      bottom: activeUserPet.getCurrentLevel() == 1 || isPlayingCrackedEggAnimation ? 20 : 10,
       left: 0,
       right: 0,
       child: Center(

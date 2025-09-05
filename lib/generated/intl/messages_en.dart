@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismissLabel": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "editFoodLabel": MessageLookupByLibrary.simpleMessage("Edit Food"),
         "editLabel": MessageLookupByLibrary.simpleMessage("Edit"),
+        "editSuccessfulMessage": MessageLookupByLibrary.simpleMessage(
+            "Your changes have been saved successfully."),
         "emailDesc": MessageLookupByLibrary.simpleMessage(
             "Your registered email used for login and account recovery."),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),

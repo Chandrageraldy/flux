@@ -389,8 +389,9 @@ extension _PrivateMethods on _PersonalizingPlanLoadingPageState {
   }
 
   Future<void> createPersonalizedPlan(Map<String, dynamic> personalizedPlan) async {
-    final response =
-        await tryCatch(context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan)) ?? false;
+    final response = await tryCatch(
+            context, () => context.read<PlanViewModel>().createPersonalizedPlan(personalizedPlan, widget.isEdit)) ??
+        false;
 
     await Future.delayed(Duration(seconds: 3));
 

@@ -88,6 +88,7 @@ extension _Actions on _MealScanLoggedFoodDetailsPageState {
         () => context.read<MealScanLoggedFoodDetailsViewModel>().editLoggedFood(nutritionTotals: nutritionTotals));
 
     if (response == true && mounted) {
+      WidgetUtils.showSnackBar(context, S.current.editSuccessfulMessage);
       context.router.maybePop(true);
     } else if (response == null && mounted) {
       context.router.maybePop();

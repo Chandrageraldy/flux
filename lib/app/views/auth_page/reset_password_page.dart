@@ -112,8 +112,8 @@ extension _WidgetFactories on _ResetPasswordPageState {
       field: FormFields.password,
       placeholder: S.current.passwordLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(8),
+        FormBuilderValidators.required(errorText: S.current.passwordRequiredError),
+        FormBuilderValidators.minLength(8, errorText: S.current.passwordLengthError),
       ]),
       icon: Icons.lock_outline,
       height: AppStyles.kSize50,
@@ -126,8 +126,8 @@ extension _WidgetFactories on _ResetPasswordPageState {
       field: FormFields.confirmPassword,
       placeholder: S.current.confirmPasswordLabel,
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(8),
+        FormBuilderValidators.required(errorText: S.current.passwordRequiredError),
+        FormBuilderValidators.minLength(8, errorText: S.current.passwordLengthError),
       ]),
       icon: Icons.lock_outline,
       height: AppStyles.kSize50,
@@ -139,10 +139,8 @@ extension _WidgetFactories on _ResetPasswordPageState {
     return AppDefaultButton(
       label: S.current.resetPasswordLabel,
       onPressed: _onResetPasswordPressed,
-      padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
       labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

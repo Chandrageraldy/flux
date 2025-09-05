@@ -374,5 +374,6 @@
     "usernameRequiredError": "Username is required",
     "passwordRequiredError": "Password is required",
     "emailRequiredError": "Email is required",
-    "invalidEmailError": "Please enter a valid email address"
+    "invalidEmailError": "Please enter a valid email address",
+    "editSuccessfulMessage": "Your changes have been saved successfully."
 }

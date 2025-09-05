@@ -311,10 +311,8 @@ extension _WidgetFactories on _VerifyOtpPageState {
     return AppDefaultButton(
       label: S.current.verifyLabel,
       onPressed: _isVerifyEnabled ? _onVerifyPressed : null,
-      padding: AppStyles.kPaddSV15,
       borderRadius: AppStyles.kRad10,
       labelStyle: Quicksand.medium.withSize(FontSizes.small).copyWith(color: context.theme.colorScheme.onPrimary),
-      backgroundColor: context.theme.colorScheme.primary,
     );
   }
 }

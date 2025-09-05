@@ -3639,6 +3639,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your changes have been saved successfully.`
+  String get editSuccessfulMessage {
+    return Intl.message(
+      'Your changes have been saved successfully.',
+      name: 'editSuccessfulMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
