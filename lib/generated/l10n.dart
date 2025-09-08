@@ -330,10 +330,10 @@ class S {
     );
   }
 
-  /// `Meal Scan`
+  /// `Scan Meal`
   String get loggingSelectionButtonTitle2 {
     return Intl.message(
-      'Meal Scan',
+      'Scan Meal',
       name: 'loggingSelectionButtonTitle2',
       desc: '',
       args: [],

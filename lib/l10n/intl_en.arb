@@ -29,7 +29,7 @@
 
     "loggingSelectionButtonTitle1": "Search Food",
     "loggingSelectionButtonDesc1": "Search and select your food, then enter the portion.",
-    "loggingSelectionButtonTitle2": "Meal Scan",
+    "loggingSelectionButtonTitle2": "Scan Meal",
     "loggingSelectionButtonDesc2": "Snap a quick photo — we’ll handle the rest.",
     "loggingSelectionButtonTitle3": "Scan Barcode",
     "loggingSelectionButtonDesc3": "Scan a barcode to log packaged food instantly.",

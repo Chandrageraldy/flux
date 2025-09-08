@@ -243,7 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loggingSelectionButtonTitle1":
             MessageLookupByLibrary.simpleMessage("Search Food"),
         "loggingSelectionButtonTitle2":
-            MessageLookupByLibrary.simpleMessage("Meal Scan"),
+            MessageLookupByLibrary.simpleMessage("Scan Meal"),
         "loggingSelectionButtonTitle3":
             MessageLookupByLibrary.simpleMessage("Scan Barcode"),
         "loginLabel": MessageLookupByLibrary.simpleMessage("Log in"),
