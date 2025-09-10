@@ -543,12 +543,10 @@ enum ExerciseLevel {
 class GeminiJsonSchema {
   static Schema mealScan = Schema.object(
     properties: {
-      'foodName': Schema.string(), // main meal name
-      'healthScoreDesc': Schema.string(), // extra: description of the meal
-      'healthScore': Schema.number(minimum: 1, maximum: 10), // extra: health score out of 10
-      'quantity': Schema.number(description: 'must always be set to 1'), // added for meal scan quantity
-
-      // ingredients list (each one uses full base food details model)
+      'foodName': Schema.string(),
+      'healthScoreDesc': Schema.string(),
+      'healthScore': Schema.number(minimum: 1, maximum: 10),
+      'quantity': Schema.number(description: 'must always be set to 1'),
       'ingredients': Schema.array(
         items: Schema.object(
           properties: {

@@ -29,6 +29,7 @@ class FoodSearchViewModel extends BaseViewModel {
 
   Future<void> getSavedFoods() async {
     _isSavedFoodLoading = true;
+    notifyListeners();
     final response = await foodRepository.getSavedFoods();
     checkError(response);
     savedFoodResults = response.data as List<SavedFoodModel>;

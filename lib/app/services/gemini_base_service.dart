@@ -80,11 +80,6 @@ abstract class GeminiBaseService {
       return Response.error(e.toString());
     }
   }
-
-  // 👇 optional helper to clear conversation
-  void resetChat() {
-    _chatHistory.clear();
-  }
 }
 
 enum GeminiMealScanStatus {
