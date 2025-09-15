@@ -44,7 +44,7 @@ class DailyGoalsRepository {
 
         return Response.complete(updatedOrCreatedGoals);
       } else {
-        // 🔹 Create new goals
+        // Create new goals
         final dailyGoals = generateDailyGoals(
           currentCalorie: totalCalories,
           currentProtein: totalProtein,

@@ -44,48 +44,18 @@ class BarcodeScanRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChiaChatbotLoadingPage]
-class ChiaChatbotLoadingRoute
-    extends PageRouteInfo<ChiaChatbotLoadingRouteArgs> {
-  ChiaChatbotLoadingRoute({
-    Key? key,
-    String initialPrompt = '',
-    List<PageRouteInfo>? children,
-  }) : super(
-         ChiaChatbotLoadingRoute.name,
-         args: ChiaChatbotLoadingRouteArgs(
-           key: key,
-           initialPrompt: initialPrompt,
-         ),
-         initialChildren: children,
-       );
+class ChiaChatbotLoadingRoute extends PageRouteInfo<void> {
+  const ChiaChatbotLoadingRoute({List<PageRouteInfo>? children})
+    : super(ChiaChatbotLoadingRoute.name, initialChildren: children);
 
   static const String name = 'ChiaChatbotLoadingRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<ChiaChatbotLoadingRouteArgs>(
-        orElse: () => const ChiaChatbotLoadingRouteArgs(),
-      );
-      return ChiaChatbotLoadingPage(
-        key: args.key,
-        initialPrompt: args.initialPrompt,
-      );
+      return const ChiaChatbotLoadingPage();
     },
   );
-}
-
-class ChiaChatbotLoadingRouteArgs {
-  const ChiaChatbotLoadingRouteArgs({this.key, this.initialPrompt = ''});
-
-  final Key? key;
-
-  final String initialPrompt;
-
-  @override
-  String toString() {
-    return 'ChiaChatbotLoadingRouteArgs{key: $key, initialPrompt: $initialPrompt}';
-  }
 }
 
 /// generated route for
@@ -106,39 +76,18 @@ class ChiaChatbotNavigatorRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChiaChatbotPage]
-class ChiaChatbotRoute extends PageRouteInfo<ChiaChatbotRouteArgs> {
-  ChiaChatbotRoute({
-    Key? key,
-    required String initialPrompt,
-    List<PageRouteInfo>? children,
-  }) : super(
-         ChiaChatbotRoute.name,
-         args: ChiaChatbotRouteArgs(key: key, initialPrompt: initialPrompt),
-         initialChildren: children,
-       );
+class ChiaChatbotRoute extends PageRouteInfo<void> {
+  const ChiaChatbotRoute({List<PageRouteInfo>? children})
+    : super(ChiaChatbotRoute.name, initialChildren: children);
 
   static const String name = 'ChiaChatbotRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<ChiaChatbotRouteArgs>();
-      return ChiaChatbotPage(key: args.key, initialPrompt: args.initialPrompt);
+      return const ChiaChatbotPage();
     },
   );
-}
-
-class ChiaChatbotRouteArgs {
-  const ChiaChatbotRouteArgs({this.key, required this.initialPrompt});
-
-  final Key? key;
-
-  final String initialPrompt;
-
-  @override
-  String toString() {
-    return 'ChiaChatbotRouteArgs{key: $key, initialPrompt: $initialPrompt}';
-  }
 }
 
 /// generated route for

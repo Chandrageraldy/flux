@@ -163,6 +163,8 @@ abstract class SupabaseBaseService {
         message = S.current.overEmailSendRateLimit;
       case SupabaseExceptionType.invalidOtp:
         message = S.current.invalidOtp;
+      case SupabaseExceptionType.samePassword:
+        message = S.current.samePassword;
       default:
         message = S.current.requestError;
     }
@@ -213,6 +215,7 @@ class SupabaseExceptionType {
   static const permissionDenied = 'permission_denied';
   static const overEmailSendRateLimit = 'over_email_send_rate_limit';
   static const invalidOtp = 'otp_expired';
+  static const samePassword = 'same_password';
 }
 
 enum BucketRequestType { upload, delete }

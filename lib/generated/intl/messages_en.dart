@@ -438,6 +438,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetYourPasswordLabel":
             MessageLookupByLibrary.simpleMessage("Reset Your Password"),
         "riboflavinLabel": MessageLookupByLibrary.simpleMessage("Riboflavin"),
+        "samePassword": MessageLookupByLibrary.simpleMessage(
+            "The new password cannot be the same as the old password."),
         "saveLabel": MessageLookupByLibrary.simpleMessage("Save"),
         "saveYourFoodDesc": MessageLookupByLibrary.simpleMessage(
             "Tap the bookmark icon on any food detail page to save your favorite foods here for easy access."),

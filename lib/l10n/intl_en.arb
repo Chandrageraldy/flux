@@ -375,5 +375,6 @@
     "passwordRequiredError": "Password is required",
     "emailRequiredError": "Email is required",
     "invalidEmailError": "Please enter a valid email address",
-    "editSuccessfulMessage": "Your changes have been saved successfully."
+    "editSuccessfulMessage": "Your changes have been saved successfully.",
+    "samePassword": "The new password cannot be the same as the old password."
 }

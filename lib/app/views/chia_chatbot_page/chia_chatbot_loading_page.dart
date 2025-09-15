@@ -5,9 +5,7 @@ import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class ChiaChatbotLoadingPage extends BaseStatefulPage {
-  const ChiaChatbotLoadingPage({super.key, this.initialPrompt = ''});
-
-  final String initialPrompt;
+  const ChiaChatbotLoadingPage({super.key});
 
   @override
   State<ChiaChatbotLoadingPage> createState() => _ChiaChatbotLoadingPageState();
@@ -51,7 +49,7 @@ extension _PrivateMethods on _ChiaChatbotLoadingPageState {
     final response = await tryCatch(context, () => context.read<ChiaChatbotViewModel>().getLoggedFoods());
 
     if (response == true && mounted) {
-      context.router.replace(ChiaChatbotRoute(initialPrompt: widget.initialPrompt));
+      context.router.replace(ChiaChatbotRoute());
     }
   }
 }

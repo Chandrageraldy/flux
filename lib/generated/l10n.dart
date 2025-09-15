@@ -3649,6 +3649,16 @@ class S {
       args: [],
     );
   }
+
+  /// `The new password cannot be the same as the old password.`
+  String get samePassword {
+    return Intl.message(
+      'The new password cannot be the same as the old password.',
+      name: 'samePassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

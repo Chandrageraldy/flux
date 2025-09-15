@@ -11,9 +11,7 @@ import 'package:typewritertext/typewritertext.dart';
 
 @RoutePage()
 class ChiaChatbotPage extends BaseStatefulPage {
-  const ChiaChatbotPage({super.key, required this.initialPrompt});
-
-  final String initialPrompt;
+  const ChiaChatbotPage({super.key});
 
   @override
   State<ChiaChatbotPage> createState() => _ChiaChatbotPageState();
@@ -41,7 +39,6 @@ class _ChiaChatbotPageState extends BaseStatefulState<ChiaChatbotPage> {
   @override
   void initState() {
     super.initState();
-    _isSendMessageEnabled = true;
   }
 
   @override
@@ -287,7 +284,6 @@ extension _WidgetFactories on _ChiaChatbotPageState {
       child: AppTextFormField(
         field: FormFields.prompt,
         validator: null,
-        initialValue: widget.initialPrompt,
         placeholder: S.current.typeToStartChattingLabel,
         icon: FaIcon(FontAwesomeIcons.paperPlane, size: AppStyles.kSize16),
         height: AppStyles.kSize40,
