@@ -7,9 +7,7 @@ Designed to make nutrition tracking **simple, interactive, and motivating**, Flu
 
 ---
 
-| Meal Scan | Gamification | Progress Tracking | Chatbot |
-|------|------------|-----------|---------------|
-| <img src="meal_scan.png" width="200" height="500"/> | <img src="gamification.png" width="200" height="500"/> | <img src="progress_tracking.png" width="200" height="500"/> | <img src="chatbot.png" width="200" height="500"/> |
+<img width="1920" height="1280" alt="117shots_so" src="https://github.com/user-attachments/assets/b614997b-4fa3-4e89-8fec-e620235d45d2" />
 
 ---
 
